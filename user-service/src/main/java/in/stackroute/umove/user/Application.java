@@ -1,4 +1,4 @@
-package br.com.codeshare.microservices.articles;
+package in.stackroute.umove.user;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
