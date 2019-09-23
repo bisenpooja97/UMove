@@ -1,6 +1,74 @@
 version: "3"
 
 services:
+
+  # mysql
+  mysql-service:
+    image: mysql
+    container_name: 'umove-mysql'
+    ports: 
+      - '3306:3306'
+#    restart: always
+    environment: 
+      MYSQL_ROOT_PASSWORD: 'root'
+    volumes:
+      - '/home/vishnu/Desktop/Assignments/umove/data/mysql:/var/lib/mysql'
+
+  # mongodb
+  mongo:
+    image: mongo
+    container_name: 'umove-mongodb'
+#    restart: always
+    ports:
+      - '27017:27017'
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: 'root'
+      MONGO_INITDB_ROOT_PASSWORD: 'root'
+    volumes:
+      - '/home/vishnu/Desktop/Assignments/umove/data/mongo:/data/db'
+
+  # cassendra
+  cassandra:
+    image: 'cassandra'
+    container_name: 'umove-cassandra'
+#    restart: always
+    ports:
+      - '7000:7000'
+      - '9042:9042'
+    volumes:
+      - '/home/vishnu/Desktop/Assignments/umove/data/cassandra:/var/lib/cassandra'
+    environment:
+      - CASSANDRA_SEEDS=cassandra
+      - CASSANDRA_PASSWORD_SEEDER=yes
+      - CASSANDRA_PASSWORD=root
+
+  # redis
+  redis:
+    image: 'redis'
+    container_name: 'umove-redis'
+#    restart: always
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    ports:
+      - '6379:6379'
+    command: ["redis-server", "--appendonly", "yes", "--requirepass", "root"]
+    volumes:
+      - '/home/vishnu/Desktop/Assignments/umove/data/redis:/data'
+
+  # rabbitmq
+  rabbit:
+    image: 'rabbitmq:3-management'
+    container_name: 'umove-rabbitmq'
+#    restart: always
+    hostname: 'rabbitmq'
+    environment:
+      RABBITMQ_DEFAULT_USER: 'root'
+      RABBITMQ_DEFAULT_PASS: 'root'
+      RABBITMQ_DEFAULT_VHOST: '/'
+    ports:
+      - '15672:15672'
+      - '5672:5672'
+
   # DISCOVERY SERVICE
   discovery:
     build:
@@ -20,38 +88,58 @@ services:
       - discovery
   
   # SERVICES
-  articles:
+  users:
     build:
-      context: ./article-service
+      context: ./user-service
       dockerfile: Dockerfile
     ports:
-      - 8080:8080
+      - 8091:8091
     depends_on:
       - discovery
 
-  articles_two:
+  vehicles:
     build:
-      context: ./article-service
+      context: ./vehicle-service
       dockerfile: Dockerfile
     ports:
-      - 9080:8080
+      - 8092:8092
     depends_on:
       - discovery
 
-  authors:
+  zones:
     build:
-      context: ./author-service
+      context: ./zone-service
       dockerfile: Dockerfile
     ports:
-      - 8081:8081
+      - 8093:8093
     depends_on:
       - discovery
 
-  authors_two:
+  Bookings:
     build:
-      context: ./author-service
+      context: ./booking-service
       dockerfile: Dockerfile
     ports:
-      - 9081:8081
+      - 8094:8094
     depends_on:
       - discovery
+
+
+  campaigns:
+    build:
+      context: ./campaign-service
+      dockerfile: Dockerfile
+    ports:
+      - 8095:8095
+    depends_on:
+      - discovery
+
+  reports:
+    build:
+      context: ./report-service
+      dockerfile: Dockerfile
+    ports:
+      - 8096:8096
+    depends_on:
+      - discovery
+

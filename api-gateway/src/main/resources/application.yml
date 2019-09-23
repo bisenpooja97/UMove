@@ -29,17 +29,27 @@ ribbon:
 
 # Zuul config
 zuul:
-  prefix: /api
+  prefix: /api/v1
   routes:
-    articles:
-      path: /articles/**
-      serviceId: article-service
-    authors:
-      path: /authors/**
-      serviceId: author-service
+    users:
+      path: /users/**
+      serviceId: user-service
+    vehicles:
+      path: /vehicles/**
+      serviceId: vehicle-service
+    zones:
+      path: /zones/**
+      serviceId: zone-service
+    bookings:
+      path: /bookings/**
+      serviceId: booking-service
+    help:
+      path: /help/**
+      serviceId: help-service
+    reports:
+      path: /reports/**
+      serviceId: report-service
 
 endpoints:
   routes:
-    sensitive: false
-  trace:
     sensitive: false

@@ -1,0 +1,43 @@
+version: "3"
+
+services:
+
+  # mongodb
+  mongo:
+    image: mongo
+    container_name: 'umove-mongodb'
+#    restart: always
+    ports:
+      - '27017:27017'
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: 'root'
+      MONGO_INITDB_ROOT_PASSWORD: 'root'
+    volumes:
+      - '/home/vishnu/Desktop/Assignments/umove/data/mongo:/data/db'
+
+  # redis
+  redis:
+    image: 'redis'
+    container_name: 'umove-redis'
+#    restart: always
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    ports:
+      - '6379:6379'
+    command: ["redis-server", "--appendonly", "yes", "--requirepass", "root"]
+    volumes:
+      - '/home/vishnu/Desktop/Assignments/umove/data/redis:/data'
+
+  # rabbitmq
+  rabbit:
+    image: 'rabbitmq:3-management'
+    container_name: 'umove-rabbitmq'
+#    restart: always
+    hostname: 'rabbitmq'
+    environment:
+      RABBITMQ_DEFAULT_USER: 'root'
+      RABBITMQ_DEFAULT_PASS: 'root'
+      RABBITMQ_DEFAULT_VHOST: '/'
+    ports:
+      - '15672:15672'
+      - '5672:5672'
