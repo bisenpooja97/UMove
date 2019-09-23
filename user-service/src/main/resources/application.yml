@@ -1,11 +1,11 @@
 # Server config
 server:
-  port: ${PORT:8091}
+  port: ${PORT:8080}
 
 # Spring config
 spring:
   application:
-    name: user-service
+    name: article-service
   logging:
     level:
       org.springframework: WARN
