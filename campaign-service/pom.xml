@@ -12,10 +12,10 @@
     <artifactId>campaignservice</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <name>campaign-service</name>
-    <description>Microservice for campaign of UMove</description>
+    <description>Campaign service for UMove</description>
 
     <properties>
-        <java.version>12</java.version>
+        <java.version>11</java.version>
         <spring-cloud.version>Greenwich.SR3</spring-cloud.version>
     </properties>
 
@@ -38,7 +38,7 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -62,11 +62,6 @@
         <dependency>
             <groupId>org.springframework.amqp</groupId>
             <artifactId>spring-rabbit-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-test</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
