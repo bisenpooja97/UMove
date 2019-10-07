@@ -96,7 +96,7 @@ services:
       - 8080:8080
     depends_on:
       - config-server
-      - discovery
+      - discovery-service
   
 #  # SERVICES
 #  users:
