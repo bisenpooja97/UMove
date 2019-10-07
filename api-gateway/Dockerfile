@@ -5,7 +5,7 @@ RUN git clone https://oauth2:6Crzz8qTF-dNKvxYYAFY@gitlab-ibm.stackroute.in/vboch
 FROM maven:3.5-jdk-8-alpine as build
 WORKDIR /app
 COPY --from=clone /app/umove /app
-RUN mvn install -f api-gateway/pom.xml
+RUN mvn clean install -f api-gateway/pom.xml
 
 FROM openjdk:8-jre-alpine
 WORKDIR /app
