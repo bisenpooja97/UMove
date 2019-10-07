@@ -1,14 +1,14 @@
-# Alpine because it's lighter
-FROM openjdk:8-jdk-alpine
-MAINTAINER Vishnu Bochiwal <bochiwal.visnu@gmail.com>
+FROM alpine/git as clone
+WORKDIR /app
+RUN git clone https://oauth2:6Crzz8qTF-dNKvxYYAFY@gitlab-ibm.stackroute.in/vbochiw1/umove.git
 
-# Set ENV variables
-ENV PORT=8765
-ENV DISCOVERY_URL="http://discovery:8761"
+FROM maven:3.5-jdk-8-alpine as build
+WORKDIR /app
+COPY --from=clone /app/umove/api-gateway /app
+RUN mvn install
 
-# Add JAR file and run it as entrypoint
-ADD target/api-gateway.jar app.jar
-ENTRYPOINT ["java", "-jar", "/app.jar"]
-
-# Expose the port
+FROM openjdk:8-jre-alpine
+WORKDIR /app
+COPY --from=build /app/target/api-gateway.jar /app
 EXPOSE 8765
+CMD ["java -jar api-gateway.jar"]

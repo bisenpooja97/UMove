@@ -1,39 +1,40 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
-  <parent>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-parent</artifactId>
-    <version>2.1.8.RELEASE</version>
-  </parent>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.1.8.RELEASE</version>
+    </parent>
 
-  <modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
 
-  <groupId>in.stackroute.umove</groupId>
+    <groupId>in.stackroute.umove</groupId>
 
-  <artifactId>app</artifactId>
+    <artifactId>app</artifactId>
 
-  <packaging>pom</packaging>
+    <packaging>pom</packaging>
 
-  <version>1.0.0.SNAPSHOT</version>
+    <version>1.0.0.SNAPSHOT</version>
 
-  <name>UMove - Bike Allocation Project</name>
+    <name>UMove - Bike Allocation Project</name>
 
-  <url>http://maven.apache.org</url>
+    <url>http://maven.apache.org</url>
 
-  <properties>
-	<java.version>12</java.version>
-    <spring-cloud.version>Greenwich.SR3</spring-cloud.version>
-  </properties>
+    <properties>
+        <java.version>12</java.version>
+        <spring-cloud.version>Greenwich.SR3</spring-cloud.version>
+    </properties>
 
-  <modules>
-    <module>userservice</module>
-	<module>zoneservice</module>
-	<module>vehicleservice</module>
-	<module>bookingservice</module>
-	<module>reportservice</module>
-	<module>campaginservice</module>
-	<module>apigatewayservice</module>
-	<module>discoveryservice</module>
-  </modules>
+    <modules>
+        <module>config-server</module>
+        <module>user-service</module>
+        <module>zone-service</module>
+        <module>vehicle-service</module>
+        <module>booking-service</module>
+        <module>report-service</module>
+        <module>campaign-service</module>
+        <module>api-gateway</module>
+        <module>discovery-service</module>
+    </modules>
 </project>

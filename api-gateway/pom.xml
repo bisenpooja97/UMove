@@ -3,10 +3,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.1.8.RELEASE</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <groupId>in.stackroute.umove</groupId>
+        <artifactId>app</artifactId>
+        <version>1.0.0.SNAPSHOT</version>
     </parent>
     <groupId>in.stackroute.umove</groupId>
     <artifactId>apigateway</artifactId>
@@ -15,7 +14,7 @@
     <description>API Gateway for UMove</description>
 
     <properties>
-        <java.version>12</java.version>
+        <java.version>1.8</java.version>
         <spring-cloud.version>Greenwich.SR3</spring-cloud.version>
     </properties>
 
@@ -42,6 +41,11 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-config</artifactId>
+        </dependency>
     </dependencies>
 
     <dependencyManagement>
@@ -62,12 +66,8 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>br.com.codeshare.microservices.gateway.Application</mainClass>
+                    <mainClass>in.stackroute.umove.apigateway.ApiGatewayApplication</mainClass>
                     <addResources>true</addResources>
                 </configuration>
                 <executions>

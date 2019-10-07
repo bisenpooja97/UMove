@@ -5,9 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Time;
 import java.util.Date;
 
@@ -25,7 +23,7 @@ public class Zones {
     private double lat;
     private double lon;
     private String city;
-    private String state;
+    private String state;   
     private String country;
     private int pincode;
     private String locality;
