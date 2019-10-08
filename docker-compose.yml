@@ -85,7 +85,7 @@ services:
     ports:
       - 8761:8761
     depends_on:
-      - config-server
+      - config
 
   # API GATEWAY
   api-gateway:
@@ -95,8 +95,8 @@ services:
     ports:
       - 8080:8080
     depends_on:
-      - config-server
-      - discovery-service
+      - config
+      - discovery
   
 #  # SERVICES
 #  users:
