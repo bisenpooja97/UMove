@@ -5,9 +5,11 @@ RUN git clone https://oauth2:6Crzz8qTF-dNKvxYYAFY@gitlab-ibm.stackroute.in/vboch
 FROM maven:3.5-jdk-8-alpine as build
 WORKDIR /app
 COPY --from=clone /app/umove /app
-RUN mvn clean install -f discovery-service/pom.xml
+RUN mvn dependency:go-offline -B -f discovery-service/pom.xml
+RUN mvn clean install -f discovery-service/pom.xml -DskipTest=true
 
 FROM openjdk:8-jre-alpine
+ENV PORT=8761
 WORKDIR /app
 COPY --from=build /app/discovery-service/target/discovery-service.jar /app
 EXPOSE 8761

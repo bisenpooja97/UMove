@@ -1,14 +1,16 @@
-# Alpine because it's lighter
-FROM openjdk:8-jdk-alpine
-MAINTAINER Vishnu Bochiwal <bochiwal.visnu@gmail.com>
+FROM alpine/git as clone
+WORKDIR /app
+RUN git clone https://oauth2:6Crzz8qTF-dNKvxYYAFY@gitlab-ibm.stackroute.in/vbochiw1/umove.git
 
-# Set ENV variables
+FROM maven:3.5-jdk-8-alpine as build
+WORKDIR /app
+COPY --from=clone /app/umove /app
+RUN mvn clean install -f booking-service/pom.xml -DskipTests=true
+
+FROM openjdk:8-jre-alpine
 ENV PORT=8094
 ENV DISCOVERY_URL="http://discovery:8761"
-
-# Add JAR file and run it as entrypoint
-ADD target/booking-service.jar app.jar
-ENTRYPOINT ["java", "-jar", "/app.jar"]
-
-# Expose the port
+WORKDIR /app
+COPY --from=build /app/booking-service/target/booking-service.jar /app
 EXPOSE 8094
+CMD ["java", "-jar", "booking-service.jar"]
