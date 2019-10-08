@@ -14,7 +14,6 @@ public class VehicleServiceApplication {
 
 	public static void main(String[] args) throws IOException {
 		SpringApplication.run(VehicleServiceApplication.class, args);
-		System.in.read();
 	}
 
 }

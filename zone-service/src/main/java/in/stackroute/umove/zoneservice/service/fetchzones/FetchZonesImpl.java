@@ -3,7 +3,6 @@ package in.stackroute.umove.zoneservice.service.fetchzones;
 import in.stackroute.umove.zoneservice.model.Zones;
 import in.stackroute.umove.zoneservice.repository.ZoneRepository;
 import in.stackroute.umove.zoneservice.service.Service;
-import javassist.bytecode.Descriptor;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Iterator;

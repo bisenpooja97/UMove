@@ -14,8 +14,6 @@ public class UserServiceApplication {
 
     public static void main(String[] args) throws IOException {
         SpringApplication.run(UserServiceApplication.class, args);
-        System.out.println("Hello");
-        System.in.read();
     }
 
 }

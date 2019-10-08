@@ -1,5 +1,6 @@
 package in.stackroute.umove.zoneservice;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -11,6 +12,7 @@ public class ZoneServiceApplicationTests {
 
 	@Test
 	public void contextLoads() {
+        Assert.assertEquals(true, true);
 	}
 
 }

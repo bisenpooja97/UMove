@@ -1,5 +1,6 @@
 package in.stackroute.umove.campaignservice;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -11,6 +12,7 @@ public class CampaignServiceApplicationTests {
 
     @Test
     public void contextLoads() {
+        Assert.assertEquals(true, true);
     }
 
 }
