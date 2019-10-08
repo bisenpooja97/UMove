@@ -1,5 +1,5 @@
 image: vikram03/node-java-chrome:0.1.0
-​
+
 variables:
   MYSQL_ROOT_PASSWORD: root
   MYSQL_DATABASE: mybooks
@@ -8,14 +8,14 @@ variables:
   MYSQL_PASSWORD: root1
   KARMA: "
 let defaultConfFile = './src/karma.conf';
-​
+
 const karmaConfig = require(defaultConfFile);
-​
+
 module.exports = function(overridedConfig) {
   reporters = ['progress', 'junit'];
-​
+
   browsers = ['ChromeHeadless'];
-​
+
   customLaunchers = {
     ChromeHeadless: {
       base: 'Chrome',
@@ -27,14 +27,14 @@ module.exports = function(overridedConfig) {
       ],
     }
   };
-​
+
   junitReporter = {
     outputDir:  'reports/karma/',
     outputFile: 'karma-test-result.xml',
     suite: '',
     useBrowserName: false,
   };
-​
+
   let mycfg = {
     set(val) {
       val.plugins = [
@@ -45,7 +45,7 @@ module.exports = function(overridedConfig) {
         require('@angular-devkit/build-angular/plugins/karma'),
         require('karma-junit-reporter')
       ];
-​
+
       val.reporters = reporters;
       val.junitReporter = junitReporter;
       val.browsers = browsers;
@@ -53,7 +53,7 @@ module.exports = function(overridedConfig) {
       val.singleRun = true;
       val.browserDisconnectTolerance = 1;
       val.browserNoActivityTimeout = 50000;
-​
+
       overridedConfig.set(val);
     }
   };
@@ -89,7 +89,7 @@ protractorConfig.config.onPrepare = function() {
     filePrefix: 'protractor-e2etest-result.xml'
   }))
 };
-​
+
 effectiveProtractorConfig = protractorConfig;
 module.exports = effectiveProtractorConfig;
 "
@@ -257,15 +257,15 @@ module.exports = effectiveProtractorConfig;
             <rule ref="rulesets/java/unnecessary.xml" />
             <rule ref="rulesets/java/unusedcode.xml" />
           </ruleset>'
-​
+
 services:
   - mysql:5.5
-​
+
 stages:
   - stage::build
   - tests
   - lint
-​
+
 # This job just to check the mysql connection
 # connect:
 #   image: mysql
@@ -274,8 +274,8 @@ stages:
 #      - immersive
 #   script:
 #      - echo "SELECT 'OK';" | mysql --user=root --password="$MYSQL_ROOT_PASSWORD" --host=mysql "$MYSQL_DATABASE"
-​
-​
+
+
 #Build job config-server project to make sure no compile errors
 build_configserver-build:
   stage: stage::build
@@ -315,7 +315,6 @@ build_campaignservice-build:
     - immersive
   when: always
   script: "mvn package -B -f ./campaign-service/ -DskipTests"
-​
 
 #Build job vehicle-service project to make sure no compile errors
 build_vehicleservice-build:
@@ -324,7 +323,7 @@ build_vehicleservice-build:
     - immersive
   when: always
   script: "mvn package -B -f ./vehicle-service/ -DskipTests"
-​
+
 #Build job zone-service project to make sure no compile errors
 build_zoneservice-build:
   stage: stage::build
@@ -358,7 +357,7 @@ build_ui-build:
     - npm install
     - npm run build
   when: always
-​
+
 #UI lint issues check
 tslint_ui-lint-codequality:
   stage: lint
@@ -369,7 +368,7 @@ tslint_ui-lint-codequality:
     - echo $TSLINT > tslint.json
     - npm install
     - npm run lint -- --format json
-​
+
 # UI code coverage check and report generation
 karma_ui-codecoverage:
   stage: tests
@@ -380,7 +379,7 @@ karma_ui-codecoverage:
     - echo $KARMA > karma-extend.conf.js
     - npm install --save karma-junit-reporter jasmine-reporters
     - npm run test -- --karma-config=./karma-extend.conf.js
-​
+
 # Backend code quality check using pmd
 pmd_backend-codequality-pmd:
   stage: lint
@@ -390,7 +389,7 @@ pmd_backend-codequality-pmd:
   script:
     - echo $PMD > pumdRules.xml
     - "mvn pmd:check"
-​
+
 # Backend code quality check using checkstyle
 checkstyle_backend-codequality-checkstyle:
   tags:
@@ -398,7 +397,7 @@ checkstyle_backend-codequality-checkstyle:
   stage: lint
   when: always
   script: "mvn checkstyle:check -Dcheckstyle.skip"
-​
+
 # Backend code quality check using findbugs
 findbugs_backend-codequality-findbugs:
   tags:
@@ -407,7 +406,7 @@ findbugs_backend-codequality-findbugs:
   when: always
   # Verify for any potential bugs in the code using findbugs maven plug-in
   script: "mvn findbugs:check"
-​
+
 # Backend code quality check using findbugs
 jococo_backend-codecoverage-jacoco:
   tags:
@@ -416,7 +415,7 @@ jococo_backend-codecoverage-jacoco:
   when: always
   # check for code coverate using jacoco maven plug-in
   script: "mvn jacoco:check"
-​
+
 # Backend config-server unit and repository integration tests (with database)
 junit_configserver-unittest:
   stage: tests
@@ -440,7 +439,7 @@ junit_apigateway-unittest:
   tags:
     - immersive
   script: "mvn test -B -f ./api-gateway/"
-​
+
 # Backend user-service unit and repository integration tests (with database)
 junit_userservice-unittest:
   stage: tests
@@ -500,7 +499,7 @@ karma_ui-unittest:
     - npm install
     - npm install --save karma-junit-reporter jasmine-reporters
     - npm run test -- --karma-config=./karma-extend.conf.js
-​
+
 #UI integration tests verification
 protractor_ui-e2etest:
   stage: tests
