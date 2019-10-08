@@ -69,8 +69,8 @@ services:
 #      - '15672:15672'
 #      - '5672:5672'
 
-  # DISCOVERY SERVICE
-  config-server:
+  # Config Server
+  config:
     build:
       context: ./config-server
       dockerfile: Dockerfile
@@ -78,7 +78,7 @@ services:
       - 8888:8888
 
   # DISCOVERY SERVICE
-  discovery-service:
+  discovery:
     build:
       context: ./discovery-service
       dockerfile: Dockerfile
