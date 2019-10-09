@@ -5,7 +5,10 @@ RUN git clone https://oauth2:6Crzz8qTF-dNKvxYYAFY@gitlab-ibm.stackroute.in/vboch
 FROM maven:3.5-jdk-8-alpine as build
 WORKDIR /app
 COPY --from=clone /app/umove /app
-RUN mvn clean install -f user-service/pom.xml -DskipTests=true
+RUN mvn -Dmaven.repo.local=$HOME/.m2 dependency:go-offline -f user-service/pom.xml
+#RUN mvn dependency:go-offline -B -f api-gateway/pom.xml
+RUN mvn -Dmaven.repo.local=$HOME/.m2 -f user-service/pom.xml clean package -DskipTests
+#RUN mvn clean install -f api-gateway/pom.xml -DskipTests=true
 
 FROM openjdk:8-jre-alpine
 ENV PORT=8091

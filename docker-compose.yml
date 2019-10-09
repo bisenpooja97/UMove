@@ -87,26 +87,25 @@ services:
     depends_on:
       - config
 
-#  # API GATEWAY
-#  api-gateway:
-#    build:
-#      context: ./api-gateway
-#      dockerfile: Dockerfile
-#    ports:
-#      - 8080:8080
-#    depends_on:
-#      - config
-#      - discovery
-  
-#  # SERVICES
-#  users:
-#    build:
-#      context: ./user-service
-#      dockerfile: Dockerfile
-#    ports:
-#      - 8091:8091
-#    depends_on:
-#      - discovery
+  # API GATEWAY
+  api-gateway:
+    build:
+      context: ./api-gateway
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    depends_on:
+      - config
+
+  # SERVICES
+  users:
+    build:
+      context: ./user-service
+      dockerfile: Dockerfile
+    ports:
+      - 8091:8091
+    depends_on:
+      - config
 #
 #  vehicles:
 #    build:
