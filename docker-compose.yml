@@ -76,6 +76,7 @@ services:
       dockerfile: Dockerfile
     ports:
       - 8888:8888
+    restart: on-failure
 
   # DISCOVERY SERVICE
   discovery:
@@ -86,6 +87,7 @@ services:
       - 8761:8761
     depends_on:
       - config
+    restart: on-failure
 
   # API GATEWAY
   api-gateway:
