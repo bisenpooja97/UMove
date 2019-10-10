@@ -12,7 +12,6 @@ RUN mvn -Dmaven.repo.local=$HOME/.m2 -f campaign-service/pom.xml clean package -
 
 FROM openjdk:8-jre-alpine
 ENV PORT=8095
-ENV DISCOVERY_URL="http://discovery:8761"
 WORKDIR /app
 COPY --from=build /app/campaign-service/target/campaign-service.jar /app
 EXPOSE 8095

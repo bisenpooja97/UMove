@@ -40,6 +40,7 @@
     </dependencies>
 
     <build>
+        <finalName>web-app</finalName>
         <plugins>
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
