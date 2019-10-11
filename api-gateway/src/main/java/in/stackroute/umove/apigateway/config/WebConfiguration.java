@@ -14,10 +14,4 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
     public void addCorsMappings(final CorsRegistry registry) {
         registry.addMapping("/**");
     }
-
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry){
-        System.out.println("dekh rhe h :)");
-        registry.addResourceHandler("/").addResourceLocations("forward:/admin-ui");
-    }
 }

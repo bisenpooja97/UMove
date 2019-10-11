@@ -104,6 +104,22 @@ services:
       - config
       - discovery
 
+  adminwebapp:
+    build:
+      context: ./admin-webapp
+      dockerfile: Dockerfile
+    ports:
+      - 8097:8097
+    depends_on:
+      - config
+      - discovery
+      - api-gateway
+    restart: on-failure
+    links:
+      - config
+      - discovery
+      - api-gateway
+
 #  # SERVICES
 #  users:
 #    build:
