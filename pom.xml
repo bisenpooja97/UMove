@@ -27,7 +27,7 @@
     </properties>
 
     <modules>
-<!--        <module>umove-admin-ui</module>-->
+        <module>umove-admin-ui</module>
         <module>admin-webapp</module>
         <module>config-server</module>
         <module>discovery-service</module>
