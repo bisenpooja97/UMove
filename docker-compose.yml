@@ -111,7 +111,6 @@ services:
     depends_on:
       - config
       - discovery
-      - api-gateway
     restart: on-failure
     links:
       - config
@@ -150,7 +149,7 @@ services:
       - config
     restart: on-failure
 
-  Bookings:
+  bookings:
     build:
       context: ./booking-service
       dockerfile: Dockerfile
