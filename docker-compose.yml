@@ -112,6 +112,7 @@ services:
       - config
       - discovery
      # - api-gateway
+
     restart: on-failure
     links:
       - config
