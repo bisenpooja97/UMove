@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
 { path: 'zones', loadChildren: () => import('./zones/zones.module').then(m => m.ZonesModule) },
+{ path: '', loadChildren: () => import('./authentication/authentication.module').then(m => m.AuthenticationModule) },
 ];
 
 @NgModule({
