@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Bike List</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+<ion-row justify-content-center align-items-center style="height: 100%">
+<ion-list class="ion-wrap" >
+  <ion-item *ngFor="let type of typeList">
+    <app-bike [type]="type" [trip]="trip"></app-bike>
+  </ion-item>
+</ion-list>
+</ion-row>
+</ion-content>
