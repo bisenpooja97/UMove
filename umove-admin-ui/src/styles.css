@@ -3,7 +3,5 @@
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
 body {
     margin: 0;
-    font-family: 'Playfair Display', serif;
-    min-height: 100%;
-    height: auto;
+    height: 100%;
 }

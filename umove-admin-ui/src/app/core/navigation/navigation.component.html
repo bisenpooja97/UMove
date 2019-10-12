@@ -7,7 +7,7 @@
     <mat-nav-list>
       <a *ngIf="loginService.isUserLoggedIn()" mat-list-item href="#">Reports</a>
       <a *ngIf="loginService.isUserLoggedIn()" mat-list-item href="#">Users</a>
-      <a *ngIf="loginService.isUserLoggedIn()" mat-list-item href="#">Zones</a>
+      <a *ngIf="loginService.isUserLoggedIn()" mat-list-item routerLink="/zones">Zones</a>
       <a *ngIf="loginService.isUserLoggedIn()" mat-list-item routerLink="/logout">Logout</a>
     </mat-nav-list>
   </mat-sidenav>
