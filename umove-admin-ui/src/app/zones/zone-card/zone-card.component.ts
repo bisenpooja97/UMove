@@ -24,7 +24,6 @@ export class ZoneCardComponent implements OnInit {
   }
 
   ok() {
-    console.log('hi');
     this.router.navigate(['zones/', this.zoneNames]);
     }
 

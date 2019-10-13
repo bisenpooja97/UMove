@@ -6,6 +6,7 @@ app-zone-card {
     
     width: 25%;
     margin-left: 50px;
+    
 }
 
 .card {
@@ -17,3 +18,7 @@ app-zone-card {
     padding-bottom: 2%; 
 }
 
+.search {
+    margin-left: 240px;
+    margin-bottom: 50px;
+}

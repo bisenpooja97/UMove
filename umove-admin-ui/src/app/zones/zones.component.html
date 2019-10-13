@@ -1,14 +1,21 @@
 <h1 fxLayout="column" fxLayout.gt-md="row" fxLayoutGap.gt-md="15px" class="header">
     Zones
 </h1>
-<app-search-zone></app-search-zone>
+<div fxLayout="row" fxLayoutGap="20px" class="search" fxLayout.gt-xs="row">
+    <mat-form-field fxFlex=20%>
+        <input matInput [(ngModel)]="term" placeholder="Search">
+    </mat-form-field>
+</div>
 <div fxLayout.xs="column" fxLayout.gt="row" fxLayout="row wrap" fxLayoutGap="10px" class="card">
-    <app-zone-card *ngFor="let zone of zones | paginate: { itemsPerPage: 10, currentPage: p } | filter:searchText" [zones]="zone"></app-zone-card>
-    
-            <pagination-controls fxLayout="column" (pageChange)="p = $event"></pagination-controls>
+    <app-zone-card *ngFor="let zone of zones | paginate: { itemsPerPage: 10, currentPage: p } | filter:term"
+        [zones]="zone">
+    </app-zone-card>
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
 </div>
 <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutAlign="end" class="add-button">
-    <button mat-fab color="primary"><i class="material-icons">
+    <button mat-fab color="primary" (click)="add()">
+        <i class="material-icons">
             add
-        </i></button>
+        </i>
+    </button>
 </div>

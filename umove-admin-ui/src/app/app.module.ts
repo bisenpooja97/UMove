@@ -15,6 +15,8 @@ import { FooterComponent } from './core/footer/footer.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { PageNotFoundComponent } from './core/page-not-found/page-not-found.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ZonesModule } from './zones/zones.module';
+import { MatDialogModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatIconModule,
     MatListModule,
     FlexLayoutModule,
-    HttpClientModule
+    HttpClientModule,
+    ZonesModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

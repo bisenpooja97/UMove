@@ -1,1 +1,90 @@
-<p>zone-details works!</p>
+<div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="10%" fxLayoutGap.lt-md="0px"
+        > 
+        <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="50px" fxLayoutGap.lt-md="0px">
+        <h1 fxLayout="column" fxLayout.gt-md="row" fxLayoutGap.gt-md="15px" class="zoneName">
+                {{name}}
+                
+        </h1>
+        </div>
+        <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap.lt-md="0px">
+                <mat-icon class="graph">
+                        assessment
+                </mat-icon>
+        </div>
+        <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap.lt-md="0px">
+                <mat-form-field appearance="outline" fxFlex class="status">
+                        <mat-label>Zone Status</mat-label>
+                        <mat-select [(ngModel)]="status">
+                            <mat-option *ngFor="let z of zoneStatus" [value]="z.value">
+                                {{z.viewValue}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+        </div>
+</div>
+
+<!--  -->
+
+<mat-card class="my-card" fxFlex.sm="0 1 calc(50%-10px)" fxFlex.md="0 1 calc(33%-10px)" fxLayout="column" fxLayoutGap="20px">
+        <mat-card-title fxLayoutAlign="start">{{creationTime | date:"dd LLLL yyyy"}}</mat-card-title>
+        <br><br>   
+    <div fxFlex=50% fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20%" fxLayoutGap.lt-md="0px"
+        class="form" fxLayoutAlign="center center">    
+    <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="50px" fxLayoutGap.lt-md="0px" class="col">
+            <mat-card-title fxLayoutAlign="center center">City: {{city}}</mat-card-title> 
+            <mat-card-title fxLayoutAlign="center center">Country: {{country}}</mat-card-title>
+            <mat-card-title fxLayoutAlign="center center">Locality: {{locality}}</mat-card-title> 
+               
+    </div>  
+    <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="50px" fxLayoutGap.lt-md="0px" class="col">
+            <mat-card-title fxLayoutAlign="center center">State: {{state}}</mat-card-title> 
+            <mat-card-title fxLayoutAlign="center center">Pincode: {{pincode}}</mat-card-title>
+                  
+            <mat-card-title fxLayoutAlign="center center">Capacity: {{capacity}}  
+                    <span>
+                        <i class="material-icons icon">
+                            create
+                        </i>
+                    </span> 
+               
+            </mat-card-title> 
+    </div> 
+    </div>  
+      
+</mat-card>
+
+<h1 fxLayout="column" fxLayout.gt-md="row" fxLayoutGap.gt-md="15px" class="zoneName">
+        Supervisor
+</h1>
+
+<mat-card class="my-card" fxFlex.sm="0 1 calc(50%-10px)" fxFlex.md="0 1 calc(33%-10px)" fxLayout="column" fxLayoutGap="20px">
+        <span fxLayoutAlign="end">
+                <i class="material-icons">
+                    create
+                </i>
+            </span> 
+        <br><br>   
+    <div fxFlex=50% fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20%" fxLayoutGap.lt-md="0px"
+        class="form" fxLayoutAlign="center center">    
+    <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="50px" fxLayoutGap.lt-md="0px" class="col">
+            <mat-card-title fxLayoutAlign="center center">Supervisor Name: {{sName}}</mat-card-title> 
+            <mat-card-title fxLayoutAlign="center center">Supervisor Number: {{sNumber}}</mat-card-title> 
+    </div>  
+    <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="50px" fxLayoutGap.lt-md="0px" class="col">
+            <mat-card-title fxLayoutAlign="center center">Supervisor Email: {{sEmail}}</mat-card-title> 
+            <mat-card-title fxLayoutAlign="center center">Supervisor Shift: {{pincode}}</mat-card-title>
+    </div> 
+    </div>  
+      
+</mat-card>
+<div fxLayout="column" fxLayout.gt-xs="row" fxLayoutAlign="end" class="add-button">
+        <button mat-fab color="primary">
+            <i class="material-icons">
+                add
+            </i>
+        </button>
+</div>
+
+<h1 fxLayout="column" fxLayout.gt-md="row" fxLayoutGap.gt-md="15px" class="zoneName">
+        Vehicles
+</h1>

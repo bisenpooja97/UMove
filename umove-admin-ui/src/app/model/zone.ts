@@ -14,4 +14,5 @@ export class Zone {
    public supervisorName: string;
    public supervisorNumber: string;
    public supervisorEmail: string;
+   public time: string;
 }

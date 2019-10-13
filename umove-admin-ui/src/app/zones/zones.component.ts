@@ -1,7 +1,8 @@
-import { Component, OnInit, Input, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ZoneService } from './service/zone.service';
 import { Zone } from '../model/zone';
-import { MatTableDataSource, MatPaginator } from '@angular/material';
+import { MatTableDataSource, MatDialog, MatDialogConfig } from '@angular/material';
+import { AddZoneComponent } from './add-zone/add-zone.component';
 
 @Component({
   selector: 'app-zones',
@@ -10,15 +11,14 @@ import { MatTableDataSource, MatPaginator } from '@angular/material';
 })
 export class ZonesComponent implements OnInit {
 
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @Input() zones: Zone[];
 
   p = 1;
-  searchText;
 
   dataSource = new MatTableDataSource();
 
-  constructor(private zoneService: ZoneService) { }
+  constructor(private zoneService: ZoneService,
+              private matDialog: MatDialog) { }
 
   ngOnInit() {
     this.zoneService.getZones().subscribe(res => { this.zones = res.data;
@@ -26,12 +26,14 @@ export class ZonesComponent implements OnInit {
 
 
 } );
-    return this.zoneService.getZones().subscribe(res => this.dataSource.data = res.data,
-  length =>  this.dataSource.data.length = length);
-  }
+}
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-  }
+add() {
+  const dialogConfig = new MatDialogConfig();
+  dialogConfig.disableClose = true;
+  dialogConfig.autoFocus = true;
+  dialogConfig.width = '40%';
+  this.matDialog.open(AddZoneComponent, dialogConfig);
+}
 
 }

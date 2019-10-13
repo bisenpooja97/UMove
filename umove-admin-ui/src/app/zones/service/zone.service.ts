@@ -19,4 +19,8 @@ export class ZoneService {
   getZones(): Observable<Resp> {
     return this.httpClient.get<Resp>(this.baseUrl);
   }
+
+  getZoneByName(name: string): Observable<Resp> {
+    return this.httpClient.get<Resp>(this.baseUrl + '/name/' + name);
+  }
 }
