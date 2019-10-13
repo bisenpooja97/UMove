@@ -1,0 +1,17 @@
+.header {
+    margin-left: 240px;
+}
+
+app-vehicle-type-card {
+    width: 25%;
+    margin-left: 50px;
+}
+
+.card {
+    margin-left: 18%;
+}
+
+.add-button {
+    padding-right: 200px;
+    padding-bottom: 2%;
+}

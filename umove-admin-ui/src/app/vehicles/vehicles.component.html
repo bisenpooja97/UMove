@@ -1,0 +1,14 @@
+<h1 fxLayout="column" fxLayout.gt-md="row" fxLayoutGap.gt-md="15px" class="header">
+    Vehicle
+</h1>
+<!-- <app-search-vehicleType></app-search-vehicleType> -->
+<div fxLayout.xs="column" fxLayout.gt="row" fxLayout="row wrap" fxLayoutGap="10px" class="card">
+    <app-vehicle-card *ngFor="let type of vehicle| paginate: { itemsPerPage: 10, currentPage: p }" [vehicle]="type"></app-vehicle-card>
+
+    <pagination-controls fxLayout="column" (pageChange)="p = $event"></pagination-controls>
+</div>
+<!-- <div fxLayout="column " fxLayout.gt-xs="row " fxLayoutAlign="end " class="add-button ">
+    <button mat-fab color="primary "><i class="material-icons ">
+          add
+      </i></button>
+</div> -->
