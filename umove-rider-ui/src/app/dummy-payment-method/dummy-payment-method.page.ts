@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {RideService} from "../service/ride.service";
-import {Router} from "@angular/router";
+import {NavigationExtras, Router} from "@angular/router";
+import {PaymentMethod} from "../model/payment-method";
 
 @Component({
   selector: 'app-dummy-payment-method',
@@ -9,20 +10,26 @@ import {Router} from "@angular/router";
 })
 export class DummyPaymentMethodPage implements OnInit {
 
+    selectedPaymentMethod: PaymentMethod;
+
   constructor(private rideService: RideService, private router: Router) { }
 
   ngOnInit() {
-  }
-
-    selectDummyPaymentMethod() {
-        let ride = this.rideService.getCurrentBooking();
-        ride.paymentMethod = {
+      this.selectedPaymentMethod = {
           _id: '5d8c7a62adfffb7e746ccee8',
           paymentMethodNumber: '7727084821',
           paymentType : 'Wallet',
           paymentProvider: 'Paytm'
+      };
+  }
+
+    selectDummyPaymentMethod() {
+        let navigationExtras: NavigationExtras = {
+            state: {
+                selectedPaymentMethod: this.selectedPaymentMethod
+            }
         };
-        this.rideService.setCurrentBooking(ride);
-        this.router.navigateByUrl('confirm-ride-detail');
+
+        this.router.navigateByUrl('confirm-ride-detail', navigationExtras);
     }
 }

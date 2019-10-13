@@ -31,7 +31,9 @@
     <ion-card-content>
       <ion-grid no-padding>
         <ion-row class="ion-align-items-center">
-          <ion-img src="assets/icon/gpay.png" style="height: 48px; width: 48px;"></ion-img>
+          <ion-img src="assets/icon/gpay.png" *ngIf="booking?.paymentMethod?.paymentProvider==='Google Pay'" style="height: 48px; width: 48px;"></ion-img>
+          <ion-img src="assets/icon/phonepe.png" *ngIf="booking?.paymentMethod?.paymentProvider==='PhonePe'" style="height: 48px; width: 48px;"></ion-img>
+          <ion-img src="assets/icon/paytm.png" *ngIf="booking?.paymentMethod?.paymentProvider==='Paytm'" style="height: 48px; width: 48px;"></ion-img>
           <ion-col padding-horizontal>
             <ion-text color="dark">
               <h2>{{ booking?.paymentMethod?.paymentMethodNumber }}</h2>
@@ -40,6 +42,7 @@
               <h3>{{ booking?.paymentMethod?.paymentType }}</h3>
             </ion-text>
           </ion-col>
+          <ion-icon name="close-circle" size="large" (click)="removeSelectedPaymentMethod()"></ion-icon>
         </ion-row>
       </ion-grid>
     </ion-card-content>
@@ -64,6 +67,7 @@
               <p>Get {{ booking?.promocode?.discount }}% off on your ride upto {{ 50 | currency: 'INR' }}</p>
             </ion-text>
           </ion-col>
+          <ion-icon name="close-circle" size="large" (click)="removeSelectedPromocode()"></ion-icon>
         </ion-row>
       </ion-grid>
     </ion-card-content>
