@@ -1,0 +1,22 @@
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+import { Resp } from 'src/app/model/zone-response';
+import { Observable } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ZoneService {
+
+  constructor(private httpClient: HttpClient) { }
+  baseUrl = environment.baseUrl + environment.zoneBaseApi;
+
+  public createZone(zone: Resp) {
+    return this.httpClient.post<Resp>(this.baseUrl, zone);
+  }
+
+  getZones(): Observable<Resp> {
+    return this.httpClient.get<Resp>(this.baseUrl);
+  }
+}

@@ -2,3 +2,13 @@
     Zones
 </h1>
 <app-search-zone></app-search-zone>
+<div fxLayout.xs="column" fxLayout.gt="row" fxLayout="row wrap" fxLayoutGap="10px" class="card">
+    <app-zone-card *ngFor="let zone of zones | paginate: { itemsPerPage: 10, currentPage: p } | filter:searchText" [zones]="zone"></app-zone-card>
+    
+            <pagination-controls fxLayout="column" (pageChange)="p = $event"></pagination-controls>
+</div>
+<div fxLayout="column" fxLayout.gt-xs="row" fxLayoutAlign="end" class="add-button">
+    <button mat-fab color="primary"><i class="material-icons">
+            add
+        </i></button>
+</div>
