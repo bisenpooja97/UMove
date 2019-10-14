@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>MY RIDES</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let ride of booking">
+      <ion-card (click)="rideDetails(ride)">
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-avatar align-content:start>
+                <img class="vehicleImage" src="{{ride.vehicle.imageUrl}}">
+              </ion-avatar>
+            </ion-col>
+            <ion-col>
+              <ion-card-subtitle color="tertiary">
+                <ion-text> {{ ride.bookedAt | date: 'medium' }} </ion-text>
+              </ion-card-subtitle>
+            </ion-col>
+              <ion-card-subtitle color="tertiary">
+                <ion-text>Rs.{{ ride.payment.paidAmount }}</ion-text>
+              </ion-card-subtitle>
+          </ion-row>
+          <ion-row>
+            <ion-card-subtitle>
+              <ion-icon name="pin" color="tertiary"></ion-icon>
+              <ion-text>
+                {{ ride.sourceZone.locality }},{{ ride.sourceZone.city }},{{ ride.sourceZone.state }},{{ ride.sourceZone.country }}-{{ ride.sourceZone.pincode }}
+              </ion-text>
+            </ion-card-subtitle>
+            <ion-card-subtitle *ngFor="let ridedestinationZone of ride.destinationZones">
+              <ion-icon name="pin" color="tertiary"></ion-icon>
+              <ion-text>
+                {{ ridedestinationZone.locality }},{{ ridedestinationZone.city }},{{ ridedestinationZone.state }},{{ ridedestinationZone.country }}-{{ ridedestinationZone.pincode }}
+              </ion-text>
+            </ion-card-subtitle>
+          </ion-row>
+        </ion-grid>
+      </ion-card>
+    </ion-item>
+  </ion-list>
+</ion-content>

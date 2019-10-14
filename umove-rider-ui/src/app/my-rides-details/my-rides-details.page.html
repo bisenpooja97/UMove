@@ -1,0 +1,58 @@
+<ion-content>
+  <ion-card>
+    <ion-card-subtitle>
+      {{ rides?.bookedAt | date: 'medium' }}
+    </ion-card-subtitle>
+    <ion-card-subtitle>
+      {{ rides?.vehicle?.name }}
+    </ion-card-subtitle>
+    <ion-card-subtitle>
+      {{ rides?.vehicle?.registrationNo }}
+    </ion-card-subtitle>
+    <ion-card-subtitle>
+      {{ rides?.payment?.paidAmount }}
+    </ion-card-subtitle>
+  </ion-card>
+  <ion-card>
+    <ion-card-subtitle>
+      <ion-icon name="pin" color="tertiary"></ion-icon>Source Zone :
+      {{ rides?.sourceZone?.locality }},{{ rides?.sourceZone?.city }},{{ rides?.sourceZone?.state }},{{ rides?.sourceZone?.country }}-{{ rides?.sourceZone.pincode }}
+    </ion-card-subtitle>
+    <ion-card-subtitle *ngFor="let ridesdestinationZones of rides?.destinationZones">
+      <ion-icon name="pin" color="tertiary"></ion-icon>Destination Zone :
+      {{ ridesdestinationZones?.locality }},{{ ridesdestinationZones?.city }},{{ ridesdestinationZones?.state }},{{ ridesdestinationZones?.country }}-{{ ridesdestinationZones?.pincode }}
+    </ion-card-subtitle>
+  </ion-card>
+  <ion-card>
+    <ion-card-subtitle>
+      Fare Break-up
+    </ion-card-subtitle>
+    <ion-card-subtitle>
+      Distance : {{ rides?.distance }}
+    </ion-card-subtitle>
+    <ion-card-subtitle>
+      Time : {{ rides?.duration }}
+    </ion-card-subtitle>
+    <ion-card-subtitle>
+      Ride Amount : {{ rides?.payment?.rideAmount }}
+    </ion-card-subtitle>
+    <ion-card-subtitle *ngFor="let ridesamount of rides?.payment?.extraCharges">
+      Extra Charges : {{ ridesamount?.amount }}
+    </ion-card-subtitle>
+    <ion-card-subtitle>
+      Total Extra Charges : {{ rides?.payment?.totalExtraCharges }}
+    </ion-card-subtitle>
+    <ion-card-subtitle>
+      Total Amount : {{ rides?.payment?.totalAmount }}
+    </ion-card-subtitle>
+    <ion-card-subtitle>
+      Discount : {{ rides?.payment?.discount }}
+    </ion-card-subtitle>
+    <ion-card-subtitle>
+      Paid Amount : {{ rides?.payment?.paidAmount }}
+    </ion-card-subtitle>
+  </ion-card>
+  <div *ngIf="rideStatus || hideMe">
+    <ion-button slot full (click)="pay()" expand="block">Pay</ion-button>
+  </div>
+</ion-content>

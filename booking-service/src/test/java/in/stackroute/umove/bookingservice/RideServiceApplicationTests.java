@@ -8,9 +8,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class BookingServiceApplicationTests {
+public class RideServiceApplicationTests {
 
-	@Test
+		@Test
 	public void contextLoads() {
         Assert.assertEquals(true, true);
 	}
