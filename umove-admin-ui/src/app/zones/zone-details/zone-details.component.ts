@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ZoneService } from '../service/zone.service';
 import { Zone } from 'src/app/model/zone';
+import { NotificationService } from 'src/app/shared/notification.service';
 
 export interface Status {
   value: string;
@@ -27,7 +28,7 @@ export class ZoneDetailsComponent implements OnInit {
   sName: string;
   sNumber: string;
   sEmail: string;
-  sStatus: string;
+  status: string;
 
   zoneStatus: Status[] = [
     { value: 'INACTIVE', viewValue: 'INACTIVE' },
@@ -38,11 +39,13 @@ export class ZoneDetailsComponent implements OnInit {
 
 
   constructor(private router: Router, private zoneService: ZoneService,
-              private activatedRoute: ActivatedRoute, private route: ActivatedRoute) { }
+              private activatedRoute: ActivatedRoute, private route: ActivatedRoute,
+              private notificationService: NotificationService) { }
 
   ngOnInit() {
     this.zoneService.getZoneByName(this.route.snapshot.paramMap.get('name')).subscribe(res => {
       this.zone = res.data;
+      console.log(res);
       this.name = this.zone[0].name;
       this.city = this.zone[0].city;
       this.country = this.zone[0].country;
@@ -54,12 +57,19 @@ export class ZoneDetailsComponent implements OnInit {
       this.sName = this.zone[0].supervisorName;
       this.sNumber = this.zone[0].supervisorNumber;
       this.sEmail = this.zone[0].supervisorEmail;
+      this.status = this.zone[0].status;
     });
   }
 
 
-  onEdit() {
+  onChange(newValue) {
+    console.log(this.zone[0], newValue);
+    this.zone[0].status = newValue;
+    this.zoneService.updateZones(this.route.snapshot.paramMap.get('name'), this.zone[0]).subscribe(
+      response => this.notificationService.success('Zone updated successfully!!'),
+      error => this.notificationService.warn('Can\'t update '),
 
-  }
+    );
+}
 
 }

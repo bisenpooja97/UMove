@@ -4,7 +4,7 @@ import { PageNotFoundComponent } from './core/page-not-found/page-not-found.comp
 import { AuthGuardService } from './authentication/service/auth-guard.service';
 
 
-const routes: Routes = [
+export const routes: Routes = [
 { path: 'zones', loadChildren: () => import('./zones/zones.module').then(m => m.ZonesModule) },
 { path: '', loadChildren: () => import('./authentication/authentication.module').then(m => m.AuthenticationModule) },
 {path: '**', component: PageNotFoundComponent, canActivate: [AuthGuardService]}

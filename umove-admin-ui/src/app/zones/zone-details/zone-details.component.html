@@ -15,7 +15,7 @@
 <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap.lt-md="0px">
         <mat-form-field appearance="outline" fxFlex class="status">
                 <mat-label>Zone Status</mat-label>
-                <mat-select [(ngModel)]="status">
+                <mat-select [(ngModel)]="status" (ngModelChange)="onChange($event)">
                     <mat-option *ngFor="let z of zoneStatus" [value]="z.value">
                         {{z.viewValue}}
                     </mat-option>
@@ -75,7 +75,7 @@
     </div>  
     <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="50px" fxLayoutGap.lt-md="0px" class="col">
             <mat-card-title fxLayoutAlign="center center">Supervisor Email: {{sEmail}}</mat-card-title> 
-            <mat-card-title fxLayoutAlign="center center">Supervisor Shift: {{pincode}}</mat-card-title>
+            <mat-card-title fxLayoutAlign="center center">Supervisor Shift:</mat-card-title>
     </div> 
     </div>  
       

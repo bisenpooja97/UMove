@@ -2,7 +2,7 @@
     Zones
 </h1>
 <div fxLayout="row" fxLayoutGap="20px" class="search" fxLayout.gt-xs="row">
-    <mat-form-field fxFlex=20%>
+    <mat-form-field fxFlex=20% class="bar">
         <input matInput [(ngModel)]="term" placeholder="Search">
     </mat-form-field>
 </div>
@@ -13,7 +13,7 @@
     <pagination-controls (pageChange)="p = $event"></pagination-controls>
 </div>
 <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutAlign="end" class="add-button">
-    <button mat-fab color="primary" (click)="add()">
+    <button mat-fab color="primary" (click)="add({})">
         <i class="material-icons">
             add
         </i>

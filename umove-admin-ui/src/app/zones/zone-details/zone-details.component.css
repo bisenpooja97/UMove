@@ -38,6 +38,10 @@
         padding-left: 330px;;
         padding-bottom: 50px; 
     }
+    .status {
+        margin-top: 20px;
+        padding-right: 60px;
+    }
 }
 
 @media only screen and (min-width: 600px) {
