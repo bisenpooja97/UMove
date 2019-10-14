@@ -1,5 +1,5 @@
 export class Zone {
-   public zoneId: string;
+   public id: string;
    public name: string;
    public locality: string;
    public lat: number;

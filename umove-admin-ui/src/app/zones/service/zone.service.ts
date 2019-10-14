@@ -23,4 +23,14 @@ export class ZoneService {
   getZoneByName(name: string): Observable<Resp> {
     return this.httpClient.get<Resp>(this.baseUrl + '/name/' + name);
   }
+
+  getZoneByLocality(name: string): Observable<Resp> {
+    return this.httpClient.get<Resp>(this.baseUrl + '/locality/' + name);
+  }
+
+  getAddress(locality: string): Observable<any> {
+    return this.httpClient.
+    get(this.baseUrl + '/loc/' + locality);
+  }
+
 }

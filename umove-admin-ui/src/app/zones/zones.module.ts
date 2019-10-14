@@ -5,7 +5,7 @@ import { ZonesRoutingModule } from './zones-routing.module';
 import { ZonesComponent } from './zones.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatFormFieldModule, MatInputModule, MatCardModule, MatIconModule, MatButtonModule, MatPaginatorModule,
-   MatSelectModule, MatOptionModule, MatDialogModule, MatToolbarModule, MatGridListModule } from '@angular/material';
+   MatSelectModule, MatOptionModule, MatDialogModule, MatToolbarModule, MatGridListModule, MatSnackBarModule } from '@angular/material';
 import { ZoneCardComponent } from './zone-card/zone-card.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ZoneDetailsComponent } from './zone-details/zone-details.component';
@@ -36,6 +36,7 @@ import { AddZoneComponent } from './add-zone/add-zone.component';
     MatDialogModule,
     MatToolbarModule,
     MatGridListModule,
+    MatSnackBarModule
   ],
   entryComponents: [AddZoneComponent]
 })
