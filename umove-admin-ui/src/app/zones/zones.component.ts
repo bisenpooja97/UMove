@@ -52,6 +52,9 @@ add() {
             } else {
               this.notificationService.success('Zone added successfully');
             }
+          this.zoneService.getZones().subscribe(res => { this.zones = res.data;
+                                                        });
+
           }); }
    });
 
