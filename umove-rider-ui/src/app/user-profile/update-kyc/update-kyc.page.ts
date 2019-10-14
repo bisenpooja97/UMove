@@ -25,13 +25,13 @@ export class UpdateKycPage implements OnInit {
     const formData = {
       document: data
     };
-    this.userDataService.uploadDldetailsById('5da1a2b80e8e3d0001c8453e', formData).subscribe(res => {
+    this.userDataService.uploadDldetailsById('5da1a2b80e8e3d0001c8453e', formData).then(res => {
       console.log(res);
     });
     const uploadData = new FormData();
     uploadData.append('imageFile', this.selectedFile, this.selectedFile.name);
 
-    this.userDataService.uploadProfileById('5da1a2b80e8e3d0001c8453e', uploadData).subscribe(res => {
+    this.userDataService.uploadProfileById('5da1a2b80e8e3d0001c8453e', uploadData).then(res => {
       console.log(res);
     });
     const toast = await this.toastController.create({
@@ -53,7 +53,7 @@ export class UpdateKycPage implements OnInit {
 
   ngOnInit() {
     this.todo = new FormGroup({
-      drivingLicenceNumber: new FormControl(''),
+      dlicenceNumber: new FormControl(''),
       expiryDate: new FormControl(''),
     });
   }

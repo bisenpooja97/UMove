@@ -12,6 +12,7 @@ import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {UserProfileServiceService} from './services/users-profile/user-profile-service.service';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {Environment} from '@angular/compiler-cli/src/ngtsc/typecheck/src/environment';
+import {HTTP} from '@ionic-native/http/ngx';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import {Environment} from '@angular/compiler-cli/src/ngtsc/typecheck/src/environ
     StatusBar,
     SplashScreen,
     HttpClient,
+      HTTP,
     UserProfileServiceService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],

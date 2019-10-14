@@ -21,22 +21,23 @@ export class EditProfilePage implements OnInit {
 
     ngOnInit() {
         this.userDataService.getUserDetailById('5da1a2b80e8e3d0001c8453e')
-            .subscribe(data => {
+            .then(data => {
                 console.log('filtered data: ', data);
-                this.user = data.data;
+                this.user = JSON.parse(data.data).data;
                 this.todo = new FormGroup({
                     name: new FormControl(this.user.name),
                     email: new FormControl(this.user.email),
                     mobilenumber: new FormControl(this.user.mobileNumber),
                 });
-                // console.log('mmmm', this.user);
             });
     }
     async logForm(data) {
         // this.http.patch('http://172.23.234.63:8091/api/v1/users/5d8de55aa0867c20905218b1', data).subscribe(res => {
         //    console.log('response', res); // handle event here
         // });
-        this.userDataService.editProfileById('5da1a2b80e8e3d0001c8453e', data).subscribe(res => {
+
+
+        this.userDataService.editProfileById('5da1a2b80e8e3d0001c8453e', data).then(res => {
             console.log(res);
         });
         const toast = await this.toastController.create({

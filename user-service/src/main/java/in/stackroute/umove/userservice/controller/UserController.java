@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.List;
 import java.util.Map;
@@ -34,7 +35,6 @@ public class UserController
 {
     @Autowired
     private UserService userService;
-
 
     @PostMapping(path = "users/adduser")
     public ResponseEntity<Map> addUser(@RequestBody UserData user)
@@ -59,7 +59,6 @@ public ResponseEntity updateUser(@PathVariable ObjectId id, @RequestBody UserDat
 @GetMapping(path = "users/{userId}/document")
 public ResponseEntity<Map> getkycDetails(@PathVariable(value = "userId") ObjectId id)
 {
-
     DocumentVerification documents =  userService.getById(id).getDocument();
     Map<String, Object> map = new TreeMap<>();
     map.put("data", documents);
@@ -69,20 +68,33 @@ public ResponseEntity<Map> getkycDetails(@PathVariable(value = "userId") ObjectI
 
 
     @PostMapping("/users/document/uploadImage")
-    public ResponseEntity <Map>uploadImage(@RequestParam(name="imageFile",required = true) MultipartFile imageFile,
-                                           @RequestParam(name = "uid",required = true) String uid)
+    public String uploadImage(@RequestParam(name="imageFile",required = true)MultipartFile imageFile,
+                              @RequestParam(name = "uid",required = true) String uid)
     {
-        final Map<String, Object> map = new TreeMap<>();
-
-//        String returnValue = "start";
+        String returnValue = "start";
         try {
             userService.saveImage(imageFile,uid);
         }catch (Exception e){
-//            returnValue = "Error";
+            e.printStackTrace();
+            returnValue = "Error";
         }
-        map.put("status", HttpStatus.OK);
-        return new ResponseEntity<>(map,HttpStatus.OK);
+        return returnValue;
     }
+
+//    @PostMapping("/users/document/uploadImage")
+//    public ResponseEntity <Map>uploadImage(@RequestParam(name="imageFile",required = true) MultipartFile imageFile,
+//                                           @RequestParam(name = "uid",required = true) String uid)
+//    {
+//        final Map<String, Object> map = new TreeMap<>();
+//        String returnValue = "start";
+//        try {
+//            userService.saveImage(imageFile,uid);
+//        }catch (Exception e){
+//            returnValue = "Error";
+//        }
+//        map.put("status", HttpStatus.OK);
+//        return new ResponseEntity<>(map,HttpStatus.OK);
+//    }
 
 @GetMapping("/users/{id}")
 public ResponseEntity<Map> getUsersById(@PathVariable ObjectId id)
@@ -115,6 +127,19 @@ public ResponseEntity<Map> getUsersById(@PathVariable ObjectId id)
         map.put("count", users.size());
         map.put("status", HttpStatus.OK);
         return new ResponseEntity<>(map, HttpStatus.OK);
+    }
+
+    @PostMapping("/uploadFile")
+    public UploadFileResponse uploadFile(@RequestParam("file") MultipartFile file) {
+        String fileName = fileStorageService.storeFile(file);
+
+        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path("/downloadFile/")
+                .path(fileName)
+                .toUriString();
+
+        return new UploadFileResponse(fileName, fileDownloadUri,
+                file.getContentType(), file.getSize());
     }
 
 }

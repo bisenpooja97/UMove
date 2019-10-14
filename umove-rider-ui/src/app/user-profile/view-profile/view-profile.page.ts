@@ -4,7 +4,7 @@ import {UserProfile} from '../../model/user-profile';
 import {UserProfileServiceService} from '../../services/users-profile/user-profile-service.service';
 import {Router} from '@angular/router';
 import {ToastController} from '@ionic/angular';
-
+import { HTTP } from '@ionic-native/http/ngx';
 @Component({
   selector: 'app-view-profile',
   templateUrl: './view-profile.page.html',
@@ -28,14 +28,11 @@ export class ViewProfilePage implements OnInit {
   }
 
   async ngOnInit() {
-    // this.updateSubscription = interval(1000).subscribe(
-    //     (val) => { this.updateStats();
-    //     }
-    // );
     this.userDataService.getUserDetailById('5da1a2b80e8e3d0001c8453e')
-        .subscribe(data => {
+        .then(data => {
           console.log('filtered data: ', data);
-          this.user = data.data;
+            console.log('Response1 : ', data.data);
+            this.user = JSON.parse(data.data).data;
           // console.log('mmmm', this.user);
         });
     const toast = await this.toastController.create({

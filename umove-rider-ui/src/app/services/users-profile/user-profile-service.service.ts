@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
+import { HTTP } from '@ionic-native/http/ngx';
 
 @Injectable({
   providedIn: 'root'
@@ -17,24 +18,23 @@ export class UserProfileServiceService {
   document = 'document';
   uploadImage = 'uploadImage';
 
-  constructor(private http: HttpClient) {}
+    constructor(private http: HTTP) {
+        http.setDataSerializer('json');
+        http.setHeader('*', 'Content-Type', 'application/json');
+    }
 
-  public getUserDetailById(id: string): Observable<any> {
-    console.log('url : ' + this.baseUrl  + '/' + id);
-    return this.http.get(this.baseUrl + '/' + id);
+    public getUserDetailById(id) {
+      // console.log('url : ' + this.baseUrl  + '/' + id);
+      return this.http.get(this.baseUrl + '/' + id, {}, {});
+    }
+
+  public editProfileById(id, data) {
+    return this.http.patch(this.baseUrl + '/' + id, data, {});
   }
-
-  // public editProfileById(id: string, data): Observable<any> {
-  //   console.log('url: ' + this.baseUrl + this.users + '/' + id);
-  //   return this.http.patch(this.baseUrl + this.users + '/' + id, data);
-  // }
-  //
-  // public uploadProfileById(id: string, data): Observable<any> {
-  //   console.log('url: ' + this.baseUrl + this.users + '/' + id);
-  //   return this.http.post(this.baseUrl + this.users + '/' + this.document + '/' + this.uploadImage + '?uid=' + id, data);
-  // }
-  // public uploadDldetailsById(id: string, data): Observable<any> {
-  //   console.log('url: ' + this.baseUrl + this.users + '/' + id);
-  //   return this.http.patch(this.baseUrl + this.users + '/' + id, data);
-  // }
+  public uploadProfileById(id, data) {
+    return this.http.post(this.baseUrl + '/' + this.document + '/' + this.uploadImage + '?uid=' + id, data, {});
+  }
+  public uploadDldetailsById(id, data) {
+    return this.http.patch(this.baseUrl + '/' + id, data, {});
+  }
 }

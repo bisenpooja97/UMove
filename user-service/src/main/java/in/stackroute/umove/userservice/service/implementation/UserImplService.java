@@ -124,6 +124,9 @@ public class UserImplService implements UserService {
             if (user.getRole() != null) {
                 updatedUser.setRole(user.getRole());
             }
+            if(user.getDocument() != null){
+                updatedUser.setDocument(user.getDocument());
+            }
             return userRepository.save(updatedUser);
         }
         return null;
@@ -159,11 +162,15 @@ public class UserImplService implements UserService {
      *
      */
     @Override
-    public void saveImage(MultipartFile imageFile, String uid) throws Exception{
-//        String folder = "/home/ashwin/Documents/Project/umove/user-service/src/main/resources/documents/";
-        final String folder = "/home/kumardivyanshu/Desktop/Stackroute Project/umove/user-service/src/main/resources/documents/";
-        final byte[] bytes = imageFile.getBytes();
-        final Path path = Paths.get(folder + uid);
+    public void saveImage(MultipartFile imageFile, String uid) throws Exception {
+        String folder = "/home/ashwin/Documents/Project/umove/user-service/src/main/resources/documents/";
+//        String folder = "/home/ashwin/Desktop/Stackroute Project/umove/user-service/src/main/resources/documents/";
+        byte[] bytes = imageFile.getBytes();
+        Path path = Paths.get(folder + uid);
         Files.write(path, bytes);
     }
+
+
+
+
 }
