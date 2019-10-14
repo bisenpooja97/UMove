@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Document Verification</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="view-profile"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-card>
+    <form [formGroup]="todo" (ngSubmit)="onUpload(todo.value)">
+      <ion-item>
+        <ion-label position="stacked">Enter Driving License Number <ion-text color="danger">*</ion-text></ion-label>
+        <ion-input required type="text" formControlName="drivingLicenceNumber"  ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Enter Expiry Date <ion-text color="danger">*</ion-text></ion-label>
+        <ion-input required type="date" formControlName="expiryDate"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="selectedFile">
+        <h3 text-center>File:{{selectedFile.name}}</h3>
+      </ion-item>
+      <input style="display: none" name="imageFile" type="file" (change)="onFileChanged($event)" #fileInput>
+      <!--    </form>-->
+      <ion-footer>
+        <ion-toolbar color="primary">
+          <ion-row center>
+            <ion-col text-center>
+              <ion-buttons>
+                <ion-button ion-button icon-left (click)="fileInput.click()" >
+                  <ion-icon name="camera"></ion-icon>&nbsp; Select Image
+                </ion-button>
+                <ion-button (click)="onUpload(todo.value)"ion-button icon-left ion-button type="submit">
+                  <ion-icon name="cloud-upload"></ion-icon>&nbsp;Upload
+                </ion-button>
+              </ion-buttons>
+            </ion-col>
+          </ion-row>
+        </ion-toolbar>
+      </ion-footer>
+    </form>
+  </ion-card>
+</ion-content>

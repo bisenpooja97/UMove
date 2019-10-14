@@ -8,6 +8,11 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {UserProfileServiceService} from './services/users-profile/user-profile-service.service';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {Environment} from '@angular/compiler-cli/src/ngtsc/typecheck/src/environment';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -15,11 +20,14 @@ import { AppRoutingModule } from './app-routing.module';
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule, FormsModule, ReactiveFormsModule,
   ],
   providers: [
     StatusBar,
     SplashScreen,
+    HttpClient,
+    UserProfileServiceService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
