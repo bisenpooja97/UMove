@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ZoneService } from './service/zone.service';
 import { Zone } from '../model/zone';
-import { MatTableDataSource, MatDialogRef, MatDialog, MatDialogConfig } from '@angular/material';
+import { MatDialog, MatDialogConfig } from '@angular/material';
 import { AddZoneComponent } from './add-zone/add-zone.component';
 import { NotificationService } from '../shared/notification.service';
 
@@ -17,18 +17,12 @@ export class ZonesComponent implements OnInit {
   p = 1;
   message: string;
 
-  dataSource = new MatTableDataSource();
-
   constructor(private zoneService: ZoneService,
               private matDialog: MatDialog,
               private notificationService: NotificationService) { }
 
   ngOnInit() {
-    this.zoneService.getZones().subscribe(res => { this.zones = res.data;
-                                                   console.log(res, 'parent');
-
-
-} );
+    this.getZonesInfo();
 }
 
 add() {
@@ -52,12 +46,15 @@ add() {
             } else {
               this.notificationService.success('Zone added successfully');
             }
-          this.zoneService.getZones().subscribe(res => { this.zones = res.data;
-                                                        });
-
+          this.getZonesInfo();
           }); }
    });
 
+}
+
+getZonesInfo() {
+  return this.zoneService.getZones().subscribe(res => { this.zones = res.data;
+  });
 }
 
 }

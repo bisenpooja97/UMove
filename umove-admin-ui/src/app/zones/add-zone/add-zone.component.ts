@@ -48,7 +48,8 @@ export class AddZoneComponent implements OnInit {
       state: ['', [Validators.pattern('[a-zA-z]+')]],
       country: ['', [Validators.pattern('[a-zA-z]+')]],
       capacity: ['', [Validators.pattern('^[0-9]*$')]],
-      status: ['INACTIVE']
+      status: ['INACTIVE'],
+      pincode: [560002]
     });
 
     getErrorZoneName() {

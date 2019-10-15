@@ -3,6 +3,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ZoneService } from '../service/zone.service';
 import { Zone } from 'src/app/model/zone';
 import { NotificationService } from 'src/app/shared/notification.service';
+import { MatDialog, MatDialogConfig } from '@angular/material';
+import { UpdateZonesComponent } from '../update-zones/update-zones.component';
 
 export interface Status {
   value: string;
@@ -21,14 +23,16 @@ export class ZoneDetailsComponent implements OnInit {
   city: string;
   country: string;
   locality: string;
-  creationTime: string;
+  creationTime: Date;
   state: string;
-  pincode: string;
+  pincode: number;
   capacity: number;
   sName: string;
   sNumber: string;
   sEmail: string;
   status: string;
+
+
 
   zoneStatus: Status[] = [
     { value: 'INACTIVE', viewValue: 'INACTIVE' },
@@ -40,25 +44,11 @@ export class ZoneDetailsComponent implements OnInit {
 
   constructor(private router: Router, private zoneService: ZoneService,
               private activatedRoute: ActivatedRoute, private route: ActivatedRoute,
-              private notificationService: NotificationService) { }
+              private notificationService: NotificationService,
+              private matDialog: MatDialog) { }
 
   ngOnInit() {
-    this.zoneService.getZoneByName(this.route.snapshot.paramMap.get('name')).subscribe(res => {
-      this.zone = res.data;
-      console.log(res);
-      this.name = this.zone[0].name;
-      this.city = this.zone[0].city;
-      this.country = this.zone[0].country;
-      this.locality = this.zone[0].locality;
-      this.creationTime = this.zone[0].time;
-      this.state = this.zone[0].state;
-      this.pincode = this.zone[0].pincode;
-      this.capacity = this.zone[0].capacity;
-      this.sName = this.zone[0].supervisorName;
-      this.sNumber = this.zone[0].supervisorNumber;
-      this.sEmail = this.zone[0].supervisorEmail;
-      this.status = this.zone[0].status;
-    });
+    this.getZoneDetails();
   }
 
 
@@ -72,4 +62,45 @@ export class ZoneDetailsComponent implements OnInit {
     );
 }
 
+update() {
+  const dialogConfig = new MatDialogConfig();
+  dialogConfig.disableClose = true;
+  dialogConfig.autoFocus = true;
+  dialogConfig.width = '20%';
+  dialogConfig.data = {
+    capacity : this.zone[0].capacity,
+  };
+  const dRef = this.matDialog.open(UpdateZonesComponent, dialogConfig);
+  dRef.afterClosed().subscribe(result => {
+    console.log('Back to parent', result);
+    this.zoneService.updateZones(this.name, result).subscribe(
+      response => { this.notificationService.success('Zone updated successfully!!'),
+      this.getZoneDetails();
+    },
+    error => {
+      this.notificationService.warn('Can\'t update ');
+    }
+    );
+
+});
+}
+
+getZoneDetails() {
+  this.zoneService.getZoneByName(this.route.snapshot.paramMap.get('name')).subscribe(res => {
+    this.zone = res.data;
+    console.log(res);
+    this.name = this.zone[0].name;
+    this.city = this.zone[0].city;
+    this.country = this.zone[0].country;
+    this.locality = this.zone[0].locality;
+    this.creationTime = this.zone[0].createdAt;
+    this.state = this.zone[0].state;
+    this.pincode = this.zone[0].pincode;
+    this.capacity = this.zone[0].capacity;
+    this.sName = this.zone[0].supervisorName;
+    this.sNumber = this.zone[0].supervisorNumber;
+    this.sEmail = this.zone[0].supervisorEmail;
+    this.status = this.zone[0].status;
+  });
+}
 }

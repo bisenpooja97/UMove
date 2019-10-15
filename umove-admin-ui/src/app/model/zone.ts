@@ -7,12 +7,12 @@ export class Zone {
    public city: string;
    public state: string;
    public country: string;
-   public pincode: string;
+   public pincode: number;
    public capacity: number;
    public status: string;
    public supervisorId: string;
    public supervisorName: string;
    public supervisorNumber: string;
    public supervisorEmail: string;
-   public time: string;
+   public createdAt: Date;
 }

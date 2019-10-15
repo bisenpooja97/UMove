@@ -13,9 +13,10 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddZoneComponent } from './add-zone/add-zone.component';
+import { UpdateZonesComponent } from './update-zones/update-zones.component';
 
 @NgModule({
-  declarations: [ZonesComponent, ZoneCardComponent, ZoneDetailsComponent, AddZoneComponent],
+  declarations: [ZonesComponent, ZoneCardComponent, ZoneDetailsComponent, AddZoneComponent, UpdateZonesComponent],
   imports: [
     CommonModule,
     ZonesRoutingModule,
@@ -38,6 +39,6 @@ import { AddZoneComponent } from './add-zone/add-zone.component';
     MatGridListModule,
     MatSnackBarModule
   ],
-  entryComponents: [AddZoneComponent]
+  entryComponents: [AddZoneComponent, UpdateZonesComponent]
 })
 export class ZonesModule { }
