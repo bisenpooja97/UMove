@@ -8,18 +8,21 @@ import { Router } from '@angular/router';
   styleUrls: ['./vehicle-card.component.css']
 })
 export class VehicleCardComponent implements OnInit {
-  @Input() vehicle: Vehicle[];
- registrationNo: object;
- status: object;
- type: object;
+  @Input() vehicle: Vehicle;
+ registrationNo: string;
+ status: string;
+ type: string;
+ category: string;
 
   constructor(private router: Router) { }
 
   ngOnInit() {
-    this.registrationNo = Object.values(this.vehicle)[2];
-    this.status = Object.values(this.vehicle)[4];
-    this.type = Object.values(this.vehicle)[5];
-    console.log(this.vehicle);
+     this.registrationNo = this.vehicle.registrationNo;
+     this.status = this.vehicle.status;
+     this.type = this.vehicle.type.name;
+     this.category=this.vehicle.type.category;
+    console.log(this.vehicle.type.name);
+
   }
 
   ok() {
@@ -30,13 +33,13 @@ export class VehicleCardComponent implements OnInit {
       switch (status) {
 case 'Busy':
 return 'green';
-case 'FREE':
-return 'cyan';
-case 'SERVICING':
+case 'Free':
+return 'black';
+case 'Servicing':
 return 'red';
-case 'NO_MORE_IN_USE':
+case 'No_More_In_Use':
 return 'gray';
-case 'STOLEN':
+case 'Stolen':
 return 'gray';
 }
 }

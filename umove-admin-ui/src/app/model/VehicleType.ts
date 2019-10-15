@@ -1,5 +1,5 @@
 export class VehicleType {
-  public typeId: string;
+  public Id: string;
   public name: string;
   public costkm: number;
   public costtime: number;
@@ -7,6 +7,7 @@ export class VehicleType {
  public vehiclecc: string;
  public kilometer: number;
  public url: string;
+
 
 }
 

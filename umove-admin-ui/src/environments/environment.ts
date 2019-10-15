@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'http://localhost:8092/',
+  baseUrl: 'http://localhost:8092',
   zoneService: 'zone-service',
   zoneBaseApi: '/api/v1/zones',
   userService: 'user-service',

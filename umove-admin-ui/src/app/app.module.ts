@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FlexLayoutModule } from "@angular/flex-layout";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   MatButtonModule,
   MatCardModule,
@@ -20,6 +21,9 @@ import {
       MatSelectModule,
 
       MatSnackBarModule,
+      MatDialogModule,
+      MatDatepicker,
+      MatDatepickerModule,
 
 
 } from '@angular/material';
@@ -45,10 +49,19 @@ import { HttpClientModule } from '@angular/common/http';
     MatSnackBarModule,
     MatPaginatorModule,
     MatListModule,
-    MatSidenavModule
+    MatSidenavModule,
+    BrowserAnimationsModule,
+    MatIconModule,
+    MatDialogModule,
+    //MatDatepicker,
+    MatDatepickerModule,
+    //MatDatepickerModule,
+    MatNativeDateModule
+
+
 
   ],
-  providers: [],
+  providers: [MatDatepickerModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

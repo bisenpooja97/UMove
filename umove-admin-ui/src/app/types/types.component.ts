@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { VehicleType } from '../model/VehicleType';
-import { MatPaginator, MatTableDataSource } from '@angular/material';
+import { MatPaginator, MatTableDataSource, MatDialogConfig, MatDialog, MatSnackBar } from '@angular/material';
 import { VehicleTypeService } from './vehicle-type.service';
+import { AddVehicleTypeComponent } from './add-vehicle-type/add-vehicle-type.component';
 
 
 @Component({
@@ -15,6 +16,9 @@ export class TypesComponent implements OnInit {
 
   p = 1;
   searchText;
+  message: string;
+
+
 
   dataSource = new MatTableDataSource();
 
@@ -22,7 +26,8 @@ export class TypesComponent implements OnInit {
 
 
 
-  constructor(private typeService: VehicleTypeService) { }
+  constructor(private typeService: VehicleTypeService, private matDialog: MatDialog, private snackBar: MatSnackBar
+    ) { }
 
   ngOnInit() {
     this.typeService.getType().subscribe(res => { this.vehicleTypes = res.data;
@@ -35,7 +40,40 @@ export class TypesComponent implements OnInit {
 ngAfterViewInit() {
                     this.dataSource.paginator = this.paginator;
                   }
+                  openSnackbar(message: string, action: string) {
+                    this.snackBar.open(message, action, {
+                      duration: 2000,
+                      panelClass: ['blue-snackbar']
+                    });
+                  }
+
+                    add() {
+                    const dialogConfig = new MatDialogConfig();
+                    dialogConfig.disableClose = true;
+                    dialogConfig.autoFocus = true;
+                    dialogConfig.width = '40%';
+                    const dRef = this.matDialog.open(AddVehicleTypeComponent, dialogConfig);
+
+                    dRef.afterClosed().subscribe(result => {
+                      if (result !== undefined) {
+                      this.typeService.createType(result)
+                          .subscribe(
+                            response => {
+                            this.message = response.message;
+                            console.log(this.message);
+                            if (this.message === 'Type already exists') {
+                              this.openSnackbar('Type already exists', 'ok');
+                            } else {
+                              this.openSnackbar('Type added succesfully', 'ok');
+                            }
+                            this.typeService.getType().subscribe(res => { this.vehicleTypes = res.data;
+                                                                          });
+
+                            }); }
+                     });
+
+                  }
+                }
 
 
 
-}
