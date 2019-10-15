@@ -36,6 +36,9 @@
         "cordova-plugin-dialogs": "^2.0.2",
         "cordova-plugin-file": "^6.0.2",
         "cordova-plugin-geolocation": "^4.0.2",
+        "cordova-plugin-mapbox": "^1.2.3",
+        "cordova-plugin-place-autocomplete": "^1.0.0",
+        "cordova-plugin-timer": "^1.0.1",
         "core-js": "^2.5.4",
         "firebase": "^6.6.2",
         "ionic4-auto-complete": "^2.1.3",
@@ -90,7 +93,11 @@
             },
             "cordova-plugin-ionic-keyboard": {},
             "cordova-plugin-dialogs": {},
-            "cordova-plugin-advanced-http": {}
+            "cordova-plugin-advanced-http": {},
+            "cordova-plugin-mapbox": {
+                "ACCESS_TOKEN": "pk.eyJ1IjoicHVuaXRzZXRpYSIsImEiOiJjazBjOTY0cGcwMDI0M2RtbThsbWEyaXhnIn0.DrloATvnGeowNnIPanQT4g"
+            },
+            "cordova-plugin-timer": {}
         },
         "platforms": [
             "android",

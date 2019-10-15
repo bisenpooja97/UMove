@@ -1,31 +1,35 @@
 <ion-header>
-  <script>
-      $('.btn-group').on('click', '.btn', function() {
-          $(this).addClass('active').siblings().removeClass('active');
-      });
-  </script>
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>{{page}}</ion-title>
-    <ion-row *ngIf="page=='pick-up'">
+    <ion-title *ngIf="page!=='pick-up'">{{page}}</ion-title>
+    <ion-row *ngIf="page==='pick-up'">
       <ion-button class="active btn" (click)="trip=false" >Round Trip</ion-button>
       <ion-button class="btn" (click)="trip=true">One Way</ion-button>
     </ion-row>
   </ion-toolbar>
 </ion-header>
-<ion-content>
+<ion-content style="margin:0; padding:0;">
   <ion-grid>
     <ion-row>
-      <ion-auto-complete  [dataProvider]="zoneService" [(ngModel)]="locality" (itemSelected)="gettingCoordinatesByLocality()"></ion-auto-complete>
+            <ion-auto-complete style="width: 100%"  [dataProvider]="zoneService" [(ngModel)]="locality" (itemSelected)="gettingCoordinatesByLocality()"></ion-auto-complete>
     </ion-row>
-    <ion-row class="map" id="map" style="height: 80vh;">
-      <div *ngFor="let marker of markerss | async">
+    <ion-row  class="map" id="map" style="height: 100vh;">
+      <div style="position:absolute; top:0; bottom:0; width:100%;" *ngFor="let marker of markerss | async">
         <button (click)="flyTo(marker)">{{ marker.properties.message }}</button>
       </div>
     </ion-row>
   </ion-grid>
+
+<!--  <ion-item slot="start" margin>-->
+<!--    <ion-searchbar type="text" style="width: 100%" debounce="500" (ionInput)="getItems($event)"></ion-searchbar>-->
+<!--    <ion-list *ngIf="isItemAvailable">-->
+<!--      <ion-item *ngFor="let item of items">-->
+<!--        {{ item }}-->
+<!--      </ion-item>-->
+<!--    </ion-list>-->
+<!--  </ion-item >-->
 </ion-content>
 <ion-footer>
   <ion-row *ngIf="page=='pick-up'">

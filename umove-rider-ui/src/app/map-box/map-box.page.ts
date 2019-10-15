@@ -29,6 +29,8 @@ export class MapBoxPage implements OnInit {
   locality: string;
   layoutCount = 0;
   page = 'pick-up';
+  private mapCanvas: Element;
+  private items: string[];
   constructor(private zoneService: ZoneService,
               private route: ActivatedRoute,
               private router: Router,
@@ -46,41 +48,95 @@ export class MapBoxPage implements OnInit {
   }
 
   ngOnInit() {
-
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(position => {
-        this.lat = position.coords.latitude;
-        this.lng = position.coords.longitude;
-        console.log('location', this.lat, this.lng);
-        this.map.flyTo({
-          center: [this.lng, this.lat]
-        });
-      });
-    }
-    this.initializeMap();
+    this.buildMap();
   }
 
   private initializeMap() {
-    this.buildMap();
-    this.addLayer(this.lat, this.lng);
+
+
   }
+
+  // delay = ms => new Promise(res => {
+  //   setTimeout(res, ms)
+  // });
 
 
   // For building Map
   buildMap() {
+    // this.mapCanvas = document.getElementsByClassName('mapboxgl-canvas')[0];
     this.map = new mapboxgl.Map({
       container: 'map',
-      style: this.style,
+      style: 'mapbox://styles/mapbox/light-v10',
       center: [this.lng, this.lng],
-      zoom: 15
+      zoom: 15,
+
     });
+    // this.map.on('load', () => {
+    //   if (navigator.geolocation) {
+    //     navigator.geolocation.getCurrentPosition(position => {
+    //       this.lat = position.coords.latitude;
+    //       this.lng = position.coords.longitude;
+    //       console.log('location', this.lat, this.lng);
+    //       this.marker(this.lat, this.lng);
+    //       this.addLayer(this.lat, this.lng);
+    //       this.map.flyTo({
+    //         center: [this.lng, this.lat]
+    //       });
+    //
+    //     });
+    //   }
+    //   // const waiting = () => {
+    //   //   if (!this.map.isStyleLoaded()) {
+    //   //     setTimeout(waiting, 100);
+    //   //   } else {
+    //   //     this.map.addControl(new mapboxgl.GeolocateControl({
+    //   //       positionOptions: {
+    //   //         enableHighAccuracy: true
+    //   //       },
+    //   //       trackUserLocation: true
+    //   //     }));
+    //
+    //       // When a click event occurs on a feature in the places layer, open a popup at the
+    //       // location of the feature, with description HTML from its properties.
+    //       this.map.on('click', 'places' + this.layoutCount, (e) => {
+    //         const coordinates = e.features[0].geometry.coordinates.slice();
+    //         const description = e.features[0].properties.description;
+    //         this.isSelected = true;
+    //
+    //         this.selectedzone = JSON.parse(e.features[0].properties.data);
+    //         console.log('selected zone:', this.selectedzone);
+    //         console.log(this.trip);
+    //
+    //         while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+    //           coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+    //         }
+    //         new mapboxgl.Popup()
+    //             .setLngLat(coordinates)
+    //             .setHTML(description)
+    //             .addTo(this.map);
+    //       });
+    //
+    //       // Change the cursor to a pointer when the mouse is over the places layer
+    //       // Change it back to a pointer when it leaves.
+    //       this.map.on('mouseleave', 'places' + this.layoutCount, () => {
+    //         this.map.getCanvas().style.cursor = '';
+    //       });
+    //
+    // });
     this.map.on('load', () => {
-      this.map.addControl(new mapboxgl.GeolocateControl({
-        positionOptions: {
-          enableHighAccuracy: true
-        },
-        trackUserLocation: true
-      }));
+      if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(position => {
+              this.lat = position.coords.latitude;
+              this.lng = position.coords.longitude;
+              console.log('location', this.lat, this.lng);
+              this.marker(this.lat,this.lng);
+              // this.addLayer(this.lat, this.lng);
+              this.map.flyTo({
+                  center: [this.lng, this.lat]
+              });
+
+          });
+      }
 
       // When a click event occurs on a feature in the places layer, open a popup at the
       // location of the feature, with description HTML from its properties.
@@ -101,30 +157,36 @@ export class MapBoxPage implements OnInit {
           .setHTML(description)
           .addTo(this.map);
       });
-      this.marker();
+
       // Change the cursor to a pointer when the mouse is over the places layer
       // Change it back to a pointer when it leaves.
       this.map.on('mouseleave', 'places' + this.layoutCount, () => {
         this.map.getCanvas().style.cursor = '';
       });
     });
+    this.map.on('style.load', () => {
+      this.addLayer(this.lat,this.lng);
+
+    });
+
   }
 
   // For showing marker on Map
-  marker() {
+  marker(lat, lng) {
     this.map.on('mouseenter', 'places', () => {
       this.map.getCanvas().style.cursor = 'pointer';
     });
+    console.log("I am marker",lng,lat);
 
     this.markers
-      .setLngLat([this.lng, this.lat])
+      .setLngLat([lng, lat])
       .addTo(this.map);
-    function onDragEnd() {
-      const lngLat = this.markers.getLngLat();
-      console.log(lngLat.lat);
-    }
+    // function onDragEnd() {
+    //   const lngLat = this.markers.getLngLat();
+    //   console.log(lngLat.lat);
+    // }
     // marker.on('dragend', this.addNewLayer(marker.getLngLat().lat, marker.getLngLat().lan));
-    this.markers.on('dragend', onDragEnd);
+    // this.markers.on('dragend', onDragEnd);
   }
 
   // For fly to different co-ordinates on map
@@ -142,7 +204,7 @@ export class MapBoxPage implements OnInit {
     // } else {
     //   booking.destinationZones.push(this.selectedzone);
     // }
-    //
+      //
     // this.bookingService.setCurrentBooking(booking);
     const navigationExtras: NavigationExtras = {
       state: {
@@ -154,6 +216,7 @@ export class MapBoxPage implements OnInit {
     console.log('coordinates', this.coordinates);
     this.router.navigate(['bikelist'], navigationExtras);
   }
+  
   booking() {
     const navigationExtras: NavigationExtras = {
       state: {
@@ -176,17 +239,74 @@ export class MapBoxPage implements OnInit {
   private addLayer(lat: number, lng: number) {
     this.layoutCount++;
     console.log('newcoordinates:', this.lat, this.lng);
+    // this.marker(lat,lng);
     // tslint:disable-next-line:max-line-length
-    this.zoneService.getNearbyZones(lat, lng).then(data => {
-      this.data = data;
-      // console.log(this.layoutCount);
-      // console.log(this.data);
-    });
+    // this.zoneService.getNearbyZones(lat, lng).then(data => {
+    //   this.data = data;
+    //   console.log('Hello', data)
+    //   // console.log(this.layoutCount);
+    //   // console.log(this.data);
+    // });
+    this.data=[{
+      "zoneId": "1",
+      "name": "Zone-1",
+      "lat": 12.93736,
+      "lon": 77.61134,
+      "city": "Bengaluru Urban",
+      "state": "Karnataka",
+      "country": "India",
+      "pincode": "560045",
+      "locality": "Block 7 Koramangala",
+      "capacity": 50,
+      "time": "2019-10-13T03:39:28.931+0000",
+      "supervisorId": null,
+      "supervisorName": null,
+      "supervisorNumber": null,
+      "supervisorEmail": null,
+      "status": "INACTIVE"
+    },
+      {
+        "zoneId": "2",
+        "name": "Zone-2",
+        "lat": 12.9416,
+        "lon": 77.61718,
+        "city": "Bengaluru Urban",
+        "state": "Karnataka",
+        "country": "India",
+        "pincode": "560045",
+        "locality": "Block 8 Koramangala",
+        "capacity": 50,
+        "time": "2019-10-14T04:10:47.595+0000",
+        "supervisorId": null,
+        "supervisorName": null,
+        "supervisorNumber": null,
+        "supervisorEmail": null,
+        "status": "ACTIVE"
+      },
+      {
+        "zoneId": "2",
+        "name": "Zone-2",
+        "lat": 12.9416,
+        "lon": 77.61718,
+        "city": "Bengaluru Urban",
+        "state": "Karnataka",
+        "country": "India",
+        "pincode": "560045",
+        "locality": "Block 8 Koramangala",
+        "capacity": 50,
+        "time": "2019-10-14T04:10:47.595+0000",
+        "supervisorId": null,
+        "supervisorName": null,
+        "supervisorNumber": null,
+        "supervisorEmail": null,
+        "status": "ACTIVE"
+      }
+    ];
     // tslint:disable-next-line:max-line-length
-    this.map.loadImage('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiYj3weoUfW-nlGNmyPagbwlzDoUyIcwb4e908EgArQmoKDacnkA', (error, image) => {
+    this.map.loadImage('https://images.vexels.com/media/users/3/129788/isolated/preview/04c91b04215f603567324d459b761807-chopper-bike-front-icon-by-vexels.png', (error, image) => {
       if (error) { throw error; }
       this.map.addImage('cat', image);
-      console.log(this.data);
+      console.log('data', this.data);
       // Add a layer showing the places.
       this.map.addLayer({
         id: 'places' + this.layoutCount,
@@ -201,7 +321,7 @@ export class MapBoxPage implements OnInit {
                 properties: {
                   description: '<strong>Zone 1</strong><a href=\'\' target=\'_blank\'><button>Get Direction</button></a>',
                   icon: 'cat',
-                  data: this.data.data[0],
+                  data: this.data[0],
                 },
 
                 geometry: {
@@ -217,7 +337,7 @@ export class MapBoxPage implements OnInit {
                 properties: {
                   description: '<strong>Zone 2</strong><a href=\'\' target=\'_blank\'><button>Get Direction</button></a>',
                   icon: 'bicycle',
-                  data: this.data.data[1],
+                  data: this.data[1],
                 },
                 geometry: {
                   type: 'Point',
@@ -232,7 +352,7 @@ export class MapBoxPage implements OnInit {
                 properties: {
                   description: '<strong>Zone 3</strong><a href=\'\' target=\'_blank\'><button>Get Direction</button></a>',
                   icon: 'bicycle',
-                  data: this.data.data[2],
+                  data: this.data[2],
                 },
                 geometry: {
                   type: 'Point',
@@ -256,16 +376,19 @@ export class MapBoxPage implements OnInit {
   }
 
   gettingCoordinatesByLocality() {
+    console.log('locality:',this.locality);
     this.zoneService.getCoordinatesByLocality(this.locality).then(
       res => {
-        this.location = res;
-        this.lat = this.location.results[0].position.lat;
-        this.lng = this.location.results[0].position.lon;
+        // this.location = res;
+        // this.lat = this.location.results[0].position.lat;
+        // this.lng = this.location.results[0].position.lon;
+        console.log("Response:",res)
       }
     );
     console.log('HEllo', this.lat);
     this.markers.remove();
-    this.marker();
+    this.marker(this.lat, this.lng);
     this.addNewLayer(this.lat, this.lng);
   }
+
 }

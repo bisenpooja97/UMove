@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ZoneService} from '../service/zone/zone.service';
 import {NavigationExtras, Router} from '@angular/router';
 
@@ -13,7 +13,7 @@ export class BikeComponent implements OnInit {
   @Input() type: {};
   @Input() trip: boolean;
   selectedType: object;
-
+  @Output() selectedTypes = new EventEmitter();
   // tslint:disable-next-line:max-line-length
   constructor(private zoneService: ZoneService, private router: Router,
               // private bookingService: BookingService
@@ -31,16 +31,17 @@ export class BikeComponent implements OnInit {
     // booking.vehicle = type;
     // this.bookingService.setCurrentBooking(booking);
     // console.log(type);
-    const navigationExtras: NavigationExtras  = {
-      state: {
-        page: 'drop',
-      }
-    };
-    if (this.trip) {
-      this.router.navigate(['home'], navigationExtras);
-    } else {
-      this.router.navigate(['booking'], navigationExtras);
-    }
+    // const navigationExtras: NavigationExtras  = {
+    //   state: {
+    //     page: 'drop',
+    //   }
+    // };
+    // if (this.trip) {
+    //   this.router.navigate(['home'], navigationExtras);
+    // } else {
+    //   this.router.navigate(['booking'], navigationExtras);
+    // }
+    this.selectedTypes.emit(this.selectedType);
   }
 
 }

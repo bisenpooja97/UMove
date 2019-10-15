@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Output} from '@angular/core';
 import {ZoneService} from '../service/zone/zone.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Dialogs} from '@ionic-native/dialogs/ngx';
@@ -28,24 +28,91 @@ export class BikeListPage implements OnInit {
     });
 
     // Subsribing service for getting vehicles list for a particular zone
-    this.zoneService.getVehiclesByZoneTypes(this.pickUpZone).then(data => {
-       this.bikeList = data;
-      this.bikeList.data.map(item => {
-        if (this.formattedData.hasOwnProperty(item.type.name)) {
-          this.formattedData[item.type.name].count++;
-        } else {
-          this.formattedData[item.type.name] = {
-            type: item.type,
-            count: 1
-          };
-        }
-      });
-      this.typeList = Object.values(this.formattedData);
-    });
+    // this.zoneService.getVehiclesByZoneTypes(this.pickUpZone).then(data => {
+    //    this.bikeList = data;
+    //   this.bikeList.data.map(item => {
+    //     if (this.formattedData.hasOwnProperty(item.type.name)) {
+    //       this.formattedData[item.type.name].count++;
+    //     } else {
+    //       this.formattedData[item.type.name] = {
+    //         type: item.type,
+    //         count: 1
+    //       };
+    //     }
+    //   });
+    //   this.typeList = Object.values(this.formattedData);
+    // });
     //
     // this.dialogs.confirm('Hello world')
     //   .then(() => console.log('Dialog dismissed'))
     //   .catch(e => console.log('Error displaying dialog', e));
+    this.bikeList={
+      "count": 2,
+      "data": [
+        {
+          "id": "5da1ab649bd1160001cb8a03",
+          "zoneid": null,
+          "registrationNo": "RJ27CA3456",
+          "insuranceNo": "678567",
+          "status": "Busy",
+          "type": {
+            "id": "5da1a0989bd1160001cb8a02",
+            "name": "R1",
+            "costkm": 9,
+            "costtime": 0.25,
+            "costlt": 100,
+            "category": "Sports",
+            "vehiclecc": "220cc",
+            "kilometer": 25,
+            "url": "https://library.kissclipart.com/20190225/exw/kissclipart-yamaha-yzf-r1-yamaha-motor-company-yamaha-yzf-r6-m-7798c5450bd8897d.png"
+          },
+          "time": "2019-10-12T09:10:56.415+0000",
+          "lastServiceDate": "2019-10-12T09:10:56.415+0000",
+          "vehiclePurchased": "2019-10-12T09:10:56.415+0000"
+        },
+        {
+          "id": "5da1ab649bd1160001cb8a03",
+          "zoneid": null,
+          "registrationNo": "RJ27CA3456",
+          "insuranceNo": "678567",
+          "status": "Busy",
+          "type": {
+            "id": "5da1a0989bd1160001cb8a02",
+            "name": "R1",
+            "costkm": 9,
+            "costtime": 0.25,
+            "costlt": 100,
+            "category": "Sports",
+            "vehiclecc": "220cc",
+            "kilometer": 25,
+            "url": "https://library.kissclipart.com/20190225/exw/kissclipart-yamaha-yzf-r1-yamaha-motor-company-yamaha-yzf-r6-m-7798c5450bd8897d.png"
+          },
+          "time": "2019-10-12T09:10:56.415+0000",
+          "lastServiceDate": "2019-10-12T09:10:56.415+0000",
+          "vehiclePurchased": "2019-10-12T09:10:56.415+0000"
+        }
+      ],
+      "status": "OK"
+    };
+    this.bikeList.data.map(item => {
+      if (this.formattedData.hasOwnProperty(item.type.name)) {
+        this.formattedData[item.type.name].count++;
+      } else {
+        this.formattedData[item.type.name] = {
+          type: item.type,
+          count: 1
+        };
+      }
+    });
+    this.typeList = Object.values(this.formattedData);
+    console.log("TypeList:",this.typeList);
+  }
 
+  onVehicleSelected(type : {}){
+    if (this.trip) {
+      this.router.navigate(['home']);
+    } else {
+      this.router.navigate(['booking']);
+    }
   }
 }
