@@ -13,7 +13,7 @@
 <ion-content style="margin:0; padding:0;">
   <ion-grid>
     <ion-row>
-            <ion-auto-complete style="width: 100%"  [dataProvider]="zoneService" [(ngModel)]="locality" (itemSelected)="gettingCoordinatesByLocality()"></ion-auto-complete>
+<!--            <ion-auto-complete style="width: 100%"  [dataProvider]="zoneService" [(ngModel)]="locality" (itemSelected)="gettingCoordinatesByLocality()"></ion-auto-complete>-->
     </ion-row>
     <ion-row  class="map" id="map" style="height: 100vh;">
       <div style="position:absolute; top:0; bottom:0; width:100%;" *ngFor="let marker of markerss | async">
@@ -22,14 +22,14 @@
     </ion-row>
   </ion-grid>
 
-<!--  <ion-item slot="start" margin>-->
-<!--    <ion-searchbar type="text" style="width: 100%" debounce="500" (ionInput)="getItems($event)"></ion-searchbar>-->
-<!--    <ion-list *ngIf="isItemAvailable">-->
-<!--      <ion-item *ngFor="let item of items">-->
-<!--        {{ item }}-->
-<!--      </ion-item>-->
-<!--    </ion-list>-->
-<!--  </ion-item >-->
+  <ion-item slot="start" margin>
+    <ion-searchbar type="text" style="width: 100%" debounce="500" (ionInput)="getItems($event)"></ion-searchbar>
+    <ion-list *ngIf="isItemAvailable">
+      <ion-item *ngFor="let item of items">
+        {{ item }}
+      </ion-item>
+    </ion-list>
+  </ion-item >
 </ion-content>
 <ion-footer>
   <ion-row *ngIf="page=='pick-up'">
