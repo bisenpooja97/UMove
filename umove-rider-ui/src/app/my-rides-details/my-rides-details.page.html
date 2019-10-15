@@ -1,57 +1,83 @@
 <ion-content>
+  <ion-list lines="none">
+    <ion-card>
+      <ion-title>
+        <h4>Ride Details</h4>
+      </ion-title>
+      <ion-row>
+        <ion-item>
+          <ion-label>{{ rides?.bookedAt | date: 'medium' }}</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>{{ rides?.payment?.paidAmount | currency : "INR" }}</ion-label>
+        </ion-item>
+      </ion-row>
+      <ion-item>
+          <ion-label>{{ rides?.vehicle?.name }}</ion-label>
+      </ion-item>
+      <ion-item>
+          <ion-label>{{ rides?.vehicle?.registrationNo }}</ion-label>
+      </ion-item>
+    </ion-card>
+  </ion-list>
   <ion-card>
-    <ion-card-subtitle>
-      {{ rides?.bookedAt | date: 'medium' }}
-    </ion-card-subtitle>
-    <ion-card-subtitle>
-      {{ rides?.vehicle?.name }}
-    </ion-card-subtitle>
-    <ion-card-subtitle>
-      {{ rides?.vehicle?.registrationNo }}
-    </ion-card-subtitle>
-    <ion-card-subtitle>
-      {{ rides?.payment?.paidAmount }}
-    </ion-card-subtitle>
-  </ion-card>
-  <ion-card>
-    <ion-card-subtitle>
+    <ion-list lines="none">
+    <ion-item>
       <ion-icon name="pin" color="tertiary"></ion-icon>Source Zone :
       {{ rides?.sourceZone?.locality }},{{ rides?.sourceZone?.city }},{{ rides?.sourceZone?.state }},{{ rides?.sourceZone?.country }}-{{ rides?.sourceZone.pincode }}
-    </ion-card-subtitle>
-    <ion-card-subtitle *ngFor="let ridesdestinationZones of rides?.destinationZones">
+    </ion-item>
+    <ion-item *ngFor="let ridesdestinationZones of rides?.destinationZones">
       <ion-icon name="pin" color="tertiary"></ion-icon>Destination Zone :
       {{ ridesdestinationZones?.locality }},{{ ridesdestinationZones?.city }},{{ ridesdestinationZones?.state }},{{ ridesdestinationZones?.country }}-{{ ridesdestinationZones?.pincode }}
-    </ion-card-subtitle>
+    </ion-item>
+  </ion-list>
   </ion-card>
+
   <ion-card>
-    <ion-card-subtitle>
-      Fare Break-up
-    </ion-card-subtitle>
-    <ion-card-subtitle>
-      Distance : {{ rides?.distance }}
-    </ion-card-subtitle>
-    <ion-card-subtitle>
-      Time : {{ rides?.duration }}
-    </ion-card-subtitle>
-    <ion-card-subtitle>
-      Ride Amount : {{ rides?.payment?.rideAmount }}
-    </ion-card-subtitle>
-    <ion-card-subtitle *ngFor="let ridesamount of rides?.payment?.extraCharges">
-      Extra Charges : {{ ridesamount?.amount }}
-    </ion-card-subtitle>
-    <ion-card-subtitle>
-      Total Extra Charges : {{ rides?.payment?.totalExtraCharges }}
-    </ion-card-subtitle>
-    <ion-card-subtitle>
-      Total Amount : {{ rides?.payment?.totalAmount }}
-    </ion-card-subtitle>
-    <ion-card-subtitle>
-      Discount : {{ rides?.payment?.discount }}
-    </ion-card-subtitle>
-    <ion-card-subtitle>
-      Paid Amount : {{ rides?.payment?.paidAmount }}
-    </ion-card-subtitle>
+    <ion-list lines="none">
+      <ion-item class="heading">
+        Fare Break-up
+      </ion-item>
+      <ion-row>
+        <ion-item>
+          <ion-label class="DistTime">Distance</ion-label>{{ rides?.distance }} Km
+        </ion-item>
+        <ion-item>
+          <ion-label class="DistTime">Time</ion-label> {{ rides?.duration }} mins
+        </ion-item>
+      </ion-row>
+      <ion-item class="baseFare">
+        <ion-label>
+          Base Fare </ion-label> {{ rides?.payment?.rideAmount | currency : "INR" }}
+      </ion-item>
+      <ion-item>
+        <ion-label class="belowBaseFare">Minimum Fare Applied</ion-label>
+      </ion-item>
+      <div *ngIf="appliedPromoCode || hideMe">
+        <ion-item>
+          <ion-label>Reward Points Discount </ion-label> - {{ rides?.promoCode?.discountPercent | currency : "INR" }}
+        </ion-item>
+      </div>
+      <ion-item>
+        <ion-label>Petrol Charge </ion-label> - {{ rides?.payment?.petrolCharges | currency : "INR" }}
+      </ion-item>
+      <ion-item>
+        <ion-label>Subtotal </ion-label> {{ rides?.payment?.totalAmount | currency : "INR" }}
+      </ion-item>
+
+      <div *ngIf="extraChargeStatus || hideMe">
+        <ion-item>
+          <ion-label>Total Extra Charges </ion-label> + {{ rides?.payment?.totalExtraCharges | currency : "INR" }}
+        </ion-item>
+      </div>
+      <ion-item>
+        <ion-label>Payment </ion-label> {{ paidAmount | currency : "INR" }}
+      </ion-item>
+
+    </ion-list>
+    <ion-button expand="full" color="primary" (click)="payWithRazor()">Pay</ion-button>
   </ion-card>
+
   <div *ngIf="rideStatus || hideMe">
     <ion-button slot full (click)="pay()" expand="block">Pay</ion-button>
   </div>

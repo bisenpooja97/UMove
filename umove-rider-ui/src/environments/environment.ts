@@ -5,7 +5,7 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'http://192.168.43.209:8080/',
+  baseUrl: 'http://172.23.234.62:8080/',
   bookingService: 'bookingservice',
   bookingBaseApi: '/api/v1/rides',
 

@@ -7,6 +7,6 @@
     </base-config>
     <domain-config cleartextTrafficPermitted="true">
         <domain includeSubdomains="true">localhost</domain>
-        <domain includeSubdomains="true">192.168.43.209:8080</domain>
+        <domain includeSubdomains="true">172.23.234.62:8080</domain>
     </domain-config>
 </network-security-config>
