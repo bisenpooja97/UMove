@@ -29,7 +29,6 @@ add() {
   const dialogConfig = new MatDialogConfig();
   dialogConfig.disableClose = true;
   dialogConfig.autoFocus = true;
-  dialogConfig.width = '40%';
   const dRef = this.matDialog.open(AddZoneComponent, dialogConfig);
 
   dRef.afterClosed().subscribe(result => {

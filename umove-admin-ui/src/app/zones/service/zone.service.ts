@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { Resp } from 'src/app/model/zone-response';
 import { Observable } from 'rxjs';
 import { Zone } from 'src/app/model/zone';
+import { RespSupervisor } from 'src/app/model/supervisor-response';
 
 @Injectable({
   providedIn: 'root'
@@ -36,6 +37,15 @@ export class ZoneService {
 
   updateZones(name: string, zone: Zone) {
     return this.httpClient.patch<Zone>(this.baseUrl + '/' + name, zone);
+  }
+
+  getSupervisor(): Observable<RespSupervisor> {
+    return this.httpClient.get<RespSupervisor>('http://172.23.234.83:8091/api/v1/users?role=Supervisor&status=Unallocated');
+  }
+
+  getSupervisorById(id: string): Observable<RespSupervisor> {
+    return this.httpClient.get<RespSupervisor>('http://localhost:8093/api/v1/supervisor/' + id);
+
   }
 
 }

@@ -5,6 +5,7 @@ import { Zone } from 'src/app/model/zone';
 import { NotificationService } from 'src/app/shared/notification.service';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { UpdateZonesComponent } from '../update-zones/update-zones.component';
+import { AddSupervisorComponent } from '../add-supervisor/add-supervisor.component';
 
 export interface Status {
   value: string;
@@ -27,12 +28,7 @@ export class ZoneDetailsComponent implements OnInit {
   state: string;
   pincode: number;
   capacity: number;
-  sName: string;
-  sNumber: string;
-  sEmail: string;
   status: string;
-
-
 
   zoneStatus: Status[] = [
     { value: 'INACTIVE', viewValue: 'INACTIVE' },
@@ -66,13 +62,12 @@ update() {
   const dialogConfig = new MatDialogConfig();
   dialogConfig.disableClose = true;
   dialogConfig.autoFocus = true;
-  dialogConfig.width = '20%';
   dialogConfig.data = {
     capacity : this.zone[0].capacity,
   };
   const dRef = this.matDialog.open(UpdateZonesComponent, dialogConfig);
   dRef.afterClosed().subscribe(result => {
-    console.log('Back to parent', result);
+    if (result !== undefined) {
     this.zoneService.updateZones(this.name, result).subscribe(
       response => { this.notificationService.success('Zone updated successfully!!'),
       this.getZoneDetails();
@@ -81,10 +76,10 @@ update() {
       this.notificationService.warn('Can\'t update ');
     }
     );
-
+  }
 });
-}
 
+}
 getZoneDetails() {
   this.zoneService.getZoneByName(this.route.snapshot.paramMap.get('name')).subscribe(res => {
     this.zone = res.data;
@@ -97,9 +92,6 @@ getZoneDetails() {
     this.state = this.zone[0].state;
     this.pincode = this.zone[0].pincode;
     this.capacity = this.zone[0].capacity;
-    this.sName = this.zone[0].supervisorName;
-    this.sNumber = this.zone[0].supervisorNumber;
-    this.sEmail = this.zone[0].supervisorEmail;
     this.status = this.zone[0].status;
   });
 }

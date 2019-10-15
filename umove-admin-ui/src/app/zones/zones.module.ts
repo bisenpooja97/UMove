@@ -5,7 +5,8 @@ import { ZonesRoutingModule } from './zones-routing.module';
 import { ZonesComponent } from './zones.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatFormFieldModule, MatInputModule, MatCardModule, MatIconModule, MatButtonModule, MatPaginatorModule,
-   MatSelectModule, MatOptionModule, MatDialogModule, MatToolbarModule, MatGridListModule, MatSnackBarModule } from '@angular/material';
+   MatSelectModule, MatOptionModule, MatDialogModule, MatToolbarModule, MatGridListModule, MatSnackBarModule,
+    MatAutocompleteModule } from '@angular/material';
 import { ZoneCardComponent } from './zone-card/zone-card.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ZoneDetailsComponent } from './zone-details/zone-details.component';
@@ -14,9 +15,11 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddZoneComponent } from './add-zone/add-zone.component';
 import { UpdateZonesComponent } from './update-zones/update-zones.component';
+import { AddSupervisorComponent } from './add-supervisor/add-supervisor.component';
+import { SupervisorDetailsComponent } from './supervisor-details/supervisor-details.component';
 
 @NgModule({
-  declarations: [ZonesComponent, ZoneCardComponent, ZoneDetailsComponent, AddZoneComponent, UpdateZonesComponent],
+  declarations: [ZonesComponent, ZoneCardComponent, ZoneDetailsComponent, AddZoneComponent, UpdateZonesComponent, AddSupervisorComponent, SupervisorDetailsComponent],
   imports: [
     CommonModule,
     ZonesRoutingModule,
@@ -37,8 +40,9 @@ import { UpdateZonesComponent } from './update-zones/update-zones.component';
     MatDialogModule,
     MatToolbarModule,
     MatGridListModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatAutocompleteModule
   ],
-  entryComponents: [AddZoneComponent, UpdateZonesComponent]
+  entryComponents: [AddZoneComponent, UpdateZonesComponent, AddSupervisorComponent]
 })
 export class ZonesModule { }

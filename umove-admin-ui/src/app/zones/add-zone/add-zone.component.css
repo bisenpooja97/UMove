@@ -31,9 +31,18 @@ mat-toolbar {
 
 .btn {
     width: 16em; height: 60px;
-  
    }
 
+.location {
+  width: 16em; height: 60px;
+}
+
+
+@media only screen and (max-width: 600px) {
+  .location {
+    width: 8em;
+  }
+}
    .col {
     width: 50%;
   }

@@ -1,0 +1,30 @@
+.my-card {
+    margin-bottom: 40px;
+    margin-left: 450px;
+    height: 300px;
+    width: 50%;
+    background-color: whitesmoke;
+}
+
+@media only screen and (max-width: 600px) {
+    .my-card {
+        margin-left: 30px;
+        height: 300px;
+        width: 85%;
+    }
+    .zoneName {
+        margin-left: 50px;
+        font-size: 1.5em;
+        padding-bottom: 5px;
+    }
+    .add-button {
+        padding-left: 250px;
+        margin-top: -18%;
+       
+    }
+
+}
+
+.icon {
+    padding-left: 75%;
+}
