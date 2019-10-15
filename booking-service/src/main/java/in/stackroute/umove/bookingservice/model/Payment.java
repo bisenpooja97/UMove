@@ -19,7 +19,7 @@ public class Payment {
     private int transaction_id;
 
     @Column
-    private String bookingId;
+    private String rideId;
 
     @Column
     private String rider;

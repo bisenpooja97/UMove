@@ -4,6 +4,7 @@ import lombok.*;
 
 import java.util.List;
 
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -13,11 +14,15 @@ public class PaymentDetail
 {
     private String status;
     private Integer discount;
+    @NonNull
     private Double rideAmount;
     private List<ExtraCharge> extraCharges;
+    @NonNull
     private Integer petrolCharges;
+    @NonNull
     private Double totalExtraCharges;
+    @NonNull
     private Double totalAmount;
+    @NonNull
     private Double paidAmount;
-
 }

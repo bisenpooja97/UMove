@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface PaymentRepo extends JpaRepository<Payment,String> {
 
-    @Query("SELECT p FROM Payment p WHERE p.bookingId = ?1")
-    Payment findByBookingId(String bookingId);
+    @Query("SELECT p FROM Payment p WHERE p.rideId = ?1")
+    Payment findByRideId(String bookingId);
 }

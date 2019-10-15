@@ -157,10 +157,12 @@ services:
     ports:
       - 8094:8094
     depends_on:
-      - discovery
       - config
+      - discovery
+      - mongo
+      - mysql
+      - rabbitmq
     restart: on-failure
-
 
   campaigns:
     build:

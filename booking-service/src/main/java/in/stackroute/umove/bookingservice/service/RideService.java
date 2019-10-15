@@ -38,22 +38,28 @@ public class RideService implements RideServiceImp {
         Ride ride = rideRepo.findBy_id(id);
         double totalExtraCharges = calculateTotalExtraCharges(ride);
         int totalAmount = calculateRideAmount(ride);
-        ride.getPayment().setTotalExtraCharges(totalExtraCharges);
-        ride.getPayment().setTotalAmount((double) totalAmount);
+        ride.getPaymentDetail().setTotalExtraCharges(totalExtraCharges);
+        ride.getPaymentDetail().setTotalAmount((double) totalAmount);
         rideRepo.save(ride);
         return rideRepo.findBy_id(id);
     }
 
     private double calculateTotalExtraCharges(Ride ride) {
-        List<ExtraCharge> extraCharges = ride.getPayment().getExtraCharges();
+        List<ExtraCharge> extraCharges = ride.getPaymentDetail().getExtraCharges();
         return extraCharges.stream().mapToDouble(f -> f.getAmount() ).sum();
     }
 
     private int calculateRideAmount(Ride ride) {
-        double rideAmount = ride.getPayment().getRideAmount();
-        int totalAmount = (int)((rideAmount)- (ride.getPayment().getPetrolCharges()));
-        totalAmount =(int) (totalAmount - ((ride.getPromoCode().getDiscountPercent()* totalAmount)/100));
-        return totalAmount;
+        double rideAmount = ride.getPaymentDetail().getRideAmount();
+        int totalAmount = (int)((rideAmount)- (ride.getPaymentDetail().getPetrolCharges()));
+        if(ride.getPromoCode()==null)
+        {
+            return totalAmount;
+        }
+        else {
+            totalAmount = (totalAmount - ((ride.getPromoCode().getDiscountPercent() * totalAmount) / 100));
+            return totalAmount;
+        }
     }
 
     @Override
@@ -67,19 +73,19 @@ public class RideService implements RideServiceImp {
         Double distance = ride.getDistance();
         int duration = ride.getDuration();
         String payment_method_id = ride.getPaymentMethod().get_id();
-        Double ride_fare = ride.getPayment().getRideAmount();
-        int discount_percent = ride.getPromoCode().getDiscountPercent();
-        Double totalExtraCharges = ride.getPayment().getTotalExtraCharges();
-        Double amount_paid = ride.getPayment().getTotalAmount();
+        Double ride_fare = ride.getPaymentDetail().getRideAmount();
+        int discount_percent = ride.getPaymentDetail().getDiscount();
+        Double totalExtraCharges = ride.getPaymentDetail().getTotalExtraCharges();
+        Double amount_paid = ride.getPaymentDetail().getTotalAmount();
         LocalDateTime deducted_at = LocalDateTime.now();
-        PaymentDetail paymentDetail = ride.getPayment();
+        PaymentDetail paymentDetail = ride.getPaymentDetail();
         paymentDetail.setStatus("Paid");
         paymentDetail.setPaidAmount(amount_paid);
-        ride.setPayment(paymentDetail);
+        ride.setPaymentDetail(paymentDetail);
         rideRepo.save(ride);
 
         Payment payment = new Payment();
-        payment.setBookingId(rideId.toString());
+        payment.setRideId(rideId.toString());
         payment.setPaymentId(paymentId);
         payment.setRider(rider);
         payment.setMobile(mobile);
@@ -100,7 +106,7 @@ public class RideService implements RideServiceImp {
 
     @Override
     public Payment getPaymentDetails(String rideId) {
-        Payment payment = paymentRepo.findByBookingId(rideId);
+        Payment payment = paymentRepo.findByRideId(rideId);
         return payment;
 
     }
