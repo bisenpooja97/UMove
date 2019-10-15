@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>PAYMENT DETAILS</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-card>
+    <ion-list lines="none">
+      <ion-item class="heading">
+        Fare Break-up
+      </ion-item>
+      <ion-row>
+        <ion-item>
+          <ion-label class="DistTime">Distance</ion-label>{{ rides?.distance }} Km
+        </ion-item>
+        <ion-item>
+          <ion-label class="DistTime">Time</ion-label> {{ rides?.duration }} mins
+        </ion-item>
+      </ion-row>
+      <ion-item class="baseFare">
+        <ion-label>
+          Base Fare </ion-label> Rs{{ rides?.payment?.rideAmount }}
+      </ion-item>
+      <ion-item>
+        <ion-label class="belowBaseFare">Minimum Fare Applied</ion-label>
+      </ion-item>
+      <div *ngIf="appliedPromoCode || hideMe">
+        <ion-item>
+          <ion-label>Reward Points Discount </ion-label> - Rs.{{ rides?.promoCode?.discountPercent }}
+        </ion-item>
+      </div>
+        <ion-item>
+          <ion-label>Petrol Charge </ion-label> - Rs. {{ rides?.payment?.petrolCharges }}
+        </ion-item>
+        <ion-item>
+          <ion-label>Subtotal </ion-label> - Rs. {{ rides?.payment?.totalAmount }}
+        </ion-item>
+        
+      <div *ngIf="extraChargeStatus || hideMe">
+      <!-- <ion-item *ngFor="let ridesamount of rides?.payment?.extraCharges">
+        <ion-label>Charged For </ion-label>
+        <ion-label> {{ ridesamount?.chargedFor }}</ion-label>
+        <ion-label>Amount </ion-label> 
+        <ion-label>{{ ridesamount?.amount }</ion-label>}
+      </ion-item> -->
+      <ion-item>
+        <ion-label>Total Extra Charges </ion-label> + Rs. {{ rides?.payment?.totalExtraCharges }}
+      </ion-item>
+      </div >
+      <ion-item>
+        <ion-label>Payment </ion-label>  Rs. {{ paidAmount }}
+      </ion-item>
+     
+    </ion-list>
+    <ion-button expand="full" color="primary" (click)="payWithRazor()">Pay</ion-button>
+  </ion-card>
+</ion-content>
