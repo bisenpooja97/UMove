@@ -20,6 +20,14 @@ export class AppComponent {
       title: 'List',
       url: '/list',
       icon: 'list'
+    },
+    {
+    title: 'Add-payment-method',
+      url: '/add-payment-method'
+    },
+    {
+      title: 'Show-payment-method',
+      url: '/show-payment-method'
     }
   ];
 

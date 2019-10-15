@@ -1,0 +1,49 @@
+<ion-header>
+  <div class = "example">
+    <ion-toolbar color = "primary">
+      <ion-buttons slot="start">
+        <ion-button (click)="goToHome()">
+          <ion-icon slot="icon-only" name="arrow-round-back"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-title>Payments</ion-title>
+    </ion-toolbar>
+  </div>
+</ion-header>
+<ion-content *ngIf="payment">
+  <ion-list>
+    <ion-item *ngFor="let item of payment">
+      <ion-card>
+        <ion-card-content>
+          <div style="display: flex; justify-content: flex-end;">
+            <ion-icon name="trash" (click)="onDelete(item.pid)"></ion-icon>
+          </div>
+          <ion-grid>
+            <ion-row>
+              <ion-card-content> Payment Provider : {{item.paymentProvider}}</ion-card-content>
+            </ion-row>
+            <ion-row>
+              <ion-card-content> Payment Method Number : {{item.paymentMethodNumber}} </ion-card-content>
+            </ion-row>
+            <ion-row>
+              <ion-card-content> Payment Type : {{item.paymentType}} </ion-card-content>
+            </ion-row>
+            <ion-grid>
+              <ion-row>
+                <ion-col>
+                  <div style="display: flex; justify-content: flex-end;">
+                    <ion-button (click) = "onSelect(item)">Select</ion-button>
+                  </div>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<ion-footer>
+  <ion-button expand="block" (click)="goAnotherPage()"> Add New Payment Method</ion-button>
+</ion-footer>
