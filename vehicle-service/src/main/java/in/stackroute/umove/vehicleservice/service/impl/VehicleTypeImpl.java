@@ -9,9 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.List;
 
 @Service
@@ -59,11 +63,8 @@ public class VehicleTypeImpl implements ServiceVehicleType {
 
     //To find the details of a type by name
     @Override
-    public List<VehicleType> findName(String name) {
-        List<VehicleType> typeList=repo.findByname(name);
-        if(typeList.size()==0){
-            throw new TypeNotFoundException("type not found"+name);
-        }
+    public VehicleType findName(String name) {
+        VehicleType typeList=repo.findByName(name);
         return typeList;
     }
 
@@ -71,7 +72,7 @@ public class VehicleTypeImpl implements ServiceVehicleType {
 
     //To find a type based on it's id
     public VehicleType findByVid(String id) {
-        return repo.findByTypeId(id);
+        return repo.findByid(id);
     }
 
     //To update details based of type
@@ -88,6 +89,9 @@ public class VehicleTypeImpl implements ServiceVehicleType {
             if (type.getCosttime() != 0) {
                 typeList.setCosttime(type.getCosttime());
             }
+            if(type.getUrl() != null){
+                typeList.setUrl(type.getUrl());
+            }
             return repo.save(typeList);
 
 
@@ -101,9 +105,22 @@ public class VehicleTypeImpl implements ServiceVehicleType {
 
     @Override
     public void saveImage(MultipartFile imageFile, String uid) throws Exception {
-        String folder = "/home/dikshi/Documents/";
-        byte[] bytes = imageFile.getBytes();
-        Path path = Paths.get(folder + uid);
-        Files.write(path, bytes);
+
+        String fileName = "/home/dikshi/umove/vehicle-service/src/main/resources/" + uid + ".jpg";
+        Path filePath = Paths.get(fileName);
+        Files.createDirectories(filePath.getParent());
+
+        try (
+                final BufferedWriter out = Files.newBufferedWriter(
+                        filePath,
+                        StandardCharsets.UTF_8,
+                        StandardOpenOption.CREATE,
+                        StandardOpenOption.APPEND)
+        ) {
+            out.write(String.valueOf(imageFile.getBytes()));
+        } catch (NoSuchFieldError e) {
+            e.printStackTrace();
+        }
+
     }
 }

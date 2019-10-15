@@ -1,8 +1,9 @@
 package in.stackroute.umove.vehicleservice.service.impl;
 
 import in.stackroute.umove.vehicleservice.exception.RegistrationNoAlreadyExistException;
-import in.stackroute.umove.vehicleservice.model.Status;
+
 import in.stackroute.umove.vehicleservice.model.Vehicle;
+import in.stackroute.umove.vehicleservice.model.VehicleStatus;
 import in.stackroute.umove.vehicleservice.repository.VehicleRepo;
 import in.stackroute.umove.vehicleservice.service.ServiceVehicle;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -89,10 +90,11 @@ public class VehicleImpl implements ServiceVehicle {
     }
 
     @Override
-    public List<Vehicle> findByStatus(Status status) {
+    public List<Vehicle> findByStatus(VehicleStatus status) {
         List<Vehicle> vehicles=repo.findByStatus(status);
         return vehicles;
     }
+
 
     //To find vehicles based on Registartion No
     @Override

@@ -4,6 +4,8 @@ import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.persistence.GeneratedValue;
+
 @Document
 
 @Data
@@ -13,8 +15,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @AllArgsConstructor
 
 public class VehicleType {
-    @Id
-    private String typeId;
+
+    private String id;
     private String name;
     private float costkm;
     private float costtime;

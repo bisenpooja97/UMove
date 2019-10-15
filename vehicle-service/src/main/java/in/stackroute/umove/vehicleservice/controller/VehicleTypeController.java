@@ -1,13 +1,16 @@
 package in.stackroute.umove.vehicleservice.controller;
 
+import in.stackroute.umove.vehicleservice.model.UploadFileResponse;
 import in.stackroute.umove.vehicleservice.model.VehicleType;
 import in.stackroute.umove.vehicleservice.repository.VehicleTypeRepo;
 import in.stackroute.umove.vehicleservice.service.ServiceVehicleType;
+import in.stackroute.umove.vehicleservice.service.impl.FileStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.List;
 import java.util.Map;
@@ -17,6 +20,8 @@ import java.util.TreeMap;
 @RestController
 @RequestMapping("/api/v1")
 public class VehicleTypeController {
+    @Autowired
+    private FileStorageService fileStorageService;
     @Autowired
 
     private ServiceVehicleType typeManagementService;
@@ -40,9 +45,8 @@ public class VehicleTypeController {
                                        @RequestParam(value = "id", required = false) String id) {
 
         if (name != null && !name.isEmpty()) {
-            List<VehicleType> typeList = typeManagementService.findName(name);
+            VehicleType typeList = typeManagementService.findName(name);
             Map<String, Object> map = new TreeMap<>();
-            map.put("count", typeList.size());
             map.put("data", typeList);
             map.put("status", HttpStatus.OK);
             return new ResponseEntity<Map>(map, HttpStatus.OK);
@@ -69,17 +73,16 @@ public class VehicleTypeController {
 
 
     // Function to save image in local sysytem
-    @PostMapping("/vehicletypes/uploadImage")
-    public String uploadImage(@RequestParam(name = "imageFile", required = true) MultipartFile imageFile,
-                              @RequestParam(name = "uid", required = true) String uid) {
-        String returnValue = "start";
-        try {
-            typeManagementService.saveImage(imageFile, uid);
-        } catch (Exception e) {
-            e.printStackTrace();
-            returnValue = "Error";
-        }
-        return returnValue;
+    @PostMapping("/uploadFile")
+    public UploadFileResponse uploadFile(@RequestParam("file") MultipartFile file,@RequestParam(name="id",required = true)String id) {
+        String fileName = fileStorageService.storeFile(file,id);
+        String fileDownloadUri =
+                ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path("/downloadFile/")
+                .path(fileName)
+                .toUriString();
+        return new UploadFileResponse(fileName, fileDownloadUri,
+                file.getContentType(), file.getSize());
     }
 
      //To fetch type data based on id

@@ -1,7 +1,8 @@
 package in.stackroute.umove.vehicleservice.controller;
 
-import in.stackroute.umove.vehicleservice.model.Status;
+
 import in.stackroute.umove.vehicleservice.model.Vehicle;
+import in.stackroute.umove.vehicleservice.model.VehicleStatus;
 import in.stackroute.umove.vehicleservice.service.ServiceVehicle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,7 +36,7 @@ public class VehicleController {
     public ResponseEntity<Map> getVehicle(@RequestParam(value = "zoneId", required = false) String zoneId,
                                           @RequestParam(value = "type", required = false) String type,
                                           @RequestParam(value = "registrationNo", required = false) String registrationNo,
-                                          @RequestParam(value = "status", required = false) Status status) {
+                                          @RequestParam(value = "status", required = false) VehicleStatus status) {
 
         if (zoneId != null && type != null && !zoneId.isEmpty() && !type.isEmpty()) {
             return new ResponseEntity(vehicleManagementService.findByZoneAndType(zoneId, type), HttpStatus.OK);

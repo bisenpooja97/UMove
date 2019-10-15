@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface VehicleTypeRepo extends MongoRepository<VehicleType,String> {
     List<VehicleType> findByname(String name);
-    VehicleType findByTypeId(String typeId);
+    VehicleType findByid(String id);
     VehicleType findByName(String name);
 
 
