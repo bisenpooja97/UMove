@@ -36,22 +36,22 @@ public class ServiceSupervisorImpl implements ServiceSupervisor {
 
 
     @Override
-    public Optional<Supervisor> findByID(String sid) {
-        Optional<Supervisor> supervisorList = repository.findById(sid);
+    public Optional<Supervisor> findByID(String id) {
+        Optional<Supervisor> supervisorList = repository.findById(id);
         return supervisorList;
     }
 
     @Override
-    public Supervisor updateSupervisorStatus(String sid, Supervisor supervisor) {
-        Supervisor supervisorData = repository.findBySid(sid);
-        if(supervisorData != null){
+    public Supervisor updateSupervisorStatus(String id, Supervisor supervisor) {
+        Supervisor s = repository.findSupervisorById(id);
+        if(s != null){
 
             if(supervisor.getSupervisorStatus() != null){
-                supervisorData.setSupervisorStatus(supervisor.getSupervisorStatus());
+                s.setSupervisorStatus(supervisor.getSupervisorStatus());
             }
 
         }
 
-        return repository.save(supervisorData);
+        return repository.save(s);
     }
 }

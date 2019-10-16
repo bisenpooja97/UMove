@@ -51,7 +51,7 @@ public class ZoneServiceControllerTest {
         MockitoAnnotations.initMocks(this);
         mockMvc = MockMvcBuilders.standaloneSetup(zoneController).build();
         zone = new Zone("Zone-1", 128.23, 23.87,
-                "Bangalore", "Karnataka", "India", "560034", "Koramangala",
+                "Bangalore", "Karnataka", "India", "Koramangala",
                 10, "1", "Bherulal", "3434352525",
                 "Bherulal@gmail.com", ZoneStatus.ACTIVE);
         zoneList.add(zone);

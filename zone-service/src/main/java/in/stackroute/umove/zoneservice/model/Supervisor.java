@@ -15,7 +15,7 @@ import javax.persistence.Id;
 public class Supervisor {
 
     @Id
-    private String sid;
+    private String id;
     private String name;
     private String contact;
     private String email;

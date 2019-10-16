@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.mongodb.core.mapping.Document;
 import javax.persistence.Id;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -20,17 +20,17 @@ import java.util.Date;
 public class Zone {
 
     @Id
-    private String zoneId;
+    private String id;
     private String name;
     private double lat;
     private double lon;
     private String city;
     private String state;
     private String country;
-    private String pincode;
+    private int pincode;
     private String locality;
     private int capacity;
-    private Date time = new Date();
+    private LocalDateTime createdAt = LocalDateTime.now();
     private String supervisorId;
     private String supervisorName;
     private String supervisorNumber;
@@ -38,8 +38,7 @@ public class Zone {
     private ZoneStatus status;
 
 
-    public Zone(String name, double lat, double lon, String city, String state, String country,
-                String pincode, String locality, int capacity, String supervisorId,
+    public Zone(String name, double lat, double lon, String city, String state, String country,String locality, int capacity, String supervisorId,
                 String supervisorName, String supervisorNumber, String supervisorEmail,
                 ZoneStatus status) {
         this.name = name;
@@ -48,7 +47,6 @@ public class Zone {
         this.city = city;
         this.state = state;
         this.country = country;
-        this.pincode = pincode;
         this.locality = locality;
         this.capacity = capacity;
         this.supervisorId = supervisorId;

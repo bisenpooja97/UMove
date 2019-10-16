@@ -16,6 +16,7 @@ import in.stackroute.umove.zoneservice.service.ServiceZone;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -78,14 +79,14 @@ public class ServiceZoneImpl implements ServiceZone {
             if(zone.getName() != null){
                 zoneModel.setName(zone.getName());
             }
-            if(zone.getStatus() != null){
-                zoneModel.setStatus(zone.getStatus());
-            }
             if(zone.getCapacity()!= 0){
-                zoneModel.setCapacity(zone.getCapacity()  );
+                zoneModel.setCapacity(zone.getCapacity());
             }
-            if(zone.getPincode()!= null){
-                zoneModel.setPincode(zone.getPincode()  );
+            if(zone.getPincode()!= 0){
+                zoneModel.setPincode(zone.getPincode());
+            }
+            if(zone.getStatus()!= null){
+                zoneModel.setStatus(zone.getStatus());
             }
             if(zone.getSupervisorId() != null){
                 zoneModel.setSupervisorId(zone.getSupervisorId());
@@ -96,10 +97,9 @@ public class ServiceZoneImpl implements ServiceZone {
             if(zone.getSupervisorNumber() != null){
                 zoneModel.setSupervisorNumber(zone.getSupervisorNumber());
             }
-            if(zone.getSupervisorEmail() != null){
+            if(zone.getSupervisorEmail() != null) {
                 zoneModel.setSupervisorEmail(zone.getSupervisorEmail());
             }
-            zoneModel.setTime(new Date());
             return zoneRepository.save(zoneModel);
         }
 

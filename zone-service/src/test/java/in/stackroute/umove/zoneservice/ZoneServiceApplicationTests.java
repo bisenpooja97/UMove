@@ -28,7 +28,7 @@ public class ZoneServiceApplicationTests {
 	@Test
 	public void getZonesTest(){
 		when(zoneRepository.findAll()).thenReturn((List<Zone>) Stream.of(new Zone("Zone-1", 128.23,23.87,
-				"Bangalore", "Karnataka", "India", "560034", "Koramangala",
+				"Bangalore", "Karnataka", "India", "Koramangala",
 				10, "1", "Bherulal", "3434352525",
 				"Bherulal@gmail.com", ZoneStatus.ACTIVE)).collect(Collectors.toList())
 		);
@@ -38,7 +38,7 @@ public class ZoneServiceApplicationTests {
 	public void getZoneByName(){
 		String zoneName = "Zone-2";
 		when(zoneRepository.findZoneByName(zoneName)).thenReturn((List<Zone>) Stream.of(new Zone("Zone-2", 128.23,23.87,
-				"Bangalore", "Karnataka", "India", "560034", "Koramangala",
+				"Bangalore", "Karnataka", "India", "Koramangala",
 				10, "1", "Bherulal", "3434352525",
 				"Bherulal@gmail.com", ZoneStatus.ACTIVE)).collect(Collectors.toList())
 		);
@@ -49,7 +49,7 @@ public class ZoneServiceApplicationTests {
 	public void getZoneByLocality(){
 		String locality = "Koramangala";
 		when(zoneRepository.findZonesByLocality(locality)).thenReturn((List<Zone>) Stream.of(new Zone("Zone-2", 128.23,23.87,
-				"Bangalore", "Karnataka", "India", "560034", "Koramangala",
+				"Bangalore", "Karnataka", "India", "Koramangala",
 				10, "1", "Bherulal", "3434352525",
 				"Bherulal@gmail.com", ZoneStatus.ACTIVE)).collect(Collectors.toList())
 		);
@@ -59,7 +59,7 @@ public class ZoneServiceApplicationTests {
 	@Test
 	public void addZoneTest(){
 		Zone zone= new Zone("Zone-2", 128.23,23.87,
-				"Bangalore", "Karnataka", "India", "560034", "Koramangala",
+				"Bangalore", "Karnataka", "India", "Koramangala",
 				10, "1", "Bherulal", "3434352525",
 				"Bherulal@gmail.com", ZoneStatus.ACTIVE);
 		assertEquals(zone,serviceZone.addNewZone(zone));

@@ -14,6 +14,7 @@ import java.util.Optional;
 import java.util.TreeMap;
 
 @RestController
+@CrossOrigin(origins = {"http://localhost:4200"})
 @RequestMapping("api/v1")
 public class SupervisorController {
 
@@ -53,9 +54,9 @@ public class SupervisorController {
 
     }
 
-    @GetMapping("/supervisor/{sid}")
-    public ResponseEntity<Map> getSupervisorById(@PathVariable String sid) {
-        Optional<Supervisor> supervisor = serviceSupervisor.findByID(sid);
+    @GetMapping("/supervisor/{id}")
+    public ResponseEntity<Map> getSupervisorById(@PathVariable String id) {
+        Optional<Supervisor> supervisor = serviceSupervisor.findByID(id);
         Map<String, Object> map = new TreeMap<>();
         map.put("data", supervisor);
         map.put("status", HttpStatus.OK);
@@ -64,8 +65,8 @@ public class SupervisorController {
 
     // Updating of zones according to zone name API
     @PatchMapping("/supervisor/{sid}")
-    public ResponseEntity<Map> updateSupervisorStatus(@PathVariable String sid, @RequestBody Supervisor supervisor) {
-        Supervisor supervisor1 = serviceSupervisor.updateSupervisorStatus(sid, supervisor);
+    public ResponseEntity<Map> updateSupervisorStatus(@PathVariable String id, @RequestBody Supervisor supervisor) {
+        Supervisor supervisor1 = serviceSupervisor.updateSupervisorStatus(id, supervisor);
         Map<String, Object> map = new TreeMap<>();
         map.put("data", supervisor1);
         map.put("status", HttpStatus.OK);

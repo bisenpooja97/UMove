@@ -9,7 +9,7 @@ import java.util.Optional;
 public interface ServiceSupervisor {
     Supervisor addNewSupervisor(Supervisor supervisor);
     List<Supervisor> findAllSupervisor();
-    Optional<Supervisor> findByID(String sid);
-    Supervisor updateSupervisorStatus(String sid, Supervisor supervisor);
+    Optional<Supervisor> findByID(String id);
+    Supervisor updateSupervisorStatus(String id, Supervisor supervisor);
     List<Supervisor> findByStatus(SupervisorStatus status);
 }

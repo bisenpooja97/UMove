@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-@CrossOrigin(origins = {"http://localhost:8100"})
+@CrossOrigin(origins = {"http://localhost:4200"})
 @RestController
 @RequestMapping("api/v1")
 public class ZoneController {
@@ -118,7 +118,7 @@ public class ZoneController {
     @GetMapping("/zones/loc/{locality}")
     public ResponseEntity<Map> getLocality(@PathVariable String locality) {
         String serviceURL = "https://api.tomtom.com/search/2/structuredGeocode.json?countryCode=IND&limit=1&" +
-                "streetName="+locality+"&key=Q0lrXtgq4yAgXdZuyf7RBbItuzVuRxUj";
+                "streetName="+locality+"&municipality=Bengaluru&key=Q0lrXtgq4yAgXdZuyf7RBbItuzVuRxUj";
         Object loc = restTemplate.getForObject(serviceURL, Object.class);
 
         //results d = loc
