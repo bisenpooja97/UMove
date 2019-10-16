@@ -22,11 +22,11 @@ export class AddVehicleTypeComponent implements OnInit {
   }
 
   get Rcc() {
-    return this.typeForm.get('cc');
+    return this.typeForm.get('vehiclecc');
   }
 
   get Rkm() {
-    return this.typeForm.get('km');
+    return this.typeForm.get('kilometer');
   }
 
   get Rcategory() {
@@ -38,15 +38,15 @@ export class AddVehicleTypeComponent implements OnInit {
 
 
 
-  constructor(public dialogRef: MatDialogRef<AddVehicleTypeComponent>,private fb: FormBuilder, private route: ActivatedRoute,
+  constructor(public dialogRef: MatDialogRef<AddVehicleTypeComponent>, private fb: FormBuilder, private route: ActivatedRoute,
               private router: Router, private typeService: VehicleTypeService,  private http: HttpClient, private snackBar: MatSnackBar
              ) { }
 
   typeForm = this.fb.group({
     name: ['', [Validators.pattern('^[a-zA-Z0-9\-]*$')]],
-    km: ['', [Validators.pattern('^[0-9]*$')]],
+    kilometer: ['', [Validators.pattern('^[0-9]*$')]],
     costtime: ['', [Validators.pattern('^[0-9]*$')]],
-    cc: [''],
+    vehiclecc: ['', [Validators.pattern('^[0-9]*$')]],
     category: ['']
   });
 
@@ -55,14 +55,19 @@ export class AddVehicleTypeComponent implements OnInit {
         '';
   }
 
-  // getErrorCostkm() {
-  //   return  this.Rcostkm.hasError('pattern') ? 'Invalid Cost' :
-  //       '';
-  // }
+  getErrorkm() {
+    return  this.Rkm.hasError('pattern') ? 'Invalid Kilometer' :
+        '';
+  }
 
   getErrorCosttime() {
-    return  this.Rcosttime.hasError('pattern') ? 'Invalid Time' :
+    return  this.Rcosttime.hasError('pattern') ? 'Invalid cost for  Time' :
         '';
+  }
+
+  getErrorCC() {
+    return this.Rcc.hasError('pattern') ? 'Invalid cc' :
+    '';
   }
 
 
@@ -92,23 +97,7 @@ export class AddVehicleTypeComponent implements OnInit {
     this.onUpload();
     console.log(this.typeForm.value);
     console.log(this.typeForm.value, 'child');
-     this.dialogRef.close(this.typeForm.value);
-
-
-      // onSubmit() {
-      //   // console.log(this.location);
-      //   // this.zoneForm.value.lat = this.location.position.lat;
-      //   // this.zoneForm.value.lon = this.location.position.lon;
-      //   // this.zoneForm.value.country = this.location.address.country;
-      //   // this.zoneForm.value.city = this.location.address.countrySecondarySubdivision;
-      //   // this.zoneForm.value.state = this.location.address.countrySubdivision;
-      //   console.log(this.typeForm.value, 'child');
-      //   this.dialogRef.close(this.typeForm.value);
-      // }
-
-
-
-  // this.router.navigateByUrl('/welcome');
+    this.dialogRef.close(this.typeForm.value);
 }
 
   ngOnInit() {

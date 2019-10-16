@@ -26,17 +26,21 @@
 
             <mat-form-field appearance="outline" fxFlex>
                 <mat-label>Km Per Litre</mat-label>
-                <input matInput #input placeholder="Km per litre" formControlName="km" required>
+                <input matInput #input placeholder="Km per litre" formControlName="kilometer" required>
+                <mat-error *ngIf="Rkm.invalid">
+
+                    {{getErrorkm()}}
+                </mat-error>
             </mat-form-field>
 
 
             <mat-form-field appearance="outline" fxFlex>
                 <mat-label>CC</mat-label>
-                <input matInput #input placeholder="CC" formControlName="cc" required>
-                <!-- <mat-error *ngIf="Rcostkm.invalid">
-                        {{getErrorCostkm()}}
+                <input matInput #input placeholder="CC" formControlName="vehiclecc" required>
+                <mat-error *ngIf="Rcc.invalid">
+                    {{getErrorCC()}}
 
-                    </mat-error> -->
+                </mat-error>
             </mat-form-field>
 
             <mat-form-field appearance="outline" fxFlex>

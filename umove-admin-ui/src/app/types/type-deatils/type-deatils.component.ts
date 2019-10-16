@@ -4,7 +4,7 @@ import { VehicleTypeService } from '../vehicle-type.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialogConfig, MatSnackBar, MatDialog } from '@angular/material';
 import { UpdateTypesComponent } from '../update-types/update-types.component';
-import { ok } from 'assert';
+
 
 
 @Component({

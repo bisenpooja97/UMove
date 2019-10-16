@@ -83,7 +83,7 @@ getVehicleDetails() {
     this.vehicle.status = newValue;
     this.vehicleService.updateVehicle(this.route.snapshot.paramMap.get('registrationNo'), this.vehicle).subscribe(
 
-    );
+);
 }
 
 openSnackbar(message: string, action: string) {
