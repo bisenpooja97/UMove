@@ -12,9 +12,9 @@ import { RespSupervisor } from 'src/app/model/supervisor-response';
 export class ZoneService {
 
   constructor(private httpClient: HttpClient) { }
-  baseUrl = environment.baseUrl + environment.zoneBaseApi;
+  baseUrl = environment.baseUrl1 + environment.zoneBaseApi;
 
-  public createZone(zone: Resp) {
+  createZone(zone: Resp) {
     return this.httpClient.post<Resp>(this.baseUrl, zone);
   }
 
@@ -36,6 +36,7 @@ export class ZoneService {
   }
 
   updateZones(name: string, zone: Zone) {
+    console.log(zone);
     return this.httpClient.patch<Zone>(this.baseUrl + '/' + name, zone);
   }
 

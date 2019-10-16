@@ -95,4 +95,17 @@ getZoneDetails() {
     this.status = this.zone[0].status;
   });
 }
+
+getColor(status) {
+  switch (status) {
+case 'ACTIVE':
+return 'green';
+case 'INACTIVE':
+return 'blue';
+case 'FULL':
+return 'red';
+case 'UNDER_MAINTAINANCE':
+return 'gray';
+}
+}
 }

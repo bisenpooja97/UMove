@@ -32,7 +32,7 @@ export class ZoneCardComponent implements OnInit {
         case 'ACTIVE':
           return 'green';
         case 'INACTIVE':
-          return 'cyan';
+          return 'blue';
         case 'FULL':
           return 'red';
         case 'UNDER_MAINTAINANCE':

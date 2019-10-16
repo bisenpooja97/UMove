@@ -10,13 +10,28 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FooterComponent } from './core/footer/footer.component';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { PageNotFoundComponent } from './core/page-not-found/page-not-found.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ZonesModule } from './zones/zones.module';
 import { MatDialogModule } from '@angular/material';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {
+  MatCardModule,
+  MatMenuModule,
+ MatNativeDateModule,
+ MatSortModule, MatAutocompleteModule,
+      MatPaginatorModule,
+      MatSelectModule,
+
+      MatSnackBarModule,
+      MatDatepickerModule,
+
+
+} from '@angular/material';
+import { VehiclesModule } from './vehicles/vehicles.module';
+import { TypesModule } from './types/types.module';
 
 @NgModule({
   declarations: [
@@ -38,8 +53,33 @@ import { MatDialogModule } from '@angular/material';
     FlexLayoutModule,
     HttpClientModule,
     ZonesModule,
+    VehiclesModule,
+    TypesModule,
+    AppRoutingModule,
+    FlexLayoutModule,
+    MatButtonModule,
+    MatMenuModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatCardModule,
+    HttpClientModule,
+    MatSortModule,
+    MatAutocompleteModule,
+    MatSelectModule,
+    MatSnackBarModule,
+    MatPaginatorModule,
+    MatListModule,
+    MatSidenavModule,
+    BrowserAnimationsModule,
+    MatIconModule,
+    MatDialogModule,
+    MatDatepickerModule,
+    MatNativeDateModule
+
+
+
   ],
-  providers: [],
+  providers: [MatDatepickerModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
