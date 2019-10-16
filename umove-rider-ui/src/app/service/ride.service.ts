@@ -11,7 +11,7 @@ import {HTTP} from "@ionic-native/http/ngx";
 export class RideService {
 
   currentBooking: Ride;
-  baseUrl = environment.baseUrl + environment.bookingService + environment.bookingBaseApi;
+  baseUrl = environment.baseUrl + /*environment.bookingService +*/ environment.bookingBaseApi;
 
   constructor(private http: HTTP, private toastController: ToastController) {
     this.currentBooking = new Ride();
