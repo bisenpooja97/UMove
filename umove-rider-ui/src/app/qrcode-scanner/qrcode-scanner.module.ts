@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { QrcodeScannerPage } from './qrcode-scanner.page';
+import { MbscModule } from '@mobiscroll/angular';
 
 const routes: Routes = [
   {
@@ -16,6 +17,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
+    MbscModule,
     CommonModule,
     FormsModule,
     IonicModule,
@@ -23,4 +25,4 @@ const routes: Routes = [
   ],
   declarations: [QrcodeScannerPage]
 })
-export class QrcodeScannerPageModule {}
+export class QrcodeScannerPageModule { }

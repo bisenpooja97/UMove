@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RideService } from '../service/ride.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { map } from 'rxjs/operators';
 import { Ride } from '../model/ride';
 import { Zone } from '../model/zone';
 
@@ -12,18 +11,19 @@ import { Zone } from '../model/zone';
 })
 export class RideDetailsPage implements OnInit {
   ride: Ride;
+  rideId: string;
   sizeOfDestinationZones: number;
   destinationZone: Zone;
   destinationZoneChange: Zone;
 
   constructor(private rideService: RideService, private route: ActivatedRoute, private router: Router) {
     this.rideService.getRideDetailsByUserIdNStatus('786', 'started')
-        .then(response => {
-          console.log('Ride details: ', response);
-          this.ride = JSON.parse(response.data).data;
-          this.sizeOfDestinationZones = this.ride.destinationZones.length;
-          this.destinationZone = this.ride.destinationZones[this.sizeOfDestinationZones - 1];
-        });
+      .then(response => {
+        console.log('Ride details: ', response);
+        this.ride = JSON.parse(response.data).data;
+        this.sizeOfDestinationZones = this.ride.destinationZones.length;
+        this.destinationZone = this.ride.destinationZones[this.sizeOfDestinationZones - 1];
+      });
   }
 
   ngOnInit() {

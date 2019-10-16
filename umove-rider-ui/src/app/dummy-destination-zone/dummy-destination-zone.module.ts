@@ -23,4 +23,4 @@ const routes: Routes = [
   ],
   declarations: [DummyDestinationZonePage]
 })
-export class DummyDestinationZonePageModule {}
+export class DummyDestinationZonePageModule { }

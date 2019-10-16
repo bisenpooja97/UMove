@@ -1,17 +1,31 @@
 import { Injectable } from '@angular/core';
 import { Zone } from '../model/zone';
-import {environment} from '../../environments/environment';
-import {HTTP} from '@ionic-native/http/ngx';
+import { environment } from '../../environments/environment';
+import { HTTP } from '@ionic-native/http/ngx';
+import { ToastController } from '@ionic/angular';
+import { Ride } from '../model/ride';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RideService {
 
+  ride: Ride;
   baseUrl = environment.baseUrl + environment.bookingService + environment.bookingBaseApi;
-  // baseUrl = 'http://localhost:8094/api/v1/rides';
 
-  constructor(private http: HTTP) { }
+  constructor(private http: HTTP, private toastController: ToastController) {
+    this.ride = new Ride();
+    http.setDataSerializer('json');
+    http.setHeader('*', 'Content-Type', 'application/json');
+  }
+
+  async presentToast(msg, duration) {
+    const toast = await this.toastController.create({
+      message: msg,
+      duration
+    });
+    toast.present();
+  }
 
   // calling api for getting ride details for particular userId and rideStatus
   getRideDetailsByUserIdNStatus(userId: string, rideStatus: string) {
@@ -25,7 +39,7 @@ export class RideService {
 
   // calling api for autocancelling a ride for particular rideId
   autocancelRideById(rideId: string) {
-    return this.http.patch(this.baseUrl + '/' + rideId  + '/autocancel', {}, {});
+    return this.http.patch(this.baseUrl + '/' + rideId + '/autocancel', {}, {});
   }
 
   // calling api for cancelling a ride for particular rideId
@@ -35,18 +49,12 @@ export class RideService {
 
   // calling api for changing destination for particular rideId
   changeDestinationOfUser(zone: Zone, rideId: string) {
-    return this.http.patch(this.baseUrl + '/' + rideId  + '/changeDestination', zone, {});
+    return this.http.patch(this.baseUrl + '/' + rideId + '/changeDestination', zone, {});
   }
 
   // calling api for ending a ride for particular rideId
   endRideRequestById(rideId: string) {
-    return this.http.patch(this.baseUrl + '/' + rideId  + '/end', {}, {});
+    return this.http.patch(this.baseUrl + '/' + rideId + '/end', {}, {});
   }
-
-  // // calling api for getting ended ride details for particular rideId
-  // getRideDetailsById(rideId: string) {
-  //   return this.http.get(this.baseUrl + '/' + rideId, {}, {});
-  // }
-
 
 }

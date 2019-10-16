@@ -16,6 +16,5 @@ public interface RideServiceInterface {
     Ride cancelRide(ObjectId rideId);
     Ride updateDestination(Zone destinationZone, ObjectId rideId);
     Ride endRide(ObjectId rideId);
-    Ride getRideDetails(ObjectId rideId);
 
 }

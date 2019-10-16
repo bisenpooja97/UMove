@@ -32,4 +32,4 @@ import { HTTP } from '@ionic-native/http/ngx';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

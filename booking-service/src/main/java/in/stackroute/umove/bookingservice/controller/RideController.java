@@ -103,15 +103,4 @@ public class RideController {
         map.put("status", HttpStatus.OK);
         return new ResponseEntity<>(map, HttpStatus.OK);
     }
-
-    //Api end point for fetching ended ride details by the rideId
-    @GetMapping("rides/{rideId}")
-    public ResponseEntity<?> getRideDetailsRequest(@PathVariable("rideId") ObjectId rideId) {
-        Ride ride = rideService.getRideDetails(rideId);
-        Map<String, Object> map = new TreeMap<>();
-        map.put("data", ride);
-        map.put("status", HttpStatus.OK);
-        return new ResponseEntity<>(map, HttpStatus.OK);
-    }
-
 }

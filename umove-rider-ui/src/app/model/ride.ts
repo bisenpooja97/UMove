@@ -6,6 +6,7 @@ import { PaymentMethod } from './payment-method';
 import { Campaign } from './campaign';
 
 export class Ride {
+    // tslint:disable-next-line: variable-name
     _id: string;
     bookedAt: Date;
     status: string;

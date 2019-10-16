@@ -9,10 +9,10 @@ describe('DummyDestinationZonePage', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DummyDestinationZonePage ],
+      declarations: [DummyDestinationZonePage],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

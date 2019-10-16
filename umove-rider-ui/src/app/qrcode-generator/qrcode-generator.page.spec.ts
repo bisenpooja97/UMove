@@ -9,10 +9,10 @@ describe('QrcodeGeneratorPage', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ QrcodeGeneratorPage ],
+      declarations: [QrcodeGeneratorPage],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

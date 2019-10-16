@@ -33,10 +33,6 @@ export class RideBookingDetailsPage implements OnInit {
         console.log('Booking details: ', response);
         this.ride = JSON.parse(response.data).data;
         console.log(this.ride);
-        // this.sizeOfDestinationZones = this.ride.destinationZones.length;
-        // console.log(this.sizeOfDestinationZones);
-        // this.destinationZone = this.ride.destinationZones[this.sizeOfDestinationZones - 1];
-        // console.log('destinationZone is ', this.destinationZone);
       });
   }
 
@@ -57,17 +53,15 @@ export class RideBookingDetailsPage implements OnInit {
     });
   }
 
+  // Routing to qr-scanner page
   startRide() {
-    this.timerRef.instance.reset();
+    this.timerRef.instance.stop();
     this.router.navigateByUrl('qrcode-scanner');
-    // this.rideService.startRideById(this.ride.rideId, this.vehicleNumber).subscribe(data => {
-    //   console.log('response of start ride: ', data);
-    //   this.router.navigateByUrl('ride-details');
-    // });
   }
 
+  // calling service method to cancel the ride
   cancelRide() {
-    this.timerRef.instance.reset();
+    this.timerRef.instance.stop();
     this.rideService.cancelRideById(this.ride._id).then(data => {
       console.log('response of cancel ride: ', data);
       this.router.navigateByUrl('');

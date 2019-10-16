@@ -25,4 +25,4 @@ const routes: Routes = [
   ],
   declarations: [RideBookingDetailsPage]
 })
-export class RideBookingDetailsPageModule {}
+export class RideBookingDetailsPageModule { }

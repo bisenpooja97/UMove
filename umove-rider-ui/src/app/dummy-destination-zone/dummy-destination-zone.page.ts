@@ -29,6 +29,7 @@ export class DummyDestinationZonePage implements OnInit {
   ngOnInit() {
   }
 
+  // Sending zone data as navigationExtras
   sendZone(data) {
     console.log('Send Zone: ', data);
     const navigationExtras: NavigationExtras = {
