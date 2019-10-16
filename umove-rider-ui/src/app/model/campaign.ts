@@ -1,5 +1,5 @@
 export class Campaign {
-    campaignId: String;
-    promocode: String;
+    campaignId: string;
+    promocode: string;
     discount: number;
 }

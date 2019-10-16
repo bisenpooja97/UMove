@@ -1,5 +1,6 @@
 package in.stackroute.umove.bookingservice.model;
 
+import in.stackroute.umove.bookingservice.model.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;

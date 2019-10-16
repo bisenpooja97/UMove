@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-
 import java.util.List;
 
 /*
@@ -21,6 +20,7 @@ public class PaymentDetail {
     private Integer discount;
     private Double rideAmount;
     private List<ExtraCharge> extraCharges;
+    private Double totalExtraCharges;
     private Double totalAmount;
     private Double paidAmount;
 

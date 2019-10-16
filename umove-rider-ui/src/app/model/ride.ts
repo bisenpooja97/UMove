@@ -8,7 +8,6 @@ import {Campaign} from "./campaign";
 
 export class Ride {
     _id: string;
-    payment: Payment;
     bookedAt: Date;
     status: string;
     vehicle: Vehicle;
@@ -17,4 +16,9 @@ export class Ride {
     paymentMethod: PaymentMethod;
     promocode: Campaign;
     rider: User;
+    rideStartAt: Date;
+    rideEndAt: Date;
+    distance: number;
+    duration: number;
+    payment: Payment;
 }
