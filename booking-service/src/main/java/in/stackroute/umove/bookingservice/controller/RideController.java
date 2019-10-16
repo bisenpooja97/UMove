@@ -9,6 +9,7 @@ import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -20,8 +21,17 @@ import java.util.TreeMap;
 @RequestMapping("api/v1")
 public class RideController {
 
+    private final SimpMessagingTemplate template;
+
+    @Autowired
+    RideController(SimpMessagingTemplate template) {
+        this.template = template;
+    }
+
+
     @Autowired
     private RideService rideService;
+
 
     // End Point: api/v1/bookings Method: POST
     // to confirm booking for a vehicle
@@ -73,7 +83,9 @@ public class RideController {
     // to apply extra charges from supervisior side at zone for a specific ride
     @PatchMapping("rides/{rideId}/extra-charges")
     public ResponseEntity<Map> addExtraCharge(@PathVariable("rideId") ObjectId bookingId, @RequestBody() List<ExtraCharge> extraCharges) {
+        System.out.println("Extracharge" + extraCharges + " | ride id " + bookingId);
         Ride ride = rideService.addExtraCharges(bookingId, extraCharges);
+        this.template.convertAndSend("/end-ride", "ride end ho gai!!!");
         Map<String, Object> map = new TreeMap<>();
         map.put("data", ride);
         map.put("status", HttpStatus.OK);

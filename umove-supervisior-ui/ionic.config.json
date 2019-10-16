@@ -1,0 +1,7 @@
+{
+  "name": "umove-supervisior-ui",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
