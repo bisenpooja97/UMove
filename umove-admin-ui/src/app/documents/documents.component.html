@@ -7,8 +7,7 @@
         </mat-form-field>
     </div>
     <div fxLayout.xs="column" fxLayout.gt="row" fxLayout="row wrap" fxLayoutGap="10px" class="card">
-        <app-document-card *ngFor="let document of documents | paginate: { itemsPerPage: 10, currentPage: p}| filter:term"
-     [documents]="document">
+        <app-document-card >
         </app-document-card>
         <pagination-controls (pageChange)="p = $event"></pagination-controls>
     </div>

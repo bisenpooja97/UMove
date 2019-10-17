@@ -5,7 +5,8 @@ import { DocumentsRoutingModule } from './documents-routing.module';
 import { DocumentsComponent } from './documents.component';
 import { DocumentCardComponent } from './document-card/document-card.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatFormFieldModule, MatInputModule, MatCardModule, MatIconModule, MatButtonModule, MatPaginatorModule, MatDialogModule, MatSelectModule, MatOptionModule, MatToolbarModule } from '@angular/material';
+import { MatFormFieldModule, MatInputModule, MatCardModule, MatIconModule, MatButtonModule,
+   MatPaginatorModule, MatDialogModule, MatSelectModule, MatOptionModule, MatToolbarModule } from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';

@@ -5,7 +5,7 @@ import { UsersRoutingModule } from './users-routing.module';
 import { UsersComponent } from './users.component';
 import { UserCardComponent } from './user-card/user-card.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatFormFieldModule, MatInputModule, MatCardModule, MatIconModule, MatButtonModule, 
+import { MatFormFieldModule, MatInputModule, MatCardModule, MatIconModule, MatButtonModule,
   MatPaginatorModule, MatDialogModule, MatSelectModule, MatOptionModule, MatToolbarModule } from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
 import {NgxPaginationModule} from 'ngx-pagination';
@@ -13,11 +13,10 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddUserComponent } from './add-user/add-user.component';
-import { DocumentCardComponent } from './document-card/document-card.component';
-import { DocumentApprovalComponent } from './document-approval/document-approval.component';
+
 
 @NgModule({
-  declarations: [UsersComponent, UserCardComponent, UserDetailsComponent, AddUserComponent, DocumentCardComponent, DocumentApprovalComponent],
+  declarations: [UsersComponent, UserCardComponent, UserDetailsComponent, AddUserComponent],
   imports: [
     CommonModule,
     UsersRoutingModule,
