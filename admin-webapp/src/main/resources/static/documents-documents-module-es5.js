@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>document-card works!</p>\n"
+module.exports = "<mat-card class=\"my-card\" fxFlex.sm=\"0 1 calc(50%-10px)\" fxFlex.md=\"0 1 calc(33%-10px)\" fxLayout=\"column\" fxLayoutGap=\"20px\" (click)=\"ok()\">\n  <mat-card-content fxLayoutAlign=\"end\" [ngStyle]=\"{'color':getColor(documentStatus)}\" >{{documentStatus}}</mat-card-content>\n  <mat-card-title fxLayoutAlign=\"center center\" class=\"userName\">{{dLicenceNumber}}</mat-card-title>\n  <mat-card-content fxLayoutAlign=\"center center\">{{expiryDate}}</mat-card-content>\n  <mat-card-content fxLayoutAlign=\"center center\">{{image}}</mat-card-content>\n</mat-card>\n"
 
 /***/ }),
 
@@ -18,7 +18,7 @@ module.exports = "<p>document-card works!</p>\n"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h1 fxLayout=\"column\" fxLayout.gt-md=\"row\" fxLayoutGap.gt-md=\"15px\" class=\"header\">\n        Documents\n    </h1>\n    <div fxLayout=\"row\" fxLayoutGap=\"20px\" class=\"search\" fxLayout.gt-xs=\"row\">\n        <mat-form-field fxFlex=20%>\n            <input matInput [(ngModel)]=\"term\" placeholder=\"Search\">\n        </mat-form-field>\n    </div>\n    <div fxLayout.xs=\"column\" fxLayout.gt=\"row\" fxLayout=\"row wrap\" fxLayoutGap=\"10px\" class=\"card\">\n        <app-document-card *ngFor=\"let document of documents | paginate: { itemsPerPage: 10, currentPage: p}| filter:term\"\n     [documents]=\"document\">\n        </app-document-card>\n        <pagination-controls (pageChange)=\"p = $event\"></pagination-controls>\n    </div>\n"
+module.exports = "<h1 fxLayout=\"column\" fxLayout.gt-md=\"row\" fxLayoutGap.gt-md=\"15px\" class=\"header\">\n        Documents\n    </h1>\n    <div fxLayout=\"row\" fxLayoutGap=\"20px\" class=\"search\" fxLayout.gt-xs=\"row\">\n        <mat-form-field fxFlex=20%>\n            <input matInput [(ngModel)]=\"term\" placeholder=\"Search\">\n        </mat-form-field>\n    </div>\n    <div fxLayout.xs=\"column\" fxLayout.gt=\"row\" fxLayout=\"row wrap\" fxLayoutGap=\"10px\" class=\"card\">\n        <app-document-card >\n        </app-document-card>\n        <pagination-controls (pageChange)=\"p = $event\"></pagination-controls>\n    </div>\n"
 
 /***/ }),
 

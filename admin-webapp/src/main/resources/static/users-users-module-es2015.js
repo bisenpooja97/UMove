@@ -11,28 +11,6 @@ module.exports = "<mat-toolbar>\n  <span class=\"fill-remaining-space\"></span>\
 
 /***/ }),
 
-/***/ "./node_modules/raw-loader/index.js!./src/app/users/document-approval/document-approval.component.html":
-/*!****************************************************************************************************!*\
-  !*** ./node_modules/raw-loader!./src/app/users/document-approval/document-approval.component.html ***!
-  \****************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "<mat-card class=\"my-card\" fxFlex.sm=\"0 1 calc(50%-10px)\" fxFlex.md=\"0 1 calc(33%-10px)\" fxLayout=\"column\" fxLayoutGap=\"20px\" (click)=\"ok()\">\n    <mat-card-content fxLayoutAlign=\"end\" >{{document.documentStatus}}</mat-card-content>\n    <mat-card-title fxLayoutAlign=\"center center\" class=\"userName\">{{document.dLicenceNumber}}</mat-card-title>\n    <mat-card-content fxLayoutAlign=\"center center\">{{document.expiryDate}}</mat-card-content>\n    <mat-card-content fxLayoutAlign=\"center center\">{{document.image}}</mat-card-content>\n  </mat-card>\n  \n"
-
-/***/ }),
-
-/***/ "./node_modules/raw-loader/index.js!./src/app/users/document-card/document-card.component.html":
-/*!********************************************************************************************!*\
-  !*** ./node_modules/raw-loader!./src/app/users/document-card/document-card.component.html ***!
-  \********************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "<div fxLayout.sm=\"column\" fxLayout.gt-sm=\"row\" fxLayoutGap=\"10%\">\n    <!-- <div fxLayout=\"column\" fxLayout.sm=\"column\" fxLayoutGap=\"50px\" fxLayoutGap.lt-md=\"0px\">\n      <h1 fxLayout=\"column\" fxLayout.gt-md=\"row\" fxLayoutGap.gt-md=\"15px\" class=\"userName\">\n        {{name}}\n      </h1>\n    </div> -->\n    <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap.lt-md=\"0px\">\n      <mat-form-field appearance=\"outline\" fxFlex class=\"status\">\n        <mat-label>User Status</mat-label>\n        <mat-select [(ngModel)]=\"Status\" (ngModelChange)=\"onChange($event)\">\n          <mat-option *ngFor=\"let u of userStatus\" [value]=\"u.value\">\n            {{u.viewValue}}\n          </mat-option>\n        </mat-select>\n      </mat-form-field>\n    </div>\n  </div>\n  <mat-card class=\"my-card\" fxFlex.sm=\"0 1 calc(50%-10px)\" fxFlex.md=\"0 1 calc(33%-10px)\" fxLayout=\"column\" fxLayoutGap=\"20px\">\n    <div fxFlex=50% fxLayout=\"column\" fxLayout.gt-sm=\"row\" fxLayoutGap=\"20%\" fxLayoutGap.lt-md=\"0px\" class=\"form\"\n      fxLayoutAlign=\"center center\">\n      <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"50px\" fxLayoutGap.lt-md=\"0px\" class=\"col\">\n        <mat-card-title fxLayoutAlign=\"center center\">Name: {{user?.name}}</mat-card-title>\n        <mat-card-title fxLayoutAlign=\"center center\">Mobile Number: {{user?.mobileNumber}}</mat-card-title>\n        <mat-card-title fxLayoutAlign=\"center center\">E-mail: {{user?.email}}</mat-card-title>\n      </div>\n    </div>\n  </mat-card>\n  \n  <h1 fxLayout=\"column\" fxLayout.gt-md=\"row\" fxLayoutGap.gt-md=\"15px\" class=\"userName\">\n  </h1> \n  \n   <mat-card class=\"my-card\" fxFlex.sm=\"0 1 calc(50%-10px)\" fxFlex.md=\"0 1 calc(33%-10px)\" fxLayout=\"column\"\n    fxLayoutGap=\"20px\">\n    <!-- <span fxLayoutAlign=\"end\">\n      <i class=\"material-icons\">\n        create\n      </i>\n    </span> -->\n    <br><br>\n    <div fxFlex=50% fxLayout=\"row\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20%\" fxLayoutGap.lt-md=\"0px\" class=\"form\"\n      fxLayoutAlign=\"center center\">\n      <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"50px\" fxLayoutGap.lt-md=\"0px\" class=\"col\">\n        <mat-card-title fxLayoutAlign=\"center center\">Driving Licence Number : {{document?.dlicenceNumber}}</mat-card-title>\n        <mat-card-title fxLayoutAlign=\"center center\">Expiry date: {{document?.expiryDate|date: \"dd LLLL yyyy\"}}</mat-card-title>\n        <mat-card-title fxLayoutAlign=\"center center\">Document Status: {{document?.documentStatus}}</mat-card-title>\n      </div>\n    </div>\n  </mat-card>\n  \n"
-
-/***/ }),
-
 /***/ "./node_modules/raw-loader/index.js!./src/app/users/user-card/user-card.component.html":
 /*!************************************************************************************!*\
   !*** ./node_modules/raw-loader!./src/app/users/user-card/user-card.component.html ***!
@@ -146,115 +124,6 @@ AddUserComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     }),
     tslib__WEBPACK_IMPORTED_MODULE_0__["__param"](3, Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Inject"])(_angular_material__WEBPACK_IMPORTED_MODULE_4__["MAT_DIALOG_DATA"]))
 ], AddUserComponent);
-
-
-
-/***/ }),
-
-/***/ "./src/app/users/document-approval/document-approval.component.css":
-/*!*************************************************************************!*\
-  !*** ./src/app/users/document-approval/document-approval.component.css ***!
-  \*************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3VzZXJzL2RvY3VtZW50LWFwcHJvdmFsL2RvY3VtZW50LWFwcHJvdmFsLmNvbXBvbmVudC5jc3MifQ== */"
-
-/***/ }),
-
-/***/ "./src/app/users/document-approval/document-approval.component.ts":
-/*!************************************************************************!*\
-  !*** ./src/app/users/document-approval/document-approval.component.ts ***!
-  \************************************************************************/
-/*! exports provided: DocumentApprovalComponent */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DocumentApprovalComponent", function() { return DocumentApprovalComponent; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
-/* harmony import */ var _service_user_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../service/user.service */ "./src/app/users/service/user.service.ts");
-
-
-
-
-let DocumentApprovalComponent = class DocumentApprovalComponent {
-    constructor(router, userservice) {
-        this.router = router;
-        this.userservice = userservice;
-    }
-    ngOnInit() {
-        console.log('User data is:', this.users);
-        this.userservice.getUsers().subscribe(res => {
-            //  this.users = res.data;
-            console.log(res, 'parent');
-        });
-    }
-    // this. = this.document[0];
-    // this.name = Object.values(this.users)[1];
-    // this.mobileNumber = Object.values(this.users)[2];
-    // this.role =  Object.values(this.users)[4];
-    // this.userStatus = Object.values(this.users)[5];
-    ok() {
-        console.log('ok', this.id);
-        this.router.navigate(['users/document', this.id]);
-    }
-};
-DocumentApprovalComponent.ctorParameters = () => [
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] },
-    { type: _service_user_service__WEBPACK_IMPORTED_MODULE_3__["UserService"] }
-];
-DocumentApprovalComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
-        selector: 'app-document-approval',
-        template: __webpack_require__(/*! raw-loader!./document-approval.component.html */ "./node_modules/raw-loader/index.js!./src/app/users/document-approval/document-approval.component.html"),
-        styles: [__webpack_require__(/*! ./document-approval.component.css */ "./src/app/users/document-approval/document-approval.component.css")]
-    })
-], DocumentApprovalComponent);
-
-
-
-/***/ }),
-
-/***/ "./src/app/users/document-card/document-card.component.css":
-/*!*****************************************************************!*\
-  !*** ./src/app/users/document-card/document-card.component.css ***!
-  \*****************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3VzZXJzL2RvY3VtZW50LWNhcmQvZG9jdW1lbnQtY2FyZC5jb21wb25lbnQuY3NzIn0= */"
-
-/***/ }),
-
-/***/ "./src/app/users/document-card/document-card.component.ts":
-/*!****************************************************************!*\
-  !*** ./src/app/users/document-card/document-card.component.ts ***!
-  \****************************************************************/
-/*! exports provided: DocumentCardComponent */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DocumentCardComponent", function() { return DocumentCardComponent; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-
-
-let DocumentCardComponent = class DocumentCardComponent {
-    constructor() { }
-    ngOnInit() {
-    }
-};
-DocumentCardComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
-        selector: 'app-document-card',
-        template: __webpack_require__(/*! raw-loader!./document-card.component.html */ "./node_modules/raw-loader/index.js!./src/app/users/document-card/document-card.component.html"),
-        styles: [__webpack_require__(/*! ./document-card.component.css */ "./src/app/users/document-card/document-card.component.css")]
-    })
-], DocumentCardComponent);
 
 
 
@@ -449,16 +318,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
 /* harmony import */ var _users_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./users.component */ "./src/app/users/users.component.ts");
 /* harmony import */ var _user_details_user_details_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./user-details/user-details.component */ "./src/app/users/user-details/user-details.component.ts");
-/* harmony import */ var _document_approval_document_approval_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./document-approval/document-approval.component */ "./src/app/users/document-approval/document-approval.component.ts");
-
 
 
 
 
 
 const routes = [{ path: '', component: _users_component__WEBPACK_IMPORTED_MODULE_3__["UsersComponent"] },
-    { path: ':id', component: _user_details_user_details_component__WEBPACK_IMPORTED_MODULE_4__["UserDetailsComponent"] },
-    { path: 'document/:id', component: _document_approval_document_approval_component__WEBPACK_IMPORTED_MODULE_5__["DocumentApprovalComponent"] }];
+    { path: ':id', component: _user_details_user_details_component__WEBPACK_IMPORTED_MODULE_4__["UserDetailsComponent"] }];
 let UsersRoutingModule = class UsersRoutingModule {
 };
 UsersRoutingModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
@@ -585,10 +451,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _user_details_user_details_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./user-details/user-details.component */ "./src/app/users/user-details/user-details.component.ts");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
 /* harmony import */ var _add_user_add_user_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./add-user/add-user.component */ "./src/app/users/add-user/add-user.component.ts");
-/* harmony import */ var _document_card_document_card_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./document-card/document-card.component */ "./src/app/users/document-card/document-card.component.ts");
-/* harmony import */ var _document_approval_document_approval_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./document-approval/document-approval.component */ "./src/app/users/document-approval/document-approval.component.ts");
-
-
 
 
 
@@ -607,7 +469,7 @@ let UsersModule = class UsersModule {
 };
 UsersModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
-        declarations: [_users_component__WEBPACK_IMPORTED_MODULE_4__["UsersComponent"], _user_card_user_card_component__WEBPACK_IMPORTED_MODULE_5__["UserCardComponent"], _user_details_user_details_component__WEBPACK_IMPORTED_MODULE_11__["UserDetailsComponent"], _add_user_add_user_component__WEBPACK_IMPORTED_MODULE_13__["AddUserComponent"], _document_card_document_card_component__WEBPACK_IMPORTED_MODULE_14__["DocumentCardComponent"], _document_approval_document_approval_component__WEBPACK_IMPORTED_MODULE_15__["DocumentApprovalComponent"]],
+        declarations: [_users_component__WEBPACK_IMPORTED_MODULE_4__["UsersComponent"], _user_card_user_card_component__WEBPACK_IMPORTED_MODULE_5__["UserCardComponent"], _user_details_user_details_component__WEBPACK_IMPORTED_MODULE_11__["UserDetailsComponent"], _add_user_add_user_component__WEBPACK_IMPORTED_MODULE_13__["AddUserComponent"]],
         imports: [
             _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"],
             _users_routing_module__WEBPACK_IMPORTED_MODULE_3__["UsersRoutingModule"],

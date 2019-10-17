@@ -64,7 +64,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({"campaigns-campaigns-module":"campaigns-campaigns-module","default~documents-documents-module~users-users-module":"default~documents-documents-module~users-users-module","documents-documents-module":"documents-documents-module","users-users-module":"users-users-module"}[chunkId]||chunkId) + "-es5.js"
+/******/ 		return __webpack_require__.p + "" + ({"authentication-authentication-module":"authentication-authentication-module","common":"common","documents-documents-module":"documents-documents-module","users-users-module":"users-users-module"}[chunkId]||chunkId) + "-es5.js"
 /******/ 	}
 /******/
 /******/ 	// The require function
