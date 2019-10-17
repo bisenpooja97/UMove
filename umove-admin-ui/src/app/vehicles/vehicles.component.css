@@ -32,7 +32,10 @@ app-vehicle-card {
     }
 }
 
+@media only screen and (min-width: 600px) {
 .search {
-    margin-left: 240px;
-    margin-bottom: 50px;
+        margin-left: 240px;
+        margin-bottom: 50px;
+    }
+
 }

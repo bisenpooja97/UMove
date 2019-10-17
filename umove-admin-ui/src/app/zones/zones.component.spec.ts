@@ -16,7 +16,7 @@ import { UpdateZonesComponent } from './update-zones/update-zones.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { SupervisorDetailsComponent } from './supervisor-details/supervisor-details.component';
 
-fdescribe('ZonesComponent', () => {
+describe('ZonesComponent', () => {
   let component: ZonesComponent;
   let fixture: ComponentFixture<ZonesComponent>;
 

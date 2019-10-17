@@ -12,7 +12,7 @@ import { Resp1 } from '../model/VehicleType-single-response';
 export class VehicleTypeService {
 
   constructor(private httpClient: HttpClient) { }
-  baseUrl = environment.baseUrl + environment.typeBaseApi;
+  baseUrl = environment.baseUrl2 + environment.typeBaseApi;
   getType(): Observable<Resp> {
     return this.httpClient.get<Resp>(this.baseUrl);
   }
