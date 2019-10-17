@@ -12,7 +12,8 @@ import { User } from 'src/model/user';
 
 export class UserCardComponent implements OnInit {
 
-  @Input() users: User[];
+  @Input() users: User;
+  id: object;
   name: object;
   mobileNumber: object;
   role: object;
@@ -21,13 +22,30 @@ export class UserCardComponent implements OnInit {
   constructor(private router: Router) {}
 
   ngOnInit() {
-   // console.log(Object.values(this.users));
-    this.name = Object.values(this.users)[0];
-    this.mobileNumber = Object.values(this.users)[1];
-    this.role =  Object.values(this.users)[3];
-    this.userStatus = Object.values(this.users)[4];
+     console.log('User data is:', Object.values(this.users));
+     this.id = Object.values(this.users)[0];
+     this.name = Object.values(this.users)[1];
+     this.mobileNumber = Object.values(this.users)[2];
+     this.role =  Object.values(this.users)[4];
+     this.userStatus = Object.values(this.users)[5];
   }
 
+  ok() {
+    console.log('ok', this.id);
+    this.router.navigate(['users/', this.id]);
+    }
 
+  getColor(userStatus) {
+    switch (userStatus) {
+    case 'Active':
+    return 'green';
+    case 'Inactive':
+    return 'blue';
+    case 'Suspended':
+    return 'red';
+    case 'Pending':
+    return 'blue';
+}
 
+}
 }

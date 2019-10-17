@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -22,6 +23,7 @@ MatSortModule, MatAutocompleteModule,
      MatSelectModule,
      MatSnackBarModule,
 } from '@angular/material';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -32,6 +34,7 @@ MatSortModule, MatAutocompleteModule,
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     FlexLayoutModule,
     MatButtonModule,
@@ -47,6 +50,7 @@ MatSortModule, MatAutocompleteModule,
     MatPaginatorModule,
     MatListModule,
     MatSidenavModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

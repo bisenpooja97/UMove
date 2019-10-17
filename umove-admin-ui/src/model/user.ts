@@ -1,8 +1,10 @@
+import {Document} from './document';
 export class User {
-    public userId: String;
-    public name: String;
-    public mobileNumber: String;
-    public email: String;
-    public role: String;
-    public UserStatus: String;
+    public id: string;
+    public name: string;
+    public mobileNumber: string;
+    public email: string;
+    public role: string;
+    public userStatus: string;
+    public document: Document;
 }

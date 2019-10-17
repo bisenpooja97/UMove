@@ -1,9 +1,8 @@
 <mat-card class="my-card" fxFlex.sm="0 1 calc(50%-10px)" fxFlex.md="0 1 calc(33%-10px)" fxLayout="column" fxLayoutGap="20px" (click)="ok()">
-  <mat-card-content fxLayoutAlign="end" >{{userStatus}}</mat-card-content>
+  <mat-card-content fxLayoutAlign="end" [ngStyle]="{'color':getColor(userStatus)}" >{{userStatus}}</mat-card-content>
   <mat-card-title fxLayoutAlign="center center" class="userName">{{name}}</mat-card-title>
   <mat-card-content fxLayoutAlign="center center">{{mobileNumber}}</mat-card-content>
   <mat-card-content fxLayoutAlign="center center">{{role}}</mat-card-content>
-  <!-- <mat-card-content fxLayoutAlign="center center">{{userStatus}}</mat-card-content> -->
 </mat-card>
 
 

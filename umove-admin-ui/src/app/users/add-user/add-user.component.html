@@ -1,0 +1,42 @@
+<mat-toolbar>
+  <span class="fill-remaining-space"></span>
+  <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabIndex="-1">
+    <mat-icon>clear</mat-icon>
+  </button>
+</mat-toolbar>
+<form fxLayout="column" fxLayoutAlign="center center" [formGroup]="userForm" (ngSubmit)="onSubmit()">
+<h2>Enter Supervisor Details</h2>
+  <div fxFlex=50% fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px" class="form"
+    fxLayoutAlign="center center">
+    <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px" class="col">
+    
+      <mat-form-field appearance="outline" fxFlex>
+        <mat-label>Supervisor Name</mat-label>
+        <input matInput #input placeholder="Supervisor Name" formControlName="name" required>
+      </mat-form-field>
+      <mat-form-field appearance="outline" fxFlex>
+
+        <mat-label>Mobile Number</mat-label>
+        <input matInput #input placeholder="Mobile Number" formControlName="mobileNumber" required>
+      </mat-form-field>
+
+    </div>
+    <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px" class="col">
+      <mat-form-field appearance="outline" fxFlex>
+        <mat-label>Email-Id</mat-label>
+        <input matInput #input placeholder="Email-Id" formControlName="email" required>
+      </mat-form-field>
+
+    <mat-form-field appearance="outline" fxFlex>
+          <mat-label>Role</mat-label>
+          <input matInput #input placeholder="Enter supervisor" formControlName="role" required>
+        </mat-form-field>
+      </div>
+  </div>
+
+  <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+    <button mat-raised-button class="btn" [disabled]='!userForm.valid' color="primary">
+      Submit
+    </button>
+  </div>
+</form>

@@ -2,7 +2,10 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 
-const routes: Routes = [{ path: 'users', loadChildren: () => import('./users/users.module').then(m => m.UsersModule) }];
+// tslint:disable-next-line: max-line-length
+const routes: Routes = [{ path: 'users', loadChildren: () => import('./users/users.module').then(m => m.UsersModule) }, 
+{ path: 'campaigns', loadChildren: () => import('./campaigns/campaigns.module').then(m => m.CampaignsModule) },
+{ path: 'documents', loadChildren: () => import('./documents/documents.module').then(m => m.DocumentsModule) }] ;
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, {useHash: true})],
