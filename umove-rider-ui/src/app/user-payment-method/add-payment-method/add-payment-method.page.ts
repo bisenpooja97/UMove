@@ -19,8 +19,11 @@ export class AddPaymentMethodPage implements OnInit {
   ngOnInit() {
     this.addPayment = new FormGroup({
       paymentProvider: new FormControl('', Validators.required),
-      paymentMethodNumber: new FormControl('', Validators.required),
-      paymentType: new FormControl('', Validators.required)
+      paymentType: new FormControl('', Validators.required),
+      paymentMethodNumber: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.pattern('')
+      ]))
     });
   }
   goShowPayment() {
@@ -33,3 +36,4 @@ export class AddPaymentMethodPage implements OnInit {
          });
   }
 }
+

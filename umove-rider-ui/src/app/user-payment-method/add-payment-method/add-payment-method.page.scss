@@ -1,21 +1,36 @@
 .example{
   background-color: blue;
 }
-
+ion-icon {
+  font-size: 30px; //Preferred size here
+}
 ion-row {
   text-align: center;
 }
-
 .example2{
   background-color: blue;
 }
 
 ion-card{
+  justify-content: center;
   display: flex;
-  flex-direction: column;
-  width: 100%;
+  width : 80%;
+  height: 60%;
+  margin-left: auto;
+  margin-right: auto;
+}
+ion-item{
+  display: flex;
+  padding-top: 30px;
+  align-items: center;
 }
 
-ion-card-content {
-  margin-left: -2%;
+.button{
+  position: fixed;
+  left: 5px;
+  bottom: 0;
+  right: 5px;
+}
+ion-label{
+  font-size: 200em;
 }

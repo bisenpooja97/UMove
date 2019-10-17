@@ -1,13 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-
 import {NavigationExtras, Router} from '@angular/router';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
-
 import {json} from '@angular-devkit/core';
 import {HTTP} from '@ionic-native/http/ngx';
 import {UserPaymentMethod} from '../../model/user-payment-method/user-payment-method';
 import {UserPaymentMethodService} from '../../services/user-payment-method/user-payment-method.service';
-
 @Component({
   selector: 'app-show-payment-method',
   templateUrl: './show-payment-method.page.html',
@@ -17,6 +13,7 @@ import {UserPaymentMethodService} from '../../services/user-payment-method/user-
 export class ShowPaymentMethodPage implements OnInit {
   public payment: UserPaymentMethod;
 
+    // tslint:disable-next-line:max-line-length
   constructor(private userPaymentMethodService: UserPaymentMethodService, private router: Router, private http: HTTP) { }
 
    ngOnInit() {
