@@ -15,7 +15,7 @@ export class MyRidesPage implements OnInit {
   userId: string;
   rideStatusPaid: boolean;
   rideStatusUnPaid: boolean;
-  
+
 
   constructor(private rideService: RideService, private router: Router) {
     this.userId = '5d8bbc0da6e87d5404aa1921';
