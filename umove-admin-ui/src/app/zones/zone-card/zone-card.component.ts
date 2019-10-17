@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Zone } from 'src/app/model/zone';
 import { Router } from '@angular/router';
-import { ZoneService } from '../service/zone.service';
 
 @Component({
   selector: 'app-zone-card',

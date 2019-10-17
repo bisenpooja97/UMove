@@ -17,10 +17,9 @@ import { AddZoneComponent } from './add-zone/add-zone.component';
 import { UpdateZonesComponent } from './update-zones/update-zones.component';
 import { AddSupervisorComponent } from './add-supervisor/add-supervisor.component';
 import { SupervisorDetailsComponent } from './supervisor-details/supervisor-details.component';
-import { UpdateSupervisorComponent } from './update-supervisor/update-supervisor.component';
-
 @NgModule({
-  declarations: [ZonesComponent, ZoneCardComponent, ZoneDetailsComponent, AddZoneComponent, UpdateZonesComponent, AddSupervisorComponent, SupervisorDetailsComponent, UpdateSupervisorComponent],
+  declarations: [ZonesComponent, ZoneCardComponent, ZoneDetailsComponent, AddZoneComponent, UpdateZonesComponent,
+     AddSupervisorComponent, SupervisorDetailsComponent],
   imports: [
     CommonModule,
     ZonesRoutingModule,
