@@ -1,0 +1,77 @@
+.zoneName {
+    margin-left: 240px;
+    padding-bottom: 2%;
+}
+
+
+
+.graph {
+    margin-top: 20px;
+    padding-left: 500px;
+    cursor: pointer;
+}
+
+.my-card {
+    margin-bottom: 40px;
+    margin-left: 450px;
+    height: 300px;
+    width: 50%;
+    background-color: whitesmoke;
+}
+
+@media only screen and (max-width: 600px) {
+    .my-card {
+        margin-left: 30px;
+        height: 300px;
+        width: 85%;
+    }
+    .zoneName {
+        margin-left: 50px;
+        font-size: 1.5em;
+        padding-bottom: 5px;
+    }
+    .add-button {
+        padding-left: 300px;
+        padding-bottom: 2%; 
+    }
+    .graph {
+        padding-left: 300px;;
+        padding-bottom: 50px; 
+    }
+    .status {
+        margin-top: 20px;
+        padding-right: 60px;
+    }
+    .iconCapacity {
+        margin-left: 70%;
+        cursor: pointer;
+        margin-top: -200px;
+    }
+}
+
+@media only screen and (min-width: 600px) {
+    .add-button {
+        padding-right: 450px;
+        padding-bottom: 2%; 
+    }
+    
+}
+
+mat-icon {
+    font-size: 60px;
+}
+
+.icon {
+    margin-left: 80%;
+    cursor: pointer;
+}
+
+.iconCapacity {
+    margin-left: 80%;
+    cursor: pointer;
+}
+
+.status {
+    margin-top: 20px;
+    padding-left: 60px;
+}
