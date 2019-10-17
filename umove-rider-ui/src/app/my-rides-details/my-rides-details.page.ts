@@ -12,7 +12,8 @@ export class MyRidesDetailsPage implements OnInit {
 
   rides: Ride;
   rideId: any;
-  rideStatus: boolean;
+  rideStatusPaid: boolean;
+  rideStatusUnPaid: boolean;
   totalAmount: boolean;
 
   constructor(private route: ActivatedRoute, private rideService: RideService) {
@@ -27,9 +28,9 @@ export class MyRidesDetailsPage implements OnInit {
       this.rides = JSON.parse(response.data).data;
       console.log(this.rides.paymentDetail.status);
       if (this.rides.paymentDetail.status === 'Paid') {
-        this.rideStatus = false;
+        this.rideStatusPaid = true;
       } else {
-        this.rideStatus = true;
+        this.rideStatusUnPaid = true;
       }
     });
   }

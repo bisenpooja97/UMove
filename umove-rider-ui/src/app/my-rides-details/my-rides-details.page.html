@@ -99,10 +99,13 @@
       </ion-item>
 
     </ion-list>
-    <ion-button expand="full" color="primary" (click)="payWithRazor()">Pay</ion-button>
-  </ion-card>
+    <div *ngIf="rideStatusPaid || hideMe">
+      <ion-button slot full (click)="pay()" expand="block">Pay</ion-button>
+    </div> 
+    <div *ngIf="rideStatusUnPaid || hideMe">
+      <ion-text class="PaidForRide">You have Already Paid For This Ride</ion-text>
+    </div>
+   </ion-card>
 
-  <div *ngIf="rideStatus || hideMe">
-    <ion-button slot full (click)="pay()" expand="block">Pay</ion-button>
-  </div>
+ 
 </ion-content>
