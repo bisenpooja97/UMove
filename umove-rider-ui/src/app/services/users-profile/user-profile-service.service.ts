@@ -18,7 +18,7 @@ export class UserProfileServiceService {
   document = 'document';
   uploadImage = 'uploadImage';
 
-    constructor(private http: HTTP) {
+    constructor(private http: HTTP , private httpc: HttpClient) {
         http.setDataSerializer('json');
         http.setHeader('*', 'Content-Type', 'application/json');
     }
@@ -31,9 +31,13 @@ export class UserProfileServiceService {
   public editProfileById(id, data) {
     return this.http.patch(this.baseUrl + '/' + id, data, {});
   }
-  public uploadProfileById(id, data) {
-    return this.http.post(this.baseUrl + '/' + this.document + '/' + this.uploadImage + '?uid=' + id, data, {});
-  }
+  // public uploadProfileById(id, data) {
+  //   return this.http.post(this.baseUrl + '/' + this.document + '/' + this.uploadImage + '?uid=' + id, data, {});
+  // }
+    public uploadProfileById(id: string, data): Observable<any> {
+        console.log('url: ' + this.baseUrl + this.users + '/' + id);
+        return this.httpc.post(this.baseUrl + '/' + this.document + '/' + this.uploadImage + '?uid=' + id, data);
+    }
   public uploadDldetailsById(id, data) {
     return this.http.patch(this.baseUrl + '/' + id, data, {});
   }

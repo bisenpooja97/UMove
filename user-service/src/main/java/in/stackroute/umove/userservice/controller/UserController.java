@@ -1,23 +1,27 @@
 package in.stackroute.umove.userservice.controller;
 
-import in.stackroute.umove.userservice.model.DocumentVerification;
-import in.stackroute.umove.userservice.model.Role;
-import in.stackroute.umove.userservice.model.UserData;
-import in.stackroute.umove.userservice.model.UserStatus;
+import in.stackroute.umove.userservice.model.*;
 import in.stackroute.umove.userservice.service.UserService;
+import in.stackroute.umove.userservice.service.implementation.FileStorageService;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -25,7 +29,7 @@ import java.util.TreeMap;
  *
  *
  */
-@CrossOrigin(origins = "http://localhost:8100")
+//@CrossOrigin(origins = "http://localhost:8100")
 @RestController
 @RequestMapping("api/v1")
 
@@ -33,6 +37,8 @@ import java.util.TreeMap;
 @NoArgsConstructor
 public class UserController
 {
+    @Autowired
+    private FileStorageService fileStorageService;
     @Autowired
     private UserService userService;
 
@@ -66,36 +72,6 @@ public ResponseEntity<Map> getkycDetails(@PathVariable(value = "userId") ObjectI
     return new ResponseEntity<>(map, HttpStatus.OK);
 }
 
-
-    @PostMapping("/users/document/uploadImage")
-    public String uploadImage(@RequestParam(name="imageFile",required = true)MultipartFile imageFile,
-                              @RequestParam(name = "uid",required = true) String uid)
-    {
-        String returnValue = "start";
-        try {
-            userService.saveImage(imageFile,uid);
-        }catch (Exception e){
-            e.printStackTrace();
-            returnValue = "Error";
-        }
-        return returnValue;
-    }
-
-//    @PostMapping("/users/document/uploadImage")
-//    public ResponseEntity <Map>uploadImage(@RequestParam(name="imageFile",required = true) MultipartFile imageFile,
-//                                           @RequestParam(name = "uid",required = true) String uid)
-//    {
-//        final Map<String, Object> map = new TreeMap<>();
-//        String returnValue = "start";
-//        try {
-//            userService.saveImage(imageFile,uid);
-//        }catch (Exception e){
-//            returnValue = "Error";
-//        }
-//        map.put("status", HttpStatus.OK);
-//        return new ResponseEntity<>(map,HttpStatus.OK);
-//    }
-
 @GetMapping("/users/{id}")
 public ResponseEntity<Map> getUsersById(@PathVariable ObjectId id)
 {
@@ -128,10 +104,9 @@ public ResponseEntity<Map> getUsersById(@PathVariable ObjectId id)
         map.put("status", HttpStatus.OK);
         return new ResponseEntity<>(map, HttpStatus.OK);
     }
-
-    @PostMapping("/uploadFile")
-    public UploadFileResponse uploadFile(@RequestParam("file") MultipartFile file) {
-        String fileName = fileStorageService.storeFile(file);
+    @PostMapping("/users/document/uploadImage")
+    public UploadFileResponse uploadFile(@RequestParam("file") MultipartFile file,@RequestParam(name = "uid",required = true) String uid) {
+        String fileName = fileStorageService.storeFile(file,uid);
 
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/downloadFile/")
@@ -141,5 +116,29 @@ public ResponseEntity<Map> getUsersById(@PathVariable ObjectId id)
         return new UploadFileResponse(fileName, fileDownloadUri,
                 file.getContentType(), file.getSize());
     }
+
+//    @GetMapping("/downloadFile/{fileName:.+}")
+//    public ResponseEntity<Resource> downloadFile(@PathVariable String fileName, HttpServletRequest request) {
+//        // Loaddata file as Resource
+//        Resource resource = fileStorageService.loadFileAsResource(fileName);
+//
+//        // Try to determine file's content type
+//        String contentType = null;
+//        try {
+//            contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
+//        } catch (IOException ex) {
+////            logger.info("Could not determine file type.");
+//        }
+//
+//        // Fallback to the default content type if type could not be determined
+//        if(contentType == null) {
+//            contentType = "application/octet-stream";
+//        }
+//
+//        return ResponseEntity.ok()
+//                .contentType(MediaType.parseMediaType(contentType))
+//                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+//                .body(resource);
+//    }
 
 }

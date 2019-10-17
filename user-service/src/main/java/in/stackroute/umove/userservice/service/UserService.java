@@ -15,7 +15,7 @@ public interface UserService {
     UserData addUser(UserData user);
     UserData getById(ObjectId objid);
     UserData updateUser(ObjectId objid, UserData user);
-    void saveImage(MultipartFile imageFile, String uid) throws Exception;
+//    void saveImage(MultipartFile imageFile, String uid) throws Exception;
     List<UserData> findByRole(Role role);
     List<UserData> findByUserStatus(UserStatus userStatus);
 }

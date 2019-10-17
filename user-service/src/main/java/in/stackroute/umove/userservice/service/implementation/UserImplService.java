@@ -10,11 +10,6 @@ import lombok.NoArgsConstructor;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Iterator;
 import java.util.List;
 
@@ -28,19 +23,15 @@ public class UserImplService implements UserService {
     private UserRepository userRepository;
 
     /**
-     *
      * Method to get user list
      */
     @Override
-    public List<UserData> getUserList()
-    {
+    public List<UserData> getUserList() {
         return userRepository.findAll();
     }
 
     /**
      * Method to find user by name and throwing exception if user not found
-     *
-     *
      */
     @Override
     public List<UserData> findByName(String name) {
@@ -52,9 +43,7 @@ public class UserImplService implements UserService {
     }
 
     /**
-     *
      * Method to find user by role
-     *
      */
 
     @Override
@@ -64,16 +53,13 @@ public class UserImplService implements UserService {
     }
 
     @Override
-    public List<UserData> findByUserStatus(UserStatus userStatus)
-    {
+    public List<UserData> findByUserStatus(UserStatus userStatus) {
         List<UserData> users = userRepository.findByUserStatus(userStatus);
         return users;
     }
 
     /**
-     *
      * Method to add a new user and throwing exception if already exists
-     *
      */
 
     @Override
@@ -87,10 +73,9 @@ public class UserImplService implements UserService {
         }
         return userRepository.save(user);
     }
+
     /**
-     *
      * Method to find user by id
-     *
      */
 
     @Override
@@ -100,9 +85,7 @@ public class UserImplService implements UserService {
 
 
     /**
-     *
      * Method to update user by id,name,role,status and document
-     *
      */
 
     @Override
@@ -124,13 +107,14 @@ public class UserImplService implements UserService {
             if (user.getRole() != null) {
                 updatedUser.setRole(user.getRole());
             }
-            if(user.getDocument() != null){
+            if (user.getDocument() != null) {
                 updatedUser.setDocument(user.getDocument());
             }
             return userRepository.save(updatedUser);
         }
         return null;
     }
+}
 //    @Override
 //    public DocumentVerification updateDocumentVerification(ObjectId id, DocumentVerification documentVerification) {
 //        DocumentVerification documentVerification = userRepository.findBy_id(id);
@@ -155,22 +139,3 @@ public class UserImplService implements UserService {
 //        return null;
 //    }
 
-
-    /*
-     *
-     Method for uploading image to resources/documents folder based on userid.
-     *
-     */
-    @Override
-    public void saveImage(MultipartFile imageFile, String uid) throws Exception {
-        String folder = "/home/ashwin/Documents/Project/umove/user-service/src/main/resources/documents/";
-//        String folder = "/home/ashwin/Desktop/Stackroute Project/umove/user-service/src/main/resources/documents/";
-        byte[] bytes = imageFile.getBytes();
-        Path path = Paths.get(folder + uid);
-        Files.write(path, bytes);
-    }
-
-
-
-
-}

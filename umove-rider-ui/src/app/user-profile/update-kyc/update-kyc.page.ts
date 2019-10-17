@@ -13,10 +13,28 @@ import {ToastController} from '@ionic/angular';
 // tslint:disable-next-line:component-class-suffix
 export class UpdateKycPage implements OnInit {
 
+  // tslint:disable-next-line:max-line-length
+  constructor(private http: HttpClient, private userDataService: UserProfileServiceService , private router: Router , private route: ActivatedRoute, public toastController: ToastController) {
+    // console.log(this.router.getCurrentNavigation().extras);
+    // this.route.queryParams.subscribe(params => {
+    //    this.campaigns = this.router.getCurrentNavigation().extras.queryParams.special;
+    //    console.log(this.campaigns);
+    // });
+
+  }
+
+
   selectedFile: File;
   todo: FormGroup;
   public campaigns: any = [];
   onFileChanged(event) {
+      // const reader = new FileReader();
+      // reader.onload = (e: any) => {
+      //     const localUrl = e.target.result;
+      // };
+      // console.log(reader.readAsDataURL(event.target.files[0]));
+      //
+      // console.log('event for file upload', event);
     this.selectedFile = event.target.files[0];
   }
 
@@ -29,9 +47,9 @@ export class UpdateKycPage implements OnInit {
       console.log(res);
     });
     const uploadData = new FormData();
-    uploadData.append('imageFile', this.selectedFile, this.selectedFile.name);
+    uploadData.append('file', this.selectedFile, this.selectedFile.name);
 
-    this.userDataService.uploadProfileById('5da1a2b80e8e3d0001c8453e', uploadData).then(res => {
+    this.userDataService.uploadProfileById('5da1a2b80e8e3d0001c8453ee', uploadData).subscribe(res => {
       console.log(res);
     });
     const toast = await this.toastController.create({
@@ -41,22 +59,11 @@ export class UpdateKycPage implements OnInit {
     toast.present();
   }
 
-  // tslint:disable-next-line:max-line-length
-  constructor(private http: HttpClient, private userDataService: UserProfileServiceService , private router: Router , private route: ActivatedRoute, public toastController: ToastController) {
-    // console.log(this.router.getCurrentNavigation().extras);
-    // this.route.queryParams.subscribe(params => {
-    //    this.campaigns = this.router.getCurrentNavigation().extras.queryParams.special;
-    //    console.log(this.campaigns);
-    // });
-
-  }
-
   ngOnInit() {
     this.todo = new FormGroup({
       dlicenceNumber: new FormControl(''),
       expiryDate: new FormControl(''),
     });
   }
-
 
 }

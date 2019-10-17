@@ -27,7 +27,7 @@ export class EditProfilePage implements OnInit {
                 this.todo = new FormGroup({
                     name: new FormControl(this.user.name),
                     email: new FormControl(this.user.email),
-                    mobilenumber: new FormControl(this.user.mobileNumber),
+                    mobileNumber: new FormControl(this.user.mobileNumber),
                 });
             });
     }
