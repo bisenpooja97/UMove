@@ -3,10 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
-export class WindowService {
+export class VehicleService {
 
-  get windowRef() {
-    return window;
-  }
+  constructor() { }
 }
-

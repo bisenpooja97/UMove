@@ -17,7 +17,7 @@ export class GeoJson implements IGeoJson {
   constructor(coordinates, public properties?) {
     this.geometry = {
       type: 'Point',
-      coordinates
+      coordinates: coordinates
     };
   }
 }
@@ -26,4 +26,3 @@ export class FeatureCollection {
   type = 'FeatureCollection';
   constructor(public features: Array<GeoJson>) {}
 }
-

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {VehicleService} from '../service/vehicle/vehicle.service';
 import { Dialogs } from '@ionic-native/dialogs/ngx';
 import { AlertController } from '@ionic/angular';
@@ -12,6 +12,7 @@ import {Vehicle} from '../model/vehicle';
 export class VehicleComponent implements OnInit {
 
   @Input() vehicle: Vehicle;
+  @Output() changedVehicle = new EventEmitter();
   constructor(private vehicleService: VehicleService, private alertController: AlertController) { }
 
   ngOnInit() {}
@@ -49,9 +50,10 @@ export class VehicleComponent implements OnInit {
             // this.vehicle.status = JSON.stringify(data);
             console.log(data);
             this.vehicle.status = data;
-            this.vehicleService.changeStatus(this.vehicle, this.vehicle.registrationNo).subscribe(updatedData => {
-              console.log(updatedData);
-            });
+            this.changedVehicle.emit(this.vehicle);
+            // this.vehicleService.changeStatus(this.vehicle, this.vehicle.registrationNo).subscribe(updatedData => {
+            //   console.log(updatedData);
+            // });
 
           }
         }

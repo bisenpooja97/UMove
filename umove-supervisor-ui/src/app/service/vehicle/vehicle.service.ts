@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-
+import { HTTP } from '@ionic-native/http/ngx';
 @Injectable({
   providedIn: 'root'
 })
@@ -12,15 +12,15 @@ export class VehicleService {
   zones = '/zones';
   vehicles = '/vehicles';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HTTP) { }
 
-  getVehiclesByZone(supervisorId: string): Observable<any> {
+  getVehiclesByZone(supervisorId: string) {
     console.log(this.baseUrl + this.vehicles);
-    return this.http.get(this.baseUrl + this.vehicles);
+    return this.http.get(this.baseUrl + this.vehicles,{},{});
   }
 
-  changeStatus(vehicle: {}, registrationNo: string): Observable<any> {
-    return this.http.patch(this.baseUrl + this.vehicles + '/' + registrationNo, vehicle);
+  changeStatus(vehicle: {}, registrationNo: string) {
+    return this.http.patch(this.baseUrl + this.vehicles + '/' + registrationNo, vehicle,{});
   }
 
 }

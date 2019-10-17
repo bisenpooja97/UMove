@@ -9,16 +9,18 @@ import {VehicleListPage} from './vehicle-list/vehicle-list.page';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import {VehicleComponent} from './vehicle/vehicle.component';
-import {HttpClient, HttpClientModule, HttpEventType} from '@angular/common/http';
+import { HTTP } from '@ionic-native/http/ngx';
+import {VehicleListPageModule} from "./vehicle-list/vehicle-list.module";
 
 @NgModule({
-  declarations: [AppComponent, VehicleComponent, VehicleListPage],
+  declarations: [AppComponent,],
   entryComponents: [],
-  imports: [BrowserModule, HttpClientModule, IonicModule.forRoot(), AppRoutingModule],
+  imports: [BrowserModule, VehicleListPageModule, IonicModule.forRoot(), AppRoutingModule],
   providers: [
     StatusBar,
     SplashScreen,
     Dialogs,
+      HTTP,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

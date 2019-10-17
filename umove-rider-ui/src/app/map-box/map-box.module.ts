@@ -6,7 +6,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { MapBoxPage } from './map-box.page';
-import {AutoCompleteModule} from 'ionic4-auto-complete';
 
 const routes: Routes = [
   {
@@ -20,8 +19,7 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes),
-    AutoCompleteModule
+    RouterModule.forChild(routes)
   ],
   declarations: []
 })
