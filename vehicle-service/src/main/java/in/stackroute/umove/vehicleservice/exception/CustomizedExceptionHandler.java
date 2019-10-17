@@ -41,6 +41,11 @@ public class CustomizedExceptionHandler extends ResponseEntityExceptionHandler {
         ExceptionModel exceptionalModel=new ExceptionModel(new Date(),ex.getMessage(),request.getDescription(false));
         return new ResponseEntity(exceptionalModel, HttpStatus.OK);
     }
+    @ExceptionHandler(FuelNameAlreadyExistException.class)
+    public final ResponseEntity<Object>handleFuelNameAlreadyExistException(FuelNameAlreadyExistException ex,WebRequest request){
+        ExceptionModel exceptionalModel=new ExceptionModel(new Date(),ex.getMessage(),request.getDescription(false));
+        return new ResponseEntity(exceptionalModel, HttpStatus.OK);
+    }
 
 }
 
