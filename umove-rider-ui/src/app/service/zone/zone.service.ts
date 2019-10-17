@@ -30,6 +30,14 @@ export class ZoneService implements AutoCompleteService, OnInit {
           this.presentToast(error);
         });
   }
+    public  getNearbyZone(lat: number, lon: number) {
+         console.log('zones api'+ this.baseUrl + this.nearby +'?lon='+lon+'&lat='+lat);
+        return this.http.get(this.baseUrl + this.nearby +'?lon='+lon+'&lat='+lat, {}, {})
+            .catch(error => {
+                console.log(error);
+                this.presentToast(error);
+            });
+    }
 
   ngOnInit(): void {
     // this.zoneList = [{
@@ -116,8 +124,7 @@ export class ZoneService implements AutoCompleteService, OnInit {
 
   getCoordinatesByLocality(locality: string) {
       console.log('locality:', locality);
-    return this.http.get('https://api.tomtom.com/search/2/structuredGeocode.json?countryCode=IND&' +
-        locality + '&key=Q0lrXtgq4yAgXdZuyf7RBbItuzVuRxUj', {}, {})
+    return this.http.get('http://172.23.234.112:8093/api/v1/zones/loc/'+locality, {}, {})
         .catch(error => {
           console.log('Error', error);
           this.presentToast(error); });
@@ -132,61 +139,6 @@ export class ZoneService implements AutoCompleteService, OnInit {
               this.zoneList = this.data.data;
           });
       console.log('zonelist', this.zoneList);
-      // this.zoneList = [{
-      //     'id': '1',
-      //     'name': 'Zone-1',
-      //     'lat': 12.93736,
-      //     'lon': 77.61134,
-      //     'city': 'Bengaluru Urban',
-      //     'state': 'Karnataka',
-      //     'country': 'India',
-      //     'pincode': 560045,
-      //     'locality': 'Block 7 Koramangala',
-      //     'capacity': 50,
-      //     'createdAt': new Date(),
-      //     'supervisorId': null,
-      //     'supervisorName': null,
-      //     'supervisorNumber': null,
-      //     'supervisorEmail': null,
-      //     'status': 'INACTIVE'
-      // },
-      //     {
-      //         'id': '2',
-      //         'name': 'Zone-2',
-      //         'lat': 12.9416,
-      //         'lon': 77.61718,
-      //         'city': 'Bengaluru Urban',
-      //         'state': 'Karnataka',
-      //         'country': 'India',
-      //         'pincode': 560045,
-      //         'locality': 'Block 8 Koramangala',
-      //         'capacity': 50,
-      //         'createdAt': new Date(),
-      //         'supervisorId': null,
-      //         'supervisorName': null,
-      //         'supervisorNumber': null,
-      //         'supervisorEmail': null,
-      //         'status': 'ACTIVE'
-      //     },
-      //     {
-      //         'id': '2',
-      //         'name': 'Zone-2',
-      //         'lat': 12.9416,
-      //         'lon': 77.61718,
-      //         'city': 'Bengaluru Urban',
-      //         'state': 'Karnataka',
-      //         'country': 'India',
-      //         'pincode': 560045,
-      //         'locality': 'Block 8 Koramangala',
-      //         'capacity': 50,
-      //         'createdAt': new Date(),
-      //         'supervisorId': null,
-      //         'supervisorName': null,
-      //         'supervisorNumber': null,
-      //         'supervisorEmail': null,
-      //         'status': 'ACTIVE'
-      //     }
-      // ];
     return this.zoneList.filter(
             (item) => {
               return item.locality.toLowerCase().startsWith(
@@ -196,6 +148,5 @@ export class ZoneService implements AutoCompleteService, OnInit {
           )
             .map(item => item.locality)
             .filter((value, index, self) => self.indexOf(value) === index);
-
   }
 }

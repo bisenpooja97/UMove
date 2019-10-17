@@ -18,7 +18,7 @@ export class MapBoxPage implements OnInit {
   options: LaunchNavigatorOptions = {
     start: 'London, ON',
   };
-  private response = null;
+
   constructor(private zoneService: ZoneService,
               private route: ActivatedRoute,
               private router: Router,
@@ -36,7 +36,9 @@ export class MapBoxPage implements OnInit {
       }
     });
   }
-
+  private response = null;
+  private response1 = null;
+  private locationData: any;
   coordinates: {};
   data = null;
   markerss: any;
@@ -66,11 +68,6 @@ export class MapBoxPage implements OnInit {
     console.log('page', this.page);
   }
 
-  private initializeMap() {
-
-
-  }
-
 
   // For building Map
   buildMap() {
@@ -94,27 +91,9 @@ export class MapBoxPage implements OnInit {
         trackUserLocation: true
       }));
 
-      // console.log('I am in popup');
-      this.map.on('click', 'places' + this.layoutCount, (e) => {
-        const coordinates = e.features[0].geometry.coordinates.slice();
-        const description = e.features[0].properties.description;
-        this.isSelected = true;
-
-        this.selectedzone = JSON.parse(e.features[0].properties.data);
-        console.log('selected zone:', this.selectedzone);
-        console.log(this.trip);
-
-        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-          coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-        }
-        new mapboxgl.Popup()
-            .setLngLat(coordinates)
-            .setHTML(description)
-            .addTo(this.map);
-      });
-
       // When a click event occurs on a feature in the places layer, open a popup at the
       // location of the feature, with description HTML from its properties.
+      this.clickPopUp();
 
 
       // Change the cursor to a pointer when the mouse is over the places layer
@@ -130,41 +109,32 @@ export class MapBoxPage implements OnInit {
 
   }
 
-  // clickPopUp(){
-  //   console.log('I am in popup');
-  //   this.map.on('click', 'places' + this.layoutCount, (e) => {
-  //     const coordinates = e.features[0].geometry.coordinates.slice();
-  //     const description = e.features[0].properties.description;
-  //     this.isSelected = true;
-  //
-  //     this.selectedzone = JSON.parse(e.features[0].properties.data);
-  //     console.log('selected zone:', this.selectedzone);
-  //     console.log(this.trip);
-  //
-  //     while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-  //       coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-  //     }
-  //     new mapboxgl.Popup()
-  //         .setLngLat(coordinates)
-  //         .setHTML(description)
-  //         .addTo(this.map);
-  //   });
-  // }
+  clickPopUp(){
 
-  navigate() {
-    console.log('hello');
-    this.launchNavigator.navigate([50.279306, -5.163158], this.options)
-        .then(
-            success => console.log('Launched navigator'),
-            error => console.log('Error launching navigator', error)
-        );
+    this.map.on('click', 'places' + this.layoutCount, (e) => {
+      const coordinates = e.features[0].geometry.coordinates.slice();
+      const description = e.features[0].properties.description;
+      this.isSelected = true;
+
+      this.selectedzone = JSON.parse(e.features[0].properties.data);
+      console.log('selected zone:', this.selectedzone);
+      console.log(this.trip);
+
+      while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+        coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+      }
+      new mapboxgl.Popup()
+          .setLngLat(coordinates)
+          .setHTML(description)
+          .addTo(this.map);
+    });
   }
+
   // For showing marker on Map
   marker(lat, lng) {
     this.map.on('mouseenter', 'places', () => {
       this.map.getCanvas().style.cursor = 'pointer';
     });
-    console.log('I am marker', lng, lat);
 
     this.markers
       .setLngLat([lng, lat])
@@ -202,7 +172,6 @@ export class MapBoxPage implements OnInit {
       }
     };
     this.coordinates = this.zoneService.getCoordinatesByLocality(this.locality);
-    console.log('coordinates', this.coordinates);
     this.router.navigate(['bikelist'], navigationExtras);
   }
 
@@ -229,35 +198,21 @@ export class MapBoxPage implements OnInit {
   // For adding layer on map for showing zones
   private addLayer(lat: number, lng: number) {
     this.layoutCount++;
-    this.map.on('click', 'places' + this.layoutCount, (e) => {
-      const coordinates = e.features[0].geometry.coordinates.slice();
-      const description = e.features[0].properties.description;
-      this.isSelected = true;
-      console.log('Layer', 'places'+this.layoutCount);
-      this.selectedzone = JSON.parse(e.features[0].properties.data);
-      console.log('selected zone:', this.selectedzone);
-      console.log(this.trip);
+    this.clickPopUp();
 
-      while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-        coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-      }
-      new mapboxgl.Popup()
-          .setLngLat(coordinates)
-          .setHTML(description)
-          .addTo(this.map);
-    });
-
-
-    console.log('newcoordinates:', this.lat, this.lng);
-    this.zoneService.getNearbyZones(lat, lng).then(response => {
-       this.response = response;
-       this.data = JSON.parse(this.response.data);
+    // console.log('newcoordinates:', this.lat, this.lng);
+    // this.zoneService.getNearbyZones(lat, lng).then(response => {
+    //
+    // });
+    this.zoneService.getNearbyZone(lat, lng).then(response =>{
+      this.response = response;
+      this.data = JSON.parse(this.response.data);
+      console.log("Nearby Zones",this.data);
     });
     // tslint:disable-next-line:max-line-length
     this.map.loadImage('https://images.vexels.com/media/users/3/129788/isolated/preview/04c91b04215f603567324d459b761807-chopper-bike-front-icon-by-vexels.png', (error, image) => {
       if (error) { throw error; }
       this.map.addImage('cat', image);
-      console.log('data', this.data);
       // Add a layer showing the places.
       this.map.addLayer({
         id: 'places' + this.layoutCount,
@@ -280,8 +235,8 @@ export class MapBoxPage implements OnInit {
                 geometry: {
                   type: 'Point',
                   coordinates: [
-                    77.6192442,
-                    12.9344758,
+                    this.data.data[0].lon,
+                    this.data.data[0].lat,
                   ]
                 }
               },
@@ -297,8 +252,8 @@ export class MapBoxPage implements OnInit {
                 geometry: {
                   type: 'Point',
                   coordinates: [
-                    77.6180919,
-                    12.9320263
+                    this.data.data[1].lon,
+                    this.data.data[1].lat
                   ]
                 }
               },
@@ -314,8 +269,8 @@ export class MapBoxPage implements OnInit {
                 geometry: {
                   type: 'Point',
                   coordinates: [
-                    77.6171146,
-                    12.9340443
+                    this.data.data[2].lon,
+                    this.data.data[2].lat
                   ]
                 }
               }
@@ -335,20 +290,19 @@ export class MapBoxPage implements OnInit {
   gettingCoordinatesByLocality() {
     console.log('locality:', this.locality);
     this.zoneService.getCoordinatesByLocality(this.locality).then(
-      res => {
+      response => {
+        this.response1 = response;
+        this.locationData = JSON.parse(this.response1.data);
         // this.location = res;
-        // this.lat = this.location.results[0].position.lat;
-        // this.lng = this.location.results[0].position.lon;
-        console.log('Response:', res);
+          this.lat = this.locationData.data.results[0].position.lat;
+          this.lng = this.locationData.data.results[0].position.lon;
+          this.map.flyTo({
+            center: [this.lng, this.lat]
+          });
+          this.marker( this.lat, this.lng );
+          this.addNewLayer(this.lat, this.lng);
+
       }
     );
-    // this.markers.remove();
-    this.map.flyTo({
-      center: [this.lng, this.lat]
-    });
-    this.marker( this.lat, this.lng );
-    this.addNewLayer(this.lat, this.lng);
-
   }
-
 }
