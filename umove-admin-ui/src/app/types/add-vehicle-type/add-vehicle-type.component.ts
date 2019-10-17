@@ -39,7 +39,7 @@ export class AddVehicleTypeComponent implements OnInit {
   baseUrl = environment.baseUrl + environment.typeBaseApi;
 
 
-  constructor(public dialogRef: MatDialogRef<AddVehicleTypeComponent>,private fb: FormBuilder, private route: ActivatedRoute,
+  constructor(public dialogRef: MatDialogRef<AddVehicleTypeComponent>, private fb: FormBuilder, private route: ActivatedRoute,
               private router: Router, private typeService: VehicleTypeService,  private http: HttpClient, private snackBar: MatSnackBar
              ) { }
 
@@ -75,8 +75,8 @@ export class AddVehicleTypeComponent implements OnInit {
      const uploadData = new FormData();
      uploadData.append('file', this.selectedFile, this.selectedFile.name);
     //  this.http; is; the; injected; HttpClient;
-     this.http.post(this.baseUrl +'/uploadFile?id=12', uploadData)
-        .subscribe(event => {
+     this.http.post(this.baseUrl + '/uploadFile?id=12', uploadData)
+       .subscribe(event => {
            console.log('response', event); // handle event here
         });
   }
@@ -93,7 +93,7 @@ export class AddVehicleTypeComponent implements OnInit {
     this.onUpload();
     console.log(this.typeForm.value);
     console.log(this.typeForm.value, 'child');
-     this.dialogRef.close(this.typeForm.value);
+    this.dialogRef.close(this.typeForm.value);
 
 
       // onSubmit() {
