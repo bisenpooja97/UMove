@@ -67,6 +67,11 @@
 /******/ 		return __webpack_require__.p + "" + ({"authentication-authentication-module":"authentication-authentication-module"}[chunkId]||chunkId) + "-es2015.js"
 /******/ 	}
 /******/
+/******/ 	// script path function
+/******/ 	function jsonpScriptSrc(chunkId) {
+/******/ 		return __webpack_require__.p + "" + ({"authentication-authentication-module":"authentication-authentication-module","common":"common","documents-documents-module":"documents-documents-module","users-users-module":"users-users-module"}[chunkId]||chunkId) + "-es2015.js"
+/******/ 	}
+/******/
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
 /******/
