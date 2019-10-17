@@ -6,8 +6,6 @@ import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
 import * as mapboxgl from 'mapbox-gl';
 import { GeoJson, FeatureCollection } from '../map';
 import { environment } from '../../environments/environment';
-import {HTTPResponse} from '@ionic-native/http';
-// import {BookingService} from '../services/booking/booking.service';
 import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-navigator/ngx';
 @Component({
   selector: 'app-map-box',
@@ -22,7 +20,6 @@ export class MapBoxPage implements OnInit {
   constructor(private zoneService: ZoneService,
               private route: ActivatedRoute,
               private router: Router,
-              private launchNavigator: LaunchNavigator,
               private geolocation: Geolocation
               // private bookingService: BookingService
   ) {
@@ -225,7 +222,7 @@ export class MapBoxPage implements OnInit {
               {
                 type: 'Feature',
                 properties: {
-                  description: '<a href="http://maps.google.com/maps?saddr=' + this.lat + ',' + this.lng + '' +
+                  description: '<a href="http://maps.google.com/maps?saddr=' + lat + ',' + lng + '' +
                       '&daddr=' + this.data.data[0].lat + ',' + this.data.data[0].lon + '">' +
                       '<button>Get Directions</button></a> ',
                   icon: 'cat',
@@ -243,7 +240,7 @@ export class MapBoxPage implements OnInit {
               {
                 type: 'Feature',
                 properties: {
-                  description: '<a href="http://maps.google.com/maps?saddr=' + this.lat + ',' + this.lng +
+                  description: '<a href="http://maps.google.com/maps?saddr=' + lat + ',' + lng +
                       '&daddr=' + this.data.data[1].lat + ',' + this.data.data[1].lon + '">' +
                       '<button>Get Directions</button></a>',
                   icon: 'bicycle',
@@ -260,7 +257,7 @@ export class MapBoxPage implements OnInit {
               {
                 type: 'Feature',
                 properties: {
-                  description: '<a href="http://maps.google.com/maps?saddr=' + this.lat + ',' + this.lng +
+                  description: '<a href="http://maps.google.com/maps?saddr=' + lat + ',' + lng +
                       '&daddr=' + this.data.data[2].lat + ',' + this.data.data[2].lon + '">' +
                       '<button>Get Directions</button></a>',
                   icon: 'bicycle',
