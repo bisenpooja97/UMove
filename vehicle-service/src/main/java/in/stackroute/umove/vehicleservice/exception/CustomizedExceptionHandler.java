@@ -47,5 +47,23 @@ public class CustomizedExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity(exceptionalModel, HttpStatus.OK);
     }
 
+    @ExceptionHandler(ChassisNoAlreadyExistException.class)
+    public final ResponseEntity<Object>handleChassisNoAlreadyExistException(ChassisNoAlreadyExistException ex,WebRequest request){
+        ExceptionModel exceptionalModel=new ExceptionModel(new Date(),ex.getMessage(),request.getDescription(false));
+        return new ResponseEntity(exceptionalModel, HttpStatus.OK);
+    }
+
+    @ExceptionHandler(InsuranceNoAlreadyExistException.class)
+    public final ResponseEntity<Object>handleInsuranceNoAlreadyExistException(InsuranceNoAlreadyExistException ex,WebRequest request){
+        ExceptionModel exceptionalModel=new ExceptionModel(new Date(),ex.getMessage(),request.getDescription(false));
+        return new ResponseEntity(exceptionalModel, HttpStatus.OK);
+    }
+
+    @ExceptionHandler(LastServiceDateWrongException.class)
+    public final ResponseEntity<Object>handleInsuranceNoAlreadyExistException(LastServiceDateWrongException ex,WebRequest request){
+        ExceptionModel exceptionalModel=new ExceptionModel(new Date(),ex.getMessage(),request.getDescription(false));
+        return new ResponseEntity(exceptionalModel, HttpStatus.OK);
+    }
+
 }
 

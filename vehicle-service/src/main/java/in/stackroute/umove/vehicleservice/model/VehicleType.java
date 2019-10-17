@@ -8,7 +8,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import javax.persistence.GeneratedValue;
 
 @Document
-
 @Data
 @Getter
 @Setter
@@ -21,8 +20,6 @@ public class VehicleType {
     private String name;
     private float costkm;
     private float costtime;
-
-    private Category category;
     private String vehiclecc;
     private float kilometer;
     private String url;

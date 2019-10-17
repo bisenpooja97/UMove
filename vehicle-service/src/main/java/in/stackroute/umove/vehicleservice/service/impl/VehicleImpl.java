@@ -1,5 +1,8 @@
 package in.stackroute.umove.vehicleservice.service.impl;
 
+import in.stackroute.umove.vehicleservice.exception.ChassisNoAlreadyExistException;
+import in.stackroute.umove.vehicleservice.exception.InsuranceNoAlreadyExistException;
+import in.stackroute.umove.vehicleservice.exception.LastServiceDateWrongException;
 import in.stackroute.umove.vehicleservice.exception.RegistrationNoAlreadyExistException;
 
 import in.stackroute.umove.vehicleservice.model.Vehicle;
@@ -9,6 +12,7 @@ import in.stackroute.umove.vehicleservice.service.ServiceVehicle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.xml.crypto.Data;
 import java.util.Date;
 import java.util.List;
 
@@ -20,10 +24,19 @@ public class VehicleImpl implements ServiceVehicle {
     //To add new vehicle
     @Override
     public Vehicle addVehicle(Vehicle vehicle) {
-        List<Vehicle> vehicleList=repo.findByRegistrationNo(vehicle.getRegistrationNo());
-        if(vehicleList.size()>0){
+        Vehicle vehicleList=repo.findByregistrationNo(vehicle.getRegistrationNo());
+        if(vehicleList != null){
             throw new RegistrationNoAlreadyExistException("Vehicle already exists");
         }
+        Vehicle vehicleList1=repo.findByChassisNumber(vehicle.getChassisNumber());
+        if(vehicleList1 != null){
+            throw new ChassisNoAlreadyExistException("Vehicle already exists");
+        }
+        Vehicle vehicleList2=repo.findByInsuranceNo(vehicle.getInsuranceNo());
+        if(vehicleList2 != null){
+            throw new InsuranceNoAlreadyExistException("Vehicle already exists");
+        }
+
 
         repo.save(vehicle);
         return vehicle;
@@ -48,12 +61,22 @@ public class VehicleImpl implements ServiceVehicle {
         Vehicle vehicleList = repo.findByregistrationNo(name);
         if(vehicleList != null){
             if(vehicle.getInsuranceNo() != null){
+                Vehicle vehicleList2=repo.findByInsuranceNo(vehicle.getInsuranceNo());
+                if(vehicleList2 != null){
+                    throw new InsuranceNoAlreadyExistException("Vehicle already exists");
+                }
                 vehicleList.setInsuranceNo(vehicle.getInsuranceNo());
             }
             if(vehicle.getStatus() != null){
                 vehicleList.setStatus(vehicle.getStatus());
             }
             if(vehicle.getLastServiceDate()!= null){
+                Date date1=vehicleList.getLastServiceDate();
+                Date date2= vehicleList.getVehiclePurchased();
+                if(date1.compareTo(date2)<0)
+                {
+                    throw new LastServiceDateWrongException("Vehicle already exists");
+                }
                 vehicleList.setLastServiceDate(vehicle.getLastServiceDate()  );
             }
             if(vehicle.getZoneid() != null){
