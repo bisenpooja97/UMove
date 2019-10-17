@@ -44,7 +44,7 @@ export class ConfirmRideDetailPage implements OnInit {
       registrationNo: 'RJ21SA1982',
       insurance_no: 'IND3938dfk',
       lastServiceDate: new Date(),
-      status: 'available',
+      status: 'Free',
       time: new Date(),
       type: { name: 'Bullet', costkm: 5, costtime: 0.2,
       // tslint:disable-next-line: max-line-length
@@ -110,8 +110,8 @@ export class ConfirmRideDetailPage implements OnInit {
   confirmBooking() {
     this.rideService.confirmBooking(this.booking).then(response => {
       console.log('response: ', response);
-      if (response && response.status === 201 && response.data.status === 'CREATED') {
-        this.router.navigateByUrl('booking-details');
+      if (response && response.status === 201 && response.data) {
+        this.router.navigateByUrl('ride-booking-details');
       } else if (!response) {
         this.rideService.presentToast('Error: Something Went Wrong, Try again.', 2000);
         this.router.navigateByUrl('home');
@@ -120,7 +120,7 @@ export class ConfirmRideDetailPage implements OnInit {
         this.router.navigateByUrl('home');
       }
     });
-  }
+  } 
 
   removeSelectedPaymentMethod() {
     this.booking.paymentMethod = undefined;

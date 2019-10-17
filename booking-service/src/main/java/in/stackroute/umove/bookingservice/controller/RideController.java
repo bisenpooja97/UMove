@@ -32,8 +32,9 @@ public class RideController {
     @Autowired
     private RideService rideService;
 
-    // End Point: api/v1/bookings Method: POST
-    // to confirm booking for a vehicle
+    // End Point: api/v1/rides Method: POST
+    // to confirm booking for a ride
+    //Create rides
     @PostMapping("rides")
     public ResponseEntity<Map> confirmBooking(@RequestBody() Ride ride) {
         Ride currentRide = rideService.getRideByUserIdNStatus(ride.getRider().get_id(), "Confirmed");
@@ -44,15 +45,19 @@ public class RideController {
         // if vehicle is allocated and outstanding amount is checked and there is no pending outstanding amount then set status as confirmed
         ride.setStatus("Confirmed");
         ride.setBookedAt(LocalDateTime.now());
-        Ride rideDetails = rideService.confirmBooking(ride);
+        Ride rideDetails = rideService.confirmRide(ride);
         Map<String, Object> map = new TreeMap<>();
         map.put("data", rideDetails);
         map.put("status", HttpStatus.CREATED);
         return new ResponseEntity<>(map, HttpStatus.CREATED);
     }
 
-    // End Point: api/v1/bookings Method: GET
-    // to get all the bookings list
+
+    // End Point: api/v1/rides Method: GET
+    // to get all the rides list
+    // End Point: api/v1/rides?userId Method: GET
+    // to get all the rides list for a particular user
+    // Retrieve
     @GetMapping("rides")
     public ResponseEntity<Map> getRides(@RequestParam(value = "userId", required = false) String userId, @RequestParam(value = "rideStatus", required = false) String rideStatus) {
         if(userId!= null && rideStatus!= null) {
@@ -62,6 +67,15 @@ public class RideController {
             map.put("status", HttpStatus.OK);
             return new ResponseEntity<>(map, HttpStatus.OK);
         }
+        else if(userId!= null && !userId.isEmpty())
+        {
+            List<Ride> rides = rideService.getRidesByUserId(userId);
+            Map<String, Object> map = new TreeMap<>();
+            map.put("data", rides);
+            map.put("count", rides.size());
+            map.put("status", HttpStatus.OK);
+            return new ResponseEntity<Map>(map, HttpStatus.OK);
+        }
         List<Ride> rides = rideService.getAllRides();
         Map<String, Object> map = new TreeMap<>();
         map.put("data", rides);
@@ -69,9 +83,8 @@ public class RideController {
         map.put("status", HttpStatus.OK);
         return new ResponseEntity<Map>(map, HttpStatus.OK);
     }
-
-    // End Point: api/v1/bookings/{id} Method: GET
-    // to get a specific booking details
+    // End Point: api/v1/rides/{ridesId} Method: GET
+    // to get a specific rides details by ridesId
     @GetMapping("rides/{rideId}")
     public ResponseEntity<Map> getRideById(@PathVariable("rideId") ObjectId id) {
         if(id == null) {
@@ -154,5 +167,7 @@ public class RideController {
         map.put("status", HttpStatus.OK);
         return new ResponseEntity<Map>(map, HttpStatus.OK);
     }
+
+
 
 }

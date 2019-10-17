@@ -18,10 +18,10 @@ public class RideServiceImp implements RideService {
     private RideRepo rideRepo;
 
     @Override
-    public Ride confirmBooking(Ride ride) {
+    public Ride confirmRide(Ride ride) {
         PaymentDetail paymentDetail = new PaymentDetail();
         paymentDetail.setExtraCharges(new ArrayList<>());
-        ride.setPayment(paymentDetail);
+        ride.setPaymentDetail(paymentDetail);
         rideRepo.save(ride);
         return ride;
     }
@@ -40,7 +40,7 @@ public class RideServiceImp implements RideService {
     @Override
     public Ride addExtraCharges(ObjectId rideId, List<ExtraCharge> extraCharges) {
         Ride ride = rideRepo.findBy_id(rideId);
-        ride.getPayment().setExtraCharges(extraCharges);
+        ride.getPaymentDetail().setExtraCharges(extraCharges);
         rideRepo.save(ride);
         return ride;
     }
@@ -50,6 +50,10 @@ public class RideServiceImp implements RideService {
     public Ride getRideByUserIdNStatus(String userId, String rideStatus){
         Ride ride = rideRepo.findByUserIdNStatus(userId, rideStatus);
         return ride;
+    }
+    @Override
+    public List<Ride> getRidesByUserId(String userId) {
+        return rideRepo.findRidesByUserId(userId);
     }
 
     @Override

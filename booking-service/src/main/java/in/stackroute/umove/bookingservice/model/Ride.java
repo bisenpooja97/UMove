@@ -1,6 +1,7 @@
 package in.stackroute.umove.bookingservice.model;
 
 import in.stackroute.umove.bookingservice.model.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -19,12 +20,12 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @ToString
-public class Ride {
-
+public class Ride
+{
     @Id
     private ObjectId _id;
     private String status;
-    private User rider;
+    private Rider rider;
     private Zone sourceZone;
     private List<Zone> destinationZones;
     private Vehicle vehicle;
@@ -34,7 +35,10 @@ public class Ride {
     private LocalDateTime rideEndAt;
     private Double distance;
     private int duration;
-    private PaymentDetail payment;
+    private PaymentDetail paymentDetail;
+    private PromoCode promoCode;
+
+
 
     // ObjectId needs to be converted to string
     public String get_id() { return _id.toHexString(); }

@@ -29,6 +29,7 @@
     "@mobiscroll/angular": "https://npm.mobiscroll.com/@mobiscroll/angular-trial/-/angular-trial-4.8.3.tgz",
     "@stomp/stompjs": "^5.4.2",
     "cordova-android": "^8.1.0",
+    "cordova-browser": "6.0.0",
     "cordova-plugin-advanced-http": "^2.2.0",
     "cordova-plugin-file": "^6.0.2",
     "core-js": "^2.5.4",
@@ -90,7 +91,8 @@
       "cordova-plugin-ionic-keyboard": {}
     },
     "platforms": [
-      "android"
+      "android",
+      "browser"
     ]
   }
 }

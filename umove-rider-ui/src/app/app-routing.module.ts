@@ -18,7 +18,9 @@ const routes: Routes = [
   { path: 'ride-details', loadChildren: './ride-details/ride-details.module#RideDetailsPageModule' },
   { path: 'dummy-destination-zone', loadChildren: './dummy-destination-zone/dummy-destination-zone.module#DummyDestinationZonePageModule' },
   { path: 'qrcode-generator', loadChildren: './qrcode-generator/qrcode-generator.module#QrcodeGeneratorPageModule' },
-  { path: 'qrcode-scanner', loadChildren: './qrcode-scanner/qrcode-scanner.module#QrcodeScannerPageModule' }
+  { path: 'qrcode-scanner', loadChildren: './qrcode-scanner/qrcode-scanner.module#QrcodeScannerPageModule' },
+  { path: 'my-rides', loadChildren: './my-rides/my-rides.module#MyRidesPageModule' },
+  { path: 'my-rides-details/:rideId', loadChildren: './my-rides-details/my-rides-details.module#MyRidesDetailsPageModule' }
 ];
 
 @NgModule({

@@ -10,7 +10,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 public class RideServiceApplicationTests {
 
-	@Test
+		@Test
 	public void contextLoads() {
         Assert.assertEquals(true, true);
 	}
