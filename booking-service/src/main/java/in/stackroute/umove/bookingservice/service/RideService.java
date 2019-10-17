@@ -1,17 +1,18 @@
 package in.stackroute.umove.bookingservice.service;
 
-import in.stackroute.umove.bookingservice.model.ExtraCharge;
-import in.stackroute.umove.bookingservice.model.Payment;
-import in.stackroute.umove.bookingservice.model.PaymentDetail;
-import in.stackroute.umove.bookingservice.model.Ride;
+import in.stackroute.umove.bookingservice.model.*;
 import in.stackroute.umove.bookingservice.repo.PaymentRepo;
 import in.stackroute.umove.bookingservice.repo.RideRepo;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.mail.MessagingException;
+import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class RideService implements RideServiceImp {
@@ -20,6 +21,10 @@ public class RideService implements RideServiceImp {
     private RideRepo rideRepo;
     @Autowired
     private PaymentRepo paymentRepo;
+    @Autowired
+    private EmailService emailService;
+
+
 
 
     @Override
@@ -38,6 +43,7 @@ public class RideService implements RideServiceImp {
         Ride ride = rideRepo.findBy_id(id);
         double totalExtraCharges = calculateTotalExtraCharges(ride);
         int totalAmount = calculateRideAmount(ride);
+        totalAmount = (int)(totalAmount - totalExtraCharges);
         ride.getPaymentDetail().setTotalExtraCharges(totalExtraCharges);
         ride.getPaymentDetail().setTotalAmount((double) totalAmount);
         rideRepo.save(ride);
@@ -63,7 +69,7 @@ public class RideService implements RideServiceImp {
     }
 
     @Override
-    public Payment payForBooking(ObjectId rideId, String paymentId) {
+    public Payment payForBooking(ObjectId rideId, String paymentId) throws IOException, MessagingException {
         Ride ride = rideRepo.findBy_id(rideId);
         String rider = ride.getRider().getName();
         Long mobile = ride.getRider().getMobile();
@@ -101,8 +107,34 @@ public class RideService implements RideServiceImp {
         payment.setDeducted_at(deducted_at);
         payment.setStatus("Paid");
         paymentRepo.save(payment);
+        sendEmail(ride); 
         return payment;
     }
+
+    private void sendEmail(Ride ride) throws IOException, MessagingException {
+        Mail mail = new Mail();
+        mail.setFrom("umove742@gmail.com");
+        mail.setTo(ride.getRider().getEmail());
+        mail.setSubject("Ride Recipt");
+
+        Map<String, Object> model = new HashMap<>();
+        model.put("name", ride.getRider().getName());
+        model.put("distance", ride.getDistance());
+        model.put("time", ride.getDuration());
+        model.put("rideAmount", ride.getPaymentDetail().getRideAmount());
+        model.put("totalExtraCharges", ride.getPaymentDetail().getTotalExtraCharges());
+        model.put("discountFor", ride.getPromoCode().getName());
+        model.put("discountPercent", ride.getPromoCode().getDiscountPercent());
+        model.put("totalAmount", ride.getPaymentDetail().getTotalAmount());
+        model.put("location", "Bangalore");
+        model.put("signature", "UMOVE");
+
+        mail.setModel(model);
+
+        emailService.sendSimpleMessage(mail);
+
+    }
+
 
     @Override
     public Payment getPaymentDetails(String rideId) {
