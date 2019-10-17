@@ -1,0 +1,68 @@
+.controles-container{
+    width: 100%;
+    padding: 5%;    
+}
+
+.fill-remaining-space {
+    /* This fills the remaining space, by using flexbox. 
+       Every toolbar row uses a flexbox row layout. */
+    flex: 1 1 auto;
+  }
+
+.controles-container > * {
+    width: 100%;
+    }
+
+ 
+    .btn-dialog-close{
+        width: 45px;
+        min-width: 0px !important;
+        height: 40px;
+        padding: 0px !important;
+      }
+
+mat-toolbar {
+    background-color: white;
+}
+
+.button {
+    padding-bottom: 21.5px;
+}
+
+.btn {
+    width: 16em; height: 60px;
+   }
+
+.location {
+  width: 16em; height: 60px;
+}
+
+
+@media only screen and (max-width: 600px) {
+  .location {
+    width: 8em;
+  }
+}
+   .col {
+    width: 50%;
+  }
+
+  snack-bar-container.success {
+    background-color: #5cb85c;
+    color : #fff;
+  }
+
+  snack-bar-container.warn {
+    background-color: #f99157;
+    color : #fff;
+  }
+
+
+  snack-bar-container.notification simple-snack-bar{
+    font-size: 18px !important;
+    font-weight: bold;
+  }
+
+ 
+
+  

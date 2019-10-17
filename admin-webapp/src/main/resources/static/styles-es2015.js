@@ -557,6 +557,8 @@ if(false) {}
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
+module.exports = __webpack_require__(/*! /home/shivam/umove/umove-admin-ui/src/styles.css */"./src/styles.css");
+module.exports = __webpack_require__(/*! /home/punit/umove/umove-admin-ui/src/styles.css */"./src/styles.css");
 module.exports = __webpack_require__(/*! /home/ruchi/umove/umove-admin-ui/src/styles.css */"./src/styles.css");
 
 
