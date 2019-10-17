@@ -14,3 +14,7 @@
 .typeName {
     padding-top: 10%;
 }
+.status {
+    font-weight: bold;
+    font-size: 1em;
+}
