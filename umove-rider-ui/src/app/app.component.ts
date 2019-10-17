@@ -20,6 +20,18 @@ export class AppComponent {
       title: 'List',
       url: '/list',
       icon: 'list'
+    },
+    {
+      title: 'View-profile',
+      url: '/view-profile',
+    },
+    {
+      title: 'Edit-profile',
+      url: '/edit-profile',
+    },
+    {
+      title: 'Update-KYC',
+      url: '/update-kyc',
     }
   ];
 
