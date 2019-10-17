@@ -6,7 +6,16 @@ export const environment = {
   production: false,
   baseUrl: 'http://172.23.234.74:8080/',
   userService: 'userservice',
-  usersBaseApi: '/api/v1/users'
+  usersBaseApi: '/api/v1/users',
+  firebase: {
+    apiKey: 'AIzaSyBZBoZCkX7W3dNNU6kQvSKfcMvZcerJSno',
+    authDomain: 'smsproject-2.firebaseapp.com',
+    databaseURL: 'https://smsproject-2.firebaseio.com',
+    projectId: 'smsproject-2',
+    storageBucket: '',
+    messagingSenderId: '533980807336',
+    appId: '1:533980807336:web:fbbbae25711ae4e252829d'
+  },
 };
 
 /*
