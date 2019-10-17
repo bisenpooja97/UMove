@@ -58,7 +58,7 @@ public class UserController
 
 
 @PatchMapping(path = "/users/{id}",consumes = {"application/json"})
-public ResponseEntity updateUser(@PathVariable ObjectId id, @RequestBody UserData user){
+public ResponseEntity updateUser(@PathVariable String id, @RequestBody UserData user){
     UserData data = userService.updateUser(id,user);
     Map<String, Object> map = new TreeMap<>();
     map.put("data", data);
@@ -67,7 +67,7 @@ public ResponseEntity updateUser(@PathVariable ObjectId id, @RequestBody UserDat
 }
 
 @GetMapping(path = "users/{userId}/document")
-public ResponseEntity<Map> getkycDetails(@PathVariable(value = "userId") ObjectId id)
+public ResponseEntity<Map> getkycDetails(@PathVariable(value = "userId") String id)
 {
     DocumentVerification documents =  userService.getById(id).getDocument();
     Map<String, Object> map = new TreeMap<>();
@@ -77,7 +77,7 @@ public ResponseEntity<Map> getkycDetails(@PathVariable(value = "userId") ObjectI
 }
 
 @GetMapping("/users/{id}")
-public ResponseEntity<Map> getUsersById(@PathVariable ObjectId id)
+public ResponseEntity<Map> getUsersById(@PathVariable String id)
 {
     UserData data = userService.getById(id);
     Map<String, Object> map = new TreeMap<>();
@@ -147,7 +147,7 @@ public ResponseEntity<Map> getUsersById(@PathVariable ObjectId id)
 
 
     @GetMapping("users/{userId}/payments")
-    public ResponseEntity<?> getPayments(@PathVariable("userId") ObjectId objid) {
+    public ResponseEntity<?> getPayments(@PathVariable("userId") String objid) {
         System.out.println(this.getClass().getSimpleName() + " - Get all payment service is invoked.");
         Map<String,Object> map = new TreeMap<>();
         map.put("data",paymentServiceInterface.getPayments(objid));
@@ -156,7 +156,7 @@ public ResponseEntity<Map> getUsersById(@PathVariable ObjectId id)
     }
 
     @PostMapping("users/{userId}/payments")
-    public ResponseEntity<?> addNewPaymentMethod(@PathVariable("userId") ObjectId objid,@RequestBody UserPaymentMethod userPaymentMethod) {
+    public ResponseEntity<?> addNewPaymentMethod(@PathVariable("userId") String objid,@RequestBody UserPaymentMethod userPaymentMethod) {
         System.out.println(userPaymentMethod.getPaymentProvider());
         int pId = userService.getById(objid).getPaymentMethod().size()+1;
         userPaymentMethod.setPId(pId);
@@ -168,7 +168,7 @@ public ResponseEntity<Map> getUsersById(@PathVariable ObjectId id)
     }
 
     @PatchMapping("users/{userId}/payments/{paymentId}")
-    public ResponseEntity<?> updatePaymentMethodById(@PathVariable("userId") ObjectId objid, @PathVariable("paymentId") int pid,@RequestBody UserPaymentMethod userPaymentMethod){
+    public ResponseEntity<?> updatePaymentMethodById(@PathVariable("userId") String objid, @PathVariable("paymentId") int pid,@RequestBody UserPaymentMethod userPaymentMethod){
         System.out.println(this.getClass().getSimpleName() + "- Update Method is invoked");
         Map<String,Object> map = new TreeMap<>();
         map.put("data",paymentServiceInterface.updatePaymentMethodById(objid,pid,userPaymentMethod));
@@ -177,7 +177,7 @@ public ResponseEntity<Map> getUsersById(@PathVariable ObjectId id)
     }
 
     @RequestMapping(value = "users/{userId}/payments/{paymentsId}", method= RequestMethod.DELETE)
-    public ResponseEntity<?> deletePaymentMethodById(@PathVariable("userId") ObjectId objid, @PathVariable("paymentsId") int pid) throws Exception {
+    public ResponseEntity<?> deletePaymentMethodById(@PathVariable("userId") String objid, @PathVariable("paymentsId") int pid) throws Exception {
         System.out.println(this.getClass().getSimpleName() + " - Delete Payment Method by id is invoked.");
         Map<String,Object> map = new TreeMap<>();
         paymentServiceInterface.deletePaymentMethodById(objid, pid);
@@ -186,7 +186,7 @@ public ResponseEntity<Map> getUsersById(@PathVariable ObjectId id)
     }
 
     @GetMapping(path = "users/{userId}/payments/{paymentId}")
-    public ResponseEntity<?> getPaymentMethodById(@PathVariable("userId") ObjectId objid, @PathVariable("paymentId") int pid) {
+    public ResponseEntity<?> getPaymentMethodById(@PathVariable("userId") String objid, @PathVariable("paymentId") int pid) {
         System.out.println(this.getClass().getSimpleName() + " - Get Payment details by id is invoked.");
         Map<String,Object> map = new TreeMap<>();
         map.put("data",paymentServiceInterface.getPaymentMethodById(objid,pid));

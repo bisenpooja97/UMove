@@ -79,8 +79,8 @@ public class UserImplService implements UserService {
      */
 
     @Override
-    public UserData getById(ObjectId objid) {
-        return userRepository.getUserBy_id(objid);
+    public UserData getById(String objid) {
+        return userRepository.getUserByid(objid);
     }
 
 
@@ -89,8 +89,8 @@ public class UserImplService implements UserService {
      */
 
     @Override
-    public UserData updateUser(ObjectId objid, UserData user) {
-        final UserData updatedUser = userRepository.findBy_id(objid);
+    public UserData updateUser(String objid, UserData user) {
+        final UserData updatedUser = userRepository.findByid(objid);
         if (updatedUser != null) {
             if (user.getName() != null) {
                 updatedUser.setName(user.getName());

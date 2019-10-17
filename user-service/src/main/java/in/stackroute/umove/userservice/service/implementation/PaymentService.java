@@ -19,8 +19,8 @@ public class PaymentService implements PaymentServiceInterface {
     API FOR GETTING ALL THE PAYMENT OF PARTICULAR USER
      */
     @Override
-    public List<UserPaymentMethod> getPayments(ObjectId objid) {
-        UserData userData = userRepository.getUserBy_id(objid);
+    public List<UserPaymentMethod> getPayments(String objid) {
+        UserData userData = userRepository.getUserByid(objid);
         List<UserPaymentMethod> savedUserPayment = userData.getPaymentMethod();
         return savedUserPayment;
     }
@@ -29,8 +29,8 @@ public class PaymentService implements PaymentServiceInterface {
     API FOR ADDING PAYMENT METHOD
      */
     @Override
-    public List<UserPaymentMethod> addNewPaymentMethod(ObjectId objid, UserPaymentMethod userPaymentMethod) {
-        UserData userData = userRepository.getUserBy_id(objid);
+    public List<UserPaymentMethod> addNewPaymentMethod(String objid, UserPaymentMethod userPaymentMethod) {
+        UserData userData = userRepository.getUserByid(objid);
         List<UserPaymentMethod> savedUserPayment = userData.getPaymentMethod();
         savedUserPayment.add(userPaymentMethod);
         userData.setPaymentMethod(savedUserPayment);
@@ -41,8 +41,8 @@ public class PaymentService implements PaymentServiceInterface {
     API FOR GETTING PAYMENT BY ID
      */
 
-    public UserPaymentMethod getPaymentMethodById(ObjectId objid, int pid) {
-        List<UserPaymentMethod> userPaymentMethodList = userRepository.getUserBy_id(objid).getPaymentMethod();
+    public UserPaymentMethod getPaymentMethodById(String objid, int pid) {
+        List<UserPaymentMethod> userPaymentMethodList = userRepository.getUserByid(objid).getPaymentMethod();
         for (UserPaymentMethod method : userPaymentMethodList) {
             if (method.getPId() == pid) {
                 System.out.println(method);
@@ -55,8 +55,8 @@ public class PaymentService implements PaymentServiceInterface {
     /*
     API FOR UPDATE PAYMENT METHOD
      */
-    public UserPaymentMethod updatePaymentMethodById(ObjectId objid, int pid, UserPaymentMethod userPaymentMethod) {
-        UserData userData = userRepository.getUserBy_id(objid);
+    public UserPaymentMethod updatePaymentMethodById(String objid, int pid, UserPaymentMethod userPaymentMethod) {
+        UserData userData = userRepository.getUserByid(objid);
         List<UserPaymentMethod> userPaymentMethodList = userData.getPaymentMethod();
         UserPaymentMethod m = null;
         for (UserPaymentMethod method : userPaymentMethodList) {
@@ -82,8 +82,8 @@ public class PaymentService implements PaymentServiceInterface {
 
     API for DELETE THE PAYMENT METHOD
      */
-    public void deletePaymentMethodById(ObjectId objid, int pid ) {
-        UserData userData = userRepository.getUserBy_id(objid);
+    public void deletePaymentMethodById(String objid, int pid ) {
+        UserData userData = userRepository.getUserByid(objid);
         List<UserPaymentMethod> userPaymentMethodList = userData.getPaymentMethod();
         for (UserPaymentMethod method : userPaymentMethodList) {
             if (method.getPId() == pid) {

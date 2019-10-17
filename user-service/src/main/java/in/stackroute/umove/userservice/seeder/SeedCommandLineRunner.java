@@ -21,17 +21,17 @@ public class SeedCommandLineRunner implements CommandLineRunner {
 
     LocalDate date = LocalDate.now();
 
-    @Override
-    public void run(String... args) throws Exception {
-//         UserData user = new UserData("Saurav", "9700056794", "saurav@gmail.com", Role.User, UserStatus.Inactive);
-//
-//         DocumentVerification dVerification = new DocumentVerification(DocumentStatus.Verified, "DLImage",
-//                "KA-01-2009-0004558",date);
-//        user.setDocument(dVerification);
-//        userRepository.save(user);
-
 //    @Override
 //    public void run(String... args) throws Exception {
+////         UserData user = new UserData("Saurav", "9700056794", "saurav@gmail.com", Role.User, UserStatus.Inactive);
+////
+////         DocumentVerification dVerification = new DocumentVerification(DocumentStatus.Verified, "DLImage",
+////                "KA-01-2009-0004558",date);
+////        user.setDocument(dVerification);
+////        userRepository.save(user);
+
+    @Override
+    public void run(String... args) throws Exception {
 //        UserData userData = new UserData("Divyanshu", "9700056794", "divyanshu@gmail.com", Role.User, UserStatus.Inactive);
 //
 //        DocumentVerification documentVerification = new DocumentVerification(DocumentStatus.Verified, "DLImage",
@@ -42,6 +42,6 @@ public class SeedCommandLineRunner implements CommandLineRunner {
 //        System.out.println(userData.getPaymentMethod());
 //        userData.getPaymentMethod().add(userPaymentMethod);
 //        userRepository.save(userData);
-//    }
     }
-}
+    }
+

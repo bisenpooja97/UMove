@@ -11,9 +11,9 @@ import java.util.List;
 public interface UserRepository extends MongoRepository<UserData, String> {
     List<UserData> findByName(String name);
 
-    UserData findBy_id(ObjectId _id);
+    UserData findByid(String id);
 
-    UserData getUserBy_id(ObjectId _id);
+    UserData getUserByid(String id);
 
     List<UserData> findByRole(Role role);
 

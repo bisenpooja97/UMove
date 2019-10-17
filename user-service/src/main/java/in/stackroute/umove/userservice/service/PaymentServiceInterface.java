@@ -7,9 +7,9 @@ import java.util.List;
 
 @Service
 public interface PaymentServiceInterface {
-    public List<UserPaymentMethod> getPayments(ObjectId objid);
-    public List<UserPaymentMethod> addNewPaymentMethod(ObjectId objid,UserPaymentMethod userPaymentMethod);
-    public UserPaymentMethod getPaymentMethodById(ObjectId objid, int pid);
-    public UserPaymentMethod updatePaymentMethodById(ObjectId objid,int pid, UserPaymentMethod userPaymentMethod);
-    public void deletePaymentMethodById(ObjectId objid, int pid);
+    public List<UserPaymentMethod> getPayments(String objid);
+    public List<UserPaymentMethod> addNewPaymentMethod(String objid,UserPaymentMethod userPaymentMethod);
+    public UserPaymentMethod getPaymentMethodById(String objid, int pid);
+    public UserPaymentMethod updatePaymentMethodById(String objid,int pid, UserPaymentMethod userPaymentMethod);
+    public void deletePaymentMethodById(String objid, int pid);
 }
