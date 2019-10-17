@@ -4,7 +4,8 @@ import { environment } from 'src/environments/environment';
 import { Resp } from 'src/app/model/zone-response';
 import { Observable } from 'rxjs';
 import { Zone } from 'src/app/model/zone';
-import { RespSupervisor } from 'src/app/model/supervisor-response';
+import { RespSupervisor, RespSupervisor2 } from 'src/app/model/supervisor-response';
+import { Supervisor } from 'src/app/model/supervisor';
 
 @Injectable({
   providedIn: 'root'
@@ -12,9 +13,9 @@ import { RespSupervisor } from 'src/app/model/supervisor-response';
 export class ZoneService {
 
   constructor(private httpClient: HttpClient) { }
-  baseUrl = environment.baseUrl + environment.zoneBaseApi;
+  baseUrl = environment.baseUrl1 + environment.zoneBaseApi;
 
-  public createZone(zone: Resp) {
+  createZone(zone: Resp) {
     return this.httpClient.post<Resp>(this.baseUrl, zone);
   }
 
@@ -36,6 +37,7 @@ export class ZoneService {
   }
 
   updateZones(name: string, zone: Zone) {
+    console.log(zone);
     return this.httpClient.patch<Zone>(this.baseUrl + '/' + name, zone);
   }
 
@@ -43,9 +45,13 @@ export class ZoneService {
     return this.httpClient.get<RespSupervisor>('http://172.23.234.83:8091/api/v1/users?role=Supervisor&status=Unallocated');
   }
 
-  getSupervisorById(id: string): Observable<RespSupervisor> {
-    return this.httpClient.get<RespSupervisor>('http://localhost:8093/api/v1/supervisor/' + id);
+  getSupervisorById(id: string): Observable<RespSupervisor2> {
+    return this.httpClient.get<RespSupervisor2>('http://172.23.234.83:8091/api/v1/users/' + id);
 
+  }
+
+  updateSupervisorStatus(id: string, supervisor: Supervisor) {
+    return this.httpClient.patch<Supervisor>('http://172.23.234.83:8091/api/v1/users/' + id , supervisor);
   }
 
 }

@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Zone } from 'src/app/model/zone';
 import { Router } from '@angular/router';
-import { ZoneService } from '../service/zone.service';
 
 @Component({
   selector: 'app-zone-card',
@@ -32,7 +31,7 @@ export class ZoneCardComponent implements OnInit {
         case 'ACTIVE':
           return 'green';
         case 'INACTIVE':
-          return 'cyan';
+          return 'blue';
         case 'FULL':
           return 'red';
         case 'UNDER_MAINTAINANCE':

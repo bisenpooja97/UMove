@@ -7,7 +7,7 @@
     </mat-form-field>
 </div>
 <div fxLayout.xs="column" fxLayout.gt="row" fxLayout="row wrap" fxLayoutGap="10px" class="card">
-    <app-zone-card *ngFor="let zone of zones | paginate: { itemsPerPage: 10, currentPage: p } | filter:term"
+    <app-zone-card *ngFor="let zone of zones | paginate: { itemsPerPage: 9, currentPage: p } | filter:term"
         [zones]="zone">
     </app-zone-card>
     <pagination-controls (pageChange)="p = $event"></pagination-controls>

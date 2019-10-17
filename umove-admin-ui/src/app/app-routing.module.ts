@@ -7,8 +7,9 @@ import { AuthGuardService } from './authentication/service/auth-guard.service';
 export const routes: Routes = [
 { path: 'zones', loadChildren: () => import('./zones/zones.module').then(m => m.ZonesModule) },
 { path: '', loadChildren: () => import('./authentication/authentication.module').then(m => m.AuthenticationModule) },
-{path: '**', component: PageNotFoundComponent, canActivate: [AuthGuardService]}
-];
+{ path: 'types', loadChildren: () => import('./types/types.module').then(m => m.TypesModule) },
+{ path: 'vehicles', loadChildren: () => import('./vehicles/vehicles.module').then(m => m.VehiclesModule) },
+{ path: '**', component: PageNotFoundComponent, canActivate: [AuthGuardService]},];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, {useHash: true})],
