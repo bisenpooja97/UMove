@@ -1,6 +1,7 @@
 export class Vehicle {
   public id: string;
   public registrationNo: string;
+  // tslint:disable-next-line: variable-name
   public insurance_no: string;
   public status: string;
   public type: object;

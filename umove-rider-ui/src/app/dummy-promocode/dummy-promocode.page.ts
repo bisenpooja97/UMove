@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {RideService} from "../service/ride.service";
-import {NavigationExtras, Router} from "@angular/router";
-import {Campaign} from "../model/campaign";
+import {RideService} from '../service/ride.service';
+import {NavigationExtras, Router} from '@angular/router';
+import {Campaign} from '../model/campaign';
 
 @Component({
   selector: 'app-dummy-promocode',
@@ -23,7 +23,7 @@ export class DummyPromocodePage implements OnInit {
   }
 
     selectDummyPaymentMethod() {
-        let navigationExtras: NavigationExtras = {
+        const navigationExtras: NavigationExtras = {
             state: {
                 selectedPromocode: this.selectedPromocode
             }

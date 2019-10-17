@@ -16,8 +16,8 @@ export class RideService {
 
   constructor(private http: HTTP, private toastController: ToastController) {
     this.currentBooking = new Ride();
-    http.setDataSerializer("json");
-    http.setHeader("*", "Content-Type", "application/json");
+    http.setDataSerializer('json');
+    http.setHeader('*', 'Content-Type', 'application/json');
   }
 
   async presentToast(msg, duration) {

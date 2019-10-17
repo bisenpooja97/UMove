@@ -9,14 +9,12 @@ import java.util.Map;
 
 public interface RideService {
 
-    Ride cofirmBooking(Ride ride);
-    List<Ride> getAllBookings();
-    Ride getBookingById(ObjectId id);
+    Ride confirmBooking(Ride ride);
+    Ride getRideById(ObjectId id);
     Map<String, Object> deleteAll();
-    Ride getBookingsByUserIdNStatus(String userId, String bookingStatus);
+    Ride getRideByUserIdNStatus(String userId, String bookingStatus);
     Ride addExtraCharges(ObjectId bookingId, List<ExtraCharge> extraCharges);
 
-    Ride getRideByUserIdNStatus(String userId, String bookingStatus);
     List<Ride> getAllRides();
     Ride startRide(ObjectId rideId, String registrationNo);
     Ride autocancelRide(ObjectId rideId);

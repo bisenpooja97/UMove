@@ -29,16 +29,14 @@ public class RideController {
         this.template = template;
     }
 
-
     @Autowired
     private RideService rideService;
-
 
     // End Point: api/v1/bookings Method: POST
     // to confirm booking for a vehicle
     @PostMapping("rides")
     public ResponseEntity<Map> confirmBooking(@RequestBody() Ride ride) {
-        Ride currentRide = rideService.getBookingsByUserIdNStatus(ride.getRider().get_id(), "Confirmed");
+        Ride currentRide = rideService.getRideByUserIdNStatus(ride.getRider().get_id(), "Confirmed");
         if(currentRide != null)  {
             throw new RideAlreadyBookedException("Ride", "userId", ride.getRider().get_id());
         }
@@ -46,7 +44,7 @@ public class RideController {
         // if vehicle is allocated and outstanding amount is checked and there is no pending outstanding amount then set status as confirmed
         ride.setStatus("Confirmed");
         ride.setBookedAt(LocalDateTime.now());
-        Ride rideDetails = rideService.cofirmBooking(ride);
+        Ride rideDetails = rideService.confirmBooking(ride);
         Map<String, Object> map = new TreeMap<>();
         map.put("data", rideDetails);
         map.put("status", HttpStatus.CREATED);
@@ -56,45 +54,7 @@ public class RideController {
     // End Point: api/v1/bookings Method: GET
     // to get all the bookings list
     @GetMapping("rides")
-    public ResponseEntity<Map> getBookings() {
-        List<Ride> bookings = rideService.getAllBookings();
-        Map<String, Object> map = new TreeMap<>();
-        map.put("data", bookings);
-        map.put("count", bookings.size());
-        map.put("status", HttpStatus.OK);
-        return new ResponseEntity<Map>(map, HttpStatus.OK);
-    }
-
-    // End Point: api/v1/bookings/{id} Method: GET
-    // to get a specific booking details
-    @GetMapping("rides/{rideId}")
-    public ResponseEntity<Map> getBookingById(@PathVariable("rideId") ObjectId id) {
-        if(id == null) {
-            throw new RideNotFoundException("Ride", "rideId", id);
-        }
-        System.out.println("id:" + id);
-        Ride ride = rideService.getBookingById(id);
-        Map<String, Object> map = new TreeMap<>();
-        map.put("data", ride);
-        map.put("status", HttpStatus.OK);
-        return new ResponseEntity<Map>(map, HttpStatus.OK);
-    }
-
-    // End Point: api/v1/bookings/{bookingId}/extra-charges
-    // to apply extra charges from supervisior side at zone for a specific ride
-    @PatchMapping("rides/{rideId}/extra-charges")
-    public ResponseEntity<Map> addExtraCharge(@PathVariable("rideId") ObjectId bookingId, @RequestBody() List<ExtraCharge> extraCharges) {
-        System.out.println("Extracharge" + extraCharges + " | ride id " + bookingId);
-        Ride ride = rideService.addExtraCharges(bookingId, extraCharges);
-        this.template.convertAndSend("/end-ride", "ride end ho gai!!!");
-        Map<String, Object> map = new TreeMap<>();
-        map.put("data", ride);
-        return new ResponseEntity<Map>(map, HttpStatus.OK);
-    }
-
-    //Api end point for getting all ride details or getting ride details by the userId and rideStatus
-    @GetMapping("rides")
-    public ResponseEntity<Map> getRideByUserIdNStatus(@RequestParam(value = "userId", required = false) String userId, @RequestParam(value = "rideStatus", required = false) String rideStatus) {
+    public ResponseEntity<Map> getRides(@RequestParam(value = "userId", required = false) String userId, @RequestParam(value = "rideStatus", required = false) String rideStatus) {
         if(userId!= null && rideStatus!= null) {
             Ride ride = rideService.getRideByUserIdNStatus(userId, rideStatus);
             Map<String, Object> map = new TreeMap<>();
@@ -110,9 +70,36 @@ public class RideController {
         return new ResponseEntity<Map>(map, HttpStatus.OK);
     }
 
+    // End Point: api/v1/bookings/{id} Method: GET
+    // to get a specific booking details
+    @GetMapping("rides/{rideId}")
+    public ResponseEntity<Map> getRideById(@PathVariable("rideId") ObjectId id) {
+        if(id == null) {
+            throw new RideNotFoundException("Ride", "rideId", id);
+        }
+        System.out.println("id:" + id);
+        Ride ride = rideService.getRideById(id);
+        Map<String, Object> map = new TreeMap<>();
+        map.put("data", ride);
+        map.put("status", HttpStatus.OK);
+        return new ResponseEntity<Map>(map, HttpStatus.OK);
+    }
+
+    // End Point: api/v1/bookings/{bookingId}/extra-charges
+    // to apply extra charges from supervisior side at zone for a specific ride
+    @PatchMapping("rides/{rideId}/extra-charges")
+    public ResponseEntity<Map> addExtraCharge(@PathVariable("rideId") ObjectId rideId, @RequestBody() List<ExtraCharge> extraCharges) {
+        System.out.println("Extracharge" + extraCharges + " | ride id " + rideId);
+        Ride ride = rideService.addExtraCharges(rideId, extraCharges);
+        this.template.convertAndSend("/end-ride", "ride end ho gai!!!");
+        Map<String, Object> map = new TreeMap<>();
+        map.put("data", ride);
+        return new ResponseEntity<Map>(map, HttpStatus.OK);
+    }
+
     //Api end point for start ride request by the user
     @PatchMapping("rides/{rideId}/start")
-    public ResponseEntity<?> startRideRequest(@PathVariable("rideId") ObjectId rideId, @RequestParam(value = "vehicleNumber", required = true) String registrationNo) {
+    public ResponseEntity<Map> startRideRequest(@PathVariable("rideId") ObjectId rideId, @RequestParam(value = "vehicleNumber", required = true) String registrationNo) {
         Ride ride = rideService.startRide(rideId, registrationNo);
         Map<String, Object> map = new TreeMap<>();
         map.put("data", ride);
@@ -122,7 +109,7 @@ public class RideController {
 
     //Api end point for autocancel ride request by the user
     @PatchMapping("rides/{rideId}/autocancel")
-    public ResponseEntity<?> autocancelRide(@PathVariable("rideId") ObjectId rideId) {
+    public ResponseEntity<Map> autocancelRide(@PathVariable("rideId") ObjectId rideId) {
         Ride ride = rideService.autocancelRide(rideId);
         Map<String, Object> map = new TreeMap<>();
         map.put("data", ride);
@@ -132,7 +119,7 @@ public class RideController {
 
     //Api end point for cancel ride request by the user
     @PatchMapping("rides/{rideId}/cancel")
-    public ResponseEntity<?> cancelRideRequest(@PathVariable("rideId") ObjectId rideId) {
+    public ResponseEntity<Map> cancelRideRequest(@PathVariable("rideId") ObjectId rideId) {
         Ride ride = rideService.cancelRide(rideId);
         Map<String, Object> map = new TreeMap<>();
         map.put("data", ride);
@@ -142,7 +129,7 @@ public class RideController {
 
     //Api end point for change destination request by the user
     @PatchMapping("rides/{rideId}/changeDestination")
-    public ResponseEntity<?> changeDestinationRequest(@RequestBody Zone destinationZone, @PathVariable("rideId") ObjectId rideId) {
+    public ResponseEntity<Map> changeDestinationRequest(@RequestBody Zone destinationZone, @PathVariable("rideId") ObjectId rideId) {
         Ride ride = rideService.updateDestination(destinationZone, rideId);
         Map<String, Object> map = new TreeMap<>();
         map.put("data", ride);
@@ -152,7 +139,7 @@ public class RideController {
 
     //Api end point for end ride request by the user
     @PatchMapping("rides/{rideId}/end")
-    public ResponseEntity<?> endRideRequest(@PathVariable("rideId") ObjectId rideId) {
+    public ResponseEntity<Map> endRideRequest(@PathVariable("rideId") ObjectId rideId) {
         Ride ride = rideService.endRide(rideId);
         Map<String, Object> map = new TreeMap<>();
         map.put("data", ride);

@@ -18,7 +18,7 @@ public class RideServiceImp implements RideService {
     private RideRepo rideRepo;
 
     @Override
-    public Ride cofirmBooking(Ride ride) {
+    public Ride confirmBooking(Ride ride) {
         PaymentDetail paymentDetail = new PaymentDetail();
         paymentDetail.setExtraCharges(new ArrayList<>());
         ride.setPayment(paymentDetail);
@@ -27,12 +27,7 @@ public class RideServiceImp implements RideService {
     }
 
     @Override
-    public List<Ride> getAllBookings() {
-        return rideRepo.findAll();
-    }
-
-    @Override
-    public Ride getBookingById(ObjectId id) {
+    public Ride getRideById(ObjectId id) {
         return rideRepo.findBy_id(id);
     }
 
@@ -43,17 +38,11 @@ public class RideServiceImp implements RideService {
     }
 
     @Override
-    public Ride getBookingsByUserIdNStatus(String userId, String bookingStatus){
-        Ride booking = rideRepo.findByUserIdNStatus(userId, bookingStatus);
-        return booking;
-    }
-
-    @Override
-    public Ride addExtraCharges(ObjectId bookingId, List<ExtraCharge> extraCharges) {
-        Ride booking = rideRepo.findBy_id(bookingId);
-        booking.getPayment().setExtraCharges(extraCharges);
-        rideRepo.save(booking);
-        return booking;
+    public Ride addExtraCharges(ObjectId rideId, List<ExtraCharge> extraCharges) {
+        Ride ride = rideRepo.findBy_id(rideId);
+        ride.getPayment().setExtraCharges(extraCharges);
+        rideRepo.save(ride);
+        return ride;
     }
 
     //Function to get ride details by userId and rideStatus

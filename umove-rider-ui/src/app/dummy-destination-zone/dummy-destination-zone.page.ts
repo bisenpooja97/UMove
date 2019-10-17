@@ -11,13 +11,16 @@ export class DummyDestinationZonePage implements OnInit {
   destinationZone: Zone;
   constructor(private router: Router) {
     this.destinationZone = {
-      id: '5d8c7a62adfffb7e746ccee8',
+      zoneId: '5d8c7a62adfffb7e746ccee8',
+      name: 'Zone-A',
       lat: -85.2065802380484,
       lon: 42.70837049544012,
       city: 'Bangalore',
       state: 'Karnataka',
       country: 'India',
       pincode: 560034,
+      capacity: 100,
+      status: 'FULL',
       locality: 'Madiwala',
       supervisorId: '1',
       supervisorName: 'Subhash',

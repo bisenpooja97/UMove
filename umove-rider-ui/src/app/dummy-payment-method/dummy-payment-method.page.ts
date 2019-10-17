@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {RideService} from "../service/ride.service";
-import {NavigationExtras, Router} from "@angular/router";
-import {PaymentMethod} from "../model/payment-method";
+import {RideService} from '../service/ride.service';
+import {NavigationExtras, Router} from '@angular/router';
+import {PaymentMethod} from '../model/payment-method';
 
 @Component({
   selector: 'app-dummy-payment-method',
@@ -24,7 +24,7 @@ export class DummyPaymentMethodPage implements OnInit {
   }
 
     selectDummyPaymentMethod() {
-        let navigationExtras: NavigationExtras = {
+        const navigationExtras: NavigationExtras = {
             state: {
                 selectedPaymentMethod: this.selectedPaymentMethod
             }

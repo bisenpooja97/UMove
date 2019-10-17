@@ -25,7 +25,7 @@ public class Zone {
     private int pincode;
     private String locality;
     private int capacity;
-    private LocalDateTime createdAt = LocalDateTime.now();
+    private LocalDateTime createdAt;
     private String supervisorId;
     private String supervisorName;
     private String supervisorNumber;
