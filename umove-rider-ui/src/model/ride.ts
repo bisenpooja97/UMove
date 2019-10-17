@@ -1,21 +1,23 @@
-import { Payment } from './payment';
+import { PaymentDetail } from './paymentdetail';
 import { Vehicle } from './ vehicle';
 import { Zone } from './zone';
-import { Campaign } from './campaign';
-import { User } from './user';
 import { PaymentMethod } from './paymentMethod';
-
-
+import { PromoCode } from './promocode';
+import { Rider } from './rider';
 
 export class Ride {
     _id: string;
-    payment: Payment;
+    paymentDetail: PaymentDetail;
     bookedAt: Date;
     status: string;
     vehicle: Vehicle;
     sourceZone: Zone;
     destinationZones: Zone[];
     paymentMethod: PaymentMethod;
-    promocode: Campaign;
-    rider: User;
+    promocode: PromoCode;
+    rider: Rider;
+    distance: number;
+    duration: number;
+    rideStartAt: Date;
+    rideEndAt: Date;
 }

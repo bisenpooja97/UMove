@@ -16,7 +16,7 @@ const routes: Routes = [
     loadChildren: () => import('./list/list.module').then(m => m.ListPageModule)
   },
   { path: 'my-rides', loadChildren: './my-rides/my-rides.module#MyRidesPageModule' },
-  { path: 'my-rides-details/:bookingId', loadChildren: './my-rides-details/my-rides-details.module#MyRidesDetailsPageModule' }
+  { path: 'my-rides-details/:rideId', loadChildren: './my-rides-details/my-rides-details.module#MyRidesDetailsPageModule' }
 ];
 
 @NgModule({

@@ -7,7 +7,7 @@ import { ToastController } from '@ionic/angular';
 @Injectable({
   providedIn: 'root'
 })
-export class BookingService {
+export class RideService {
 currentBooking: Ride;
 baseUrl = environment.baseUrl + environment.bookingService + environment.bookingBaseApi;
 
@@ -24,10 +24,10 @@ async presentToast(msg, duration) {
   });
   toast.present();
 }
-  getBookingsByUserId(userId) {
+  getRidesByUserId(userId) {
     return this.http.get(this.baseUrl + '?userId=' + userId, {} , {});
   }
-  getBookingById(id: string) {
+  getRidesById(id: string) {
     return this.http.get(this.baseUrl + '/' + id, {}, {});
   }
 

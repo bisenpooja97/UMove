@@ -17,7 +17,7 @@ public class RideServiceImp implements RideService
 
     @Override
     public List<Ride> getRidesByUserId(String userId) {
-        return rideRepo.findByUserId(userId);
+        return rideRepo.findRidesByUserId(userId);
     }
 
     @Override
@@ -27,21 +27,11 @@ public class RideServiceImp implements RideService
 
     @Override
     public Ride getRidesById(ObjectId id) {
-        Ride ride = rideRepo.findBy_id(id);
-        double totalExtraCharges = calculateTotalExtraCharges(ride);
-        ride.getPayment().setTotalExtraCharges(totalExtraCharges);
-        rideRepo.save(ride);
-        return ride;
-
+        return rideRepo.findBy_id(id);
     }
 
     @Override
-    public Ride confirmBooking(Ride ride) {
+    public Ride confirmRide(Ride ride) {
         return rideRepo.save(ride);
-    }
-
-    private double calculateTotalExtraCharges(Ride ride) {
-        List<ExtraCharge> extraCharges = ride.getPayment().getExtraCharges();
-        return extraCharges.stream().mapToDouble(f -> f.getAmount() ).sum();
     }
 }

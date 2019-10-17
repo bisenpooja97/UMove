@@ -58,11 +58,11 @@ public class RideController
    // to confirm booking for a ride
    //Create rides
    @PostMapping("rides")
-   public ResponseEntity<Map> confirmBooking(@RequestBody() Ride ride) {
+   public ResponseEntity<Map> confirmRide(@RequestBody() Ride ride) {
       // if vehicle is allocated and outstanding amount is checked and there is no pending outstanding amount then set status as confirmed
       ride.setStatus("Confirmed");
       ride.setBookedAt(LocalDateTime.now());
-      Ride rideDetails = rideService.confirmBooking(ride);
+      Ride rideDetails = rideService.confirmRide(ride);
       Map<String, Object> map = new TreeMap<>();
       map.put("data", rideDetails);
       map.put("status", HttpStatus.CREATED);

@@ -1,5 +1,5 @@
 export class PaymentMethod {
-    _id: string;
+    //_id: string;
     paymentMethodNumber: string;
     paymentType: string;
     paymentProvider: string;

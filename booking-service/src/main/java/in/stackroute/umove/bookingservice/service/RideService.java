@@ -10,5 +10,5 @@ public interface RideService {
     List<Ride> getRidesByUserId(String userId);
     List<Ride> getAllRides();
     Ride getRidesById(ObjectId id);
-    Ride confirmBooking(Ride ride);
+    Ride confirmRide(Ride ride);
 }

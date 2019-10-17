@@ -10,5 +10,5 @@ import java.util.List;
 public interface RideRepo extends MongoRepository<Ride, String> {
     Ride findBy_id(ObjectId _id);
     @Query("{'rider._id' : ?0 }")
-    List<Ride> findByUserId(String userId);
+    List<Ride> findRidesByUserId(String userId);
 }

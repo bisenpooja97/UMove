@@ -1,12 +1,11 @@
 import { ExtraCharges } from './extraCharges';
 
 
-export class Payment {
+export class PaymentDetail {
     status: string;
-    discount: number;
     rideAmount: number;
     extraCharges: ExtraCharges[];
     totalAmount: number;
     totalExtraCharges: number;
-    paidAmount: number;
+    fuelRefillAmount: number;
 }

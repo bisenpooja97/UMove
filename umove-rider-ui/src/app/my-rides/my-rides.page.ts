@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Ride } from 'src/model/ride';
-import { BookingService } from 'src/service/booking.service';
+import { RideService } from 'src/service/ride.service';
 import { Route, Router } from '@angular/router';
 
 
@@ -11,18 +11,18 @@ import { Route, Router } from '@angular/router';
 })
 
 export class MyRidesPage implements OnInit {
-  booking: Ride[];
+  ridedata: Ride[];
   userId: string;
 
-  constructor(private bookingService: BookingService, private router: Router) {
+  constructor(private rideService: RideService, private router: Router) {
     this.userId = '5d8bbc0da6e87d5404aa1921';
   }
 
   ngOnInit() {
-    this.bookingService.getBookingsByUserId(this.userId).then(response => {
+    this.rideService.getRidesByUserId(this.userId).then(response => {
       console.log('Response1 : ', response.data);
-      this.booking = JSON.parse(response.data).data;
-      console.log('Response2 : ', this.booking);
+      this.ridedata = JSON.parse(response.data).data;
+      console.log('Response2 : ', this.ridedata);
     });
   }
 

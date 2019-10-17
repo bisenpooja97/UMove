@@ -10,7 +10,7 @@ import lombok.*;
 @Setter
 public class PaymentMethod
 {
-    private String _id;
+    //private String _id;
     private String paymentMethodNumber;
     private String paymentType;
     private String paymentProvider;

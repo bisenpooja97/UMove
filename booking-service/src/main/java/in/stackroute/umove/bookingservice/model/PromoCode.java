@@ -5,12 +5,11 @@ import lombok.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 @Getter
 @Setter
-public class User
-{
-    private String _id;
+public class PromoCode {
+    private String id;
     private String name;
-    private String email;
+    private int discountPercent;
+    private String code;
 }
