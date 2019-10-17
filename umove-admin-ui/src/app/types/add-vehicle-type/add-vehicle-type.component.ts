@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { MatSnackBar, MatDialogRef } from '@angular/material';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-add-vehicle-type',
@@ -35,7 +36,7 @@ export class AddVehicleTypeComponent implements OnInit {
   get Rcosttime() {
     return this.typeForm.get('costtime');
   }
-
+  baseUrl = environment.baseUrl + environment.typeBaseApi;
 
 
   constructor(public dialogRef: MatDialogRef<AddVehicleTypeComponent>,private fb: FormBuilder, private route: ActivatedRoute,
@@ -74,7 +75,7 @@ export class AddVehicleTypeComponent implements OnInit {
      const uploadData = new FormData();
      uploadData.append('file', this.selectedFile, this.selectedFile.name);
     //  this.http; is; the; injected; HttpClient;
-     this.http.post('http://172.23.234.114:8092/api/v1/uploadFile?id=12', uploadData)
+     this.http.post(this.baseUrl +'/uploadFile?id=12', uploadData)
         .subscribe(event => {
            console.log('response', event); // handle event here
         });
