@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatTableDataSource } from '@angular/material';
+import { MatPaginator, MatTableDataSource, MatDialog } from '@angular/material';
 import { UserService } from '../users/service/user.service';
+import { NotificationService } from '../shared/notification.service';
 
 @Component({
   selector: 'app-documents',
@@ -13,7 +14,7 @@ export class DocumentsComponent implements OnInit {
 
  p = 1;
  dataSource = new MatTableDataSource();
-  constructor() { }
+  constructor(private userService: UserService, private notificationService: NotificationService, private matDialog: MatDialog) { }
 
   ngOnInit() {
   }

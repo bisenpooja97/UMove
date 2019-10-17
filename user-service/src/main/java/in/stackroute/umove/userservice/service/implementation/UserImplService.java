@@ -8,7 +8,6 @@ import in.stackroute.umove.userservice.model.UserData;
 import in.stackroute.umove.userservice.model.UserStatus;
 import in.stackroute.umove.userservice.repository.UserRepository;
 import in.stackroute.umove.userservice.service.UserService;
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -89,9 +88,10 @@ public class UserImplService implements UserService {
         return userRepository.save(user);
     }
 
+
     @Override
-    public UserData getUserBy_id(ObjectId _id) {
-        return userRepository.getUserBy_id(_id);
+    public UserData getByid(String id) {
+        return userRepository.findByid(id);
     }
 
     /**
@@ -110,8 +110,8 @@ public class UserImplService implements UserService {
      */
 
     @Override
-    public UserData updateUser(ObjectId id, UserData user) {
-        UserData updatedUser = userRepository.findBy_id(id);
+    public UserData updateUser(String id, UserData user) {
+        UserData updatedUser = userRepository.findByid(id);
         if (updatedUser != null) {
             if (user.getName() != null) {
                 updatedUser.setName(user.getName());
@@ -166,17 +166,18 @@ public class UserImplService implements UserService {
      *
      */
     @Override
-    public void saveImage(MultipartFile imageFile, String uid) throws Exception {
+    public void saveImage(MultipartFile imageFile, String id) throws Exception {
 //        String folder = "/home/ashwin/Documents/Project/umove/user-service/src/main/resources/documents/";
         String folder = "/home/kumardivyanshu/Desktop/Stackroute Project/umove/user-service/src/main/resources/documents/";
         byte[] bytes = imageFile.getBytes();
-        Path path = Paths.get(folder + uid);
+        Path path = Paths.get(folder + id);
         Files.write(path, bytes);
     }
 
     @Override
-    public UserData updateDocumentStatus(ObjectId userId, String status) {
-        UserData user = userRepository.getUserBy_id(userId);
+    public UserData updateDocumentStatus(String id, String status)
+    {
+        UserData user = userRepository.getByid(id);
 
         if(status.equals("Verified")) {
             user.setUserStatus(UserStatus.Active);
@@ -191,6 +192,7 @@ public class UserImplService implements UserService {
 
         return user;
     }
+
 
 
 

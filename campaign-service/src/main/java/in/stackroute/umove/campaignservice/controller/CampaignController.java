@@ -2,7 +2,6 @@ package in.stackroute.umove.campaignservice.controller;
 
 import in.stackroute.umove.campaignservice.model.Campaign;
 import in.stackroute.umove.campaignservice.service.CampaignService;
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +12,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 public class CampaignController
 {
 
@@ -52,7 +52,7 @@ public class CampaignController
      * API endpoint for updating campaign
      */
     @PatchMapping(path = "/campaigns/{id}")
-    public Campaign updateCampaign(@PathVariable ObjectId id, @RequestBody Campaign campaign){
+    public Campaign updateCampaign(@PathVariable String id, @RequestBody Campaign campaign){
         return campaignService.updateCampaign(id,campaign);
     }
     /**
@@ -61,7 +61,7 @@ public class CampaignController
      */
 
     @DeleteMapping(path = "/campaigns/{id}")
-    public ResponseEntity<Map> deleteCampaign(@PathVariable("id") ObjectId id)
+    public ResponseEntity<Map> deleteCampaign(@PathVariable("id") String id)
     {
         Campaign deleteCampaign=campaignService.deleteCampaign(id);
 

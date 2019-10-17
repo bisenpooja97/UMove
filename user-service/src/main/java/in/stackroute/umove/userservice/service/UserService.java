@@ -3,7 +3,6 @@ package in.stackroute.umove.userservice.service;
 import in.stackroute.umove.userservice.model.Role;
 import in.stackroute.umove.userservice.model.UserData;
 import in.stackroute.umove.userservice.model.UserStatus;
-import org.bson.types.ObjectId;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -21,13 +20,11 @@ public interface UserService
 
     UserData addUser(UserData user);
 
-    UserData getUserBy_id(ObjectId _id);
+    UserData getByid(String id);
 
-    UserData updateUser(ObjectId id, UserData user);
+    UserData updateUser(String id, UserData user);
 
     void saveImage(MultipartFile imageFile, String uid) throws Exception;
 
-    UserData updateDocumentStatus(ObjectId userId, String status);
-
-//    UserData getById(ObjectId id);
+    UserData updateDocumentStatus(String id, String status);
 }

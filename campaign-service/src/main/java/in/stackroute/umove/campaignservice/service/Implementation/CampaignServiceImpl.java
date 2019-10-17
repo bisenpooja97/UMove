@@ -3,7 +3,6 @@ package in.stackroute.umove.campaignservice.service.Implementation;
 import in.stackroute.umove.campaignservice.model.Campaign;
 import in.stackroute.umove.campaignservice.repository.CampaignRepository;
 import in.stackroute.umove.campaignservice.service.CampaignService;
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,9 +40,9 @@ public class CampaignServiceImpl implements CampaignService
      *
      */
     @Override
-    public Campaign updateCampaign(ObjectId id, Campaign campaign)
+    public Campaign updateCampaign(String id, Campaign campaign)
     {
-        Campaign updatedCampaign = campaignRepository.findBy_id(id);
+        Campaign updatedCampaign = campaignRepository.findByid(id);
         if (updatedCampaign != null) {
             if (campaign.getName() != null) {
                 updatedCampaign.setName(campaign.getName());
@@ -68,9 +67,9 @@ public class CampaignServiceImpl implements CampaignService
         return null;
     }
     @Override
-    public Campaign deleteCampaign(ObjectId id)
+    public Campaign deleteCampaign(String id)
     {
-        Campaign campaign=campaignRepository.findBy_id(id);
+        Campaign campaign=campaignRepository.findByid(id);
         campaignRepository.delete(campaign);
         return campaign;
     }

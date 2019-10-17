@@ -20,9 +20,9 @@ public class SeedCommandLineRunner implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        Campaign campaign=new Campaign
-                ("SBI credit card","To increase the number of credit card users for SBI",
-                        date1,date2,"OCT100",25);
-        campaignRepository.save(campaign);
+//        Campaign campaign=new Campaign
+//                ("SBI credit card","To increase the number of credit card users for SBI",
+//                        date1,date2,"OCT100",25);
+//        campaignRepository.save(campaign);
     }
 }

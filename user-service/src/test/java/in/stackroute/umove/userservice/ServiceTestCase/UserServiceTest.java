@@ -6,11 +6,8 @@ import in.stackroute.umove.userservice.model.UserStatus;
 import in.stackroute.umove.userservice.repository.UserRepository;
 import in.stackroute.umove.userservice.service.UserService;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -32,6 +29,38 @@ public class UserServiceTest
                 .thenReturn(Stream.of(new UserData("XYZ", "9700056784", "xyz@gmail.com", Role.User, UserStatus.Inactive))
                         .collect(Collectors.toList()));
         assertEquals(1, userService.getUserList().size());
+    }
+
+
+    @Test
+    public void findByNameTest() {
+        String name = "ABC";
+        when(userRepository.findByName(name)).thenReturn(Stream.of(new UserData("XYZ", "9700056784", "xyz@gmail.com", Role.User, UserStatus.Inactive))
+                .collect(Collectors.toList()));
+        assertEquals(1, userService.findByName(name).size());
+    }
+
+    @Test
+    public void findByRoleTest() {
+        String role = "User";
+        when(userRepository.findByRole(Role.User)).thenReturn(Stream.of(new UserData("XYZ", "9700056784", "xyz@gmail.com", Role.User, UserStatus.Inactive))
+                .collect(Collectors.toList()));
+        assertEquals(1, userService.findByRole(Role.User).size());
+    }
+
+    @Test
+    public void findByUserStatusTest() {
+        String userStatus = "Inactive";
+        when(userRepository.findByUserStatus(UserStatus.Inactive)).thenReturn(Stream.of(new UserData("XYZ", "9700056784", "xyz@gmail.com", Role.User, UserStatus.Inactive))
+                .collect(Collectors.toList()));
+        assertEquals(1, userService.findByUserStatus(UserStatus.Inactive).size());
+    }
+
+    @Test
+    public void addUserTest(){
+        UserData user = new UserData("ABCD", "9700056784", "xyz@gmail.com", Role.Admin, UserStatus.Active);
+        when(userRepository.save(user)).thenReturn(user);
+        assertEquals(user,userService.addUser(user));
     }
 
 }

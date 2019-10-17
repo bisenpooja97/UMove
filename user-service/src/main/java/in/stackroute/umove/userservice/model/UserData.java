@@ -19,7 +19,7 @@ import java.util.List;
 public class UserData
 {
     @Id
-    private ObjectId _id;
+    private String id;
     private String name;
     private String mobileNumber;
     private String email;
@@ -41,15 +41,16 @@ public class UserData
     }
 
 
-    public String get_Id()
-    {
-
-        return _id.toHexString();
-    }
-
-    public void set_Id(ObjectId _id)
-    {
-        this._id = _id;
-    }
+//    public String getId()
+//    {
+//
+//        return id.toHexString();
+//    }
+//
+//    public void setId(ObjectId _id)
+//
+//    {
+//        this.id = id;
+//    }
 
 }
