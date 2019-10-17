@@ -6,6 +6,11 @@
     background-color: whitesmoke;
 }
 
+.zoneName {
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
 @media only screen and (max-width: 600px) {
     .my-card {
         margin-left: 30px;
@@ -13,18 +18,27 @@
         width: 85%;
     }
     .zoneName {
-        margin-left: 50px;
         font-size: 1.5em;
-        padding-bottom: 5px;
+        font-weight: bold;
     }
     .add-button {
         padding-left: 250px;
         margin-top: -18%;
-       
+    }
+    .icon {
+        margin-left: 40%;
     }
 
+    
 }
 
-.icon {
-    padding-left: 75%;
-}
+@media only screen and (min-width: 600px) {
+    .icon {
+        margin-left: 80%;
+        background-color:transparent;
+        }   
+        
+        .mat-button-focus-overlay {
+            background-color:transparent;
+        }
+    }
