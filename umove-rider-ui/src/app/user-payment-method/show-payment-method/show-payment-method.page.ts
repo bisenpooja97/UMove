@@ -12,7 +12,6 @@ import {UserPaymentMethodService} from '../../services/user-payment-method/user-
 // tslint:disable-next-line:component-class-suffix
 export class ShowPaymentMethodPage implements OnInit {
   public payment: UserPaymentMethod;
-
     // tslint:disable-next-line:max-line-length
   constructor(private userPaymentMethodService: UserPaymentMethodService, private router: Router, private http: HTTP) { }
 

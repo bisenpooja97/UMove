@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <network-security-config>
-    <base-config cleartextTrafficPermitted="true">
+<base-config cleartextTrafficPermitted="true">
         <trust-anchors>
             <certificates src="system" />
         </trust-anchors>
     </base-config>
     <domain-config cleartextTrafficPermitted="true">
         <domain includeSubdomains="true">localhost</domain>
-        <domain includeSubdomains="true">172.23.234.61:8080</domain>
+<domain includeSubdomains="true"> 172.23.234.74:8080</domain>
     </domain-config>
 </network-security-config>

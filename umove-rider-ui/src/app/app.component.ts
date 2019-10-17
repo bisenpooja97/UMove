@@ -28,6 +28,18 @@ export class AppComponent {
     {
       title: 'Show-payment-method',
       url: '/show-payment-method'
+    },
+    {
+      title: 'View-profile',
+      url: '/view-profile',
+    },
+    {
+      title: 'Edit-profile',
+      url: '/edit-profile',
+    },
+    {
+      title: 'Update-KYC',
+      url: '/update-kyc',
     }
   ];
 

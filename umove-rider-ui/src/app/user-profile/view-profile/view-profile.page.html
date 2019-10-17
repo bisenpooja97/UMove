@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title text-center>User-Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-card *ngIf="user">
+    <ion-card-content>
+      <img src = "./assets/icon/dummy-avatar-300x300.jpg"><br>
+      <ion-row center>
+        <ion-col text-center>
+          <ion-button (click)="goAnOtherPage1()"><ion-icon name="create"></ion-icon>&nbsp;Edit-Profile</ion-button>
+        </ion-col>
+      </ion-row><br>
+      <ion-card-title text-center>{{user?.name}}</ion-card-title><br>
+      <p text-center>Email:{{user?.email}}</p>
+      <p text-center>Mobile:{{user?.mobileNumber}}</p><br>
+      <ion-button expand=block fill=outline (click)="goAnOtherPage()">Update KYC</ion-button><br>
+      <ion-row centers>
+        <ion-col text-center>
+          <ion-button (click)="goLogout()">Logout</ion-button>
+        </ion-col>
+      </ion-row>
+
+    </ion-card-content>
+  </ion-card>
+</ion-content>

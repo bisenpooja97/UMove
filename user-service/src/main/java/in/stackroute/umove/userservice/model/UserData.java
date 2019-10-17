@@ -3,6 +3,7 @@ package in.stackroute.umove.userservice.model;
 import lombok.*;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.mapping.Document;
+
 import javax.persistence.Id;
 import java.util.List;
 
@@ -12,7 +13,13 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserData {
+
+/*
+ * User details
+ */
+
+public class UserData
+{
     @Id
     private ObjectId _id;
     private String name;
@@ -29,7 +36,8 @@ public class UserData {
         this.email = email;
     }
 
-    public UserData( String name, String mobileNumber, String email,  Role role,  UserStatus userStatus ) {
+    public UserData( String name, String mobileNumber, String email,  Role role,  UserStatus userStatus )
+    {
         this.name = name;
         this.mobileNumber = mobileNumber;
         this.email = email;
@@ -37,11 +45,16 @@ public class UserData {
         this.userStatus = userStatus;
     }
 
-    public String getId() {
+    // ObjectId needs to be converted to string
+
+    public String get_Id()
+    {
         return _id.toHexString();
     }
 
-    public void setId(ObjectId _id) {
+    public void set_Id(ObjectId _id)
+    {
         this._id = _id;
     }
+
 }

@@ -43,7 +43,7 @@ services:
       - CASSANDRA_PASSWORD=Umove@2019
 
 #  # redis
-#  redis:
+#  redis:use u
 #    image: 'redis'
 #    container_name: 'umove-redis'
 #    restart: always
@@ -127,6 +127,8 @@ services:
       - config
       - discovery
     restart: on-failure
+    volumes:
+      - '$HOME/umove/user-service/uploads/documents:/uploads/documents'
 
   vehicles:
     build:

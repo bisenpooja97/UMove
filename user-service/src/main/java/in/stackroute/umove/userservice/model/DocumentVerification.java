@@ -10,18 +10,22 @@ import java.time.LocalDate;
 @Setter
 @NoArgsConstructor
 
+/*
+ * Document verification details
+ */
+
 public class DocumentVerification {
-
-    private String image;
-    private String drivingLicenceNumber;
-    private LocalDate expiryDate;
     private DocumentStatus documentStatus;
+    private String image;
+    private String dLicenceNumber;
+    private LocalDate expiryDate;
 
-    public DocumentVerification(DocumentStatus documentStatus, String image, String drivingLicenceNumber, LocalDate expiryDate)
+
+    public DocumentVerification(DocumentStatus documentStatus, String image, String dLicenceNumber, LocalDate expiryDate)
     {
         this.documentStatus = documentStatus;
         this.image = image;
-        this.drivingLicenceNumber = drivingLicenceNumber;
+        this.dLicenceNumber = dLicenceNumber;
         this.expiryDate = expiryDate;
     }
 }
