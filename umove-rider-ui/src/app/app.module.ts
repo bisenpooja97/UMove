@@ -14,6 +14,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {Environment} from '@angular/compiler-cli/src/ngtsc/typecheck/src/environment';
 import {HTTP} from '@ionic-native/http/ngx';
 import {UserPaymentMethodService} from './services/user-payment-method/user-payment-method.service';
+import {IonicStorageModule} from '@ionic/storage';
 
 
 // @ts-ignore
@@ -24,6 +25,7 @@ import {UserPaymentMethodService} from './services/user-payment-method/user-paym
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
+      IonicStorageModule.forRoot(),
     AppRoutingModule,
     HttpClientModule, FormsModule, ReactiveFormsModule,
   ],

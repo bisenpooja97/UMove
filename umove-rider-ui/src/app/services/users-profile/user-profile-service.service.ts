@@ -17,12 +17,16 @@ export class UserProfileServiceService {
   users = 'users';
   document = 'document';
   uploadImage = 'uploadImage';
+  addser = 'adduser';
 
     constructor(private http: HTTP , private httpc: HttpClient) {
         http.setDataSerializer('json');
         http.setHeader('*', 'Content-Type', 'application/json');
     }
 
+    public addUser(data) {
+      return this.http.post(this.baseUrl + '/' + this.addser,data,{});
+    }
     public getUserDetailById(id) {
       // console.log('url : ' + this.baseUrl  + '/' + id);
       return this.http.get(this.baseUrl + '/' + id, {}, {});

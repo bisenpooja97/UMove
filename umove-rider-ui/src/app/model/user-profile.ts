@@ -5,5 +5,5 @@ export class UserProfile {
     email: string;
     role: string;
     userStatus: string;
-    document: string;
+    // document: string;
 }

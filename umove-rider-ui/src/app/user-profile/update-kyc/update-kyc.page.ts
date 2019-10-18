@@ -43,13 +43,13 @@ export class UpdateKycPage implements OnInit {
     const formData = {
       document: data
     };
-    this.userDataService.uploadDldetailsById('5da1b2ba0e8e3d0001e33275', formData).then(res => {
+    this.userDataService.uploadDldetailsById('5da1a2b80e8e3d0001c8453e', formData).then(res => {
       console.log(res);
     });
     const uploadData = new FormData();
     uploadData.append('file', this.selectedFile, this.selectedFile.name);
 
-    this.userDataService.uploadProfileById('5da1b2ba0e8e3d0001e33275', uploadData).subscribe(res => {
+    this.userDataService.uploadProfileById('5da1a2b80e8e3d0001c8453e', uploadData).subscribe(res => {
       console.log(res);
     });
     const toast = await this.toastController.create({

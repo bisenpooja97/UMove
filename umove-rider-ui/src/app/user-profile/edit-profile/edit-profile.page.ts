@@ -20,7 +20,7 @@ export class EditProfilePage implements OnInit {
     }
 
     ngOnInit() {
-        this.userDataService.getUserDetailById('5da1b2ba0e8e3d0001e33275')
+        this.userDataService.getUserDetailById('5da1a2b80e8e3d0001c8453e')
             .then(data => {
                 console.log('filtered data: ', data);
                 this.user = JSON.parse(data.data).data;
@@ -37,7 +37,7 @@ export class EditProfilePage implements OnInit {
         // });
 
 
-        this.userDataService.editProfileById('5da1b2ba0e8e3d0001e33275', data).then(res => {
+        this.userDataService.editProfileById('5da1a2b80e8e3d0001c8453e', data).then(res => {
             console.log(res);
         });
         const toast = await this.toastController.create({
