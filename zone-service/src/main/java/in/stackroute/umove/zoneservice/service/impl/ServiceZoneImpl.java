@@ -111,36 +111,32 @@ public class ServiceZoneImpl implements ServiceZone {
     // Zone service for getting nearby zones
     @Override
     public List<Zone> getNearbyZones(Double lon, Double lat) {
-        List<Zone> zones=zoneRepository.findAll();
-        List<Zone> nearbyZones = new ArrayList<>();
-        Iterator iterator=zones.iterator();
-        while (iterator.hasNext()){
-            Zone zones1= (Zone) iterator.next();
-            Double lat1=zones1.getLat();
-            Double lon1=zones1.getLon();
-            lon1 = Math.toRadians(lon1);
-            lon = Math.toRadians(lon);
-            lat1 = Math.toRadians(lat1);
-            lat = Math.toRadians(lat);
-            // Haversine formula
-            double dlon = lon - lon1;
-            double dlat = lat - lat1;
-            double value1 = Math.pow(Math.sin(dlat / 2), 2)
-                    + Math.cos(lat1) * Math.cos(lat)
-                    * Math.pow(Math.sin(dlon / 2),2);
-            double value2 = 2 * Math.asin(Math.sqrt(value1));
-            double value3 = 6371;
-
-            System.out.println(value2*value3);
-            // calculate the result
-            if ((value2*value3)<=4000){
-                nearbyZones.add(zones1);
-                //System.out.println(c*r);
-            }
-        }
-        return nearbyZones;
-    }
-
+       List<Zone> zones=zoneRepository.findAll();
+       List<Zone> nearbyZones = new ArrayList<>();
+       Iterator iterator=zones.iterator();
+       while (iterator.hasNext()){
+           Zone zones1= (Zone) iterator.next();
+           Double lat1=zones1.getLat();
+           Double lon1=zones1.getLon();
+           int R = 6371; // Radius of the earth in km
+           double dLat = (lat-lat1)*(Math.PI/180);  // deg2rad below
+           double dLon = (lon-lon1)*(Math.PI/180);
+           double a =
+                   Math.sin(dLat/2) * Math.sin(dLat/2) +
+                           Math.cos((lat1)*(Math.PI/180)) * Math.cos((lat)*(Math.PI/180)) *
+                                   Math.sin(dLon/2) * Math.sin(dLon/2);
+           var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+           var d = R * c; // Distance in km
+           System.out.println("Distance "+d);
+           // calculate the result
+           if (d<=1){
+               nearbyZones.add(zones1);
+               //System.out.println(c*r);
+           }
+       }
+       return nearbyZones;
+   }
+   
     @Override
     public List<Zone> findByStatus(ZoneStatus status) {
         List<Zone> zones = zoneRepository.findByStatus(status);
