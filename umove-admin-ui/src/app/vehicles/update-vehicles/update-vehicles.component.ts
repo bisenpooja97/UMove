@@ -40,6 +40,7 @@ onSubmit() {
 
 
   ngOnInit() {
+    console.log(this.lastServiceDate);
   }
 
 }

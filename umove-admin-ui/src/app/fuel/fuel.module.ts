@@ -12,10 +12,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FuelCardComponent } from './fuel-card/fuel-card.component';
 import { AddFuelComponent } from './add-fuel/add-fuel.component';
 import { UpdateFuelComponent } from './update-fuel/update-fuel.component';
+import { FuelDetailsComponent } from './fuel-details/fuel-details.component';
 
 
 @NgModule({
-  declarations: [FuelComponent, FuelCardComponent, AddFuelComponent, UpdateFuelComponent],
+  declarations: [FuelComponent, FuelCardComponent, AddFuelComponent, UpdateFuelComponent, FuelDetailsComponent],
   imports: [
     CommonModule,
     FuelRoutingModule,
@@ -40,6 +41,7 @@ import { UpdateFuelComponent } from './update-fuel/update-fuel.component';
     MatDialogModule,
    // MatDatepicker,
     MatDatepickerModule,
-  ]
+  ],
+  entryComponents: [AddFuelComponent, UpdateFuelComponent]
 })
 export class FuelModule { }
