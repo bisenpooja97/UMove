@@ -57,20 +57,17 @@ export class BikeListPage implements OnInit {
           'insuranceNo': '678567',
           'status': 'Busy',
           'type': {
-            'id': '5da1a0989bd1160001cb8a02',
+            'Id': '5da1a0989bd1160001cb8a02',
             'name': 'R1',
             'costkm': 9,
             'costtime': 0.25,
-            'costlt': 100,
             'category': 'Sports',
             'vehiclecc': '220cc',
             'kilometer': 25,
-            'url': 'https://library.kissclipart.com/20190225' +
-                '/exw/kissclipart-yamaha-yzf-r1-yamaha-motor-company-yamaha-yzf-r6-m-7798c5450bd8897d.png'
+            'url': 'https://jtride-data.s3.ap-south-1.amazonaws.com/uploads/1570608854_vespa.png'
           },
-          'time': '2019-10-12T09:10:56.415+0000',
-          'lastServiceDate': '2019-10-12T09:10:56.415+0000',
-          'vehiclePurchased': '2019-10-12T09:10:56.415+0000'
+          'lastServiceDate': new Date(),
+          'vehiclePurchased': new Date()
         },
         {
           'id': '5da1ab649bd1160001cb8a03',
@@ -79,20 +76,17 @@ export class BikeListPage implements OnInit {
           'insuranceNo': '678567',
           'status': 'Busy',
           'type': {
-            'id': '5da1a0989bd1160001cb8a02',
+            'Id': '5da1a0989bd1160001cb8a02',
             'name': 'R1',
             'costkm': 9,
             'costtime': 0.25,
-            'costlt': 100,
             'category': 'Sports',
             'vehiclecc': '220cc',
             'kilometer': 25,
-            'url': 'https://library.kissclipart.com' +
-                '/20190225/exw/kissclipart-yamaha-yzf-r1-yamaha-motor-company-yamaha-yzf-r6-m-7798c5450bd8897d.png'
+            'url':'https://jtride-data.s3.ap-south-1.amazonaws.com/uploads/1570608854_vespa.png'
           },
-          'time': '2019-10-12T09:10:56.415+0000',
-          'lastServiceDate': '2019-10-12T09:10:56.415+0000',
-          'vehiclePurchased': '2019-10-12T09:10:56.415+0000'
+          'lastServiceDate': new Date(),
+          'vehiclePurchased': new Date()
         }
       ],
       'status': 'OK'

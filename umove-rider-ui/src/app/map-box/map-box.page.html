@@ -4,12 +4,20 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title *ngIf="page!=='pick-up'">Select Drop Zone</ion-title>
-    <ion-row *ngIf="page==='pick-up'">
+    <ion-row *ngIf="page==='pick-up' && !trip">
       <ion-col size="6">
-      <ion-button shape="round" expand="block" (click)="trip=false" >Round Trip</ion-button>
+      <ion-button shape="round" expand="block" fill="solid" (click)="trip=false" >Round Trip</ion-button>
       </ion-col>
       <ion-col size="6">
-      <ion-button shape="round" expand="block" (click)="trip=true">One Way</ion-button>
+      <ion-button shape="round" expand="block" fill="outline" (click)="trip=true">One Way</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="page==='pick-up' && trip">
+      <ion-col size="6">
+        <ion-button shape="round" expand="block" fill="outline" (click)="trip=false" >Round Trip</ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button shape="round" expand="block" fill="solid" (click)="trip=true">One Way</ion-button>
       </ion-col>
     </ion-row>
   </ion-toolbar>
