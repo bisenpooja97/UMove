@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Ride } from 'src/model/ride';
-import { RideService } from 'src/service/ride.service';
-import { Router } from '@angular/router';
-import { PaymentDetail } from 'src/model/paymentdetail';
-import { Payment } from 'src/model/payment';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Ride } from '../model/ride';
+import { PaymentDetail } from '../model/paymentdetail';
+import { Payment } from '../model/payment';
+import { RideService } from '../service/ride.service';
 
 declare let RazorpayCheckout: any;
 
@@ -18,7 +18,7 @@ export class PaymentDetailsPage implements OnInit {
   email: string;
   contact: number;
   rides: Ride;
-  paymentAmount = 333;
+  paymentAmount: number;
   currency = 'INR';
   currencyIcon = '$';
   razorKey = 'rzp_test_p3NNx70zMgBF3L';
@@ -31,20 +31,21 @@ export class PaymentDetailsPage implements OnInit {
   rideStatusUnPaid: boolean;
 
 
-  constructor(private rideService: RideService, private route: Router) {
-    this.bookingId = '5da97d689194be0001d04bd8';
+  constructor(private rideService: RideService, private route: Router, private router: ActivatedRoute) {}
+
+  ngOnInit() {
+
+    this.bookingId = this.router.snapshot.paramMap.get('rideId');
     this.rideStatusPaid = false;
     this.rideStatusUnPaid = false;
 
-  }
-
-  ngOnInit() {
-    this.rideService.getRidesById(this.bookingId).then(response => {
+    this.rideService.getBookingById(this.bookingId).then(response => {
       this.rides = JSON.parse(response.data).data;
       this.name = this.rides.rider.name;
       this.email = this.rides.rider.email;
-      this.contact = Number(this.rides.rider.mobileNo);
-      this.paymentAmount = Number(this.rides.paymentDetail.totalAmount) * 100;
+      this.contact = 7560650799;
+      this.paymentAmount = this.rides.paymentDetail.totalAmount;
+      this.paymentAmount = Number(this.paymentAmount) * 100;
       if (this.rides.paymentDetail.totalExtraCharges === undefined) {
         this.extraChargeStatus = false;
       } else {
@@ -70,7 +71,7 @@ export class PaymentDetailsPage implements OnInit {
       image: 'https://i.imgur.com/3g7nmJC.png',
       currency: this.currency, // your 3 letter currency code
       key: this.razorKey, // your Key Id from Razorpay dashboard
-      amount: this.paymentAmount, // Payment amount in smallest denomiation e.g. cents for USD
+      amount: 300, // Payment amount in smallest denomiation e.g. cents for USD
       name: this.name,
       prefill: {
         email: this.email,
@@ -92,7 +93,7 @@ export class PaymentDetailsPage implements OnInit {
       this.rideService.setPaymentDetails(this.bookingId, paymentId).then(response => {
         console.log('data of payment in sql: ', response['data']);
         this.payment = JSON.parse(response.data).data;
-        this.route.navigateByUrl('/home');
+        this.route.navigateByUrl('');
       });
     };
 

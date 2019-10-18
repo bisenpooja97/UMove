@@ -17,7 +17,7 @@ export class RideDetailsPage implements OnInit {
   destinationZoneChange: Zone;
 
   constructor(private rideService: RideService, private route: ActivatedRoute, private router: Router) {
-    this.rideService.getRideDetailsByUserIdNStatus('786', 'started')
+    this.rideService.getRideDetailsByUserIdNStatus('5d8bbc0da6e87d5404aa1921', 'started')
       .then(response => {
         console.log('Ride details: ', response);
         this.ride = JSON.parse(response.data).data;

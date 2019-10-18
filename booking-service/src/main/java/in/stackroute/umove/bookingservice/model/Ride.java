@@ -24,7 +24,7 @@ public class Ride
     @Id
     private ObjectId _id;
     private String status;
-    private Rider rider;
+    private User rider;
     private Zone sourceZone;
     private List<Zone> destinationZones;
     private Vehicle vehicle;

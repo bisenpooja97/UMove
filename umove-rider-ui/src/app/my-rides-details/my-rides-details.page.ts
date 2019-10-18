@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Ride } from 'src/model/ride';
-import { RideService } from 'src/service/ride.service';
+
 import { ActivatedRoute, Router } from '@angular/router';
+import { Ride } from '../model/ride';
+import { RideService } from '../service/ride.service';
 
 @Component({
   selector: 'app-my-rides-details',
@@ -23,7 +24,7 @@ export class MyRidesDetailsPage implements OnInit {
    }
 
   ngOnInit() {
-    this.rideService.getRidesById(this.rideId).then(response => {
+    this.rideService.getBookingById(this.rideId).then(response => {
       console.log('Booking data: ', response.data);
       this.rides = JSON.parse(response.data).data;
       console.log(this.rides.paymentDetail.status);

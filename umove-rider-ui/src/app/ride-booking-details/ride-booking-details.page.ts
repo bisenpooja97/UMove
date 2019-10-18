@@ -28,7 +28,7 @@ export class RideBookingDetailsPage implements OnInit {
 
   constructor(private rideService: RideService, private router: Router, private route: ActivatedRoute) {
     // Subscribing bookingService method to get booking details by its id
-    this.rideService.getRideDetailsByUserIdNStatus('786', 'Confirmed')
+    this.rideService.getRideDetailsByUserIdNStatus('5d8bbc0da6e87d5404aa1921', 'Confirmed')
       .then(response => {
         console.log('Booking details: ', response);
         this.ride = JSON.parse(response.data).data;
@@ -48,7 +48,7 @@ export class RideBookingDetailsPage implements OnInit {
       message: 'Please book a new ride.',
       callback: () => {
         // Apply the url of home page
-        this.router.navigateByUrl('ride-booking-details');
+        this.router.navigateByUrl('confirm-ride-detail');
       }
     });
   }
@@ -64,7 +64,7 @@ export class RideBookingDetailsPage implements OnInit {
     this.timerRef.instance.stop();
     this.rideService.cancelRideById(this.ride._id).then(data => {
       console.log('response of cancel ride: ', data);
-      this.router.navigateByUrl('');
+      this.router.navigateByUrl('confirm-ride-detail');
     });
   }
 

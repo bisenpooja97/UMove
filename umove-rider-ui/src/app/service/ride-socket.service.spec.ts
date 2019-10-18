@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { RideService } from './ride.service';
+import { RideSocketService } from './ride-socket.service';
 
-describe('RideService', () => {
+describe('RideSocketService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: RideService = TestBed.get(RideService);
+    const service: RideSocketService = TestBed.get(RideSocketService);
     expect(service).toBeTruthy();
   });
 });

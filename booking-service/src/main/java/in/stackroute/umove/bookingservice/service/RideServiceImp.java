@@ -202,7 +202,7 @@ public class RideServiceImp implements RideService {
     public Payment payForRide(ObjectId rideId, String paymentId) {
         Ride ride = rideRepo.findBy_id(rideId);
         String rider = ride.getRider().getName();
-        String mobile = ride.getRider().getMobileNo();
+        String mobile = ride.getRider().getMobileNumber();
         String source = ride.getSourceZone().getLocality();
         int sizeOfDestinationZones = ride.getDestinationZones().size();
         String destination = ride.getDestinationZones().get(sizeOfDestinationZones-1).getLocality();

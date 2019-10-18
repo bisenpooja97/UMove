@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Ride } from 'src/model/ride';
-import { RideService } from 'src/service/ride.service';
 import { Route, Router } from '@angular/router';
+import { Ride } from '../model/ride';
+import { RideService } from '../service/ride.service';
 
 
 @Component({

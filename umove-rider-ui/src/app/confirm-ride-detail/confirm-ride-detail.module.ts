@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { ConfirmRideDetailPage } from './confirm-ride-detail.page';
 import {BikeDetailComponent} from '../bike-detail/bike-detail.component';
+import {SharedModule} from "../shared/shared.module";
 
 const routes: Routes = [
   {
@@ -20,8 +21,9 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    SharedModule
   ],
-  declarations: [ConfirmRideDetailPage, BikeDetailComponent]
+  declarations: [ConfirmRideDetailPage]
 })
 export class ConfirmRideDetailPageModule {}

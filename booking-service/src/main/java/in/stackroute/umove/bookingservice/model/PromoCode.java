@@ -8,7 +8,7 @@ import lombok.*;
 @Getter
 @Setter
 public class PromoCode {
-    private String id;
+    private String campaignId;
     private String name;
     private int discountPercent;
     private String code;
