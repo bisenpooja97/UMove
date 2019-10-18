@@ -114,7 +114,7 @@ export class BikeListPage implements OnInit {
     if (this.trip) {
       this.router.navigate([''], navigationExtras);
     } else {
-      this.router.navigate(['booking'], navigationExtras);
+      this.router.navigate(['confirm-ride-detail'], navigationExtras);
     }
   }
 }

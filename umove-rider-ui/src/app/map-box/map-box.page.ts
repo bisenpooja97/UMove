@@ -179,7 +179,7 @@ export class MapBoxPage implements OnInit {
         pickUpZone: this.selectedzone
       }
     };
-    this.router.navigate(['booking'], navigationExtras);
+    this.router.navigate(['confirm-ride-detail'], navigationExtras);
   }
 
 

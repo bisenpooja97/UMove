@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
+import { MbscModule } from '@mobiscroll/angular';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
@@ -11,6 +12,8 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import {SharedModule} from "./shared/shared.module";
 import {MapBoxPage} from './map-box/map-box.page';
 import {BikeListPage} from './bike-list/bike-list.page';
 import {BikeListPageModule} from './bike-list/bike-list.module';
@@ -20,26 +23,28 @@ import {FormsModule} from '@angular/forms';
 @NgModule({
   declarations: [AppComponent, MapBoxPage, BikeListPage],
   entryComponents: [],
-    imports: [
-        BrowserModule,
-        IonicModule.forRoot(),
-        AppRoutingModule,
-        BikeListPageModule,
-        AutoCompleteModule,
-        FormsModule
-    ],
-    providers: [
-        HTTP,
-        Geolocation,
-        StatusBar,
-        LaunchNavigator,
-        SplashScreen,
-        {provide: RouteReuseStrategy, useClass: IonicRouteStrategy}
-    ],
-
-  exports: [
-    MapBoxPage,
+  imports: [
+    BrowserModule,
+    IonicModule.forRoot(),
+    AppRoutingModule,
+      BikeListPageModule,
+      AutoCompleteModule,
+      FormsModule,
+      SharedModule,
+      MbscModule
   ],
+  providers: [
+      HTTP,
+      Geolocation,
+      LaunchNavigator,
+    StatusBar,
+      BarcodeScanner,
+    SplashScreen,
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+  ],
+    exports: [
+        MapBoxPage
+    ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
