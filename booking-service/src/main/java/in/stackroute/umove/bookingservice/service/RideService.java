@@ -20,6 +20,6 @@ public interface RideService {
     Ride autocancelRide(ObjectId rideId);
     Ride cancelRide(ObjectId rideId);
     Ride updateDestination(Zone destinationZone, ObjectId rideId);
-    Ride endRide(ObjectId rideId);
+//    Ride endRideRequest(ObjectId rideId);
 
 }

@@ -39,8 +39,19 @@ public class RideServiceImp implements RideService {
 
     @Override
     public Ride addExtraCharges(ObjectId rideId, List<ExtraCharge> extraCharges) {
+        LocalDateTime rightNow = LocalDateTime.now();
         Ride ride = rideRepo.findBy_id(rideId);
         ride.getPayment().setExtraCharges(extraCharges);
+        ride.setRideEndAt(rightNow);
+        LocalDateTime rideStarted = ride.getRideStartAt();
+        Duration duration = Duration.between(rideStarted, rightNow);
+        int totalDuration = (int) duration.toMinutes();
+        ride.setDuration(totalDuration);
+        Double distance = 5 + (Math.random()*5);
+        ride.setDistance(distance);
+        Double rideAmount = (totalDuration*ride.getVehicle().getType().getCosttime())+(distance*ride.getVehicle().getType().getCostkm());
+        ride.getPayment().setRideAmount(rideAmount);
+        ride.setStatus("ended");
         rideRepo.save(ride);
         return ride;
     }
@@ -130,20 +141,21 @@ public class RideServiceImp implements RideService {
         return ride;
     }
 
-    //Function to end ride for the user
-    @Override
-    public Ride endRide(ObjectId rideId) {
-        LocalDateTime rightNow = LocalDateTime.now();
-        Ride ride = rideRepo.findBy_id(rideId);
-        if (ride.getStatus().equalsIgnoreCase("started")) {
-            ride.setRideEndAt(rightNow);
-            LocalDateTime rideStarted = ride.getRideStartAt();
-            Duration duration = Duration.between(rideStarted, rightNow);
-            int totalDuration = (int) duration.toMinutes();
-            ride.setDuration(totalDuration);
-            ride.setStatus("endRideRequest");
-            rideRepo.save(ride);
-        }
-        return ride;
-    }
+//    @Override
+//    public Ride endRideRequest(ObjectId rideId) {
+//        LocalDateTime rightNow = LocalDateTime.now();
+//        Ride ride = rideRepo.findBy_id(rideId);
+//        if (ride.getStatus().equalsIgnoreCase("started")) {
+//            ride.setRideEndAt(rightNow);
+//            LocalDateTime rideStarted = ride.getRideStartAt();
+//            Duration duration = Duration.between(rideStarted, rightNow);
+//            int totalDuration = (int) duration.toMinutes();
+//            ride.setDuration(totalDuration);
+//            Double distance = 5 + (Math.random()*5);
+//            ride.setDistance(distance);
+//            ride.setStatus("endRideRequest");
+//            rideRepo.save(ride);
+//        }
+//        return ride;
+//    }
 }

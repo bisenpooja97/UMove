@@ -119,24 +119,4 @@ public class RideServiceTests {
         assertEquals(actual, expected);
     }
 
-    //Test to check the end ride function of a ride
-    @Test
-    public void endRideTest() throws Exception {
-        int expectedDuration = 20;
-        String expectedStatus = "endRideRequest";
-        LocalDateTime rightNow = LocalDateTime.now();
-        LocalDateTime beforeRightNow = rightNow.minusMinutes(20);
-        Ride ride = new Ride();
-        ride.set_id(new ObjectId("5d89c3cf651a913a1cf2d31e"));
-        ride.setStatus("started");
-        ride.setRideStartAt(beforeRightNow);
-        Mockito.when(rideRepo.findBy_id(new ObjectId("5d89c3cf651a913a1cf2d31e")))
-                .thenReturn(ride);
-        Ride rideDetails = rideService.endRide(new ObjectId("5d89c3cf651a913a1cf2d31e"));
-        int actualDuration = rideDetails.getDuration();
-        String actualStatus = rideDetails.getStatus();
-        assertEquals(actualStatus, expectedStatus);
-        assertEquals(actualDuration, expectedDuration);
-    }
-
 }
