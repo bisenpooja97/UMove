@@ -40,17 +40,23 @@ export class ConfirmRideDetailPage implements OnInit {
     };
 
     this.booking.vehicle = {
-      id: '5d8c7a62adfffb7e746ccee8',
-      registrationNo: 'RJ21SA1982',
-      insurance_no: 'IND3938dfk',
-      lastServiceDate: new Date(),
-      status: 'available',
-      time: new Date(),
-      type: { name: 'Bullet', costkm: 5, costtime: 0.2,
-      // tslint:disable-next-line: max-line-length
-      imageUrl: 'https://auto.ndtvimg.com/bike-images/colors/royal-enfield/bullet-350/royal-enfield-bullet-350-bullet-trials-works-replica-350-red.png' },
-      vehiclePurchased: new Date(),
-      zoneid: '5d8c7a62adfffb7e746ccee8'
+      'id': '5da1ab649bd1160001cb8a03',
+      'zoneid': null,
+      'registrationNo': 'RJ27CA3456',
+      'insuranceNo': '678567',
+      'status': 'Busy',
+      'type': {
+        'Id': '5da1a0989bd1160001cb8a02',
+        'name': 'R1',
+        'costkm': 9,
+        'costtime': 0.25,
+        'category': 'Sports',
+        'vehiclecc': '220cc',
+        'kilometer': 25,
+        'url': 'https://jtride-data.s3.ap-south-1.amazonaws.com/uploads/1570608854_vespa.png'
+      },
+      'lastServiceDate': new Date(),
+      'vehiclePurchased': new Date()
     };
 
     this.booking.sourceZone = {
@@ -110,8 +116,8 @@ export class ConfirmRideDetailPage implements OnInit {
   confirmBooking() {
     this.rideService.confirmBooking(this.booking).then(response => {
       console.log('response: ', response);
-      if (response && response.status === 201 && response.data.status === 'CREATED') {
-        this.router.navigateByUrl('booking-details');
+      if (response && response.status === 201 && response.data) {
+        this.router.navigateByUrl('ride-booking-details');
       } else if (!response) {
         this.rideService.presentToast('Error: Something Went Wrong, Try again.', 2000);
         this.router.navigateByUrl('home');

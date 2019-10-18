@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { HTTP } from '@ionic-native/http/ngx';
+import {SharedModule} from "./shared/shared.module";
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,7 +22,8 @@ import { HTTP } from '@ionic-native/http/ngx';
     MbscModule,
     BrowserModule,
     IonicModule.forRoot(),
-    AppRoutingModule
+    AppRoutingModule,
+    SharedModule
   ],
   providers: [
     StatusBar,
