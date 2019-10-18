@@ -125,8 +125,8 @@ public class ServiceZoneImpl implements ServiceZone {
                    Math.sin(dLat/2) * Math.sin(dLat/2) +
                            Math.cos((lat1)*(Math.PI/180)) * Math.cos((lat)*(Math.PI/180)) *
                                    Math.sin(dLon/2) * Math.sin(dLon/2);
-           var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-           var d = R * c; // Distance in km
+           double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+           double d = R * c; // Distance in km
            System.out.println("Distance "+d);
            // calculate the result
            if (d<=1){
