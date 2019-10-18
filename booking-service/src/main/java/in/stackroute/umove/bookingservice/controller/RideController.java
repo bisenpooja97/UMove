@@ -14,6 +14,7 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -91,7 +92,10 @@ public class RideController {
     public ResponseEntity<Map> addExtraCharge(@PathVariable("rideId") ObjectId rideId, @RequestBody() List<ExtraCharge> extraCharges) {
         System.out.println("Extracharge" + extraCharges + " | ride id " + rideId);
         Ride ride = rideService.addExtraCharges(rideId, extraCharges);
-        this.template.convertAndSend("/end-ride", "ride end ho gai!!!");
+        Map<String, Object> payload = new LinkedHashMap<>();
+        payload.put("status", "Ended");
+        payload.put("message", "Rided is ended.");
+        this.template.convertAndSend("/topic/end-ride/" + rideId, payload);
         Map<String, Object> map = new TreeMap<>();
         map.put("data", ride);
         return new ResponseEntity<Map>(map, HttpStatus.OK);
