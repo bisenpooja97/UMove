@@ -50,8 +50,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var routes = [{ path: 'types', loadChildren: function () { return Promise.all(/*! import() | types-types-module */[__webpack_require__.e("default~types-types-module~vehicles-vehicles-module"), __webpack_require__.e("types-types-module")]).then(__webpack_require__.bind(null, /*! ./types/types.module */ "./src/app/types/types.module.ts")).then(function (m) { return m.TypesModule; }); } },
-    { path: 'vehicles', loadChildren: function () { return Promise.all(/*! import() | vehicles-vehicles-module */[__webpack_require__.e("default~types-types-module~vehicles-vehicles-module"), __webpack_require__.e("vehicles-vehicles-module")]).then(__webpack_require__.bind(null, /*! ./vehicles/vehicles.module */ "./src/app/vehicles/vehicles.module.ts")).then(function (m) { return m.VehiclesModule; }); } }];
+var routes = [{ path: 'types', loadChildren: function () { return Promise.all(/*! import() | types-types-module */[__webpack_require__.e("default~fuel-fuel-module~types-types-module~vehicles-vehicles-module"), __webpack_require__.e("common"), __webpack_require__.e("types-types-module")]).then(__webpack_require__.bind(null, /*! ./types/types.module */ "./src/app/types/types.module.ts")).then(function (m) { return m.TypesModule; }); } },
+    { path: 'vehicles', loadChildren: function () { return Promise.all(/*! import() | vehicles-vehicles-module */[__webpack_require__.e("default~fuel-fuel-module~types-types-module~vehicles-vehicles-module"), __webpack_require__.e("common"), __webpack_require__.e("vehicles-vehicles-module")]).then(__webpack_require__.bind(null, /*! ./vehicles/vehicles.module */ "./src/app/vehicles/vehicles.module.ts")).then(function (m) { return m.VehiclesModule; }); } },
+    { path: 'fuel', loadChildren: function () { return Promise.all(/*! import() | fuel-fuel-module */[__webpack_require__.e("default~fuel-fuel-module~types-types-module~vehicles-vehicles-module"), __webpack_require__.e("common"), __webpack_require__.e("fuel-fuel-module")]).then(__webpack_require__.bind(null, /*! ./fuel/fuel.module */ "./src/app/fuel/fuel.module.ts")).then(function (m) { return m.FuelModule; }); } }];
 var AppRoutingModule = /** @class */ (function () {
     function AppRoutingModule() {
     }
@@ -208,6 +209,7 @@ var environment = {
     vehicleService: 'vehicle-service',
     vehicleBaseApi: '/api/v1/vehicles',
     typeBaseApi: '/api/v1/types',
+    fuelBaseApi: '/api/v1/fuel',
 };
 /*
  * For easier debugging in development mode, you can import the following file

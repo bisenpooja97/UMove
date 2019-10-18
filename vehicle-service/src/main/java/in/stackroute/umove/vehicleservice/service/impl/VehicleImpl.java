@@ -61,22 +61,22 @@ public class VehicleImpl implements ServiceVehicle {
         Vehicle vehicleList = repo.findByregistrationNo(name);
         if(vehicleList != null){
             if(vehicle.getInsuranceNo() != null){
-                Vehicle vehicleList2=repo.findByInsuranceNo(vehicle.getInsuranceNo());
-                if(vehicleList2 != null){
-                    throw new InsuranceNoAlreadyExistException("Vehicle already exists");
-                }
+//                Vehicle vehicleList2=repo.findByInsuranceNo(vehicle.getInsuranceNo());
+//                if(vehicleList2 != null){
+//                    throw new InsuranceNoAlreadyExistException("Vehicle already exists");
+//                }
                 vehicleList.setInsuranceNo(vehicle.getInsuranceNo());
             }
             if(vehicle.getStatus() != null){
                 vehicleList.setStatus(vehicle.getStatus());
             }
             if(vehicle.getLastServiceDate()!= null){
-                Date date1=vehicleList.getLastServiceDate();
-                Date date2= vehicleList.getVehiclePurchased();
-                if(date1.compareTo(date2)<0)
-                {
-                    throw new LastServiceDateWrongException("Vehicle already exists");
-                }
+//                Date date1=vehicleList.getLastServiceDate();
+//                Date date2= vehicleList.getVehiclePurchased();
+//                if(date1.compareTo(date2)<0)
+//                {
+//                    throw new LastServiceDateWrongException("Vehicle already exists");
+//                }
                 vehicleList.setLastServiceDate(vehicle.getLastServiceDate()  );
             }
             if(vehicle.getZoneid() != null){

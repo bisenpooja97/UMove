@@ -50,8 +50,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const routes = [{ path: 'types', loadChildren: () => Promise.all(/*! import() | types-types-module */[__webpack_require__.e("default~types-types-module~vehicles-vehicles-module"), __webpack_require__.e("types-types-module")]).then(__webpack_require__.bind(null, /*! ./types/types.module */ "./src/app/types/types.module.ts")).then(m => m.TypesModule) },
-    { path: 'vehicles', loadChildren: () => Promise.all(/*! import() | vehicles-vehicles-module */[__webpack_require__.e("default~types-types-module~vehicles-vehicles-module"), __webpack_require__.e("vehicles-vehicles-module")]).then(__webpack_require__.bind(null, /*! ./vehicles/vehicles.module */ "./src/app/vehicles/vehicles.module.ts")).then(m => m.VehiclesModule) }];
+const routes = [{ path: 'types', loadChildren: () => Promise.all(/*! import() | types-types-module */[__webpack_require__.e("default~fuel-fuel-module~types-types-module~vehicles-vehicles-module"), __webpack_require__.e("common"), __webpack_require__.e("types-types-module")]).then(__webpack_require__.bind(null, /*! ./types/types.module */ "./src/app/types/types.module.ts")).then(m => m.TypesModule) },
+    { path: 'vehicles', loadChildren: () => Promise.all(/*! import() | vehicles-vehicles-module */[__webpack_require__.e("default~fuel-fuel-module~types-types-module~vehicles-vehicles-module"), __webpack_require__.e("common"), __webpack_require__.e("vehicles-vehicles-module")]).then(__webpack_require__.bind(null, /*! ./vehicles/vehicles.module */ "./src/app/vehicles/vehicles.module.ts")).then(m => m.VehiclesModule) },
+    { path: 'fuel', loadChildren: () => Promise.all(/*! import() | fuel-fuel-module */[__webpack_require__.e("default~fuel-fuel-module~types-types-module~vehicles-vehicles-module"), __webpack_require__.e("common"), __webpack_require__.e("fuel-fuel-module")]).then(__webpack_require__.bind(null, /*! ./fuel/fuel.module */ "./src/app/fuel/fuel.module.ts")).then(m => m.FuelModule) }];
 let AppRoutingModule = class AppRoutingModule {
 };
 AppRoutingModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
@@ -201,6 +202,7 @@ const environment = {
     vehicleService: 'vehicle-service',
     vehicleBaseApi: '/api/v1/vehicles',
     typeBaseApi: '/api/v1/types',
+    fuelBaseApi: '/api/v1/fuel',
 };
 /*
  * For easier debugging in development mode, you can import the following file

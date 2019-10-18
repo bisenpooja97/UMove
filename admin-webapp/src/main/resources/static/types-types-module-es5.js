@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"add\">\n    <mat-toolbar>\n        <span class=\"fill-remaining-space\"></span>\n        <button class=\"btn-dialog-close\" mat-stroked-button (click)=\"onClose()\" tabIndex=\"-1\">\n          <mat-icon>clear</mat-icon>\n      </button>\n    </mat-toolbar>\n\n\n    <form fxLayout=\"column\" fxLayoutAlign=\"center center\" [formGroup]=\"typeForm\" (ngSubmit)=\"onSubmit()\">\n        <h2 fxLayout=\"column\" fxLayout.gt-md=\"row\" fxLayoutGap.gt-md=\"15px\" fxLayoutAlign=\"center center\">Add New Types</h2>\n\n        <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\" class=\"form\">\n\n            <mat-form-field appearance=\"outline\" fxFlex>\n                <mat-label>Type Name</mat-label>\n                <input matInput #input placeholder=\"Type Name\" formControlName=\"name\" required>\n\n                <mat-error *ngIf=\"rName.invalid\">\n\n                    {{getErrorType()}}\n                </mat-error>\n\n            </mat-form-field>\n\n\n            <mat-form-field appearance=\"outline\" fxFlex>\n                <mat-label>Km Per Litre</mat-label>\n                <input matInput #input placeholder=\"Km per litre\" formControlName=\"kilometer\" required>\n                <mat-error *ngIf=\"Rkm.invalid\">\n\n                    {{getErrorkm()}}\n                </mat-error>\n            </mat-form-field>\n\n\n            <mat-form-field appearance=\"outline\" fxFlex>\n                <mat-label>CC</mat-label>\n                <input matInput #input placeholder=\"CC\" formControlName=\"vehiclecc\" required>\n                <mat-error *ngIf=\"Rcc.invalid\">\n                    {{getErrorCC()}}\n\n                </mat-error>\n            </mat-form-field>\n\n            <!-- <mat-form-field appearance=\"outline\" fxFlex>\n                <mat-label>Category</mat-label>\n                 <input matInput #input placeholder=\"Placeholder\" formControlName=\"status\" required> -->\n            <!-- <select matNativeControl formControlName=\"category\">\n        <option value=\"Sports\">Sports</option>\n        <option value=\"Cruiser\">Cruiser</option>\n        <option value=\"Touring\">Touring</option>\n        <option value=\"Standard\">Standard</option>\n        <option value=\"Dual_Purpose\">Dual Purpose</option>\n        <option value=\"Dirt_Bikes\">Dirt Bikes</option>\n      </select>\n            </mat-form-field> -->\n\n\n            <mat-form-field appearance=\"outline\" fxFlex>\n                <mat-label>Cost Time</mat-label>\n                <input matInput #input placeholder=\"Cost Time\" formControlName=\"costtime\" required>\n\n                <mat-error *ngIf=\"Rcosttime.invalid\">\n\n                    {{getErrorCosttime()}}\n                </mat-error>\n\n            </mat-form-field>\n\n\n            <input name=\"file\" type=\"file\" class=\"ng-hide\" (change)=\"onFileChanged($event)\" #fileInput>\n\n\n\n\n            <button mat-raised-button class=\"btn\">\n          Submit\n        </button>\n\n\n        </div>\n\n    </form>\n\n</div>"
+module.exports = "<div class=\"add\">\n    <mat-toolbar>\n        <span class=\"fill-remaining-space\"></span>\n        <button class=\"btn-dialog-close\" mat-stroked-button (click)=\"onClose()\" tabIndex=\"-1\">\n          <mat-icon>clear</mat-icon>\n      </button>\n    </mat-toolbar>\n\n\n    <form fxLayout=\"column\" fxLayoutAlign=\"center center\" [formGroup]=\"typeForm\" (ngSubmit)=\"onSubmit()\">\n        <h2 fxLayout=\"column\" fxLayout.gt-md=\"row\" fxLayoutGap.gt-md=\"15px\" fxLayoutAlign=\"center center\">Add New Types</h2>\n\n        <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\" class=\"form\">\n\n            <mat-form-field appearance=\"outline\" fxFlex>\n                <mat-label>Type Name</mat-label>\n                <input matInput #input placeholder=\"Type Name\" formControlName=\"name\" required>\n\n                <mat-error *ngIf=\"rName.invalid\">\n\n                    {{getErrorType()}}\n                </mat-error>\n\n            </mat-form-field>\n\n\n            <mat-form-field appearance=\"outline\" fxFlex>\n                <mat-label>Km Per Litre</mat-label>\n                <input matInput #input placeholder=\"Km per litre\" formControlName=\"kilometer\" required>\n                <mat-error *ngIf=\"Rkm.invalid\">\n\n                    {{getErrorkm()}}\n                </mat-error>\n            </mat-form-field>\n\n\n            <mat-form-field appearance=\"outline\" fxFlex>\n                <mat-label>CC</mat-label>\n                <input matInput #input placeholder=\"CC\" formControlName=\"vehiclecc\" required>\n                <mat-error *ngIf=\"Rcc.invalid\">\n                    {{getErrorCC()}}\n\n                </mat-error>\n            </mat-form-field>\n\n            <mat-form-field appearance=\"outline\" fxFlex>\n                <mat-label></mat-label>\n                <input matInput #input placeholder=\"Base Fare\" formControlName=\"baseFare\" required>\n                <mat-error *ngIf=\"Rbasefare.invalid\">\n                    {{getErrorBaseFare()}}\n\n                </mat-error>\n\n            </mat-form-field>\n\n\n            <mat-form-field appearance=\"outline\" fxFlex>\n                <mat-label>Fuel Type</mat-label>\n                <mat-select formControlName=\"fuel\">\n                    <mat-option *ngFor=\"let fuel of  fuels\" [value]=\"fuel\">\n                        {{fuel.name}}\n                    </mat-option>\n                </mat-select>\n            </mat-form-field>\n\n            <!-- <mat-form-field appearance=\"outline\" fxFlex>\n                <mat-label>Category</mat-label>\n                 <input matInput #input placeholder=\"Placeholder\" formControlName=\"status\" required> -->\n            <!-- <select matNativeControl formControlName=\"category\">\n        <option value=\"Sports\">Sports</option>\n        <option value=\"Cruiser\">Cruiser</option>\n        <option value=\"Touring\">Touring</option>\n        <option value=\"Standard\">Standard</option>\n        <option value=\"Dual_Purpose\">Dual Purpose</option>\n        <option value=\"Dirt_Bikes\">Dirt Bikes</option>\n      </select>\n            </mat-form-field> -->\n\n\n            <mat-form-field appearance=\"outline\" fxFlex>\n                <mat-label>Cost Time</mat-label>\n                <input matInput #input placeholder=\"Cost Time\" formControlName=\"costtime\" required>\n\n                <mat-error *ngIf=\"Rcosttime.invalid\">\n\n                    {{getErrorCosttime()}}\n                </mat-error>\n\n            </mat-form-field>\n\n\n            <input name=\"file\" type=\"file\" class=\"ng-hide\" (change)=\"onFileChanged($event)\" #fileInput>\n\n\n\n\n            <button mat-raised-button class=\"btn\">\n          Submit\n        </button>\n\n\n        </div>\n\n    </form>\n\n</div>"
 
 /***/ }),
 
@@ -18,7 +18,7 @@ module.exports = "<div class=\"add\">\n    <mat-toolbar>\n        <span class=\"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div fxLayout=\"row\" fxLayout.lt-md=\"column\" fxLayoutGap=\"10%\" fxLayoutGap.lt-md=\"0px\">\n    <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"50px\" fxLayoutGap.lt-md=\"0px\">\n        <h1 fxLayout=\"column\" fxLayout.gt-md=\"row\" fxLayoutGap.gt-md=\"15px\" class=\"vehicleName\">\n            {{name}}\n\n        </h1>\n    </div>\n\n\n\n    <!--  -->\n\n    <mat-card class=\"my-card\" fxFlex.sm=\"0 1 calc(50%-10px)\" fxFlex.md=\"0 1 calc(33%-10px)\" fxLayout=\"column\" fxLayoutGap=\"20px\">\n        <mat-card-title fxLayoutAlign=\"start\">{{category}}</mat-card-title>\n        <br><br>\n        <div fxFlex=50% fxLayout=\"row\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20%\" fxLayoutGap.lt-md=\"0px\" class=\"form\" fxLayoutAlign=\"center center\">\n            <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"50px\" fxLayoutGap.lt-md=\"0px\" class=\"col\">\n                <mat-card-title fxLayoutAlign=\"center center\">Vehicle cc: {{cc}}</mat-card-title>\n                <mat-card-title fxLayoutAlign=\"center center\">Cost/km: {{costkm}}</mat-card-title>\n                <mat-card-title fxLayoutAlign=\"center center\">cost/min: {{costtime}}\n                    <span>\n                    <i class=\"material-icons iconCapacity\" (click)=\"update()\" >\n                        create\n                    </i>\n                </span>\n\n                </mat-card-title>\n                <mat-card-title fxLayoutAlign=\"center center\">kilometers/lt: {{kilometer}}</mat-card-title>\n\n            </div>\n\n        </div>\n\n    </mat-card>\n"
+module.exports = "<div fxLayout=\"row\" fxLayout.lt-md=\"column\" fxLayoutGap=\"10%\" fxLayoutGap.lt-md=\"0px\">\n    <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"50px\" fxLayoutGap.lt-md=\"0px\">\n        <h1 fxLayout=\"column\" fxLayout.gt-md=\"row\" fxLayoutGap.gt-md=\"15px\" class=\"vehicleName\">\n            {{name}}\n\n        </h1>\n    </div>\n\n\n\n    <!--  -->\n\n    <mat-card class=\"my-card\" fxFlex.sm=\"0 1 calc(50%-10px)\" fxFlex.md=\"0 1 calc(33%-10px)\" fxLayout=\"column\" fxLayoutGap=\"20px\">\n        <mat-card-title fxLayoutAlign=\"start\">Fuel-type: {{fuelname}}</mat-card-title>\n        <br><br>\n        <div fxFlex=50% fxLayout=\"row\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20%\" fxLayoutGap.lt-md=\"0px\" class=\"form\" fxLayoutAlign=\"center center\">\n            <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"50px\" fxLayoutGap.lt-md=\"0px\" class=\"col\">\n                <mat-card-title fxLayoutAlign=\"center center\">Vehicle cc: {{cc}}</mat-card-title>\n                <mat-card-title fxLayoutAlign=\"center center\">Cost/km: {{costkm}}</mat-card-title>\n                <mat-card-title fxLayoutAlign=\"center center\">cost/min: {{costtime}}\n                    <span>\n                    <i class=\"material-icons iconCapacity\" (click)=\"update()\" >\n                        create\n                    </i>\n                </span>\n\n                </mat-card-title>\n                <mat-card-title fxLayoutAlign=\"center center\">kilometers/lt: {{kilometer}}</mat-card-title>\n\n            </div>\n\n        </div>\n\n    </mat-card>"
 
 /***/ }),
 
@@ -83,6 +83,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var src_app_fuel_fuel_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/app/fuel/fuel.service */ "./src/app/fuel/fuel.service.ts");
+
 
 
 
@@ -91,21 +93,24 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var AddVehicleTypeComponent = /** @class */ (function () {
-    function AddVehicleTypeComponent(dialogRef, fb, route, router, typeService, http, snackBar) {
+    function AddVehicleTypeComponent(dialogRef, fb, route, router, typeService, fuelService, http, snackBar) {
         this.dialogRef = dialogRef;
         this.fb = fb;
         this.route = route;
         this.router = router;
         this.typeService = typeService;
+        this.fuelService = fuelService;
         this.http = http;
         this.snackBar = snackBar;
         this.datas = [];
+        this.fuels = [];
         this.typeForm = this.fb.group({
             name: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].pattern('^[a-zA-Z0-9\-]*$')]],
             kilometer: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].pattern('^[0-9]*$')]],
             costtime: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].pattern('^[0-9]*$')]],
             vehiclecc: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].pattern('^[0-9]*$')]],
-            category: ['']
+            baseFare: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].pattern('^[0-9]*$')]],
+            fuel: []
         });
     }
     Object.defineProperty(AddVehicleTypeComponent.prototype, "rName", {
@@ -143,6 +148,13 @@ var AddVehicleTypeComponent = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(AddVehicleTypeComponent.prototype, "Rbasefare", {
+        get: function () {
+            return this.typeForm.get('baseFare');
+        },
+        enumerable: true,
+        configurable: true
+    });
     AddVehicleTypeComponent.prototype.getErrorType = function () {
         return this.rName.hasError('pattern') ? 'Registration No  should not contain any special characters.' :
             '';
@@ -157,6 +169,10 @@ var AddVehicleTypeComponent = /** @class */ (function () {
     };
     AddVehicleTypeComponent.prototype.getErrorCC = function () {
         return this.Rcc.hasError('pattern') ? 'Invalid cc' :
+            '';
+    };
+    AddVehicleTypeComponent.prototype.getErrorBaseFare = function () {
+        return this.Rbasefare.hasError('pattern') ? 'Invalid cost for basefare' :
             '';
     };
     AddVehicleTypeComponent.prototype.onFileChanged = function (event) {
@@ -176,6 +192,13 @@ var AddVehicleTypeComponent = /** @class */ (function () {
         this.typeForm.reset();
         this.dialogRef.close();
     };
+    AddVehicleTypeComponent.prototype.getFuelList = function () {
+        var _this = this;
+        this.fuelService.getFuel().subscribe(function (res) {
+            _this.fuels = res.data;
+            console.log('types list: ', _this.fuels);
+        });
+    };
     AddVehicleTypeComponent.prototype.onSubmit = function () {
         this.onUpload();
         console.log(this.typeForm.value);
@@ -183,6 +206,7 @@ var AddVehicleTypeComponent = /** @class */ (function () {
         this.dialogRef.close(this.typeForm.value);
     };
     AddVehicleTypeComponent.prototype.ngOnInit = function () {
+        this.getFuelList();
     };
     AddVehicleTypeComponent.prototype.openSnackbar = function (message, action) {
         this.snackBar.open(message, action, {
@@ -196,6 +220,7 @@ var AddVehicleTypeComponent = /** @class */ (function () {
         { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"] },
         { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] },
         { type: _vehicle_type_service__WEBPACK_IMPORTED_MODULE_2__["VehicleTypeService"] },
+        { type: src_app_fuel_fuel_service__WEBPACK_IMPORTED_MODULE_7__["FuelService"] },
         { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_6__["HttpClient"] },
         { type: _angular_material__WEBPACK_IMPORTED_MODULE_5__["MatSnackBar"] }
     ]; };
@@ -266,6 +291,7 @@ var TypeDeatilsComponent = /** @class */ (function () {
             console.log(res);
             _this.name = _this.type.name;
             _this.cc = _this.type.vehiclecc;
+            _this.fuelname = _this.type.fuel.name;
             // this.category = this.type.category;
             _this.costkm = _this.type.costkm;
             _this.costtime = _this.type.costtime;
