@@ -39,7 +39,7 @@ export class AddUserComponent implements OnInit {
 
               userForm = this.fb.group({
                 name: ['', [Validators.pattern('^[a-zA-Z0-9\-]*$')]],
-                mobileNumber: ['', [Validators.pattern('[a-zA-z]+')]],
+                mobileNumber: ['', [Validators.pattern('[0-9]+')]],
                 email: ['', []],
                 role: ['', []],
                 userStatus: ['Unallocated']
