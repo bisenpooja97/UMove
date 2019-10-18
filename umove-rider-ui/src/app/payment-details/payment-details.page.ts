@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Ride } from 'src/model/ride';
-import { PaymentDetails } from 'src/model/paymentdetail';
 import { RideService } from 'src/service/ride.service';
 import { Router } from '@angular/router';
+import { PaymentDetail } from 'src/model/paymentdetail';
+import { Payment } from 'src/model/payment';
 
 declare let RazorpayCheckout: any;
 
@@ -23,12 +24,18 @@ export class PaymentDetailsPage implements OnInit {
   razorKey = 'rzp_test_p3NNx70zMgBF3L';
   rideData: Ride;
   extraChargeStatus: boolean;
-  payment: PaymentDetails;
+  paymentDetail: PaymentDetail;
   appliedPromoCode: boolean;
-  paidAmount: number;
+  payment: Payment;
+  rideStatusPaid: boolean;
+  rideStatusUnPaid: boolean;
+
 
   constructor(private rideService: RideService, private route: Router) {
-    this.bookingId = '5da468f908813b0001892b5a';
+    this.bookingId = '5da954570e8e3d000160230b';
+    this.rideStatusPaid = false;
+    this.rideStatusUnPaid = false;
+
   }
 
   ngOnInit() {
@@ -36,10 +43,9 @@ export class PaymentDetailsPage implements OnInit {
       this.rides = JSON.parse(response.data).data;
       this.name = this.rides.rider.name;
       this.email = this.rides.rider.email;
-      this.contact = this.rides.rider.mobile;
-      this.paidAmount = this.rides.payment.totalAmount + this.rides.payment.totalExtraCharges;
-      this.paymentAmount = Number(this.paidAmount) * 100;
-      if (this.rides.payment.totalExtraCharges === undefined) {
+      this.contact = Number(this.rides.rider.mobileNo);
+      this.paymentAmount = Number(this.rides.paymentDetail.totalAmount) * 100;
+      if (this.rides.paymentDetail.totalExtraCharges === undefined) {
         this.extraChargeStatus = false;
       } else {
         this.extraChargeStatus = true;
@@ -50,9 +56,12 @@ export class PaymentDetailsPage implements OnInit {
       } else {
         this.appliedPromoCode = true;
       }
-
-
-    });
+      if (this.rides.paymentDetail.status === 'Paid') {
+        this.rideStatusPaid = true;
+      } else {
+        this.rideStatusUnPaid = true;
+      }
+     });
   }
 
   payWithRazor() {
@@ -83,7 +92,7 @@ export class PaymentDetailsPage implements OnInit {
       this.rideService.setPaymentDetails(this.bookingId, paymentId).then(response => {
         console.log('data of payment in sql: ', response['data']);
         this.payment = JSON.parse(response.data).data;
-        this.route.navigateByUrl('payment-confirmation');
+        this.route.navigateByUrl('/home');
       });
     };
 

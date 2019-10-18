@@ -1,6 +1,6 @@
-export class User {
+export class Rider {
     _id: string;
     name: string;
     email: string;
-    mobile: number;
+    mobileNo: string;
 }

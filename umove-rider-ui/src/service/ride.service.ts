@@ -22,8 +22,8 @@ getBookingById(id: string) {
   return this.http.get(this.baseUrl + '/rides' + '/' + id, {}, {});
 }
 
-setPaymentDetails(bookingId: string, paymentId: string) {
-  return this.http.put(this.baseUrl + '/payments?booking_Id=' + bookingId + '&payment_Id=' + paymentId, {}, {});
+setPaymentDetails(rideId: string, paymentId: string) {
+  return this.http.put(this.baseUrl + '/payments?rideId=' + rideId + '&payment_Id=' + paymentId, {}, {});
 }
 
 getPaymentDetailsByBookingId(id: string) {

@@ -1,12 +1,21 @@
 import { ExtraCharges } from './extracharges';
 
 export class Payment {
+    bookingId: string;
+    rider: string;
+    mobile: number;
+    source: string;
+    destination: string;
+    distance: number;
+    duration: number;
+    paymentMethodId: string;
+    rideFare: number;
+    discountPercent: number;
+    extraCharges: number;
+    amountPaid: number;
+    paymentId: string;
+    deductedAt: Date;
     status: string;
-    discount: number;
-    rideAmount: number;
-    extraCharges: ExtraCharges[];
-    totalAmount: number;
-    totalExtraCharges: number;
-    paidAmount: number;
-    petrolCharges: number;
+
+
 }

@@ -40,28 +40,27 @@ public class Payment {
     private int duration;
 
     @Column
-    private String payment_method_id;
+    private String paymentMethodId;
 
     @Column
-    private Double ride_fare;
+    private Double rideFare;
+    @Column
+    private int discountPercent;
 
     @Column
-    private int discount_percent;
+    private Double extraCharges;
 
     @Column
-    private Double extra_charges;
+    private Double amountPaid;
 
     @Column
-    private Double amount_paid;
-
-    @Column
-    private Double petrolCharges;
+    private Double fuelRefillAmount;
 
     @Column
     private String paymentId;
 
     @Column
-    private LocalDateTime deducted_at;
+    private LocalDateTime deductedAt;
 
     @Column
     private String status;

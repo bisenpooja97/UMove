@@ -8,9 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import javax.mail.MessagingException;
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
@@ -65,7 +62,7 @@ public class RideController {
     // End Point: api/v1/payments Method: PUT
     // to pay for a specific ride by id
     @PutMapping("payments")
-    public ResponseEntity<Map> payForBooking(@RequestParam(value = "rideId") ObjectId rideId, @RequestParam(value = "payment_Id") String paymentId) throws IOException, MessagingException {
+    public ResponseEntity<Map> payForBooking(@RequestParam(value = "rideId") ObjectId rideId, @RequestParam(value = "payment_Id") String paymentId) {
         Payment payment = rideService.payForBooking(rideId, paymentId);
         Map<String, Object> map = new TreeMap<>();
         map.put("data", payment);

@@ -13,16 +13,12 @@ import java.util.List;
 public class PaymentDetail
 {
     private String status;
-    private Integer discount;
     @NonNull
     private Double rideAmount;
     private List<ExtraCharge> extraCharges;
-    @NonNull
-    private Integer petrolCharges;
+    private Double fuelRefillAmount;
     @NonNull
     private Double totalExtraCharges;
     @NonNull
     private Double totalAmount;
-    @NonNull
-    private Double paidAmount;
 }
