@@ -15,12 +15,13 @@ import { UpdateTypesComponent } from '../update-types/update-types.component';
 export class TypeDeatilsComponent implements OnInit {
   type: VehicleType;
  name: string;
- category: string;
+ // category: string;
  costkm: number;
  costtime: number;
  cc: string;
  kilometer: number;
  message: string;
+ fuelname: string;
 
 
  constructor(private router: Router, private vehicleTypeService: VehicleTypeService,
@@ -39,7 +40,8 @@ getVehicleTypeDetails() {
               console.log(res);
               this.name = this.type.name;
               this.cc = this.type.vehiclecc;
-              this.category = this.type.category;
+              this.fuelname = this.type.fuel.name;
+             // this.category = this.type.category;
               this.costkm = this.type.costkm;
               this.costtime = this.type.costtime;
               this.kilometer = this.type.kilometer;
@@ -75,7 +77,7 @@ getVehicleTypeDetails() {
                 console.log('Back to parent', result);
                 this.vehicleTypeService.updateVehicleType(this.name, result).subscribe(
                   response => {
-                                this.openSnackbar('Cost updated succesffuly','ok');
+                                this.openSnackbar('Cost updated succesffuly', 'ok');
                                 this.getVehicleTypeDetails();
 
                                                                 },

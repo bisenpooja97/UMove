@@ -5,6 +5,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { MatSnackBar, MatDialogRef } from '@angular/material';
 import { HttpClient } from '@angular/common/http';
+import { Fuel } from 'src/app/model/Fuel';
+import { FuelService } from 'src/app/fuel/fuel.service';
 
 @Component({
   selector: 'app-add-vehicle-type',
@@ -14,6 +16,7 @@ import { HttpClient } from '@angular/common/http';
 export class AddVehicleTypeComponent implements OnInit {
 
   datas = [];
+  fuels: Fuel[] = [];
   selectedFile: File;
   upload: any ;
   message: string;
@@ -35,11 +38,16 @@ export class AddVehicleTypeComponent implements OnInit {
   get Rcosttime() {
     return this.typeForm.get('costtime');
   }
+  get Rbasefare() {
+    return this.typeForm.get('baseFare');
+  }
 
 
 
   constructor(public dialogRef: MatDialogRef<AddVehicleTypeComponent>, private fb: FormBuilder, private route: ActivatedRoute,
-              private router: Router, private typeService: VehicleTypeService,  private http: HttpClient, private snackBar: MatSnackBar
+              private router: Router, private typeService: VehicleTypeService,
+              private fuelService: FuelService,
+              private http: HttpClient, private snackBar: MatSnackBar
              ) { }
 
   typeForm = this.fb.group({
@@ -47,7 +55,8 @@ export class AddVehicleTypeComponent implements OnInit {
     kilometer: ['', [Validators.pattern('^[0-9]*$')]],
     costtime: ['', [Validators.pattern('^[0-9]*$')]],
     vehiclecc: ['', [Validators.pattern('^[0-9]*$')]],
-    category: ['']
+     baseFare: ['', [Validators.pattern('^[0-9]*$')]],
+     fuel: []
   });
 
   getErrorType() {
@@ -67,6 +76,10 @@ export class AddVehicleTypeComponent implements OnInit {
 
   getErrorCC() {
     return this.Rcc.hasError('pattern') ? 'Invalid cc' :
+    '';
+  }
+  getErrorBaseFare() {
+    return this.Rbasefare.hasError('pattern') ? 'Invalid cost for basefare' :
     '';
   }
 
@@ -90,6 +103,16 @@ export class AddVehicleTypeComponent implements OnInit {
     this.dialogRef.close();
   }
 
+  getFuelList() {
+    this.fuelService.getFuel().subscribe(
+      res => {
+        this.fuels = res.data;
+        console.log('types list: ', this.fuels);
+      }
+
+    );
+  }
+
 
 
 
@@ -101,6 +124,7 @@ export class AddVehicleTypeComponent implements OnInit {
 }
 
   ngOnInit() {
+    this.getFuelList();
   }
 
   openSnackbar(message: string, action: string) {

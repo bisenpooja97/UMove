@@ -43,6 +43,26 @@
                 </mat-error>
             </mat-form-field>
 
+            <mat-form-field appearance="outline" fxFlex>
+                <mat-label></mat-label>
+                <input matInput #input placeholder="Base Fare" formControlName="baseFare" required>
+                <mat-error *ngIf="Rbasefare.invalid">
+                    {{getErrorBaseFare()}}
+
+                </mat-error>
+
+            </mat-form-field>
+
+
+            <mat-form-field appearance="outline" fxFlex>
+                <mat-label>Fuel Type</mat-label>
+                <mat-select formControlName="fuel">
+                    <mat-option *ngFor="let fuel of  fuels" [value]="fuel">
+                        {{fuel.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
             <!-- <mat-form-field appearance="outline" fxFlex>
                 <mat-label>Category</mat-label>
                  <input matInput #input placeholder="Placeholder" formControlName="status" required> -->
