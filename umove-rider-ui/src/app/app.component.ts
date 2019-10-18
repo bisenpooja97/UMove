@@ -19,7 +19,11 @@ export class AppComponent {
     {
       title: 'My Rides',
       url: '/my-rides',
-    }
+    },
+      {
+          title: 'Payment Details',
+          url: '/payment-details',
+      }
   ];
 
   constructor(

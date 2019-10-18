@@ -1,10 +1,7 @@
 package in.stackroute.umove.bookingservice.model;
 
 import in.stackroute.umove.bookingservice.model.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -20,6 +17,8 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @ToString
+@Getter
+@Setter
 public class Ride
 {
     @Id
@@ -43,5 +42,7 @@ public class Ride
     // ObjectId needs to be converted to string
     public String get_id() { return _id.toHexString(); }
     public void set_id(ObjectId _id) { this._id = _id; }
+
+
 
 }

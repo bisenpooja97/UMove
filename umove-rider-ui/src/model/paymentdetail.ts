@@ -1,4 +1,4 @@
-import { ExtraCharges } from './extraCharges';
+import { ExtraCharges } from './extracharges';
 
 
 export class PaymentDetail {

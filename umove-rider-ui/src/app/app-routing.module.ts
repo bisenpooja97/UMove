@@ -20,7 +20,8 @@ const routes: Routes = [
   { path: 'qrcode-generator', loadChildren: './qrcode-generator/qrcode-generator.module#QrcodeGeneratorPageModule' },
   { path: 'qrcode-scanner', loadChildren: './qrcode-scanner/qrcode-scanner.module#QrcodeScannerPageModule' },
   { path: 'my-rides', loadChildren: './my-rides/my-rides.module#MyRidesPageModule' },
-  { path: 'my-rides-details/:rideId', loadChildren: './my-rides-details/my-rides-details.module#MyRidesDetailsPageModule' }
+  { path: 'my-rides-details/:rideId', loadChildren: './my-rides-details/my-rides-details.module#MyRidesDetailsPageModule' },
+  { path: 'payment-details', loadChildren: './payment-details/payment-details.module#PaymentDetailsPageModule' },
 ];
 
 @NgModule({

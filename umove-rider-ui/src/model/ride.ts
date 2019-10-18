@@ -1,13 +1,15 @@
 import { PaymentDetail } from './paymentdetail';
 import { Vehicle } from './ vehicle';
 import { Zone } from './zone';
-import { PaymentMethod } from './paymentMethod';
+import { PaymentMethod } from './paymentmethod';
 import { PromoCode } from './promocode';
 import { Rider } from './rider';
+import { Payment } from './payment';
 
 export class Ride {
     _id: string;
     paymentDetail: PaymentDetail;
+    payment: Payment;
     bookedAt: Date;
     status: string;
     vehicle: Vehicle;

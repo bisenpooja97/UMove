@@ -6,6 +6,9 @@ import in.stackroute.umove.bookingservice.model.ExtraCharge;
 import in.stackroute.umove.bookingservice.model.Ride;
 import in.stackroute.umove.bookingservice.service.RideService;
 import in.stackroute.umove.bookingservice.model.Zone;
+import in.stackroute.umove.bookingservice.model.Payment;
+import in.stackroute.umove.bookingservice.model.Ride;
+import in.stackroute.umove.bookingservice.service.RideServiceImp;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -166,6 +169,28 @@ public class RideController {
         map.put("message", "All rides are deleted successfully.");
         map.put("status", HttpStatus.OK);
         return new ResponseEntity<Map>(map, HttpStatus.OK);
+    }
+    // End Point: api/v1/payments Method: PUT
+    // to pay for a specific ride by id
+    @PutMapping("payments")
+    public ResponseEntity<Map> payForBooking(@RequestParam(value = "rideId") ObjectId rideId, @RequestParam(value = "payment_Id") String paymentId) {
+        Payment payment = rideService.payForRide(rideId, paymentId);
+        Map<String, Object> map = new TreeMap<>();
+        map.put("data", payment);
+        map.put("status", HttpStatus.CREATED);
+        return new ResponseEntity<>(map, HttpStatus.CREATED);
+    }
+
+    // End Point: api/v1/payments/rideId Method: GET
+    // to get payment Details for a specific ride by rideId
+    @GetMapping("payments/{rideId}")
+    public ResponseEntity<Map> getPaymentDetails(@PathVariable("rideId") String rideId)
+    {
+        Payment payment = rideService.getPaymentDetails(rideId);
+        Map<String, Object> map = new TreeMap<>();
+        map.put("data", payment);
+        map.put("status", HttpStatus.OK);
+        return new ResponseEntity<>(map, HttpStatus.OK);
     }
 
 

@@ -30,5 +30,10 @@ async presentToast(msg, duration) {
   getRidesById(id: string) {
     return this.http.get(this.baseUrl + '/' + id, {}, {});
   }
-
+  setPaymentDetails(rideId: string, paymentId: string) {
+        return this.http.put(this.baseUrl + '/payments?rideId=' + rideId + '&payment_Id=' + paymentId, {}, {});
+    }
+    getPaymentDetailsByRideId(id: string) {
+        return this.http.get(this.baseUrl + '/payments/' + id, {}, {});
+    }
 }
