@@ -122,6 +122,11 @@ public class RideService implements RideServiceInterface {
             LocalDateTime rideStarted = ride.getRideStartAt();
             Duration duration = Duration.between(rideStarted, rightNow);
             int totalDuration = (int) duration.toMinutes();
+            Double distance = Math.random();
+            Double rideAmount = (totalDuration*ride.getVehicle().getCosttime())+(distance*ride.getVehicle().getCostkm());
+            PaymentDetail paymentDetail = ride.getPayment();
+            paymentDetail.setRideAmount(rideAmount);
+            ride.setPayment(paymentDetail);
             ride.setDuration(totalDuration);
             ride.setStatus("endRideRequest");
             rideRepo.save(ride);
