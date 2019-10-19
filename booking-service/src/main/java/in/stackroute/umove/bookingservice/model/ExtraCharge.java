@@ -1,9 +1,6 @@
 package in.stackroute.umove.bookingservice.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 /*
  * charges list for extra damages or missing goods for vehicle
@@ -13,6 +10,8 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@Getter
+@Setter
 public class ExtraCharge {
 
     private String chargedFor;

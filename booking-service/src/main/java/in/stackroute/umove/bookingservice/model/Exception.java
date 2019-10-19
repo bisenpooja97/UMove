@@ -2,14 +2,19 @@ package in.stackroute.umove.bookingservice.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.util.Date;
 
 /*
  *  Model for exception
  */
 
-@Getter
+@NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 public class Exception {
 
     private Date timeStamp;

@@ -1,3 +1,4 @@
+
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
@@ -5,14 +6,15 @@
 export const environment = {
   production: false,
   map: 'pk.eyJ1IjoicHVuaXRzZXRpYSIsImEiOiJjazBjOTY0cGcwMDI0M2RtbThsbWEyaXhnIn0.DrloATvnGeowNnIPanQT4g',
-  baseUrl : 'http://172.23.234.60:8080/',
+  baseUrl : 'http://172.23.234.62:8080/',
   zoneService : '/zoneservice/api/v1',
   vehicleService: '/vehicleservice/api/v1',
   tomTomUrl : 'https://api.tomtom.com/search/2/structuredGeocode.json?countryCode=IND&streetName=',
   tomtomKey : '&key=Q0lrXtgq4yAgXdZuyf7RBbItuzVuRxUj',
   bookingSocket: '/ws',
   bookingService: 'bookingservice',
-  bookingBaseApi: '/api/v1/rides'
+  bookingBaseApi: '/api/v1/rides',
+
 };
 
 /*

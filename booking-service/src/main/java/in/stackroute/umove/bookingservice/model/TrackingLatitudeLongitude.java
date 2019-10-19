@@ -48,4 +48,3 @@ public class TrackingLatitudeLongitude
   private List<Timestamp> timestamps;
 
 }
-
