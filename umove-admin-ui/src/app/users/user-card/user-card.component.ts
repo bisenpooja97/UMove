@@ -38,13 +38,13 @@ export class UserCardComponent implements OnInit {
   getColor(userStatus) {
     switch (userStatus) {
     case 'Active':
-    return 'green';
+    return '#1B5E20';
     case 'Inactive':
-    return 'blue';
+    return '#FFC400';
     case 'Suspended':
-    return 'red';
+    return '#F44336';
     case 'Pending':
-    return 'blue';
+    return '#6D4C41';
 }
 
 }

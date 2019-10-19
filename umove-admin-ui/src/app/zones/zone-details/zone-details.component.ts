@@ -33,7 +33,7 @@ export class ZoneDetailsComponent implements OnInit {
   zoneStatus: Status[] = [
     { value: 'INACTIVE', viewValue: 'INACTIVE' },
     { value: 'ACTIVE', viewValue: 'ACTIVE' },
-    { value: 'UNDER_MAINTAINANCE', viewValue: 'UNDER_MAINTAINANCE' },
+    { value: 'INMAINTAINANCE', viewValue: 'INMAINTAINANCE' },
     { value: 'FULL', viewValue: 'FULL' },
   ];
 
@@ -99,13 +99,13 @@ getZoneDetails() {
 getColor(status) {
   switch (status) {
 case 'ACTIVE':
-return 'green';
+return '#1B5E20';
 case 'INACTIVE':
-return 'blue';
+return '#FFC400';
 case 'FULL':
-return 'red';
-case 'UNDER_MAINTAINANCE':
-return 'gray';
+return '#F44336';
+case 'INMAINTAINANCE':
+return '#6D4C41';
 }
 }
 }
