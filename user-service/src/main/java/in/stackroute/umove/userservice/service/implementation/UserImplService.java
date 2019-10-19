@@ -1,5 +1,6 @@
 package in.stackroute.umove.userservice.service.implementation;
 
+import in.stackroute.umove.userservice.exceptions.UserAlreadyExistsException;
 import in.stackroute.umove.userservice.model.Role;
 import in.stackroute.umove.userservice.model.UserData;
 import in.stackroute.umove.userservice.model.UserStatus;
@@ -64,13 +65,13 @@ public class UserImplService implements UserService {
 
     @Override
     public UserData addUser(UserData user) {
-        final List<UserData> userList = userRepository.findAll();
-        final Iterator<UserData> iUserList = userList.iterator();
-        while (iUserList.hasNext()) {
-            if (iUserList.next().getName().equals(user.getName())) {
+//        final List<UserData> userList = userRepository.findAll();
+//        final Iterator<UserData> iUserList = userList.iterator();
+//        while (iUserList.hasNext()) {
+//            if (iUserList.next().getName().equals(user.getName())) {
 //                throw new UserAlreadyExistsException("User already exists!!");
-            }
-        }
+//            }
+//        }
         return userRepository.save(user);
     }
 
