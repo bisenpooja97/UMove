@@ -8,13 +8,14 @@ import { VehicleCardComponent } from './vehicle-card/vehicle-card.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatFormFieldModule, MatInputModule, MatCardModule, MatIconModule,
   MatButtonModule, MatPaginatorModule, MatSelectModule, MatOptionModule, MatDialogModule,
-  MatToolbarModule, MatGridListModule, MatDatepicker, MatDatepickerModule } from '@angular/material';
+  MatToolbarModule, MatGridListModule, MatDatepicker, MatDatepickerModule, MatChipsModule } from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddVehicleComponent } from './add-vehicle/add-vehicle.component';
 import { UpdateVehiclesComponent } from './update-vehicles/update-vehicles.component';
+import { AvatarModule } from 'ngx-avatar';
 
 
 
@@ -44,6 +45,8 @@ import { UpdateVehiclesComponent } from './update-vehicles/update-vehicles.compo
     MatDialogModule,
    // MatDatepicker,
     MatDatepickerModule,
+    MatChipsModule,
+    AvatarModule,
 
 
   ],

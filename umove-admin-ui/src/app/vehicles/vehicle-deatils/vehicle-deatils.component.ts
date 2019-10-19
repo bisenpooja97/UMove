@@ -29,6 +29,7 @@ export class VehicleDeatilsComponent implements OnInit {
  cc: string;
 vehiclePurchased: Date;
 status1: String;
+chassisNumber: string;
 
 vehicleStatus: Status[] = [
   { value: 'Busy', viewValue: 'BUSY' },
@@ -61,8 +62,10 @@ getVehicleDetails() {
     this.vehiclePurchased = this.vehicle.vehiclePurchased;
     this.insuranceNo = this.vehicle.insuranceNo;
     this.zoneId = this.vehicle.zoneid;
-    this.category = this.vehicle.type.category;
-    console.log(this.category);
+    this.chassisNumber=this.vehicle.chassisNumber;
+
+    //this.category = this.vehicle.type.category;
+    //console.log(this.category);
     this.cc = this.vehicle.type.vehiclecc;
     this.costkm = this.vehicle.type.costkm;
     this.costtime = this.vehicle.type.costtime;
@@ -83,7 +86,7 @@ getVehicleDetails() {
     this.vehicle.status = newValue;
     this.vehicleService.updateVehicle(this.route.snapshot.paramMap.get('registrationNo'), this.vehicle).subscribe(
 
-    );
+);
 }
 
 openSnackbar(message: string, action: string) {

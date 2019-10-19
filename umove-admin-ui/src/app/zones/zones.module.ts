@@ -6,7 +6,9 @@ import { ZonesComponent } from './zones.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatFormFieldModule, MatInputModule, MatCardModule, MatIconModule, MatButtonModule, MatPaginatorModule,
    MatSelectModule, MatOptionModule, MatDialogModule, MatToolbarModule, MatGridListModule, MatSnackBarModule,
-    MatAutocompleteModule } from '@angular/material';
+    MatAutocompleteModule,
+    MatChipsModule,
+    MatListModule} from '@angular/material';
 import { ZoneCardComponent } from './zone-card/zone-card.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ZoneDetailsComponent } from './zone-details/zone-details.component';
@@ -17,9 +19,12 @@ import { AddZoneComponent } from './add-zone/add-zone.component';
 import { UpdateZonesComponent } from './update-zones/update-zones.component';
 import { AddSupervisorComponent } from './add-supervisor/add-supervisor.component';
 import { SupervisorDetailsComponent } from './supervisor-details/supervisor-details.component';
+import { AvatarModule } from 'ngx-avatar';
+import { VehicleDetailsComponent } from './vehicle-details/vehicle-details.component';
+
 @NgModule({
   declarations: [ZonesComponent, ZoneCardComponent, ZoneDetailsComponent, AddZoneComponent, UpdateZonesComponent,
-     AddSupervisorComponent, SupervisorDetailsComponent],
+     AddSupervisorComponent, SupervisorDetailsComponent, VehicleDetailsComponent, ],
   imports: [
     CommonModule,
     ZonesRoutingModule,
@@ -41,7 +46,12 @@ import { SupervisorDetailsComponent } from './supervisor-details/supervisor-deta
     MatToolbarModule,
     MatGridListModule,
     MatSnackBarModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatChipsModule,
+    AvatarModule,
+    MatListModule,
+    
+
   ],
   entryComponents: [AddZoneComponent, UpdateZonesComponent, AddSupervisorComponent]
 })
