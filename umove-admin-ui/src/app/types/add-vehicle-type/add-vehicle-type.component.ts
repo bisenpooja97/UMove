@@ -49,7 +49,7 @@ export class AddVehicleTypeComponent implements OnInit {
               private router: Router, private typeService: VehicleTypeService,
               private fuelService: FuelService,
               private http: HttpClient, private snackBar: MatSnackBar) {}
-  baseUrl = environment.baseUrl2 + environment.typeBaseApi;
+  baseUrl = environment.baseUrl + environment.zoneService + environment.typeBaseApi;
 
   typeForm = this.fb.group({
     name: ['', [Validators.pattern('^[a-zA-Z0-9\-]*$')]],
