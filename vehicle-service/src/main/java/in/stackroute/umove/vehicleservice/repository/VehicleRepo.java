@@ -24,6 +24,4 @@ public interface VehicleRepo extends MongoRepository<Vehicle,String> {
     List<Vehicle> findByRegistrationNo(String name);
     List<Vehicle> findByStatus(VehicleStatus status);
     //List<Vehicle> fetchVehicleByTypeName(String tname);
-
-
 }
