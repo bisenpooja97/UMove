@@ -1,7 +1,9 @@
 package in.stackroute.umove.zoneservice;
 
+import in.stackroute.umove.zoneservice.configuration.FileStorageProperties;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
@@ -15,6 +17,9 @@ import java.io.IOException;
 @EnableEurekaClient
 @EnableHystrix
 @SpringBootApplication
+@EnableConfigurationProperties({
+		FileStorageProperties.class
+})
 public class ZoneServiceApplication {
 	public static void main(String[] args) throws IOException {
 		SpringApplication.run(ZoneServiceApplication.class, args);
