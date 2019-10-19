@@ -277,4 +277,10 @@ public class RideServiceImp implements RideService {
         return payment;
 
     }
+
+    @Override
+    public Payment getOutstandingRideDetail(String rideId) {
+        Payment payment = paymentRepo.findByRideIdAndStatus(rideId, PaymentStatus.Pending);
+        return payment;
+    }
 }

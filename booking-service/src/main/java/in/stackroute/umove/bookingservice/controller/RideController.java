@@ -120,6 +120,7 @@ public class RideController {
         this.template.convertAndSend("/topic/end-ride/" + rideId, payload);
         Map<String, Object> map = new TreeMap<>();
         map.put("data", ride);
+        messagingTemplate.convertAndSend("booking_exchange", "ride_ended", map);
         return new ResponseEntity<Map>(map, HttpStatus.OK);
     }
 
@@ -130,6 +131,7 @@ public class RideController {
         Map<String, Object> map = new TreeMap<>();
         map.put("data", ride);
         map.put("status", HttpStatus.OK);
+        messagingTemplate.convertAndSend("booking_exchange", "ride_started", map);
         return new ResponseEntity<>(map, HttpStatus.OK);
     }
 
@@ -140,6 +142,7 @@ public class RideController {
         Map<String, Object> map = new TreeMap<>();
         map.put("data", ride);
         map.put("status", HttpStatus.OK);
+        messagingTemplate.convertAndSend("booking_exchange", "ride_cancelled", map);
         return new ResponseEntity<>(map, HttpStatus.OK);
     }
 
@@ -150,6 +153,7 @@ public class RideController {
         Map<String, Object> map = new TreeMap<>();
         map.put("data", ride);
         map.put("status", HttpStatus.OK);
+        messagingTemplate.convertAndSend("booking_exchange", "ride_cancelled", map);
         return new ResponseEntity<>(map, HttpStatus.OK);
     }
 
