@@ -80,17 +80,6 @@ public class RideControllerTests {
                 .andExpect(status().isOk());
     }
 
-    //Test to check api end point for ending a ride
-    @Test
-    public void endRideTest() throws Exception {
-        Ride ride = new Ride();
-        ride.set_id(new ObjectId("5d89c3cf651a913a1cf2d31e"));
-        BDDMockito.given(rideService.endRide(new ObjectId("5d89c3cf651a913a1cf2d31e"))).willReturn(ride);
-        mockMvc.perform(MockMvcRequestBuilders.patch("/api/v1/rides/5d89c3cf651a913a1cf2d31e/end")
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
-    }
-
     private static String jsonToString(final Object ob) throws JsonProcessingException {
         String result;
         try {

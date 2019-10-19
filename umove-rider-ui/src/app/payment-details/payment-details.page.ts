@@ -4,6 +4,7 @@ import { Ride } from '../model/ride';
 import { PaymentDetail } from '../model/paymentdetail';
 import { Payment } from '../model/payment';
 import { RideService } from '../service/ride.service';
+import { ToastController } from '@ionic/angular';
 
 declare let RazorpayCheckout: any;
 
@@ -71,7 +72,7 @@ export class PaymentDetailsPage implements OnInit {
       image: 'https://i.imgur.com/3g7nmJC.png',
       currency: this.currency, // your 3 letter currency code
       key: this.razorKey, // your Key Id from Razorpay dashboard
-      amount: 300, // Payment amount in smallest denomiation e.g. cents for USD
+      amount: this.paymentAmount, // Payment amount in smallest denomiation e.g. cents for USD
       name: this.name,
       prefill: {
         email: this.email,
@@ -91,8 +92,11 @@ export class PaymentDetailsPage implements OnInit {
     const successCallback = (paymentId) => {
       console.log('Hua hUa Ha');
       this.rideService.setPaymentDetails(this.bookingId, paymentId).then(response => {
-        console.log('data of payment in sql: ', response['data']);
+        console.log('data of payment in sql: ', response.data);
         this.payment = JSON.parse(response.data).data;
+        this.rideService.presentToast('hahaha' + response, 3000);
+      }).catch((e) => {
+        this.rideService.presentToast('hahaha' + e, 3000);
         this.route.navigateByUrl('');
       });
     };

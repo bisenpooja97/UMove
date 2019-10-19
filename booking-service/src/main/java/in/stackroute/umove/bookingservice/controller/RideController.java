@@ -157,15 +157,15 @@ public class RideController {
         return new ResponseEntity<>(map, HttpStatus.OK);
     }
 
-    //Api end point for end ride request by the user
-    @PatchMapping("rides/{rideId}/end")
-    public ResponseEntity<Map> endRideRequest(@PathVariable("rideId") ObjectId rideId) {
-        Ride ride = rideService.endRide(rideId);
-        Map<String, Object> map = new TreeMap<>();
-        map.put("data", ride);
-        map.put("status", HttpStatus.OK);
-        return new ResponseEntity<>(map, HttpStatus.OK);
-    }
+//    //Api end point for end ride request by the user
+//    @PatchMapping("rides/{rideId}/end")
+//    public ResponseEntity<Map> endRideRequest(@PathVariable("rideId") ObjectId rideId) {
+//        Ride ride = rideService.endRideRequest(rideId);
+//        Map<String, Object> map = new TreeMap<>();
+//        map.put("data", ride);
+//        map.put("status", HttpStatus.OK);
+//        return new ResponseEntity<>(map, HttpStatus.OK);
+//    }
     @DeleteMapping("rides")
     public ResponseEntity<Map> deleteAllRides() {
         rideService.deleteAll();

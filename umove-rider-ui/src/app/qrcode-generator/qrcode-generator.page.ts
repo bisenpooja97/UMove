@@ -15,7 +15,7 @@ export class QrcodeGeneratorPage implements OnInit {
     ride: Ride;
 
     constructor(private rideService: RideService, private route: ActivatedRoute, private router: Router, private websocketService: RideSocketService) {
-        this.rideService.getRideDetailsByUserIdNStatus('5d8bbc0da6e87d5404aa1921', 'endRideRequest')
+        this.rideService.getRideDetailsByUserIdNStatus('5d8bbc0da6e87d5404aa1921', 'started')
             .then(response => {
                 console.log('Ride details: ', response);
                 this.ride = JSON.parse(response.data).data;

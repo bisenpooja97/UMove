@@ -33,7 +33,13 @@ public class RideServiceImp implements RideService {
     @Override
     public Ride getRideById(ObjectId id) {
         Ride ride = rideRepo.findBy_id(id);
-        if(ride.getPaymentDetail().getStatus()=="unPaid"){
+        System.out.println(ride.getPaymentDetail());
+        System.out.println(ride.getPaymentDetail().getStatus());
+        if(ride.getPaymentDetail().getStatus().equals("Paid"))
+        {
+            return rideRepo.findBy_id(id);
+        }
+        else{
             double totalExtraCharges = calculateTotalExtraCharges(ride);
             int totalAmount = deductFuelAmount(ride);
             totalAmount = deductDiscount(ride,totalAmount);
@@ -42,9 +48,6 @@ public class RideServiceImp implements RideService {
             ride.getPaymentDetail().setTotalAmount((double) totalAmount);
             rideRepo.save(ride);
             return rideRepo.findBy_id(id);
-        }
-        else {
-        return rideRepo.findBy_id(id);
         }
     }
 
@@ -86,8 +89,19 @@ public class RideServiceImp implements RideService {
 
     @Override
     public Ride addExtraCharges(ObjectId rideId, List<ExtraCharge> extraCharges) {
+        LocalDateTime rightNow = LocalDateTime.now();
         Ride ride = rideRepo.findBy_id(rideId);
         ride.getPaymentDetail().setExtraCharges(extraCharges);
+        ride.setRideEndAt(rightNow);
+        LocalDateTime rideStarted = ride.getRideStartAt();
+        Duration duration = Duration.between(rideStarted, rightNow);
+        int totalDuration = (int) duration.toMinutes();
+        ride.setDuration(totalDuration);
+        Double distance = 5 + (Math.random()*5);
+        ride.setDistance(distance);
+        Double rideAmount = (totalDuration*ride.getVehicle().getType().getCosttime())+(distance*ride.getVehicle().getType().getCostkm());
+        ride.getPaymentDetail().setRideAmount(rideAmount);
+        ride.setStatus("ended");
         rideRepo.save(ride);
         return ride;
     }
@@ -181,22 +195,39 @@ public class RideServiceImp implements RideService {
         return ride;
     }
 
+//    @Override
+//    public Ride endRideRequest(ObjectId rideId) {
+//        LocalDateTime rightNow = LocalDateTime.now();
+//        Ride ride = rideRepo.findBy_id(rideId);
+//        if (ride.getStatus().equalsIgnoreCase("started")) {
+//            ride.setRideEndAt(rightNow);
+//            LocalDateTime rideStarted = ride.getRideStartAt();
+//            Duration duration = Duration.between(rideStarted, rightNow);
+//            int totalDuration = (int) duration.toMinutes();
+//            ride.setDuration(totalDuration);
+//            Double distance = 5 + (Math.random()*5);
+//            ride.setDistance(distance);
+//            ride.setStatus("endRideRequest");
+//            rideRepo.save(ride);
+//        }
+//        return ride;
+//    }
     //Function to end ride for the user
-    @Override
-    public Ride endRide(ObjectId rideId) {
-        LocalDateTime rightNow = LocalDateTime.now();
-        Ride ride = rideRepo.findBy_id(rideId);
-        if (ride.getStatus().equalsIgnoreCase("started")) {
-            ride.setRideEndAt(rightNow);
-            LocalDateTime rideStarted = ride.getRideStartAt();
-            Duration duration = Duration.between(rideStarted, rightNow);
-            int totalDuration = (int) duration.toMinutes();
-            ride.setDuration(totalDuration);
-            ride.setStatus("endRideRequest");
-            rideRepo.save(ride);
-        }
-        return ride;
-    }
+//    @Override
+//    public Ride endRide(ObjectId rideId) {
+//        LocalDateTime rightNow = LocalDateTime.now();
+//        Ride ride = rideRepo.findBy_id(rideId);
+//        if (ride.getStatus().equalsIgnoreCase("started")) {
+//            ride.setRideEndAt(rightNow);
+//            LocalDateTime rideStarted = ride.getRideStartAt();
+//            Duration duration = Duration.between(rideStarted, rightNow);
+//            int totalDuration = (int) duration.toMinutes();
+//            ride.setDuration(totalDuration);
+//            ride.setStatus("endRideRequest");
+//            rideRepo.save(ride);
+//        }
+//        return ride;
+//    }
 
     @Override
     public Payment payForRide(ObjectId rideId, String paymentId) {
@@ -215,7 +246,7 @@ public class RideServiceImp implements RideService {
         Double amount_paid = ride.getPaymentDetail().getTotalAmount();
         LocalDateTime deducted_at = LocalDateTime.now();
         PaymentDetail paymentDetail = ride.getPaymentDetail();
-        paymentDetail.setStatus("Paid");
+        paymentDetail.setStatus(PaymentStatus.Paid);
         //paymentDetail.setPaidAmount(amount_paid);
         ride.setPaymentDetail(paymentDetail);
         rideRepo.save(ride);

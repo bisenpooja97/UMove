@@ -1,6 +1,7 @@
 package in.stackroute.umove.bookingservice.service;
 
 import in.stackroute.umove.bookingservice.model.Payment;
+import in.stackroute.umove.bookingservice.model.Payment;
 import in.stackroute.umove.bookingservice.model.Ride;
 import in.stackroute.umove.bookingservice.model.ExtraCharge;
 import org.bson.types.ObjectId;
@@ -15,15 +16,16 @@ public interface RideService {
     Map<String, Object> deleteAll();
     Ride getRideByUserIdNStatus(String userId, String bookingStatus);
     Ride addExtraCharges(ObjectId bookingId, List<ExtraCharge> extraCharges);
-    List<Ride> getRidesByUserId(String userId);
+
     List<Ride> getAllRides();
     Ride startRide(ObjectId rideId, String registrationNo);
     Ride autocancelRide(ObjectId rideId);
     Ride cancelRide(ObjectId rideId);
     Ride updateDestination(Zone destinationZone, ObjectId rideId);
-    Ride endRide(ObjectId rideId);
+   // Ride endRide(ObjectId rideId);
     Payment payForRide(ObjectId rideId, String paymentId);
-
+    List<Ride> getRidesByUserId(String userId);
     Payment getPaymentDetails(String rideId);
+//    Ride endRideRequest(ObjectId rideId);
 
 }
