@@ -1,3 +1,48 @@
 /* You can add global styles to this file, and also import other style files */
 
-@import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+body {
+    margin: 0;
+    height: 100%;
+}
+
+.header {
+    margin-left: 240px;
+}
+
+.card {
+    margin-left: 15%;
+}
+
+.add-button {
+    padding-right: 200px;
+}
+
+.search {
+    margin-left: 240px;
+    margin-bottom: 50px;
+}
+
+@media only screen and (max-width: 600px) {
+    .search {
+        margin-left: 60px;
+        margin-bottom: 50px;
+    }
+    .header {
+        margin-left: 50px;
+    }
+    .add-button {
+        padding-left: 300px;
+    }
+}
+.my-card {
+    height: 250px;
+    cursor: pointer;
+}
+.my-card:hover {
+    -webkit-transform: scale(1.1) 2s;
+    -ms-transform: scale(1.1);
+    transform: scale(1.1);  
+}
+
+

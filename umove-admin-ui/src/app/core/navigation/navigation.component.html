@@ -1,0 +1,30 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="(isHandset$ | async) === false">
+    <mat-toolbar>Menu</mat-toolbar>
+    <mat-nav-list>
+      <a *ngIf="loginService.isUserLoggedIn()" mat-list-item routerLink="/users">Users</a>
+      <a *ngIf="loginService.isUserLoggedIn()" mat-list-item routerLink="/zones">Zones</a>
+      <a *ngIf="loginService.isUserLoggedIn()" mat-list-item routerLink="/vehicles">Vehicles</a>
+      <a *ngIf="loginService.isUserLoggedIn()" mat-list-item routerLink="/types">Vehicle types</a>
+      <a *ngIf="loginService.isUserLoggedIn()" mat-list-item routerLink="/fuel">Fuel</a>
+      <a *ngIf="loginService.isUserLoggedIn()" mat-list-item routerLink="/logout">Logout</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span>umove-admin-ui</span>
+    </mat-toolbar>
+    <!-- Add Content Here -->
+  </mat-sidenav-content>
+</mat-sidenav-container>

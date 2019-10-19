@@ -1,13 +1,11 @@
 <h1 fxLayout="column" fxLayout.gt-md="row" fxLayoutGap.gt-md="15px" class="header">
-    Vehicle
+    Fuel
 </h1>
 <div fxLayout="row" fxLayoutGap="20px" class="search" fxLayout.gt-xs="row">
     <mat-form-field fxFlex=20%>
         <input matInput [(ngModel)]="term" placeholder="Search">
     </mat-form-field>
 </div>
-
-<!-- <app-search-vehicleType></app-search-vehicleType> -->
 <div fxLayout.xs="column" fxLayout.gt="row" fxLayout="row wrap" fxLayoutGap="10px" class="card">
     <app-fuel-card *ngFor="let type of fuel| paginate: { itemsPerPage: 10, currentPage: p } | filter:term" [fuel]="type"></app-fuel-card>
 

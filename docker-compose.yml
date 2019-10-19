@@ -111,6 +111,7 @@ services:
     depends_on:
       - config
       - discovery
+      # - api-gateway
     restart: on-failure
     links:
       - config

@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title *ngIf="page!=='pick-up'">Select Drop Zone</ion-title>
+<ion-row *ngIf="page==='pick-up' && !trip">
+      <ion-col size="6">
+      <ion-button shape="round" expand="block" fill="solid" (click)="trip=false" >Round Trip</ion-button>
+      </ion-col>
+      <ion-col size="6">
+      <ion-button shape="round" expand="block" fill="outline" (click)="trip=true">One Way</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="page==='pick-up' && trip">
+      <ion-col size="6">
+        <ion-button shape="round" expand="block" fill="outline" (click)="trip=false" >Round Trip</ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button shape="round" expand="block" fill="solid" (click)="trip=true">One Way</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+<ion-content style="margin:0; padding:0;">
+  <ion-grid>
+    <ion-row>
+                  <ion-auto-complete style="width: 100%"  [dataProvider]="zoneService" [(ngModel)]="locality" (itemSelected)="gettingCoordinatesByLocality()"></ion-auto-complete>
+    </ion-row>
+
+    <ion-row  class="map" id="map" style="height: 640px" >
+      <div style="position:absolute; top:0; bottom:0; width:100%;" *ngFor="let marker of markerss | async">
+        <button (click)="flyTo(marker)">{{ marker.properties.message }}</button>
+      </div>
+    </ion-row>
+  </ion-grid>
+
+<!--  <ion-item slot="fixed" margin>-->
+<!--    <ion-searchbar type="text" style="width: 100%" debounce="500" (ionInput)="getItems($event)"></ion-searchbar>-->
+<!--    <ion-list *ngIf="isItemAvailable">-->
+<!--      <ion-item *ngFor="let item of items">-->
+<!--        {{ item }}-->
+<!--      </ion-item>-->
+<!--    </ion-list>-->
+<!--  </ion-item >-->
+</ion-content>
+<ion-footer>
+  <ion-row *ngIf="page=='pick-up'">
+    <ion-button [class.button-disabled]="!isSelected" expand="block" class="ion-no-margin btn-bottom" style="width: 100vw" (click)="sendDataToService()">Show vehicles</ion-button>
+  </ion-row>
+  <ion-row *ngIf="page=='drop'">
+    <ion-button [class.button-disabled]="!isSelected" expand="block" class="ion-no-margin btn-bottom" style="width: 100vw" (click)="booking()">Get Booking Details</ion-button>
+  </ion-row>
+</ion-footer>

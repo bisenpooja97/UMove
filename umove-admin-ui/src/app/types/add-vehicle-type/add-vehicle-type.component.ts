@@ -7,6 +7,7 @@ import { MatSnackBar, MatDialogRef } from '@angular/material';
 import { HttpClient } from '@angular/common/http';
 import { Fuel } from 'src/app/model/Fuel';
 import { FuelService } from 'src/app/fuel/fuel.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-add-vehicle-type',
@@ -47,8 +48,8 @@ export class AddVehicleTypeComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<AddVehicleTypeComponent>, private fb: FormBuilder, private route: ActivatedRoute,
               private router: Router, private typeService: VehicleTypeService,
               private fuelService: FuelService,
-              private http: HttpClient, private snackBar: MatSnackBar
-             ) { }
+              private http: HttpClient, private snackBar: MatSnackBar) {}
+  baseUrl = environment.baseUrl2 + environment.typeBaseApi;
 
   typeForm = this.fb.group({
     name: ['', [Validators.pattern('^[a-zA-Z0-9\-]*$')]],
@@ -92,8 +93,8 @@ export class AddVehicleTypeComponent implements OnInit {
      const uploadData = new FormData();
      uploadData.append('file', this.selectedFile, this.selectedFile.name);
     //  this.http; is; the; injected; HttpClient;
-     this.http.post('http://localhost:8092/api/v1/uploadFile?id=12', uploadData)
-        .subscribe(event => {
+     this.http.post(this.baseUrl + '/uploadFile?id=12', uploadData)
+       .subscribe(event => {
            console.log('response', event); // handle event here
         });
   }

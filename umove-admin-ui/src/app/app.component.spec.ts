@@ -1,15 +1,28 @@
 import { TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import { NavigationComponent } from './core/navigation/navigation.component';
+import { FooterComponent } from './core/footer/footer.component';
+import { MatSidenavModule, MatToolbarModule, MatListModule, MatIconModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AuthenticationComponent } from './authentication/authentication.component';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule
+        RouterTestingModule,
+        MatSidenavModule,
+        MatToolbarModule,
+        MatListModule,
+        MatIconModule,
+        BrowserAnimationsModule
       ],
       declarations: [
-        AppComponent
+        AppComponent,
+        NavigationComponent,
+        FooterComponent,
+        // AuthenticationComponent
       ],
     }).compileComponents();
   }));
@@ -30,6 +43,6 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to umove-admin-ui!');
+    expect(compiled.querySelector('span').textContent).toContain('umove-admin-ui');
   });
 });

@@ -1,40 +1,61 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FlexLayoutModule } from "@angular/flex-layout";
+import { FormsModule } from '@angular/forms';
+
+
+import { NavigationComponent } from './core/navigation/navigation.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { FooterComponent } from './core/footer/footer.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ZonesModule } from './zones/zones.module';
+import { MatDialogModule } from '@angular/material';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
-  MatButtonModule,
   MatCardModule,
-   MatInputModule,
-  MatIconModule,
   MatMenuModule,
  MatNativeDateModule,
-  MatToolbarModule,
  MatSortModule, MatAutocompleteModule,
-   MatSidenavModule,
-    MatListModule,
-     MatTableModule,
       MatPaginatorModule,
       MatSelectModule,
-
       MatSnackBarModule,
-      MatDialogModule,
-      MatDatepicker,
       MatDatepickerModule,
 
 
 } from '@angular/material';
-import { HttpClientModule } from '@angular/common/http';
+import { VehiclesModule } from './vehicles/vehicles.module';
+import { TypesModule } from './types/types.module';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+
+    NavigationComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
+    AppRoutingModule,
+    LayoutModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule,
+    FlexLayoutModule,
+    HttpClientModule,
+    ZonesModule,
+    VehiclesModule,
+    TypesModule,
     AppRoutingModule,
     FlexLayoutModule,
     MatButtonModule,
@@ -50,16 +71,13 @@ import { HttpClientModule } from '@angular/common/http';
     MatPaginatorModule,
     MatListModule,
     MatSidenavModule,
+    FormsModule,
     BrowserAnimationsModule,
     MatIconModule,
     MatDialogModule,
-    //MatDatepicker,
     MatDatepickerModule,
-    //MatDatepickerModule,
-    MatNativeDateModule
-
-
-
+    MatNativeDateModule,
+    SharedModule
   ],
   providers: [MatDatepickerModule],
   bootstrap: [AppComponent]

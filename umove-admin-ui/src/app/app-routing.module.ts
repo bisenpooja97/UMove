@@ -1,10 +1,20 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { PageNotFoundComponent } from './shared/page-not-found/page-not-found.component';
+import { AuthGuardService } from './authentication/service/auth-guard.service';
 
 
-const routes: Routes = [{ path: 'types', loadChildren: () => import('./types/types.module').then(m => m.TypesModule) },
-{ path: 'vehicles', loadChildren: () => import('./vehicles/vehicles.module').then(m => m.VehiclesModule) },
-{ path: 'fuel', loadChildren: () => import('./fuel/fuel.module').then(m => m.FuelModule) }];
+const routes: Routes = [
+{ path: 'fuel', loadChildren: () => import('./fuel/fuel.module').then(m => m.FuelModule), canActivate: [AuthGuardService] },
+{ path: 'documents', loadChildren: () => import('./documents/documents.module').then(m => m.DocumentsModule),
+ canActivate: [AuthGuardService] },
+{ path: 'users', loadChildren: () => import('./users/users.module').then(m => m.UsersModule) },
+{ path: 'zones', loadChildren: () => import('./zones/zones.module').then(m => m.ZonesModule) , canActivate: [AuthGuardService]},
+{ path: '', loadChildren: () => import('./authentication/authentication.module').then(m => m.AuthenticationModule) },
+{ path: 'types', loadChildren: () => import('./types/types.module').then(m => m.TypesModule), canActivate: [AuthGuardService] },
+{ path: 'vehicles', loadChildren: () => import('./vehicles/vehicles.module').then(m => m.VehiclesModule), canActivate: [AuthGuardService] },
+{ path: '**', component: PageNotFoundComponent}
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, {useHash: true})],

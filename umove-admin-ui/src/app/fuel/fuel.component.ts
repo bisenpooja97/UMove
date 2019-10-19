@@ -27,9 +27,10 @@ export class FuelComponent implements OnInit {
                                                          console.log(res, 'parent');
 
     } );
-    return this.fuelService.getFuel().subscribe(res => this.dataSource.data = res.data,
-      length =>  this.dataSource.data.length = length);
-      }
+    return this.fuelService.getFuel().subscribe(res => {
+      this.fuel = res.data;
+    });
+  }
 
       ngAfterViewInit() {
         this.dataSource.paginator = this.paginator;

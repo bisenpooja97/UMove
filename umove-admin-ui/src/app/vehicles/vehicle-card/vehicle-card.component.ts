@@ -12,7 +12,7 @@ export class VehicleCardComponent implements OnInit {
  registrationNo: string;
  status: string;
  type: string;
- //category: string;
+ // category: string;
 
   constructor(private router: Router) { }
 
@@ -28,23 +28,19 @@ export class VehicleCardComponent implements OnInit {
   ok() {
     console.log('hi');
     this.router.navigate(['vehicles/', this.registrationNo]);
+  }
+  getColor(status) {
+    switch (status) {
+      case 'Busy':
+        return '#F44336';
+      case 'Free':
+        return '#1B5E20';
+      case 'Servicing':
+        return '#6D4C41';
+      case 'No_More_In_Use':
+        return '#FFC400';
+      case 'Stolen':
+        return '#757575';
     }
-    getColor(status) {
-      switch (status) {
-case 'Busy':
-return 'green';
-case 'Free':
-return 'black';
-case 'Servicing':
-return 'red';
-case 'No_More_In_Use':
-return 'gray';
-case 'Stolen':
-return 'gray';
+  }
 }
-}
-}
-
-
-
-
