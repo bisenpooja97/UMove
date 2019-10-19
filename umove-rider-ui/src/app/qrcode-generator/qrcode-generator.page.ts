@@ -32,7 +32,7 @@ export class QrcodeGeneratorPage implements OnInit {
                 console.log('data from socket: ', message);
                 if(message && message.status === 'Ended') {
                     rideService.presentToast('Your ride is ended.', 2000);
-                    router.navigateByUrl('payment-detail');
+                    router.navigateByUrl('payment-detail/'+ this.ride._id);
                 }
                 else {
                     rideService.presentToast('Something went wrong', 2000);

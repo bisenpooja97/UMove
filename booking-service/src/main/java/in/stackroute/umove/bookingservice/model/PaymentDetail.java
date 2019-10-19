@@ -1,27 +1,21 @@
 package in.stackroute.umove.bookingservice.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
+
 import java.util.List;
 
-/*
- * Ride charges and payment details
- */
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-@ToString
-public class PaymentDetail {
-
-    private String status;
-    private Integer discount;
-    private Double rideAmount;
+@AllArgsConstructor
+@Getter
+@Setter
+public class PaymentDetail
+{
+    private PaymentStatus status = PaymentStatus.UnPaid ;
+    private Double rideAmount=0.0;
     private List<ExtraCharge> extraCharges;
-    private Double totalExtraCharges;
-    private Double totalAmount;
-    private Double paidAmount;
-
+    private Double totalExtraCharges=0.0;
+    private Double totalAmount=0.0;
+    private Double fuelRefillAmount=0.0;
 }

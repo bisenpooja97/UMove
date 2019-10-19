@@ -7,10 +7,6 @@ const routes: Routes = [
     redirectTo: 'confirm-ride-detail',
     pathMatch: 'full'
   },
-  // {
-  //   path: 'home',
-  //   loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
-  // },
   { path: 'confirm-ride-detail', loadChildren: './confirm-ride-detail/confirm-ride-detail.module#ConfirmRideDetailPageModule' },
   { path: 'dummy-payment-method', loadChildren: './dummy-payment-method/dummy-payment-method.module#DummyPaymentMethodPageModule' },
   { path: 'dummy-promocode', loadChildren: './dummy-promocode/dummy-promocode.module#DummyPromocodePageModule' },
@@ -19,7 +15,9 @@ const routes: Routes = [
   { path: 'dummy-destination-zone', loadChildren: './dummy-destination-zone/dummy-destination-zone.module#DummyDestinationZonePageModule' },
   { path: 'qrcode-generator', loadChildren: './qrcode-generator/qrcode-generator.module#QrcodeGeneratorPageModule' },
   { path: 'qrcode-scanner', loadChildren: './qrcode-scanner/qrcode-scanner.module#QrcodeScannerPageModule' },
-  { path: 'payment-detail', loadChildren: './payment-detail/payment-detail.module#PaymentDetailPageModule' }
+  { path: 'my-rides', loadChildren: './my-rides/my-rides.module#MyRidesPageModule' },
+  { path: 'my-rides-details/:rideId', loadChildren: './my-rides-details/my-rides-details.module#MyRidesDetailsPageModule' },
+  { path: 'payment-detail/:rideId', loadChildren: './payment-details/payment-details.module#PaymentDetailsPageModule' },
 ];
 
 @NgModule({

@@ -120,10 +120,10 @@ export class ConfirmRideDetailPage implements OnInit {
         this.router.navigateByUrl('ride-booking-details');
       } else if (!response) {
         this.rideService.presentToast('Error: Something Went Wrong, Try again.', 2000);
-        this.router.navigateByUrl('home');
+        this.router.navigateByUrl('');
       } else {
-        this.rideService.presentToast(response.data.message, 2000);
-        this.router.navigateByUrl('home');
+        this.rideService.presentToast(JSON.parse(response.data).message, 2000);
+        this.router.navigateByUrl('');
       }
     });
   }
