@@ -10,6 +10,9 @@ import in.stackroute.umove.bookingservice.model.Payment;
 import in.stackroute.umove.bookingservice.model.Ride;
 import in.stackroute.umove.bookingservice.service.RideServiceImp;
 import org.bson.types.ObjectId;
+import org.springframework.amqp.core.TopicExchange;
+import org.springframework.amqp.rabbit.core.RabbitMessagingTemplate;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,10 +30,12 @@ import java.util.TreeMap;
 public class RideController {
 
     private final SimpMessagingTemplate template;
+    private final RabbitTemplate messagingTemplate;
 
     @Autowired
-    RideController(SimpMessagingTemplate template) {
+    RideController(SimpMessagingTemplate template, RabbitTemplate messagingTemplate) {
         this.template = template;
+        this.messagingTemplate = messagingTemplate;
     }
 
     @Autowired
@@ -53,6 +58,7 @@ public class RideController {
         Map<String, Object> map = new TreeMap<>();
         map.put("data", rideDetails);
         map.put("status", HttpStatus.CREATED);
+        messagingTemplate.convertAndSend("booking_exchange", "ride_confirmed", map);
         return new ResponseEntity<>(map, HttpStatus.CREATED);
     }
 

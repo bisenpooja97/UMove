@@ -134,8 +134,10 @@ services:
     ports:
       - 8092:8092
     depends_on:
-      - discovery
       - config
+      - discovery
+      - mongo
+      - rabbitmq
     restart: on-failure
 
   zones:
