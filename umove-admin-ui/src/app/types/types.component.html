@@ -1,0 +1,20 @@
+<h1 fxLayout="column" fxLayout.gt-md="row" fxLayoutGap.gt-md="15px" class="header">
+    Vehicle Types
+</h1>
+<div fxLayout="row" fxLayoutGap="20px" class="search" fxLayout.gt-xs="row">
+    <mat-form-field fxFlex=20%>
+        <input matInput [(ngModel)]="term" placeholder="Search">
+    </mat-form-field>
+</div>
+<!-- <app-search-vehicleType></app-search-vehicleType> -->
+<div fxLayout.xs="column" fxLayout.gt="row" fxLayout="row wrap" fxLayoutGap="10px" class="card">
+    <app-vehicle-type-card *ngFor="let type of vehicleTypes | paginate: { itemsPerPage: 10, currentPage: p}  | filter:term" [vehicleTypes]="type"></app-vehicle-type-card>
+
+    <pagination-controls fxLayout="column" (pageChange)="p = $event"></pagination-controls>
+</div>
+<div fxLayout="column" fxLayout.gt-xs="row " fxLayoutAlign="end" class="add-button">
+    <button mat-fab color="primary" (click)="add()"><i class="material-icons">
+          add
+      </i>
+    </button>
+</div>
