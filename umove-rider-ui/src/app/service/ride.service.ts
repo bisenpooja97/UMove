@@ -78,5 +78,14 @@ export class RideService {
   endRideRequestById(rideId: string) {
     return this.http.patch(this.baseUrl + '/' + rideId + '/end', {}, {});
   }
+  getRidesByUserId(userId) {
+  return this.http.get(this.baseUrl + '?userId=' + userId, {} , {});
+}
+setPaymentDetails(rideId: string, paymentId: string) {
+  return this.http.put(this.baseUrl + '/payments?rideId=' + rideId + '&payment_Id=' + paymentId, {}, {});
+}
+getPaymentDetailsByRideId(id: string) {
+  return this.http.get(this.baseUrl + '/payments/' + id, {}, {});
+}
 
 }

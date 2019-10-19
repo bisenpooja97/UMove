@@ -1,9 +1,10 @@
 import {Vehicle} from './vehicle';
 import {Zone} from './zone';
 import {User} from './user';
-import {Payment} from './payment';
+import {PaymentDetail} from './paymentdetail';
 import {PaymentMethod} from './payment-method';
 import {Campaign} from './campaign';
+import { Payment } from './payment';
 
 
 export class Ride {
@@ -21,5 +22,6 @@ export class Ride {
     rideEndAt: Date;
     distance: number;
     duration: number;
+    paymentDetail: PaymentDetail;
     payment: Payment;
 }

@@ -38,6 +38,7 @@
     "cordova-plugin-tomtom-bridge-navigation-launcher": "0.0.3",
     "@mobiscroll/angular": "https://npm.mobiscroll.com/@mobiscroll/angular-trial/-/angular-trial-4.8.3.tgz",
     "@stomp/stompjs": "^5.4.2",
+    "com.razorpay.cordova": "^1.4.8",
     "core-js": "^2.5.4",
     "ionic": "^5.4.4",
     "ionic4-auto-complete": "^2.1.4",
@@ -96,6 +97,7 @@
       "cordova-plugin-statusbar": {},
       "cordova-plugin-device": {},
       "cordova-plugin-splashscreen": {},
+      "com.razorpay.cordova": {},
       "cordova-plugin-ionic-webview": {
         "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
       },
