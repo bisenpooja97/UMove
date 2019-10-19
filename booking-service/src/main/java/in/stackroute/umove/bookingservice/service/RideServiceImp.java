@@ -47,10 +47,12 @@ public class RideServiceImp implements RideService {
         Duration duration = Duration.between(rideStarted, rightNow);
         int totalDuration = (int) duration.toMinutes();
         ride.setDuration(totalDuration);
-        Double distance = 5 + (Math.random()*5);
-        ride.setDistance(distance);
-        Double rideAmount = (totalDuration*ride.getVehicle().getType().getCosttime())+(distance*ride.getVehicle().getType().getCostkm());
-        ride.getPayment().setRideAmount(rideAmount);
+        Double distance = 5 + (Math.random() * 5);
+        Double roundUpDistance = Double.valueOf(Math.round(distance*100)/100);
+        ride.setDistance(roundUpDistance);
+        Double rideAmount = (totalDuration*ride.getVehicle().getType().getCosttime()+roundUpDistance*ride.getVehicle().getType().getCostkm());
+        Double roundUpRideAmount = Double.valueOf(Math.round(rideAmount*100)/100);
+        ride.getPayment().setRideAmount(roundUpRideAmount);
         ride.setStatus("ended");
         rideRepo.save(ride);
         return ride;
@@ -141,21 +143,4 @@ public class RideServiceImp implements RideService {
         return ride;
     }
 
-//    @Override
-//    public Ride endRideRequest(ObjectId rideId) {
-//        LocalDateTime rightNow = LocalDateTime.now();
-//        Ride ride = rideRepo.findBy_id(rideId);
-//        if (ride.getStatus().equalsIgnoreCase("started")) {
-//            ride.setRideEndAt(rightNow);
-//            LocalDateTime rideStarted = ride.getRideStartAt();
-//            Duration duration = Duration.between(rideStarted, rightNow);
-//            int totalDuration = (int) duration.toMinutes();
-//            ride.setDuration(totalDuration);
-//            Double distance = 5 + (Math.random()*5);
-//            ride.setDistance(distance);
-//            ride.setStatus("endRideRequest");
-//            rideRepo.save(ride);
-//        }
-//        return ride;
-//    }
 }
