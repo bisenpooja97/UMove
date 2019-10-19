@@ -26,23 +26,47 @@
 
             <mat-form-field appearance="outline" fxFlex>
                 <mat-label>Km Per Litre</mat-label>
-                <input matInput #input placeholder="Km per litre" formControlName="km" required>
+                <input matInput #input placeholder="Km per litre" formControlName="kilometer" required>
+                <mat-error *ngIf="Rkm.invalid">
+
+                    {{getErrorkm()}}
+                </mat-error>
             </mat-form-field>
 
 
             <mat-form-field appearance="outline" fxFlex>
                 <mat-label>CC</mat-label>
-                <input matInput #input placeholder="CC" formControlName="cc" required>
-                <!-- <mat-error *ngIf="Rcostkm.invalid">
-                        {{getErrorCostkm()}}
+                <input matInput #input placeholder="CC" formControlName="vehiclecc" required>
+                <mat-error *ngIf="Rcc.invalid">
+                    {{getErrorCC()}}
 
-                    </mat-error> -->
+                </mat-error>
             </mat-form-field>
 
             <mat-form-field appearance="outline" fxFlex>
+                <mat-label></mat-label>
+                <input matInput #input placeholder="Base Fare" formControlName="baseFare" required>
+                <mat-error *ngIf="Rbasefare.invalid">
+                    {{getErrorBaseFare()}}
+
+                </mat-error>
+
+            </mat-form-field>
+
+
+            <mat-form-field appearance="outline" fxFlex>
+                <mat-label>Fuel Type</mat-label>
+                <mat-select formControlName="fuel">
+                    <mat-option *ngFor="let fuel of  fuels" [value]="fuel">
+                        {{fuel.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <!-- <mat-form-field appearance="outline" fxFlex>
                 <mat-label>Category</mat-label>
-                <!-- <input matInput #input placeholder="Placeholder" formControlName="status" required> -->
-                <select matNativeControl formControlName="category">
+                 <input matInput #input placeholder="Placeholder" formControlName="status" required> -->
+            <!-- <select matNativeControl formControlName="category">
         <option value="Sports">Sports</option>
         <option value="Cruiser">Cruiser</option>
         <option value="Touring">Touring</option>
@@ -50,7 +74,7 @@
         <option value="Dual_Purpose">Dual Purpose</option>
         <option value="Dirt_Bikes">Dirt Bikes</option>
       </select>
-            </mat-form-field>
+            </mat-form-field> -->
 
 
             <mat-form-field appearance="outline" fxFlex>

@@ -14,6 +14,7 @@ export const environment = {
   vehicleService: 'vehicle-service',
   vehicleBaseApi: '/api/v1/vehicles',
   typeBaseApi: '/api/v1/types',
+  fuelBaseApi: '/api/v1/fuel',
 };
 /*
  * For easier debugging in development mode, you can import the following file

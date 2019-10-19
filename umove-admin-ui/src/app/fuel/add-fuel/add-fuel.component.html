@@ -1,0 +1,54 @@
+<div class="add">
+    <mat-toolbar>
+        <span class="fill-remaining-space"></span>
+        <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabIndex="-1">
+          <mat-icon>clear</mat-icon>
+      </button>
+    </mat-toolbar>
+
+
+
+    <form fxLayout="column" fxLayoutAlign="center center" [formGroup]="fuelForm" (ngSubmit)="onSubmit()">
+        <h2 fxLayout="column" fxLayout.gt-md="row" fxLayoutGap.gt-md="15px" fxLayoutAlign="center center">Add New Fuel Type</h2>
+
+        <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px" class="form">
+
+            <mat-form-field appearance="outline" fxFlex>
+                <mat-label>Name</mat-label>
+                <input matInput #input placeholder="Name" formControlName="name" required>
+
+                <!-- <mat-error *ngIf="rNum.invalid">
+
+                  {{getErrorRegistrationNo()}}
+              </mat-error> -->
+            </mat-form-field>
+
+
+
+            <mat-form-field appearance="outline" fxFlex>
+                <mat-label>Insurance No.</mat-label>
+                <input matInput #input placeholder="Cost" formControlName="costFuel" required>
+
+                <!-- <mat-error *ngIf="RinsuranceNo.invalid">
+
+                  {{getErrorInsuranceNo()}}
+              </mat-error> -->
+
+            </mat-form-field>
+
+
+
+
+
+
+
+            <button mat-raised-button class="btn">
+    Submit
+  </button>
+
+
+        </div>
+
+    </form>
+
+</div>

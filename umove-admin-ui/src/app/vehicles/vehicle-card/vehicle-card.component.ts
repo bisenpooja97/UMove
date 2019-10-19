@@ -12,7 +12,7 @@ export class VehicleCardComponent implements OnInit {
  registrationNo: string;
  status: string;
  type: string;
- category: string;
+ //category: string;
 
   constructor(private router: Router) { }
 
@@ -20,8 +20,8 @@ export class VehicleCardComponent implements OnInit {
      this.registrationNo = this.vehicle.registrationNo;
      this.status = this.vehicle.status;
      this.type = this.vehicle.type.name;
-     this.category=this.vehicle.type.category;
-    console.log(this.vehicle.type.name);
+   //  this.category = this.vehicle.type.category;
+     console.log(this.vehicle.type.name);
 
   }
 

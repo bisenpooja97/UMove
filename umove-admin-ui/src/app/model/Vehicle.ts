@@ -9,6 +9,7 @@ export class Vehicle{
   public type: VehicleType;
   public lastServiceDate: Date;
   public vehiclePurchased: Date;
+  public chassisNumber: string;
 
 
 
