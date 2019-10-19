@@ -5,6 +5,7 @@ target/
 !**/src/main/**
 !**/src/test/**
 
+/user-service/uploads/
 ### STS ###
 .apt_generated
 .classpath
