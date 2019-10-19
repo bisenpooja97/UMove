@@ -13,7 +13,7 @@
         
                         <mat-form-field appearance="outline" fxFlex>
                                 <mat-label>Supervisor Name</mat-label>
-                                <input type="text" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto" [(ngModel)]="sname2">
+                                <input #input aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto" [(ngModel)]="sname2">
                                 <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedclient($event)" [displayWith]="getOptionText">
                                     <mat-option *ngFor="let option of options ; let i = index" [value]="option">
                                         {{option.name}}

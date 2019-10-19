@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Zone } from 'src/app/model/zone';
 import { Router } from '@angular/router';
-import { ZoneService } from '../service/zone.service';
 
 @Component({
   selector: 'app-zone-card',
@@ -14,6 +13,8 @@ export class ZoneCardComponent implements OnInit {
   zoneNames: object;
   city: object;
   status: object;
+  locality: object;
+  capacity: object;
 
   constructor(private router: Router) {}
 
@@ -21,6 +22,8 @@ export class ZoneCardComponent implements OnInit {
      this.zoneNames = Object.values(this.zones)[1];
      this.city = Object.values(this.zones)[4];
      this.status = Object.values(this.zones)[15];
+     this.locality = Object.values(this.zones)[8];
+     this.capacity = Object.values(this.zones)[9];
   }
 
   ok() {
@@ -30,13 +33,13 @@ export class ZoneCardComponent implements OnInit {
     getColor(status) {
                        switch (status) {
         case 'ACTIVE':
-          return 'green';
+          return '#1B5E20';
         case 'INACTIVE':
-          return 'cyan';
+          return '#FFC400';
         case 'FULL':
-          return 'red';
-        case 'UNDER_MAINTAINANCE':
-          return 'gray';
+          return '#F44336';
+        case 'INMAINTAINANCE':
+          return '#6D4C41';
       }
 }
 }

@@ -1,0 +1,82 @@
+<div class="add">
+    <mat-toolbar>
+        <span class="fill-remaining-space"></span>
+        <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabIndex="-1">
+          <mat-icon>clear</mat-icon>
+      </button>
+    </mat-toolbar>
+
+
+    <form fxLayout="column" fxLayoutAlign="center center" [formGroup]="typeForm" (ngSubmit)="onSubmit()">
+        <h2 fxLayout="column" fxLayout.gt-md="row" fxLayoutGap.gt-md="15px" fxLayoutAlign="center center">Add New Types</h2>
+
+        <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px" class="form">
+
+            <mat-form-field appearance="outline" fxFlex>
+                <mat-label>Type Name</mat-label>
+                <input matInput #input placeholder="Type Name" formControlName="name" required>
+
+                <mat-error *ngIf="rName.invalid">
+
+                    {{getErrorType()}}
+                </mat-error>
+
+            </mat-form-field>
+
+
+            <mat-form-field appearance="outline" fxFlex>
+                <mat-label>KM per Litre</mat-label>
+                <input matInput #input placeholder="KM per Litre" formControlName="kilometer" required>
+            </mat-form-field>
+
+
+            <mat-form-field appearance="outline" fxFlex>
+                <mat-label>CC</mat-label>
+                <input matInput #input placeholder="CC" formControlName="vehiclecc" required>
+                <!-- <mat-error *ngIf="Rcostkm.invalid">
+                        {{getErrorCostkm()}}
+
+                    </mat-error> -->
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" fxFlex>
+                <mat-label>Category</mat-label>
+                <!-- <input matInput #input placeholder="Placeholder" formControlName="status" required> -->
+                <select matNativeControl formControlName="category">
+        <option value="Sports">Sports</option>
+        <option value="Cruiser">Cruiser</option>
+        <option value="Touring">Touring</option>
+        <option value="Standard">Standard</option>
+        <option value="Dual_Purpose">Dual Purpose</option>
+        <option value="Dirt_Bikes">Dirt Bikes</option>
+      </select>
+            </mat-form-field>
+
+
+            <mat-form-field appearance="outline" fxFlex>
+                <mat-label>Cost Time</mat-label>
+                <input matInput #input placeholder="Cost Time" formControlName="costtime" required>
+
+                <mat-error *ngIf="Rcosttime.invalid">
+
+                    {{getErrorCosttime()}}
+                </mat-error>
+
+            </mat-form-field>
+
+
+            <input name="file" type="file" class="ng-hide" (change)="onFileChanged($event)" #fileInput>
+
+
+
+
+            <button mat-raised-button class="btn">
+          Submit
+        </button>
+
+
+        </div>
+
+    </form>
+
+</div>

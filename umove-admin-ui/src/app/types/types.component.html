@@ -1,0 +1,38 @@
+<div fxLayout="column">
+    <h1 class="header">
+        Vehicle Types
+    </h1>
+     <div fxLayout="row" class="search">
+        <mat-form-field fxFlex="20%">
+            <input matInput [(ngModel)]="term" placeholder="Search">
+        </mat-form-field>
+    </div>
+    <div fxLayout="column wrap">
+        <div fxLayout.xs="column" fxLayout.lg="row wrap" fxLayoutGap="50px" class="card" fxLayoutAlign.sm="center center">
+            <app-vehicle-type-card *ngFor="let type of vehicleTypes | paginate: { itemsPerPage: 9, currentPage: p}  | filter:term" [vehicleTypes]="type">
+
+            </app-vehicle-type-card>
+        </div>
+        <pagination-controls (pageChange)="p = $event" fxLayoutAlign="center center"></pagination-controls> 
+        </div>
+        <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutAlign="end" class="add-button">
+            <button mat-fab color="primary" (click)="add()">
+                <i class="material-icons">
+                    add
+                </i>
+            </button>
+        </div>
+    </div>
+
+<!-- <app-search-vehicleType></app-search-vehicleType> -->
+<!-- <div fxLayout.xs="column" fxLayout.gt="row" fxLayout="row wrap" fxLayoutGap="10px" class="card">
+    <app-vehicle-type-card *ngFor="let type of vehicleTypes | paginate: { itemsPerPage: 9, currentPage: p}  | filter:term" [vehicleTypes]="type"></app-vehicle-type-card>
+
+    <pagination-controls fxLayout="column" (pageChange)="p = $event"></pagination-controls>
+</div>
+<div fxLayout="column" fxLayout.gt-xs="row " fxLayoutAlign="end" class="add-button">
+    <button mat-fab color="primary" (click)="add()"><i class="material-icons">
+          add
+      </i>
+    </button>
+</div> -->

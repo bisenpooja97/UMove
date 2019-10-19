@@ -8,6 +8,6 @@ package in.stackroute.umove.zoneservice.model;
 public enum ZoneStatus {
     ACTIVE,
     INACTIVE,
-    UNDER_MAINTAINANCE,
+    INMAINTAINANCE,
     FULL
 }
