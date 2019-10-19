@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.text.DecimalFormat;
 
 @Service
 public class RideService implements RideServiceInterface {
@@ -123,11 +124,15 @@ public class RideService implements RideServiceInterface {
             Duration duration = Duration.between(rideStarted, rightNow);
             int totalDuration = (int) duration.toMinutes();
             Double distance = 5 + (Math.random() * 5);
+            Double roundUpDistance = Double.valueOf(Math.round(distance*100)/100);
             Double rideAmount = (totalDuration*ride.getVehicle().getCosttime())+(distance*ride.getVehicle().getCostkm());
+            Double roundUpRideAmount = Double.valueOf(Math.round(rideAmount*100)/100);
+            System.out.println("Round up ride amount "+roundUpRideAmount);
             PaymentDetail paymentDetail = ride.getPayment();
-            paymentDetail.setRideAmount(rideAmount);
+            paymentDetail.setRideAmount(roundUpRideAmount);
             ride.setPayment(paymentDetail);
             ride.setDuration(totalDuration);
+            ride.setDistance(roundUpDistance);
             ride.setStatus("endRideRequest");
             rideRepo.save(ride);
         }

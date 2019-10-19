@@ -25,12 +25,34 @@ export class QrcodeScannerPage implements OnInit {
 
   ngOnInit() {
     this.barcodeScanner.scan().then(qrCodeData => {
+      this.vehicleNumber = undefined;
       console.log('QR Data:', qrCodeData);
       console.log('vehicle number: ', qrCodeData.text);
-      this.vehicleNumber = qrCodeData.text;
-      this.rideService.startRideById(this.ride._id, this.vehicleNumber).then(data => {
-        console.log('response of start ride: ', data);
-        this.router.navigateByUrl('ride-details');
+      try {
+        this.vehicleNumber = qrCodeData.text;
+      }
+      catch (e) {
+        this.rideService.presentToast('Wrong QR Code.', 3000);
+        this.router.navigateByUrl('ride-booking-details');
+      }
+      this.rideService.startRideById(this.ride._id, this.vehicleNumber).then(response => {
+
+        console.log('response', response);
+        if (response) {
+          if (response.status === 200 && response.data) {
+            console.log('response of start ride:', JSON.parse(response.data).data);
+            this.ride = JSON.parse(response.data).data;
+            this.router.navigateByUrl('ride-details');
+          }
+          else {
+            this.rideService.presentToast('Try again Later', 2000);
+            this.router.navigateByUrl('home');
+          }
+        }
+        else {
+          this.rideService.presentToast('Something went wrong.', 2000);
+          this.router.navigateByUrl('ride-booking-details');
+        }
       });
     });
   }
