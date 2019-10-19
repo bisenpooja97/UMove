@@ -12,7 +12,7 @@ import { Ride } from '../model/ride';
 export class RideService {
 
   currentBooking: Ride;
-  baseUrl = environment.baseUrl + environment.bookingService + environment.bookingBaseApi;
+  baseUrl = environment.baseUrl + /*environment.bookingService +*/ environment.bookingBaseApi;
 
   constructor(private http: HTTP, private toastController: ToastController) {
     this.currentBooking = new Ride();
