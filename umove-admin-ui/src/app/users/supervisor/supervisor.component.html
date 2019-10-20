@@ -1,0 +1,26 @@
+<h1 fxLayout="column" fxLayout.gt-md="row" fxLayoutGap.gt-md="15px" class="header">
+    Supervisors
+</h1>
+<div fxLayout="row" fxLayoutGap="20px" class="search" fxLayout.gt-xs="row">
+    <mat-form-field fxFlex=20%>
+        <input matInput [(ngModel)]="term" placeholder="Search">
+    </mat-form-field>
+</div>
+<div fxLayout="row wrap">
+<div *ngFor="let data of supervisors | paginate: { itemsPerPage: 12, currentPage: p}| filter:term">
+<mat-card class="my-card" fxFlex.sm="0 1 calc(50%-10px)" fxFlex.md="0 1 calc(33%-10px)" fxLayout="column" fxLayoutGap="20px" (click)="ok()">  
+<mat-card-content fxLayoutAlign="end" class="status">{{data.userStatus}}</mat-card-content>
+  <mat-card-title fxLayoutAlign="center center" class="userName">{{data.name}}</mat-card-title>
+  <mat-card-content fxLayoutAlign="center center">Mobile Number:{{data.mobileNumber}}</mat-card-content>
+  <mat-card-content fxLayoutAlign="center center">Email:{{data.email}}</mat-card-content>
+  </mat-card>
+</div>
+ <pagination-controls (pageChange)="p = $event"></pagination-controls>
+</div>
+
+<div fxLayout="column" fxLayout.gt-xs="row" fxLayoutAlign="end" class="add-button">
+    <button mat-fab color="primary" (click)="add()">
+        <i class="material-icons">
+            add
+        </i>
+    </button>

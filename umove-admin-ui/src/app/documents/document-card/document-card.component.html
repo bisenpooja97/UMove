@@ -1,0 +1,11 @@
+<mat-card class="my-card" fxFlex.sm="0 1 calc(50%-10px)" fxFlex.md="0 1 calc(33%-10px)" fxLayout="column" fxLayoutGap="20px">
+  
+  <mat-card-content fxLayoutAlign="end" [ngStyle]="{'color':getColor(documentStatus)}">{{documentStatus}}</mat-card-content>
+  <mat-card-title fxLayoutAlign="start" >{{name}}</mat-card-title>
+  <mat-card-content fxLayoutAlign="start" >Mobile Number:{{mobileNumber}}</mat-card-content>
+  <mat-card-content fxLayoutAlign="start" class="userName">Driving Licence Number:{{dLicenceNumber}}</mat-card-content>
+  <mat-card-content fxLayoutAlign="start">Expiry Date:{{expiryDate|date: "dd LLLL yyyy"}}</mat-card-content>
+   <mat-card-actions >
+    <button mat-raised-button color="primary" class="view-button" (click)=view()>VIEW</button>
+  </mat-card-actions>
+</mat-card>
