@@ -1,6 +1,6 @@
 import { VehicleType } from './VehicleType';
 
-export class Vehicle{
+export class Vehicle {
   public id: string;
   public zoneid: string;
   public insuranceNo: string;
@@ -10,9 +10,4 @@ export class Vehicle{
   public lastServiceDate: Date;
   public vehiclePurchased: Date;
   public chassisNumber: string;
-
-
-
 }
-
-

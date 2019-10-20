@@ -1,11 +1,4 @@
-.my-card {
-    margin-bottom: 40px;
-    margin-left: 450px;
-    height: 300px;
-    width: 50%;
-}
-
-.zoneName {
-    font-weight: bold;
-    font-size: 1.5em;
+.vehicles {
+    margin-left: 240px;
+    padding-bottom: 2%;
 }
