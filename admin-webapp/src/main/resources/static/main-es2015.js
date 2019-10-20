@@ -673,7 +673,7 @@ __webpack_require__.r(__webpack_exports__);
 let FuelService = class FuelService {
     constructor(httpClient) {
         this.httpClient = httpClient;
-        this.baseUrl = src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].baseUrl2 + src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].fuelBaseApi;
+        this.baseUrl = src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].baseUrl + src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].zoneService + src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].fuelBaseApi;
     }
     getFuel() {
         console.log(this.baseUrl);
@@ -880,7 +880,7 @@ let AddVehicleTypeComponent = class AddVehicleTypeComponent {
         this.snackBar = snackBar;
         this.datas = [];
         this.fuels = [];
-        this.baseUrl = src_environments_environment__WEBPACK_IMPORTED_MODULE_8__["environment"].baseUrl2 + src_environments_environment__WEBPACK_IMPORTED_MODULE_8__["environment"].typeBaseApi;
+        this.baseUrl = src_environments_environment__WEBPACK_IMPORTED_MODULE_8__["environment"].baseUrl + src_environments_environment__WEBPACK_IMPORTED_MODULE_8__["environment"].zoneService + src_environments_environment__WEBPACK_IMPORTED_MODULE_8__["environment"].typeBaseApi;
         this.typeForm = this.fb.group({
             name: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].pattern('^[a-zA-Z0-9\-]*$')]],
             kilometer: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].pattern('^[0-9]*$')]],
@@ -1474,7 +1474,7 @@ __webpack_require__.r(__webpack_exports__);
 let VehicleTypeService = class VehicleTypeService {
     constructor(httpClient) {
         this.httpClient = httpClient;
-        this.baseUrl = src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].baseUrl2 + src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].typeBaseApi;
+        this.baseUrl = src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].baseUrl + src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].zoneService + src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].typeBaseApi;
     }
     getType() {
         return this.httpClient.get(this.baseUrl);
@@ -1960,7 +1960,7 @@ __webpack_require__.r(__webpack_exports__);
 let VehicleService = class VehicleService {
     constructor(httpClient) {
         this.httpClient = httpClient;
-        this.baseUrl = src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].baseUrl2 + src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].vehicleBaseApi;
+        this.baseUrl = src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].baseUrl + src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].zoneService + src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].vehicleBaseApi;
     }
     getVehicles() {
         return this.httpClient.get(this.baseUrl);
@@ -2459,7 +2459,7 @@ __webpack_require__.r(__webpack_exports__);
 let ZoneService = class ZoneService {
     constructor(httpClient) {
         this.httpClient = httpClient;
-        this.baseUrl = src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].baseUrl1 + src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].zoneBaseApi;
+        this.baseUrl = src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].baseUrl + src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].zoneService + src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].zoneBaseApi;
     }
     createZone(zone) {
         return this.httpClient.post(this.baseUrl, zone);
@@ -3240,16 +3240,16 @@ __webpack_require__.r(__webpack_exports__);
 // The list of file replacements can be found in `angular.json`.
 const environment = {
     production: false,
-    baseUrl: 'http://172.23.234.83:8091/',
-    userService: 'user-service',
+    baseUrl: 'http://13.235.35.202:8080/',
+    userService: 'userservice',
     userBaseApi: '/api/v1/users',
-    baseUrl1: 'http://172.23.234.112:8093',
-    zoneService: 'zone-service',
+    // baseUrl1: 'http://172.23.234.112:8093/',
+    zoneService: 'zoneservice',
     zoneBaseApi: '/api/v1/zones',
-    baseUrl2: 'http://172.23.234.112:8093',
-    campaignService: 'campaign-service',
+    // baseUrl2: 'http://172.23.234.112:8093/',
+    campaignService: 'campaignservice',
     campaignBaseApi: '/api/v1/campaigns',
-    vehicleService: 'vehicle-service',
+    vehicleService: 'vehicleservice',
     vehicleBaseApi: '/api/v1/vehicles',
     typeBaseApi: '/api/v1/types',
     fuelBaseApi: '/api/v1/fuel',
@@ -3299,7 +3299,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/shivam/umove/umove-admin-ui/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /home/vishnu/umove/umove-admin-ui/src/main.ts */"./src/main.ts");
 
 
 /***/ })
