@@ -17,8 +17,8 @@ import java.util.List;
 public class Ride {
     @Id
     private ObjectId _id;
-    private String status;
-    private Rider rider;
+    private RideStatus status;
+    private User rider;
     private Zone sourceZone;
     private List<Zone> destinationZones;
     private Vehicle vehicle;
@@ -28,7 +28,7 @@ public class Ride {
     private LocalDateTime rideEndAt;
     private Double distance;
     private int duration;
-    private Promocode promoCode;
+    private Campaign promoCode;
     private PaymentDetail paymentDetail;
 
     // ObjectId needs to be converted to string

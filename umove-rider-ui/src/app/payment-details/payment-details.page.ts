@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Ride } from 'src/model/ride';
-import { RideService } from 'src/service/ride.service';
+import { Ride } from 'src/app/model/ride';
+
 import { Router } from '@angular/router';
-import { PaymentDetail } from 'src/model/paymentdetail';
-import { Payment } from 'src/model/payment';
+import { PaymentDetail } from 'src/app/model/paymentdetail';
+import { Payment } from 'src/app/model/payment';
+import { RideService } from '../service/ride.service';
 
 declare let RazorpayCheckout: any;
 
@@ -16,7 +17,7 @@ export class PaymentDetailsPage implements OnInit {
   bookingId: string;
   name: string;
   email: string;
-  contact: number;
+  contact: string;
   rides: Ride;
   paymentAmount = 333;
   currency = 'INR';
@@ -29,13 +30,16 @@ export class PaymentDetailsPage implements OnInit {
   payment: Payment;
   rideStatusPaid: boolean;
   rideStatusUnPaid: boolean;
+  petrolCharge: boolean;
+  showExtraCharge: boolean;
 
 
   constructor(private rideService: RideService, private route: Router) {
-    this.bookingId = '5da954570e8e3d000160230b';
+    this.bookingId = '5dab132c149b3f0001856499';
     this.rideStatusPaid = false;
     this.rideStatusUnPaid = false;
-
+    this.petrolCharge = false;
+    this.showExtraCharge = false;
   }
 
   ngOnInit() {
@@ -43,14 +47,18 @@ export class PaymentDetailsPage implements OnInit {
       this.rides = JSON.parse(response.data).data;
       this.name = this.rides.rider.name;
       this.email = this.rides.rider.email;
-      this.contact = Number(this.rides.rider.mobileNo);
+      this.contact = this.rides.rider.mobileNumber;
       this.paymentAmount = Number(this.rides.paymentDetail.totalAmount) * 100;
       if (this.rides.paymentDetail.totalExtraCharges === undefined) {
         this.extraChargeStatus = false;
       } else {
         this.extraChargeStatus = true;
       }
-
+      if (this.rides.paymentDetail.fuelRefillAmount === undefined || this.rides.paymentDetail.fuelRefillAmount === 0) {
+        this.petrolCharge = false;
+      } else {
+        this.petrolCharge = true;
+      }
       if (this.rides.promocode === null) {
          this.appliedPromoCode = false;
       } else {
@@ -63,7 +71,15 @@ export class PaymentDetailsPage implements OnInit {
       }
      });
   }
-
+  showExtraCharges(statusExtra: boolean) {
+    if (statusExtra === false) {
+    this.showExtraCharge = true;
+    console.log(this.showExtraCharge);
+    this.rideService.presentToast(this.showExtraCharge, 3000);
+  } else {
+      this.showExtraCharge = false;
+    }
+  }
   payWithRazor() {
     const options = {
       description: 'Credits towards consultation',
@@ -88,8 +104,7 @@ export class PaymentDetailsPage implements OnInit {
     };
 
     const successCallback = (paymentId) => {
-      console.log('Hua hUa Ha');
-      this.rideService.setPaymentDetails(this.bookingId, paymentId).then(response => {
+      this.rideService.setPaymentDetails(this.bookingId, paymentId, "Paid").then(response => {
         console.log('data of payment in sql: ', response['data']);
         this.payment = JSON.parse(response.data).data;
         this.route.navigateByUrl('/home');
@@ -97,7 +112,11 @@ export class PaymentDetailsPage implements OnInit {
     };
 
     const cancelCallback = (error) => {
-      console.log('nHua nhUa nHa');
+      this.rideService.setPaymentDetails(this.bookingId, null, "Pending").then(response => {
+        console.log('data of payment in sql: ', response['data']);
+        this.payment = JSON.parse(response.data).data;
+        this.route.navigateByUrl('/home');
+      });
       alert(error.description + ' (Error ' + error.code + ')');
     };
 

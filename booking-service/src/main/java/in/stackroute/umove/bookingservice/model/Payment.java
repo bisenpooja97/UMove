@@ -22,10 +22,10 @@ public class Payment {
     private String rideId;
 
     @Column
-    private String rider;
+    private String userId;
 
     @Column
-    private Long mobile;
+    private String mobile;
 
     @Column
     private String source;

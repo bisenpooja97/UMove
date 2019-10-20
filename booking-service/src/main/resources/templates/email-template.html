@@ -1,0 +1,47 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title>Email</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+
+    <style style="margin: 0; padding: 0;">
+        body {
+            font-family: 'Roboto', sans-serif;
+            font-size: 48px;
+        }
+    </style>
+
+
+</head>
+<body>
+<table align="center" border="0" cellpadding="0" cellspacing="0" width="600" style="border-collapse: collapse;">
+    <tr>
+        <td bgcolor="#eaeaea" style="padding: 40px 30px 40px 30px;">
+            <tr>Dear <td th:text="${name}"/></tr>
+        </td>
+    </tr>
+    <tr>Your Ride Recipt : </tr>
+    <tr><td>Distance Travelled :</td><td th:text="${distance}"/></tr>
+    <tr><td>Ride Duration  :</td><td th:text="${time}"/></tr>
+    <tr><td>Ride Amount :</td><td th:text="${rideAmount}"/></tr>
+    <tr><td>Total Extra Charges :</td><td th:text="${totalExtraCharges}"/></tr>
+    <tr><td>Fuel Re-Fill Amount :</td><td th:text="${fuelRefillAmount}" /></tr>
+    <tr><td>Discount Percent : </td><td th:text="${discountPercent}"/></tr>
+    <tr><td>Total Amount : </td><td th:text="${totalAmount}"/></tr>
+    <tr><td>Payment Status : </td><td th:text="${paymentStatus}"/></tr>
+    <tr>
+        <td>Thank</td>
+    </tr>
+    <tr>
+        <td bgcolor="#777777" style="padding: 30px 30px 30px 30px;">
+            <p>UMOVE</p>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

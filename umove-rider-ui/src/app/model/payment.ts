@@ -1,4 +1,3 @@
-import { ExtraCharges } from './extracharges';
 
 export class Payment {
     bookingId: string;
@@ -16,6 +15,4 @@ export class Payment {
     paymentId: string;
     deductedAt: Date;
     status: string;
-
-
 }

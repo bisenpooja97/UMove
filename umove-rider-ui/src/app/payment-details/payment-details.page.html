@@ -32,28 +32,34 @@
           <ion-label>Reward Points Discount </ion-label> - Rs.{{ rides?.promoCode?.discountPercent }}
         </ion-item>
       </div>
-        <ion-item>
-          <ion-label> Fuel Refill Amount </ion-label> - Rs. {{ rides?.paymentDetail?.fuelRefillAmount }}
-        </ion-item>
-        <div *ngIf="extraChargeStatus || hideMe">
-          <ion-item>
-            <ion-label>Total Extra Charges </ion-label> + Rs. {{ rides?.paymentDetail?.totalExtraCharges }}
-          </ion-item>
-          </div >
-        <ion-item>
-          <ion-label>Total Amount </ion-label>  Rs. {{ rides?.paymentDetail?.totalAmount }}
-        </ion-item>
-      <ion-item>
-        <ion-label>Paid Amount </ion-label>  Rs. {{ rides?.paymentDetail?.totalAmount }}
+      <ion-item *ngIf="petrolCharge || hideMe">
+        <ion-label> Fuel Refill Amount </ion-label> - Rs. {{ rides?.paymentDetail?.fuelRefillAmount }}
       </ion-item>
-      </ion-list>
-      
-      <div *ngIf="rideStatusUnPaid || hideMe">
-        <ion-button expand="full" color="primary" (click)="payWithRazor()">Pay</ion-button>
-      </div> 
-      <div *ngIf="rideStatusPaid || hideMe">
-        <ion-text class="PaidForRide">You have Already Paid For This Ride</ion-text>
-      </div>  
-      
+      <div *ngIf="extraChargeStatus || hideMe">
+        <ion-item (click)="showExtraCharges(statusExtra)">
+          <ion-label>Total Extra Charges </ion-label> + Rs. {{ rides?.paymentDetail?.totalExtraCharges }}
+        </ion-item>
+      </div>
+      <div *ngIf="showExtraCharge || hideMe">
+        <ion-item *ngFor="let extraCharge of rides?.paymentDetail?.extraCharges" class="showCharge">
+          <ion-label>Charged For </ion-label> {{ extraCharge?.chargedFor }}
+          <ion-label>Amount </ion-label> Rs. {{ extraCharge?.amount }}
+        </ion-item>
+      </div>
+      <ion-item>
+        <ion-label>Total Amount </ion-label> Rs. {{ rides?.paymentDetail?.totalAmount }}
+      </ion-item>
+      <ion-item>
+        <ion-label>Paid Amount </ion-label> Rs. {{ rides?.paymentDetail?.totalAmount }}
+      </ion-item>
+    </ion-list>
+
+    <div *ngIf="rideStatusUnPaid || hideMe">
+      <ion-button expand="full" color="primary" (click)="payWithRazor()">Pay</ion-button>
+    </div>
+    <div *ngIf="rideStatusPaid || hideMe">
+      <ion-text class="PaidForRide">You have Already Paid For This Ride</ion-text>
+    </div>
+
   </ion-card>
 </ion-content>

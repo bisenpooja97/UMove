@@ -10,6 +10,6 @@ import lombok.*;
 @Setter
 public class ExtraCharge {
     private String chargedFor;
-    private Double amount;
+    private Double amount=0.0;
 
 }

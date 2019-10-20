@@ -1,25 +1,27 @@
 import { Vehicle } from './vehicle';
 import { Zone } from './zone';
-import { PaymentMethod } from './paymentmethod';
-import { Rider } from './rider';
+import { PaymentMethod } from './payment-method';
+import { Campaign } from './campaign';
+import { User } from './user';
 import { PaymentDetail } from './paymentdetail';
-import { PromoCode } from './promocode';
 import { Payment } from './payment';
 
 export class Ride {
+    // tslint:disable-next-line: variable-name
     _id: string;
-    paymentDetail: PaymentDetail;
-    payment: Payment;
     bookedAt: Date;
     status: string;
     vehicle: Vehicle;
     sourceZone: Zone;
     destinationZones: Zone[];
     paymentMethod: PaymentMethod;
-    promocode: PromoCode;
-    rider: Rider;
-    distance: number;
-    duration: number;
+    promocode: Campaign;
+    rider: User;
     rideStartAt: Date;
     rideEndAt: Date;
+    distance: number;
+    duration: number;
+    paymentDetail: PaymentDetail;
+    payment: Payment;
+
 }

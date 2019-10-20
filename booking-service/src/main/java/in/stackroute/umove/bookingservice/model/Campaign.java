@@ -9,9 +9,9 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class Promocode {
+public class Campaign {
     private String campaignId;
     private String name;
     private String code;
-    private int discountPercent;
+    private int discountPercent=0;
 }

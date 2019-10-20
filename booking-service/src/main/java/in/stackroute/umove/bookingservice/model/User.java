@@ -8,9 +8,9 @@ import lombok.*;
 @ToString
 @Getter
 @Setter
-public class Rider {
+public class User {
     private String _id;
     private String name;
     private String email;
-    private Long mobile;
+    private String mobileNumber;
 }

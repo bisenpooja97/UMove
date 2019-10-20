@@ -15,3 +15,4 @@ export class Zone {
     supervisorNumber: string;
     supervisorEmail: string;
 }
+
