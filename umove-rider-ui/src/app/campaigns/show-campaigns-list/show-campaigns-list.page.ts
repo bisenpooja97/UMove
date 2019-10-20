@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {CampaignService} from '../../services/campaign-service/campaign.service';
 import {HTTP} from '@ionic-native/http/ngx';
+import {Campaign} from '../../model/campaigns/campaign';
 
 @Component({
   selector: 'app-show-campaigns-list',
@@ -12,7 +13,7 @@ import {HTTP} from '@ionic-native/http/ngx';
 // tslint:disable-next-line:component-class-suffix
 export class ShowCampaignsListPage implements OnInit {
 
-  public campaigns: any = [];
+  public campaigns: Campaign;
 
   constructor(private http: HTTP, private router: Router, private campaignService: CampaignService) { }
 

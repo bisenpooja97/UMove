@@ -49,7 +49,7 @@ public class CampaignController {
         return new ResponseEntity<>(map, HttpStatus.OK);
     }
     @DeleteMapping(path = "/campaigns/{id}")
-    public ResponseEntity<Map> deleteCampaign(@PathVariable("id") ObjectId id)
+    public ResponseEntity<Map> deleteCampaign(@PathVariable("id") String id)
     {
         Campaign deleteCampaign=campaignService.deleteCampaign(id);
         Map<String , Object>map = new TreeMap<>();

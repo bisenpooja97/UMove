@@ -5,5 +5,5 @@ import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface CampaignRepository extends MongoRepository<Campaign,Object> {
-    Campaign findBy_id(ObjectId id);
+    Campaign findById(String id);
 }

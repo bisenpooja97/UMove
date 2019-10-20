@@ -23,8 +23,8 @@ public class CampaignServiceImpl implements CampaignService {
     }
 
     @Override
-    public Campaign deleteCampaign(ObjectId id) {
-        Campaign campaign=campaignRepository.findBy_id(id);
+    public Campaign deleteCampaign(String id) {
+        Campaign campaign=campaignRepository.findById(id);
         campaignRepository.delete(campaign);
         return campaign;
     }

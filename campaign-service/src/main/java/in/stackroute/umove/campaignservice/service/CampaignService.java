@@ -9,5 +9,5 @@ import java.util.List;
 public interface CampaignService {
     List<Campaign> getCampaignList();
     Campaign addUser(Campaign campaign);
-    Campaign deleteCampaign(ObjectId id);
+    Campaign deleteCampaign(String id);
 }
