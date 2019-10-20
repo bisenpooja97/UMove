@@ -9,5 +9,5 @@ public interface PaymentRepo extends JpaRepository<Payment,String> {
 
     @Query("SELECT p FROM Payment p WHERE p.rideId = ?1")
     Payment findByRideId(String bookingId);
-    Payment findByRideIdAndStatus(String bookingId, PaymentStatus status);
+    Payment findByUserIdAndStatus(String userId, PaymentStatus status);
 }

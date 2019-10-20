@@ -28,6 +28,6 @@ public interface RideService {
     Payment getPaymentDetails(String rideId);
 //    Ride endRideRequest(ObjectId rideId);
 
-    Payment getOutstandingRideDetail(String rideId);
+    Payment getOutstandingRideDetail(String userId);
 
 }
