@@ -16,15 +16,9 @@ export class RideBookingDetailsPage implements OnInit {
   vehicleNumber: string;
   sizeOfDestinationZones: number;
   destinationZone: Zone;
+  timerTime: number;
 
-  timerSettings: MbscTimerOptions = {
-    display: 'inline',
-    targetTime: 1200,
-    maxWheel: 'minutes',
-    minWidth: 100,
-    autostart: true,
-    buttons: []
-  };
+  timerSettings: MbscTimerOptions;
 
   constructor(private rideService: RideService, private router: Router, private route: ActivatedRoute) {
     // Subscribing bookingService method to get booking details by its id
@@ -33,6 +27,17 @@ export class RideBookingDetailsPage implements OnInit {
         console.log('Booking details: ', response);
         this.ride = JSON.parse(response.data).data;
         console.log(this.ride);
+        console.log('Auto cancel time is ', this.ride.timer);
+        this.timerTime = this.ride.timer * 60;
+        console.log('Auto cancel time is ', this.timerTime);
+        this.timerSettings = {
+          display: 'inline',
+          targetTime: this.timerTime,
+          maxWheel: 'minutes',
+          minWidth: 100,
+          autostart: true,
+          buttons: []
+        };
       });
   }
 

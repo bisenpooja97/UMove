@@ -21,4 +21,5 @@ export class Ride {
     distance: number;
     duration: number;
     payment: Payment;
+    timer: number;
 }

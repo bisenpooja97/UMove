@@ -35,6 +35,7 @@ public class Ride {
     private Double distance;
     private int duration;
     private PaymentDetail payment;
+    private int timer;
 
     // ObjectId needs to be converted to string
     public String get_id() { return _id.toHexString(); }

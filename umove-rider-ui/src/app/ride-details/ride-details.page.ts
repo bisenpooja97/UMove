@@ -51,10 +51,10 @@ export class RideDetailsPage implements OnInit {
 
   // calling service method to end a ride
   endRideRequest() {
-    this.rideService.endRideRequestById(this.ride._id).then(data => {
-      console.log('response of end ride: ', data);
+    // this.rideService.endRideRequestById(this.ride._id).then(data => {
+    //   console.log('response of end ride: ', data);
       this.router.navigateByUrl('qrcode-generator');
-    });
+    // });
   }
 
 }
