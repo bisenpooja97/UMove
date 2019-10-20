@@ -7,7 +7,7 @@ import * as firebase from 'firebase';
 export const environment = {
   production: false,
   map: 'pk.eyJ1IjoicHVuaXRzZXRpYSIsImEiOiJjazBjOTY0cGcwMDI0M2RtbThsbWEyaXhnIn0.DrloATvnGeowNnIPanQT4g',
-  baseUrl : 'http://172.23.234.60:8080/',
+  baseUrl : 'http://192.168.1.9:8080/',
   zoneService : '/zoneservice/api/v1',
   vehicleService: '/vehicleservice/api/v1',
   tomTomUrl : 'https://api.tomtom.com/search/2/structuredGeocode.json?countryCode=IND&streetName=',
