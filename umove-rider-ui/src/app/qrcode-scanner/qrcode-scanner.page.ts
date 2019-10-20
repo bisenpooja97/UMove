@@ -12,7 +12,10 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 })
 export class QrcodeScannerPage implements OnInit {
   ride: Ride;
+  timerSettings: MbscTimerOptions;
+  timerTime: number;
   vehicleNumber: string;
+  rideBookedAt: Date;
 
   constructor(private barcodeScanner: BarcodeScanner, private router: Router, private rideService: RideService) {
     this.rideService.getRideDetailsByUserIdNStatus('5d8bbc0da6e87d5404aa1921', 'Confirmed')
@@ -20,16 +23,36 @@ export class QrcodeScannerPage implements OnInit {
         console.log('Booking details in scanner: ', response);
         this.ride = JSON.parse(response.data).data;
         console.log(this.ride);
+        this.rideBookedAt = this.ride.bookedAt;
+        console.log('Ride booked at ', this.rideBookedAt);
+        console.log(typeof (this.rideBookedAt));
       });
   }
 
   ngOnInit() {
+
+    this.timerSettings = {
+      display: 'inline',
+      targetTime: this.timerTime,
+      maxWheel: 'minutes',
+      minWidth: 100,
+      autostart: true,
+      buttons: []
+    };
+
     this.barcodeScanner.scan().then(qrCodeData => {
       console.log('QR Data:', qrCodeData);
-      console.log('vehicle number: ', qrCodeData.text);
-      this.vehicleNumber = qrCodeData.text;
-      this.rideService.startRideById(this.ride._id, this.vehicleNumber).then(data => {
-        console.log('response of start ride: ', data);
+      this.vehicleNumber = undefined;
+      try {
+        console.log('vehicle number: ', JSON.parse(qrCodeData.text).registrationNo);
+        this.vehicleNumber = JSON.parse(qrCodeData.text).registrationNo;
+      } catch (e) {
+        this.rideService.presentToast('Wrong QR Code.', 3000);
+        this.router.navigateByUrl('ride-booking-details');
+      }
+      this.rideService.startRideById(this.ride._id, this.vehicleNumber).then(response => {
+        console.log('response', response);
+        this.ride = JSON.parse(response.data).data;
         this.router.navigateByUrl('ride-details');
       });
     });
