@@ -48,7 +48,7 @@ export class QrcodeScannerPage implements OnInit {
         this.vehicleNumber = JSON.parse(qrCodeData.text).registrationNo;
       } catch (e) {
         this.rideService.presentToast('Wrong QR Code.', 3000);
-        this.router.navigateByUrl('ride-booking-details');
+        this.router.navigateByUrl('confirm-ride-detail');
       }
       this.rideService.startRideById(this.ride._id, this.vehicleNumber).then(response => {
         console.log('response', response);
