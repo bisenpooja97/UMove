@@ -2,9 +2,11 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+import * as firebase from 'firebase';
+
 export const environment = {
   production: false,
-  baseUrl: 'http://172.23.234.74:8080/',
+  baseUrl: 'http://192.168.1.9:8080/',
   userService: 'userservice',
   usersBaseApi: '/api/v1/users',
   firebase: {

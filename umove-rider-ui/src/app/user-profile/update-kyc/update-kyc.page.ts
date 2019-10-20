@@ -4,6 +4,8 @@ import {HttpClient} from '@angular/common/http';
 import {UserProfileServiceService} from '../../services/users-profile/user-profile-service.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ToastController} from '@ionic/angular';
+import {UserProfile} from '../../model/user-profile';
+import {Storage} from '@ionic/storage';
 
 @Component({
   selector: 'app-update-kyc',
@@ -12,9 +14,19 @@ import {ToastController} from '@ionic/angular';
 })
 // tslint:disable-next-line:component-class-suffix
 export class UpdateKycPage implements OnInit {
+  public localUser: UserProfile = {
+    id: null ,
+    name: '',
+    mobileNumber: '',
+    email: '',
+    role: 'User',
+    userStatus: null,
+    // document: null,
+  };
+  key = 'details';
 
   // tslint:disable-next-line:max-line-length
-  constructor(private http: HttpClient, private userDataService: UserProfileServiceService , private router: Router , private route: ActivatedRoute, public toastController: ToastController) {
+  constructor(private http: HttpClient, private userDataService: UserProfileServiceService , private router: Router , private route: ActivatedRoute, public toastController: ToastController, private storage: Storage) {
     // console.log(this.router.getCurrentNavigation().extras);
     // this.route.queryParams.subscribe(params => {
     //    this.campaigns = this.router.getCurrentNavigation().extras.queryParams.special;
@@ -22,8 +34,6 @@ export class UpdateKycPage implements OnInit {
     // });
 
   }
-
-
   selectedFile: File;
   todo: FormGroup;
   public campaigns: any = [];
@@ -39,24 +49,28 @@ export class UpdateKycPage implements OnInit {
   }
 
   async onUpload(data) {
-    console.log('data: ', data);
-    const formData = {
-      document: data
-    };
-    this.userDataService.uploadDldetailsById('5da1a2b80e8e3d0001c8453e', formData).then(res => {
-      console.log(res);
+    this.storage.get(this.key).then(async value => {
+      console.log('Before:', value);
+      this.localUser = value;
+      console.log(this.localUser.id);
+      console.log('data: ', data);
+      const formData = {
+        document: data
+      };
+      this.userDataService.uploadDldetailsById(this.localUser.id, formData).then(res => {
+        console.log(res);
+      });
+      const uploadData = new FormData();
+      uploadData.append('file', this.selectedFile, this.selectedFile.name);
+      this.userDataService.uploadProfileById(this.localUser.id, uploadData).subscribe(res => {
+        console.log(res);
+      });
+      const toast = await this.toastController.create({
+        message: 'KYC Details Uploaded Successfully.',
+        duration: 2000
+      });
+      toast.present();
     });
-    const uploadData = new FormData();
-    uploadData.append('file', this.selectedFile, this.selectedFile.name);
-
-    this.userDataService.uploadProfileById('5da1a2b80e8e3d0001c8453e', uploadData).subscribe(res => {
-      console.log(res);
-    });
-    const toast = await this.toastController.create({
-      message: 'KYC Details Uploaded Successfully.',
-      duration: 2000
-    });
-    toast.present();
   }
 
   ngOnInit() {

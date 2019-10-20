@@ -11,6 +11,8 @@ import lombok.NoArgsConstructor;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -65,14 +67,24 @@ public class UserImplService implements UserService {
 
     @Override
     public UserData addUser(UserData user) {
-//        final List<UserData> userList = userRepository.findAll();
-//        final Iterator<UserData> iUserList = userList.iterator();
-//        while (iUserList.hasNext()) {
-//            if (iUserList.next().getName().equals(user.getName())) {
-//                throw new UserAlreadyExistsException("User already exists!!");
-//            }
-//        }
+        String mobileNumber = user.getMobileNumber();
+        final List<UserData> userList = userRepository.findAll();
+        final Iterator<UserData> iUserList = userList.iterator();
+        while (iUserList.hasNext()) {
+            if (iUserList.next().getMobileNumber().equals(user.getMobileNumber())) {
+                return userRepository.findByMobileNumber(mobileNumber);
+            }
+        }
+        user.setPaymentMethod(new ArrayList<>());
         return userRepository.save(user);
+    }
+
+    @Override
+    public UserData deleteUser(String objid)
+    {
+        UserData user=userRepository.findByid(objid);
+        userRepository.delete(user);
+        return user;
     }
 
     /**

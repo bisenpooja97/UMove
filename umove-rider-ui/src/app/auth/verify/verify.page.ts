@@ -18,13 +18,14 @@ export class VerifyPage implements OnInit {
   windowRef: any;
   key = 'details';
   verificationCode: string;
+  localUserData: UserProfile;
   userDataRecieved: UserProfile;
   userData: UserProfile = {
     id: null ,
-    name: null,
-    mobileNumber: null,
-    email: null,
-    role: null,
+    name: '',
+    mobileNumber: '',
+    email: '',
+    role: 'User',
     userStatus: null,
     // document: null,
   };
@@ -46,11 +47,16 @@ export class VerifyPage implements OnInit {
           this.user = result.user;
           // console.log(this.user.phoneNumber);
            this.userData.mobileNumber = this.user.phoneNumber;
-           console.log(this.userData);
+           console.log('In Verify Page', this.userData);
            this.userDataService.addUser(this.userData).then(res => {
                    this.userDataRecieved = JSON.parse(res.data).data;
                    console.log(this.userDataRecieved.id);
-               this.storage.set(this.key, this.userDataRecieved);
+                   this.storage.ready().then(() => {
+                       this.storage.set(this.key, this.userDataRecieved);
+                       this.storage.get(this.key).then(value => {
+                           console.log('this is in storage', value);
+                       });
+                   });
            });
             // this.storage.get('').then((val) => {
             //     console.log('Your age is', val);

@@ -17,6 +17,15 @@ export class ViewProfilePage implements OnInit {
 
   private updateSubscription: Subscription;
   public user: UserProfile;
+  public localUser: UserProfile = {
+      id: null ,
+      name: '',
+      mobileNumber: '',
+      email: '',
+      role: 'User',
+      userStatus: null,
+      // document: null,
+  };
     key = 'details';
 
     // tslint:disable-next-line:max-line-length
@@ -37,22 +46,40 @@ export class ViewProfilePage implements OnInit {
       });
     this.router.navigateByUrl('/login');
   }
- async ionViewWillEnter() {
-    this.userDataService.getUserDetailById('5da1a2b80e8e3d0001c8453e')
-        .then(data => {
-          console.log('filtered data: ', data);
-          console.log('Response1 : ', data.data);
-          this.user = JSON.parse(data.data).data;
-          // console.log('mmmm', this.user);
-        });
-    const toast = await this.toastController.create({
-      message: 'Welcome',
-      duration: 2000
-    });
-    toast.present();
+  ionViewWillEnter() {
+     this.storage.get(this.key).then(async value => {
+         console.log('Before:', value);
+         this.localUser = value;
+         console.log(this.localUser.id);
+         this.userDataService.getUserDetailById(this.localUser.id)
+             .then(data => {
+                 console.log('filtered data: ', data);
+                 console.log('Response1 : ', data.data);
+                 this.user = JSON.parse(data.data).data;
+             });
+     });
   }
-
   ngOnInit() {
+      this.storage.get(this.key).then(async value => {
+          console.log('Before:', value);
+          this.localUser = value;
+          this.userDataService.getUserDetailById(this.localUser.id)
+              .then(data => {
+                  console.log('filtered data: ', data);
+                  console.log('Response1 : ', data.data);
+                  this.user = JSON.parse(data.data).data;
+              });
+          const toast = await this.toastController.create({
+              message: 'Welcome',
+              duration: 2000
+          });
+          toast.present();
+      });
+      // this.storage.get(this.key).then(value => {
+      //     console.log('Before:', value);
+      //     this.localUser = value;
+      //     console.log(this.localUser.id);
+      // });
     // this.userDataService.getUserDetailById('5da1b2ba0e8e3d0001e33275')
     //     .then(data => {
     //       console.log('filtered data: ', data);

@@ -20,7 +20,10 @@ export class LoginPage implements OnInit {
   constructor(private win: WindowService, private  router: Router) { }
 
   ngOnInit() {
-    firebase.initializeApp(environment.firebase);
+    if (!firebase.apps.length) {
+      firebase.initializeApp(environment.firebase);
+    }
+    // firebase.initializeApp(environment.firebase);
     this.windowRef = this.win.windowRef;
     this.windowRef.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
       size: 'invisible'});

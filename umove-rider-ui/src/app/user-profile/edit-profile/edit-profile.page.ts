@@ -5,6 +5,8 @@ import {Router} from '@angular/router';
 import {UserProfileServiceService} from '../../services/users-profile/user-profile-service.service';
 import {UserProfile} from '../../model/user-profile';
 import {ToastController} from '@ionic/angular';
+import {Storage} from '@ionic/storage';
+
 
 @Component({
   selector: 'app-edit-profile',
@@ -15,35 +17,50 @@ import {ToastController} from '@ionic/angular';
 export class EditProfilePage implements OnInit {
     public todo: FormGroup;
     user: UserProfile;
+    public localUser: UserProfile = {
+        id: null ,
+        name: '',
+        mobileNumber: '',
+        email: '',
+        role: 'User',
+        userStatus: null,
+        // document: null,
+    };
+    key = 'details';
     // tslint:disable-next-line:max-line-length
-    constructor(private formBuilder: FormBuilder, private userDataService: UserProfileServiceService, private router: Router, private  http: HttpClient, public toastController: ToastController) {
+    constructor(private formBuilder: FormBuilder, private userDataService: UserProfileServiceService, private router: Router, private  http: HttpClient, public toastController: ToastController, private storage: Storage) {
     }
 
     ngOnInit() {
-        this.userDataService.getUserDetailById('5da1a2b80e8e3d0001c8453e')
-            .then(data => {
-                console.log('filtered data: ', data);
-                this.user = JSON.parse(data.data).data;
-                this.todo = new FormGroup({
-                    name: new FormControl(this.user.name),
-                    email: new FormControl(this.user.email),
-                    mobileNumber: new FormControl(this.user.mobileNumber),
+        this.storage.get(this.key).then( value => {
+            console.log('Before:', value);
+            this.localUser = value;
+            console.log(this.localUser.id);
+            this.userDataService.getUserDetailById(this.localUser.id)
+                .then(data => {
+                    console.log('filtered data: ', data);
+                    this.user = JSON.parse(data.data).data;
+                    this.todo = new FormGroup({
+                        name: new FormControl(this.user.name),
+                        email: new FormControl(this.user.email),
+                        mobileNumber: new FormControl(this.user.mobileNumber),
+                    });
                 });
-            });
+        });
     }
     async logForm(data) {
-        // this.http.patch('http://172.23.234.63:8091/api/v1/users/5d8de55aa0867c20905218b1', data).subscribe(res => {
-        //    console.log('response', res); // handle event here
-        // });
-
-
-        this.userDataService.editProfileById('5da1a2b80e8e3d0001c8453e', data).then(res => {
-            console.log(res);
+        this.storage.get(this.key).then(async value => {
+            console.log('Before:', value);
+            this.localUser = value;
+            console.log(this.localUser.id);
+            this.userDataService.editProfileById(this.localUser.id, data).then(res => {
+                console.log(res);
+            });
+            const toast = await this.toastController.create({
+                message: 'Profile Updated Successfully.',
+                duration: 2000
+            });
+            toast.present();
         });
-        const toast = await this.toastController.create({
-            message: 'Profile Updated Successfully.',
-            duration: 2000
-        });
-        toast.present();
     }
 }

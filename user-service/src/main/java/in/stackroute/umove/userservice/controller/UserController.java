@@ -48,16 +48,26 @@ public class UserController
 
     @PostMapping(path = "users/adduser")
     public ResponseEntity<Map> addUser(@RequestBody UserData user) {
-        user.setPaymentMethod(new ArrayList<>());
+//        user.setPaymentMethod(new ArrayList<>());
         UserData addedUser = userService.addUser(user);
         Map<String, Object> map = new TreeMap<>();
         map.put("data", addedUser);
         map.put("status", HttpStatus.OK);
         return new ResponseEntity<>(map, HttpStatus.CREATED);
     }
+    @DeleteMapping(path = "/users/{id}")
+    public ResponseEntity<Map> deleteUser(@PathVariable("id") String id) {
+        UserData deleteUser = userService.deleteUser(id);
+        Map<String, Object> map = new TreeMap<>();
+        map.put("data", deleteUser);
+        map.put("message", "User deleted");
+        map.put("status", HttpStatus.OK);
+        return new ResponseEntity<>(map, HttpStatus.OK);
+    }
 
 
-@PatchMapping(path = "/users/{id}",consumes = {"application/json"})
+
+    @PatchMapping(path = "/users/{id}",consumes = {"application/json"})
 public ResponseEntity updateUser(@PathVariable String id, @RequestBody UserData user){
     UserData data = userService.updateUser(id,user);
     Map<String, Object> map = new TreeMap<>();

@@ -4,6 +4,9 @@ import {json} from '@angular-devkit/core';
 import {HTTP} from '@ionic-native/http/ngx';
 import {UserPaymentMethod} from '../../model/user-payment-method/user-payment-method';
 import {UserPaymentMethodService} from '../../services/user-payment-method/user-payment-method.service';
+import {Storage} from '@ionic/storage';
+import {UserProfile} from '../../model/user-profile';
+
 @Component({
   selector: 'app-show-payment-method',
   templateUrl: './show-payment-method.page.html',
@@ -13,16 +16,31 @@ import {UserPaymentMethodService} from '../../services/user-payment-method/user-
 export class ShowPaymentMethodPage implements OnInit {
   public payment: UserPaymentMethod;
     private pid1: any;
+    public localUser: UserProfile = {
+        id: null ,
+        name: '',
+        mobileNumber: '',
+        email: '',
+        role: 'User',
+        userStatus: null,
+        // document: null,
+    };
+    key = 'details';
     // tslint:disable-next-line:max-line-length
-  constructor(private userPaymentMethodService: UserPaymentMethodService, private router: Router, private http: HTTP) { }
+  constructor(private userPaymentMethodService: UserPaymentMethodService, private router: Router, private http: HTTP, private storage: Storage) { }
 
   ionViewWillEnter () {
-      this.userPaymentMethodService.getAllPaymentMethod('5da1b2ba0e8e3d0001e33275')
-          .then(data => {
-              console.log('filtered data: ', data);
-              console.log('Response: ', data.data);
-              this.payment = JSON.parse(data.data).data;
-          });
+      this.storage.get(this.key).then( value => {
+          console.log('Before:', value);
+          this.localUser = value;
+          console.log(this.localUser.id);
+          this.userPaymentMethodService.getAllPaymentMethod(this.localUser.id)
+              .then(data => {
+                  console.log('filtered data: ', data);
+                  console.log('Response: ', data.data);
+                  this.payment = JSON.parse(data.data).data;
+              });
+      });
   }
 
    ngOnInit() {
@@ -41,11 +59,16 @@ export class ShowPaymentMethodPage implements OnInit {
         this.router.navigateByUrl('/poc-payment', navigationExtras);
     }
   onDelete(pid: any) {
+      this.storage.get(this.key).then( value => {
+          console.log('Before:', value);
+          this.localUser = value;
+          console.log(this.localUser.id);
       this.pid1 = pid;
-     this.userPaymentMethodService.deletePaymentMethod('5da1b2ba0e8e3d0001e33275', pid)
+     this.userPaymentMethodService.deletePaymentMethod(this.localUser.id, pid)
          .then(
              resp => console.log('deleted'),
              error => console.log(error)
          );
+      });
 }
 }
