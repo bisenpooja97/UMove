@@ -15,6 +15,7 @@ target/
 .springBeans
 .sts4-cache
 
+/user-service/uploads/
 ### IntelliJ IDEA ###
 .idea
 *.iws
