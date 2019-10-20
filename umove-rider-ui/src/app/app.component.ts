@@ -11,16 +11,27 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 })
 export class AppComponent {
   public appPages = [
+      {
+          title: 'Home',
+          url: '/',
+          icon: 'home'
+      },
+      {
+          title: 'My Rides',
+          url: '/my-rides',
+      },
     {
-      title: 'Home',
-      url: '/',
-      icon: 'home'
+      title: 'Payment Method',
+      url: '/show-payment-method'
     },
     {
-      title: 'My Rides',
-      url: '/my-rides',
+      title: 'View profile',
+      url: '/view-profile',
     },
-
+      {
+          title: 'Update KYC',
+          url: '/update-kyc',
+      }
   ];
 
   constructor(

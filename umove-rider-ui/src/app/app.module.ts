@@ -13,12 +13,18 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
-import {SharedModule} from "./shared/shared.module";
+import {SharedModule} from './shared/shared.module';
 import {MapBoxPage} from './map-box/map-box.page';
 import {BikeListPage} from './bike-list/bike-list.page';
 import {BikeListPageModule} from './bike-list/bike-list.module';
 import {AutoCompleteModule} from 'ionic4-auto-complete';
 import {FormsModule} from '@angular/forms';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {UserProfileServiceService} from './services/users-profile/user-profile-service.service';
+import {ReactiveFormsModule} from '@angular/forms';
+import {Environment} from '@angular/compiler-cli/src/ngtsc/typecheck/src/environment';
+import {UserPaymentMethodService} from './services/user-payment-method/user-payment-method.service';
+import {IonicStorageModule} from '@ionic/storage';
 
 @NgModule({
   declarations: [AppComponent, MapBoxPage, BikeListPage],
@@ -26,6 +32,9 @@ import {FormsModule} from '@angular/forms';
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
+      IonicStorageModule.forRoot(),
+    AppRoutingModule,
+    HttpClientModule, ReactiveFormsModule,
     AppRoutingModule,
       BikeListPageModule,
       AutoCompleteModule,
@@ -40,6 +49,10 @@ import {FormsModule} from '@angular/forms';
     StatusBar,
       BarcodeScanner,
     SplashScreen,
+    HttpClient,
+      HTTP,
+    UserProfileServiceService,
+    UserPaymentMethodService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
     exports: [

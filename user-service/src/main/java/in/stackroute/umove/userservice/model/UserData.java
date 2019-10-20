@@ -13,9 +13,11 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+
 /*
  * User details
  */
+
 public class UserData
 {
     @Id
@@ -28,29 +30,31 @@ public class UserData
     private DocumentVerification document;
     private List<UserPaymentMethod> paymentMethod;
 
-    public UserData(String name, String mobileNumber, String email, Role role, UserStatus userStatus, DocumentVerification document) {
+    public UserData( String name, String mobileNumber, String email) {
+        this.name = name;
+        this.mobileNumber = mobileNumber;
+        this.email = email;
+    }
+
+    public UserData( String name, String mobileNumber, String email,  Role role,  UserStatus userStatus )
+    {
         this.name = name;
         this.mobileNumber = mobileNumber;
         this.email = email;
         this.role = role;
         this.userStatus = userStatus;
-        this.document = document;
     }
 
-    public UserData(String rahul, String s, String s1, Role user, UserStatus inactive) {
-    }
+    // ObjectId needs to be converted to string
 
-
-//    public String getId()
+//    public String get_Id()
 //    {
-//
-//        return id.toHexString();
+//        return _id.toHexString();
 //    }
 //
-//    public void setId(ObjectId _id)
-//
+//    public void set_Id(ObjectId _id)
 //    {
-//        this.id = id;
+//        this._id = _id;
 //    }
 
 }

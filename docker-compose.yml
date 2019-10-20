@@ -126,6 +126,8 @@ services:
       - config
       - discovery
     restart: on-failure
+    volumes:
+      - '$HOME/umove/user-service/uploads/documents:/uploads/documents'
 
   vehicles:
     build:

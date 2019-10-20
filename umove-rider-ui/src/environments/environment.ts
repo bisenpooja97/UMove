@@ -2,6 +2,8 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+import * as firebase from 'firebase';
+
 export const environment = {
   production: false,
   map: 'pk.eyJ1IjoicHVuaXRzZXRpYSIsImEiOiJjazBjOTY0cGcwMDI0M2RtbThsbWEyaXhnIn0.DrloATvnGeowNnIPanQT4g',
@@ -12,7 +14,18 @@ export const environment = {
   tomtomKey : '&key=Q0lrXtgq4yAgXdZuyf7RBbItuzVuRxUj',
   bookingSocket: '/ws',
   bookingService: 'bookingservice',
-  bookingBaseApi: '/api/v1/rides'
+  bookingBaseApi: '/api/v1/rides',
+  userService: 'userservice',
+  usersBaseApi: '/api/v1/users',
+  firebase: {
+    apiKey: 'AIzaSyBZBoZCkX7W3dNNU6kQvSKfcMvZcerJSno',
+    authDomain: 'smsproject-2.firebaseapp.com',
+    databaseURL: 'https://smsproject-2.firebaseio.com',
+    projectId: 'smsproject-2',
+    storageBucket: '',
+    messagingSenderId: '533980807336',
+    appId: '1:533980807336:web:fbbbae25711ae4e252829d'
+  },
 };
 
 /*

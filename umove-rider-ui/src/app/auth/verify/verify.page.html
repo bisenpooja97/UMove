@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title style="color: white ">Enter OTP</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div padding>
+    <h3 text-center> Enter OTP sent to Your Mobile</h3>
+  </div>
+    <div padding>
+      <div *ngIf="windowRef.confirmationResult">
+        <ion-input id="name" class="text-input" type="tel" name="code" placeholder="OTP" [(ngModel)]="verificationCode" ngModel maxlength="6"></ion-input>
+        <ion-text *ngIf="error" text-center color="danger">Wrong OTP entered.</ion-text>
+      </div>
+    </div>
+  <div padding>
+  <ion-button size="large" type="submit" (click)="verifyLoginCode()" expand="block">Verify</ion-button>
+  </div>
+  <button ion-button (click)="loadData()">Load Data</button>
+</ion-content>

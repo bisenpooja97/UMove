@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="view-profile"></ion-back-button>
+    </ion-buttons>
+    <ion-title >Edit-Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content padding>
+  <ion-card *ngIf="user">
+    <ion-card-content>
+      <form [formGroup]="todo" (ngSubmit)="logForm(todo.value)">
+        <ion-label>Name</ion-label>
+        <ion-item>
+          <ion-input type="text" formControlName="name"></ion-input>
+        </ion-item>
+        <ion-label>Email</ion-label>
+        <ion-item>
+          <ion-input type="text" formControlName="email"></ion-input>
+        </ion-item>
+        <ion-label>Phone Number</ion-label>
+        <ion-item>
+          <ion-input type='text' formControlName="mobileNumber"></ion-input>
+        </ion-item>
+        <ion-button expand=block type="submit" [disabled]="!todo.valid">Submit</ion-button>
+      </form>
+      <!--      <ion-button expand=block fill=outline >Submit</ion-button><br>-->
+    </ion-card-content>
+  </ion-card>
+</ion-content>
