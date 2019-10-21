@@ -13,7 +13,7 @@ import { Supervisor } from 'src/app/model/supervisor';
 export class ZoneService {
 
   constructor(private httpClient: HttpClient) { }
-  baseUrl = environment.baseUrl1 + environment.zoneBaseApi;
+  baseUrl = environment.baseUrl + environment.zoneService + environment.zoneBaseApi;
 
   createZone(zone: Resp) {
     return this.httpClient.post<Resp>(this.baseUrl, zone);

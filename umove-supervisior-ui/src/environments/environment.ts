@@ -4,9 +4,11 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'http://172.23.234.70:8094/',
+  baseUrl: 'http://13.235.35.202:8094/',
   bookingService: 'bookingservice',
-  bookingBaseApi: '/api/v1/rides'
+  bookingBaseApi: '/api/v1/rides',
+  zoneService: 'zoneservice',
+  vehiclesBaseApi: '/api/v1/vehicles'
 };
 
 /*

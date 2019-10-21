@@ -12,7 +12,7 @@ import { Vehicle } from '../model/Vehicle';
 export class VehicleService {
 
   constructor(private httpClient: HttpClient) { }
-  baseUrl = environment.baseUrl2 + environment.vehicleBaseApi;
+  baseUrl = environment.baseUrl + environment.zoneService + environment.vehicleBaseApi;
   getVehicles(): Observable<Resp> {
     return this.httpClient.get<Resp>(this.baseUrl);
   }

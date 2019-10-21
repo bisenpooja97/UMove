@@ -48,6 +48,17 @@
 
             </mat-form-field>
 
+            <mat-form-field appearance="outline" fxFlex>
+                <mat-label>Chassis Number.</mat-label>
+                <input matInput #input placeholder="Chassis No." formControlName="chassisNumber" required>
+
+                <mat-error *ngIf="RchassisNumber.invalid">
+
+                    {{getErrorChassisNo()}}
+                </mat-error>
+
+            </mat-form-field>
+
 
 
 

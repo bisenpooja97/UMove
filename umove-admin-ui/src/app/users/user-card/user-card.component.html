@@ -1,8 +1,13 @@
-<mat-card class="my-card" fxFlex.sm="0 1 calc(50%-10px)" fxFlex.md="0 1 calc(33%-10px)" fxLayout="column" fxLayoutGap="20px" (click)="ok()">
-  <mat-card-content fxLayoutAlign="end" class="status" [ngStyle]="{'color':getColor(userStatus)}" >{{userStatus}}</mat-card-content>
-  <mat-card-title fxLayoutAlign="center center" class="userName">{{name}}</mat-card-title>
-  <mat-card-content fxLayoutAlign="center center">{{mobileNumber}}</mat-card-content>
-  <mat-card-content fxLayoutAlign="center center">{{role}}</mat-card-content>
+<mat-card (click)="ok()" class="my-card">
+  <mat-card-content fxLayoutAlign="space-between" >
+    <ngx-avatar name="{{name}}"></ngx-avatar>
+    <mat-chip-list aria-label="Fish selection">
+<mat-chip [ngStyle]="{'background-color':getColor(userStatus)}" class="status">{{userStatus}}</mat-chip>
+</mat-chip-list>
+</mat-card-content>
+<mat-card-title class="userName">{{name}}</mat-card-title>
+  <mat-card-content>Mobile No: {{mobileNumber}}</mat-card-content>
+  <mat-card-content>{{role}}</mat-card-content>
 </mat-card>
 
 

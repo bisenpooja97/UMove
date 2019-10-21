@@ -1,9 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import { ZoneService } from './service/zone.service';
 import { Zone } from '../model/zone';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { AddZoneComponent } from './add-zone/add-zone.component';
 import { NotificationService } from '../shared/notification.service';
+import { VehicleService } from '../vehicles/vehicle.service';
 
 @Component({
   selector: 'app-zones',
@@ -14,10 +15,11 @@ export class ZonesComponent implements OnInit {
 
   @Input() zones: Zone[];
 
-  p = 1;
+  @Output() p = 1;
   message: string;
 
   constructor(private zoneService: ZoneService,
+              private vehicleService: VehicleService,
               private matDialog: MatDialog,
               private notificationService: NotificationService) { }
 
@@ -37,7 +39,7 @@ add() {
         .subscribe(
           response => {
           this.message = response.message;
-          console.log(this.message);
+          // console.log(this.message);
           if (this.message === 'Zone name is already exist!!!') {
             this.notificationService.warn('Zone name already exist!!!');
             } else if (this.message === 'Zone locality is already exist!!!') {

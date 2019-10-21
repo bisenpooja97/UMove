@@ -13,6 +13,8 @@ export class UpdateVehiclesComponent implements OnInit {
   lastServiceDate: Date;
   insuranceNo: string;
   todaydate: Date = new Date();
+  vehiclePurchased: Date;
+  minDate: Date = new Date();
 
   constructor(public dialogRef: MatDialogRef<UpdateVehiclesComponent>,
               private fb: FormBuilder, private route: ActivatedRoute,
@@ -20,6 +22,7 @@ export class UpdateVehiclesComponent implements OnInit {
               @Inject(MAT_DIALOG_DATA) data) {
 this.lastServiceDate = data.lastServiceDate;
 this.insuranceNo = data.insuranceNo;
+this.minDate = new Date(data.vehiclePurchased);
 }
 
 vehicleForm = this.fb.group({
@@ -40,6 +43,7 @@ onSubmit() {
 
 
   ngOnInit() {
+    console.log(this.lastServiceDate);
   }
 
 }

@@ -3,6 +3,7 @@ package in.stackroute.umove.bookingservice.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import in.stackroute.umove.bookingservice.model.Ride;
+import in.stackroute.umove.bookingservice.model.RideStatus;
 import in.stackroute.umove.bookingservice.model.Vehicle;
 import in.stackroute.umove.bookingservice.model.Zone;
 import in.stackroute.umove.bookingservice.service.RideService;
@@ -72,7 +73,7 @@ public class RideControllerTests {
         destination.setId("888");
         Ride ride = new Ride();
         ride.set_id(new ObjectId("5d89c3cf651a913a1cf2d31e"));
-        ride.setStatus("started");
+        ride.setStatus(RideStatus.Started);
         BDDMockito.given(rideService.updateDestination(destination, new ObjectId("5d89c3cf651a913a1cf2d31e"))).willReturn(ride);
         mockMvc.perform(MockMvcRequestBuilders.patch("/api/v1/rides/5d89c3cf651a913a1cf2d31e/changeDestination")
                 .contentType(MediaType.APPLICATION_JSON)

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ZoneService } from '../service/zone.service';
 import { Zone } from 'src/app/model/zone';
@@ -6,6 +6,7 @@ import { NotificationService } from 'src/app/shared/notification.service';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { UpdateZonesComponent } from '../update-zones/update-zones.component';
 import { AddSupervisorComponent } from '../add-supervisor/add-supervisor.component';
+import { VehicleService } from 'src/app/vehicles/vehicle.service';
 
 export interface Status {
   value: string;
@@ -29,11 +30,13 @@ export class ZoneDetailsComponent implements OnInit {
   pincode: number;
   capacity: number;
   status: string;
+  id: string;
+  count = 0;
 
   zoneStatus: Status[] = [
     { value: 'INACTIVE', viewValue: 'INACTIVE' },
     { value: 'ACTIVE', viewValue: 'ACTIVE' },
-    { value: 'UNDER_MAINTAINANCE', viewValue: 'UNDER_MAINTAINANCE' },
+    { value: 'INMAINTAINANCE', viewValue: 'INMAINTAINANCE' },
     { value: 'FULL', viewValue: 'FULL' },
   ];
 
@@ -41,10 +44,15 @@ export class ZoneDetailsComponent implements OnInit {
   constructor(private router: Router, private zoneService: ZoneService,
               private activatedRoute: ActivatedRoute, private route: ActivatedRoute,
               private notificationService: NotificationService,
-              private matDialog: MatDialog) { }
+              private matDialog: MatDialog,
+              private vehicleService: VehicleService) { }
 
   ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      this.count = params.count;
+  });
     this.getZoneDetails();
+
   }
 
 
@@ -84,6 +92,7 @@ getZoneDetails() {
   this.zoneService.getZoneByName(this.route.snapshot.paramMap.get('name')).subscribe(res => {
     this.zone = res.data;
     console.log(res);
+    this.id = this.zone[0].id;
     this.name = this.zone[0].name;
     this.city = this.zone[0].city;
     this.country = this.zone[0].country;
@@ -93,19 +102,46 @@ getZoneDetails() {
     this.pincode = this.zone[0].pincode;
     this.capacity = this.zone[0].capacity;
     this.status = this.zone[0].status;
+
+    // this.count = this.getVehiclesDetails();
+    console.log(this.count);
+    if (this.count >= this.capacity) {
+    this.zone[0].status = 'FULL';
+    this.zoneService.updateZones(this.route.snapshot.paramMap.get('name'), this.zone[0]).subscribe(
+      response => this.notificationService.success('Zone updated successfully!!'),
+      error => this.notificationService.warn('Can\'t update '),
+
+    );
+  }
   });
+
+
 }
 
 getColor(status) {
   switch (status) {
 case 'ACTIVE':
-return 'green';
+return '#1B5E20';
 case 'INACTIVE':
-return 'blue';
+return '#FFC400';
 case 'FULL':
-return 'red';
-case 'UNDER_MAINTAINANCE':
-return 'gray';
+return '#F44336';
+case 'INMAINTAINANCE':
+return '#6D4C41';
 }
 }
+
+// getVehiclesDetails() {
+//   this.vehicleService.getVehicles().subscribe(res => {
+
+//     res.data.filter(val => {
+//       if (val.zoneid === String(this.id)) {
+//           this.count += 1;
+//       }
+//       console.log(this.count, val.zoneid, this.id, val, this.count);
+//     });
+// });
+//   // console.log(this.count);
+//   // return this.count;
+// }
 }

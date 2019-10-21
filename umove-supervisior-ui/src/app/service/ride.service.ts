@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import {HTTP, HTTPResponse} from "@ionic-native/http/ngx";
-import {environment} from "../../environments/environment";
-import {ToastController} from "@ionic/angular";
-import {stringify} from "querystring";
+import {HTTP, HTTPResponse} from '@ionic-native/http/ngx';
+import {environment} from '../../environments/environment';
+import {ToastController} from '@ionic/angular';
+import {stringify} from 'querystring';
 
 @Injectable({
   providedIn: 'root'
@@ -29,8 +29,8 @@ export class RideService {
 
 
   getRideDetailById(rideId): Promise<HTTPResponse> {
-    console.log('get ride by id url:', this.baseUrl + /*this.bookingService +*/ this.baseEndPoint + '/' + rideId)
-    return this.http.get(this.baseUrl + /*this.bookingService +*/ this.baseEndPoint + '/' + rideId, {}, {})
+    console.log('get ride by id url:', this.baseUrl + /*this.bookingService +*/ this.baseEndPoint + '/' + rideId);
+    return this.http.get(this.baseUrl + /*this.bookingService +*/ this.baseEndPoint + '/' + rideId, {}, {});
   }
 
   submitExtraCharges(bookingId, charges): Promise<HTTPResponse> {

@@ -11,7 +11,7 @@ import { User } from 'src/model/user';
 export class UserService {
 
   constructor(private httpClient: HttpClient) { }
-  baseUrl = environment.baseUrl + environment.userBaseApi;
+  baseUrl = environment.baseUrl + environment.userService + environment.userBaseApi;
 
   getUsers(): Observable<Resp> {
     return this.httpClient.get<Resp>(this.baseUrl);

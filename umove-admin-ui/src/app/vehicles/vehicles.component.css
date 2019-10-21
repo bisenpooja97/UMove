@@ -1,41 +1,12 @@
-.header {
-    margin-left: 240px;
-}
 
 app-vehicle-card {
-    width: 25%;
-    margin-left: 50px;
-}
-
-.card {
-    margin-left: 18%;
-}
-
-.add-button {
-    padding-right: 200px;
-    padding-bottom: 2%;
+    width: 20%;
+    margin-bottom: 20px;
 }
 
 @media only screen and (max-width: 600px) {
-    .card {
-        margin-left: 10%;
-    }
+   
     app-vehicle-card {
         width: 75%;
     }
-    .search {
-        margin-left: 60px;
-        margin-bottom: 50px;
-    }
-    .header {
-        margin-left: 50px;
-    }
-}
-
-@media only screen and (min-width: 600px) {
-.search {
-        margin-left: 240px;
-        margin-bottom: 50px;
-    }
-
 }
