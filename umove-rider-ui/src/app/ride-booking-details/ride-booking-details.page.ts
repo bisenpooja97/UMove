@@ -17,31 +17,24 @@ export class RideBookingDetailsPage implements OnInit {
   sizeOfDestinationZones: number;
   destinationZone: Zone;
   timerTime: number;
-  timerSettings: MbscTimerOptions;
+  timerSettings: MbscTimerOptions = {
+    display: 'inline',
+    maxWheel: 'minutes',
+    minWidth: 100,
+    autostart: true,
+    buttons: [],
+    targetTime: 1200,
+  };
 
   constructor(private rideService: RideService, private router: Router, private route: ActivatedRoute) {
   }
 
   ngOnInit() {
-    this.rideService.getRideDetailsByUserIdNStatus('786', 'Confirmed')
+    this.rideService.getRideDetailsByUserIdNStatus('5d8bbc0da6e87d5404aa1921', 'Confirmed')
       .then(response => {
         console.log('Booking details: ', response);
         this.ride = JSON.parse(response.data).data;
         console.log(this.ride);
-        console.log('Auto cancel time is ', this.ride.timer);
-        this.timerTime = this.ride.timer * 60;
-        console.log('Auto cancel time is ', this.timerTime);
-        console.log('It will enter timer settings');
-        console.log('Timer time:', typeof (this.timerTime));
-        this.timerSettings = {
-          display: 'inline',
-          maxWheel: 'minutes',
-          minWidth: 100,
-          autostart: true,
-          buttons: [],
-          targetTime: this.timerTime,
-        };
-        console.log('timer settings ', this.timerSettings);
       });
   }
 

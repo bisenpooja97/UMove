@@ -36,7 +36,6 @@ public class Ride
     private int duration;
     private PaymentDetail paymentDetail;
     private PromoCode promoCode;
-    private int timer;
 
     // ObjectId needs to be converted to string
     public String get_id() { return _id.toHexString(); }

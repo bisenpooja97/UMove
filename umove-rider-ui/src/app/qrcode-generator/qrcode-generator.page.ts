@@ -34,7 +34,7 @@ export class QrcodeGeneratorPage implements OnInit {
     }
 
     ngOnInit() {
-        this.rideService.getRideDetailsByUserIdNStatus('786', 'started')
+        this.rideService.getRideDetailsByUserIdNStatus('5d8bbc0da6e87d5404aa1921', 'started')
             .then(response => {
                 console.log('Ride details: ', response);
                 this.ride = JSON.parse(response.data).data;
