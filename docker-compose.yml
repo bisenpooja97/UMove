@@ -27,20 +27,20 @@ services:
     volumes:
       - '$HOME/umove/data/mongo:/data/db'
 
-  # cassendra
-  cassandra:
-    image: 'cassandra'
-    container_name: 'umove-cassandra'
-    restart: on-failure
-    ports:
-      - '7000:7000'
-      - '9042:9042'
-    volumes:
-      - '$HOME/umove/data/cassandra:/var/lib/cassandra'
-    environment:
-      - CASSANDRA_SEEDS=cassandra
-      - CASSANDRA_PASSWORD_SEEDER=yes
-      - CASSANDRA_PASSWORD=Umove@2019
+#  # cassendra
+#  cassandra:
+#    image: 'cassandra'
+#    container_name: 'umove-cassandra'
+#    restart: on-failure
+#    ports:
+#      - '7000:7000'
+#      - '9042:9042'
+#    volumes:
+#      - '$HOME/umove/data/cassandra:/var/lib/cassandra'
+#    environment:
+#      - CASSANDRA_SEEDS=cassandra
+#      - CASSANDRA_PASSWORD_SEEDER=yes
+#      - CASSANDRA_PASSWORD=Umove@2019
 
 #  # redis
 #  redis:
@@ -111,7 +111,6 @@ services:
     depends_on:
       - config
       - discovery
-      - api-gateway
     restart: on-failure
     links:
       - config
@@ -127,6 +126,8 @@ services:
       - config
       - discovery
     restart: on-failure
+    volumes:
+      - '$HOME/umove/user-service/uploads/documents:/uploads/documents'
 
   vehicles:
     build:
@@ -150,15 +151,18 @@ services:
       - config
     restart: on-failure
 
-  Bookings:
+  bookings:
     build:
       context: ./booking-service
       dockerfile: Dockerfile
     ports:
       - 8094:8094
     depends_on:
-      - discovery
       - config
+      - discovery
+      - mongo
+      - mysql
+      - rabbitmq
     restart: on-failure
 
 

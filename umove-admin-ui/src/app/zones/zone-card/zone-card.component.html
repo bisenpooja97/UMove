@@ -1,0 +1,6 @@
+
+    <mat-card class="my-card" fxFlex.sm="0 1 calc(50%-10px)" fxFlex.md="0 1 calc(33%-10px)" fxLayout="column" fxLayoutGap="20px" (click)="ok()">
+        <mat-card-content fxLayoutAlign="end" [ngStyle]="{'color':getColor(status)}" class="status">{{status}}</mat-card-content>
+        <mat-card-title fxLayoutAlign="center center" class="zoneName">{{zoneNames}}</mat-card-title>
+        <mat-card-content fxLayoutAlign="center center">{{city}}</mat-card-content>
+    </mat-card>

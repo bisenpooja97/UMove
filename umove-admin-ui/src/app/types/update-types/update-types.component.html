@@ -1,0 +1,26 @@
+<mat-toolbar>
+    <span class="fill-remaining-space"></span>
+    <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabIndex="-1">
+    <mat-icon>clear</mat-icon>
+</button>
+</mat-toolbar>
+
+<form fxLayout="column" fxLayoutAlign="center center" [formGroup]="typeForm" (ngSubmit)="onSubmit()">
+
+    <div fxFlex=50% fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px" class="form" fxLayoutAlign="center center">
+        <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px" class="col">
+
+            <mat-form-field appearance="outline" fxFlex>
+                <mat-label>Cost/min </mat-label>
+                <input matInput maxlength="6" #input placeholder="cost/min" formControlName="costtime" [(ngModel)]="costtime" required>
+
+            </mat-form-field>
+        </div>
+    </div>
+    <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+        <button mat-raised-button class="btn" [disabled]='!typeForm.valid' color="primary">
+                        Submit
+                    </button>
+
+    </div>
+</form>
