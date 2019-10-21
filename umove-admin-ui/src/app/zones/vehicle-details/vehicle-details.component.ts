@@ -69,12 +69,13 @@ export class VehicleDetailsComponent implements OnInit {
           console.log(this.selectedVehicle);
           this.vehicleService.updateVehicle(String(Object.values(result)[0]), this.selectedVehicle).subscribe(
             response => { this.notificationService.success('Vehicle added to zone successfully!!');
+                          this.getZoneDetails();
+                          this.vDetails();
             });
           console.log(Object.values(result), JSON.stringify(Object.values(result)[0]));
         });
       }
-      this.getZoneDetails();
-      this.vDetails();
+
     });
   }
 
