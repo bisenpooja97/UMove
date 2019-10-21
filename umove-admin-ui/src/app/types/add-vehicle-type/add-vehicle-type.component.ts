@@ -114,9 +114,6 @@ export class AddVehicleTypeComponent implements OnInit {
     );
   }
 
-
-
-
   onSubmit() {
     this.onUpload();
     console.log(this.typeForm.value);
