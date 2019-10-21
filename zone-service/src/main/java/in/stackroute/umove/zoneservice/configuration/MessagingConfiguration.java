@@ -46,7 +46,7 @@ public class MessagingConfiguration extends SpringBootServletInitializer impleme
 
     @Bean
     TopicExchange zoneExchange() {
-        return new TopicExchange("vehicle_exchange");
+        return new TopicExchange("zone_exchange");
     }
 
     @Bean
