@@ -1,8 +1,9 @@
 package in.stackroute.umove.bookingservice.controller;
 
 import in.stackroute.umove.bookingservice.model.Ride;
+import in.stackroute.umove.bookingservice.model.RideStatus;
 import in.stackroute.umove.bookingservice.model.Zone;
-import in.stackroute.umove.bookingservice.service.RideServiceInterface;
+import in.stackroute.umove.bookingservice.service.RideService;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,12 +25,14 @@ import java.util.TreeMap;
 public class RideController {
 
     @Autowired
-    private RideServiceInterface rideService;
+    private RideService rideService;
 
     //Api end point for posting ride details
     @PostMapping("rides")
-    public ResponseEntity<Map> confirmBooking(@RequestBody() Ride ride) {
-        Ride rideDetails = rideService.confirmBooking(ride);
+    public ResponseEntity<Map> confirmRide(@RequestBody() Ride ride) {
+        ride.setStatus(RideStatus.Confirmed);
+        ride.setBookedAt(LocalDateTime.now());
+        Ride rideDetails = rideService.confirmRide(ride);
         Map<String, Object> map = new TreeMap<>();
         map.put("data", rideDetails);
         map.put("status", HttpStatus.CREATED);
@@ -64,16 +67,6 @@ public class RideController {
         return new ResponseEntity<>(map, HttpStatus.OK);
     }
 
-    //Api end point for autocancel ride request by the user
-    @PatchMapping("rides/{rideId}/autocancel")
-    public ResponseEntity<?> autocancelRide(@PathVariable("rideId") ObjectId rideId) {
-        Ride ride = rideService.autocancelRide(rideId);
-        Map<String, Object> map = new TreeMap<>();
-        map.put("data", ride);
-        map.put("status", HttpStatus.OK);
-        return new ResponseEntity<>(map, HttpStatus.OK);
-    }
-
     //Api end point for cancel ride request by the user
     @PatchMapping("rides/{rideId}/cancel")
     public ResponseEntity<?> cancelRideRequest(@PathVariable("rideId") ObjectId rideId) {
@@ -94,13 +87,4 @@ public class RideController {
         return new ResponseEntity<>(map, HttpStatus.OK);
     }
 
-    //Api end point for end ride request by the user
-    @PatchMapping("rides/{rideId}/end")
-    public ResponseEntity<?> endRideRequest(@PathVariable("rideId") ObjectId rideId) {
-        Ride ride = rideService.endRide(rideId);
-        Map<String, Object> map = new TreeMap<>();
-        map.put("data", ride);
-        map.put("status", HttpStatus.OK);
-        return new ResponseEntity<>(map, HttpStatus.OK);
-    }
 }

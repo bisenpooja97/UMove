@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.time.LocalDateTime;
+
 /*
  * Zone details
  */
@@ -16,19 +18,39 @@ import lombok.ToString;
 public class Zone {
 
     private String id;
-
-    // supervisor details
-    private String supervisorId;
-    private String supervisorName;
-    private String supervisorEmail;
-    private String supervisorContactNo;
-
-    // zone address
-    private Double lat;
-    private Double lon;
-    private String locality;
+    private String name;
+    private double lat;
+    private double lon;
     private String city;
     private String state;
     private String country;
     private int pincode;
+    private String locality;
+    private int capacity;
+    private LocalDateTime createdAt;
+    private String supervisorId;
+    private String supervisorName;
+    private String supervisorNumber;
+    private String supervisorEmail;
+    private ZoneStatus status;
+
+
+    public Zone(String name, double lat, double lon, String city, String state, String country,String locality, int capacity, String supervisorId,
+                String supervisorName, String supervisorNumber, String supervisorEmail,
+                ZoneStatus status) {
+        this.name = name;
+        this.lat = lat;
+        this.lon = lon;
+        this.city = city;
+        this.state = state;
+        this.country = country;
+        this.locality = locality;
+        this.capacity = capacity;
+        this.supervisorId = supervisorId;
+        this.supervisorName = supervisorName;
+        this.supervisorNumber = supervisorNumber;
+        this.supervisorEmail = supervisorEmail;
+        this.status = status;
+    }
+
 }

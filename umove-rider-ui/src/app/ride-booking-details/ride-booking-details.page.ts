@@ -17,7 +17,14 @@ export class RideBookingDetailsPage implements OnInit {
   sizeOfDestinationZones: number;
   destinationZone: Zone;
   timerTime: number;
-  timerSettings: MbscTimerOptions;
+  timerSettings: MbscTimerOptions = {
+      display: 'inline',
+      maxWheel: 'minutes',
+      minWidth: 100,
+      autostart: true,
+      buttons: [],
+      targetTime: 1200
+    };
 
   constructor(private rideService: RideService, private router: Router, private route: ActivatedRoute) {
   }
@@ -28,25 +35,25 @@ export class RideBookingDetailsPage implements OnInit {
         console.log('Booking details: ', response);
         this.ride = JSON.parse(response.data).data;
         console.log(this.ride);
-        console.log('Auto cancel time is ', this.ride.timer);
-        this.timerTime = this.ride.timer * 60;
-        console.log('Auto cancel time is ', this.timerTime);
-        console.log('It will enter timer settings');
-        console.log('Timer time:', typeof (this.timerTime));
-        this.timerSettings = {
-          display: 'inline',
-          maxWheel: 'minutes',
-          minWidth: 100,
-          autostart: true,
-          buttons: [],
-          targetTime: this.timerTime,
-        };
-        console.log('timer settings ', this.timerSettings);
+        // console.log('Auto cancel time is ', this.ride.timer);
+        // this.timerTime = this.ride.timer * 60;
+        // console.log('Auto cancel time is ', this.timerTime);
+        // console.log('It will enter timer settings');
+        // console.log('Timer time:', typeof (this.timerTime));
+        // this.timerSettings = {
+        //   display: 'inline',
+        //   maxWheel: 'minutes',
+        //   minWidth: 100,
+        //   autostart: true,
+        //   buttons: [],
+        //   targetTime: this.timerTime,
+        // };
+        // console.log('timer settings ', this.timerSettings);
       });
   }
 
   timerFinished() {
-    this.rideService.autocancelRideById(this.ride._id).then(data => {
+    this.rideService.cancelRideById(this.ride._id).then(data => {
       console.log('response of autocancel ride: ', data);
     });
     mobiscroll.alert({

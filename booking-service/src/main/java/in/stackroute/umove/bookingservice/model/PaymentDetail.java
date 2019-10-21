@@ -16,12 +16,12 @@ import java.util.List;
 @ToString
 public class PaymentDetail {
 
-    private String status;
-    private Integer discount;
-    private Double rideAmount;
+    private PaymentStatus status = PaymentStatus.Pending;
+    private Double rideAmount=0.0;
     private List<ExtraCharge> extraCharges;
-    private Double totalExtraCharges;
-    private Double totalAmount;
-    private Double paidAmount;
+    private Double totalExtraCharges=0.0;
+    private Double totalAmount=0.0;
+    private Double fuelRefillAmount=0.0;
+
 
 }

@@ -73,7 +73,7 @@ export class QrcodeScannerPage implements OnInit {
   }
 
   // timerFinished() {
-  //   this.rideService.autocancelRideById(this.ride._id).then(data => {
+  //   this.rideService.cancelRideById(this.ride._id).then(data => {
   //     console.log('response of autocancel ride: ', data);
   //   });
   //   mobiscroll.alert({

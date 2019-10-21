@@ -21,7 +21,7 @@ export class RideDetailsPage implements OnInit {
 
   ngOnInit() {
 
-    this.rideService.getRideDetailsByUserIdNStatus('786', 'started')
+    this.rideService.getRideDetailsByUserIdNStatus('786', 'Started')
     .then(response => {
       console.log('Ride details: ', response);
       this.ride = JSON.parse(response.data).data;

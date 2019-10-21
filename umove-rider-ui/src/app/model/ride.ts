@@ -4,6 +4,7 @@ import { User } from './user';
 import { Payment } from './payment';
 import { PaymentMethod } from './payment-method';
 import { Campaign } from './campaign';
+import {PaymentDetail} from './paymentdetail';
 
 export class Ride {
     // tslint:disable-next-line: variable-name
@@ -20,6 +21,7 @@ export class Ride {
     rideEndAt: Date;
     distance: number;
     duration: number;
+    paymentDetail: PaymentDetail;
     payment: Payment;
-    timer: number;
+
 }
