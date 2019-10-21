@@ -9,7 +9,7 @@
 
 <ion-content>
 
-  <mbsc-form>
+  <mbsc-form *ngIf="timerSettings">
     <mbsc-form-group>
       <mbsc-form-group-title>Timer</mbsc-form-group-title>
       <div [(ngModel)]="timer" mbsc-timer #timerVariable="mobiscroll" [mbsc-options]="timerSettings"
