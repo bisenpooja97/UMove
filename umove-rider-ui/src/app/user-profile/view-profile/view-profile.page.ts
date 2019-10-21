@@ -44,7 +44,7 @@ export class ViewProfilePage implements OnInit {
       this.storage.get(this.key).then(value => {
           console.log('After:', value);
       });
-    this.router.navigateByUrl('/login');
+      this.router.navigateByUrl('/login');
   }
   ionViewWillEnter() {
      this.storage.get(this.key).then(async value => {

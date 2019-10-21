@@ -4,8 +4,9 @@ import {BikeListPage} from './bike-list/bike-list.page';
 import {MapBoxPage} from './map-box/map-box.page';
 
 const routes: Routes = [
-  {path: '', component: MapBoxPage},
-   {path: 'bikelist', component: BikeListPage},
+    { path: '', redirectTo: 'login', pathMatch: 'full'} ,
+   { path: 'home', component: MapBoxPage},
+   { path: 'bikelist', component: BikeListPage},
     { path: 'confirm-ride-detail', loadChildren: './confirm-ride-detail/confirm-ride-detail.module#ConfirmRideDetailPageModule' },
     { path: 'dummy-payment-method', loadChildren: './dummy-payment-method/dummy-payment-method.module#DummyPaymentMethodPageModule' },
     { path: 'dummy-promocode', loadChildren: './dummy-promocode/dummy-promocode.module#DummyPromocodePageModule' },
@@ -19,11 +20,6 @@ const routes: Routes = [
     { path: 'my-rides', loadChildren: './my-rides/my-rides.module#MyRidesPageModule' },
     { path: 'my-rides-details/:rideId', loadChildren: './my-rides-details/my-rides-details.module#MyRidesDetailsPageModule' },
     { path: 'payment-detail/:rideId', loadChildren: './payment-details/payment-details.module#PaymentDetailsPageModule' },
-  // {
-  //   path: '',
-  //   redirectTo: 'login',
-  //   pathMatch: 'full'
-  // },
   { path: 'view-profile', loadChildren: './user-profile/view-profile/view-profile.module#ViewProfilePageModule' },
   { path: 'edit-profile', loadChildren: './user-profile/edit-profile/edit-profile.module#EditProfilePageModule' },
   { path: 'update-kyc', loadChildren: './user-profile/update-kyc/update-kyc.module#UpdateKycPageModule' },

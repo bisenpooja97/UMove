@@ -7,7 +7,7 @@ import * as firebase from 'firebase';
 export const environment = {
   production: false,
   map: 'pk.eyJ1IjoicHVuaXRzZXRpYSIsImEiOiJjazBjOTY0cGcwMDI0M2RtbThsbWEyaXhnIn0.DrloATvnGeowNnIPanQT4g',
-  baseUrl : 'http://192.168.1.9:8080/',
+  baseUrl : 'http://172.23.234.74:8080/',
   zoneService : '/zoneservice/api/v1',
   vehicleService: '/vehicleservice/api/v1',
   tomTomUrl : 'https://api.tomtom.com/search/2/structuredGeocode.json?countryCode=IND&streetName=',
@@ -18,13 +18,13 @@ export const environment = {
   userService: 'userservice',
   usersBaseApi: '/api/v1/users',
   firebase: {
-    apiKey: 'AIzaSyBZBoZCkX7W3dNNU6kQvSKfcMvZcerJSno',
-    authDomain: 'smsproject-2.firebaseapp.com',
-    databaseURL: 'https://smsproject-2.firebaseio.com',
-    projectId: 'smsproject-2',
-    storageBucket: '',
-    messagingSenderId: '533980807336',
-    appId: '1:533980807336:web:fbbbae25711ae4e252829d'
+    apiKey: 'AIzaSyC5Fc9iQzehhW9yw9qDDCUYhU7YhWPFgoI',
+    authDomain: 'sms-project-3.firebaseapp.com',
+    databaseURL: 'https://sms-project-3.firebaseio.com',
+    projectId: 'sms-project-3',
+    storageBucket: 'sms-project-3.appspot.com',
+    messagingSenderId: '505919961682',
+    appId: '1:505919961682:web:a1ad48542500c354403d8b'
   },
 };
 

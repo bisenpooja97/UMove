@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {WindowService} from '../../services/window/window.service';
 import {Router} from '@angular/router';
 import {UserProfile} from '../../model/user-profile';
@@ -20,21 +20,14 @@ export class VerifyPage implements OnInit {
   verificationCode: string;
   localUserData: UserProfile;
   userDataRecieved: UserProfile;
-  userData: UserProfile = {
-    id: null ,
-    name: '',
-    mobileNumber: '',
-    email: '',
-    role: 'User',
-    userStatus: null,
-    // document: null,
-  };
+  userData: UserProfile;
   user: any;
-    inputtext: any;
+    // inputtext: any;
 
     // tslint:disable-next-line:max-line-length
   constructor(private win: WindowService, private  router: Router, private http: HTTP , private storage: Storage, private userDataService: UserProfileServiceService) {
     this.error = false;
+    this.userData = new UserProfile();
   }
 
   ngOnInit() {
@@ -46,15 +39,22 @@ export class VerifyPage implements OnInit {
         .then( result => {
           this.user = result.user;
           // console.log(this.user.phoneNumber);
-           this.userData.mobileNumber = this.user.phoneNumber;
-           console.log('In Verify Page', this.userData);
-           this.userDataService.addUser(this.userData).then(res => {
+          this.userData.mobileNumber = this.user.phoneNumber;
+          console.log('In Verify Page', this.userData);
+          this.userDataService.addUser(this.userData).then(res => {
                    this.userDataRecieved = JSON.parse(res.data).data;
                    console.log(this.userDataRecieved.id);
                    this.storage.ready().then(() => {
+                       console.log('storing data --', this.userDataRecieved);
                        this.storage.set(this.key, this.userDataRecieved);
                        this.storage.get(this.key).then(value => {
                            console.log('this is in storage', value);
+                           this.localUserData = value;
+                           if (this.localUserData.name != null) {
+                           this.router.navigateByUrl('/home');
+                           } else {
+                               this.router.navigateByUrl('/edit-profile');
+                           }
                        });
                    });
            });
@@ -67,7 +67,7 @@ export class VerifyPage implements OnInit {
             //     console.log(this.userDataRecieved.mobileNumber);
             //     // this.userDataRecieved = res.data;
             // });
-          this.router.navigateByUrl('/view-profile');
+
         })
         .catch( error => {
           console.log(error, 'Incorrect code entered?');
