@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Zone } from 'src/app/model/zone';
 import { AddVehicleComponent } from '../add-vehicle/add-vehicle.component';
 import { MatDialogConfig, MatDialog } from '@angular/material';
+import { NotificationService } from 'src/app/shared/notification.service';
 
 @Component({
   selector: 'app-vehicle-details',
@@ -22,15 +23,17 @@ export class VehicleDetailsComponent implements OnInit {
   id: string;
   capacity: number;
   buttonDisable: boolean;
-  constructor(private vehicleService: VehicleService,
-              private zoneService: ZoneService,
-              private route: ActivatedRoute,
-              private matDialog: MatDialog) { }
+ constructor(private vehicleService: VehicleService,
+             private zoneService: ZoneService,
+             private route: ActivatedRoute,
+             private matDialog: MatDialog,
+             private notificationService: NotificationService) { }
 
   ngOnInit() {
+    this.buttonDisable = false;
     this.route.queryParams.subscribe(params => {
       this.count = params.count;
-  });
+    });
     this.getZoneDetails();
     this.vDetails();
   }
@@ -41,9 +44,9 @@ export class VehicleDetailsComponent implements OnInit {
       console.log(res);
       this.id = this.zone[0].id;
       this.capacity = this.zone[0].capacity;
-      console.log(this.count < this.capacity, this.capacity);
-      if (this.count < this.capacity) {
-        this.buttonDisable = false;
+      if ((this.count > this.capacity) || (this.zone[0].status === 'INACTIVE') || (this.zone[0].status === 'INMAINTAINANCE')
+        || (this.zone[0].status === 'FULL')) {
+        this.buttonDisable = true;
       }
     });
   }
@@ -60,37 +63,34 @@ export class VehicleDetailsComponent implements OnInit {
 
     dRef.afterClosed().subscribe(result => {
       if (result !== undefined) {
-        this.vehicleService.getVehicleByRegistrationNo(String(Object.values(result)[0])).subscribe( res => {
-            this.selectedVehicle = res.data;
-            this.selectedVehicle.zoneid = this.id;
-            console.log(this.selectedVehicle);
-            this.vehicleService.updateVehicle(String(Object.values(result)[0]), this.selectedVehicle).subscribe();
-            console.log(Object.values(result), JSON.stringify(Object.values(result)[0]));
-            this.vDetails();
-
-     });
-    }
-          });
-
+        this.vehicleService.getVehicleByRegistrationNo(String(Object.values(result)[0])).subscribe(res => {
+          this.selectedVehicle = res.data;
+          this.selectedVehicle.zoneid = this.id;
+          console.log(this.selectedVehicle);
+          this.vehicleService.updateVehicle(String(Object.values(result)[0]), this.selectedVehicle).subscribe(
+            response => { this.notificationService.success('Vehicle added to zone successfully!!');
+            });
+          console.log(Object.values(result), JSON.stringify(Object.values(result)[0]));
+        });
+      }
+      this.getZoneDetails();
+      this.vDetails();
+    });
   }
 
   vDetails() {
     this.vehicleService.getVehicles().subscribe(res => {
       res.data.filter(val => {
-        if (val.zoneid === this.id) {
+        if ((val.zoneid === this.id)) {
           this.vehicle.push(val);
         }
       });
       res.data.filter(val => {
-        // console.log(val.zoneid, this.id);
-        if (val.zoneid === null) {
-          // this.vehicle2 = val;
+        if (((val.zoneid === null) || (val.zoneid !== this.id)) && (
+       (val.status !== 'No_More_In_Use') && (val.status !== 'Stolen') && (val.status !== 'Busy') && (val.status !== 'Servicing'))) {
           this.vehicle2.push(val);
-          console.log(this.vehicle);
-        }
-        console.log(this.vehicle);
-          });
-} );
+       }
+      });
+    });
   }
-
 }

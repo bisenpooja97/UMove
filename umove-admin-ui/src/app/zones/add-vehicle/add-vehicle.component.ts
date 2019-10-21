@@ -20,7 +20,6 @@ export class AddVehicleComponent implements OnInit {
   zId: string;
   cNo: string;
   selectedVehicle;
-  // selectedVehicle: Vehicle[];
 
   constructor(private fb: FormBuilder, public dialogRef: MatDialogRef<AddSupervisorComponent>,
               private vehicleService: VehicleService,
@@ -31,7 +30,6 @@ export class AddVehicleComponent implements OnInit {
                   this.options = data.vehicle;
                   this.zId = data.zId;
               }
-
               vehicleForm = this.fb.group({
                 rNo: ['']
               });
@@ -39,16 +37,11 @@ export class AddVehicleComponent implements OnInit {
   ngOnInit() {
 
     this.vehicleService.getVehicles().subscribe(res => {
-      // if (val.zoneid === this.id) {
         this.vehicle = res.data;
-        console.log(this.vehicle, this.zId);
-      // }
 } );
   }
 
-
   onClose() {
-    // this.zoneForm.reset();
     this.dialogRef.close();
   }
 
@@ -63,6 +56,6 @@ export class AddVehicleComponent implements OnInit {
   }
 
   getOptionText(option) {
-    return option.chassisNumber;
+    return option.registrationNo;
   }
 }

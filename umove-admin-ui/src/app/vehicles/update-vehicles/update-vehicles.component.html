@@ -24,7 +24,7 @@
 
             <mat-label>Vehicle Last Service date</mat-label>
             <mat-form-field>
-                <input matInput [matDatepicker]="lastServiceDate" formControlName="lastServiceDate" [max]="todaydate" placeholder="Vehicle Last Service  Date" #input>
+                <input matInput [matDatepicker]="lastServiceDate" formControlName="lastServiceDate" [min]="minDate" [max]="todaydate" placeholder="Vehicle Last Service  Date" #input>
                 <mat-datepicker-toggle matSuffix [for]="lastServiceDate"></mat-datepicker-toggle>
                 <mat-datepicker #lastServiceDate></mat-datepicker>
             </mat-form-field>
