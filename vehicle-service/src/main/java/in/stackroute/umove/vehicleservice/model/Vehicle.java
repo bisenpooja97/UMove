@@ -25,6 +25,7 @@ public class Vehicle {
     private Date time=new Date();
     private Date lastServiceDate;
     private Date vehiclePurchased;
+    private String chassisNumber;
 
     public Vehicle(String id, String zoneid, String registrationNo) {
         this.id = id;

@@ -42,12 +42,20 @@ public class VehicleTypeController {
 
     @GetMapping("/types")
     public ResponseEntity<Map> getType(@RequestParam(value = "name", required = false) String name,
-                                       @RequestParam(value = "id", required = false) String id) {
+                                       @RequestParam(value = "id", required = false) String id,@RequestParam(value = "fuel", required = false) String fuel) {
 
         if (name != null && !name.isEmpty()) {
             VehicleType typeList = typeManagementService.findName(name);
             Map<String, Object> map = new TreeMap<>();
             map.put("data", typeList);
+            map.put("status", HttpStatus.OK);
+            return new ResponseEntity<Map>(map, HttpStatus.OK);
+        }
+
+        if(fuel!= null && !fuel.isEmpty()) {
+            List<VehicleType> vehicleType = typeManagementService.findVehicleTypeByFuel(fuel);
+            Map<String, Object> map = new TreeMap<>();
+            map.put("data", vehicleType);
             map.put("status", HttpStatus.OK);
             return new ResponseEntity<Map>(map, HttpStatus.OK);
         }
@@ -89,12 +97,15 @@ public class VehicleTypeController {
 
     @GetMapping("/types/{id}")
     public ResponseEntity<Map> getTypeById(@PathVariable("typeId") String id) {
+
         VehicleType typeList=typeManagementService.findByVid(id);
         Map<String, Object> map = new TreeMap<>();
         map.put("data", typeList);
         map.put("status", HttpStatus.OK);
         return new ResponseEntity<Map>(map, HttpStatus.OK);
     }
+
+
 }
 
 

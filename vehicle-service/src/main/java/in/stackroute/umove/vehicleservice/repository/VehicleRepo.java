@@ -20,8 +20,12 @@ public interface VehicleRepo extends MongoRepository<Vehicle,String> {
 
     List<Vehicle> findByzoneid(String zone_id);
     Vehicle findByregistrationNo(String name);
+    Vehicle findByChassisNumber(String name);
+    Vehicle findByInsuranceNo(String name);
 //    Vehicle findByVehicleId(String vehicleId);
-    List<Vehicle> findByRegistrationNo(String name);
+   // List<Vehicle> findByRegistrationNo(String name);
     List<Vehicle> findByStatus(VehicleStatus status);
     //List<Vehicle> fetchVehicleByTypeName(String tname);
+
+
 }
