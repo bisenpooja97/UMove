@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { ZoneService } from '../service/zone.service';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -11,19 +11,28 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class UpdateZonesComponent implements OnInit {
 
-  capacity: number;
+  cap: number;
 
   constructor(public dialogRef: MatDialogRef<UpdateZonesComponent>,
               private fb: FormBuilder, private route: ActivatedRoute,
               private router: Router, private zoneService: ZoneService,
               @Inject(MAT_DIALOG_DATA) data) {
-                this.capacity = data.capacity;
+                this.cap = data.capacity;
               }
 
 
+              get capacity() {
+                return this.zoneForm.get('capacity');
+              }
+
   zoneForm = this.fb.group({
-    capacity: ['']
+    capacity: ['', [Validators.pattern('^[0-9]*$')]]
   });
+
+  getErrorCapacity() {
+    return this.capacity.hasError('pattern') ? 'Capacity should contain only numbers.' :
+      '';
+  }
 
   onClose() {
     // this.zoneForm.reset();

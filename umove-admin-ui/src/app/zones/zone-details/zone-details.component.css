@@ -11,7 +11,7 @@
     cursor: pointer;
 }
 
-.my-card {
+.zone {
     margin-bottom: 40px;
     margin-left: 450px;
     height: 300px;
@@ -19,7 +19,7 @@
 }
 
 @media only screen and (max-width: 600px) {
-    .my-card {
+    .zone {
         margin-left: 30px;
         height: 300px;
         width: 85%;
@@ -44,7 +44,9 @@
     .iconCapacity {
         margin-left: 70%;
         cursor: pointer;
-        margin-top: -200px;
+    }
+    mat-card-title {
+        font-size: 1.4em;
     }
 }
 

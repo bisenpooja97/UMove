@@ -93,7 +93,7 @@ export class AddVehicleTypeComponent implements OnInit {
      const uploadData = new FormData();
      uploadData.append('file', this.selectedFile, this.selectedFile.name);
     //  this.http; is; the; injected; HttpClient;
-     this.http.post(this.baseUrl + '/uploadFile?id=12', uploadData)
+     this.http.post(this.baseUrl + '/uploadFile?id=' + this.typeForm.value.name, uploadData)
        .subscribe(event => {
            console.log('response', event); // handle event here
         });

@@ -21,10 +21,11 @@ import { AddSupervisorComponent } from './add-supervisor/add-supervisor.componen
 import { SupervisorDetailsComponent } from './supervisor-details/supervisor-details.component';
 import { AvatarModule } from 'ngx-avatar';
 import { VehicleDetailsComponent } from './vehicle-details/vehicle-details.component';
+import { AddVehicleComponent } from './add-vehicle/add-vehicle.component';
 
 @NgModule({
   declarations: [ZonesComponent, ZoneCardComponent, ZoneDetailsComponent, AddZoneComponent, UpdateZonesComponent,
-     AddSupervisorComponent, SupervisorDetailsComponent, VehicleDetailsComponent, ],
+     AddSupervisorComponent, SupervisorDetailsComponent, VehicleDetailsComponent, AddVehicleComponent, ],
   imports: [
     CommonModule,
     ZonesRoutingModule,
@@ -50,9 +51,8 @@ import { VehicleDetailsComponent } from './vehicle-details/vehicle-details.compo
     MatChipsModule,
     AvatarModule,
     MatListModule,
-    
 
   ],
-  entryComponents: [AddZoneComponent, UpdateZonesComponent, AddSupervisorComponent]
+  entryComponents: [AddZoneComponent, UpdateZonesComponent, AddSupervisorComponent, AddVehicleComponent]
 })
 export class ZonesModule { }

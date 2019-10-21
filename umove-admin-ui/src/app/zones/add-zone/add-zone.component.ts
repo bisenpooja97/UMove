@@ -43,10 +43,10 @@ export class AddZoneComponent implements OnInit {
       name: ['', [Validators.pattern('^[a-zA-Z0-9\-]*$')]],
       lat: [''],
       lon: [''],
-      city: ['', [Validators.pattern('[a-zA-z]+')]],
+      city: [''],
       locality: ['', [Validators.pattern('[a-zA-z0-9\- ]+')]],
-      state: ['', [Validators.pattern('[a-zA-z]+')]],
-      country: ['', [Validators.pattern('[a-zA-z]+')]],
+      state: [''],
+      country: [''],
       capacity: ['', [Validators.pattern('^[0-9]*$')]],
       status: ['INACTIVE'],
       pincode: [560002]
@@ -88,25 +88,25 @@ export class AddZoneComponent implements OnInit {
     }
 
     getLocation() {
-      if (this.zoneForm.value.locality === '') {
-        this.notificationService.warn('Please provide locality!!!');
-      } else {
-      this.zoneService.getAddress(this.zoneForm.value.locality).subscribe(
-        res => {
-          this.location = res.data.results[0];
-          console.log(this.location);
-          if (this.location == null) {
-            this.notificationService.warn('No location found!!');
-          } else {
-             this.notificationService.success('Location added successfully');
-             this.lat1 = this.location.position.lat;
-             this.lon1 = this.location.position.lon;
-             this.con = this.location.address.country;
-             console.log(this.location.address.country + '' + this.lat1 + ' ' + this.lon1 + ' ' + this.con);
+    if (this.zoneForm.value.locality === '') {
+          this.notificationService.warn('Please provide locality!!!');
+        } else {
+            this.zoneService.getAddress(this.zoneForm.value.locality).subscribe(
+              res => {
+                this.location = res.data.results[0];
+                console.log(this.location);
+                if (this.location == null) {
+                  this.notificationService.warn('No location found!!');
+                } else {
+                   this.notificationService.success('Location added successfully');
+                   this.lat1 = this.location.position.lat;
+                   this.lon1 = this.location.position.lon;
+                   this.con = this.location.address.country;
+                   console.log(this.location.address.country + '' + this.lat1 + ' ' + this.lon1 + ' ' + this.con);
+                }
+             }
+            );
           }
-       }
-      );
-    }
   }
 
 }
