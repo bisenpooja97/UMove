@@ -16,9 +16,9 @@ import java.util.TreeMap;
 @CrossOrigin(origins="http://localhost:4200")
 @RestController
 @RequestMapping("api/v1")
-
 public class CampaignController
 {
+
     @Autowired
     private CampaignService campaignService;
     /**
@@ -72,7 +72,6 @@ public class CampaignController
         map.put("status", HttpStatus.OK);
         return new ResponseEntity<>(map,HttpStatus.OK);
     }
-
 
 
 }
