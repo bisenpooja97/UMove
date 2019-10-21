@@ -9,58 +9,56 @@ import {Storage} from '@ionic/storage';
 
 
 @Component({
-  selector: 'app-edit-profile',
-  templateUrl: './edit-profile.page.html',
-  styleUrls: ['./edit-profile.page.scss'],
+    selector: 'app-edit-profile',
+    templateUrl: './edit-profile.page.html',
+    styleUrls: ['./edit-profile.page.scss'],
 })
 // tslint:disable-next-line:component-class-suffix
 export class EditProfilePage implements OnInit {
     public todo: FormGroup;
     user: UserProfile;
-    public localUser: UserProfile = {
-        id: null ,
-        name: '',
-        mobileNumber: '',
-        email: '',
-        role: 'User',
-        userStatus: null,
-        // document: null,
-    };
+    public localUser;
     key = 'details';
     // tslint:disable-next-line:max-line-length
     constructor(private formBuilder: FormBuilder, private userDataService: UserProfileServiceService, private router: Router, private  http: HttpClient, public toastController: ToastController, private storage: Storage) {
+        this.localUser = new UserProfile();
     }
 
     ngOnInit() {
-        this.storage.get(this.key).then( value => {
-            console.log('Before:', value);
-            this.localUser = value;
-            console.log(this.localUser.id);
-            this.userDataService.getUserDetailById(this.localUser.id)
-                .then(data => {
-                    console.log('filtered data: ', data);
-                    this.user = JSON.parse(data.data).data;
-                    this.todo = new FormGroup({
-                        name: new FormControl(this.user.name),
-                        email: new FormControl(this.user.email),
-                        mobileNumber: new FormControl(this.user.mobileNumber),
+        this.storage.ready().then(() => {
+            this.storage.get(this.key).then(value => {
+                console.log('Before:', value);
+                this.localUser = value;
+                console.log(this.localUser.id);
+                this.userDataService.getUserDetailById(this.localUser.id)
+                    .then(data => {
+                        console.log('filtered data: ', data);
+                        this.user = JSON.parse(data.data).data;
+                        this.todo = new FormGroup({
+                            name: new FormControl(this.user.name),
+                            email: new FormControl(this.user.email),
+                            mobileNumber: new FormControl(this.user.mobileNumber),
+                        });
                     });
-                });
+            });
         });
     }
     async logForm(data) {
-        this.storage.get(this.key).then(async value => {
-            console.log('Before:', value);
-            this.localUser = value;
-            console.log(this.localUser.id);
-            this.userDataService.editProfileById(this.localUser.id, data).then(res => {
-                console.log(res);
+        this.storage.ready().then(() => {
+            this.storage.get(this.key).then(async value => {
+                console.log('Before:', value);
+                this.localUser = value;
+                console.log(this.localUser.id);
+                this.userDataService.editProfileById(this.localUser.id, data).then(res => {
+                    console.log(res);
+                    this.router.navigateByUrl('/home');
+                });
+                const toast = await this.toastController.create({
+                    message: 'Profile Updated Successfully.',
+                    duration: 2000
+                });
+                toast.present();
             });
-            const toast = await this.toastController.create({
-                message: 'Profile Updated Successfully.',
-                duration: 2000
-            });
-            toast.present();
         });
     }
 }

@@ -14,19 +14,12 @@ import {Storage} from '@ionic/storage';
 })
 // tslint:disable-next-line:component-class-suffix
 export class UpdateKycPage implements OnInit {
-  public localUser: UserProfile = {
-    id: null ,
-    name: '',
-    mobileNumber: '',
-    email: '',
-    role: 'User',
-    userStatus: null,
-    // document: null,
-  };
+  public localUser: UserProfile ;
   key = 'details';
 
   // tslint:disable-next-line:max-line-length
   constructor(private http: HttpClient, private userDataService: UserProfileServiceService , private router: Router , private route: ActivatedRoute, public toastController: ToastController, private storage: Storage) {
+    this.localUser = new UserProfile();
     // console.log(this.router.getCurrentNavigation().extras);
     // this.route.queryParams.subscribe(params => {
     //    this.campaigns = this.router.getCurrentNavigation().extras.queryParams.special;

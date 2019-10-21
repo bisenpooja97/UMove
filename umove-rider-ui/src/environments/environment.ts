@@ -6,7 +6,7 @@ import * as firebase from 'firebase';
 
 export const environment = {
   production: false,
-  baseUrl: 'http://192.168.1.9:8080/',
+  baseUrl: 'http://172.23.234.74:8080/',
   userService: 'userservice',
   usersBaseApi: '/api/v1/users',
   firebase: {
