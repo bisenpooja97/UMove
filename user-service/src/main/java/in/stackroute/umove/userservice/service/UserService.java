@@ -1,6 +1,7 @@
 package in.stackroute.umove.userservice.service;
 
 
+import in.stackroute.umove.userservice.model.DocumentStatus;
 import in.stackroute.umove.userservice.model.Role;
 import in.stackroute.umove.userservice.model.UserData;
 import in.stackroute.umove.userservice.model.UserStatus;
@@ -16,6 +17,7 @@ public interface UserService {
     UserData updateUser(String objid, UserData user);
     List<UserData> findByRole(Role role);
     List<UserData> findByUserStatus(UserStatus userStatus);
+//    List<UserData> findByDocumentStatus(DocumentStatus documentStatus);
     UserData deleteUser(String objid);
     //    void saveImage(MultipartFile imageFile, String uid) throws Exception;
 }

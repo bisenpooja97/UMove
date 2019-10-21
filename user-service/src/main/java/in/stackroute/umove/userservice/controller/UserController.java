@@ -88,6 +88,7 @@ public ResponseEntity<Map> getUsersById(@PathVariable String id)
     public ResponseEntity<Map> getUsers(@RequestParam(value = "name",
             required = false) String name, @RequestParam(value = "role", required = false) Role role,
                                         @RequestParam(value = "status",required = false) UserStatus userStatus)
+                                       
     {
         List<UserData> users = userService.getUserList();
         if(name != null && !name.isEmpty()) {
@@ -99,6 +100,7 @@ public ResponseEntity<Map> getUsersById(@PathVariable String id)
         if(userStatus!= null ) {
             users=userService.findByUserStatus(userStatus);
         }
+
         Map<String, Object> map = new TreeMap<>();
         map.put("data", users);
         map.put("count", users.size());

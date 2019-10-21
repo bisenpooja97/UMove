@@ -1,5 +1,6 @@
 package in.stackroute.umove.userservice.repository;
 
+import in.stackroute.umove.userservice.model.DocumentStatus;
 import in.stackroute.umove.userservice.model.Role;
 import in.stackroute.umove.userservice.model.UserData;
 import in.stackroute.umove.userservice.model.UserStatus;
