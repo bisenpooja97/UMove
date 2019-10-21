@@ -16,16 +16,6 @@ export class QrcodeGeneratorPage implements OnInit {
 
     constructor(private rideService: RideService, private route: ActivatedRoute, private router: Router,
                 private websocketService: RideSocketService) {
-        this.rideService.getRideDetailsByUserIdNStatus('786', 'started')
-            .then(response => {
-                console.log('Ride details: ', response);
-                this.ride = JSON.parse(response.data).data;
-                // tslint:disable-next-line: object-literal-key-quotes
-                this.createdCode = JSON.stringify({ '_id': this.ride._id });
-                console.log('Created code data should be: ', this.createdCode);
-            });
-
-        // this.createdCode = JSON.stringify({ '_id': '5da5959cb3cb1f0001ce2b6e' });
 
         this.websocketService.connect().then((result) => {
             console.log('Connected');
@@ -44,6 +34,15 @@ export class QrcodeGeneratorPage implements OnInit {
     }
 
     ngOnInit() {
+        this.rideService.getRideDetailsByUserIdNStatus('786', 'started')
+            .then(response => {
+                console.log('Ride details: ', response);
+                this.ride = JSON.parse(response.data).data;
+                // tslint:disable-next-line: object-literal-key-quotes
+                this.createdCode = JSON.stringify({ '_id': this.ride._id });
+                console.log('Created code data should be: ', this.createdCode);
+            });
+
     }
 
 }

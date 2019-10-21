@@ -17,11 +17,12 @@ export class RideBookingDetailsPage implements OnInit {
   sizeOfDestinationZones: number;
   destinationZone: Zone;
   timerTime: number;
-
   timerSettings: MbscTimerOptions;
 
   constructor(private rideService: RideService, private router: Router, private route: ActivatedRoute) {
-    // Subscribing bookingService method to get booking details by its id
+  }
+
+  ngOnInit() {
     this.rideService.getRideDetailsByUserIdNStatus('786', 'Confirmed')
       .then(response => {
         console.log('Booking details: ', response);
@@ -30,18 +31,18 @@ export class RideBookingDetailsPage implements OnInit {
         console.log('Auto cancel time is ', this.ride.timer);
         this.timerTime = this.ride.timer * 60;
         console.log('Auto cancel time is ', this.timerTime);
+        console.log('It will enter timer settings');
+        console.log('Timer time:', typeof (this.timerTime));
         this.timerSettings = {
           display: 'inline',
-          targetTime: this.timerTime,
           maxWheel: 'minutes',
           minWidth: 100,
           autostart: true,
-          buttons: []
+          buttons: [],
+          targetTime: this.timerTime,
         };
+        console.log('timer settings ', this.timerSettings);
       });
-  }
-
-  ngOnInit() {
   }
 
   timerFinished() {

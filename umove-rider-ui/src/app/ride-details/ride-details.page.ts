@@ -17,16 +17,18 @@ export class RideDetailsPage implements OnInit {
   destinationZoneChange: Zone;
 
   constructor(private rideService: RideService, private route: ActivatedRoute, private router: Router) {
-    this.rideService.getRideDetailsByUserIdNStatus('786', 'started')
-      .then(response => {
-        console.log('Ride details: ', response);
-        this.ride = JSON.parse(response.data).data;
-        this.sizeOfDestinationZones = this.ride.destinationZones.length;
-        this.destinationZone = this.ride.destinationZones[this.sizeOfDestinationZones - 1];
-      });
   }
 
   ngOnInit() {
+
+    this.rideService.getRideDetailsByUserIdNStatus('786', 'started')
+    .then(response => {
+      console.log('Ride details: ', response);
+      this.ride = JSON.parse(response.data).data;
+      this.sizeOfDestinationZones = this.ride.destinationZones.length;
+      this.destinationZone = this.ride.destinationZones[this.sizeOfDestinationZones - 1];
+    });
+
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.queryParams) {
         this.destinationZoneChange = this.router.getCurrentNavigation().extras.queryParams.special;
@@ -53,7 +55,7 @@ export class RideDetailsPage implements OnInit {
   endRideRequest() {
     // this.rideService.endRideRequestById(this.ride._id).then(data => {
     //   console.log('response of end ride: ', data);
-      this.router.navigateByUrl('qrcode-generator');
+    this.router.navigateByUrl('qrcode-generator');
     // });
   }
 

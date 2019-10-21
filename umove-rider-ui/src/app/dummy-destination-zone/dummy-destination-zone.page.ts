@@ -10,6 +10,10 @@ import { Router, NavigationExtras } from '@angular/router';
 export class DummyDestinationZonePage implements OnInit {
   destinationZone: Zone;
   constructor(private router: Router) {
+  }
+
+  ngOnInit() {
+
     this.destinationZone = {
       id: '5d8c7a62adfffb7e746ccee8',
       lat: -85.2065802380484,
@@ -24,9 +28,6 @@ export class DummyDestinationZonePage implements OnInit {
       supervisorNumber: '9196778866',
       supervisorEmail: 'subhash@gmail.com'
     };
-  }
-
-  ngOnInit() {
   }
 
   // Sending zone data as navigationExtras
