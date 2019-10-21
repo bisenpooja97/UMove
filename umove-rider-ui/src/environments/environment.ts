@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'http://192.168.1.9:8080/',
+  baseUrl: 'http://172.23.234.74:8080/',
   campaignService: 'campaignservice',
   campaignBaseApi: '/api/v1/campaigns',
 };
