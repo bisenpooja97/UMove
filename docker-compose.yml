@@ -13,6 +13,10 @@ services:
       MYSQL_ROOT_PASSWORD: 'Umove@2019'
     volumes:
       - '$HOME/umove/data/mysql:/var/lib/mysql'
+    deploy:
+      resources:
+        limits:
+          memory: 500M
 
   # mongodb
   mongo:
@@ -26,6 +30,10 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: 'Umove@2019'
     volumes:
       - '$HOME/umove/data/mongo:/data/db'
+    deploy:
+      resources:
+        limits:
+          memory: 500M
 
 #  # cassendra
 #  cassandra:
@@ -66,6 +74,10 @@ services:
     ports:
       - '15672:15672'
       - '5672:5672'
+    deploy:
+      resources:
+        limits:
+          memory: 500M
 
   # Config Server
   config:
@@ -75,6 +87,10 @@ services:
     ports:
       - 8888:8888
     restart: on-failure
+    deploy:
+      resources:
+        limits:
+          memory: 500M
 
   # DISCOVERY SERVICE
   discovery:
@@ -86,6 +102,10 @@ services:
     depends_on:
       - config
     restart: on-failure
+    deploy:
+      resources:
+        limits:
+          memory: 500M
 
   # API GATEWAY
   apigateway:
@@ -101,6 +121,10 @@ services:
     links:
       - config
       - discovery
+    deploy:
+      resources:
+        limits:
+          memory: 500M
 
   adminwebapp:
     build:
@@ -115,6 +139,10 @@ services:
     links:
       - config
       - discovery
+    deploy:
+      resources:
+        limits:
+          memory: 500M
 
   users:
     build:
@@ -126,8 +154,10 @@ services:
       - config
       - discovery
     restart: on-failure
-    volumes:
-      - '$HOME/umove/user-service/uploads/documents:/uploads/documents'
+    deploy:
+      resources:
+        limits:
+          memory: 500M
 
   vehicles:
     build:
@@ -141,6 +171,10 @@ services:
       - mongo
       - rabbitmq
     restart: on-failure
+    deploy:
+      resources:
+        limits:
+          memory: 500M
 
   zones:
     build:
@@ -152,6 +186,10 @@ services:
       - discovery
       - config
     restart: on-failure
+    deploy:
+      resources:
+        limits:
+          memory: 500M
 
   bookings:
     build:
@@ -166,7 +204,10 @@ services:
       - mysql
       - rabbitmq
     restart: on-failure
-
+    deploy:
+      resources:
+        limits:
+          memory: 500M
 
   campaigns:
     build:
@@ -178,6 +219,10 @@ services:
       - discovery
       - config
     restart: on-failure
+    deploy:
+      resources:
+        limits:
+          memory: 500M
 
   reports:
     build:
@@ -188,5 +233,9 @@ services:
     depends_on:
       - discovery
       - config
-    restart: on-failures
+    restart: on-failure    
+    deploy:
+      resources:
+        limits:
+          memory: 500M
 
