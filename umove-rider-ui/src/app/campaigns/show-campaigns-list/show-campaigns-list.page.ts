@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Router} from '@angular/router';
+import {NavigationExtras, Router} from '@angular/router';
 import {CampaignService} from '../../services/campaign-service/campaign.service';
 import {HTTP} from '@ionic-native/http/ngx';
 import {Campaign} from '../../model/campaigns/campaign';
@@ -40,13 +40,13 @@ export class ShowCampaignsListPage implements OnInit {
   }
 
   sendCampaign(data) {
-    console.log(data);
-    // const navigationExtras: NavigationExtras = {
-    //       queryParams: {
-    //           special: data
-    //       }
-    //   };
-    // // pass Your page url HERE
-    // this.router.navigateByUrl('/update-kyc', navigationExtras);
+    // console.log(data);
+    const navigationExtras: NavigationExtras = {
+          queryParams: {
+              special: data
+          }
+      };
+    // pass Your page url HERE
+    this.router.navigateByUrl('/dummy-data-sent', navigationExtras);
   }
 }
