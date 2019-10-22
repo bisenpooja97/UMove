@@ -35,7 +35,7 @@ import {IonicStorageModule} from '@ionic/storage';
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
-      IonicStorageModule.forRoot(),
+    IonicStorageModule.forRoot(),
     AppRoutingModule,
     HttpClientModule, ReactiveFormsModule,
     AppRoutingModule,
