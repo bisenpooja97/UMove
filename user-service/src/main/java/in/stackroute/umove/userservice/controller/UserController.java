@@ -22,6 +22,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.stream.Collectors;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -37,6 +39,7 @@ import org.slf4j.LoggerFactory;
 
 @AllArgsConstructor
 @NoArgsConstructor
+@CrossOrigin(origins="http://localhost:4200")
 public class UserController
 {
     @Autowired
@@ -100,7 +103,9 @@ public ResponseEntity<Map> getUsersById(@PathVariable String id)
     @GetMapping("users")
     public ResponseEntity<Map> getUsers(@RequestParam(value = "name",
             required = false) String name, @RequestParam(value = "role", required = false) Role role,
-                                        @RequestParam(value = "status",required = false) UserStatus userStatus)
+                                        @RequestParam(value = "status",required = false) UserStatus userStatus,
+                                        @RequestParam(value="documentStatus",required = false) DocumentStatus documentStatus)
+
     {
         List<UserData> users = userService.getUserList();
         if(name != null && !name.isEmpty()) {
@@ -112,6 +117,12 @@ public ResponseEntity<Map> getUsersById(@PathVariable String id)
         if(userStatus!= null ) {
             users=userService.findByUserStatus(userStatus);
         }
+        if(documentStatus!=null)
+        {
+            users=userService.findByDocumentStatus(documentStatus);
+            System.out.println(users);
+        }
+
         Map<String, Object> map = new TreeMap<>();
         map.put("data", users);
         map.put("count", users.size());
@@ -206,6 +217,25 @@ public ResponseEntity<Map> getUsersById(@PathVariable String id)
         Map<String,Object> map = new TreeMap<>();
         map.put("data",paymentServiceInterface.getPaymentMethodById(objid,pid));
         map.put("status",HttpStatus.OK);
+        return new ResponseEntity<>(map, HttpStatus.OK);
+    }
+    @GetMapping(path = "users/document")
+    public ResponseEntity<Map> getDocument()
+    {
+        List<UserData> users = userService.getUserList();
+
+        List<Map<String, Object>> list = users.stream().map(userData -> {
+            Map<String, Object> map = new TreeMap<>();
+            map.put("id",userData.getId());
+            map.put("name", userData.getName());
+            map.put("mobileNumber", userData.getMobileNumber());
+            map.put("document", userData.getDocument());
+            return map;
+        }).collect(Collectors.toList());
+
+        Map<String, Object> map = new TreeMap<>();
+        map.put("data", list);
+        map.put("status", HttpStatus.OK);
         return new ResponseEntity<>(map, HttpStatus.OK);
     }
 }

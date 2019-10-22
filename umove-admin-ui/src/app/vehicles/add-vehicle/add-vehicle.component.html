@@ -1,0 +1,94 @@
+<div class="add">
+    <mat-toolbar>
+        <span class="fill-remaining-space"></span>
+        <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabIndex="-1">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </mat-toolbar>
+
+
+
+    <form fxLayout="column" fxLayoutAlign="center center" [formGroup]="vehicleForm" (ngSubmit)="onSubmit()">
+        <h2 fxLayout="column" fxLayout.gt-md="row" fxLayoutGap.gt-md="15px" fxLayoutAlign="center center">Add New Vehicle</h2>
+
+        <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px" class="form">
+
+            <mat-form-field appearance="outline" fxFlex>
+                <mat-label>Registration No.</mat-label>
+                <input matInput #input placeholder="Registration No" formControlName="registrationNo" required>
+
+                <mat-error *ngIf="rNum.invalid">
+
+                    {{getErrorRegistrationNo()}}
+                </mat-error>
+            </mat-form-field>
+
+
+
+
+            <mat-form-field appearance="outline" fxFlex>
+                <mat-label>Type</mat-label>
+                <mat-select formControlName="type">
+                    <mat-option *ngFor="let type of types" [value]="type">
+                        {{type.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+
+
+            <mat-form-field appearance="outline" fxFlex>
+                <mat-label>Insurance No.</mat-label>
+                <input matInput #input placeholder="Insurance No." formControlName="insuranceNo" required>
+
+                <mat-error *ngIf="RinsuranceNo.invalid">
+
+                    {{getErrorInsuranceNo()}}
+                </mat-error>
+
+            </mat-form-field>
+
+
+
+
+            <!-- <mat-form-field appearance="outline" fxFlex>
+          <mat-label>Status</mat-label>
+          <input matInput #input placeholder="Placeholder" formControlName="status" required>
+      </mat-form-field> -->
+
+
+            <!-- <mat-form-field appearance="outline" fxFlex>
+          <mat-label>Last Service date</mat-label>
+          <input matInput #input placeholder="Placeholder"  required>
+      </mat-form-field> -->
+            <!-- <mat-label>Last Service date</mat-label>
+      <mat-form-field>
+          <input matInput [matDatepicker]="lastServiceDate" formControlName="lastServiceDate" [max]="todaydate" placeholder="Last Service Date" #input>
+          <mat-datepicker-toggle matSuffix [for]="lastServiceDate"></mat-datepicker-toggle>
+          <mat-datepicker #lastServiceDate></mat-datepicker>
+      </mat-form-field> -->
+
+            <mat-label>Vehicle purchase date</mat-label>
+            <mat-form-field>
+                <input matInput [matDatepicker]="vehiclePurchased" formControlName="vehiclePurchased" [max]="todaydate" placeholder="Vehicle Purchased Date" #input>
+                <mat-datepicker-toggle matSuffix [for]="vehiclePurchased"></mat-datepicker-toggle>
+                <mat-datepicker #vehiclePurchased></mat-datepicker>
+            </mat-form-field>
+
+
+
+            <!-- <mat-form-field appearance="outline" fxFlex>
+        <input matInput #input placeholder="Placeholder" formControlName="vehiclePurchased" required>
+    </mat-form-field> -->
+
+
+            <button mat-raised-button class="btn">
+      Submit
+    </button>
+
+
+        </div>
+
+    </form>
+
+</div>

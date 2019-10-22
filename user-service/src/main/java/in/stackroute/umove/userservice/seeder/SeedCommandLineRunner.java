@@ -30,12 +30,19 @@ public class SeedCommandLineRunner implements CommandLineRunner {
 ////        user.setDocument(dVerification);
 ////        userRepository.save(user);
 
-    @Override
-    public void run(String... args) throws Exception {
+//    @Override
+//    public void run(String... args) throws Exception {
 //        UserData userData = new UserData("Divyanshu", "9700056794", "divyanshu@gmail.com", Role.User, UserStatus.Inactive);
 //
 //        DocumentVerification documentVerification = new DocumentVerification(DocumentStatus.Verified, "DLImage",
 //                "KA-01-2009-0004558",date);
+    @Override
+    public void run(String... args) throws Exception {
+
+//        UserData userData = new UserData("Divyanshu","9432123890","divyanshu@gmail.com","Role.User","UserStatus.Inactive","DocumentStatus");
+//          DocumentVerification documentVerification = new DocumentVerification(DocumentStatus.Verified, "DLImage",
+//                 "RJ27-SL-4558",date);
+//
 //        userData.setDocument(documentVerification);
 //
 //        UserPaymentMethod userPaymentMethod = new UserPaymentMethod("9700056784", "wallet", "Paytm");

@@ -43,7 +43,7 @@ services:
       - CASSANDRA_PASSWORD=Umove@2019
 
 #  # redis
-#  redis:use u
+#  redis:
 #    image: 'redis'
 #    container_name: 'umove-redis'
 #    restart: always
