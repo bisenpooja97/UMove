@@ -11,10 +11,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UpdateKycComponent } from './update-kyc/update-kyc.component';
 
 
 @NgModule({
-  declarations: [DocumentsComponent, DocumentCardComponent],
+  declarations: [DocumentsComponent, DocumentCardComponent, UpdateKycComponent],
   imports: [
     CommonModule,
     DocumentsRoutingModule,
@@ -34,6 +35,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule,
     MatToolbarModule
-  ]
+  ],
+  entryComponents: [UpdateKycComponent]
 })
 export class DocumentsModule { }

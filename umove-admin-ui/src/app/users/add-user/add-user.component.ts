@@ -50,7 +50,8 @@ export class AddUserComponent implements OnInit {
                 this.dialogRef.close();
               }
 
-  ngOnInit() {}
+  ngOnInit()
+   {}
 
   onSubmit() {
     console.log(this.userForm.value);

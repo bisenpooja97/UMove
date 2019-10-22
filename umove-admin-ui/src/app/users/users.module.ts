@@ -14,10 +14,11 @@ import { UserDetailsComponent } from './user-details/user-details.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddUserComponent } from './add-user/add-user.component';
 import { AvatarModule } from 'ngx-avatar';
+import { SupervisorComponent } from './supervisor/supervisor.component';
 
 
 @NgModule({
-  declarations: [UsersComponent, UserCardComponent, UserDetailsComponent, AddUserComponent],
+  declarations: [UsersComponent, UserCardComponent, UserDetailsComponent, AddUserComponent, SupervisorComponent],
   imports: [
     CommonModule,
     UsersRoutingModule,

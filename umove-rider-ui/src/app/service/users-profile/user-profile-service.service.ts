@@ -25,7 +25,7 @@ export class UserProfileServiceService {
     }
 
     public addUser(data) {
-      return this.http.post(this.baseUrl + '/' + this.addser,data,{});
+      return this.http.post(this.baseUrl + '/' + this.addser, data, {});
     }
     public getUserDetailById(id) {
       // console.log('url : ' + this.baseUrl  + '/' + id);
@@ -39,7 +39,7 @@ export class UserProfileServiceService {
   //   return this.http.post(this.baseUrl + '/' + this.document + '/' + this.uploadImage + '?uid=' + id, data, {});
   // }
     public uploadProfileById(id: string, data): Observable<any> {
-        console.log('url: ' + this.baseUrl + this.users + '/' + id);
+        // console.log('url: ' + this.baseUrl + this.users + '/' + id);
         return this.httpc.post(this.baseUrl + '/' + this.document + '/' + this.uploadImage + '?uid=' + id, data);
     }
   public uploadDldetailsById(id, data) {

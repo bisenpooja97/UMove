@@ -1,10 +1,10 @@
 .controles-container{
     width: 100%;
-    padding: 5%;    
+    padding: 5%;
 }
 
 .fill-remaining-space {
-    /* This fills the remaining space, by using flexbox. 
+    /* This fills the remaining space, by using flexbox.
        Every toolbar row uses a flexbox row layout. */
     flex: 1 1 auto;
   }
@@ -13,7 +13,7 @@
     width: 100%;
     }
 
- 
+
     .btn-dialog-close{
         width: 45px;
         min-width: 0px !important;
@@ -62,4 +62,3 @@ mat-toolbar {
     font-size: 18px !important;
     font-weight: bold;
   }
-  

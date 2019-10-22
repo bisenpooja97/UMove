@@ -22,6 +22,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.stream.Collectors;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -37,6 +39,7 @@ import org.slf4j.LoggerFactory;
 
 @AllArgsConstructor
 @NoArgsConstructor
+//@CrossOrigin(origins="http://localhost:4200")
 public class UserController
 {
     @Autowired
@@ -100,7 +103,9 @@ public ResponseEntity<Map> getUsersById(@PathVariable String id)
     @GetMapping("users")
     public ResponseEntity<Map> getUsers(@RequestParam(value = "name",
             required = false) String name, @RequestParam(value = "role", required = false) Role role,
-                                        @RequestParam(value = "status",required = false) UserStatus userStatus)
+                                        @RequestParam(value = "status",required = false) UserStatus userStatus,
+                                        @RequestParam(value="documentStatus",required = false) DocumentStatus documentStatus)
+
     {
         List<UserData> users = userService.getUserList();
         if(name != null && !name.isEmpty()) {
@@ -112,6 +117,12 @@ public ResponseEntity<Map> getUsersById(@PathVariable String id)
         if(userStatus!= null ) {
             users=userService.findByUserStatus(userStatus);
         }
+        if(documentStatus!=null)
+        {
+            users=userService.findByDocumentStatus(documentStatus);
+            System.out.println(users);
+        }
+
         Map<String, Object> map = new TreeMap<>();
         map.put("data", users);
         map.put("count", users.size());
@@ -123,37 +134,43 @@ public ResponseEntity<Map> getUsersById(@PathVariable String id)
         String fileName = fileStorageService.storeFile(file,uid);
 
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/downloadFile/")
+                .path("api/v1/downloadFile/")
                 .path(fileName)
                 .toUriString();
+        String fileDownloaduri = "api/v1/downloadFile/"+fileName;
+        UserData user = userService.getById(uid);
+        DocumentVerification documentVerification = user.getDocument();
+        documentVerification.setImage(fileDownloaduri);
+        user.setUserStatus(UserStatus.Pending);
+        this.userService.updateUser(uid,user);
 
         return new UploadFileResponse(fileName, fileDownloadUri,
                 file.getContentType(), file.getSize());
     }
 
-//    @GetMapping("/downloadFile/{fileName:.+}")
-//    public ResponseEntity<Resource> downloadFile(@PathVariable String fileName, HttpServletRequest request) {
-//        // Loaddata file as Resource
-//        Resource resource = fileStorageService.loadFileAsResource(fileName);
-//
-//        // Try to determine file's content type
-//        String contentType = null;
-//        try {
-//            contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
-//        } catch (IOException ex) {
-////            logger.info("Could not determine file type.");
-//        }
-//
-//        // Fallback to the default content type if type could not be determined
-//        if(contentType == null) {
-//            contentType = "application/octet-stream";
-//        }
-//
-//        return ResponseEntity.ok()
-//                .contentType(MediaType.parseMediaType(contentType))
-//                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
-//                .body(resource);
-//    }
+    @GetMapping("/downloadFile/{fileName:.+}")
+    public ResponseEntity<Resource> downloadFile(@PathVariable String fileName, HttpServletRequest request) {
+        // Loaddata file as Resource
+        Resource resource = fileStorageService.loadFileAsResource(fileName);
+
+        // Try to determine file's content type
+        String contentType = null;
+        try {
+            contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
+        } catch (IOException ex) {
+//            logger.info("Could not determine file type.");
+        }
+
+        // Fallback to the default content type if type could not be determined
+        if(contentType == null) {
+            contentType = "application/octet-stream";
+        }
+
+        return ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType(contentType))
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+                .body(resource);
+    }
 
 
     @GetMapping("users/{userId}/payments")
@@ -201,6 +218,26 @@ public ResponseEntity<Map> getUsersById(@PathVariable String id)
         Map<String,Object> map = new TreeMap<>();
         map.put("data",paymentServiceInterface.getPaymentMethodById(objid,pid));
         map.put("status",HttpStatus.OK);
+        return new ResponseEntity<>(map, HttpStatus.OK);
+    }
+    @GetMapping(path = "users/document")
+    public ResponseEntity<Map> getDocument()
+    {
+        List<UserData> users = userService.getUserList();
+
+        List<Map<String, Object>> list = users.stream().map(userData -> {
+            Map<String, Object> map = new TreeMap<>();
+            map.put("id",userData.getId());
+            map.put("name", userData.getName());
+            map.put("mobileNumber", userData.getMobileNumber());
+            map.put("document", userData.getDocument());
+            return map;
+        }).collect(Collectors.toList());
+
+        Map<String, Object> map = new TreeMap<>();
+        map.put("data", list);
+        map.put("count", users.size());
+        map.put("status", HttpStatus.OK);
         return new ResponseEntity<>(map, HttpStatus.OK);
     }
 }

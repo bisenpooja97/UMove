@@ -31,11 +31,11 @@
     }
     .add-button {
         padding-left: 300px;
-        padding-bottom: 2%; 
+        padding-bottom: 2%;
     }
     .graph {
         padding-left: 300px;;
-        padding-bottom: 50px; 
+        padding-bottom: 50px;
     }
     .status {
         margin-top: 20px;
@@ -53,9 +53,9 @@
 @media only screen and (min-width: 600px) {
     .add-button {
         padding-right: 450px;
-        padding-bottom: 2%; 
+        padding-bottom: 2%;
     }
-    
+
 }
 
 mat-icon {

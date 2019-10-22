@@ -60,7 +60,7 @@ export class AddVehicleComponent implements OnInit {
     status: 'Free',
     // lastServiceDate: [''],
     vehiclePurchased: [''],
-    chassisNumber: ['',[Validators.pattern('^[a-zA-Z0-9\-]*$')]]
+    chassisNumber: ['',[Validators.pattern('^[a-zA-Z0-9\-]*$')]],
   });
 
   getErrorRegistrationNo() {

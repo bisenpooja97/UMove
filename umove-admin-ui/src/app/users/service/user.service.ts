@@ -13,8 +13,13 @@ export class UserService {
   constructor(private httpClient: HttpClient) { }
   baseUrl = environment.baseUrl + environment.userService + environment.userBaseApi;
 
+
   getUsers(): Observable<Resp> {
-    return this.httpClient.get<Resp>(this.baseUrl);
+    return this.httpClient.get<Resp>(this.baseUrl + '/' +  '?role=User');
+  }
+
+  getSupervisors(): Observable<Resp> {
+    return this.httpClient.get<Resp>(this.baseUrl + '/' + '?role=Supervisor');
   }
 
   getUsersById(id: string): Observable<Resp> {

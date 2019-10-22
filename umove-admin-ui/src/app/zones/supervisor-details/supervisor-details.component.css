@@ -1,8 +1,9 @@
-.supervisor {
+.my-card {
     margin-bottom: 40px;
     margin-left: 450px;
     height: 300px;
     width: 50%;
+    background-color: whitesmoke;
 }
 
 .zoneName {
@@ -10,12 +11,8 @@
     font-size: 1.5em;
 }
 
-.add-button {
-    padding-left: 100%;
-}
-
 @media only screen and (max-width: 600px) {
-    .supervisor {
+    .my-card {
         margin-left: 30px;
         height: 300px;
         width: 85%;
@@ -26,20 +23,22 @@
     }
     .add-button {
         padding-left: 250px;
-        margin-top: -5%;
+        margin-top: -18%;
     }
     .icon {
         margin-left: 40%;
     }
-    mat-card-title {
-        font-size: 1.4em;
-    }  
+
+
 }
 
 @media only screen and (min-width: 600px) {
     .icon {
         margin-left: 80%;
         background-color:transparent;
-        }   
-        
-}
+        }
+
+        .mat-button-focus-overlay {
+            background-color:transparent;
+        }
+    }

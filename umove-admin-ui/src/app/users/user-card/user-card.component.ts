@@ -32,7 +32,7 @@ export class UserCardComponent implements OnInit {
 
   ok() {
     console.log('ok', this.id);
-    this.router.navigate(['users/', this.id]);
+    this.router.navigate(['users/details', this.id]);
     }
 
   getColor(userStatus) {

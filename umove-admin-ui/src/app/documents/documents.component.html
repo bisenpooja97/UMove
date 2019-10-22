@@ -1,5 +1,5 @@
 <h1 fxLayout="column" fxLayout.gt-md="row" fxLayoutGap.gt-md="15px" class="header">
-        Documents
+        Driving licence Verification Requests
     </h1>
     <div fxLayout="row" fxLayoutGap="20px" class="search" fxLayout.gt-xs="row">
         <mat-form-field fxFlex=20%>
@@ -7,7 +7,9 @@
         </mat-form-field>
     </div>
     <div fxLayout.xs="column" fxLayout.gt="row" fxLayout="row wrap" fxLayoutGap="10px" class="card">
-        <app-document-card >
+        <app-document-card *ngFor="let user of users | paginate: { itemsPerPage: 10, currentPage: p}| filter:term"
+ [users]="user">>
+
         </app-document-card>
         <pagination-controls (pageChange)="p = $event"></pagination-controls>
     </div>

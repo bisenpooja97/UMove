@@ -13,6 +13,7 @@ import { NotificationService } from '../shared/notification.service';
 export class UsersComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
    users: User;
+   supervisors: User;
 
   p = 1;
   dataSource = new MatTableDataSource();
@@ -22,32 +23,34 @@ export class UsersComponent implements OnInit {
   ngOnInit() {
     this.userService.getUsers().subscribe(res => { this.users = res.data;
                                                    console.log(res, 'parent');
+
 });
-  }
-
-  add() {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    dialogConfig.width = '40%';
-    const dRef = this.matDialog.open(AddUserComponent, dialogConfig);
-
-    dRef.afterClosed().subscribe(result => {
-      if (result !== undefined) {
-      this.userService.addUser(result)
-          .subscribe(
-            response => {
-              this.notificationService.success(' Supervisor Added successfully');
-
-              this.getUsersInfo();
-            }); }
-     });
 
   }
-  getUsersInfo() {
-    return this.userService.getUsers().subscribe(res => { this.users = res.data;
-    });
-  }
+
+  // add() {
+  //   const dialogConfig = new MatDialogConfig();
+  //   dialogConfig.disableClose = true;
+  //   dialogConfig.autoFocus = true;
+  //   dialogConfig.width = '40%';
+  //   const dRef = this.matDialog.open(AddUserComponent, dialogConfig);
+
+  //   dRef.afterClosed().subscribe(result => {
+  //     if (result !== undefined) {
+  //     this.userService.addUser(result)
+  //         .subscribe(
+  //           response => {
+  //             this.notificationService.success(' Supervisor Added successfully');
+
+  //             this.getUsersInfo();
+  //           }); }
+  //    });
+
+  // }
+  // getUsersInfo() {
+  //   return this.userService.getUsers().subscribe(res => { this.users = res.data;
+  //   });
+  // }
 
 
 }

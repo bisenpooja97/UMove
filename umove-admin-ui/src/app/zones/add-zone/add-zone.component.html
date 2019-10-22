@@ -8,7 +8,7 @@
 
     <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px" class="form"
         fxLayoutAlign="center center">
-        
+
 
             <mat-form-field appearance="outline" fxFlex>
                 <mat-label>Zone Locality</mat-label>
@@ -26,20 +26,20 @@
                 <input matInput #input placeholder="Zone Name" formControlName="name" required>
 
                 <mat-error *ngIf="zone.invalid">
-                
+
                                             {{getErrorZoneName()}}
                                         </mat-error>
 
             </mat-form-field>
 
-        
+
 
 
             <mat-form-field appearance="outline" fxFlex>
                 <mat-label>Capacity</mat-label>
                 <input matInput #input placeholder="Capacity" formControlName="capacity" required>
                 <mat-error *ngIf="capacity.invalid">
-                                    
+
                                                                 {{getErrorCapacity()}}
                                                             </mat-error>
             </mat-form-field>
@@ -48,7 +48,7 @@
                 Submit
             </button>
 
-        
+
     </div>
 
 

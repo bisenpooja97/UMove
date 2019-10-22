@@ -36,13 +36,14 @@ public class UserData
         this.email = email;
     }
 
-    public UserData( String name, String mobileNumber, String email,  Role role,  UserStatus userStatus )
+    public UserData( String name, String mobileNumber, String email,  Role role,  UserStatus userStatus, DocumentVerification documentverification )
     {
         this.name = name;
         this.mobileNumber = mobileNumber;
         this.email = email;
         this.role = role;
         this.userStatus = userStatus;
+        this.document=document;
     }
 
     // ObjectId needs to be converted to string

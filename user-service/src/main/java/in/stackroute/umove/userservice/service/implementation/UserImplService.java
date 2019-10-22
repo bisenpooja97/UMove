@@ -1,9 +1,7 @@
 package in.stackroute.umove.userservice.service.implementation;
 
 import in.stackroute.umove.userservice.exceptions.UserAlreadyExistsException;
-import in.stackroute.umove.userservice.model.Role;
-import in.stackroute.umove.userservice.model.UserData;
-import in.stackroute.umove.userservice.model.UserStatus;
+import in.stackroute.umove.userservice.model.*;
 import in.stackroute.umove.userservice.repository.UserRepository;
 import in.stackroute.umove.userservice.service.UserService;
 import lombok.AllArgsConstructor;
@@ -59,6 +57,29 @@ public class UserImplService implements UserService {
     public List<UserData> findByUserStatus(UserStatus userStatus) {
         List<UserData> users = userRepository.findByUserStatus(userStatus);
         return users;
+    }
+    @Override
+    public List<UserData> findByDocumentStatus(DocumentStatus documentStatus) {
+        List<UserData> users = userRepository.findByDocumentStatus(documentStatus);
+        return users;
+    }
+
+    @Override
+    public UserData updateDocumentStatus(String id, String status) {
+        UserData user = userRepository.getUserByid(id);
+
+        if(status.equals("Verified")) {
+            user.setUserStatus(UserStatus.Active);
+            user.getDocument().setDocumentStatus(DocumentStatus.Verified);
+        }
+        else if(status.equals("Rejected")){
+            user.setUserStatus(UserStatus.Inactive);
+            user.getDocument().setDocumentStatus(DocumentStatus.Rejected);
+        }
+
+        userRepository.save(user);
+
+        return user;
     }
 
     /**
@@ -127,6 +148,18 @@ public class UserImplService implements UserService {
         }
         return null;
     }
+//    public DocumentVerification updateDocument(String objid, DocumentVerification user) {
+//        final UserData updatedUser = userRepository.findByid(objid);
+//        final DocumentVerification updatedDocuemt = updatedUser.getDocument();
+//        if (updatedDocuemt != null) {
+//            if (user.getImage() != null) {
+//                updatedDocuemt.setImage(user.getImage());
+//            }
+//            userRepository.save(updatedUser);
+//            return updatedDocuemt;
+//        }
+//        return null;
+//    }
 }
 //    @Override
 //    public DocumentVerification updateDocumentVerification(ObjectId id, DocumentVerification documentVerification) {

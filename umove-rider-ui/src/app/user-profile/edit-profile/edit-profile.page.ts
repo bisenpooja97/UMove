@@ -9,9 +9,9 @@ import {Storage} from '@ionic/storage';
 
 
 @Component({
-  selector: 'app-edit-profile',
-  templateUrl: './edit-profile.page.html',
-  styleUrls: ['./edit-profile.page.scss'],
+    selector: 'app-edit-profile',
+    templateUrl: './edit-profile.page.html',
+    styleUrls: ['./edit-profile.page.scss'],
 })
 // tslint:disable-next-line:component-class-suffix
 export class EditProfilePage implements OnInit {

@@ -14,19 +14,12 @@ import {Storage} from '@ionic/storage';
 })
 // tslint:disable-next-line:component-class-suffix
 export class UpdateKycPage implements OnInit {
-  public localUser: UserProfile = {
-    id: null ,
-    name: '',
-    mobileNumber: '',
-    email: '',
-    role: 'User',
-    userStatus: null,
-    // document: null,
-  };
+  public localUser: UserProfile ;
   key = 'details';
 
   // tslint:disable-next-line:max-line-length
   constructor(private http: HttpClient, private userDataService: UserProfileServiceService , private router: Router , private route: ActivatedRoute, public toastController: ToastController, private storage: Storage) {
+    this.localUser = new UserProfile();
     // console.log(this.router.getCurrentNavigation().extras);
     // this.route.queryParams.subscribe(params => {
     //    this.campaigns = this.router.getCurrentNavigation().extras.queryParams.special;
@@ -50,15 +43,13 @@ export class UpdateKycPage implements OnInit {
 
   async onUpload(data) {
     this.storage.get(this.key).then(async value => {
-      console.log('Before:', value);
       this.localUser = value;
-      console.log(this.localUser.id);
       console.log('data: ', data);
       const formData = {
         document: data
       };
       this.userDataService.uploadDldetailsById(this.localUser.id, formData).then(res => {
-        console.log(res);
+        // console.log(res);
       });
       const uploadData = new FormData();
       uploadData.append('file', this.selectedFile, this.selectedFile.name);

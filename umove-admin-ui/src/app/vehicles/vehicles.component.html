@@ -12,7 +12,7 @@
                         <app-vehicle-card *ngFor="let type of vehicle| paginate: { itemsPerPage: 9, currentPage: p } | filter:term" [vehicle]="type"></app-vehicle-card>
 
                 </div>
-                <pagination-controls (pageChange)="p = $event" fxLayoutAlign="center center"></pagination-controls> 
+                <pagination-controls (pageChange)="p = $event" fxLayoutAlign="center center"></pagination-controls>
                 </div>
                 <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutAlign="end" class="add-button">
                     <button mat-fab color="primary" (click)="add()">
@@ -22,7 +22,7 @@
                     </button>
                 </div>
             </div>
-            
+
 
 <!-- <app-search-vehicleType></app-search-vehicleType> -->
 <!-- <div fxLayout.xs="column" fxLayout.gt="row" fxLayout="row wrap" fxLayoutGap="10px" class="card">
