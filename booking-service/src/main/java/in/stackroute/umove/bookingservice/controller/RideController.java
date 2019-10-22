@@ -2,20 +2,17 @@ package in.stackroute.umove.bookingservice.controller;
 
 import in.stackroute.umove.bookingservice.exception.RideAlreadyBookedException;
 import in.stackroute.umove.bookingservice.exception.RideNotFoundException;
-import in.stackroute.umove.bookingservice.model.ExtraCharge;
 import in.stackroute.umove.bookingservice.model.Ride;
-import in.stackroute.umove.bookingservice.service.RideService;
+import in.stackroute.umove.bookingservice.model.RideStatus;
 import in.stackroute.umove.bookingservice.model.Zone;
+import in.stackroute.umove.bookingservice.service.RideService;
 import in.stackroute.umove.bookingservice.model.Payment;
-import in.stackroute.umove.bookingservice.model.Ride;
-import in.stackroute.umove.bookingservice.service.RideServiceImp;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.*;
-
 import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -32,13 +29,9 @@ public class RideController {
     RideController(SimpMessagingTemplate template) {
         this.template = template;
     }
-
-    @Autowired
     private RideService rideService;
 
-    // End Point: api/v1/rides Method: POST
-    // to confirm booking for a ride
-    //Create rides
+    //Api end point for posting ride details
     @PostMapping("rides")
     public ResponseEntity<Map> confirmBooking(@RequestBody() Ride ride) {
         Ride currentRide = rideService.getRideByUserIdNStatus(ride.getRider().get_id(), "Confirmed");
@@ -47,7 +40,7 @@ public class RideController {
         }
 //        if(bookingServiceInterface.)
         // if vehicle is allocated and outstanding amount is checked and there is no pending outstanding amount then set status as confirmed
-        ride.setStatus("Confirmed");
+        ride.setStatus(RideStatus.Confirmed);
         ride.setBookedAt(LocalDateTime.now());
         Ride rideDetails = rideService.confirmRide(ride);
         Map<String, Object> map = new TreeMap<>();
@@ -121,16 +114,6 @@ public class RideController {
     @PatchMapping("rides/{rideId}/start")
     public ResponseEntity<Map> startRideRequest(@PathVariable("rideId") ObjectId rideId, @RequestParam(value = "vehicleNumber", required = true) String registrationNo) {
         Ride ride = rideService.startRide(rideId, registrationNo);
-        Map<String, Object> map = new TreeMap<>();
-        map.put("data", ride);
-        map.put("status", HttpStatus.OK);
-        return new ResponseEntity<>(map, HttpStatus.OK);
-    }
-
-    //Api end point for autocancel ride request by the user
-    @PatchMapping("rides/{rideId}/autocancel")
-    public ResponseEntity<Map> autocancelRide(@PathVariable("rideId") ObjectId rideId) {
-        Ride ride = rideService.autocancelRide(rideId);
         Map<String, Object> map = new TreeMap<>();
         map.put("data", ride);
         map.put("status", HttpStatus.OK);

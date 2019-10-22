@@ -1,19 +1,20 @@
 package in.stackroute.umove.bookingservice.model;
 
-import lombok.*;
-import org.springframework.data.mongodb.core.mapping.Document;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import java.util.Date;
 
-@Document
-@Getter
-@Setter
+/*
+ * Vehicle details
+ */
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-
+@ToString
 public class Vehicle {
 
     private String id;
@@ -31,4 +32,6 @@ public class Vehicle {
         this.zoneid = zoneid;
         this.registrationNo = registrationNo;
     }
+
+
 }

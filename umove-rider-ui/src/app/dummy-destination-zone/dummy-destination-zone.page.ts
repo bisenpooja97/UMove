@@ -15,21 +15,22 @@ export class DummyDestinationZonePage implements OnInit {
   ngOnInit() {
 
     this.destinationZone = {
-      zoneId: '5d8c7a62adfffb7e746ccee8',
-      name: 'Zone-A',
-      lat: -85.2065802380484,
-      lon: 42.70837049544012,
-      city: 'Bangalore',
+      id: '5da41d0c30c49e000131313c',
+      name: 'Zone-Koramangala-B8',
+      lat: 12.9416,
+      lon: 77.61718,
+      city: 'Bengaluru Urban',
       state: 'Karnataka',
       country: 'India',
-      pincode: 560034,
+      pincode: 560002,
+      locality: 'Koramangala',
       capacity: 100,
-      status: 'FULL',
-      locality: 'Madiwala',
-      supervisorId: '1',
-      supervisorName: 'Subhash',
-      supervisorNumber: '9196778866',
-      supervisorEmail: 'subhash@gmail.com'
+      createdAt: new Date(),
+      supervisorId: '5da5e1cfadbe1d0001409653',
+      supervisorName: 'Suraj',
+      supervisorNumber: '9456789090',
+      supervisorEmail: 'suraj@gmail.com',
+      status: 'FULL'
     };
   }
 

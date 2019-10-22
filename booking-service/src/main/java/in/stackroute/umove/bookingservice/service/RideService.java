@@ -18,7 +18,6 @@ public interface RideService {
 
     List<Ride> getAllRides();
     Ride startRide(ObjectId rideId, String registrationNo);
-    Ride autocancelRide(ObjectId rideId);
     Ride cancelRide(ObjectId rideId);
     Ride updateDestination(Zone destinationZone, ObjectId rideId);
    // Ride endRide(ObjectId rideId);
@@ -26,5 +25,7 @@ public interface RideService {
     List<Ride> getRidesByUserId(String userId);
     Payment getPaymentDetails(String rideId);
 //    Ride endRideRequest(ObjectId rideId);
+
+
 
 }

@@ -15,6 +15,7 @@ import java.util.Map;
 
 @Service
 public class RideServiceImp implements RideService {
+
     @Autowired
     private RideRepo rideRepo;
     @Autowired
@@ -128,36 +129,19 @@ public class RideServiceImp implements RideService {
     public Ride startRide(ObjectId rideId, String registrationNo) {
         LocalDateTime startRideRequestAt = LocalDateTime.now();
         Ride ride = rideRepo.findBy_id(rideId);
-        if (ride.getStatus().equalsIgnoreCase("Confirmed")) {
+        if (ride.getStatus().equals(RideStatus.Confirmed)) {
             LocalDateTime bookedAt = ride.getBookedAt();
             LocalDateTime autoCancelTime = bookedAt.plusMinutes(20);
             int compareValue = startRideRequestAt.compareTo(autoCancelTime);
             if (compareValue <= 0) {
-                ride.setStatus("started");
+                ride.setStatus(RideStatus.Started);
                 ride.setRideStartAt(startRideRequestAt);
                 Vehicle vehicle = ride.getVehicle();
                 vehicle.setRegistrationNo(registrationNo);
                 ride.setVehicle(vehicle);
             }
             else {
-                ride.setStatus("autocancelled");
-            }
-            rideRepo.save(ride);
-        }
-        return ride;
-    }
-
-    //Function to autocancel a ride for the user
-    @Override
-    public Ride autocancelRide(ObjectId rideId){
-        LocalDateTime startRideRequestAt = LocalDateTime.now();
-        Ride ride = rideRepo.findBy_id(rideId);
-        if (ride.getStatus().equalsIgnoreCase("Confirmed")) {
-            LocalDateTime bookedAt = ride.getBookedAt();
-            LocalDateTime autoCancelTime = bookedAt.plusMinutes(20);
-            int compareValue = startRideRequestAt.compareTo(autoCancelTime);
-            if (compareValue > 0) {
-                ride.setStatus("autocancelled");
+                ride.setStatus(RideStatus.Auto_Cancelled);
             }
             rideRepo.save(ride);
         }
@@ -169,14 +153,25 @@ public class RideServiceImp implements RideService {
     public Ride cancelRide(ObjectId rideId) {
         LocalDateTime rightNow = LocalDateTime.now();
         Ride ride = rideRepo.findBy_id(rideId);
-        if (ride.getStatus().equalsIgnoreCase("Confirmed")) {
+        if (ride.getStatus().equals(RideStatus.Confirmed)) {
             LocalDateTime bookedAt = ride.getBookedAt();
             LocalDateTime cancel = bookedAt.plusMinutes(5);
+            LocalDateTime autoCancelTime = bookedAt.plusMinutes(20);
             int compareValue = rightNow.compareTo(cancel);
             if (compareValue <= 0) {
-                ride.setStatus("cancelled before 5 mins");
-            } else {
-                ride.setStatus("cancelled after 5 mins");
+                ride.setStatus(RideStatus.CancelledWithinThreshold);
+            }
+            else {
+                int compareValueForAutocancelling = rightNow.compareTo(autoCancelTime);
+                if (compareValueForAutocancelling <= 0) {
+                    ride.setStatus(RideStatus.CancelledAfterThreshold);
+                }
+                else{
+                    ride.setStatus(RideStatus.Auto_Cancelled);
+                }
+                PaymentDetail paymentDetail = ride.getPaymentDetail();
+                paymentDetail.setRideAmount((double)ride.getVehicle().getType().getBaseFare());
+                ride.setPaymentDetail(paymentDetail);
             }
             rideRepo.save(ride);
         }
@@ -187,7 +182,7 @@ public class RideServiceImp implements RideService {
     @Override
     public Ride updateDestination(Zone destinationZone, ObjectId rideId) {
         Ride ride = rideRepo.findBy_id(rideId);
-        if (ride.getStatus().equalsIgnoreCase("started")) {
+        if (ride.getStatus().equals(RideStatus.Started)) {
             List<Zone> destinationZones = ride.getDestinationZones();
             destinationZones.add(destinationZone);
             ride.setDestinationZones(destinationZones);

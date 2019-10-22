@@ -13,6 +13,7 @@ import { Zone } from '../model/zone';
 export class RideBookingDetailsPage implements OnInit {
   @ViewChild('timerVariable', { static: false }) timerRef;
   ride: Ride;
+  rideStatus: string;
   vehicleNumber: string;
   sizeOfDestinationZones: number;
   destinationZone: Zone;
@@ -39,8 +40,8 @@ export class RideBookingDetailsPage implements OnInit {
   }
 
   timerFinished() {
-    this.rideService.autocancelRideById(this.ride._id).then(data => {
-      console.log('response of autocancel ride: ', data);
+    this.rideService.cancelRideById(this.ride._id).then(data => {
+      console.log('response of cancel ride: ', data);
     });
     mobiscroll.alert({
       title: 'Your ride is autocancelled',
@@ -61,9 +62,17 @@ export class RideBookingDetailsPage implements OnInit {
   // calling service method to cancel the ride
   cancelRide() {
     this.timerRef.instance.stop();
-    this.rideService.cancelRideById(this.ride._id).then(data => {
-      console.log('response of cancel ride: ', data);
-      this.router.navigateByUrl('confirm-ride-detail');
+    this.rideService.cancelRideById(this.ride._id).then(response => {
+      console.log('response of cancel ride: ', response);
+      this.ride = JSON.parse(response.data).data;
+      this.rideStatus = this.ride.status;
+      if (this.rideStatus === 'CancelledWithinThreshold') {
+        this.router.navigateByUrl('ride-booking-details');
+      }
+      if (this.rideStatus === 'CancelledAfterThreshold') {
+        // Apply the url of payment details page
+        this.router.navigateByUrl('ride-details');
+      }
     });
   }
 
