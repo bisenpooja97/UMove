@@ -9,7 +9,6 @@ import javax.persistence.Column;
 import javax.persistence.Id;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
 
 /*
  * Vehicle booking details
@@ -24,7 +23,7 @@ import java.util.UUID;
 public class Ride
 {
     @Id
-    private UUID rideId;
+    private ObjectId _id;
     private RideStatus status;
     private User rider;
     private Zone sourceZone;
@@ -38,5 +37,9 @@ public class Ride
     private int duration;
     private PaymentDetail paymentDetail;
     private PromoCode promoCode;
+
+    // ObjectId needs to be converted to string
+    public String get_id() { return _id.toHexString(); }
+    public void set_id(ObjectId _id) { this._id = _id; }
 
 }
