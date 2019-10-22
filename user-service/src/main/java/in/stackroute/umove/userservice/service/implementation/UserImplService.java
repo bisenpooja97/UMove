@@ -96,6 +96,7 @@ public class UserImplService implements UserService {
                 return userRepository.findByMobileNumber(mobileNumber);
             }
         }
+        user.setUserStatus(UserStatus.Inactive);
         user.setPaymentMethod(new ArrayList<>());
         return userRepository.save(user);
     }

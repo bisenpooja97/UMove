@@ -29,7 +29,7 @@ module.exports = "<h1 fxLayout=\"column\" fxLayout.gt-md=\"row\" fxLayoutGap.gt-
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = " <mat-toolbar>\n    <span class=\"fill-remaining-space\"></span>\n    <button class=\"btn-dialog-close\" mat-stroked-button (click)=\"onClose()\" tabIndex=\"-1\">\n        <mat-icon>clear</mat-icon>\n    </button>\n</mat-toolbar>\n <img mat-card-image src=\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCmrhTn0-Pu1yPZzTq1cOe6Ru5z3MSrSVINc-byYsk07jF-DkVRw\" alt=\"DL image\">\n        \n"
+module.exports = " <mat-toolbar>\n    <span class=\"fill-remaining-space\"></span>\n    <button class=\"btn-dialog-close\" mat-stroked-button (click)=\"onClose()\" tabIndex=\"-1\">\n        <mat-icon>clear</mat-icon>\n    </button>\n</mat-toolbar>\n<img mat-card-image src=\"http://localhost:8091\"+{{user.id}} alt=\"DL Image\">\n<div class=\"kycstatus\">\n    <div fxLayout=\"column\" fxLayout.gt-xs=\"row\" fxLayoutAlign=\"end\">\n    <button mat-raised-button color=\"green\" (click)=\"approve()\" class=\"approve\">Approve\n        <i class=\"material-icons\">\n            done\n        </i>\n    </button>\n    <button mat-raised-button color=\"red\" (click)=\"reject()\" class=\"reject\">Reject\n        <i class=\"material-icons\">\n            clear\n        </i>\n    </button>\n</div>\n\n\n \n        \n"
 
 /***/ }),
 
@@ -344,7 +344,7 @@ DocumentsService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "img {\n    display: block;\n    max-width: 100%;\n    height: auto; \n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZG9jdW1lbnRzL3VwZGF0ZS1reWMvdXBkYXRlLWt5Yy5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksY0FBYztJQUNkLGVBQWU7SUFDZixZQUFZO0FBQ2hCIiwiZmlsZSI6InNyYy9hcHAvZG9jdW1lbnRzL3VwZGF0ZS1reWMvdXBkYXRlLWt5Yy5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiaW1nIHtcbiAgICBkaXNwbGF5OiBibG9jaztcbiAgICBtYXgtd2lkdGg6IDEwMCU7XG4gICAgaGVpZ2h0OiBhdXRvOyBcbn0iXX0= */"
+module.exports = "img {\n    display: block;\n    max-width: 100%;\n    height: auto; \n}\n.kycstatus\n{\n    flex-direction: row;\n\n}\n.approve{\n    background-color: green;\n    color: white;\n}\n.reject{\n    background-color: red;\n    color:white;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZG9jdW1lbnRzL3VwZGF0ZS1reWMvdXBkYXRlLWt5Yy5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksY0FBYztJQUNkLGVBQWU7SUFDZixZQUFZO0FBQ2hCO0FBQ0E7O0lBRUksbUJBQW1COztBQUV2QjtBQUNBO0lBQ0ksdUJBQXVCO0lBQ3ZCLFlBQVk7QUFDaEI7QUFDQTtJQUNJLHFCQUFxQjtJQUNyQixXQUFXO0FBQ2YiLCJmaWxlIjoic3JjL2FwcC9kb2N1bWVudHMvdXBkYXRlLWt5Yy91cGRhdGUta3ljLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyJpbWcge1xuICAgIGRpc3BsYXk6IGJsb2NrO1xuICAgIG1heC13aWR0aDogMTAwJTtcbiAgICBoZWlnaHQ6IGF1dG87IFxufVxuLmt5Y3N0YXR1c1xue1xuICAgIGZsZXgtZGlyZWN0aW9uOiByb3c7XG5cbn1cbi5hcHByb3Zle1xuICAgIGJhY2tncm91bmQtY29sb3I6IGdyZWVuO1xuICAgIGNvbG9yOiB3aGl0ZTtcbn1cbi5yZWplY3R7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogcmVkO1xuICAgIGNvbG9yOndoaXRlO1xufSJdfQ== */"
 
 /***/ }),
 
@@ -361,23 +361,36 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm2015/material.js");
+/* harmony import */ var _service_documents_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../service/documents.service */ "./src/app/documents/service/documents.service.ts");
+
 
 
 
 let UpdateKycComponent = class UpdateKycComponent {
-    constructor(dialogRef, data) {
+    constructor(dialogRef, data, documentService) {
         this.dialogRef = dialogRef;
+        this.documentService = documentService;
     }
     onClose() {
         this.dialogRef.close();
     }
     ngOnInit() {
+        this.documentService.getUsers().subscribe(res => {
+            this.users = res.data;
+            console.log(res, 'parent');
+        });
+    }
+    approve() {
     }
 };
 UpdateKycComponent.ctorParameters = () => [
     { type: _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatDialogRef"] },
-    { type: undefined, decorators: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Inject"], args: [_angular_material__WEBPACK_IMPORTED_MODULE_2__["MAT_DIALOG_DATA"],] }] }
+    { type: undefined, decorators: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Inject"], args: [_angular_material__WEBPACK_IMPORTED_MODULE_2__["MAT_DIALOG_DATA"],] }] },
+    { type: _service_documents_service__WEBPACK_IMPORTED_MODULE_3__["DocumentsService"] }
 ];
+tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()
+], UpdateKycComponent.prototype, "users", void 0);
 UpdateKycComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
         selector: 'app-update-kyc',

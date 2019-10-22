@@ -4,7 +4,11 @@
         <mat-icon>clear</mat-icon>
     </button>
 </mat-toolbar>
-<img mat-card-image src="http://localhost:8091/api/v1/downloadFile/" alt="">
+
+<img mat-card-image src="http://localhost:8091/" alt="DL Image">
+<p>{{users.name}}</p>
+
+
 <div class="kycstatus">
     <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutAlign="end">
     <button mat-raised-button color="green" (click)="approve()" class="approve">Approve

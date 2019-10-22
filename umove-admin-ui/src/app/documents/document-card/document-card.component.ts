@@ -52,7 +52,11 @@ view() {
   dialogConfig.disableClose = true;
   dialogConfig.autoFocus = true;
   dialogConfig.width = '40%';
+  dialogConfig.data={
+    user: this.users
+  }
   const dRef = this.matDialog.open(UpdateKycComponent, dialogConfig);
+
 }
 
 }
