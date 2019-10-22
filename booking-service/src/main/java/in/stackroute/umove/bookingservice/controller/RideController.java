@@ -4,6 +4,8 @@ import in.stackroute.umove.bookingservice.exception.RideAlreadyBookedException;
 import in.stackroute.umove.bookingservice.exception.RideNotFoundException;
 import in.stackroute.umove.bookingservice.model.*;
 import in.stackroute.umove.bookingservice.service.RideService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.bson.types.ObjectId;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,14 +14,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 @RestController
 @RequestMapping("api/v1")
 public class RideController {
+
+    private static final Logger logger = LogManager.getLogger(RideController.class);
 
     private final SimpMessagingTemplate template;
     private final RabbitTemplate messagingTemplate;
@@ -36,12 +37,14 @@ public class RideController {
     //Api end point for posting ride details
     @PostMapping("rides")
     public ResponseEntity<Map> confirmBooking(@RequestBody() Ride ride) {
+//        logger.debug("Hello from Log4j 2 ");
         Ride currentRide = rideService.getRideByUserIdNStatus(ride.getRider().get_id(), "Confirmed");
         if(currentRide != null)  {
             throw new RideAlreadyBookedException("Ride", "userId", ride.getRider().get_id());
         }
 //        if(bookingServiceInterface.)
         // if vehicle is allocated and outstanding amount is checked and there is no pending outstanding amount then set status as confirmed
+//        ride.setRideId(new UUID);
         ride.setStatus(RideStatus.Confirmed);
         ride.setBookedAt(LocalDateTime.now());
         Ride rideDetails = rideService.confirmRide(ride);
