@@ -1,11 +1,13 @@
 package in.stackroute.umove.bookingservice.service;
 
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import in.stackroute.umove.bookingservice.model.*;
 import in.stackroute.umove.bookingservice.repo.PaymentRepo;
 import in.stackroute.umove.bookingservice.repo.RideRepo;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -278,5 +280,22 @@ public class RideServiceImp implements RideService {
     public Payment getOutstandingRideDetail(String userId) {
         Payment payment = paymentRepo.findByUserIdAndStatus(userId, PaymentStatus.Pending);
         return payment;
+    }
+
+    @Override
+    public boolean isValidUser(String userId) {
+        RestTemplate restTemplate = new RestTemplate();
+        Map<String, Object> response = restTemplate.getForObject("http://172.23.234.74:8091/api/v1/users/" + userId, Map.class);
+        Map<String, Object> user = (Map<String, Object>) response.get("data");
+        if(user.get("userStatus").equals("Active")) {
+            return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean isVehicleAllocated(String zoneId, String typeName) {
+        return false;
     }
 }

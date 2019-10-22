@@ -2,8 +2,8 @@ import {Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {HTTP} from '@ionic-native/http/ngx';
-import {UserPaymentMethod} from '../../model/user-payment-method/user-payment-method';
-import {UserPaymentMethodService} from '../../services/user-payment-method/user-payment-method.service';
+import {UserPaymentMethod} from '../../model/user-payment-method';
+import {UserPaymentMethodService} from '../../service/user-payment-method/user-payment-method.service';
 import {Storage} from '@ionic/storage';
 import {UserProfile} from '../../model/user-profile';
 @Component({

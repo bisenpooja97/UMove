@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
-import {UserProfileServiceService} from '../../services/users-profile/user-profile-service.service';
+import {UserProfileServiceService} from '../../service/users-profile/user-profile-service.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ToastController} from '@ionic/angular';
 import {UserProfile} from '../../model/user-profile';

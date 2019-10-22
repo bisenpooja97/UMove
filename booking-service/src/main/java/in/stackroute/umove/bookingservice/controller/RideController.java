@@ -40,13 +40,15 @@ public class RideController {
 
     // End Point: api/v1/rides Method: POST
     // to confirm booking for a ride
-    //Create rides
+    // Create rides
     @PostMapping("rides")
     public ResponseEntity<Map> confirmBooking(@RequestBody() Ride ride) {
         Map<String, Object> map = new TreeMap<>();
-        Ride currentRide = rideService.getRideByUserIdNStatus(ride.getRider().get_id(), "Confirmed");
-        if(currentRide != null)  {
-            throw new RideAlreadyBookedException("Ride", "userId", ride.getRider().get_id());
+
+        if(!rideService.isValidUser(ride.getRider().get_id())) {
+            map.put("status", "Failed");
+            map.put("message", "Can't book your ride, Please check your status in your profile");
+            return new ResponseEntity<>(map, HttpStatus.OK);
         }
 
         Payment outstandingPayment = rideService.getOutstandingRideDetail(ride.getRider().get_id());
@@ -57,9 +59,16 @@ public class RideController {
             return new ResponseEntity<>(map, HttpStatus.OK);
         }
 
-        // check for vehicle allocation
+        Ride currentRide = rideService.getRideByUserIdNStatus(ride.getRider().get_id(), "Confirmed");
+        if(currentRide != null)  {
+            throw new RideAlreadyBookedException("Ride", "userId", ride.getRider().get_id());
+        }
 
-        // check for user status
+//        if(rideService.isVehicleAllocated(ride.getVehicle().getId(), ride.getVehicle().getType().getName())) {
+//            map.put("status", "Failed");
+//            map.put("message", "Sorry, The vehicle you have selected is not available now.");
+//            return new ResponseEntity<>(map, HttpStatus.OK);
+//        }
 
         ride.setStatus(RideStatus.Confirmed);
         ride.setBookedAt(LocalDateTime.now());
@@ -78,6 +87,7 @@ public class RideController {
     // Retrieve
     @GetMapping("rides")
     public ResponseEntity<Map> getRides(@RequestParam(value = "userId", required = false) String userId, @RequestParam(value = "rideStatus", required = false) String rideStatus) {
+
         if(userId!= null && rideStatus!= null) {
             Ride ride = rideService.getRideByUserIdNStatus(userId, rideStatus);
             Map<String, Object> map = new TreeMap<>();

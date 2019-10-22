@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Subscription} from 'rxjs';
 import {UserProfile} from '../../model/user-profile';
-import {UserProfileServiceService} from '../../services/users-profile/user-profile-service.service';
+import {UserProfileServiceService} from '../../service/users-profile/user-profile-service.service';
 import {Router} from '@angular/router';
 import {ToastController} from '@ionic/angular';
 import { HTTP } from '@ionic-native/http/ngx';

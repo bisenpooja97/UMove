@@ -1,6 +1,6 @@
 export class PaymentMethod {
     // tslint:disable-next-line: variable-name
-    _id: string;
+    pid: number;
     paymentMethodNumber: string;
     paymentType: string;
     paymentProvider: string;
