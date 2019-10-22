@@ -51,6 +51,8 @@ export class RideBookingDetailsPage implements OnInit {
         // };
         // console.log('timer settings ', this.timerSettings);
       });
+
+      
   }
 
   timerFinished() {

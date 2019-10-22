@@ -59,7 +59,7 @@ public class RideController {
 
     //Api end point for start ride request by the user
     @PatchMapping("rides/{rideId}/start")
-    public ResponseEntity<?> startRideRequest(@PathVariable("rideId") ObjectId rideId, @RequestParam(value = "vehicleNumber", required = true) String registrationNo) {
+    public ResponseEntity<Map> startRideRequest(@PathVariable("rideId") ObjectId rideId, @RequestParam(value = "vehicleNumber", required = true) String registrationNo) {
         Ride ride = rideService.startRide(rideId, registrationNo);
         Map<String, Object> map = new TreeMap<>();
         map.put("data", ride);
@@ -69,7 +69,7 @@ public class RideController {
 
     //Api end point for cancel ride request by the user
     @PatchMapping("rides/{rideId}/cancel")
-    public ResponseEntity<?> cancelRideRequest(@PathVariable("rideId") ObjectId rideId) {
+    public ResponseEntity<Map> cancelRideRequest(@PathVariable("rideId") ObjectId rideId) {
         Ride ride = rideService.cancelRide(rideId);
         Map<String, Object> map = new TreeMap<>();
         map.put("data", ride);
@@ -79,7 +79,7 @@ public class RideController {
 
     //Api end point for change destination request by the user
     @PatchMapping("rides/{rideId}/changeDestination")
-    public ResponseEntity<?> changeDestinationRequest(@RequestBody Zone destinationZone, @PathVariable("rideId") ObjectId rideId) {
+    public ResponseEntity<Map> changeDestinationRequest(@RequestBody Zone destinationZone, @PathVariable("rideId") ObjectId rideId) {
         Ride ride = rideService.updateDestination(destinationZone, rideId);
         Map<String, Object> map = new TreeMap<>();
         map.put("data", ride);
