@@ -1,6 +1,7 @@
 package in.stackroute.umove.bookingservice.service;
 
 import in.stackroute.umove.bookingservice.model.Ride;
+import in.stackroute.umove.bookingservice.model.RideStatus;
 import in.stackroute.umove.bookingservice.model.Vehicle;
 import in.stackroute.umove.bookingservice.model.Zone;
 import in.stackroute.umove.bookingservice.repo.RideRepo;
@@ -30,13 +31,13 @@ public class RideServiceTests {
     //Test to check the start ride function of ride
     @Test
     public void startRideTest() throws Exception {
-        String expected = "started";
+        RideStatus expected = RideStatus.Started;
         String expectedVehicleNo = "MH1140";
         LocalDateTime rightNow = LocalDateTime.now();
         LocalDateTime beforeRightNow = rightNow.minusMinutes(10);
         Ride ride = new Ride();
         ride.set_id(new ObjectId("5d89c3cf651a913a1cf2d31e"));
-        ride.setStatus("Confirmed");
+        ride.setStatus(RideStatus.Confirmed);
         ride.setBookedAt(beforeRightNow);
         Vehicle vehicle = new Vehicle();
         vehicle.setRegistrationNo("MH1140");
@@ -44,7 +45,7 @@ public class RideServiceTests {
         Mockito.when(rideRepo.findBy_id(new ObjectId("5d89c3cf651a913a1cf2d31e")))
                 .thenReturn(ride);
         Ride rideDetails = rideService.startRide(new ObjectId("5d89c3cf651a913a1cf2d31e"),"MH1140");
-        String actual = rideDetails.getStatus();
+        RideStatus actual = rideDetails.getStatus();
         String actualVehicleNo = rideDetails.getVehicle().getRegistrationNo();
         assertEquals(actual, expected);
         assertEquals(actualVehicleNo, expectedVehicleNo);
@@ -58,12 +59,12 @@ public class RideServiceTests {
         LocalDateTime beforeRightNow = rightNow.minusMinutes(20);
         Ride ride = new Ride();
         ride.set_id(new ObjectId("5d89c3cf651a913a1cf2d31e"));
-        ride.setStatus("Confirmed");
+        ride.setStatus(RideStatus.Confirmed);
         ride.setBookedAt(beforeRightNow);
         Mockito.when(rideRepo.findBy_id(new ObjectId("5d89c3cf651a913a1cf2d31e")))
                 .thenReturn(ride);
         Ride rideDetails = rideService.autocancelRide(new ObjectId("5d89c3cf651a913a1cf2d31e"));
-        String actual = rideDetails.getStatus();
+        RideStatus actual = rideDetails.getStatus();
         assertEquals(actual, expected);
     }
 
@@ -75,12 +76,12 @@ public class RideServiceTests {
         LocalDateTime beforeRightNow = rightNow.minusMinutes(4);
         Ride ride = new Ride();
         ride.set_id(new ObjectId("5d89c3cf651a913a1cf2d31e"));
-        ride.setStatus("Confirmed");
+        ride.setStatus(RideStatus.Confirmed);
         ride.setBookedAt(beforeRightNow);
         Mockito.when(rideRepo.findBy_id(new ObjectId("5d89c3cf651a913a1cf2d31e")))
                 .thenReturn(ride);
         Ride bookingDetails = rideService.cancelRide(new ObjectId("5d89c3cf651a913a1cf2d31e"));
-        String actual = bookingDetails.getStatus();
+        RideStatus actual = bookingDetails.getStatus();
         assertEquals(actual, expected);
     }
 
@@ -92,12 +93,12 @@ public class RideServiceTests {
         LocalDateTime beforeRightNow = rightNow.minusMinutes(10);
         Ride ride = new Ride();
         ride.set_id(new ObjectId("5d89c3cf651a913a1cf2d31e"));
-        ride.setStatus("Confirmed");
+        ride.setStatus(RideStatus.Confirmed);
         ride.setBookedAt(beforeRightNow);
         Mockito.when(rideRepo.findBy_id(new ObjectId("5d89c3cf651a913a1cf2d31e")))
                 .thenReturn(ride);
         Ride rideDetails = rideService.cancelRide(new ObjectId("5d89c3cf651a913a1cf2d31e"));
-        String actual = rideDetails.getStatus();
+        RideStatus actual = rideDetails.getStatus();
         assertEquals(actual, expected);
     }
 
@@ -110,7 +111,7 @@ public class RideServiceTests {
         destinationZoneTwo.setId("77");
         Ride ride = new Ride();
         ride.set_id(new ObjectId("5d89c3cf651a913a1cf2d31e"));
-        ride.setStatus("started");
+        ride.setStatus(RideStatus.Started);
         ride.setDestinationZones(Zones);
         Mockito.when(rideRepo.findBy_id(new ObjectId("5d89c3cf651a913a1cf2d31e")))
                 .thenReturn(ride);

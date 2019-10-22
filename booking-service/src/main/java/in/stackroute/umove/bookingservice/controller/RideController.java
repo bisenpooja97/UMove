@@ -2,14 +2,14 @@ package in.stackroute.umove.bookingservice.controller;
 
 import in.stackroute.umove.bookingservice.exception.RideAlreadyBookedException;
 import in.stackroute.umove.bookingservice.exception.RideNotFoundException;
-import in.stackroute.umove.bookingservice.model.ExtraCharge;
-import in.stackroute.umove.bookingservice.model.Ride;
+import in.stackroute.umove.bookingservice.model.*;
 import in.stackroute.umove.bookingservice.service.RideService;
-import in.stackroute.umove.bookingservice.model.Zone;
-import in.stackroute.umove.bookingservice.model.Payment;
 import in.stackroute.umove.bookingservice.model.Ride;
 import in.stackroute.umove.bookingservice.service.RideServiceImp;
 import org.bson.types.ObjectId;
+import org.springframework.amqp.core.TopicExchange;
+import org.springframework.amqp.rabbit.core.RabbitMessagingTemplate;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,10 +27,12 @@ import java.util.TreeMap;
 public class RideController {
 
     private final SimpMessagingTemplate template;
+    private final RabbitTemplate messagingTemplate;
 
     @Autowired
-    RideController(SimpMessagingTemplate template) {
+    RideController(SimpMessagingTemplate template, RabbitTemplate messagingTemplate) {
         this.template = template;
+        this.messagingTemplate = messagingTemplate;
     }
 
     @Autowired
@@ -38,21 +40,42 @@ public class RideController {
 
     // End Point: api/v1/rides Method: POST
     // to confirm booking for a ride
-    //Create rides
+    // Create rides
     @PostMapping("rides")
     public ResponseEntity<Map> confirmBooking(@RequestBody() Ride ride) {
+        Map<String, Object> map = new TreeMap<>();
+
+        if(!rideService.isValidUser(ride.getRider().get_id())) {
+            map.put("status", "Failed");
+            map.put("message", "Can't book your ride, Please check your status in your profile");
+            return new ResponseEntity<>(map, HttpStatus.OK);
+        }
+
+        Payment outstandingPayment = rideService.getOutstandingRideDetail(ride.getRider().get_id());
+        if(outstandingPayment != null) {
+            map.put("status", "Failed");
+            map.put("data", outstandingPayment);
+            map.put("message", "There is some outstanding amount pending. Pay that First to make a new Booking.");
+            return new ResponseEntity<>(map, HttpStatus.OK);
+        }
+
         Ride currentRide = rideService.getRideByUserIdNStatus(ride.getRider().get_id(), "Confirmed");
         if(currentRide != null)  {
             throw new RideAlreadyBookedException("Ride", "userId", ride.getRider().get_id());
         }
-//        if(bookingServiceInterface.)
-        // if vehicle is allocated and outstanding amount is checked and there is no pending outstanding amount then set status as confirmed
-        ride.setStatus("Confirmed");
+
+//        if(rideService.isVehicleAllocated(ride.getVehicle().getId(), ride.getVehicle().getType().getName())) {
+//            map.put("status", "Failed");
+//            map.put("message", "Sorry, The vehicle you have selected is not available now.");
+//            return new ResponseEntity<>(map, HttpStatus.OK);
+//        }
+
+        ride.setStatus(RideStatus.Confirmed);
         ride.setBookedAt(LocalDateTime.now());
         Ride rideDetails = rideService.confirmRide(ride);
-        Map<String, Object> map = new TreeMap<>();
         map.put("data", rideDetails);
         map.put("status", HttpStatus.CREATED);
+        messagingTemplate.convertAndSend("booking_exchange", "ride_confirmed", map);
         return new ResponseEntity<>(map, HttpStatus.CREATED);
     }
 
@@ -64,6 +87,7 @@ public class RideController {
     // Retrieve
     @GetMapping("rides")
     public ResponseEntity<Map> getRides(@RequestParam(value = "userId", required = false) String userId, @RequestParam(value = "rideStatus", required = false) String rideStatus) {
+
         if(userId!= null && rideStatus!= null) {
             Ride ride = rideService.getRideByUserIdNStatus(userId, rideStatus);
             Map<String, Object> map = new TreeMap<>();
@@ -106,7 +130,6 @@ public class RideController {
     // to apply extra charges from supervisior side at zone for a specific ride
     @PatchMapping("rides/{rideId}/extra-charges")
     public ResponseEntity<Map> addExtraCharge(@PathVariable("rideId") ObjectId rideId, @RequestBody() List<ExtraCharge> extraCharges) {
-        System.out.println("Extracharge" + extraCharges + " | ride id " + rideId);
         Ride ride = rideService.addExtraCharges(rideId, extraCharges);
         Map<String, Object> payload = new LinkedHashMap<>();
         payload.put("status", "Ended");
@@ -114,6 +137,7 @@ public class RideController {
         this.template.convertAndSend("/topic/end-ride/" + rideId, payload);
         Map<String, Object> map = new TreeMap<>();
         map.put("data", ride);
+        messagingTemplate.convertAndSend("booking_exchange", "ride_ended", map);
         return new ResponseEntity<Map>(map, HttpStatus.OK);
     }
 
@@ -124,6 +148,8 @@ public class RideController {
         Map<String, Object> map = new TreeMap<>();
         map.put("data", ride);
         map.put("status", HttpStatus.OK);
+        template.convertAndSend("/topic/ride-started/" + registrationNo, map);
+        messagingTemplate.convertAndSend("booking_exchange", "ride_started", map);
         return new ResponseEntity<>(map, HttpStatus.OK);
     }
 
@@ -134,6 +160,7 @@ public class RideController {
         Map<String, Object> map = new TreeMap<>();
         map.put("data", ride);
         map.put("status", HttpStatus.OK);
+        messagingTemplate.convertAndSend("booking_exchange", "ride_cancelled", map);
         return new ResponseEntity<>(map, HttpStatus.OK);
     }
 
@@ -144,6 +171,7 @@ public class RideController {
         Map<String, Object> map = new TreeMap<>();
         map.put("data", ride);
         map.put("status", HttpStatus.OK);
+        messagingTemplate.convertAndSend("booking_exchange", "ride_cancelled", map);
         return new ResponseEntity<>(map, HttpStatus.OK);
     }
 

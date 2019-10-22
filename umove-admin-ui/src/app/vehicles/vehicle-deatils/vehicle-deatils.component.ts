@@ -28,7 +28,8 @@ export class VehicleDeatilsComponent implements OnInit {
  costtime: number;
  cc: string;
 vehiclePurchased: Date;
-status1: String;
+status1: string;
+chassisNumber: string;
 
 vehicleStatus: Status[] = [
   { value: 'Busy', viewValue: 'BUSY' },
@@ -61,8 +62,7 @@ getVehicleDetails() {
     this.vehiclePurchased = this.vehicle.vehiclePurchased;
     this.insuranceNo = this.vehicle.insuranceNo;
     this.zoneId = this.vehicle.zoneid;
-    this.category = this.vehicle.type.category;
-    console.log(this.category);
+    this.chassisNumber = this.vehicle.chassisNumber;
     this.cc = this.vehicle.type.vehiclecc;
     this.costkm = this.vehicle.type.costkm;
     this.costtime = this.vehicle.type.costtime;
@@ -83,7 +83,7 @@ getVehicleDetails() {
     this.vehicle.status = newValue;
     this.vehicleService.updateVehicle(this.route.snapshot.paramMap.get('registrationNo'), this.vehicle).subscribe(
 
-    );
+);
 }
 
 openSnackbar(message: string, action: string) {
@@ -103,6 +103,7 @@ update() {
   dialogConfig.data = {
     insuranceNo : this.vehicle.insuranceNo,
     lastServiceDate: this.vehicle.lastServiceDate,
+    vehiclePurchased: this.vehicle.vehiclePurchased
   };
   const dRef = this.matDialog.open(UpdateVehiclesComponent, dialogConfig);
   dRef.afterClosed().subscribe(result => {

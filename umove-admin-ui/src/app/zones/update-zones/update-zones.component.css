@@ -8,6 +8,10 @@ mat-toolbar {
     background-color: white;
 }
 
+.btn {
+  width: 16em; height: 60px;
+ }
+
 .btn-dialog-close{
     width: 45px;
     min-width: 0px !important;

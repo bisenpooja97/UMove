@@ -1,11 +1,13 @@
 package in.stackroute.umove.bookingservice.service;
 
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import in.stackroute.umove.bookingservice.model.*;
 import in.stackroute.umove.bookingservice.repo.PaymentRepo;
 import in.stackroute.umove.bookingservice.repo.RideRepo;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -35,7 +37,7 @@ public class RideServiceImp implements RideService {
         Ride ride = rideRepo.findBy_id(id);
         System.out.println(ride.getPaymentDetail());
         System.out.println(ride.getPaymentDetail().getStatus());
-        if(ride.getPaymentDetail().getStatus().equals("Paid"))
+        if(ride.getPaymentDetail().getStatus().equals(PaymentStatus.Paid))
         {
             return rideRepo.findBy_id(id);
         }
@@ -101,7 +103,7 @@ public class RideServiceImp implements RideService {
         ride.setDistance(distance);
         Double rideAmount = (totalDuration*ride.getVehicle().getType().getCosttime())+(distance*ride.getVehicle().getType().getCostkm());
         ride.getPaymentDetail().setRideAmount(rideAmount);
-        ride.setStatus("ended");
+        ride.setStatus(RideStatus.Ended);
         rideRepo.save(ride);
         return ride;
     }
@@ -127,19 +129,19 @@ public class RideServiceImp implements RideService {
     public Ride startRide(ObjectId rideId, String registrationNo) {
         LocalDateTime startRideRequestAt = LocalDateTime.now();
         Ride ride = rideRepo.findBy_id(rideId);
-        if (ride.getStatus().equalsIgnoreCase("Confirmed")) {
+        if (ride.getStatus().equals(RideStatus.Confirmed)) {
             LocalDateTime bookedAt = ride.getBookedAt();
             LocalDateTime autoCancelTime = bookedAt.plusMinutes(20);
             int compareValue = startRideRequestAt.compareTo(autoCancelTime);
             if (compareValue <= 0) {
-                ride.setStatus("started");
+                ride.setStatus(RideStatus.Started);
                 ride.setRideStartAt(startRideRequestAt);
                 Vehicle vehicle = ride.getVehicle();
                 vehicle.setRegistrationNo(registrationNo);
                 ride.setVehicle(vehicle);
             }
             else {
-                ride.setStatus("autocancelled");
+                ride.setStatus(RideStatus.Auto_Cancelled);
             }
             rideRepo.save(ride);
         }
@@ -151,12 +153,12 @@ public class RideServiceImp implements RideService {
     public Ride autocancelRide(ObjectId rideId){
         LocalDateTime startRideRequestAt = LocalDateTime.now();
         Ride ride = rideRepo.findBy_id(rideId);
-        if (ride.getStatus().equalsIgnoreCase("Confirmed")) {
+        if (ride.getStatus().equals(RideStatus.Confirmed)) {
             LocalDateTime bookedAt = ride.getBookedAt();
             LocalDateTime autoCancelTime = bookedAt.plusMinutes(20);
             int compareValue = startRideRequestAt.compareTo(autoCancelTime);
             if (compareValue > 0) {
-                ride.setStatus("autocancelled");
+                ride.setStatus(RideStatus.Auto_Cancelled);
             }
             rideRepo.save(ride);
         }
@@ -168,15 +170,11 @@ public class RideServiceImp implements RideService {
     public Ride cancelRide(ObjectId rideId) {
         LocalDateTime rightNow = LocalDateTime.now();
         Ride ride = rideRepo.findBy_id(rideId);
-        if (ride.getStatus().equalsIgnoreCase("Confirmed")) {
+        if (ride.getStatus().equals(RideStatus.Confirmed)) {
             LocalDateTime bookedAt = ride.getBookedAt();
             LocalDateTime cancel = bookedAt.plusMinutes(5);
             int compareValue = rightNow.compareTo(cancel);
-            if (compareValue <= 0) {
-                ride.setStatus("cancelled before 5 mins");
-            } else {
-                ride.setStatus("cancelled after 5 mins");
-            }
+            ride.setStatus(RideStatus.Cancelled);
             rideRepo.save(ride);
         }
         return ride;
@@ -186,7 +184,7 @@ public class RideServiceImp implements RideService {
     @Override
     public Ride updateDestination(Zone destinationZone, ObjectId rideId) {
         Ride ride = rideRepo.findBy_id(rideId);
-        if (ride.getStatus().equalsIgnoreCase("started")) {
+        if (ride.getStatus().equals(RideStatus.Started)) {
             List<Zone> destinationZones = ride.getDestinationZones();
             destinationZones.add(destinationZone);
             ride.setDestinationZones(destinationZones);
@@ -232,7 +230,7 @@ public class RideServiceImp implements RideService {
     @Override
     public Payment payForRide(ObjectId rideId, String paymentId) {
         Ride ride = rideRepo.findBy_id(rideId);
-        String rider = ride.getRider().getName();
+        String userId = ride.getRider().get_id();
         String mobile = ride.getRider().getMobileNumber();
         String source = ride.getSourceZone().getLocality();
         int sizeOfDestinationZones = ride.getDestinationZones().size();
@@ -254,7 +252,7 @@ public class RideServiceImp implements RideService {
         Payment payment = new Payment();
         payment.setRideId(rideId.toString());
         payment.setPaymentId(paymentId);
-        payment.setRider(rider);
+        payment.setUserId(userId);
         payment.setMobile(mobile);
         payment.setSource(source);
         payment.setDestination(destination);
@@ -276,5 +274,28 @@ public class RideServiceImp implements RideService {
         Payment payment = paymentRepo.findByRideId(rideId);
         return payment;
 
+    }
+
+    @Override
+    public Payment getOutstandingRideDetail(String userId) {
+        Payment payment = paymentRepo.findByUserIdAndStatus(userId, PaymentStatus.Pending);
+        return payment;
+    }
+
+    @Override
+    public boolean isValidUser(String userId) {
+        RestTemplate restTemplate = new RestTemplate();
+        Map<String, Object> response = restTemplate.getForObject("http://172.23.234.74:8091/api/v1/users/" + userId, Map.class);
+        Map<String, Object> user = (Map<String, Object>) response.get("data");
+        if(user.get("userStatus").equals("Active")) {
+            return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean isVehicleAllocated(String zoneId, String typeName) {
+        return false;
     }
 }

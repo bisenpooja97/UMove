@@ -39,6 +39,7 @@ public class ServiceZoneImpl implements ServiceZone {
                 throw new ZoneAlreadyExistException("Zone name is already exist!!!");
             }
         }
+        zone.setCreatedAt(LocalDateTime.now());
         zoneRepository.save(zone);
         return zone;
     }
@@ -136,7 +137,7 @@ public class ServiceZoneImpl implements ServiceZone {
        }
        return nearbyZones;
    }
-   
+
     @Override
     public List<Zone> findByStatus(ZoneStatus status) {
         List<Zone> zones = zoneRepository.findByStatus(status);

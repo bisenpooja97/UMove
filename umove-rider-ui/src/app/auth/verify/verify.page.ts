@@ -1,10 +1,10 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {WindowService} from '../../services/window/window.service';
+import {WindowService} from '../../service/window/window.service';
 import {Router} from '@angular/router';
 import {UserProfile} from '../../model/user-profile';
 import {Storage} from '@ionic/storage';
 import {HTTP} from '@ionic-native/http/ngx';
-import {UserProfileServiceService} from '../../services/users-profile/user-profile-service.service';
+import {UserProfileServiceService} from '../../service/users-profile/user-profile-service.service';
 
 @Component({
   selector: 'app-verify',

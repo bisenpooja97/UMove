@@ -5,6 +5,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { MatSnackBar, MatDialogRef } from '@angular/material';
 import { HttpClient } from '@angular/common/http';
+import { Fuel } from 'src/app/model/Fuel';
+import { FuelService } from 'src/app/fuel/fuel.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -15,6 +17,7 @@ import { environment } from 'src/environments/environment';
 export class AddVehicleTypeComponent implements OnInit {
 
   datas = [];
+  fuels: Fuel[] = [];
   selectedFile: File;
   upload: any ;
   message: string;
@@ -23,11 +26,11 @@ export class AddVehicleTypeComponent implements OnInit {
   }
 
   get Rcc() {
-    return this.typeForm.get('cc');
+    return this.typeForm.get('vehiclecc');
   }
 
   get Rkm() {
-    return this.typeForm.get('km');
+    return this.typeForm.get('kilometer');
   }
 
   get Rcategory() {
@@ -36,19 +39,25 @@ export class AddVehicleTypeComponent implements OnInit {
   get Rcosttime() {
     return this.typeForm.get('costtime');
   }
-  baseUrl = environment.baseUrl + environment.typeBaseApi;
+  get Rbasefare() {
+    return this.typeForm.get('baseFare');
+  }
+
 
 
   constructor(public dialogRef: MatDialogRef<AddVehicleTypeComponent>, private fb: FormBuilder, private route: ActivatedRoute,
-              private router: Router, private typeService: VehicleTypeService,  private http: HttpClient, private snackBar: MatSnackBar
-             ) { }
+              private router: Router, private typeService: VehicleTypeService,
+              private fuelService: FuelService,
+              private http: HttpClient, private snackBar: MatSnackBar) {}
+  baseUrl = environment.baseUrl + environment.zoneService + environment.typeBaseApi;
 
   typeForm = this.fb.group({
     name: ['', [Validators.pattern('^[a-zA-Z0-9\-]*$')]],
     kilometer: ['', [Validators.pattern('^[0-9]*$')]],
     costtime: ['', [Validators.pattern('^[0-9]*$')]],
-    vehiclecc: [''],
-    category: ['']
+    vehiclecc: ['', [Validators.pattern('^[0-9]*$')]],
+     baseFare: ['', [Validators.pattern('^[0-9]*$')]],
+     fuel: []
   });
 
   getErrorType() {
@@ -56,14 +65,23 @@ export class AddVehicleTypeComponent implements OnInit {
         '';
   }
 
-  // getErrorCostkm() {
-  //   return  this.Rcostkm.hasError('pattern') ? 'Invalid Cost' :
-  //       '';
-  // }
+  getErrorkm() {
+    return  this.Rkm.hasError('pattern') ? 'Invalid Kilometer' :
+        '';
+  }
 
   getErrorCosttime() {
-    return  this.Rcosttime.hasError('pattern') ? 'Invalid Time' :
+    return  this.Rcosttime.hasError('pattern') ? 'Invalid cost for  Time' :
         '';
+  }
+
+  getErrorCC() {
+    return this.Rcc.hasError('pattern') ? 'Invalid cc' :
+    '';
+  }
+  getErrorBaseFare() {
+    return this.Rbasefare.hasError('pattern') ? 'Invalid cost for basefare' :
+    '';
   }
 
 
@@ -75,7 +93,7 @@ export class AddVehicleTypeComponent implements OnInit {
      const uploadData = new FormData();
      uploadData.append('file', this.selectedFile, this.selectedFile.name);
     //  this.http; is; the; injected; HttpClient;
-     this.http.post(this.baseUrl + '/uploadFile?id=12', uploadData)
+     this.http.post(this.baseUrl + '/uploadFile?id=' + this.typeForm.value.name, uploadData)
        .subscribe(event => {
            console.log('response', event); // handle event here
         });
@@ -86,6 +104,16 @@ export class AddVehicleTypeComponent implements OnInit {
     this.dialogRef.close();
   }
 
+  getFuelList() {
+    this.fuelService.getFuel().subscribe(
+      res => {
+        this.fuels = res.data;
+        console.log('types list: ', this.fuels);
+      }
+
+    );
+  }
+
 
 
 
@@ -94,25 +122,10 @@ export class AddVehicleTypeComponent implements OnInit {
     console.log(this.typeForm.value);
     console.log(this.typeForm.value, 'child');
     this.dialogRef.close(this.typeForm.value);
-
-
-      // onSubmit() {
-      //   // console.log(this.location);
-      //   // this.zoneForm.value.lat = this.location.position.lat;
-      //   // this.zoneForm.value.lon = this.location.position.lon;
-      //   // this.zoneForm.value.country = this.location.address.country;
-      //   // this.zoneForm.value.city = this.location.address.countrySecondarySubdivision;
-      //   // this.zoneForm.value.state = this.location.address.countrySubdivision;
-      //   console.log(this.typeForm.value, 'child');
-      //   this.dialogRef.close(this.typeForm.value);
-      // }
-
-
-
-  // this.router.navigateByUrl('/welcome');
 }
 
   ngOnInit() {
+    this.getFuelList();
   }
 
   openSnackbar(message: string, action: string) {

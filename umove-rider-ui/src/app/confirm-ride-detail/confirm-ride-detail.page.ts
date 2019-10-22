@@ -17,7 +17,9 @@ export class ConfirmRideDetailPage implements OnInit {
       const state = this.router.getCurrentNavigation().extras.state;
       if (state) {
         if (state.selectedPaymentMethod) {
+          console.log('payment method, ', state.selectedPaymentMethod)
           this.booking.paymentMethod = state.selectedPaymentMethod;
+          console.log('selected payment method: ', this.booking.paymentMethod);
         } else if (state.selectedPromocode) {
           this.booking.promocode = state.selectedPromocode;
         }
@@ -40,61 +42,61 @@ export class ConfirmRideDetailPage implements OnInit {
     };
 
     this.booking.vehicle = {
-      'id': '5da1ab649bd1160001cb8a03',
-      'zoneid': null,
-      'registrationNo': 'RJ27CA3456',
-      'insuranceNo': '678567',
-      'status': 'Busy',
-      'type': {
-        'Id': '5da1a0989bd1160001cb8a02',
-        'name': 'R1',
-        'costkm': 9,
-        'costtime': 0.25,
-        'category': 'Sports',
-        'vehiclecc': '220cc',
-        'kilometer': 25,
-        'url': 'https://jtride-data.s3.ap-south-1.amazonaws.com/uploads/1570608854_vespa.png'
+      id: '5da1ab649bd1160001cb8a03',
+      zoneid: null,
+      registrationNo: 'RJ27CA3456',
+      insuranceNo: '678567',
+      status: 'Busy',
+      type: {
+        Id: '5da1a0989bd1160001cb8a02',
+        name: 'R1',
+        costkm: 9,
+        costtime: 0.25,
+        category: 'Sports',
+        vehiclecc: '220cc',
+        kilometer: 25,
+        url: 'https://jtride-data.s3.ap-south-1.amazonaws.com/uploads/1570608854_vespa.png'
       },
-      'lastServiceDate': new Date(),
-      'vehiclePurchased': new Date()
+      lastServiceDate: new Date(),
+      vehiclePurchased: new Date()
     };
 
     this.booking.sourceZone = {
-      "id":"5da41d0c30c49e000131313c",
-      "name":"Zone-Koramangala-B8",
-      "lat":12.9416,
-      "lon":77.61718,
-      "city":"Bengaluru Urban",
-      "state":"Karnataka",
-      "country":"India",
-      "pincode":560002,
-      "locality":"Block 8 koramangala",
-      "capacity":100,
-      "createdAt":new Date(),
-      "supervisorId":"5da5e1cfadbe1d0001409653",
-      "supervisorName":"Suraj",
-      "supervisorNumber":"9456789090",
-      "supervisorEmail":"suraj@gmail.com",
-      "status":"FULL"
+      id: '5da41d0c30c49e000131313c',
+      name: 'Zone-Koramangala-B8',
+      lat: 12.9416,
+      lon: 77.61718,
+      city: 'Bengaluru Urban',
+      state: 'Karnataka',
+      country: 'India',
+      pincode: 560002,
+      locality: 'Block 8 koramangala',
+      capacity: 100,
+      createdAt: new Date(),
+      supervisorId: '5da5e1cfadbe1d0001409653',
+      supervisorName: 'Suraj',
+      supervisorNumber: '9456789090',
+      supervisorEmail: 'suraj@gmail.com',
+      status: 'FULL'
     };
 
     this.booking.destinationZones.push({
-      "id":"5da41d0c30c49e000131313c",
-      "name":"Zone-Manyata",
-      "lat":12.9416,
-      "lon":77.61718,
-      "city":"Bengaluru Urban",
-      "state":"Karnataka",
-      "country":"India",
-      "pincode":560002,
-      "locality":"Manyata",
-      "capacity":100,
-      "createdAt":new Date(),
-      "supervisorId":"5da5e1cfadbe1d0001409653",
-      "supervisorName":"Suraj",
-      "supervisorNumber":"9456789090",
-      "supervisorEmail":"suraj@gmail.com",
-      "status":"FULL"
+      id: '5da41d0c30c49e000131313c',
+      name: 'Zone-Manyata',
+      lat: 12.9416,
+      lon: 77.61718,
+      city: 'Bengaluru Urban',
+      state: 'Karnataka',
+      country: 'India',
+      pincode: 560002,
+      locality: 'Manyata',
+      capacity: 100,
+      createdAt: new Date(),
+      supervisorId: '5da5e1cfadbe1d0001409653',
+      supervisorName: 'Suraj',
+      supervisorNumber: '9456789090',
+      supervisorEmail: 'suraj@gmail.com',
+      status: 'FULL'
     });
 
     console.log('payment method: ', this.booking.paymentMethod);

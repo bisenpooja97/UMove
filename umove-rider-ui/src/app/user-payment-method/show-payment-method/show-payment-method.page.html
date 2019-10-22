@@ -17,7 +17,7 @@
 </ion-header>
 <ion-content *ngIf="payment" fullscreen>
       <ion-list *ngFor="let item of payment">
-        <ion-item (click)="onSelect(payment)">
+        <ion-item (click)="onSelect(item)">
           <ion-grid>
             <ion-row>
               <ion-col>

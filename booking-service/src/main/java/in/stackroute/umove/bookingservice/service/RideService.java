@@ -28,4 +28,9 @@ public interface RideService {
     Payment getPaymentDetails(String rideId);
 //    Ride endRideRequest(ObjectId rideId);
 
+    Payment getOutstandingRideDetail(String userId);
+
+    boolean isValidUser(String userId);
+    boolean isVehicleAllocated(String zoneId, String typeName);
+
 }

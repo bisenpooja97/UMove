@@ -6,60 +6,51 @@
 </mat-toolbar>
 <form fxLayout="column" fxLayoutAlign="center center" [formGroup]="zoneForm" (ngSubmit)="onSubmit()">
 
-    <div fxFlex=50% fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px" class="form"
+    <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px" class="form"
         fxLayoutAlign="center center">
-        <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px" class="col">
+        
 
             <mat-form-field appearance="outline" fxFlex>
                 <mat-label>Zone Locality</mat-label>
-                <input matInput #input placeholder="Zone Locality" formControlName="locality" required>
-                <!-- <mat-error *ngIf="locality.invalid">
+                <input matInput #input placeholder="Zone Locality" formControlName="locality" required (keyup.enter)="getLocation()">
+                <mat-hint>
+                    Press Enter after writing locality
+                </mat-hint>
+                <mat-error *ngIf="locality.invalid">
                                         {{getErrorZoneLocality()}}
-                                    </mat-error> -->
+                                    </mat-error>
             </mat-form-field>
             <mat-form-field appearance="outline" fxFlex>
 
                 <mat-label>Zone Name</mat-label>
                 <input matInput #input placeholder="Zone Name" formControlName="name" required>
 
-                <!-- <mat-error *ngIf="zone.invalid">
+                <mat-error *ngIf="zone.invalid">
                 
                                             {{getErrorZoneName()}}
-                                        </mat-error> -->
+                                        </mat-error>
 
             </mat-form-field>
 
-        </div>
-        <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px" class="col">
-
-
-            <div class="button">
-                
-                
-                    <input type="button" value="Get Locations" (click)="getLocation()" class="location">
-
-            </div>
+        
 
 
             <mat-form-field appearance="outline" fxFlex>
                 <mat-label>Capacity</mat-label>
                 <input matInput #input placeholder="Capacity" formControlName="capacity" required>
-                <!-- <mat-error *ngIf="capacity.invalid">
+                <mat-error *ngIf="capacity.invalid">
                                     
                                                                 {{getErrorCapacity()}}
-                                                            </mat-error> -->
+                                                            </mat-error>
             </mat-form-field>
 
+            <button mat-raised-button class="btn" [disabled]='!zoneForm.valid' color="primary">
+                Submit
+            </button>
 
-        </div>
+        
     </div>
 
-    <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
-        <button mat-raised-button class="btn" [disabled]='!zoneForm.valid' color="primary">
-            Submit
-        </button>
-
-    </div>
 
 
 

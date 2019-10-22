@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import * as firebase from 'firebase';
 import {environment} from '../../../environments/environment';
-import {WindowService} from '../../services/window/window.service';
+import {WindowService} from '../../service/window/window.service';
 import {Storage} from '@ionic/storage';
 import {UserProfile} from '../../model/user-profile';
 

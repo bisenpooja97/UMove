@@ -25,7 +25,7 @@
 </div>
 
 <div fxLayout="column">
-<mat-card class="my-card" fxFlex.sm="0 1 calc(50%-10px)" fxFlex.md="0 1 calc(33%-10px)" fxLayout="column" fxLayoutGap="20px">
+<mat-card class="zone" fxFlex.sm="0 1 calc(50%-10px)" fxFlex.md="0 1 calc(33%-10px)" fxLayout="column" fxLayoutGap="20px">
         <mat-card-title fxLayoutAlign="start">{{creationTime | date:"dd LLLL yyyy"}}</mat-card-title>
         <br><br>   
     <div fxFlex=50% fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="20%" fxLayoutGap.lt-md="0px"
@@ -54,8 +54,5 @@
 </mat-card>
 
 <app-supervisor-details></app-supervisor-details>
-
-<h1 fxLayout="column" fxLayout.gt-md="row" fxLayoutGap.gt-md="15px" class="zoneName">
-        Vehicles
-</h1>
+<app-vehicle-details></app-vehicle-details>
 </div>

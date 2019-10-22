@@ -12,4 +12,6 @@ public interface ServiceVehicleType {
     public VehicleType findByVid(String id);
     public VehicleType updateTypeDetails(String name, VehicleType type);
     void saveImage(MultipartFile imageFile, String _uid) throws Exception;
+    public void updateEveryoneFare(float fare,String name);
+    public List<VehicleType> findVehicleTypeByFuel(String fuel);
 }

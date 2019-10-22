@@ -1,6 +1,6 @@
 import {Injectable, OnInit} from '@angular/core';
 import {HTTP, HTTPResponse} from '@ionic-native/http/ngx';
- import {AutoCompleteService} from 'ionic4-auto-complete';
+import {AutoCompleteService} from 'ionic4-auto-complete';
 import {environment} from '../../../environments/environment';
 import { ToastController } from '@ionic/angular';
 import {Zone} from '../../model/zone';
@@ -10,10 +10,9 @@ import {Zone} from '../../model/zone';
 })
 
 export class ZoneService implements AutoCompleteService, OnInit {
-  baseUrl = 'http://172.23.234.112:8093/api/v1/zones';
-  nearby = '/nearby';
-  zones = '/zones';
-  // baseUrl = environment.baseUrl + environment.zoneService + this.zones ;
+  // baseUrl = 'http://172.23.234.112:8093/api/v1/zones';
+
+  baseUrl = environment.baseUrl + environment.zoneService + environment.zones ;
   vehicles = '/vehicles';
   zoneList: Zone[];
     private response: HTTPResponse;
@@ -31,8 +30,8 @@ export class ZoneService implements AutoCompleteService, OnInit {
         });
   }
     public  getNearbyZone(lat: number, lon: number) {
-         console.log('zones api'+ this.baseUrl + this.nearby +'?lon='+lon+'&lat='+lat);
-        return this.http.get(this.baseUrl + this.nearby +'?lon='+lon+'&lat='+lat, {}, {})
+         console.log('zones api' + this.baseUrl + environment.nearby + '?lon=' + lon + '&lat=' + lat);
+         return this.http.get(this.baseUrl + environment.nearby + '?lon=' + lon + '&lat=' + lat, {}, {})
             .catch(error => {
                 console.log(error);
                 this.presentToast(error);
@@ -106,11 +105,11 @@ export class ZoneService implements AutoCompleteService, OnInit {
 
   async presentToast(error) {
       console.log(error);
-    const toast = await this.toastController.create({
+      const toast = await this.toastController.create({
       message: error,
       duration: 5000
     });
-    toast.present();
+      toast.present();
   }
 
   //  Service for getting vehicles of a specific zone
@@ -124,7 +123,7 @@ export class ZoneService implements AutoCompleteService, OnInit {
 
   getCoordinatesByLocality(locality: string) {
       console.log('locality:', locality);
-    return this.http.get('http://172.23.234.112:8093/api/v1/zones/loc/'+locality, {}, {})
+      return this.http.get(this.baseUrl + '/loc/' + locality, {}, {})
         .catch(error => {
           console.log('Error', error);
           this.presentToast(error); });
@@ -139,7 +138,7 @@ export class ZoneService implements AutoCompleteService, OnInit {
               this.zoneList = this.data.data;
           });
       console.log('zonelist', this.zoneList);
-    return this.zoneList.filter(
+      return this.zoneList.filter(
             (item) => {
               return item.locality.toLowerCase().startsWith(
                 keyword.toLowerCase()

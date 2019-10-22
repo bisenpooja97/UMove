@@ -43,6 +43,10 @@ export class AddVehicleComponent implements OnInit {
     return this.vehicleForm.get('vehiclePurchased');
   }
 
+  get RchassisNumber(){
+    return this.vehicleForm.get('chassisNumber');
+  }
+
 
 
   constructor( public dialogRef: MatDialogRef<AddVehicleComponent>, private fb: FormBuilder, private route: ActivatedRoute,
@@ -55,7 +59,8 @@ export class AddVehicleComponent implements OnInit {
     type: [''],
     status: 'Free',
     // lastServiceDate: [''],
-    vehiclePurchased: ['']
+    vehiclePurchased: [''],
+    chassisNumber: ['',[Validators.pattern('^[a-zA-Z0-9\-]*$')]]
   });
 
   getErrorRegistrationNo() {
@@ -66,6 +71,11 @@ export class AddVehicleComponent implements OnInit {
   getErrorInsuranceNo() {
     return this.RinsuranceNo.hasError('pattern') ? 'Invalid insurance no' :
       '';
+  }
+
+  getErrorChassisNo(){
+    return this.RchassisNumber.hasError('pattern')?'Invalid no':
+    '';
   }
 
   onClose() {
