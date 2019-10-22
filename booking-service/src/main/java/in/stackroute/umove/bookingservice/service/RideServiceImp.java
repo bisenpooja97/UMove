@@ -18,6 +18,7 @@ public class RideServiceImp implements RideService {
 
     @Autowired
     private RideRepo rideRepo;
+
     @Autowired
     private PaymentRepo paymentRepo;
 
@@ -103,7 +104,7 @@ public class RideServiceImp implements RideService {
         Double rideAmount = (totalDuration*ride.getVehicle().getType().getCosttime()+roundUpDistance*ride.getVehicle().getType().getCostkm());
         Double roundUpRideAmount = Double.valueOf(Math.round(rideAmount*100)/100);
         ride.getPaymentDetail().setRideAmount(roundUpRideAmount);
-        ride.setStatus("ended");
+        ride.setStatus(RideStatus.Ended);
         rideRepo.save(ride);
         return ride;
     }
@@ -192,45 +193,35 @@ public class RideServiceImp implements RideService {
     }
 
     @Override
-    public Payment payForRide(ObjectId rideId, String paymentId) {
+    public Payment payForRide(ObjectId rideId, String paymentId, String paymentStatus) {
         Ride ride = rideRepo.findBy_id(rideId);
-        String rider = ride.getRider().getName();
-        String mobile = ride.getRider().getMobileNumber();
-        String source = ride.getSourceZone().getLocality();
+        Payment payment = new Payment();
         int sizeOfDestinationZones = ride.getDestinationZones().size();
-        String destination = ride.getDestinationZones().get(sizeOfDestinationZones-1).getLocality();
-        Double distance = ride.getDistance();
-        int duration = ride.getDuration();
-        String payment_method_id = ride.getPaymentMethod().get_id();
-        Double ride_fare = ride.getPaymentDetail().getRideAmount();
-        int discount_percent = ride.getPromoCode().getDiscountPercent();
-        Double totalExtraCharges = ride.getPaymentDetail().getTotalExtraCharges();
-        Double amount_paid = ride.getPaymentDetail().getTotalAmount();
-        LocalDateTime deducted_at = LocalDateTime.now();
+        int discount_percent = 0;
+        if(ride.getPromoCode()!= null){ discount_percent= ride.getPromoCode().getDiscountPercent();}
         PaymentDetail paymentDetail = ride.getPaymentDetail();
-        paymentDetail.setStatus(PaymentStatus.Paid);
-        //paymentDetail.setPaidAmount(amount_paid);
+        if(paymentStatus.equals("Paid")){paymentDetail.setStatus(PaymentStatus.Paid); payment.setStatus("Paid");}
+        else {paymentDetail.setStatus(PaymentStatus.Pending); payment.setStatus("Pending");}
         ride.setPaymentDetail(paymentDetail);
         rideRepo.save(ride);
 
-        Payment payment = new Payment();
         payment.setRideId(rideId.toString());
         payment.setPaymentId(paymentId);
-        payment.setRider(rider);
-        payment.setMobile(mobile);
-        payment.setSource(source);
-        payment.setDestination(destination);
-        payment.setDistance(distance);
-        payment.setDuration(duration);
-        payment.setPaymentMethodId(payment_method_id);
-        payment.setRideFare(ride_fare);
+        payment.setUserId(ride.getRider().get_id());
+        payment.setMobile(ride.getRider().getMobileNumber());
+        payment.setSource(ride.getSourceZone().getLocality());
+        payment.setDestination(ride.getDestinationZones().get(sizeOfDestinationZones-1).getLocality());
+        payment.setDistance(ride.getDistance());
+        payment.setDuration(ride.getDuration());
+        payment.setPaymentMethodId(ride.getPaymentMethod().get_id());
+        payment.setRideFare(ride.getPaymentDetail().getRideAmount());
         payment.setDiscountPercent(discount_percent);
-        payment.setExtraCharges(totalExtraCharges);
-        payment.setAmountPaid(amount_paid);
-        payment.setDeductedAt(deducted_at);
-        payment.setStatus("Paid");
+        payment.setExtraCharges(ride.getPaymentDetail().getTotalExtraCharges());
+        payment.setAmountPaid(ride.getPaymentDetail().getTotalAmount());
+        payment.setDeductedAt(LocalDateTime.now());
         paymentRepo.save(payment);
         return payment;
+
     }
 
     @Override

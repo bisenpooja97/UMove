@@ -48,7 +48,7 @@ export class RideBookingDetailsPage implements OnInit {
       message: 'Please book a new ride.',
       callback: () => {
         // Apply the url of home page
-        this.router.navigateByUrl('confirm-ride-detail');
+        this.router.navigateByUrl('payment-detail/' + this.ride._id);
       }
     });
   }
@@ -67,11 +67,11 @@ export class RideBookingDetailsPage implements OnInit {
       this.ride = JSON.parse(response.data).data;
       this.rideStatus = this.ride.status;
       if (this.rideStatus === 'CancelledWithinThreshold') {
-        this.router.navigateByUrl('ride-booking-details');
+        this.router.navigateByUrl('confirm-ride-detail');
       }
       if (this.rideStatus === 'CancelledAfterThreshold') {
         // Apply the url of payment details page
-        this.router.navigateByUrl('ride-details');
+        this.router.navigateByUrl('payment-detail/' + this.ride._id);
       }
     });
   }

@@ -40,27 +40,27 @@ export class ConfirmRideDetailPage implements OnInit {
     };
 
     this.booking.vehicle = {
-      'id': '5da1ab649bd1160001cb8a03',
-      'zoneid': null,
-      'registrationNo': 'RJ27CA3456',
-      'insuranceNo': '678567',
-      'status': 'Busy',
-      'type': {
-        'Id': '5da1a0989bd1160001cb8a02',
-        'name': 'R1',
-        'costkm': 9,
-        'costtime': 0.25,
-        'category': 'Sports',
-        'vehiclecc': '220cc',
-        'kilometer': 25,
-        'url': 'https://jtride-data.s3.ap-south-1.amazonaws.com/uploads/1570608854_vespa.png'
+      id: '5da1ab649bd1160001cb8a03',
+      zoneid: null,
+      registrationNo: 'RJ27CA3456',
+      insuranceNo: '678567',
+      status: 'Busy',
+      type: {
+        Id: '5da1a0989bd1160001cb8a02',
+        name: 'R1',
+        costkm: 9,
+        costtime: 0.25,
+        category: 'Sports',
+        vehiclecc: '220cc',
+        kilometer: 25,
+        url: 'https://jtride-data.s3.ap-south-1.amazonaws.com/uploads/1570608854_vespa.png'
       },
-      'lastServiceDate': new Date(),
-      'vehiclePurchased': new Date()
+      lastServiceDate: new Date(),
+      vehiclePurchased: new Date()
     };
 
     this.booking.sourceZone = {
-      zoneId: '5d8c7a62adfffb7e746ccee8',
+      id: '5d8c7a62adfffb7e746ccee8',
       name: 'Kormangla Zone-1',
       lat: -85.2065802380484,
       lon: 42.70837049544012,
@@ -70,6 +70,7 @@ export class ConfirmRideDetailPage implements OnInit {
       pincode: 560034,
       locality: 'Madiwala',
       capacity: 10,
+      createdAt: new Date(),
       supervisorId: '1',
       supervisorName: 'Subhash',
       supervisorNumber: '9196778866',
@@ -78,7 +79,7 @@ export class ConfirmRideDetailPage implements OnInit {
     };
 
     this.booking.destinationZones.push({
-      zoneId: '5d8c7a62adfffb7e746ccee8',
+      id: '5d8c7a62adfffb7e746ccee8',
       name: 'Manayatha Zone-3',
       lat: -85.2065802380484,
       lon: 42.70837049544012,
@@ -88,6 +89,7 @@ export class ConfirmRideDetailPage implements OnInit {
       pincode: 560034,
       locality: 'Madiwala',
       capacity: 10,
+      createdAt: new Date(),
       supervisorId: '1',
       supervisorName: 'Subhash',
       supervisorNumber: '9196778866',

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Ride } from '../model/ride';
 import { RideService } from '../service/ride.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import {RideSocketService} from '../service/ride-socket.service';
+import { RideSocketService } from '../service/ride-socket.service';
 
 @Component({
     selector: 'app-qrcode-generator',
@@ -16,6 +16,16 @@ export class QrcodeGeneratorPage implements OnInit {
 
     constructor(private rideService: RideService, private route: ActivatedRoute, private router: Router,
                 private websocketService: RideSocketService) {
+
+
+        this.rideService.getRideDetailsByUserIdNStatus('5d8bbc0da6e87d5404aa1921', 'Started')
+            .then(response => {
+                console.log('Ride details: ', response);
+                this.ride = JSON.parse(response.data).data;
+                // tslint:disable-next-line: object-literal-key-quotes
+                this.createdCode = JSON.stringify({ '_id': this.ride._id });
+                console.log('Created code data should be: ', this.createdCode);
+            });
 
         this.websocketService.connect().then((result) => {
             console.log('Connected');
@@ -34,14 +44,6 @@ export class QrcodeGeneratorPage implements OnInit {
     }
 
     ngOnInit() {
-        this.rideService.getRideDetailsByUserIdNStatus('5d8bbc0da6e87d5404aa1921', 'started')
-            .then(response => {
-                console.log('Ride details: ', response);
-                this.ride = JSON.parse(response.data).data;
-                // tslint:disable-next-line: object-literal-key-quotes
-                this.createdCode = JSON.stringify({ '_id': this.ride._id });
-                console.log('Created code data should be: ', this.createdCode);
-            });
 
     }
 

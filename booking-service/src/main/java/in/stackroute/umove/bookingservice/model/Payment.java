@@ -22,7 +22,7 @@ public class Payment {
     private String rideId;
 
     @Column
-    private String rider;
+    private String userId;
 
     @Column
     private String mobile;

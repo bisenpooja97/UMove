@@ -2,12 +2,10 @@ package in.stackroute.umove.bookingservice.controller;
 
 import in.stackroute.umove.bookingservice.exception.RideAlreadyBookedException;
 import in.stackroute.umove.bookingservice.exception.RideNotFoundException;
-import in.stackroute.umove.bookingservice.model.Ride;
-import in.stackroute.umove.bookingservice.model.RideStatus;
-import in.stackroute.umove.bookingservice.model.Zone;
+import in.stackroute.umove.bookingservice.model.*;
 import in.stackroute.umove.bookingservice.service.RideService;
-import in.stackroute.umove.bookingservice.model.Payment;
 import org.bson.types.ObjectId;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,11 +22,15 @@ import java.util.TreeMap;
 public class RideController {
 
     private final SimpMessagingTemplate template;
+    private final RabbitTemplate messagingTemplate;
 
     @Autowired
-    RideController(SimpMessagingTemplate template) {
+    RideController(SimpMessagingTemplate template, RabbitTemplate messagingTemplate) {
         this.template = template;
+        this.messagingTemplate = messagingTemplate;
     }
+
+    @Autowired
     private RideService rideService;
 
     //Api end point for posting ride details
@@ -150,9 +152,9 @@ public class RideController {
     }
     // End Point: api/v1/payments Method: PUT
     // to pay for a specific ride by id
-    @PutMapping("payments")
-    public ResponseEntity<Map> payForBooking(@RequestParam(value = "rideId") ObjectId rideId, @RequestParam(value = "payment_Id") String paymentId) {
-        Payment payment = rideService.payForRide(rideId, paymentId);
+    @PutMapping("rides/payments")
+    public ResponseEntity<Map> payForBooking(@RequestParam(value = "rideId") ObjectId rideId, @RequestParam(value = "paymentId") String paymentId, @RequestParam(value="paymentStatus") String paymentStatus) {
+        Payment payment = rideService.payForRide(rideId, paymentId, paymentStatus);
         Map<String, Object> map = new TreeMap<>();
         map.put("data", payment);
         map.put("status", HttpStatus.CREATED);
@@ -161,7 +163,7 @@ public class RideController {
 
     // End Point: api/v1/payments/rideId Method: GET
     // to get payment Details for a specific ride by rideId
-    @GetMapping("payments/{rideId}")
+    @GetMapping("rides/payments/{rideId}")
     public ResponseEntity<Map> getPaymentDetails(@PathVariable("rideId") String rideId)
     {
         Payment payment = rideService.getPaymentDetails(rideId);

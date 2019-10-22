@@ -6,11 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { RideDetailsPage } from './ride-details.page';
-<<<<<<< HEAD
-import {SharedModule} from "../shared/shared.module";
-=======
 import {SharedModule} from '../shared/shared.module';
->>>>>>> ride-feature
 
 const routes: Routes = [
   {
