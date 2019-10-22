@@ -56,7 +56,7 @@ export class UpdateKycPage implements OnInit {
       const uploadData = new FormData();
       uploadData.append('file', this.selectedFile, this.selectedFile.name);
       this.userDataService.uploadProfileById(this.localUser.id, uploadData).subscribe(res => {
-        console.log(res);
+        // console.log(res);
       });
       const toast = await this.toastController.create({
         message: 'KYC Details Uploaded Successfully.',

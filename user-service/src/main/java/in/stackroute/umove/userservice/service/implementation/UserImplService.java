@@ -1,6 +1,7 @@
 package in.stackroute.umove.userservice.service.implementation;
 
 import in.stackroute.umove.userservice.exceptions.UserAlreadyExistsException;
+import in.stackroute.umove.userservice.model.DocumentVerification;
 import in.stackroute.umove.userservice.model.Role;
 import in.stackroute.umove.userservice.model.UserData;
 import in.stackroute.umove.userservice.model.UserStatus;
@@ -127,6 +128,18 @@ public class UserImplService implements UserService {
         }
         return null;
     }
+//    public DocumentVerification updateDocument(String objid, DocumentVerification user) {
+//        final UserData updatedUser = userRepository.findByid(objid);
+//        final DocumentVerification updatedDocuemt = updatedUser.getDocument();
+//        if (updatedDocuemt != null) {
+//            if (user.getImage() != null) {
+//                updatedDocuemt.setImage(user.getImage());
+//            }
+//            userRepository.save(updatedUser);
+//            return updatedDocuemt;
+//        }
+//        return null;
+//    }
 }
 //    @Override
 //    public DocumentVerification updateDocumentVerification(ObjectId id, DocumentVerification documentVerification) {
