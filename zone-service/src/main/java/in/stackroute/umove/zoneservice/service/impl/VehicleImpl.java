@@ -5,7 +5,10 @@ import in.stackroute.umove.zoneservice.exception.InsuranceNoAlreadyExistExceptio
 import in.stackroute.umove.zoneservice.exception.RegistrationNoAlreadyExistException;
 import in.stackroute.umove.zoneservice.model.Vehicle;
 import in.stackroute.umove.zoneservice.model.VehicleStatus;
+import in.stackroute.umove.zoneservice.model.VehicleType;
+import in.stackroute.umove.zoneservice.model.ZoneTypeCount;
 import in.stackroute.umove.zoneservice.repository.VehicleRepo;
+import in.stackroute.umove.zoneservice.repository.VehicleTypeRepo;
 import in.stackroute.umove.zoneservice.service.ServiceVehicle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +21,12 @@ import java.util.List;
 public class VehicleImpl implements ServiceVehicle {
     @Autowired
     VehicleRepo repo;
+
+    @Autowired
+    ZoneTypeCountImpl repo1;
+
+    @Autowired
+    VehicleTypeRepo repo2;
     //To add new vehicle
     @Override
     public Vehicle addVehicle(Vehicle vehicle) {
@@ -91,6 +100,7 @@ public class VehicleImpl implements ServiceVehicle {
         }
         else
             return null;
+
     }
 
     //Find vehicles based on type name

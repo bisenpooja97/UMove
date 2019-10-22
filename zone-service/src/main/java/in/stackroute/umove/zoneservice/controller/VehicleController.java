@@ -39,7 +39,12 @@ public class VehicleController {
                                           @RequestParam(value = "status", required = false) VehicleStatus status) {
 
         if (zoneId != null && type != null && !zoneId.isEmpty() && !type.isEmpty()) {
-            return new ResponseEntity(vehicleManagementService.findByZoneAndType(zoneId, type), HttpStatus.OK);
+            List<Vehicle> vehicleList = vehicleManagementService.findByZoneAndType(zoneId,type);
+            Map<String, Object> map = new TreeMap<>();
+            map.put("count", vehicleList.size());
+            map.put("data", vehicleList);
+            map.put("status", HttpStatus.OK);
+            return new ResponseEntity<Map>(map, HttpStatus.OK);
         }
 
         if (zoneId != null && !zoneId.isEmpty()) {
