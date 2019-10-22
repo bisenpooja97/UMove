@@ -3,9 +3,11 @@ img {
     max-width: 100%;
     height: auto; 
 }
+
 .kycstatus
 {
     flex-direction: row;
+    align-items: center;
 
 }
 .approve{
@@ -15,4 +17,8 @@ img {
 .reject{
     background-color: red;
     color:white;
+}
+
+mat-toolbar {
+    background-color: white;
 }

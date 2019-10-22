@@ -9,11 +9,9 @@ import { User } from 'src/model/user';
   styleUrls: ['./update-kyc.component.css']
 })
 export class UpdateKycComponent implements OnInit {
- users: User;
+ public users: User;
   constructor(private dialogRef: MatDialogRef<UpdateKycComponent>,
-              @Inject(MAT_DIALOG_DATA) data, private documentService: DocumentsService) {
-               this.users = data.user;
-               console.log('userdata', this.users);
+              @Inject(MAT_DIALOG_DATA) public data, private documentService: DocumentsService) {
                }
 
               onClose() {
@@ -21,10 +19,11 @@ export class UpdateKycComponent implements OnInit {
               }
 
   ngOnInit() {
-     this.documentService.getUsers().subscribe(res => { this.users = res.data;
-                                                        console.log(this.users, 'parent');
+  //    this.documentService.getUsers().subscribe(res => { this.users = res.data;
+  //                                                       console.log(this.users, 'parent');
 
-  });
+  // }
+  // );
 }
 
 approve() {

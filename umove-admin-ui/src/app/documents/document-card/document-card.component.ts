@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { User } from 'src/model/user';
 import { UpdateKycComponent } from '../update-kyc/update-kyc.component';
 import { MatDialogConfig, MatDialog } from '@angular/material';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-document-card',
@@ -37,25 +38,35 @@ export class DocumentCardComponent implements OnInit {
     this.router.navigate(['users/', this.id]);
     }
 
-    getColor(documentStatus) {
+  getColor(documentStatus) {
     switch (documentStatus) {
-    case 'Pending':
-    return 'red';
-    case 'Verified':
-    return 'green';
+      case 'Pending':
+        return 'red';
+      case 'Verified':
+        return 'green';
     }
 
     }
 
 view() {
-  const dialogConfig = new MatDialogConfig();
-  dialogConfig.disableClose = true;
-  dialogConfig.autoFocus = true;
-  dialogConfig.width = '40%';
-  dialogConfig.data={
-    user: this.users
-  }
-  const dRef = this.matDialog.open(UpdateKycComponent, dialogConfig);
+  const dRef = this.matDialog.open(UpdateKycComponent, {
+      width: '40vw',
+      disableClose: true,
+      autoFocus: true,
+      data: {
+        name: this.users.name,
+        imageUrl: `${environment.baseUrl}/api/v1/downloadFile/${this.users.id}`,
+      }
+    });
+
+  // const dialogConfig = new MatDialogConfig();
+  // dialogConfig.disableClose = true;
+  // dialogConfig.autoFocus = true;
+  // dialogConfig.width = '40vw';
+  // dialogConfig.data = {
+  //   ...this.users
+  // };
+  // const dRef = this.matDialog.open(UpdateKycComponent, dialogConfig);
 
 }
 

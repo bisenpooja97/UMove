@@ -29,7 +29,7 @@ module.exports = "<h1 fxLayout=\"column\" fxLayout.gt-md=\"row\" fxLayoutGap.gt-
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = " <mat-toolbar>\n    <span class=\"fill-remaining-space\"></span>\n    <button class=\"btn-dialog-close\" mat-stroked-button (click)=\"onClose()\" tabIndex=\"-1\">\n        <mat-icon>clear</mat-icon>\n    </button>\n</mat-toolbar>\n<img mat-card-image src=\"http://localhost:8091\"+{{user.id}} alt=\"DL Image\">\n<div class=\"kycstatus\">\n    <div fxLayout=\"column\" fxLayout.gt-xs=\"row\" fxLayoutAlign=\"end\">\n    <button mat-raised-button color=\"green\" (click)=\"approve()\" class=\"approve\">Approve\n        <i class=\"material-icons\">\n            done\n        </i>\n    </button>\n    <button mat-raised-button color=\"red\" (click)=\"reject()\" class=\"reject\">Reject\n        <i class=\"material-icons\">\n            clear\n        </i>\n    </button>\n</div>\n\n\n \n        \n"
+module.exports = " <mat-toolbar>\n    <span class=\"fill-remaining-space\"></span>\n    <button class=\"btn-dialog-close\" mat-stroked-button (click)=\"onClose()\" tabIndex=\"-1\">\n        <mat-icon>clear</mat-icon>\n    </button>\n</mat-toolbar>\n\n<img mat-card-image src=\"http://localhost:8091/\" alt=\"DL Image\">\n<p>{{users.name}}</p>\n\n\n<div class=\"kycstatus\">\n    <div fxLayout=\"column\" fxLayout.gt-xs=\"row\" fxLayoutAlign=\"end\">\n    <button mat-raised-button color=\"green\" (click)=\"approve()\" class=\"approve\">Approve\n        <i class=\"material-icons\">\n            done\n        </i>\n    </button>\n    <button mat-raised-button color=\"red\" (click)=\"reject()\" class=\"reject\">Reject\n        <i class=\"material-icons\">\n            clear\n        </i>\n    </button>\n</div>\n\n\n \n        \n"
 
 /***/ }),
 
@@ -95,6 +95,9 @@ var DocumentCardComponent = /** @class */ (function () {
         dialogConfig.disableClose = true;
         dialogConfig.autoFocus = true;
         dialogConfig.width = '40%';
+        dialogConfig.data = {
+            user: this.users
+        };
         var dRef = this.matDialog.open(_update_kyc_update_kyc_component__WEBPACK_IMPORTED_MODULE_3__["UpdateKycComponent"], dialogConfig);
     };
     DocumentCardComponent.ctorParameters = function () { return [
@@ -380,6 +383,8 @@ var UpdateKycComponent = /** @class */ (function () {
     function UpdateKycComponent(dialogRef, data, documentService) {
         this.dialogRef = dialogRef;
         this.documentService = documentService;
+        this.users = data.user;
+        console.log('userdata', this.users);
     }
     UpdateKycComponent.prototype.onClose = function () {
         this.dialogRef.close();
@@ -388,7 +393,7 @@ var UpdateKycComponent = /** @class */ (function () {
         var _this = this;
         this.documentService.getUsers().subscribe(function (res) {
             _this.users = res.data;
-            console.log(res, 'parent');
+            console.log(_this.users, 'parent');
         });
     };
     UpdateKycComponent.prototype.approve = function () {
@@ -398,9 +403,6 @@ var UpdateKycComponent = /** @class */ (function () {
         { type: undefined, decorators: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Inject"], args: [_angular_material__WEBPACK_IMPORTED_MODULE_2__["MAT_DIALOG_DATA"],] }] },
         { type: _service_documents_service__WEBPACK_IMPORTED_MODULE_3__["DocumentsService"] }
     ]; };
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()
-    ], UpdateKycComponent.prototype, "users", void 0);
     UpdateKycComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-update-kyc',
