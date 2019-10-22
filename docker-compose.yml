@@ -16,7 +16,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 500M
+          memory: 1000M
 
   # mongodb
   mongo:
@@ -33,7 +33,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 500M
+          memory: 1000M
 
 #  # cassendra
 #  cassandra:
@@ -77,7 +77,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 500M
+          memory: 1000M
 
   # Config Server
   config:
@@ -90,7 +90,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 500M
+          memory: 1000M
 
   # DISCOVERY SERVICE
   discovery:
@@ -105,7 +105,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 500M
+          memory: 1000M
 
   # API GATEWAY
   apigateway:
@@ -124,7 +124,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 500M
+          memory: 1000M
 
   adminwebapp:
     build:
@@ -142,7 +142,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 500M
+          memory: 1000M
 
   users:
     build:
@@ -157,7 +157,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 500M
+          memory: 1000M
 
   vehicles:
     build:
@@ -174,7 +174,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 500M
+          memory: 1000M
 
   zones:
     build:
@@ -189,7 +189,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 500M
+          memory: 1000M
 
   bookings:
     build:
@@ -207,7 +207,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 500M
+          memory: 1000M
 
   campaigns:
     build:
@@ -222,7 +222,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 500M
+          memory: 1000M
 
   reports:
     build:
@@ -237,5 +237,5 @@ services:
     deploy:
       resources:
         limits:
-          memory: 500M
+          memory: 1000M
 
