@@ -235,6 +235,7 @@ public ResponseEntity<Map> getUsersById(@PathVariable String id)
 
         Map<String, Object> map = new TreeMap<>();
         map.put("data", list);
+        map.put("count", users.size());
         map.put("status", HttpStatus.OK);
         return new ResponseEntity<>(map, HttpStatus.OK);
     }

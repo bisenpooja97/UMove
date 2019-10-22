@@ -21,7 +21,7 @@ export class DocumentsComponent implements OnInit {
   ngOnInit() {
 
     this.documentService.getUsers().subscribe(res => { this.users = res.data;
-                                                   console.log(res, 'parent');
+                                                       console.log(res, 'parent');
 });
 }
 

@@ -21,6 +21,7 @@ export class DocumentsService {
     return this.httpClient.get<Resp>(this.baseUrl + '/' +  '?role=User&documentStatus=Pending');
   }
 
+
   getUsersById(id: string): Observable<Resp> {
     return this.httpClient.get<Resp>(this.baseUrl + '/' + id);
   }

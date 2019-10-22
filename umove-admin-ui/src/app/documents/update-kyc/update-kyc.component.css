@@ -3,3 +3,16 @@ img {
     max-width: 100%;
     height: auto; 
 }
+.kycstatus
+{
+    flex-direction: row;
+
+}
+.approve{
+    background-color: green;
+    color: white;
+}
+.reject{
+    background-color: red;
+    color:white;
+}

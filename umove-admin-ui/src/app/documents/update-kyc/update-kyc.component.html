@@ -4,5 +4,21 @@
         <mat-icon>clear</mat-icon>
     </button>
 </mat-toolbar>
- <img mat-card-image src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCmrhTn0-Pu1yPZzTq1cOe6Ru5z3MSrSVINc-byYsk07jF-DkVRw" alt="DL image">
+<img mat-card-image src="http://localhost:8091/api/v1/downloadFile/" alt="">
+<div class="kycstatus">
+    <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutAlign="end">
+    <button mat-raised-button color="green" (click)="approve()" class="approve">Approve
+        <i class="material-icons">
+            done
+        </i>
+    </button>
+    <button mat-raised-button color="red" (click)="reject()" class="reject">Reject
+        <i class="material-icons">
+            clear
+        </i>
+    </button>
+</div>
+
+
+ 
         
