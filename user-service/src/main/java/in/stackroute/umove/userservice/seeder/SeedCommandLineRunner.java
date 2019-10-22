@@ -22,7 +22,7 @@ public class SeedCommandLineRunner implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-//        UserData userData = new UserData("Divyanshu","9432123890","divyanshu@gmail.com","Role.User","UserStatus.Inactive");
+//        UserData userData = new UserData("Divyanshu","9432123890","divyanshu@gmail.com","Role.User","UserStatus.Inactive","DocumentStatus");
 //          DocumentVerification documentVerification = new DocumentVerification(DocumentStatus.Verified, "DLImage",
 //                 "RJ27-SL-4558",date);
 //

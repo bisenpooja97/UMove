@@ -26,14 +26,14 @@ public class UserData
 
 
 
-    public UserData( String name, String mobileNumber, String email,  Role role,  UserStatus userStatus,DocumentVerification document)
+    public UserData( String name, String mobileNumber, String email,  Role role,  UserStatus userStatus,DocumentVerification documentverification)
     {
         this.name = name;
         this.mobileNumber = mobileNumber;
         this.email = email;
         this.role = role;
         this.userStatus = userStatus;
-        this.document = document;
+        this.document=document;
     }
 
 

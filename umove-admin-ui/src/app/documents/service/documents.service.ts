@@ -17,7 +17,8 @@ export class DocumentsService {
   baseUrl = environment.baseUrl + environment.userBaseApi;
 
   getUsers(): Observable<Resp> {
-    return this.httpClient.get<Resp>(this.baseUrl);
+    console.log(this.baseUrl + '/' +  '?role=User&documentStatus=Pending');
+    return this.httpClient.get<Resp>(this.baseUrl + '/' +  '?role=User&documentStatus=Pending');
   }
 
   getUsersById(id: string): Observable<Resp> {

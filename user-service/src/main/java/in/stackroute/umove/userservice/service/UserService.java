@@ -17,7 +17,8 @@ public interface UserService {
     UserData updateUser(String objid, UserData user);
     List<UserData> findByRole(Role role);
     List<UserData> findByUserStatus(UserStatus userStatus);
-//    List<UserData> findByDocumentStatus(DocumentStatus documentStatus);
+   List<UserData> findByDocumentStatus(DocumentStatus documentStatus);
     UserData deleteUser(String objid);
+
     //    void saveImage(MultipartFile imageFile, String uid) throws Exception;
 }

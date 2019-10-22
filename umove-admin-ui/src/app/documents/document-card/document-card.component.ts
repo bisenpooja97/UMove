@@ -19,7 +19,7 @@ export class DocumentCardComponent implements OnInit {
   expiryDate: Date;
   image: string;
 
-  constructor(private router: Router,private matDialog: MatDialog) { }
+  constructor(private router: Router, private matDialog: MatDialog) { }
 
   ngOnInit() {
     console.log('User data is:', this.users);

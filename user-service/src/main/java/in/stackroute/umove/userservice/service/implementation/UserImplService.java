@@ -64,6 +64,12 @@ public class UserImplService implements UserService {
     }
 
     @Override
+    public List<UserData> findByDocumentStatus(DocumentStatus documentStatus) {
+        List<UserData> users = userRepository.findByDocumentStatus(documentStatus);
+        return users;
+    }
+
+    @Override
     public UserData deleteUser(String objid)
     {
         UserData user=userRepository.findByid(objid);
