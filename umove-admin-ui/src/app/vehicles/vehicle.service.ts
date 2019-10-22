@@ -28,6 +28,11 @@ export class VehicleService {
     return this.httpClient.get<Resp1>(this.baseUrl + '?registrationNo=' + registrationNo);
   }
 
+  getVehicleByZoneIdType(zoneId: string, type: string): Observable<Resp1> {
+    console.log(this.baseUrl + '?zoneId=' + zoneId + '&type=' + type);
+    return this.httpClient.get<Resp1>(this.baseUrl + '?zoneId=' + zoneId + '&type=' + type);
+  }
+
   updateVehicle(registrationNo: string, vehicle: Vehicle) {
     return this.httpClient.patch<Vehicle>(this.baseUrl + '/' + registrationNo, vehicle);
   }

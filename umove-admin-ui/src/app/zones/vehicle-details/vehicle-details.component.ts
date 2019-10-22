@@ -7,6 +7,7 @@ import { Zone } from 'src/app/model/zone';
 import { AddVehicleComponent } from '../add-vehicle/add-vehicle.component';
 import { MatDialogConfig, MatDialog } from '@angular/material';
 import { NotificationService } from 'src/app/shared/notification.service';
+import { ZoneTypeCount } from 'src/app/model/ZoneTypeCount';
 
 @Component({
   selector: 'app-vehicle-details',
@@ -14,6 +15,11 @@ import { NotificationService } from 'src/app/shared/notification.service';
   styleUrls: ['./vehicle-details.component.css']
 })
 export class VehicleDetailsComponent implements OnInit {
+  constructor(private vehicleService: VehicleService,
+              private zoneService: ZoneService,
+              private route: ActivatedRoute,
+              private matDialog: MatDialog,
+              private notificationService: NotificationService) { }
 
   count: number;
   vehicle: Vehicle[] = [];
@@ -21,13 +27,11 @@ export class VehicleDetailsComponent implements OnInit {
   selectedVehicle: Vehicle;
   zone: Zone[];
   id: string;
+  tname: string;
+  tid: string;
   capacity: number;
   buttonDisable: boolean;
- constructor(private vehicleService: VehicleService,
-             private zoneService: ZoneService,
-             private route: ActivatedRoute,
-             private matDialog: MatDialog,
-             private notificationService: NotificationService) { }
+  zoneType: ZoneTypeCount[];
 
   ngOnInit() {
     this.buttonDisable = false;
@@ -60,7 +64,6 @@ export class VehicleDetailsComponent implements OnInit {
       zId: this.id
     };
     const dRef = this.matDialog.open(AddVehicleComponent, dialogConfig);
-
     dRef.afterClosed().subscribe(result => {
       if (result !== undefined) {
         this.vehicleService.getVehicleByRegistrationNo(String(Object.values(result)[0])).subscribe(res => {
@@ -68,14 +71,38 @@ export class VehicleDetailsComponent implements OnInit {
           this.selectedVehicle.zoneid = this.id;
           console.log(this.selectedVehicle);
           this.vehicleService.updateVehicle(String(Object.values(result)[0]), this.selectedVehicle).subscribe(
-            response => { this.notificationService.success('Vehicle added to zone successfully!!');
-                          this.getZoneDetails();
-                          this.vDetails();
+            response => {
+              this.notificationService.success('Vehicle added to zone successfully!!');
+              this.getZoneDetails();
+              this.vDetails();
+              console.log(this.vehicle);
             });
-          console.log(Object.values(result), JSON.stringify(Object.values(result)[0]));
+          this.zoneService.getZoneType(this.id, this.tid).subscribe(val => {
+            console.log(val);
+            if (val.data === null) {
+              console.log(res.count, { zoneId: this.id, typeId: this.tid, typeName: this.tname, count: 1 });
+              const reqBody: ZoneTypeCount = {
+                zoneId: this.id,
+                typeId: this.tid,
+                typeName: this.tname,
+                count: 1
+              };
+              this.zoneService.createNew(reqBody)
+                .subscribe();
+            } else {
+              val.data.count = val.data.count + 1;
+              const reqBody: ZoneTypeCount = {
+                zoneId: this.id,
+                typeId: this.tid,
+                typeName: this.tname,
+                count: val.data.count
+              };
+              this.zoneService.updateZoneTypeCount(this.id, this.tid, reqBody).subscribe();
+            }
+          });
         });
+        console.log(Object.values(result), JSON.stringify(Object.values(result)[0]));
       }
-
     });
   }
 
@@ -88,9 +115,13 @@ export class VehicleDetailsComponent implements OnInit {
       });
       res.data.filter(val => {
         if (((val.zoneid === null) || (val.zoneid !== this.id)) && (
-       (val.status !== 'No_More_In_Use') && (val.status !== 'Stolen') && (val.status !== 'Busy') && (val.status !== 'Servicing'))) {
+          (val.status !== 'No_More_In_Use') && (val.status !== 'Stolen') && (val.status !== 'Busy') && (val.status !== 'Servicing'))) {
           this.vehicle2.push(val);
-       }
+          this.tname = val.type.name;
+          this.tid = val.type.id;
+          console.log(this.tid);
+          console.log(this.tname);
+        }
       });
     });
   }

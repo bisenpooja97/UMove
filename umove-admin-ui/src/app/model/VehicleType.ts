@@ -1,7 +1,7 @@
 import { Fuel } from './Fuel';
 
 export class VehicleType {
-  public Id: string;
+  public id: string;
   public name: string;
   public costkm: number;
   public costtime: number;
@@ -10,7 +10,7 @@ export class VehicleType {
  public kilometer: number;
  public fuel: Fuel;
  public url: string;
-
+public count: number;
 
 }
 
