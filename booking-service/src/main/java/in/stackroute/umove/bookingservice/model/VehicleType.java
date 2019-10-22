@@ -1,6 +1,7 @@
 package in.stackroute.umove.bookingservice.model;
 
 import lombok.*;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 
 @Data
 @Getter
@@ -12,15 +13,14 @@ public class VehicleType {
     private String name;
     private float costkm;
     private float costtime;
-    private float costlt=100;
-    private Category category;
     private String vehiclecc;
     private float kilometer;
     private String url;
+    @DBRef
+    private Fuel fuel;
+    private float baseFare;
 
-
-    public VehicleType(String name, int costkm, int costtime) {
-
+    public VehicleType(String name, float costkm, float costtime) {
         this.name = name;
         this.costkm = costkm;
         this.costtime = costtime;
