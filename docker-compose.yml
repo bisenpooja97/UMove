@@ -1,0 +1,241 @@
+version: "3"
+
+services:
+
+  # mysql
+  mysql:
+    image: mysql
+    container_name: 'umove-mysql'
+    ports:
+      - '3306:3306'
+    restart: on-failure
+    environment:
+      MYSQL_ROOT_PASSWORD: 'Umove@2019'
+    volumes:
+      - '$HOME/umove/data/mysql:/var/lib/mysql'
+    deploy:
+      resources:
+        limits:
+          memory: 1000M
+
+  # mongodb
+  mongo:
+    image: mongo
+    container_name: 'umove-mongodb'
+    restart: on-failure
+    ports:
+      - '27017:27017'
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: 'umove'
+      MONGO_INITDB_ROOT_PASSWORD: 'Umove@2019'
+    volumes:
+      - '$HOME/umove/data/mongo:/data/db'
+    deploy:
+      resources:
+        limits:
+          memory: 1000M
+
+#  # cassendra
+#  cassandra:
+#    image: 'cassandra'
+#    container_name: 'umove-cassandra'
+#    restart: on-failure
+#    ports:
+#      - '7000:7000'
+#      - '9042:9042'
+#    volumes:
+#      - '$HOME/umove/data/cassandra:/var/lib/cassandra'
+#    environment:
+#      - CASSANDRA_SEEDS=cassandra
+#      - CASSANDRA_PASSWORD_SEEDER=yes
+#      - CASSANDRA_PASSWORD=Umove@2019
+
+#  # redis
+#  redis:
+#    image: 'redis'
+#    container_name: 'umove-redis'
+#    restart: always
+#    ports:
+#      - '6379:6379'
+#    command: ["--requirepass", "Umove@2019"]
+#    volumes:
+#      - '$HOME/umove/data/redis:/data'
+
+  # rabbitmq
+  rabbitmq:
+    image: 'rabbitmq:3-management'
+    container_name: 'umove-rabbitmq'
+    restart: on-failure
+    hostname: 'rabbitmq'
+    environment:
+      RABBITMQ_DEFAULT_USER: 'umove'
+      RABBITMQ_DEFAULT_PASS: 'Umove@2019'
+      RABBITMQ_DEFAULT_VHOST: '/'
+    ports:
+      - '15672:15672'
+      - '5672:5672'
+    deploy:
+      resources:
+        limits:
+          memory: 1000M
+
+  # Config Server
+  config:
+    build:
+      context: ./config-server
+      dockerfile: Dockerfile
+    ports:
+      - 8888:8888
+    restart: on-failure
+    deploy:
+      resources:
+        limits:
+          memory: 1000M
+
+  # DISCOVERY SERVICE
+  discovery:
+    build:
+      context: ./discovery-service
+      dockerfile: Dockerfile
+    ports:
+      - 8761:8761
+    depends_on:
+      - config
+    restart: on-failure
+    deploy:
+      resources:
+        limits:
+          memory: 1000M
+
+  # API GATEWAY
+  apigateway:
+    build:
+      context: ./api-gateway
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    depends_on:
+      - config
+      - discovery
+    restart: on-failure
+    links:
+      - config
+      - discovery
+    deploy:
+      resources:
+        limits:
+          memory: 1000M
+
+  adminwebapp:
+    build:
+      context: ./admin-webapp
+      dockerfile: Dockerfile
+    ports:
+      - 8097:8097
+    depends_on:
+      - config
+      - discovery
+    restart: on-failure
+    links:
+      - config
+      - discovery
+    deploy:
+      resources:
+        limits:
+          memory: 1000M
+
+  users:
+    build:
+      context: ./user-service
+      dockerfile: Dockerfile
+    ports:
+      - 8091:8091
+    depends_on:
+      - config
+      - discovery
+    restart: on-failure
+    deploy:
+      resources:
+        limits:
+          memory: 1000M
+
+  vehicles:
+    build:
+      context: ./vehicle-service
+      dockerfile: Dockerfile
+    ports:
+      - 8092:8092
+    depends_on:
+      - config
+      - discovery
+      - mongo
+      - rabbitmq
+    restart: on-failure
+    deploy:
+      resources:
+        limits:
+          memory: 1000M
+
+  zones:
+    build:
+      context: ./zone-service
+      dockerfile: Dockerfile
+    ports:
+      - 8093:8093
+    depends_on:
+      - discovery
+      - config
+    restart: on-failure
+    deploy:
+      resources:
+        limits:
+          memory: 1000M
+
+  bookings:
+    build:
+      context: ./booking-service
+      dockerfile: Dockerfile
+    ports:
+      - 8094:8094
+    depends_on:
+      - config
+      - discovery
+      - mongo
+      - mysql
+      - rabbitmq
+    restart: on-failure
+    deploy:
+      resources:
+        limits:
+          memory: 1000M
+
+  campaigns:
+    build:
+      context: ./campaign-service
+      dockerfile: Dockerfile
+    ports:
+      - 8095:8095
+    depends_on:
+      - discovery
+      - config
+    restart: on-failure
+    deploy:
+      resources:
+        limits:
+          memory: 1000M
+
+  reports:
+    build:
+      context: ./report-service
+      dockerfile: Dockerfile
+    ports:
+      - 8096:8096
+    depends_on:
+      - discovery
+      - config
+    restart: on-failure    
+    deploy:
+      resources:
+        limits:
+          memory: 1000M
+

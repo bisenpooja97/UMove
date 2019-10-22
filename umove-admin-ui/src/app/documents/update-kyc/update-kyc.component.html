@@ -1,0 +1,24 @@
+ <mat-toolbar>
+    <span class="fill-remaining-space"></span>
+    <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabIndex="-1">
+        <mat-icon>clear</mat-icon>
+    </button>
+</mat-toolbar>
+<img mat-card-image src="http://localhost:8091/api/v1/downloadFile/" alt="">
+<div class="kycstatus">
+    <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutAlign="end">
+    <button mat-raised-button color="green" (click)="approve()" class="approve">Approve
+        <i class="material-icons">
+            done
+        </i>
+    </button>
+    <button mat-raised-button color="red" (click)="reject()" class="reject">Reject
+        <i class="material-icons">
+            clear
+        </i>
+    </button>
+</div>
+
+
+ 
+        

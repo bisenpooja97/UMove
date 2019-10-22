@@ -1,0 +1,42 @@
+<ion-header>
+  <div class = "example">
+    <ion-toolbar color = "primary">
+        <ion-buttons slot="start">
+            <ion-button (click)="goShowPayment()">
+                <ion-icon slot="icon-only" name="arrow-round-back"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+      <ion-title>Add Payment</ion-title>
+    </ion-toolbar>
+  </div>
+</ion-header>
+<ion-content padding>
+          <form [formGroup]="addPayment" (ngSubmit)="addForm(addPayment.value)">
+            <ion-item>
+              <ion-label position="floating" style="color: black"> Type </ion-label>
+              <ion-select placeholder="Select One" formControlName="paymentType">
+                <ion-select-option value="UPI" >UPI</ion-select-option>
+                <ion-select-option value="Wallet">Wallet</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating" style="color: black"> Provider</ion-label>
+              <ion-select placeholder="Select One" formControlName="paymentProvider">
+                <ion-select-option value="Paytm" >Paytm</ion-select-option>
+                <ion-select-option value="PhonePe">PhonePe</ion-select-option>
+                <ion-select-option value="Google Pay">Google Pay</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating" style="color: black"> Method Number </ion-label>
+              <ion-input type = "text" formControlName="paymentMethodNumber"></ion-input>
+            </ion-item>
+              <ion-button class="button" expand="full" color="primary" type = "submit" [disabled]="!addPayment.valid">Save</ion-button>
+          </form>
+
+</ion-content>
+
+
+
+
+

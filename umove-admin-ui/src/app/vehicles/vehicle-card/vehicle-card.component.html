@@ -1,0 +1,10 @@
+<mat-card (click)="ok()" class="my-card">
+        <mat-card-content fxLayoutAlign="space-between" >
+                <ngx-avatar name="{{type}}"></ngx-avatar>
+                <mat-chip-list aria-label="Fish selection">
+            <mat-chip [ngStyle]="{'background-color':getColor(status)}" class="status">{{status}}</mat-chip>
+            </mat-chip-list>
+        </mat-card-content>
+   <mat-card-title class="typeName">{{registrationNo}}</mat-card-title>
+    <mat-card-content>Vehicle type: {{type}}</mat-card-content>
+</mat-card>

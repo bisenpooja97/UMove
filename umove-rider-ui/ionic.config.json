@@ -1,0 +1,7 @@
+{
+  "name": "umove-rider-ui",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

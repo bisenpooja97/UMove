@@ -1,0 +1,42 @@
+<mat-toolbar>
+    <span class="fill-remaining-space"></span>
+    <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabIndex="-1">
+    <mat-icon>clear</mat-icon>
+</button>
+</mat-toolbar>
+
+<form fxLayout="column" fxLayoutAlign="center center" [formGroup]="vehicleForm" (ngSubmit)="onSubmit()">
+
+    <div fxFlex=50% fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px" class="form" fxLayoutAlign="center center">
+        <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px" class="col">
+
+            <mat-form-field appearance="outline" fxFlex>
+                <mat-label>Insurance No.</mat-label>
+                <input matInput #input placeholder="Insurance No." formControlName="insuranceNo" [(ngModel)]="insuranceNo" required>
+
+            </mat-form-field>
+        </div>
+    </div>
+
+
+    <div fxFlex=50% fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px" class="form" fxLayoutAlign="center center">
+        <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px" class="col">
+
+            <mat-label>Vehicle Last Service date</mat-label>
+            <mat-form-field>
+                <input matInput [matDatepicker]="lastServiceDate" formControlName="lastServiceDate" [min]="minDate" [max]="todaydate" placeholder="Vehicle Last Service  Date" #input>
+                <mat-datepicker-toggle matSuffix [for]="lastServiceDate"></mat-datepicker-toggle>
+                <mat-datepicker #lastServiceDate></mat-datepicker>
+            </mat-form-field>
+        </div>
+    </div>
+
+
+
+    <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+        <button mat-raised-button class="btn" [disabled]='!vehicleForm.valid' color="primary">
+                        Submit
+                    </button>
+
+    </div>
+</form>
