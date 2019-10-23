@@ -19,8 +19,11 @@ export class RideBookingDetailsPage implements OnInit {
   rideStatus: string;
   vehicleNumber: string;
   sizeOfDestinationZones: number;
+  rideBookedAt: Date;
   destinationZone: Zone;
-  timerTime: number;
+  timerTimeInMins: number;
+  rightNow: Date;
+  timerSeconds: number;
   timerSettings: MbscTimerOptions;
 
   constructor(private rideService: RideService, private router: Router, private route: ActivatedRoute,
@@ -30,43 +33,57 @@ export class RideBookingDetailsPage implements OnInit {
   ngOnInit() {
 
     this.configurationService.getConfigurationDetailsByName('autocancelTime')
-      .then(response => {
-        console.log('Configuration details: ', response);
-        this.configuration = JSON.parse(response.data).data;
+      .then(response1 => {
+        console.log('Configuration details: ', response1);
+        this.configuration = JSON.parse(response1.data).data;
         console.log(this.configuration);
-        this.timerTime = this.configuration.value * 60;
-        console.log('Auto cancel time is ', this.timerTime);
-        console.log('It will enter timer settings');
-        this.timerSettings = {
-          display: 'inline',
-          maxWheel: 'minutes',
-          minWidth: 100,
-          autostart: true,
-          buttons: [],
-          targetTime: this.timerTime,
-        };
-        console.log('timer settings ', this.timerSettings);
-      });
+        this.timerTimeInMins = this.configuration.value;
+        console.log('Auto cancel time is ', this.timerTimeInMins);
 
-    this.rideService.getRideDetailsByUserIdNStatus('5d8bbc0da6e87d5404aa1921', 'Confirmed')
-      .then(response => {
-        console.log('Booking details: ', response);
-        this.ride = JSON.parse(response.data).data;
-        console.log(this.ride);
+        this.rideService.getRideDetailsByUserIdNStatus('5d8bbc0da6e87d5404aa1921', 'Confirmed')
+          .then(response2 => {
+            console.log('Booking details: ', response2);
+            this.ride = JSON.parse(response2.data).data;
+            console.log(this.ride);
+            this.rideBookedAt = new Date(this.ride.bookedAt + 'Z');
+            console.log('Ride booked at ', this.rideBookedAt);
+            console.log(typeof (this.rideBookedAt));
+            // // this.timerTime = this.ride.timer;
+            console.log('Timer time in minutes is ', this.timerTimeInMins);
+            this.rideBookedAt.setMinutes(this.rideBookedAt.getMinutes() + this.timerTimeInMins);
+            console.log('Autocancel time is ', this.rideBookedAt);
+            this.rightNow = new Date();
+            console.log('RightNow time is ', this.rightNow);
+            this.timerSeconds = (this.rideBookedAt.getTime() - this.rightNow.getTime()) / 1000;
+            console.log('Scanner timer', this.timerSeconds);
+            console.log(this.timerSeconds);
+            if (this.timerSeconds > 0) {
+              this.timerSettings = {
+                display: 'inline',
+                targetTime: this.timerSeconds,
+                maxWheel: 'minutes',
+                minWidth: 100,
+                autostart: true,
+                buttons: []
+              };
+            } else {
+              this.timerFinished();
+            }
+          });
       });
   }
 
   timerFinished() {
     this.rideService.cancelRideById(this.ride._id).then(data => {
       console.log('response of cancel ride: ', data);
-    });
-    mobiscroll.alert({
-      title: 'Your ride is autocancelled',
-      message: 'Please book a new ride.',
-      callback: () => {
-        // Apply the url of home page
-        this.router.navigateByUrl('payment-detail/' + this.ride._id);
-      }
+      mobiscroll.alert({
+        title: 'Your ride is autocancelled',
+        message: 'Please book a new ride.',
+        callback: () => {
+          // Apply the url of home page
+          this.router.navigateByUrl('ride-booking-details');
+        }
+      });
     });
   }
 
