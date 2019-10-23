@@ -1,9 +1,8 @@
 package in.stackroute.umove.bookingservice.service;
 
-import in.stackroute.umove.bookingservice.model.Payment;
+import in.stackroute.umove.bookingservice.model.ExtraCharge;
 import in.stackroute.umove.bookingservice.model.Payment;
 import in.stackroute.umove.bookingservice.model.Ride;
-import in.stackroute.umove.bookingservice.model.ExtraCharge;
 import org.bson.types.ObjectId;
 import in.stackroute.umove.bookingservice.model.Zone;
 import java.util.List;
@@ -19,11 +18,10 @@ public interface RideService {
 
     List<Ride> getAllRides();
     Ride startRide(ObjectId rideId, String registrationNo);
-    Ride autocancelRide(ObjectId rideId);
     Ride cancelRide(ObjectId rideId);
     Ride updateDestination(Zone destinationZone, ObjectId rideId);
    // Ride endRide(ObjectId rideId);
-    Payment payForRide(ObjectId rideId, String paymentId);
+    Payment payForRide(ObjectId rideId, String paymentId, String paymentStatus);
     List<Ride> getRidesByUserId(String userId);
     Payment getPaymentDetails(String rideId);
 //    Ride endRideRequest(ObjectId rideId);

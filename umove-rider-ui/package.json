@@ -113,8 +113,8 @@
       "cordova-plugin-geolocation": {}
     },
     "platforms": [
-      "android",
-      "browser"
+      "browser",
+      "android"
     ]
   }
 }

@@ -9,28 +9,27 @@ import { Router, NavigationExtras } from '@angular/router';
 })
 export class DummyDestinationZonePage implements OnInit {
   destinationZone: Zone;
-  constructor(private router: Router) {
-    this.destinationZone = {
-      "id":"5da41d0c30c49e000131313c",
-      "name":"Zone-HSR",
-      "lat":12.9416,
-      "lon":77.61718,
-      "city":"Bengaluru Urban",
-      "state":"Karnataka",
-      "country":"India",
-      "pincode":560002,
-      "locality":"Block 8 HSR",
-      "capacity":100,
-      "createdAt":new Date(),
-      "supervisorId":"5da5e1cfadbe1d0001409653",
-      "supervisorName":"Suraj",
-      "supervisorNumber":"9456789090",
-      "supervisorEmail":"suraj@gmail.com",
-      "status":"FULL"
-    };
-  }
+  constructor(private router: Router) {}
 
-  ngOnInit() {
+    ngOnInit() {
+    this.destinationZone = {
+        id: '5da41d0c30c49e000131313c',
+        name: 'Zone-Koramangala-B8',
+        lat: 12.9416,
+        lon: 77.61718,
+        city: 'Bengaluru Urban',
+        state: 'Karnataka',
+        country: 'India',
+        pincode: 560002,
+        locality: 'Koramangala',
+        capacity: 100,
+        createdAt: new Date(),
+        supervisorId: '5da5e1cfadbe1d0001409653',
+        supervisorName: 'Suraj',
+        supervisorNumber: '9456789090',
+        supervisorEmail: 'suraj@gmail.com',
+        status: 'FULL'
+    };
   }
 
   // Sending zone data as navigationExtras

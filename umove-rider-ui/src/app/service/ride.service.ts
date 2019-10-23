@@ -59,10 +59,10 @@ export class RideService {
     return this.http.patch(this.baseUrl + '/' + rideId + '/start' + '?vehicleNumber=' + vehicleNumber, {}, {});
   }
 
-  // calling api for autocancelling a ride for particular rideId
-  autocancelRideById(rideId: string) {
-    return this.http.patch(this.baseUrl + '/' + rideId + '/autocancel', {}, {});
-  }
+  // // calling api for autocancelling a ride for particular rideId
+  // autocancelRideById(rideId: string) {
+  //   return this.http.patch(this.baseUrl + '/' + rideId + '/autocancel', {}, {});
+  // }
 
   // calling api for cancelling a ride for particular rideId
   cancelRideById(rideId: string) {
@@ -74,10 +74,10 @@ export class RideService {
     return this.http.patch(this.baseUrl + '/' + rideId + '/changeDestination', zone, {});
   }
 
-  // calling api for ending a ride for particular rideId
-  endRideRequestById(rideId: string) {
-    return this.http.patch(this.baseUrl + '/' + rideId + '/end', {}, {});
-  }
+  // // calling api for ending a ride for particular rideId
+  // endRideRequestById(rideId: string) {
+  //   return this.http.patch(this.baseUrl + '/' + rideId + '/end', {}, {});
+  // }
   getRidesByUserId(userId) {
   return this.http.get(this.baseUrl + '?userId=' + userId, {} , {});
 }

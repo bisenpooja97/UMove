@@ -6,25 +6,26 @@ import in.stackroute.umove.bookingservice.model.*;
 import in.stackroute.umove.bookingservice.service.RideService;
 import in.stackroute.umove.bookingservice.model.Ride;
 import in.stackroute.umove.bookingservice.service.RideServiceImp;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.bson.types.ObjectId;
 import org.springframework.amqp.core.TopicExchange;
 import org.springframework.amqp.rabbit.core.RabbitMessagingTemplate;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.*;
-
 import java.time.LocalDateTime;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 @RestController
 @RequestMapping("api/v1")
 public class RideController {
+
+    private static final Logger logger = LogManager.getLogger(RideController.class);
 
     private final SimpMessagingTemplate template;
     private final RabbitTemplate messagingTemplate;
@@ -153,17 +154,6 @@ public class RideController {
         return new ResponseEntity<>(map, HttpStatus.OK);
     }
 
-    //Api end point for autocancel ride request by the user
-    @PatchMapping("rides/{rideId}/autocancel")
-    public ResponseEntity<Map> autocancelRide(@PathVariable("rideId") ObjectId rideId) {
-        Ride ride = rideService.autocancelRide(rideId);
-        Map<String, Object> map = new TreeMap<>();
-        map.put("data", ride);
-        map.put("status", HttpStatus.OK);
-        messagingTemplate.convertAndSend("booking_exchange", "ride_cancelled", map);
-        return new ResponseEntity<>(map, HttpStatus.OK);
-    }
-
     //Api end point for cancel ride request by the user
     @PatchMapping("rides/{rideId}/cancel")
     public ResponseEntity<Map> cancelRideRequest(@PathVariable("rideId") ObjectId rideId) {
@@ -185,15 +175,6 @@ public class RideController {
         return new ResponseEntity<>(map, HttpStatus.OK);
     }
 
-//    //Api end point for end ride request by the user
-//    @PatchMapping("rides/{rideId}/end")
-//    public ResponseEntity<Map> endRideRequest(@PathVariable("rideId") ObjectId rideId) {
-//        Ride ride = rideService.endRideRequest(rideId);
-//        Map<String, Object> map = new TreeMap<>();
-//        map.put("data", ride);
-//        map.put("status", HttpStatus.OK);
-//        return new ResponseEntity<>(map, HttpStatus.OK);
-//    }
     @DeleteMapping("rides")
     public ResponseEntity<Map> deleteAllRides() {
         rideService.deleteAll();
@@ -204,9 +185,9 @@ public class RideController {
     }
     // End Point: api/v1/payments Method: PUT
     // to pay for a specific ride by id
-    @PutMapping("payments")
-    public ResponseEntity<Map> payForBooking(@RequestParam(value = "rideId") ObjectId rideId, @RequestParam(value = "payment_Id") String paymentId) {
-        Payment payment = rideService.payForRide(rideId, paymentId);
+    @PutMapping("rides/payments")
+    public ResponseEntity<Map> payForBooking(@RequestParam(value = "rideId") ObjectId rideId, @RequestParam(value = "paymentId") String paymentId, @RequestParam(value="paymentStatus") String paymentStatus) {
+        Payment payment = rideService.payForRide(rideId, paymentId, paymentStatus);
         Map<String, Object> map = new TreeMap<>();
         map.put("data", payment);
         map.put("status", HttpStatus.CREATED);
@@ -215,7 +196,7 @@ public class RideController {
 
     // End Point: api/v1/payments/rideId Method: GET
     // to get payment Details for a specific ride by rideId
-    @GetMapping("payments/{rideId}")
+    @GetMapping("rides/payments/{rideId}")
     public ResponseEntity<Map> getPaymentDetails(@PathVariable("rideId") String rideId)
     {
         Payment payment = rideService.getPaymentDetails(rideId);
