@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, EventEmitter, Output } from '@angular/core';
 import { MatPaginator, MatTableDataSource, MatDialog } from '@angular/material';
 import { NotificationService } from '../shared/notification.service';
 import { Document } from 'src/model/document';
@@ -13,6 +13,7 @@ import { DocumentsService } from './service/documents.service';
 export class DocumentsComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @Input() users: User;
+  @Output() cardDeleted = new EventEmitter<{id: string}>();
 
  p = 1;
  dataSource = new MatTableDataSource();
@@ -22,7 +23,7 @@ export class DocumentsComponent implements OnInit {
 
     this.documentService.getUsers().subscribe(res => { this.users = res.data;
                                                        console.log(res, 'parent');
-});
+                                                      });
 }
 
 }

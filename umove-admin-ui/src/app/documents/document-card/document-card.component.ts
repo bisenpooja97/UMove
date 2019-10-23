@@ -1,9 +1,12 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/model/user';
 import { UpdateKycComponent } from '../update-kyc/update-kyc.component';
 import { MatDialogConfig, MatDialog } from '@angular/material';
 import { environment } from 'src/environments/environment';
+import { DocumentsService } from '../service/documents.service';
+import { NotificationService } from 'src/app/shared/notification.service';
+import { EventEmitter } from 'events';
 
 @Component({
   selector: 'app-document-card',
@@ -20,14 +23,17 @@ export class DocumentCardComponent implements OnInit {
   expiryDate: Date;
   image: string;
 
-  constructor(private router: Router, private matDialog: MatDialog) { }
+
+  constructor(private router: Router, private matDialog: MatDialog,
+              private documentService: DocumentsService,
+              private notificationService: NotificationService) { }
 
   ngOnInit() {
     console.log('User data is:', this.users);
     this.name = this.users.name;
     this.mobileNumber = this.users.mobileNumber;
     this.documentStatus = this.users.document.documentStatus;
-    console.log(this.users.document.documentStatus);
+    console.log(this.users.document.documentStatus, ':documentstatus');
     this.dLicenceNumber = this.users.document.dlicenceNumber;
     this.expiryDate = this.users.document.expiryDate;
 
@@ -55,7 +61,34 @@ view() {
       autoFocus: true,
       data: {
         name: this.users.name,
+        id: this.users.id,
         imageUrl: `${environment.baseUrl}/api/v1/downloadFile/${this.users.id}`,
+        users: this.users
+      }
+    });
+
+  dRef.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+
+        console.log(result.document.documentStatus, 'Document status' );
+        this.documentService.updateUsersById(result.id, result).subscribe(val => {
+    console.log(result.id, 'user-id');
+    if (result.document.documentStatus  === 'Verified') {
+           this.notificationService.success(' KYC approved successfully!');
+    } else {
+
+            this.notificationService.success('Sorry! KYC rejected.');
+
+//             onCardDeleted(result.id); {
+//     this.users = this.users.filter(item => this.users.id !== this.users.id);
+// }
+
+    }
+// tslint:disable-next-line: align
+ // this.router.navigate(['/documents']);
+
+   });
+
       }
     });
 

@@ -1,5 +1,6 @@
 import {Document} from './document';
 export class User {
+  [x: string]: any;
     public id: string;
     public name: string;
     public mobileNumber: string;

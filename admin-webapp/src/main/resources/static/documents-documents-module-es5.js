@@ -18,7 +18,7 @@ module.exports = "<mat-card class=\"my-card\" fxFlex.sm=\"0 1 calc(50%-10px)\" f
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h1 fxLayout=\"column\" fxLayout.gt-md=\"row\" fxLayoutGap.gt-md=\"15px\" class=\"header\">\n        Driving licence Verification Requests\n    </h1>\n    <div fxLayout=\"row\" fxLayoutGap=\"20px\" class=\"search\" fxLayout.gt-xs=\"row\">\n        <mat-form-field fxFlex=20%>\n            <input matInput [(ngModel)]=\"term\" placeholder=\"Search\">\n        </mat-form-field>\n    </div>\n    <div fxLayout.xs=\"column\" fxLayout.gt=\"row\" fxLayout=\"row wrap\" fxLayoutGap=\"10px\" class=\"card\">\n        <app-document-card *ngFor=\"let user of users | paginate: { itemsPerPage: 10, currentPage: p}| filter:term\"\n [users]=\"user\">>\n\n        </app-document-card>\n        <pagination-controls (pageChange)=\"p = $event\"></pagination-controls>\n    </div>\n"
+module.exports = "<h1 fxLayout=\"column\" fxLayout.gt-md=\"row\" fxLayoutGap.gt-md=\"15px\" class=\"header\">\n        Driving licence Verification Requests\n    </h1>\n    <div fxLayout=\"row\" fxLayoutGap=\"20px\" class=\"search\" fxLayout.gt-xs=\"row\">\n        <mat-form-field fxFlex=20%>\n            <input matInput [(ngModel)]=\"term\" placeholder=\"Search\">\n        </mat-form-field>\n    </div>\n    <div fxLayout.xs=\"column\" fxLayout.gt=\"row\" fxLayout=\"row wrap\" fxLayoutGap=\"10px\" class=\"card\">\n        <app-document-card *ngFor=\"let user of users | paginate: { itemsPerPage: 10, currentPage: p}| filter:term\"\n [users]=\"user\" (cardDeleted)=\"onCardDeleted($event)\">\n\n        </app-document-card>\n        <pagination-controls (pageChange)=\"p = $event\"></pagination-controls>\n    </div>\n"
 
 /***/ }),
 
@@ -29,7 +29,7 @@ module.exports = "<h1 fxLayout=\"column\" fxLayout.gt-md=\"row\" fxLayoutGap.gt-
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = " <mat-toolbar>\n    <span class=\"fill-remaining-space\"></span>\n    <button class=\"btn-dialog-close\" mat-stroked-button (click)=\"onClose()\" tabIndex=\"-1\">\n        <mat-icon>clear</mat-icon>\n    </button>\n</mat-toolbar>\n\n<img mat-card-image src=\"http://localhost:8091/\" alt=\"DL Image\">\n<p>{{users.name}}</p>\n\n\n<div class=\"kycstatus\">\n    <div fxLayout=\"column\" fxLayout.gt-xs=\"row\" fxLayoutAlign=\"end\">\n    <button mat-raised-button color=\"green\" (click)=\"approve()\" class=\"approve\">Approve\n        <i class=\"material-icons\">\n            done\n        </i>\n    </button>\n    <button mat-raised-button color=\"red\" (click)=\"reject()\" class=\"reject\">Reject\n        <i class=\"material-icons\">\n            clear\n        </i>\n    </button>\n</div>\n\n\n \n        \n"
+module.exports = " <mat-toolbar>\n    <span class=\"fill-remaining-space\"></span>\n    <button class=\"btn-dialog-close\" mat-stroked-button (click)=\"onClose()\" tabIndex=\"-1\">\n        <mat-icon>clear</mat-icon>\n    </button>\n</mat-toolbar>\n\n<img mat-card-image src=\"{{data.imageUrl}}\" onError=\"this.src='data:image/png;base64,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';\" alt=\"Image not available\">\n<!-- <img mat-card-image src=\"http://localhost:8091/{{data.imageUrl}}\" alt=\"DL Image\"> -->\n<p>{{data.name}}</p>\n\n\n<div class=\"kycstatus\">\n    <div fxLayout=\"column\" fxLayout.gt-xs=\"row\" fxLayoutAlign=\"end\" fxLayoutGap=\"10px\">\n    <button mat-raised-button color=\"green\" (click)=\"approve()\" class=\"approve\">Approve\n        <i class=\"material-icons\">\n            done\n        </i>\n    </button>\n    <button mat-raised-button color=\"red\" (click)=\"reject()\" class=\"reject\">Reject\n        <i class=\"material-icons\">\n            clear\n        </i>\n    </button>\n</div>\n\n\n \n        \n"
 
 /***/ }),
 
@@ -59,22 +59,30 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _update_kyc_update_kyc_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../update-kyc/update-kyc.component */ "./src/app/documents/update-kyc/update-kyc.component.ts");
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
+/* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/environments/environment */ "./src/environments/environment.ts");
+/* harmony import */ var _service_documents_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../service/documents.service */ "./src/app/documents/service/documents.service.ts");
+/* harmony import */ var src_app_shared_notification_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/app/shared/notification.service */ "./src/app/shared/notification.service.ts");
+
+
+
 
 
 
 
 
 var DocumentCardComponent = /** @class */ (function () {
-    function DocumentCardComponent(router, matDialog) {
+    function DocumentCardComponent(router, matDialog, documentService, notificationService) {
         this.router = router;
         this.matDialog = matDialog;
+        this.documentService = documentService;
+        this.notificationService = notificationService;
     }
     DocumentCardComponent.prototype.ngOnInit = function () {
         console.log('User data is:', this.users);
         this.name = this.users.name;
         this.mobileNumber = this.users.mobileNumber;
         this.documentStatus = this.users.document.documentStatus;
-        console.log(this.users.document.documentStatus);
+        console.log(this.users.document.documentStatus, ':documentstatus');
         this.dLicenceNumber = this.users.document.dlicenceNumber;
         this.expiryDate = this.users.document.expiryDate;
     };
@@ -91,18 +99,51 @@ var DocumentCardComponent = /** @class */ (function () {
         }
     };
     DocumentCardComponent.prototype.view = function () {
-        var dialogConfig = new _angular_material__WEBPACK_IMPORTED_MODULE_4__["MatDialogConfig"]();
-        dialogConfig.disableClose = true;
-        dialogConfig.autoFocus = true;
-        dialogConfig.width = '40%';
-        dialogConfig.data = {
-            user: this.users
-        };
-        var dRef = this.matDialog.open(_update_kyc_update_kyc_component__WEBPACK_IMPORTED_MODULE_3__["UpdateKycComponent"], dialogConfig);
+        var _this = this;
+        var dRef = this.matDialog.open(_update_kyc_update_kyc_component__WEBPACK_IMPORTED_MODULE_3__["UpdateKycComponent"], {
+            width: '40vw',
+            disableClose: true,
+            autoFocus: true,
+            data: {
+                name: this.users.name,
+                id: this.users.id,
+                imageUrl: src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].baseUrl + "/api/v1/downloadFile/" + this.users.id,
+                users: this.users
+            }
+        });
+        dRef.afterClosed().subscribe(function (result) {
+            if (result !== undefined) {
+                console.log(result.document.documentStatus, 'Document status');
+                _this.documentService.updateUsersById(result.id, result).subscribe(function (val) {
+                    console.log(result.id, 'user-id');
+                    if (result.document.documentStatus === 'Verified') {
+                        _this.notificationService.success(' KYC approved successfully!');
+                    }
+                    else {
+                        _this.notificationService.success('Sorry! KYC rejected.');
+                        //             onCardDeleted(result.id); {
+                        //     this.users = this.users.filter(item => this.users.id !== this.users.id);
+                        // }
+                    }
+                    // tslint:disable-next-line: align
+                    // this.router.navigate(['/documents']);
+                });
+            }
+        });
+        // const dialogConfig = new MatDialogConfig();
+        // dialogConfig.disableClose = true;
+        // dialogConfig.autoFocus = true;
+        // dialogConfig.width = '40vw';
+        // dialogConfig.data = {
+        //   ...this.users
+        // };
+        // const dRef = this.matDialog.open(UpdateKycComponent, dialogConfig);
     };
     DocumentCardComponent.ctorParameters = function () { return [
         { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] },
-        { type: _angular_material__WEBPACK_IMPORTED_MODULE_4__["MatDialog"] }
+        { type: _angular_material__WEBPACK_IMPORTED_MODULE_4__["MatDialog"] },
+        { type: _service_documents_service__WEBPACK_IMPORTED_MODULE_6__["DocumentsService"] },
+        { type: src_app_shared_notification_service__WEBPACK_IMPORTED_MODULE_7__["NotificationService"] }
     ]; };
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()
@@ -192,6 +233,7 @@ var DocumentsComponent = /** @class */ (function () {
         this.documentService = documentService;
         this.notificationService = notificationService;
         this.matDialog = matDialog;
+        this.cardDeleted = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
         this.p = 1;
         this.dataSource = new _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatTableDataSource"]();
     }
@@ -213,6 +255,9 @@ var DocumentsComponent = /** @class */ (function () {
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()
     ], DocumentsComponent.prototype, "users", void 0);
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Output"])()
+    ], DocumentsComponent.prototype, "cardDeleted", void 0);
     DocumentsComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-documents',
@@ -357,7 +402,7 @@ var DocumentsService = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "img {\n    display: block;\n    max-width: 100%;\n    height: auto; \n}\n.kycstatus\n{\n    flex-direction: row;\n\n}\n.approve{\n    background-color: green;\n    color: white;\n}\n.reject{\n    background-color: red;\n    color:white;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZG9jdW1lbnRzL3VwZGF0ZS1reWMvdXBkYXRlLWt5Yy5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksY0FBYztJQUNkLGVBQWU7SUFDZixZQUFZO0FBQ2hCO0FBQ0E7O0lBRUksbUJBQW1COztBQUV2QjtBQUNBO0lBQ0ksdUJBQXVCO0lBQ3ZCLFlBQVk7QUFDaEI7QUFDQTtJQUNJLHFCQUFxQjtJQUNyQixXQUFXO0FBQ2YiLCJmaWxlIjoic3JjL2FwcC9kb2N1bWVudHMvdXBkYXRlLWt5Yy91cGRhdGUta3ljLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyJpbWcge1xuICAgIGRpc3BsYXk6IGJsb2NrO1xuICAgIG1heC13aWR0aDogMTAwJTtcbiAgICBoZWlnaHQ6IGF1dG87IFxufVxuLmt5Y3N0YXR1c1xue1xuICAgIGZsZXgtZGlyZWN0aW9uOiByb3c7XG5cbn1cbi5hcHByb3Zle1xuICAgIGJhY2tncm91bmQtY29sb3I6IGdyZWVuO1xuICAgIGNvbG9yOiB3aGl0ZTtcbn1cbi5yZWplY3R7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogcmVkO1xuICAgIGNvbG9yOndoaXRlO1xufSJdfQ== */"
+module.exports = "img {\n    display: block;\n    max-width: 100%;\n    height: auto; \n}\n\n.kycstatus\n{\n    flex-direction: row;\n    align-items: center;\n\n}\n\n.approve{\n    background-color: green;\n    color: white;\n}\n\n.reject{\n    background-color: red;\n    color:white;\n}\n\nmat-toolbar {\n    background-color: white;\n}\n\n.controles-container{\n    width: 100%;\n    padding: 5%;    \n}\n\n.fill-remaining-space {\n    /* This fills the remaining space, by using flexbox. \n       Every toolbar row uses a flexbox row layout. */\n    flex: 1 1 auto;\n  }\n\n.controles-container > * {\n    width: 100%;\n    }\n\n.btn-dialog-close{\n        width: 45px;\n        min-width: 0px !important;\n        height: 40px;\n        padding: 0px !important;\n      }\n\n.button {\n        padding-bottom: 21.5px;\n    }\n\n.btn {\n        width: 16em; height: 60px;\n      \n       }\n\n.col {\n        width: 80%;\n      }\n    \n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZG9jdW1lbnRzL3VwZGF0ZS1reWMvdXBkYXRlLWt5Yy5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksY0FBYztJQUNkLGVBQWU7SUFDZixZQUFZO0FBQ2hCOztBQUVBOztJQUVJLG1CQUFtQjtJQUNuQixtQkFBbUI7O0FBRXZCOztBQUNBO0lBQ0ksdUJBQXVCO0lBQ3ZCLFlBQVk7QUFDaEI7O0FBQ0E7SUFDSSxxQkFBcUI7SUFDckIsV0FBVztBQUNmOztBQUVBO0lBQ0ksdUJBQXVCO0FBQzNCOztBQUVBO0lBQ0ksV0FBVztJQUNYLFdBQVc7QUFDZjs7QUFFQTtJQUNJO3FEQUNpRDtJQUNqRCxjQUFjO0VBQ2hCOztBQUVGO0lBQ0ksV0FBVztJQUNYOztBQUdKO1FBQ1EsV0FBVztRQUNYLHlCQUF5QjtRQUN6QixZQUFZO1FBQ1osdUJBQXVCO01BQ3pCOztBQUVBO1FBQ0Usc0JBQXNCO0lBQzFCOztBQUVKO1FBQ1EsV0FBVyxFQUFFLFlBQVk7O09BRTFCOztBQUVQO1FBQ1EsVUFBVTtNQUNaIiwiZmlsZSI6InNyYy9hcHAvZG9jdW1lbnRzL3VwZGF0ZS1reWMvdXBkYXRlLWt5Yy5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiaW1nIHtcbiAgICBkaXNwbGF5OiBibG9jaztcbiAgICBtYXgtd2lkdGg6IDEwMCU7XG4gICAgaGVpZ2h0OiBhdXRvOyBcbn1cblxuLmt5Y3N0YXR1c1xue1xuICAgIGZsZXgtZGlyZWN0aW9uOiByb3c7XG4gICAgYWxpZ24taXRlbXM6IGNlbnRlcjtcblxufVxuLmFwcHJvdmV7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogZ3JlZW47XG4gICAgY29sb3I6IHdoaXRlO1xufVxuLnJlamVjdHtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiByZWQ7XG4gICAgY29sb3I6d2hpdGU7XG59XG5cbm1hdC10b29sYmFyIHtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiB3aGl0ZTtcbn1cblxuLmNvbnRyb2xlcy1jb250YWluZXJ7XG4gICAgd2lkdGg6IDEwMCU7XG4gICAgcGFkZGluZzogNSU7ICAgIFxufVxuXG4uZmlsbC1yZW1haW5pbmctc3BhY2Uge1xuICAgIC8qIFRoaXMgZmlsbHMgdGhlIHJlbWFpbmluZyBzcGFjZSwgYnkgdXNpbmcgZmxleGJveC4gXG4gICAgICAgRXZlcnkgdG9vbGJhciByb3cgdXNlcyBhIGZsZXhib3ggcm93IGxheW91dC4gKi9cbiAgICBmbGV4OiAxIDEgYXV0bztcbiAgfVxuXG4uY29udHJvbGVzLWNvbnRhaW5lciA+ICoge1xuICAgIHdpZHRoOiAxMDAlO1xuICAgIH1cblxuIFxuLmJ0bi1kaWFsb2ctY2xvc2V7XG4gICAgICAgIHdpZHRoOiA0NXB4O1xuICAgICAgICBtaW4td2lkdGg6IDBweCAhaW1wb3J0YW50O1xuICAgICAgICBoZWlnaHQ6IDQwcHg7XG4gICAgICAgIHBhZGRpbmc6IDBweCAhaW1wb3J0YW50O1xuICAgICAgfVxuXG4gICAgICAuYnV0dG9uIHtcbiAgICAgICAgcGFkZGluZy1ib3R0b206IDIxLjVweDtcbiAgICB9XG4gICAgXG4uYnRuIHtcbiAgICAgICAgd2lkdGg6IDE2ZW07IGhlaWdodDogNjBweDtcbiAgICAgIFxuICAgICAgIH1cbiAgICBcbi5jb2wge1xuICAgICAgICB3aWR0aDogODAlO1xuICAgICAgfVxuICAgIFxuIl19 */"
 
 /***/ }),
 
@@ -375,33 +420,56 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
 /* harmony import */ var _service_documents_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../service/documents.service */ "./src/app/documents/service/documents.service.ts");
+/* harmony import */ var src_app_shared_notification_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/shared/notification.service */ "./src/app/shared/notification.service.ts");
+
 
 
 
 
 var UpdateKycComponent = /** @class */ (function () {
-    function UpdateKycComponent(dialogRef, data, documentService) {
+    function UpdateKycComponent(dialogRef, data, documentService, notificationService) {
         this.dialogRef = dialogRef;
+        this.data = data;
         this.documentService = documentService;
-        this.users = data.user;
-        console.log('userdata', this.users);
+        this.notificationService = notificationService;
     }
     UpdateKycComponent.prototype.onClose = function () {
         this.dialogRef.close();
     };
     UpdateKycComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.documentService.getUsers().subscribe(function (res) {
-            _this.users = res.data;
-            console.log(_this.users, 'parent');
-        });
+        //    this.documentService.getUsers().subscribe(res => { this.users = res.data;
+        //                                                       console.log(this.users, 'parent');
+        // }
+        // );
     };
     UpdateKycComponent.prototype.approve = function () {
+        // this.documentService.updateUsersById(this.users.id, this.users).subscribe(result =>{
+        //   console.log(this.users.id, 'status');
+        //   this.notificationService.success(' KYC approved successfully');
+        //  });
+        // console.log(this.data.users.id, 'id');
+        console.log(this.data.users.userStatus, 'userstatus');
+        console.log(this.data.users.document.documentStatus, 'documentstatus');
+        this.data.users.userStatus = 'Active';
+        this.data.users.document.documentStatus = 'Verified';
+        // this.documentService.updateUsersById(this.data.users.id, this.data.users).subscribe(result => {
+        //   console.log(this.data.users.id, 'status');
+        //   this.notificationService.success(' KYC approved successfully');
+        //  });
+        this.dialogRef.close(this.data.users);
+    };
+    UpdateKycComponent.prototype.reject = function () {
+        console.log(this.data.users.userStatus, 'userstatus');
+        console.log(this.data.users.document.documentStatus, 'documentstatus');
+        this.data.users.userStatus = 'Inactive';
+        this.data.users.document.documentStatus = 'Rejected';
+        this.dialogRef.close(this.data.users);
     };
     UpdateKycComponent.ctorParameters = function () { return [
         { type: _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatDialogRef"] },
         { type: undefined, decorators: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Inject"], args: [_angular_material__WEBPACK_IMPORTED_MODULE_2__["MAT_DIALOG_DATA"],] }] },
-        { type: _service_documents_service__WEBPACK_IMPORTED_MODULE_3__["DocumentsService"] }
+        { type: _service_documents_service__WEBPACK_IMPORTED_MODULE_3__["DocumentsService"] },
+        { type: src_app_shared_notification_service__WEBPACK_IMPORTED_MODULE_4__["NotificationService"] }
     ]; };
     UpdateKycComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
