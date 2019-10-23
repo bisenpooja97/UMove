@@ -20,10 +20,7 @@
     ]
   },
   "angularCompilerOptions": {
-    "experimentalDecorators": true,
-    "allowJs": true,
     "fullTemplateTypeCheck": true,
-    "strictInjectionParameters": true,
-
+    "strictInjectionParameters": true
   }
 }

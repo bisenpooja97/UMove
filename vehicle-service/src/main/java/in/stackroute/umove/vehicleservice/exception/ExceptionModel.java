@@ -7,7 +7,6 @@ public class ExceptionModel {
     private String message;
     private String details;
 
-
     public ExceptionModel(Date timeStamp, String message, String details) {
         TimeStamp = timeStamp;
         this.message = message;
