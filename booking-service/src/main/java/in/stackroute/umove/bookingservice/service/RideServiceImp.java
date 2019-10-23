@@ -2,6 +2,7 @@ package in.stackroute.umove.bookingservice.service;
 
 import in.stackroute.umove.bookingservice.model.*;
 import in.stackroute.umove.bookingservice.repo.PaymentRepo;
+import in.stackroute.umove.bookingservice.repo.ConfigRepo;
 import in.stackroute.umove.bookingservice.repo.RideRepo;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,9 @@ public class RideServiceImp implements RideService {
 
     @Autowired
     private PaymentRepo paymentRepo;
+
+    @Autowired
+    private ConfigRepo configRepo;
 
     @Override
     public Ride confirmRide(Ride ride) {
@@ -156,9 +160,13 @@ public class RideServiceImp implements RideService {
         Ride ride = rideRepo.findBy_id(rideId);
         if (ride.getStatus().equals(RideStatus.Confirmed)) {
             LocalDateTime bookedAt = ride.getBookedAt();
-            LocalDateTime cancel = bookedAt.plusMinutes(5);
-            LocalDateTime autoCancelTime = bookedAt.plusMinutes(20);
-            int compareValue = rightNow.compareTo(cancel);
+            Configuration configOfAutocancel = configRepo.findByName("autocancelTime");
+            System.out.println("AutocancelTime "+configOfAutocancel.getValue());
+            LocalDateTime autoCancelTime = bookedAt.plusMinutes(configOfAutocancel.getValue());
+            Configuration configOfCancel = configRepo.findByName("cancelThresholdTime");
+            System.out.println("cancelThresholdTime "+configOfCancel.getValue());
+            LocalDateTime cancelTime = bookedAt.plusMinutes(configOfCancel.getValue());
+            int compareValue = rightNow.compareTo(cancelTime);
             if (compareValue <= 0) {
                 ride.setStatus(RideStatus.CancelledWithinThreshold);
             }

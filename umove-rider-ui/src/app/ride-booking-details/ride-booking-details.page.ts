@@ -4,6 +4,8 @@ import { RideService } from '../service/ride.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Ride } from '../model/ride';
 import { Zone } from '../model/zone';
+import { ConfigurationService } from '../service/configuration.service';
+import { Configuration } from '../model/configuration';
 
 @Component({
   selector: 'app-ride-booking-details',
@@ -13,24 +15,39 @@ import { Zone } from '../model/zone';
 export class RideBookingDetailsPage implements OnInit {
   @ViewChild('timerVariable', { static: false }) timerRef;
   ride: Ride;
+  configuration: Configuration;
   rideStatus: string;
   vehicleNumber: string;
   sizeOfDestinationZones: number;
   destinationZone: Zone;
   timerTime: number;
-  timerSettings: MbscTimerOptions = {
-    display: 'inline',
-    maxWheel: 'minutes',
-    minWidth: 100,
-    autostart: true,
-    buttons: [],
-    targetTime: 1200,
-  };
+  timerSettings: MbscTimerOptions;
 
-  constructor(private rideService: RideService, private router: Router, private route: ActivatedRoute) {
+  constructor(private rideService: RideService, private router: Router, private route: ActivatedRoute,
+              private configurationService: ConfigurationService) {
   }
 
   ngOnInit() {
+
+    this.configurationService.getConfigurationDetailsByName('autocancelTime')
+      .then(response => {
+        console.log('Configuration details: ', response);
+        this.configuration = JSON.parse(response.data).data;
+        console.log(this.configuration);
+        this.timerTime = this.configuration.value * 60;
+        console.log('Auto cancel time is ', this.timerTime);
+        console.log('It will enter timer settings');
+        this.timerSettings = {
+          display: 'inline',
+          maxWheel: 'minutes',
+          minWidth: 100,
+          autostart: true,
+          buttons: [],
+          targetTime: this.timerTime,
+        };
+        console.log('timer settings ', this.timerSettings);
+      });
+
     this.rideService.getRideDetailsByUserIdNStatus('5d8bbc0da6e87d5404aa1921', 'Confirmed')
       .then(response => {
         console.log('Booking details: ', response);

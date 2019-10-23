@@ -4,4 +4,5 @@ export const environment = {
   bookingSocket: '/ws',
   bookingService: 'bookingservice',
   bookingBaseApi: '/api/v1/rides',
+  configBaseApi: '/api/v1/config'
 };
