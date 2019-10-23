@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy, Output } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/model/user';
 import { UpdateKycComponent } from '../update-kyc/update-kyc.component';
@@ -6,7 +6,6 @@ import { MatDialogConfig, MatDialog } from '@angular/material';
 import { environment } from 'src/environments/environment';
 import { DocumentsService } from '../service/documents.service';
 import { NotificationService } from 'src/app/shared/notification.service';
-import { EventEmitter } from 'events';
 
 @Component({
   selector: 'app-document-card',
@@ -15,6 +14,8 @@ import { EventEmitter } from 'events';
 })
 export class DocumentCardComponent implements OnInit {
 @Input() users: User;
+@Output() removeDocumentCard = new EventEmitter<string>();
+
   id: string;
   name: string;
   mobileNumber: string;
@@ -79,14 +80,11 @@ view() {
 
             this.notificationService.success('Sorry! KYC rejected.');
 
-//             onCardDeleted(result.id); {
-//     this.users = this.users.filter(item => this.users.id !== this.users.id);
-// }
-
     }
 // tslint:disable-next-line: align
  // this.router.navigate(['/documents']);
 
+    this.removeDocumentCard.emit(this.users.id);
    });
 
       }
