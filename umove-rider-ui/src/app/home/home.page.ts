@@ -17,6 +17,7 @@ export class HomePage implements OnInit{
         const lat = resp.coords.latitude;
         const lng = resp.coords.longitude;
         this.mapService.buildMap(lat, lng,'pickup');
+        // this.mapService.checkMapLoading();
         this.mapService.marker(lat, lng);
       }).catch((error) => {
         console.log('Error getting location', error);
@@ -25,11 +26,16 @@ export class HomePage implements OnInit{
         console.log('selected zone',zone);
         this.selectedZone = zone;
       });
+      this.mapService.onLoad$.subscribe((message:string)=>{
+        console.log('lo ho gya load ab tofinally~~~');
+        this.isLoaded = true;
+      })
     }
   containerId = 'pick';
   page = 'pick-up';
   trip : boolean;
-  isSelected = false;
+  isLoaded : boolean;
+
   private selectedZone: Zone;
   locality:string;
   constructor(private zoneService: ZoneService,
