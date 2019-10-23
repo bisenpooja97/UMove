@@ -11,6 +11,8 @@ import in.stackroute.umove.zoneservice.model.Zone;
 import in.stackroute.umove.zoneservice.model.ZoneStatus;
 //import in.stackroute.umove.zoneservice.service.impl.ServiceVehicleImpl;
 import in.stackroute.umove.zoneservice.service.impl.ServiceZoneImpl;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,11 +28,10 @@ import java.util.TreeMap;
 @RequestMapping("api/v1")
 public class ZoneController {
 
+    private static final Logger logger = LogManager.getLogger(FuelController.class);
+
     @Autowired
     private ServiceZoneImpl serviceZoneDummy;
-
-//    @Autowired
-//    private ServiceVehicleImpl serviceVehicle;
 
     @Autowired
     private RestTemplate restTemplate;

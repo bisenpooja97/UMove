@@ -26,7 +26,6 @@ public class VehicleType {
     @DBRef
     private Fuel fuel;
     private float baseFare;
-    private int count;
 
 
     public VehicleType(String name, int costkm, int costtime) {

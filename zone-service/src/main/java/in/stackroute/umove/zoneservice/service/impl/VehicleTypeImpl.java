@@ -116,9 +116,6 @@ public class VehicleTypeImpl implements ServiceVehicleType {
             if(type.getBaseFare() != 0){
                 typeList.setBaseFare(type.getBaseFare());
             }
-            if(type.getCount() != 0) {
-                typeList.setCount(type.getCount());
-            }
             return repo.save(typeList);
 
 
@@ -169,13 +166,5 @@ public class VehicleTypeImpl implements ServiceVehicleType {
             vehicle.setCostkm(b);
             updateTypeDetails(vehicle.getName(),vehicle);
         }
-
-
-
-
-
-
-
-
     }
 }
