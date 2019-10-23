@@ -60,8 +60,7 @@ public class ConfigurationController {
     }
 
     @PatchMapping("config/{name}")
-    public ResponseEntity<Map> updateConfiguration(@PathVariable("name") String name, @RequestParam(value = "value", required = true) int value) {
-
+    public ResponseEntity<Map> updateConfiguration(@PathVariable("name") String name, @RequestParam(value = "configValue", required = true) int value) {
         Configuration config = configRepo.findByName(name);
         config.setValue(value);
         configRepo.save(config);

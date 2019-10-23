@@ -4,6 +4,8 @@ import { mobiscroll, MbscTimerOptions } from '@mobiscroll/angular';
 import { RideService } from '../service/ride.service';
 import { Router } from '@angular/router';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import { ConfigurationService } from '../service/configuration.service';
+import { Configuration } from '../model/configuration';
 
 @Component({
   selector: 'app-qrcode-scanner',
@@ -12,17 +14,29 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 })
 export class QrcodeScannerPage implements OnInit {
   ride: Ride;
+  configuration: Configuration;
   timerSettings: MbscTimerOptions;
   timerTime: number;
+  timerTimeInMins: number;
   vehicleNumber: string;
   rideBookedAt: Date;
   rightNow: Date;
   timerSeconds: number;
 
-  constructor(private barcodeScanner: BarcodeScanner, private router: Router, private rideService: RideService) {
+  constructor(private barcodeScanner: BarcodeScanner, private router: Router, private rideService: RideService,
+              private configurationService: ConfigurationService) {
   }
 
   ngOnInit() {
+
+    // this.configurationService.getConfigurationDetailsByName('autocancelTime')
+    //   .then(response => {
+    //     console.log('Configuration details: ', response);
+    //     this.configuration = JSON.parse(response.data).data;
+    //     console.log(this.configuration);
+    //     this.timerTimeInMins = this.configuration.value;
+    //     console.log('Auto-cancel time is ', this.timerTimeInMins);
+    //   });
 
     this.rideService.getRideDetailsByUserIdNStatus('786', 'Confirmed')
       .then(response => {
@@ -32,13 +46,15 @@ export class QrcodeScannerPage implements OnInit {
         // this.rideBookedAt = new Date(this.ride.bookedAt);
         // console.log('Ride booked at ', this.rideBookedAt);
         // console.log(typeof (this.rideBookedAt));
-        // this.timerTime = this.ride.timer;
-        // console.log('Timer time is ', this.timerTime);
-        // this.rideBookedAt.setMinutes(this.rideBookedAt.getMinutes() + this.timerTime);
+        // // this.timerTime = this.ride.timer;
+        // console.log('Timer time in minutes is ', this.timerTimeInMins);
+        // this.rideBookedAt.setMinutes(this.rideBookedAt.getMinutes() + this.timerTimeInMins);
         // console.log('Autocancel time is ', this.rideBookedAt);
         // this.rightNow = new Date();
         // console.log(typeof (this.rightNow));
+        // console.log('RightNow time is ', this.rightNow);
         // this.timerSeconds = (this.rideBookedAt.getTime() - this.rightNow.getTime()) / 1000;
+        // console.log('Scanner timer', this.timerSeconds);
         // console.log(this.timerSeconds);
         // if (this.timerSeconds > 0) {
         //   this.timerSettings = {
@@ -47,7 +63,8 @@ export class QrcodeScannerPage implements OnInit {
         //     maxWheel: 'minutes',
         //     minWidth: 100,
         //     autostart: true,
-        //     buttons: []
+        //     buttons: [],
+        //     showOnFocus: false
         //   };
         // } else {
         //   this.timerFinished();

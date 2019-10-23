@@ -1,5 +1,5 @@
-import { FormsModule } from '@angular/forms';
 import { MbscModule } from '@mobiscroll/angular';
+import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
@@ -17,9 +17,9 @@ import {SharedModule} from './shared/shared.module';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [
+  imports: [ 
+    MbscModule,  
     FormsModule,
-    MbscModule,
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
