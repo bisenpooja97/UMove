@@ -46,7 +46,8 @@ public class RideServiceImp implements RideService {
         Ride ride = rideRepo.findBy_id(rideId);
         if (ride.getStatus().equals(RideStatus.Confirmed)) {
             LocalDateTime bookedAt = ride.getBookedAt();
-            LocalDateTime autoCancelTime = bookedAt.plusMinutes(20);
+            Configuration configOfAutocancel = configRepo.findByName("autocancelTime");
+            LocalDateTime autoCancelTime = bookedAt.plusMinutes(configOfAutocancel.getValue());
             int compareValue = startRideRequestAt.compareTo(autoCancelTime);
             if (compareValue <= 0) {
                 ride.setStatus(RideStatus.Started);

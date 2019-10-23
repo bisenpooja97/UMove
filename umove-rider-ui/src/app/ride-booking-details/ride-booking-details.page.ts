@@ -64,8 +64,7 @@ export class RideBookingDetailsPage implements OnInit {
                 maxWheel: 'minutes',
                 minWidth: 100,
                 autostart: true,
-                buttons: [],
-                showOnFocus: false
+                buttons: []
               };
             } else {
               this.timerFinished();

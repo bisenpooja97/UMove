@@ -18,10 +18,10 @@ export class QrcodeScannerPage implements OnInit {
   timerSettings: MbscTimerOptions;
   timerTime: number;
   timerTimeInMins: number;
-  vehicleNumber: string;
   rideBookedAt: Date;
   rightNow: Date;
   timerSeconds: number;
+  rideStatus: string;
 
   constructor(private barcodeScanner: BarcodeScanner, private router: Router, private rideService: RideService,
               private configurationService: ConfigurationService) {
@@ -29,79 +29,42 @@ export class QrcodeScannerPage implements OnInit {
 
   ngOnInit() {
 
-    this.configurationService.getConfigurationDetailsByName('autocancelTime')
-      .then(response => {
-        console.log('Configuration details: ', response);
-        this.configuration = JSON.parse(response.data).data;
-        console.log(this.configuration);
-        this.timerTimeInMins = this.configuration.value;
-        console.log('Auto-cancel time is ', this.timerTimeInMins);
-
-        this.rideService.getRideDetailsByUserIdNStatus('786', 'Confirmed')
-          .then(response1 => {
-            console.log('Booking details in scanner: ', response1);
-            this.ride = JSON.parse(response1.data).data;
-            console.log(this.ride);
-            this.rideBookedAt = new Date(this.ride.bookedAt + 'Z');
-            console.log('Ride booked at ', this.rideBookedAt);
-            console.log(typeof (this.rideBookedAt));
-            // // this.timerTime = this.ride.timer;
-            console.log('Timer time in minutes is ', this.timerTimeInMins);
-            this.rideBookedAt.setMinutes(this.rideBookedAt.getMinutes() + this.timerTimeInMins);
-            console.log('Autocancel time is ', this.rideBookedAt);
-            this.rightNow = new Date();
-            console.log(typeof (this.rightNow));
-            console.log('RightNow time is ', this.rightNow);
-            this.timerSeconds = (this.rideBookedAt.getTime() - this.rightNow.getTime()) / 1000;
-            console.log('Scanner timer', this.timerSeconds);
-            console.log(this.timerSeconds);
-            if (this.timerSeconds > 0) {
-              this.timerSettings = {
-                animate: 'fade',
-                targetTime: this.timerSeconds,
-                maxWheel: 'minutes',
-                minWidth: 100,
-                autostart: true,
-                buttons: [],
-                showOnFocus: false
-              };
-            } else {
-              this.timerFinished();
-            }
-          });
+    this.rideService.getRideDetailsByUserIdNStatus('786', 'Confirmed')
+      .then(response1 => {
+        console.log('Booking details in scanner: ', response1);
+        this.ride = JSON.parse(response1.data).data;
+        console.log(this.ride);
       });
 
     this.barcodeScanner.scan().then(qrCodeData => {
       console.log('QR Data:', qrCodeData);
-      this.vehicleNumber = undefined;
+      let vehicleNumber;
       try {
         console.log('vehicle number: ', JSON.parse(qrCodeData.text).registrationNo);
-        this.vehicleNumber = JSON.parse(qrCodeData.text).registrationNo;
+        vehicleNumber = JSON.parse(qrCodeData.text).registrationNo;
       } catch (e) {
         this.rideService.presentToast('Wrong QR Code.', 3000);
         this.router.navigateByUrl('ride-booking-details');
       }
-      if (this.vehicleNumber != undefined) {
-        this.rideService.startRideById(this.ride._id, this.vehicleNumber).then(response => {
-          console.log('response', response);
-          this.ride = JSON.parse(response.data).data;
+      if (vehicleNumber !== undefined) {
+      this.rideService.startRideById(this.ride._id, vehicleNumber).then(response => {
+        console.log('response', response);
+        this.ride = JSON.parse(response.data).data;
+        this.rideStatus = this.ride.status;
+        if (this.rideStatus === 'Auto_Cancelled') {
+          mobiscroll.alert({
+            title: 'Your ride is autocancelled',
+            message: 'Please book a new ride.',
+            callback: () => {
+              // Apply the url of home page
+              this.router.navigateByUrl('ride-booking-details');
+            }
+          });
+        } else {
           this.router.navigateByUrl('ride-details');
-        });
-      }
-    });
-  }
-
-  timerFinished() {
-    this.rideService.cancelRideById(this.ride._id).then(data => {
-      console.log('response of autocancel ride: ', data);
-      mobiscroll.alert({
-        title: 'Your ride is autocancelled',
-        message: 'Please book a new ride.',
-        callback: () => {
-          // Apply the url of home page
-          this.router.navigateByUrl('ride-booking-details');
         }
       });
+      }
     });
   }
 
