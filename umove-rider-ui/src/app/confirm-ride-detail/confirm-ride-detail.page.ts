@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Ride } from '../model/ride';
 import { RideService } from '../service/ride.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ActionSheetController } from '@ionic/angular';
 
 @Component({
   selector: 'app-confirm-ride-detail',
@@ -12,7 +13,7 @@ export class ConfirmRideDetailPage implements OnInit {
 
   booking: Ride;
 
-  constructor(private rideService: RideService, private router: Router, private route: ActivatedRoute) {
+  constructor(private rideService: RideService,private actionSheetController: ActionSheetController,private router: Router, private route: ActivatedRoute) {
     this.route.queryParams.subscribe(params => {
       const state = this.router.getCurrentNavigation().extras.state;
       if (state) {
@@ -146,4 +147,5 @@ export class ConfirmRideDetailPage implements OnInit {
   removeSelectedPromocode() {
     this.booking.promocode = undefined;
   }
+
 }

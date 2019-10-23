@@ -11,6 +11,7 @@ import {MapService} from "../service/zone/map.service";
   styleUrls: ['./drop.page.scss'],
 })
 export class DropPage implements OnInit {
+  private isLoaded: boolean;
   ngOnInit(): void {
     this.geolocation.getCurrentPosition().then((resp) => {
       const lat = resp.coords.latitude;
@@ -24,6 +25,10 @@ export class DropPage implements OnInit {
       console.log('selected zone',zone);
       this.selectedZone = zone;
     });
+    this.mapService.onLoad$.subscribe((message:string)=>{
+      console.log('lo ho gya load ab tofinally~~~');
+      this.isLoaded = true;
+    })
   }
   containerId = 'drop';
   page = 'pick-up';

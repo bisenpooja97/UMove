@@ -6,9 +6,15 @@
     <ion-title >Select Drop Zone</ion-title>
   </ion-toolbar>
 </ion-header>
-
+<ion-content [ngClass]="{'loader': !isLoaded}" *ngIf="!isLoaded">
+  <ion-grid style="height: 100%">
+    <ion-row style="height: 100%;">
+      <ion-img src="assets/icon/loader.svg" style="margin: 0 auto;" ></ion-img>
+    </ion-row>
+  </ion-grid>
+</ion-content>
 <ion-content>
-<!--  <app-map [containerId]="containerId"  (onSelected)="getSelected($event);" ></app-map>-->
+  <!--<app-map [containerId]="containerId"  (onSelected)="getSelected($event);" ></app-map>-->
   <ion-grid style="height: 100%;">
     <ion-row>
       <ion-auto-complete style="width: 100%"  [dataProvider]="zoneService" (itemSelected)="gettingCoordinatesByLocality($event)"></ion-auto-complete>

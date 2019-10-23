@@ -2,3 +2,9 @@
   max-height: 35vh;
   overflow: hidden;
 }
+
+::ng-deep .loader {
+  position: absolute;
+  z-index: 5;
+  height: 100%;
+}

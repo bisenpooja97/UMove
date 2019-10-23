@@ -1,6 +1,6 @@
 import {Injectable, OnInit} from '@angular/core';
 import * as mapboxgl from 'mapbox-gl';
-import {Observable, Observer, of, Subject} from "rxjs";
+import {Observable, Observer, of, Subject, timer} from "rxjs";
 import {Zone} from "../../model/zone";
 import {ZoneService} from "./zone.service";
 import {GeoJson} from "../../map";
@@ -17,12 +17,17 @@ export class MapService implements OnInit{
   private isSelected: boolean;
   onZoneSelected: Subject<Zone>;
   selectZone$: Observable<Zone>;
+  loading: Subject<any>;
+  onLoad$: Observable<any>;
+
   private features = [];
 
   constructor(private zoneService : ZoneService,private geolocation: Geolocation,) {
     this.layoutCount = 0;
     this.onZoneSelected = new Subject<Zone>();
     this.selectZone$ = this.onZoneSelected.asObservable();
+    this.loading = new Subject<any>();
+    this.onLoad$ = this.loading.asObservable();
   }
   ngOnInit(): void {
   }
@@ -45,7 +50,10 @@ export class MapService implements OnInit{
       optimize :false
 
     });
+    this.checkMapLoading();
+    // this.map.on('idle', () => {
     this.map.on('load', () => {
+      console.log('map loaded');
       this.map.resize();
       this.flyTo(
          [lng, lat]
@@ -68,9 +76,16 @@ export class MapService implements OnInit{
         this.map.getCanvas().style.cursor = '';
       });
     });
-    this.map.on('style.load', () => {
-      this.addLayer(lat, lng);
+    this.map.on('style.load',() => {
+      console.log('style loaded');
+      // setTimeout(() => {
+      //   this.addLayer(lat,lng);
+      //   console.log('Async operation has ended');
+      //   style();
+      // }, 500);
+      this.addLayer(lat,lng);
     });
+
   }
 
   marker(lat, lng) {
@@ -93,20 +108,12 @@ export class MapService implements OnInit{
   // For fly to different co-ordinates on map
   flyTo(coordinates:number[]) {
     this.map.flyTo({
-      center: coordinates
+      center: coordinates,
+      maxDuration:100,
+      // speed:2.4
     });
   }
 
-
-
-  // For changing layer on Map after changing location
-  addNewLayer(lat: number, lng: number) {
-
-    this.map.removeLayer('places' + this.layoutCount);
-    this.map.removeImage('cat');
-    this.features = [];
-    this.addLayer(lat, lng);
-  }
 
 
   clickPopUp(){
@@ -175,6 +182,7 @@ export class MapService implements OnInit{
       if (error) { throw error; }
       this.map.addImage('cat', image);
       // Add a layer showing the places.
+
       this.map.addLayer({
         id: 'places' + this.layoutCount,
         type: 'symbol',
@@ -214,5 +222,16 @@ export class MapService implements OnInit{
       this.zoneService.presentToast(error); });
   }
 
-
+  checkMapLoading() {
+    timer(1000).subscribe(() => {
+      if(this.map.loaded()) {
+        console.log('load ho gya');
+        this.loading.next("Map is loaded");
+      }
+      else {
+        console.log('abhi ni hua');
+        this.checkMapLoading();
+      }
+    });
+  }
 }
