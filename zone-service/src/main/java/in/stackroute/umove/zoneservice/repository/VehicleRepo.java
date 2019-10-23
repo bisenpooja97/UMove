@@ -3,6 +3,8 @@ package in.stackroute.umove.zoneservice.repository;
 
 import in.stackroute.umove.zoneservice.model.Vehicle;
 import in.stackroute.umove.zoneservice.model.VehicleStatus;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 
@@ -13,19 +15,18 @@ public interface VehicleRepo extends MongoRepository<Vehicle,String> {
     /*@Query(value = "{ 'type' : { 'name': {$regex : ?0, $options: 'i'}}}")
     List<Vehicle> findByTypeName(String name);*/
     @Query("{'type.name':?0}")
-    List<Vehicle> findByType(String type);
+    Page<Vehicle> findByType(String type, Pageable pageable);
 
     @Query("{ 'zoneid':?0, 'type.name':?1}")
-    List<Vehicle> findByZoneType(String zone,String type);
+    Page<Vehicle> findByZoneType(String zone, String type, Pageable pageable);
 
-    List<Vehicle> findByzoneid(String zone_id);
-    Vehicle findByregistrationNo(String name);
-    Vehicle findByChassisNumber(String name);
-    Vehicle findByInsuranceNo(String name);
-    //    Vehicle findByVehicleId(String vehicleId);
-    // List<Vehicle> findByRegistrationNo(String name);
-    List<Vehicle> findByStatus(VehicleStatus status);
-    //List<Vehicle> fetchVehicleByTypeName(String tname);
+
+    Page<Vehicle> findByzoneId(String zone_id, Pageable pageable);
+    Vehicle findByregistrationNoIgnoreCase(String name);
+    Vehicle findByChassisNumberIgnoreCase(String name);
+    Vehicle findByInsuranceNoIgnoreCase(String name);
+    Page<Vehicle> findByStatus(VehicleStatus status, Pageable pageable);
+    Page<Vehicle> findAll(Pageable pageable);
 
 
 }

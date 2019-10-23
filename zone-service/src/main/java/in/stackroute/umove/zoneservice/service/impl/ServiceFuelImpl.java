@@ -6,6 +6,7 @@ import in.stackroute.umove.zoneservice.repository.FuelRepo;
 import in.stackroute.umove.zoneservice.service.ServiceFuel;
 import in.stackroute.umove.zoneservice.service.ServiceVehicleType;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,7 +22,7 @@ public class ServiceFuelImpl implements ServiceFuel {
 
     @Override
     public Fuel addFuel(Fuel fuel) {
-        Fuel fuelList=repo.findByName(fuel.getName());
+        Fuel fuelList=repo.findByNameIgnoreCase(fuel.getName());
         if(fuelList != null){
             throw new FuelNameAlreadyExistException("Fuel Name already exists");
         }
@@ -30,26 +31,26 @@ public class ServiceFuelImpl implements ServiceFuel {
     }
 
     @Override
-    public List<Fuel> find() {
-        return repo.findAll();
+    public List<Fuel> find(int page) {
+        //List<Fuel> list= new ArrayList<>();
+        List<Fuel> list=repo.findAll(new PageRequest(page,9)).getContent();
+        // List<Fuel> list =  repo.findAllByName(page);
+        //List<Fuel> list=repo.findAll(page);
+        return list;
     }
 
     @Override
     public Fuel updateFuelDetails(String name, Fuel fuel) {
-        Fuel fuelList = repo.findByName(name);
+        Fuel fuelList = repo.findByNameIgnoreCase(name);
         if (fuelList != null) {
             if (fuel.getName() != null) {
                 fuel.setName(fuel.getName());
             }
 
-            if (fuel.getCostFuel() != 0)   {
-                fuelList.setCostFuel(fuel.getCostFuel());
+            if (fuel.getFuelCost() != 0)   {
+                fuelList.setFuelCost(fuel.getFuelCost());
                 repo.save(fuelList);
-                System.out.println("Vehicles types for diesel cost");
-                System.out.println(fuelList.getCostFuel());
-                System.out.println(fuelList.getName());
-                System.out.println("service" + serviceVehicleType);
-                serviceVehicleType.updateEveryoneFare(fuelList.getCostFuel(),fuelList.getName());
+                serviceVehicleType.updateEveryoneFare(fuelList.getFuelCost(),fuelList.getName());
             }
 
             return repo.save(fuelList);
@@ -59,11 +60,16 @@ public class ServiceFuelImpl implements ServiceFuel {
         return null;
     }
 
+
+
+
     @Override
     public Fuel findName(String name) {
-        Fuel fuelList=repo.findByName(name);
+        Fuel fuelList=repo.findByNameIgnoreCase(name);
         return fuelList;
     }
+
+
 
 
 }

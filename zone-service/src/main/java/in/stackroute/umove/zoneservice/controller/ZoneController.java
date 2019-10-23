@@ -48,8 +48,8 @@ public class ZoneController {
 
     // Getting list of all zones API
     @GetMapping("/zones")
-    public ResponseEntity<Map> getAllZones() {
-        List<Zone> zoneList = serviceZoneDummy.findAllZones();
+    public ResponseEntity<Map> getAllZones( @RequestParam(value = "page", required = false) Integer page) {
+        List<Zone> zoneList = serviceZoneDummy.findAllZones((page !=null) ? page : 0 );
         Map<String, Object> map = new TreeMap<>();
         map.put("data", zoneList);
         map.put("count", zoneList.size());
@@ -70,8 +70,8 @@ public class ZoneController {
 
     // Searching of zone by locality API
     @GetMapping("/zones/locality/{locality}")
-    public ResponseEntity<Map> findZonesByLocality(@PathVariable String locality) {
-        List<Zone> zoneList = serviceZoneDummy.findZonesByLocality(locality);
+    public ResponseEntity<Map> findZonesByLocality(@PathVariable String locality, @RequestParam(value = "page", required = false) Integer page) {
+        List<Zone> zoneList = serviceZoneDummy.findZonesByLocality(locality, (page !=null) ? page : 0 );
         Map<String, Object> map = new TreeMap<>();
         map.put("count", zoneList.size());
         map.put("data", zoneList);
@@ -130,8 +130,8 @@ public class ZoneController {
     }
 
     @GetMapping("/zones/status/{status}")
-    public ResponseEntity<Map> getZonesByStatus(@PathVariable ZoneStatus status) {
-        List<Zone> zones=serviceZoneDummy.findByStatus(status);
+    public ResponseEntity<Map> getZonesByStatus(@PathVariable ZoneStatus status, @RequestParam(value = "page", required = false) Integer page) {
+        List<Zone> zones=serviceZoneDummy.findByStatus(status, (page !=null) ? page : 0 );
         Map<String, Object> map = new TreeMap<>();
         map.put("data", zones);
         map.put("status", HttpStatus.OK);

@@ -7,11 +7,19 @@ import in.stackroute.umove.zoneservice.service.ServiceZoneTypeCount;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ZoneTypeCountImpl implements ServiceZoneTypeCount {
 
     @Autowired
     ZoneTypeCountRepo repo;
+
+    @Override
+    public List<ZoneTypeCount> findAllTypeCount() {
+        List<ZoneTypeCount> zoneTypeCounts = repo.findAll();
+        return zoneTypeCounts;
+    }
 
     @Override
     public ZoneTypeCount getZoneType(String zoneId, String typeId) {

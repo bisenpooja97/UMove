@@ -2,6 +2,8 @@ package in.stackroute.umove.zoneservice.model;
 
 import lombok.*;
 import org.springframework.data.mongodb.core.mapping.Document;
+import java.util.UUID;
+
 
 @Document
 @Data
@@ -10,8 +12,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Fuel {
-    private String id;
+    private String id = UUID.randomUUID().toString().substring(32);
     private String name;
-    private Float costFuel;
+    private Float fuelCost;
+
 }
 

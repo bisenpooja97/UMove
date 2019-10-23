@@ -2,6 +2,8 @@ package in.stackroute.umove.zoneservice.controller;
 
 import in.stackroute.umove.zoneservice.model.Fuel;
 import in.stackroute.umove.zoneservice.service.ServiceFuel;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,21 +18,25 @@ import java.util.TreeMap;
 @RequestMapping("/api/v1")
 public class FuelController {
 
+    private static final Logger logger = LogManager.getLogger(FuelController.class);
     @Autowired
     private ServiceFuel serviceFuel;
 
     @PostMapping("/fuel")
     public ResponseEntity<Map> addFuel(@RequestBody Fuel fuel) {
+
         Fuel fuelList = serviceFuel.addFuel(fuel);
         Map<String, Object> map = new TreeMap<>();
         map.put("data", fuelList);
         map.put("status", HttpStatus.CREATED);
+
         return new ResponseEntity<>(map, HttpStatus.CREATED);
     }
 
 
     @GetMapping("/fuel")
-    public ResponseEntity<Map> getFuel(@RequestParam(value = "name", required = false) String name
+    public ResponseEntity<Map> getFuel(@RequestParam(value = "name", required = false) String name,
+                                       @RequestParam(value = "page", required = false) Integer page
     ) {
 
         if (name != null && !name.isEmpty()) {
@@ -41,7 +47,7 @@ public class FuelController {
             return new ResponseEntity<Map>(map, HttpStatus.OK);
         }
 
-        List<Fuel> fuelList = serviceFuel.find();
+        List<Fuel> fuelList = serviceFuel.find((page !=null) ? page : 0 );
         Map<String, Object> map = new TreeMap<>();
         map.put("data", fuelList);
         map.put("count", fuelList.size());
