@@ -39,7 +39,7 @@ import org.slf4j.LoggerFactory;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@CrossOrigin(origins="http://localhost:4200")
+//@CrossOrigin(origins="http://localhost:4200")
 public class UserController
 {
     @Autowired
@@ -141,6 +141,7 @@ public ResponseEntity<Map> getUsersById(@PathVariable String id)
         UserData user = userService.getById(uid);
         DocumentVerification documentVerification = user.getDocument();
         documentVerification.setImage(fileDownloaduri);
+        user.setUserStatus(UserStatus.Pending);
         this.userService.updateUser(uid,user);
 
         return new UploadFileResponse(fileName, fileDownloadUri,
