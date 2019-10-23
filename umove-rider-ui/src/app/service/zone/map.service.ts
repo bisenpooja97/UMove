@@ -109,7 +109,7 @@ export class MapService implements OnInit{
   flyTo(coordinates:number[]) {
     this.map.flyTo({
       center: coordinates,
-      maxDuration:100,
+      maxDuration:1000,
       // speed:2.4
     });
   }
