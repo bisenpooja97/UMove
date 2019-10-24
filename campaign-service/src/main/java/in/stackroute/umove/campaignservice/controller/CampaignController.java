@@ -13,7 +13,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 //@CrossOrigin(origins = "http://localhost:8100")
-@CrossOrigin(origins="http://localhost:4200")
+//@CrossOrigin(origins="http://localhost:4200")
 @RestController
 @RequestMapping("api/v1")
 public class CampaignController

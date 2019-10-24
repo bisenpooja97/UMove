@@ -186,7 +186,7 @@ var AppModule = /** @class */ (function () {
                 _angular_material_list__WEBPACK_IMPORTED_MODULE_11__["MatListModule"],
                 _angular_common_http__WEBPACK_IMPORTED_MODULE_12__["HttpClientModule"]
             ],
-            providers: [],
+            providers: [_angular_material__WEBPACK_IMPORTED_MODULE_13__["MatDatepickerModule"]],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"]]
         })
     ], AppModule);
@@ -270,7 +270,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/ruchi/umove/umove-admin-ui/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /home/ashwin/umove/umove-admin-ui/src/main.ts */"./src/main.ts");
 
 
 /***/ })
