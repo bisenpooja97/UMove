@@ -36,14 +36,14 @@
         <ion-label> Fuel Refill Amount </ion-label> - Rs. {{ rides?.paymentDetail?.fuelRefillAmount }}
       </ion-item>
       <div *ngIf="extraChargeStatus || hideMe">
-        <ion-item (click)="showExtraCharges(statusExtra)">
+        <ion-item (click)="showExtraCharges(statusExtraCharge)">
           <ion-label>Total Extra Charges </ion-label> + Rs. {{ rides?.paymentDetail?.totalExtraCharges }}
         </ion-item>
       </div>
-      <div *ngIf="showExtraCharge || hideMe">
+      <div *ngIf="extraChargeStatus || hideMe">
         <ion-item *ngFor="let extraCharge of rides?.paymentDetail?.extraCharges" class="showCharge">
-          <ion-label>Charged For </ion-label> {{ extraCharge?.chargedFor }}
-          <ion-label>Amount </ion-label> Rs. {{ extraCharge?.amount }}
+          <ion-label >Charged For </ion-label> {{ extraCharge?.chargedFor }}
+          <ion-label class="lab-dist">Amount </ion-label> Rs. {{ extraCharge?.amount }}
         </ion-item>
       </div>
       <ion-item>

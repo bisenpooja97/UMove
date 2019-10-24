@@ -35,11 +35,11 @@ export class PaymentDetailsPage implements OnInit {
 
 
   constructor(private rideService: RideService, private route: Router) {
-    this.bookingId = '5dab132c149b3f0001856499';
+    this.bookingId = '5db071a0d02e7d0001e5d7b5';
     this.rideStatusPaid = false;
     this.rideStatusUnPaid = false;
     this.petrolCharge = false;
-    this.showExtraCharge = false;
+    this.extraChargeStatus = false;
   }
 
   ngOnInit() {
@@ -71,8 +71,8 @@ export class PaymentDetailsPage implements OnInit {
       }
      });
   }
-  showExtraCharges(statusExtra: boolean) {
-    if (statusExtra === false) {
+  showExtraCharges(statusExtraCharge: boolean) {
+    if (statusExtraCharge === false) {
     this.showExtraCharge = true;
     console.log(this.showExtraCharge);
     this.rideService.presentToast(this.showExtraCharge, 3000);
