@@ -41,22 +41,28 @@ export class ConfirmRideDetailPage implements OnInit {
 
     this.booking.vehicle = {
       id: '5da1ab649bd1160001cb8a03',
-      zoneid: null,
+      zoneId: null,
       registrationNo: 'RJ27CA3456',
       insuranceNo: '678567',
       status: 'Busy',
-      type: {
-        Id: '5da1a0989bd1160001cb8a02',
+      vehicleType: {
+        id: '5da1a0989bd1160001cb8a02',
         name: 'R1',
-        costkm: 9,
-        costtime: 0.25,
-        category: 'Sports',
-        vehiclecc: '220cc',
-        kilometer: 25,
+        costPerKm: 9,
+        costPerMin: 0.25,
+        vehicleCC: '220cc',
+        mileage: 25,
+        fuel: {
+          id: '5da1a0989bd1160001cb8a87',
+          name: 'Petrol',
+          fuelCost: 80
+        },
+        baseFare: 20,
         url: 'https://jtride-data.s3.ap-south-1.amazonaws.com/uploads/1570608854_vespa.png'
       },
       lastServiceDate: new Date(),
-      vehiclePurchased: new Date()
+      purchasedDate: new Date(),
+      chassisNumber: '987665'
     };
 
     this.booking.sourceZone = {

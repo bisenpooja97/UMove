@@ -115,7 +115,7 @@ public class RideServiceImp implements RideService {
         Double distance = 5 + (Math.random() * 5);
         Double roundUpDistance = Double.valueOf(Math.round(distance*100)/100);
         ride.setDistance(roundUpDistance);
-        Double rideAmount = (totalDuration*ride.getVehicle().getType().getCosttime()+roundUpDistance*ride.getVehicle().getType().getCostkm());
+        Double rideAmount = (totalDuration*ride.getVehicle().getVehicleType().getCostPerMin() +roundUpDistance*ride.getVehicle().getVehicleType().getCostPerKm());
         Double roundUpRideAmount = Double.valueOf(Math.round(rideAmount*100)/100);
         ride.getPaymentDetail().setRideAmount(roundUpRideAmount);
         ride.setStatus(RideStatus.Ended);
@@ -196,7 +196,7 @@ public class RideServiceImp implements RideService {
                     ride.setStatus(RideStatus.Auto_Cancelled);
                 }
                 PaymentDetail paymentDetail = ride.getPaymentDetail();
-                paymentDetail.setRideAmount((double)ride.getVehicle().getType().getBaseFare());
+                paymentDetail.setRideAmount((double)ride.getVehicle().getVehicleType().getBaseFare());
                 ride.setPaymentDetail(paymentDetail);
             }
             rideRepo.save(ride);
