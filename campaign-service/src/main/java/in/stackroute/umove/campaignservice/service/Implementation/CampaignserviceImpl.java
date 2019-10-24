@@ -15,11 +15,19 @@ public class CampaignserviceImpl implements CampaignService
     @Autowired
     private CampaignRepository campaignRepository;
 
+    /*
+     *Method to get campaign list
+     */
+
     @Override
     public List<Campaign> getCampaignList()
     {
         return campaignRepository.findAll();
     }
+    /*
+     *Method to add campaign
+     */
+
 
     @Override
     public Campaign addCampaign(Campaign campaign) {

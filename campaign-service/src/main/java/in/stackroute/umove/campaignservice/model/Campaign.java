@@ -7,8 +7,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.Id;
+
 import java.time.LocalDate;
+import java.util.UUID;
 
 @Document
 @Getter
@@ -16,14 +17,15 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Campaign {
-    @Id
-    private String id;
+
+    private String id= UUID.randomUUID().toString().substring(30);
     private String name;
     private String objective;
     private LocalDate startDate;
     private LocalDate endDate;
     private String promocode;
     private int discountPercent;
+
 
     public Campaign(String name, String objective, LocalDate startDate, LocalDate endDate, String promocode,int discountPercent) {
         this.name = name;
