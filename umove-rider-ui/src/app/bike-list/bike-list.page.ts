@@ -5,6 +5,8 @@ import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
 import {Zone} from "../model/zone";
 import {HTTPResponse} from "@ionic-native/http";
 import {TypeCountList} from "../model/type-count-list";
+import {RideService} from "../service/ride.service";
+import {Vehicle} from "../model/vehicle";
 
 
 @Component({
@@ -18,7 +20,7 @@ export class BikeListPage implements OnInit {
   private response = null;
   private data: any;
 
-  constructor(private zoneService: ZoneService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private zoneService: ZoneService,private rideService: RideService, private route: ActivatedRoute, private router: Router) { }
 
   pickUpZone: Zone;
   trip: boolean;
@@ -38,16 +40,20 @@ export class BikeListPage implements OnInit {
   }
   
 
-  onVehicleSelected(type: {}) {
-    const navigationExtras: NavigationExtras  = {
-      state: {
-        page: 'drop',
-      }
-    };
+  onVehicleSelected(type: Vehicle) {
+    const ride = this.rideService.getCurrentBooking();
+    ride.vehicle = type;
+    this.rideService.setCurrentBooking(ride);
+
     if (this.trip) {
+      const navigationExtras: NavigationExtras  = {
+        state: {
+          page: 'drop',
+        }
+      };
       this.router.navigate(['drop'], navigationExtras);
     } else {
-      this.router.navigate(['confirm-ride-detail'], navigationExtras);
+      this.router.navigate(['confirm-ride-detail']);
     }
   }
 
