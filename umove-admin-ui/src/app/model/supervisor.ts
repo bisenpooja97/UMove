@@ -1,4 +1,4 @@
-import { Document } from './document';
+import {Document} from './document';
 export class Supervisor {
     public id: string;
     public name: string;

@@ -93,7 +93,7 @@ public class FuelControllerTestCase {
 
     @Test
     public void getAllVehicle() throws Exception{
-        when(serviceFuel.find()).thenReturn(fuelList);
+        when(serviceFuel.find(2)).thenReturn(fuelList);
         mockMvc.perform(get("/api/v1/fuel")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(jsonToString(fuel)))
@@ -104,7 +104,7 @@ public class FuelControllerTestCase {
 
     @Test
     public void getAllVehicleFail() throws Exception{
-        when(serviceFuel.find()).thenReturn(fuelList);
+        when(serviceFuel.find(2)).thenReturn(fuelList);
         mockMvc.perform(get("/apir/v1/fuel")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(jsonToString(fuel)))

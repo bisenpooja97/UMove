@@ -84,7 +84,7 @@ public class ZoneServiceControllerTest {
 
     @Test
     public void getAllZones() throws Exception {
-        when(serviceZone.findAllZones()).thenReturn(zoneList);
+        when(serviceZone.findAllZones(1)).thenReturn(zoneList);
         mockMvc.perform(get("/api/v1/zones")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(jsonToString(zone)))
@@ -94,7 +94,7 @@ public class ZoneServiceControllerTest {
 
     @Test
     public void getAllZonesFail() throws Exception {
-        when(serviceZone.findAllZones()).thenReturn(zoneList);
+        when(serviceZone.findAllZones(1)).thenReturn(zoneList);
         mockMvc.perform(get("/api/v1/zones")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(jsonToString(zone)))

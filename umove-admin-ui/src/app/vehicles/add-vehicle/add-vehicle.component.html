@@ -16,7 +16,6 @@
             <mat-form-field appearance="outline" fxFlex>
                 <mat-label>Registration No.</mat-label>
                 <input matInput #input placeholder="Registration No" formControlName="registrationNo" required>
-
                 <mat-error *ngIf="rNum.invalid">
 
                     {{getErrorRegistrationNo()}}
@@ -27,13 +26,14 @@
 
 
             <mat-form-field appearance="outline" fxFlex>
-                <mat-label>Type</mat-label>
-                <mat-select formControlName="type">
-                    <mat-option *ngFor="let type of types" [value]="type">
-                        {{type.name}}
+                <mat-label>Vehicle Type</mat-label>
+                <mat-select formControlName="vehicleType">
+                    <mat-option *ngFor="let vehicleType of Vehicletypes" [value]="vehicleType">
+                        {{vehicleType.name}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
+
 
 
 
@@ -48,6 +48,7 @@
 
             </mat-form-field>
 
+
             <mat-form-field appearance="outline" fxFlex>
                 <mat-label>Chassis Number.</mat-label>
                 <input matInput #input placeholder="Chassis No." formControlName="chassisNumber" required>
@@ -59,31 +60,11 @@
 
             </mat-form-field>
 
-
-
-
-            <!-- <mat-form-field appearance="outline" fxFlex>
-          <mat-label>Status</mat-label>
-          <input matInput #input placeholder="Placeholder" formControlName="status" required>
-      </mat-form-field> -->
-
-
-            <!-- <mat-form-field appearance="outline" fxFlex>
-          <mat-label>Last Service date</mat-label>
-          <input matInput #input placeholder="Placeholder"  required>
-      </mat-form-field> -->
-            <!-- <mat-label>Last Service date</mat-label>
-      <mat-form-field>
-          <input matInput [matDatepicker]="lastServiceDate" formControlName="lastServiceDate" [max]="todaydate" placeholder="Last Service Date" #input>
-          <mat-datepicker-toggle matSuffix [for]="lastServiceDate"></mat-datepicker-toggle>
-          <mat-datepicker #lastServiceDate></mat-datepicker>
-      </mat-form-field> -->
-
             <mat-label>Vehicle purchase date</mat-label>
             <mat-form-field>
-                <input matInput [matDatepicker]="vehiclePurchased" formControlName="vehiclePurchased" [max]="todaydate" placeholder="Vehicle Purchased Date" #input>
-                <mat-datepicker-toggle matSuffix [for]="vehiclePurchased"></mat-datepicker-toggle>
-                <mat-datepicker #vehiclePurchased></mat-datepicker>
+                <input matInput [matDatepicker]="purchasedDate" formControlName="purchasedDate" [max]="todaydate" placeholder="Vehicle Purchased Date" #input>
+                <mat-datepicker-toggle matSuffix [for]="purchasedDate"></mat-datepicker-toggle>
+                <mat-datepicker #purchasedDate></mat-datepicker>
             </mat-form-field>
 
 
@@ -93,7 +74,7 @@
     </mat-form-field> -->
 
 
-            <button mat-raised-button class="btn">
+            <button mat-raised-button  [disabled]='!vehicleForm.valid' class="btn" color="primary">
       Submit
     </button>
 

@@ -28,7 +28,7 @@ public class FuelTestCase {
     @Test
     public  void getFuelTest(){
         when(fuelRepo.findAll()).thenReturn(Stream.of(new Fuel("1","petrol",2.3F)).collect(Collectors.toList()));
-        assertEquals(1,serviceFuel.find().size());
+        assertEquals(1,serviceFuel.find(2).size());
     }
 
     @Test

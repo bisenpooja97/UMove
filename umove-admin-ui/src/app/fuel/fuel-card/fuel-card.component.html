@@ -1,5 +1,8 @@
-<mat-card class="my-card" fxFlex.sm="0 1 calc(50%-10px)" fxFlex.md="0 1 calc(33%-10px)" fxLayout="column" fxLayoutGap="20px" (click)="ok()">
+<mat-card (click)="ok()" class="my-card">
 
-    <mat-card-title fxLayoutAlign="center center" class="typeName">{{name}}</mat-card-title>
+    <mat-card-content fxLayoutAlign="space-between">
+        <ngx-avatar name="{{name}}"></ngx-avatar>
+    </mat-card-content>
+    <mat-card-title class="fuelName">{{name}}</mat-card-title>
 
 </mat-card>
