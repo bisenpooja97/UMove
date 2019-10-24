@@ -13,6 +13,18 @@
 
   <ion-card>
     <ion-card-content>
+      <ion-card-subtitle>
+        <ion-icon name="pin" color="tertiary"></ion-icon> {{ ride?.sourceZone?.locality }}
+      </ion-card-subtitle>
+      <ion-card-subtitle>
+        <ion-icon name="pin" color="tertiary"></ion-icon> {{ destinationZone?.locality }}
+      </ion-card-subtitle>
+    </ion-card-content>
+  </ion-card>
+
+
+  <!-- <ion-card>
+    <ion-card-content>
       <ion-row>
         <ion-col size="5">
           <ion-card-subtitle>{{ ride?.sourceZone?.locality }}</ion-card-subtitle>
@@ -22,7 +34,7 @@
         </ion-col>
       </ion-row>
     </ion-card-content>
-  </ion-card>
+  </ion-card> -->
 
   <ion-card>
     <ion-input required type="text" placeholder="Need help?"></ion-input>

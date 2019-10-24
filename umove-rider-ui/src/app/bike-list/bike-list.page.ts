@@ -35,7 +35,6 @@ export class BikeListPage implements OnInit {
         this.doInfinite();
       }
     });
-
   }
   
 

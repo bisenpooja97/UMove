@@ -1,5 +1,8 @@
 package in.stackroute.umove.bookingservice.controller;
 
+import in.stackroute.umove.bookingservice.exception.ConfigurationAlreadyExistsException;
+import in.stackroute.umove.bookingservice.exception.ConfigurationNotFoundException;
+import in.stackroute.umove.bookingservice.exception.RideNotFoundException;
 import in.stackroute.umove.bookingservice.repo.ConfigRepo;
 import in.stackroute.umove.bookingservice.model.Configuration;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +35,9 @@ public class ConfigurationController {
     @GetMapping("config/{name}")
     public ResponseEntity<Map> getConfigurationByName(@PathVariable("name") String name) {
         Configuration config = configRepo.findByName(name);
+        if(config == null) {
+            throw new ConfigurationNotFoundException("Configuration", "name", name);
+        }
         Map<String, Object> map = new TreeMap<>();
         map.put("data", config);
         map.put("status", HttpStatus.OK);
@@ -41,7 +47,7 @@ public class ConfigurationController {
     @PostMapping("config")
     public ResponseEntity<Map> createConfiguration(@RequestBody Configuration config) {
         if(configRepo.findByName(config.getName()) != null) {
-            return null;
+            throw new ConfigurationAlreadyExistsException("Configuration", "name", config.getName());
         }
         configRepo.save(config);
         Map<String, Object> map = new TreeMap<>();
@@ -62,6 +68,9 @@ public class ConfigurationController {
     @PatchMapping("config/{name}")
     public ResponseEntity<Map> updateConfiguration(@PathVariable("name") String name, @RequestParam(value = "configValue", required = true) int value) {
         Configuration config = configRepo.findByName(name);
+        if(config == null) {
+            throw new ConfigurationNotFoundException("Configuration", "name", name);
+        }
         config.setValue(value);
         configRepo.save(config);
         Map<String, Object> map = new TreeMap<>();

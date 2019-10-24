@@ -72,6 +72,10 @@
       </ion-grid>
     </ion-card-content>
   </ion-card>
+  <ion-card *ngIf="!booking?.promocode">
+
+        <ion-row  class="map" id="booking" style="height: 300px;" ></ion-row>
+  </ion-card>
 
   <ion-button expand="block" class="ion-no-margin btn-bottom" (click)="confirmBooking()">
     Confirm Booking

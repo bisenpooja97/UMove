@@ -7,7 +7,7 @@ import javax.persistence.Id;
 
 @Document(collection = "config")
 @Data
-@AllArgsConstructor
+@NoArgsConstructor
 @Setter
 @Getter
 @ToString

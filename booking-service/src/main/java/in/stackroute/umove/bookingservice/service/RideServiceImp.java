@@ -1,10 +1,15 @@
 package in.stackroute.umove.bookingservice.service;
 
 import com.fasterxml.jackson.databind.util.JSONPObject;
+import in.stackroute.umove.bookingservice.controller.RideController;
+import in.stackroute.umove.bookingservice.exception.PaymentDetailsNotFoundException;
+import in.stackroute.umove.bookingservice.exception.RideNotFoundException;
 import in.stackroute.umove.bookingservice.model.*;
 import in.stackroute.umove.bookingservice.repo.PaymentRepo;
 import in.stackroute.umove.bookingservice.repo.ConfigRepo;
 import in.stackroute.umove.bookingservice.repo.RideRepo;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,8 +23,12 @@ import java.util.Map;
 
 @Service
 public class RideServiceImp implements RideService {
+
+    private static final Logger logger = LogManager.getLogger(RideController.class);
+
     @Autowired
     private RideRepo rideRepo;
+
     @Autowired
     private PaymentRepo paymentRepo;
 
@@ -96,6 +105,9 @@ public class RideServiceImp implements RideService {
     public Ride addExtraCharges(ObjectId rideId, List<ExtraCharge> extraCharges) {
         LocalDateTime rightNow = LocalDateTime.now();
         Ride ride = rideRepo.findBy_id(rideId);
+        if(ride == null) {
+            throw new RideNotFoundException("Ride", "rideId", rideId);
+        }
         ride.getPaymentDetail().setExtraCharges(extraCharges);
         ride.setRideEndAt(rightNow);
         LocalDateTime rideStarted = ride.getRideStartAt();
@@ -105,7 +117,7 @@ public class RideServiceImp implements RideService {
         Double distance = 5 + (Math.random() * 5);
         Double roundUpDistance = Double.valueOf(Math.round(distance*100)/100);
         ride.setDistance(roundUpDistance);
-        Double rideAmount = (totalDuration*ride.getVehicle().getType().getCosttime()+roundUpDistance*ride.getVehicle().getType().getCostkm());
+        Double rideAmount = (totalDuration*ride.getVehicle().getVehicleType().getCostPerMin() +roundUpDistance*ride.getVehicle().getVehicleType().getCostPerKm());
         Double roundUpRideAmount = Double.valueOf(Math.round(rideAmount*100)/100);
         ride.getPaymentDetail().setRideAmount(roundUpRideAmount);
         ride.setStatus(RideStatus.Ended);
@@ -134,6 +146,9 @@ public class RideServiceImp implements RideService {
     public Ride startRide(ObjectId rideId, String registrationNo) {
         LocalDateTime startRideRequestAt = LocalDateTime.now();
         Ride ride = rideRepo.findBy_id(rideId);
+        if(ride == null) {
+            throw new RideNotFoundException("Ride", "rideId", rideId);
+        }
         if (ride.getStatus().equals(RideStatus.Confirmed)) {
             LocalDateTime bookedAt = ride.getBookedAt();
             Configuration configOfAutocancel = configRepo.findByName("autocancelTime");
@@ -148,6 +163,9 @@ public class RideServiceImp implements RideService {
             }
             else {
                 ride.setStatus(RideStatus.Auto_Cancelled);
+                PaymentDetail paymentDetail = ride.getPaymentDetail();
+                paymentDetail.setRideAmount((double)ride.getVehicle().getVehicleType().getBaseFare());
+                ride.setPaymentDetail(paymentDetail);
             }
             rideRepo.save(ride);
         }
@@ -159,14 +177,17 @@ public class RideServiceImp implements RideService {
     public Ride cancelRide(ObjectId rideId) {
         LocalDateTime rightNow = LocalDateTime.now();
         Ride ride = rideRepo.findBy_id(rideId);
+        if(ride == null) {
+            throw new RideNotFoundException("Ride", "rideId", rideId);
+        }
         if (ride.getStatus().equals(RideStatus.Confirmed)) {
             LocalDateTime bookedAt = ride.getBookedAt();
             Configuration configOfAutocancel = configRepo.findByName("autocancelTime");
-            System.out.println("AutocancelTime "+configOfAutocancel.getValue());
             LocalDateTime autoCancelTime = bookedAt.plusMinutes(configOfAutocancel.getValue());
+            logger.info("Autocancel Time from configuration is "+configOfAutocancel.getValue());
             Configuration configOfCancel = configRepo.findByName("cancelThresholdTime");
-            System.out.println("cancelThresholdTime "+configOfCancel.getValue());
             LocalDateTime cancelTime = bookedAt.plusMinutes(configOfCancel.getValue());
+            logger.info("Cancel Threshold Time from configuration is "+configOfCancel.getValue());
             int compareValue = rightNow.compareTo(cancelTime);
             if (compareValue <= 0) {
                 ride.setStatus(RideStatus.CancelledWithinThreshold);
@@ -180,7 +201,7 @@ public class RideServiceImp implements RideService {
                     ride.setStatus(RideStatus.Auto_Cancelled);
                 }
                 PaymentDetail paymentDetail = ride.getPaymentDetail();
-                paymentDetail.setRideAmount((double)ride.getVehicle().getType().getBaseFare());
+                paymentDetail.setRideAmount((double)ride.getVehicle().getVehicleType().getBaseFare());
                 ride.setPaymentDetail(paymentDetail);
             }
             rideRepo.save(ride);
@@ -192,6 +213,9 @@ public class RideServiceImp implements RideService {
     @Override
     public Ride updateDestination(Zone destinationZone, ObjectId rideId) {
         Ride ride = rideRepo.findBy_id(rideId);
+        if(ride == null) {
+            throw new RideNotFoundException("Ride", "rideId", rideId);
+        }
         if (ride.getStatus().equals(RideStatus.Started)) {
             List<Zone> destinationZones = ride.getDestinationZones();
             destinationZones.add(destinationZone);
@@ -204,6 +228,9 @@ public class RideServiceImp implements RideService {
     @Override
     public Payment payForRide(ObjectId rideId, String paymentId, String paymentStatus) {
         Ride ride = rideRepo.findBy_id(rideId);
+        if(ride == null) {
+            throw new RideNotFoundException("Ride", "rideId", rideId);
+        }
         Payment payment = new Payment();
         int sizeOfDestinationZones = ride.getDestinationZones().size();
         int discount_percent = 0;
@@ -236,6 +263,9 @@ public class RideServiceImp implements RideService {
     @Override
     public Payment getPaymentDetails(String rideId) {
         Payment payment = paymentRepo.findByRideId(rideId);
+        if(payment == null) {
+            throw new PaymentDetailsNotFoundException("Payment Details", "rideId", rideId);
+        }
         return payment;
 
     }

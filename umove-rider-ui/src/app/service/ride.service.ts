@@ -45,8 +45,8 @@ export class RideService {
     return this.currentBooking;
   }
 
-  setCurrentBooking(booking: Ride) {
-    this.currentBooking = booking;
+  setCurrentBooking(ride: Ride) {
+    this.currentBooking = ride;
   }
 
   // calling api for getting ride details for particular userId and rideStatus

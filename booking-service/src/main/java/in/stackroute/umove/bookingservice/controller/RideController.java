@@ -131,6 +131,7 @@ public class RideController {
     // to apply extra charges from supervisior side at zone for a specific ride
     @PatchMapping("rides/{rideId}/extra-charges")
     public ResponseEntity<Map> addExtraCharge(@PathVariable("rideId") ObjectId rideId, @RequestBody() List<ExtraCharge> extraCharges) {
+        logger.debug("Extracharge" + extraCharges + " | ride id " + rideId);
         Ride ride = rideService.addExtraCharges(rideId, extraCharges);
         Map<String, Object> payload = new LinkedHashMap<>();
         payload.put("status", "Ended");

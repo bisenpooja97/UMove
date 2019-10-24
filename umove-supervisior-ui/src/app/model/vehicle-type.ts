@@ -1,12 +1,14 @@
+import { Fuel } from './fuel';
+
 export class VehicleType {
-  public Id: string;
+  public id: string;
   public name: string;
-  public costkm: number;
-  public costtime: number;
- public category: string;
- public vehiclecc: string;
- public kilometer: number;
- public url: string;
+  public costPerKm: number;
+  public costPerMin: number;
+  public vehicleCC: string;
+  public mileage: number;
+  public fuel: Fuel;
+  public url: string;
+  public baseFare: number;
 
 }
-

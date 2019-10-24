@@ -4,19 +4,21 @@ import {ZoneService} from "../service/zone/zone.service";
 import {Zone} from "../model/zone";
 import {Geolocation} from "@ionic-native/geolocation/ngx";
 import {MapService} from "../service/zone/map.service";
+import {RideService} from "../service/ride.service";
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
+
 export class HomePage implements OnInit{
     ngOnInit(): void {
 
       this.geolocation.getCurrentPosition().then((resp) => {
         const lat = resp.coords.latitude;
         const lng = resp.coords.longitude;
-        this.mapService.buildMap(lat, lng,'pickup');
+        this.mapService.buildMap(lat, lng,'pickup',true);
         // this.mapService.checkMapLoading();
         this.mapService.marker(lat, lng);
       }).catch((error) => {
@@ -42,27 +44,16 @@ export class HomePage implements OnInit{
               private route: ActivatedRoute,
               private router: Router,
               private geolocation: Geolocation,
-              private mapService: MapService) {
+              private mapService: MapService,
+              private rideService: RideService) {
 
-    this.route.queryParams.subscribe(params => {
-      if (this.router.getCurrentNavigation().extras.state) {
-        this.page = this.router.getCurrentNavigation().extras.state.page;
-        // this.trip = this.router.getCurrentNavigation().extras.state.trip;
-        console.log('page', this.page);
-      }
-    });
+
   }
 
-  sendDataToService() {
-    // const booking = this.bookingService.currentBooking;
-    // booking.sourceZone = this.selectedzone;
-    // if (this.trip) {
-    // booking.destinationZones.push(this.selectedzone);
-    // } else {
-    //   booking.destinationZones.push(this.selectedzone);
-    // }
-    //
-    // this.bookingService.setCurrentBooking(booking);
+  confirmBooking() {
+     const ride = this.rideService.currentBooking;
+     ride.sourceZone = this.selectedZone;
+     this.rideService.setCurrentBooking(ride);
     const navigationExtras: NavigationExtras = {
       state: {
         trip: this.trip,
@@ -71,22 +62,6 @@ export class HomePage implements OnInit{
     };
     // this.coordinates = this.zoneService.getCoordinatesByLocality(this.locality);
     this.router.navigate(['bikelist'], navigationExtras);
-  }
-
-  booking() {
-    const navigationExtras: NavigationExtras = {
-      state: {
-        trip: this.trip,
-        pickUpZone: this.selectedZone
-      }
-    };
-    this.router.navigate(['confirm-ride-detail'], navigationExtras);
-  }
-
-  getSelected(selectedZone: Zone ) {
-
-    this.selectedZone = selectedZone;
-    
   }
 
   gettingCoordinatesByLocality($event: any) {
