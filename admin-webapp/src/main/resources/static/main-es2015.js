@@ -424,7 +424,7 @@ AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         declarations: [
             _app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"],
             _core_navigation_navigation_component__WEBPACK_IMPORTED_MODULE_6__["NavigationComponent"],
-            _core_footer_footer_component__WEBPACK_IMPORTED_MODULE_13__["FooterComponent"]
+            _core_footer_footer_component__WEBPACK_IMPORTED_MODULE_13__["FooterComponent"],
         ],
         imports: [
             _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],

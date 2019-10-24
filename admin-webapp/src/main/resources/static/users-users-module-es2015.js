@@ -29,7 +29,7 @@ module.exports = "<h1 fxLayout=\"column\" fxLayout.gt-md=\"row\" fxLayoutGap.gt-
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-card (click)=\"ok()\" class=\"my-card\">\n  <mat-card-content fxLayoutAlign=\"space-between\" >\n    <ngx-avatar name=\"{{name}}\"></ngx-avatar>\n    <mat-chip-list aria-label=\"Fish selection\">\n<mat-chip [ngStyle]=\"{'background-color':getColor(userStatus)}\" class=\"status\">{{userStatus}}</mat-chip>\n</mat-chip-list>\n</mat-card-content>\n<mat-card-title class=\"userName\">{{name}}</mat-card-title>\n  <mat-card-content>Mobile No: {{mobileNumber}}</mat-card-content>\n  <mat-card-content>{{role}}</mat-card-content>\n</mat-card>\n\n\n"
+module.exports = "<mat-card (click)=\"ok()\" class=\"my-card\">\n  <mat-card-content fxLayoutAlign=\"space-between\" >\n    <ngx-avatar name=\"{{name}}\"></ngx-avatar>\n    <mat-chip-list aria-label=\"Fish selection\">\n<mat-chip [ngStyle]=\"{'background-color':getColor(userStatus)}\" class=\"status\">{{userStatus}}</mat-chip>\n</mat-chip-list>\n</mat-card-content>\n<mat-card-title class=\"userName\">{{name}}</mat-card-title>\n  <mat-card-content>Mobile No: {{mobileNumber}}</mat-card-content>\n</mat-card>\n\n\n"
 
 /***/ }),
 
@@ -51,7 +51,7 @@ module.exports = "<div fxLayout.sm=\"column\" fxLayout.gt-sm=\"row\" fxLayoutGap
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div fxLayout=\"column\">\n    <h1 class=\"header\">\n        Users\n    </h1>\n     <div fxLayout=\"row\" class=\"search\">\n        <mat-form-field fxFlex=\"20%\">\n            <input matInput [(ngModel)]=\"term\" placeholder=\"Search\">\n        </mat-form-field>\n    </div>\n    <div fxLayout=\"column wrap\">\n        <div fxLayout.xs=\"column\" fxLayout.lg=\"row wrap\" fxLayoutGap=\"50px\" class=\"card\" fxLayoutAlign.sm=\"center center\">\n            <app-user-card *ngFor=\"let user of users | paginate: { itemsPerPage: 12, currentPage: p } | filter:term\"\n                [users]=\"user\">\n            </app-user-card>\n        </div>\n        <pagination-controls (pageChange)=\"p = $event\" fxLayoutAlign=\"center center\"></pagination-controls>\n        </div>\n        <div fxLayout=\"column\" fxLayout.gt-xs=\"row\" fxLayoutAlign=\"end\" class=\"add-button\">\n            <button mat-fab color=\"primary\" (click)=\"add()\">\n                <i class=\"material-icons\">\n                    add\n                </i>\n            </button>\n        </div>\n    </div>\n\n\n\n\n\n"
+module.exports = "<div fxLayout=\"column\">\n    <h1 class=\"header\">\n        Users\n    </h1>\n     <div fxLayout=\"row\" class=\"search\">\n        <mat-form-field fxFlex=\"20%\">\n            <input matInput [(ngModel)]=\"term\" placeholder=\"Search\">\n        </mat-form-field>\n    </div>\n    <div fxLayout=\"column wrap\">\n        <div fxLayout.xs=\"column\" fxLayout.lg=\"row wrap\" fxLayoutGap=\"50px\" class=\"card\" fxLayoutAlign.sm=\"center center\">\n            <app-user-card *ngFor=\"let user of users | paginate: { itemsPerPage: 12, currentPage: p } | filter:term\"\n                [users]=\"user\">\n            </app-user-card>\n        </div>\n        <pagination-controls (pageChange)=\"p = $event\" fxLayoutAlign=\"center center\"></pagination-controls>\n        </div>\n    </div>\n\n\n\n\n\n"
 
 /***/ }),
 
