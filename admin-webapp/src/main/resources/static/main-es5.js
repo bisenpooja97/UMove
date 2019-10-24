@@ -2706,13 +2706,13 @@ var ZoneService = /** @class */ (function () {
         return this.httpClient.patch(this.baseUrl + '/' + name, zone);
     };
     ZoneService.prototype.getSupervisor = function () {
-        return this.httpClient.get('http://172.23.234.83:8091/api/v1/users?role=Supervisor&status=Unallocated');
+        return this.httpClient.get('http://13.235.35.202:8080/userservice/api/v1/users?role=Supervisor&status=Unallocated');
     };
     ZoneService.prototype.getSupervisorById = function (id) {
-        return this.httpClient.get('http://172.23.234.83:8091/api/v1/users/' + id);
+        return this.httpClient.get('http://13.235.35.202:8080/userservice/api/v1/users/' + id);
     };
     ZoneService.prototype.updateSupervisorStatus = function (id, supervisor) {
-        return this.httpClient.patch('http://172.23.234.83:8091/api/v1/users/' + id, supervisor);
+        return this.httpClient.patch('http://13.235.35.202:8080/userservice/api/v1/users/' + id, supervisor);
     };
     ZoneService.ctorParameters = function () { return [
         { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }

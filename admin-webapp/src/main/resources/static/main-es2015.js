@@ -2586,13 +2586,13 @@ let ZoneService = class ZoneService {
         return this.httpClient.patch(this.baseUrl + '/' + name, zone);
     }
     getSupervisor() {
-        return this.httpClient.get('http://172.23.234.83:8091/api/v1/users?role=Supervisor&status=Unallocated');
+        return this.httpClient.get('http://13.235.35.202:8080/userservice/api/v1/users?role=Supervisor&status=Unallocated');
     }
     getSupervisorById(id) {
-        return this.httpClient.get('http://172.23.234.83:8091/api/v1/users/' + id);
+        return this.httpClient.get('http://13.235.35.202:8080/userservice/api/v1/users/' + id);
     }
     updateSupervisorStatus(id, supervisor) {
-        return this.httpClient.patch('http://172.23.234.83:8091/api/v1/users/' + id, supervisor);
+        return this.httpClient.patch('http://13.235.35.202:8080/userservice/api/v1/users/' + id, supervisor);
     }
 };
 ZoneService.ctorParameters = () => [

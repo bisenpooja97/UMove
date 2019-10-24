@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-card class=\"my-card\" fxFlex.sm=\"0 1 calc(50%-10px)\" fxFlex.md=\"0 1 calc(33%-10px)\" fxLayout=\"column\" fxLayoutGap=\"20px\">\n\n  <mat-card-content fxLayoutAlign=\"end\" [ngStyle]=\"{'color':getColor(documentStatus)}\">{{documentStatus}}</mat-card-content>\n  <mat-card-title fxLayoutAlign=\"start\" >{{name}}</mat-card-title>\n  <mat-card-content fxLayoutAlign=\"start\" >Mobile Number:{{mobileNumber}}</mat-card-content>\n  <mat-card-content fxLayoutAlign=\"start\" class=\"userName\">Driving Licence Number:{{dLicenceNumber}}</mat-card-content>\n  <mat-card-content fxLayoutAlign=\"start\">Expiry Date:{{expiryDate|date: \"dd LLLL yyyy\"}}</mat-card-content>\n   <mat-card-actions >\n    <button mat-raised-button color=\"primary\" class=\"view-button\" (click)=view()>VIEW</button>\n  </mat-card-actions>\n</mat-card>\n"
+module.exports = "<mat-card class=\"my-card\">\n\n  <!-- <mat-card-content fxLayoutAlign=\"end\" [ngStyle]=\"{'color':getColor(documentStatus)}\">{{documentStatus}}</mat-card-content>\n  <ngx-avatar name=\"{{name}}\"></ngx-avatar> -->\n  <mat-card-content fxLayoutAlign=\"space-between\" >\n    <ngx-avatar name=\"{{name}}\"></ngx-avatar>\n    <mat-chip-list aria-label=\"Fish selection\">\n<mat-chip [ngStyle]=\"{'background-color':getColor(documentStatus)}\" class=\"status\">{{documentStatus}}</mat-chip>\n</mat-chip-list>\n</mat-card-content>\n  <mat-card-title fxLayoutAlign=\"start\" >{{name}}</mat-card-title>\n  <mat-card-content fxLayoutAlign=\"start\" >Mobile Number:{{mobileNumber}}</mat-card-content>\n  <mat-card-content fxLayoutAlign=\"start\" class=\"userName\">Driving Licence Number:{{dLicenceNumber}}</mat-card-content>\n  <mat-card-content fxLayoutAlign=\"start\">Expiry Date:{{expiryDate|date: \"dd LLLL yyyy\"}}</mat-card-content>\n   <mat-card-actions >\n    <button mat-raised-button color=\"primary\" class=\"view-button\" (click)=view()>VIEW</button>\n  </mat-card-actions>\n</mat-card>\n"
 
 /***/ }),
 
@@ -18,7 +18,7 @@ module.exports = "<mat-card class=\"my-card\" fxFlex.sm=\"0 1 calc(50%-10px)\" f
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h1 fxLayout=\"column\" fxLayout.gt-md=\"row\" fxLayoutGap.gt-md=\"15px\" class=\"header\">\n        Driving licence Verification Requests\n    </h1>\n    <div fxLayout=\"row\" fxLayoutGap=\"20px\" class=\"search\" fxLayout.gt-xs=\"row\">\n        <mat-form-field fxFlex=20%>\n            <input matInput [(ngModel)]=\"term\" placeholder=\"Search\">\n        </mat-form-field>\n    </div>\n    <div fxLayout.xs=\"column\" fxLayout.gt=\"row\" fxLayout=\"row wrap\" fxLayoutGap=\"10px\" class=\"card\">\n        <app-document-card *ngFor=\"let user of users | paginate: { itemsPerPage: 10, currentPage: p}| filter:term\"\n [users]=\"user\" (removeDocumentCard)=\"removeDocument($event)\">\n\n        </app-document-card>\n        <pagination-controls (pageChange)=\"p = $event\"></pagination-controls>\n    </div>\n"
+module.exports = "<div fxLayout=\"column\">\n<h1 fxLayout=\"column\" fxLayout.gt-md=\"row\" fxLayoutGap.gt-md=\"15px\" class=\"header\">\n        Driving licence Verification Requests\n    </h1>\n    <div fxLayout=\"row\" fxLayoutGap=\"20px\" class=\"search\" fxLayout.gt-xs=\"row\">\n        <mat-form-field fxFlex=20%>\n            <input matInput [(ngModel)]=\"term\" placeholder=\"Search\">\n        </mat-form-field>\n    </div>\n    <div fxLayout=\"column wrap\">\n    <div fxLayout.xs=\"column\" fxLayout.gt=\"row\" fxLayout=\"row wrap\" fxLayoutGap=\"10px\" class=\"card\">\n        <app-document-card *ngFor=\"let user of users | paginate: { itemsPerPage: 10, currentPage: p}| filter:term\"\n     [users]=\"user\" (removeDocumentCard)=\"removeDocument($event)\">\n        </app-document-card>    \n        </div>\n        <pagination-controls (pageChange)=\"p = $event\" fxLayoutAlign=\"center center\"></pagination-controls>\n    </div>\n</div>\n    \n"
 
 /***/ }),
 
@@ -40,7 +40,7 @@ module.exports = " <mat-toolbar>\n    <span class=\"fill-remaining-space\"></spa
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".my-card {\n    margin-bottom: 40px;\n    height: 250px;\n    cursor: pointer;\n}\n\n.my-card:hover {\n    transform: scale(1.1);\n}\n\n.name {\n    padding-top: 10%;\n}\n\n.status {\n    font-weight: bold;\n    font-size: 1em;\n}\n\n.view-button\n{ \n    color:white;\n   \n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZG9jdW1lbnRzL2RvY3VtZW50LWNhcmQvZG9jdW1lbnQtY2FyZC5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksbUJBQW1CO0lBQ25CLGFBQWE7SUFDYixlQUFlO0FBQ25COztBQUVBO0lBR0kscUJBQXFCO0FBQ3pCOztBQUNBO0lBQ0ksZ0JBQWdCO0FBQ3BCOztBQUVBO0lBQ0ksaUJBQWlCO0lBQ2pCLGNBQWM7QUFDbEI7O0FBQ0E7O0lBRUksV0FBVzs7QUFFZiIsImZpbGUiOiJzcmMvYXBwL2RvY3VtZW50cy9kb2N1bWVudC1jYXJkL2RvY3VtZW50LWNhcmQuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5teS1jYXJkIHtcbiAgICBtYXJnaW4tYm90dG9tOiA0MHB4O1xuICAgIGhlaWdodDogMjUwcHg7XG4gICAgY3Vyc29yOiBwb2ludGVyO1xufVxuXG4ubXktY2FyZDpob3ZlciB7XG4gICAgLXdlYmtpdC10cmFuc2Zvcm06IHNjYWxlKDEuMSk7XG4gICAgLW1zLXRyYW5zZm9ybTogc2NhbGUoMS4xKTtcbiAgICB0cmFuc2Zvcm06IHNjYWxlKDEuMSk7XG59XG4ubmFtZSB7XG4gICAgcGFkZGluZy10b3A6IDEwJTtcbn1cblxuLnN0YXR1cyB7XG4gICAgZm9udC13ZWlnaHQ6IGJvbGQ7XG4gICAgZm9udC1zaXplOiAxZW07XG59XG4udmlldy1idXR0b25cbnsgXG4gICAgY29sb3I6d2hpdGU7XG4gICBcbn0iXX0= */"
+module.exports = ".my-card {\n    margin-bottom: 40px;\n    height: 250px;\n    cursor: pointer;\n}\n\n.my-card:hover {\n    transform: scale(1.1);\n}\n\n.name {\n    padding-top: 10%;\n}\n\n.status {\n    font-weight: bold;\n    font-size: 1em;\n    color:white;\n    \n}\n\n.view-button\n{ \n    color:white;\n   \n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZG9jdW1lbnRzL2RvY3VtZW50LWNhcmQvZG9jdW1lbnQtY2FyZC5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksbUJBQW1CO0lBQ25CLGFBQWE7SUFDYixlQUFlO0FBQ25COztBQUVBO0lBR0kscUJBQXFCO0FBQ3pCOztBQUNBO0lBQ0ksZ0JBQWdCO0FBQ3BCOztBQUVBO0lBQ0ksaUJBQWlCO0lBQ2pCLGNBQWM7SUFDZCxXQUFXOztBQUVmOztBQUNBOztJQUVJLFdBQVc7O0FBRWYiLCJmaWxlIjoic3JjL2FwcC9kb2N1bWVudHMvZG9jdW1lbnQtY2FyZC9kb2N1bWVudC1jYXJkLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIubXktY2FyZCB7XG4gICAgbWFyZ2luLWJvdHRvbTogNDBweDtcbiAgICBoZWlnaHQ6IDI1MHB4O1xuICAgIGN1cnNvcjogcG9pbnRlcjtcbn1cblxuLm15LWNhcmQ6aG92ZXIge1xuICAgIC13ZWJraXQtdHJhbnNmb3JtOiBzY2FsZSgxLjEpO1xuICAgIC1tcy10cmFuc2Zvcm06IHNjYWxlKDEuMSk7XG4gICAgdHJhbnNmb3JtOiBzY2FsZSgxLjEpO1xufVxuLm5hbWUge1xuICAgIHBhZGRpbmctdG9wOiAxMCU7XG59XG5cbi5zdGF0dXMge1xuICAgIGZvbnQtd2VpZ2h0OiBib2xkO1xuICAgIGZvbnQtc2l6ZTogMWVtO1xuICAgIGNvbG9yOndoaXRlO1xuICAgIFxufVxuLnZpZXctYnV0dG9uXG57IFxuICAgIGNvbG9yOndoaXRlO1xuICAgXG59Il19 */"
 
 /***/ }),
 
@@ -92,11 +92,11 @@ let DocumentCardComponent = class DocumentCardComponent {
         this.router.navigate(['users/', this.id]);
     }
     getColor(documentStatus) {
-        switch (documentStatus) {
+        switch (this.documentStatus) {
             case 'Pending':
-                return 'red';
+                return '#ff0000';
             case 'Verified':
-                return 'green';
+                return '#008000';
         }
     }
     view() {
@@ -295,7 +295,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var ngx_pagination__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ngx-pagination */ "./node_modules/ngx-pagination/dist/ngx-pagination.js");
 /* harmony import */ var ng2_search_filter__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ng2-search-filter */ "./node_modules/ng2-search-filter/ng2-search-filter.js");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
-/* harmony import */ var _update_kyc_update_kyc_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./update-kyc/update-kyc.component */ "./src/app/documents/update-kyc/update-kyc.component.ts");
+/* harmony import */ var ngx_avatar__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ngx-avatar */ "./node_modules/ngx-avatar/fesm2015/ngx-avatar.js");
+/* harmony import */ var _update_kyc_update_kyc_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./update-kyc/update-kyc.component */ "./src/app/documents/update-kyc/update-kyc.component.ts");
+
 
 
 
@@ -313,7 +315,7 @@ let DocumentsModule = class DocumentsModule {
 };
 DocumentsModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
-        declarations: [_documents_component__WEBPACK_IMPORTED_MODULE_4__["DocumentsComponent"], _document_card_document_card_component__WEBPACK_IMPORTED_MODULE_5__["DocumentCardComponent"], _update_kyc_update_kyc_component__WEBPACK_IMPORTED_MODULE_12__["UpdateKycComponent"]],
+        declarations: [_documents_component__WEBPACK_IMPORTED_MODULE_4__["DocumentsComponent"], _document_card_document_card_component__WEBPACK_IMPORTED_MODULE_5__["DocumentCardComponent"], _update_kyc_update_kyc_component__WEBPACK_IMPORTED_MODULE_13__["UpdateKycComponent"]],
         imports: [
             _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"],
             _documents_routing_module__WEBPACK_IMPORTED_MODULE_3__["DocumentsRoutingModule"],
@@ -332,9 +334,11 @@ DocumentsModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _angular_material__WEBPACK_IMPORTED_MODULE_7__["MatOptionModule"],
             _angular_forms__WEBPACK_IMPORTED_MODULE_11__["FormsModule"],
             _angular_forms__WEBPACK_IMPORTED_MODULE_11__["ReactiveFormsModule"],
-            _angular_material__WEBPACK_IMPORTED_MODULE_7__["MatToolbarModule"]
+            _angular_material__WEBPACK_IMPORTED_MODULE_7__["MatToolbarModule"],
+            ngx_avatar__WEBPACK_IMPORTED_MODULE_12__["AvatarModule"],
+            _angular_material__WEBPACK_IMPORTED_MODULE_7__["MatChipsModule"],
         ],
-        entryComponents: [_update_kyc_update_kyc_component__WEBPACK_IMPORTED_MODULE_12__["UpdateKycComponent"]]
+        entryComponents: [_update_kyc_update_kyc_component__WEBPACK_IMPORTED_MODULE_13__["UpdateKycComponent"]]
     })
 ], DocumentsModule);
 
@@ -363,11 +367,11 @@ __webpack_require__.r(__webpack_exports__);
 let DocumentsService = class DocumentsService {
     constructor(httpClient) {
         this.httpClient = httpClient;
-        this.baseUrl = src_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].baseUrl + src_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].userBaseApi;
+        this.baseUrl = src_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].baseUrl + src_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].userService + src_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].userBaseApi;
     }
     getUsers() {
         console.log(this.baseUrl + '/' + '?role=User&documentStatus=Pending');
-        return this.httpClient.get(this.baseUrl + '/' + '?role=User&documentStatus=Pending');
+        return this.httpClient.get(this.baseUrl + '?role=User&documentStatus=Pending');
     }
     getUsersById(id) {
         return this.httpClient.get(this.baseUrl + '/' + id);
