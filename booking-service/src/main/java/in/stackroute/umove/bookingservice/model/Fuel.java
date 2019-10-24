@@ -5,10 +5,10 @@ import lombok.*;
 @Data
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class ExtraCharge {
-    private String chargedFor;
-    private Double amount;
+public class Fuel {
+    private String id;
+    private String name;
+    private Float costFuel;
 }

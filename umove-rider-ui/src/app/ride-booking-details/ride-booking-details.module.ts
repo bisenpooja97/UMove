@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { RideBookingDetailsPage } from './ride-booking-details.page';
 import { MbscModule } from '@mobiscroll/angular';
-import {SharedModule} from "../shared/shared.module";
+import {SharedModule} from '../shared/shared.module';
 
 const routes: Routes = [
   {

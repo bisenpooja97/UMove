@@ -30,9 +30,11 @@ import {UserPaymentMethodService} from './service/user-payment-method/user-payme
 import {IonicStorageModule} from '@ionic/storage';
 
 @NgModule({
-  declarations: [AppComponent, BikeListPage,DropPage],
+  declarations: [AppComponent, BikeListPage, DropPage],
   entryComponents: [],
   imports: [
+    MbscModule,
+    FormsModule,
     BrowserModule,
     IonicModule.forRoot(),
     IonicStorageModule.forRoot(),

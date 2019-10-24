@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {BikeDetailComponent} from "../bike-detail/bike-detail.component";
-import {IonicModule} from "@ionic/angular";
+import {BikeDetailComponent} from '../bike-detail/bike-detail.component';
+import {IonicModule} from '@ionic/angular';
 
 
 
