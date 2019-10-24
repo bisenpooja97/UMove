@@ -103,10 +103,10 @@ public class VehicleTypeController {
                 .toUriString();
         String fileDownloaduri= ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("api/v1/downloadFile/"+fileName).toUriString();
-       VehicleType vehicleType=typeManagementService.findName(id);
-       vehicleType.getUrl();
-       vehicleType.setUrl(fileDownloaduri);
-       typeManagementService.updateTypeDetails(id,vehicleType);
+  //     VehicleType vehicleType=typeManagementService.findName(id);
+  //     vehicleType.getUrl();
+  //     vehicleType.setUrl(fileDownloaduri);
+   //    typeManagementService.updateTypeDetails(id,vehicleType);
 //       VehicleType vehicleType1=vehicleType.getUrl();
 
 

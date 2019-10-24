@@ -18,7 +18,7 @@ import java.util.UUID;
 
 public class VehicleType {
 
-    private String id = UUID.randomUUID().toString().substring(32);
+    private String id = UUID.randomUUID().toString().substring(30);
     private String name;
     private float costPerKm;
     private float costPerMin;

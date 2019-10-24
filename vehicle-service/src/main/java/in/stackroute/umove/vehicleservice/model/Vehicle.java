@@ -18,7 +18,7 @@ import java.util.UUID;
 
 public class Vehicle {
 
-    private String id = UUID.randomUUID().toString().substring(32);
+    private String id = UUID.randomUUID().toString().substring(30);
     private String zoneId;
     private String registrationNo;
     private String insuranceNo;
