@@ -57,7 +57,7 @@ getVehiclesDetails() {
   this.vehicleService.getVehicles().subscribe(res => {
 
     res.data.filter(val => {
-      if (val.zoneid === String(this.id)) {
+      if (val.zoneId === String(this.id)) {
           this.count += 1;
       }
     });

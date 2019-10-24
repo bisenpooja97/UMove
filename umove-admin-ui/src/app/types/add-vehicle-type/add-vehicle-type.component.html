@@ -25,8 +25,8 @@
 
 
             <mat-form-field appearance="outline" fxFlex>
-                <mat-label>Km Per Litre</mat-label>
-                <input matInput #input placeholder="Km per litre" formControlName="kilometer" required>
+                <mat-label>KM Per Litre</mat-label>
+                <input matInput #input placeholder="Mileage" formControlName="mileage" required>
                 <mat-error *ngIf="Rkm.invalid">
 
                     {{getErrorkm()}}
@@ -35,8 +35,8 @@
 
 
             <mat-form-field appearance="outline" fxFlex>
-                <mat-label>CC</mat-label>
-                <input matInput #input placeholder="CC" formControlName="vehiclecc" required>
+                <mat-label>Vehicle CC</mat-label>
+                <input matInput #input placeholder="vehicle CC" formControlName="vehicleCC" required>
                 <mat-error *ngIf="Rcc.invalid">
                     {{getErrorCC()}}
 
@@ -63,25 +63,10 @@
                 </mat-select>
             </mat-form-field>
 
-            <!-- <mat-form-field appearance="outline" fxFlex>
-                <mat-label>Category</mat-label>
-                 <input matInput #input placeholder="Placeholder" formControlName="status" required> -->
-            <!-- <select matNativeControl formControlName="category">
-        <option value="Sports">Sports</option>
-        <option value="Cruiser">Cruiser</option>
-        <option value="Touring">Touring</option>
-        <option value="Standard">Standard</option>
-        <option value="Dual_Purpose">Dual Purpose</option>
-        <option value="Dirt_Bikes">Dirt Bikes</option>
-      </select>
-            </mat-form-field> -->
-
-
             <mat-form-field appearance="outline" fxFlex>
                 <mat-label>Cost Time</mat-label>
-                <input matInput #input placeholder="Cost Time" formControlName="costtime" required>
-
-                <mat-error *ngIf="Rcosttime.invalid">
+                <input matInput #input placeholder="Cost Per Minute" formControlName="costPerMin" required>
+                  <mat-error *ngIf="Rcosttime.invalid">
 
                     {{getErrorCosttime()}}
                 </mat-error>
@@ -94,7 +79,7 @@
 
 
 
-            <button mat-raised-button class="btn">
+            <button mat-raised-button class="btn"  [disabled]='!typeForm.valid'  color="primary">
           Submit
         </button>
 

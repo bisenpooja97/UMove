@@ -11,17 +11,17 @@ import { VehicleTypeService } from '../vehicle-type.service';
 })
 export class UpdateTypesComponent implements OnInit {
 
-  costtime: number;
+  costPerMin: number;
   constructor(public dialogRef: MatDialogRef<UpdateTypesComponent>,
               private fb: FormBuilder, private route: ActivatedRoute,
               private router: Router, private vehicleTypeService: VehicleTypeService,
               @Inject(MAT_DIALOG_DATA) data) {
-      this.costtime = data.costtime;
+      this.costPerMin = data.costPerMin;
     }
 
 
     typeForm = this.fb.group({
-      costtime: ['']
+      costPerMin: ['']
     });
 
     onClose() {
@@ -33,10 +33,7 @@ export class UpdateTypesComponent implements OnInit {
       console.log(this.typeForm.value);
       this.dialogRef.close(this.typeForm.value);
     }
-
-
-
-
+    
   ngOnInit() {
   }
 

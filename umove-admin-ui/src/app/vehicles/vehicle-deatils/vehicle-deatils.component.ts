@@ -4,6 +4,7 @@ import { VehicleService } from '../vehicle.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatSnackBar, MatDialogConfig, MatDialog } from '@angular/material';
 import { UpdateVehiclesComponent } from '../update-vehicles/update-vehicles.component';
+import { NotificationService } from 'src/app/shared/notification.service';
 export interface Status {
   value: string;
   viewValue: string;
@@ -20,58 +21,55 @@ export class VehicleDeatilsComponent implements OnInit {
   registrationNo: string;
   lastServiceDate: Date;
   zoneId: string;
-   insuranceNo: string;
+  insuranceNo: string;
 
- name: string;
- category: string;
- costkm: number;
- costtime: number;
- cc: string;
-vehiclePurchased: Date;
-status1: string;
-chassisNumber: string;
+  name: string;
+  category: string;
+  costkm: number;
+  costtime: number;
+  cc: string;
+  purchasedDate: Date;
+  status1: string;
+  chassisNumber: string;
 
-vehicleStatus: Status[] = [
-  { value: 'Busy', viewValue: 'BUSY' },
-  { value: 'Free', viewValue: 'FREE' },
-  {value: 'Servicing', viewValue: 'SERVICING'},
-  {value: 'Stolen', viewValue: 'STOLEN'},
-  {value: 'No_More_In_Use', viewValue: 'No More In Use'}
+  vehicleStatus: Status[] = [
+    { value: 'Busy', viewValue: 'BUSY' },
+    { value: 'Free', viewValue: 'FREE' },
+    { value: 'Servicing', viewValue: 'SERVICING' },
+    { value: 'Stolen', viewValue: 'STOLEN' },
+    { value: 'No_More_In_Use', viewValue: 'No More In Use' }
 
-];
+  ];
 
 
 
-constructor(private router: Router, private vehicleService: VehicleService,
-            private activatedRoute: ActivatedRoute, private route: ActivatedRoute,
-            private snackbar: MatSnackBar,  private matDialog: MatDialog) { }
+  constructor(private router: Router, private vehicleService: VehicleService,
+    private activatedRoute: ActivatedRoute, private route: ActivatedRoute,
+    private matDialog: MatDialog,
+    private notificationService: NotificationService) { }
 
 
   ngOnInit() {
     this.getVehicleDetails();
 
   }
-getVehicleDetails() {
-  this.vehicleService.getVehicleByRegistrationNo(this.route.snapshot.paramMap.get('registrationNo')).subscribe(res => {
-    this.vehicle = res.data;
-    console.log('data', res.data);
-    console.log(res);
-    this.registrationNo = this.vehicle.registrationNo;
-    this.name = this.vehicle.type.name;
-    this.lastServiceDate = this.vehicle.lastServiceDate;
-    this.vehiclePurchased = this.vehicle.vehiclePurchased;
-    this.insuranceNo = this.vehicle.insuranceNo;
-    this.zoneId = this.vehicle.zoneid;
-    this.chassisNumber = this.vehicle.chassisNumber;
-    this.cc = this.vehicle.type.vehiclecc;
-    this.costkm = this.vehicle.type.costkm;
-    this.costtime = this.vehicle.type.costtime;
-    this.status1 = this.vehicle.status;
-
-
-
-
-   });
+  getVehicleDetails() {
+    this.vehicleService.getVehicleByRegistrationNo(this.route.snapshot.paramMap.get('registrationNo')).subscribe(res => {
+      this.vehicle = res.data;
+      console.log('data', res.data);
+      console.log(res);
+      this.registrationNo = this.vehicle.registrationNo;
+      this.name = this.vehicle.vehicleType.name;
+      this.lastServiceDate = this.vehicle.lastServiceDate;
+      this.purchasedDate = this.vehicle.purchasedDate;
+      this.insuranceNo = this.vehicle.insuranceNo;
+      this.zoneId = this.vehicle.zoneId;
+      this.chassisNumber = this.vehicle.chassisNumber;
+      this.cc = this.vehicle.vehicleType.vehicleCC;
+      this.costkm = this.vehicle.vehicleType.costPerKm;
+      this.costtime = this.vehicle.vehicleType.costPerMin;
+      this.status1 = this.vehicle.status;
+    });
   }
 
   onEdit() {
@@ -83,51 +81,36 @@ getVehicleDetails() {
     this.vehicle.status = newValue;
     this.vehicleService.updateVehicle(this.route.snapshot.paramMap.get('registrationNo'), this.vehicle).subscribe(
 
-);
-}
+    );
+  }
 
-openSnackbar(message: string, action: string) {
-  this.snackbar.open(message, action, {
-    duration: 2000,
-    panelClass: ['blue-snackbar']
-  });
-}
+  update() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+      insuranceNo: this.vehicle.insuranceNo,
+      lastServiceDate: this.vehicle.lastServiceDate,
+      purchasedDate: this.vehicle.purchasedDate
+    };
+    const dRef = this.matDialog.open(UpdateVehiclesComponent, dialogConfig);
+    dRef.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+      console.log('Back to parent', result);
+      this.vehicleService.updateVehicle(this.registrationNo, result).subscribe(
+        response => {
+          this.notificationService.success('Vehicle details updated succesffuly');
+          this.getVehicleDetails();
 
+        },
+        error => {
+          this.notificationService.warn('not updated');
+        }
 
+      );
+    }
+    });
 
-update() {
-  const dialogConfig = new MatDialogConfig();
-  dialogConfig.disableClose = true;
-  dialogConfig.autoFocus = true;
-  dialogConfig.width = '20%';
-  dialogConfig.data = {
-    insuranceNo : this.vehicle.insuranceNo,
-    lastServiceDate: this.vehicle.lastServiceDate,
-    vehiclePurchased: this.vehicle.vehiclePurchased
-  };
-  const dRef = this.matDialog.open(UpdateVehiclesComponent, dialogConfig);
-  dRef.afterClosed().subscribe(result => {
-    console.log('Back to parent', result);
-    this.vehicleService.updateVehicle(this.registrationNo, result).subscribe(
-      response => {
-                    this.openSnackbar('Vehicle details updated succesffuly', 'ok');
-                    this.getVehicleDetails();
-
-                                                    },
-                                                    error => {
-                                                      this.openSnackbar('not updated', 'ok');
-                                                    }
-
-                                                    );
-                                                  });
-
-
-
-}
-
-
-
-
-
+  }
 
 }

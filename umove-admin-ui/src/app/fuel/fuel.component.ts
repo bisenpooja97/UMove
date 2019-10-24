@@ -24,7 +24,7 @@ export class FuelComponent implements OnInit {
 
   ngOnInit() {
     this.fuelService.getFuel().subscribe(res => { this.fuel = res.data;
-                                                         console.log(res, 'parent');
+                                                  console.log(res, 'parent');
 
     } );
     return this.fuelService.getFuel().subscribe(res => {
@@ -46,7 +46,6 @@ export class FuelComponent implements OnInit {
           const dialogConfig = new MatDialogConfig();
           dialogConfig.disableClose = true;
           dialogConfig.autoFocus = true;
-          dialogConfig.width = '40%';
           this.matDialog.open(AddFuelComponent, dialogConfig);
           const dRef = this.matDialog.open(AddFuelComponent, dialogConfig);
 

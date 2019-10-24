@@ -39,7 +39,6 @@ add() {
   const dialogConfig = new MatDialogConfig();
   dialogConfig.disableClose = true;
   dialogConfig.autoFocus = true;
-  dialogConfig.width = '40%';
   this.matDialog.open(AddVehicleComponent, dialogConfig);
   const dRef = this.matDialog.open(AddVehicleComponent, dialogConfig);
 

@@ -11,10 +11,10 @@ import { UpdateFuelComponent } from '../update-fuel/update-fuel.component';
   styleUrls: ['./fuel-details.component.css']
 })
 export class FuelDetailsComponent implements OnInit {
-  fuel: Fuel;
-
+ fuel: Fuel;
  name: string;
- costFuel: number;
+ fuelCost: number;
+
 
  constructor(private router: Router, private fuelService: FuelService,
              private activatedRoute: ActivatedRoute, private route: ActivatedRoute,
@@ -32,7 +32,7 @@ export class FuelDetailsComponent implements OnInit {
       console.log(res);
 
       this.name = this.fuel.name;
-      this.costFuel = this.fuel.costFuel;
+      this.fuelCost = this.fuel.fuelCost;
 
 
 
@@ -56,13 +56,13 @@ update() {
   const dialogConfig = new MatDialogConfig();
   dialogConfig.disableClose = true;
   dialogConfig.autoFocus = true;
-  dialogConfig.width = '20%';
   dialogConfig.data = {
-    costFuel : this.fuel.costFuel,
+    fuelCost : this.fuel.fuelCost,
 
   };
   const dRef = this.matDialog.open(UpdateFuelComponent, dialogConfig);
   dRef.afterClosed().subscribe(result => {
+    if (result !== undefined) {
     console.log('Back to parent', result);
     this.fuelService.updateFuel(this.name, result).subscribe(
       response => {
@@ -75,6 +75,7 @@ update() {
                                                     }
 
                                                     );
+                                                  }
                                                   });
 
 

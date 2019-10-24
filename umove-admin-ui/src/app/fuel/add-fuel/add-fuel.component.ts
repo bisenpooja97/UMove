@@ -18,7 +18,7 @@ export class AddFuelComponent implements OnInit {
   }
 
   get rCost() {
-    return this.fuelForm.get('costFuel');
+    return this.fuelForm.get('fuelCost');
   }
 
   constructor( public dialogRef: MatDialogRef<AddFuelComponent>, private fb: FormBuilder, private route: ActivatedRoute,
@@ -27,7 +27,7 @@ export class AddFuelComponent implements OnInit {
 
                fuelForm = this.fb.group({
                 name: ['', [Validators.pattern('^[a-zA-Z0-9\-]*$')]],
-                costFuel: ['']
+                fuelCost: ['']
               });
 
               onSubmit() {

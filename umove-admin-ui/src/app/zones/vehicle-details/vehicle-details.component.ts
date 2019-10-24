@@ -32,6 +32,7 @@ export class VehicleDetailsComponent implements OnInit {
   capacity: number;
   buttonDisable: boolean;
   zoneType: ZoneTypeCount[];
+  displayCount: number;
 
   ngOnInit() {
     this.buttonDisable = false;
@@ -68,15 +69,15 @@ export class VehicleDetailsComponent implements OnInit {
       if (result !== undefined) {
         this.vehicleService.getVehicleByRegistrationNo(String(Object.values(result)[0])).subscribe(res => {
           this.selectedVehicle = res.data;
-          this.selectedVehicle.zoneid = this.id;
+          this.selectedVehicle.zoneId = this.id;
           console.log(this.selectedVehicle);
           this.vehicleService.updateVehicle(String(Object.values(result)[0]), this.selectedVehicle).subscribe(
             response => {
               this.notificationService.success('Vehicle added to zone successfully!!');
-              this.getZoneDetails();
-              this.vDetails();
-              console.log(this.vehicle);
             });
+          this.getZoneDetails();
+          this.vDetails();
+          console.log(this.vehicle);
           this.zoneService.getZoneType(this.id, this.tid).subscribe(val => {
             console.log(val);
             if (val.data === null) {
@@ -108,21 +109,32 @@ export class VehicleDetailsComponent implements OnInit {
 
   vDetails() {
     this.vehicleService.getVehicles().subscribe(res => {
-      res.data.filter(val => {
-        if ((val.zoneid === this.id)) {
-          this.vehicle.push(val);
-        }
-      });
-      res.data.filter(val => {
-        if (((val.zoneid === null) || (val.zoneid !== this.id)) && (
-          (val.status !== 'No_More_In_Use') && (val.status !== 'Stolen') && (val.status !== 'Busy') && (val.status !== 'Servicing'))) {
-          this.vehicle2.push(val);
-          this.tname = val.type.name;
-          this.tid = val.type.id;
-          console.log(this.tid);
-          console.log(this.tname);
-        }
-      });
+      if (res.count === 0) {
+        this.displayCount = res.count;
+        console.log(res, 'https://www.doodadi.com/assets/images/data-not-found.svg');
+      } else {
+        res.data.filter(val => {
+          if ((val.zoneId === this.id)) {
+            this.displayCount = 1;
+            this.vehicle.push(val);
+            console.log(res, 'hi this' , 'https://www.doodadi.com/assets/images/data-not-found.svg');
+          } else {
+            this.displayCount = 0;
+            console.log(res, 'hi this' , 'https://www.doodadi.com/assets/images/data-not-found.svg');
+          }
+        });
+        res.data.filter(val => {
+          if (((val.zoneId === null) || (val.zoneId !== this.id)) && (
+            (val.status !== 'No_More_In_Use') && (val.status !== 'Stolen') && (val.status !== 'Busy') && (val.status !== 'Servicing'))) {
+            this.vehicle2.push(val);
+            this.tname = val.vehicleType.name;
+            this.tid = val.vehicleType.id;
+            console.log(this.tid);
+            console.log(this.tname);
+          }
+        });
+      }
+
     });
   }
 }

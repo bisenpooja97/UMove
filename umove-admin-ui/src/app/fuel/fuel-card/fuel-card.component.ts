@@ -13,28 +13,19 @@ import { UpdateFuelComponent } from '../update-fuel/update-fuel.component';
 export class FuelCardComponent implements OnInit {
   @Input() fuel: Fuel;
   name: string;
-  costFuel: number;
+  fuelCost: number;
 
   constructor(private router: Router) { }
 
 
   ngOnInit() {
      this.name = this.fuel.name;
-     this.costFuel = this.fuel.costFuel;
-
-   //  this.category = this.vehicle.type.category;
-
-
+     this.fuelCost = this.fuel.fuelCost;
   }
 
   ok() {
     this.router.navigate(['fuel/', this.name]);
 
   }
-
-
-  //////////////////////////////////////////////trial//////////////////////////////////////////////////////
-
-
 
 }

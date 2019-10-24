@@ -12,7 +12,7 @@
 
             <mat-form-field appearance="outline" fxFlex>
                 <mat-label>Zone Locality</mat-label>
-                <input matInput #input placeholder="Zone Locality" formControlName="locality" required (keyup.enter)="getLocation()">
+                <input matInput #input placeholder="Zone Locality" formControlName="locality" required (keyup.enter)="getLocation()"  (blur)="getLocation()">
                 <mat-hint>
                     Press Enter after writing locality
                 </mat-hint>

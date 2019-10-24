@@ -9,7 +9,7 @@
     </div>
     <div fxLayout="column wrap">
         <div fxLayout.xs="column" fxLayout.lg="row wrap" fxLayoutGap="50px" class="card" fxLayoutAlign.sm="center center">
-            <app-vehicle-type-card *ngFor="let type of vehicleTypes | paginate: { itemsPerPage: 9, currentPage: p}  | filter:term" [vehicleTypes]="type">
+            <app-vehicle-type-card *ngFor="let type of vehicleTypes | paginate: { itemsPerPage: 12, currentPage: p}  | filter:term" [vehicleTypes]="type">
 
             </app-vehicle-type-card>
         </div>

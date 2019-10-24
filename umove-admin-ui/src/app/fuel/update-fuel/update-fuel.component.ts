@@ -10,19 +10,19 @@ import { FormBuilder } from '@angular/forms';
   styleUrls: ['./update-fuel.component.css']
 })
 export class UpdateFuelComponent implements OnInit {
-  costFuel: number;
+  fuelCost: number;
 
 
   constructor(public dialogRef: MatDialogRef<UpdateFuelComponent>,
               private fb: FormBuilder, private route: ActivatedRoute,
               private router: Router, private fuelService: FuelService,
               @Inject(MAT_DIALOG_DATA) data) {
-this.costFuel = data.costFuel;
+                this.fuelCost = data.fuelCost;
 
 }
 
 fuelForm = this.fb.group({
-  costFuel: ['']
+  fuelCost: ['']
  });
 
  onClose() {

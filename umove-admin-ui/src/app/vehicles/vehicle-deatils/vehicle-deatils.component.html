@@ -20,7 +20,7 @@
 
 <div fxLayout="column">
 <mat-card class="vehicle" fxFlex.sm="0 1 calc(50%-10px)" fxFlex.md="0 1 calc(33%-10px)" fxLayout="column" fxLayoutGap="20px">
-    <mat-card-title fxLayoutAlign="start" class="date">{{vehiclePurchased| date:"dd LLLL yyyy"}}
+    <mat-card-title fxLayoutAlign="start" class="date">{{purchasedDate| date:"dd LLLL yyyy"}}
         <button mat-button class="icon" (click)="update()">
             <mat-icon>
                     create
@@ -31,24 +31,15 @@
     <div fxFlex=50% fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="20%" fxLayoutGap.lt-md="0px"
     class="form" fxLayoutAlign="center center">    
 <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="50px" fxLayoutGap.lt-md="0px" class="col">
-         <mat-card-title fxLayoutAlign="center center">Insurance No: {{insuranceNo}}
-
-                <!-- <span>
-                        <i class="material-icons iconCapacity"  (click)="update()"  >
-                            create
-                        </i>
-                  </span> -->
-
-
-            </mat-card-title>
+         <mat-card-title fxLayoutAlign="center center">Insurance No: {{insuranceNo}}</mat-card-title>
             <mat-card-title fxLayoutAlign="center center">Last Service Date: {{lastServiceDate| date:"dd LLLL yyyy"}}</mat-card-title>
             <mat-card-title fxLayoutAlign="center center">Name: {{name}}</mat-card-title>
 </div>
 <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="50px" fxLayoutGap.lt-md="0px" class="col">
  
-            <mat-card-title fxLayoutAlign="center center">Cost-KM: {{costkm}}</mat-card-title>
-            <mat-card-title fxLayoutAlign="center center">Cost-Time: {{costtime}}</mat-card-title>
-            <mat-card-title fxLayoutAlign="center center">Chassis No: {{chassisNumber}}</mat-card-title>
+    <mat-card-title fxLayoutAlign="center center">cost-Km: {{costkm}}</mat-card-title>
+    <mat-card-title fxLayoutAlign="center center">cost-Time: {{costtime}}</mat-card-title>
+    <mat-card-title fxLayoutAlign="center center">Chassis No: {{chassisNumber}}</mat-card-title>
 
 
         </div>

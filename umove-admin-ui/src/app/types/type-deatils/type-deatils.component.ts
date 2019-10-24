@@ -16,12 +16,13 @@ export class TypeDeatilsComponent implements OnInit {
   type: VehicleType;
  name: string;
  // category: string;
- costkm: number;
- costtime: number;
+ costPerKm: number;
+ costPerMin: number;
  cc: string;
- kilometer: number;
+ mileage: number;
  message: string;
  fuelname: string;
+
 
 
  constructor(private router: Router, private vehicleTypeService: VehicleTypeService,
@@ -39,16 +40,12 @@ getVehicleTypeDetails() {
               console.log('data', res.data);
               console.log(res);
               this.name = this.type.name;
-              this.cc = this.type.vehiclecc;
+              this.cc = this.type.vehicleCC;
               this.fuelname = this.type.fuel.name;
              // this.category = this.type.category;
-              this.costkm = this.type.costkm;
-              this.costtime = this.type.costtime;
-              this.kilometer = this.type.kilometer;
-
-
-
-
+              this.costPerKm = this.type.costPerKm;
+              this.costPerMin = this.type.costPerMin;
+              this.mileage = this.type.mileage;
              });
             }
 
@@ -68,9 +65,8 @@ getVehicleTypeDetails() {
               const dialogConfig = new MatDialogConfig();
               dialogConfig.disableClose = true;
               dialogConfig.autoFocus = true;
-              dialogConfig.width = '20%';
               dialogConfig.data = {
-                costtime : this.type.costtime,
+                costPerMin : this.type.costPerMin,
               };
               const dRef = this.matDialog.open(UpdateTypesComponent, dialogConfig);
               dRef.afterClosed().subscribe(result => {
