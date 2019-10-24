@@ -111,7 +111,7 @@ public class VehicleTypeImpl implements ServiceVehicleType {
     @Override
     public void saveImage(MultipartFile imageFile, String uid) throws Exception {
 
-        String fileName = "/home/dikshi/umove/vehicle-service/src/main/resources/" + uid + ".jpg";
+        String fileName = "/home/shivam/umove/zone-service/src/main/resources/" + uid + ".jpg";
         Path filePath = Paths.get(fileName);
         Files.createDirectories(filePath.getParent());
 

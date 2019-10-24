@@ -29,7 +29,7 @@ public class ZoneTypeCountController {
         return new ResponseEntity<>(map, HttpStatus.OK);
     }
 
-    @GetMapping("/zoneTypeCount")
+    @GetMapping("/zoneTypeCount/total")
     public ResponseEntity<Map> findZoneTypeCount() {
         List<ZoneTypeCount> zoneTypeCounts =serviceZoneTypeCount.findAllTypeCount();
         Map<String, Object> map = new TreeMap<>();

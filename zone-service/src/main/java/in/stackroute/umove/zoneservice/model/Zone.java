@@ -19,7 +19,7 @@ import java.util.UUID;
 @Document
 public class Zone {
 
-    private String id = UUID.randomUUID().toString().substring(32);
+    private String id = UUID.randomUUID().toString().substring(30);
     private String name;
     private double lat;
     private double lon;
