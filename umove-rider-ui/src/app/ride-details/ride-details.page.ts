@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RideService } from '../service/ride.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
 import { Ride } from '../model/ride';
 import { Zone } from '../model/zone';
 
@@ -45,8 +45,13 @@ export class RideDetailsPage implements OnInit {
 
   // calling service method to change destination of ride
   changeDestination() {
+    const navigationExtras: NavigationExtras = {
+      state: {
+          page:'change-drop'
+      }
+    };
+    this.router.navigate(['drop'], navigationExtras);
     // Apply the URL of choose destination page
-    this.router.navigateByUrl('dummy-destination-zone');
   }
 
   // calling service method to end a ride

@@ -6,11 +6,13 @@
 package in.stackroute.umove.zoneservice.controller;
 
 // Importing files
+import in.stackroute.umove.zoneservice.model.Vehicle;
 import in.stackroute.umove.zoneservice.model.Zone;
 //import in.stackroute.umove.zoneservice.model.Vehicle;
 import in.stackroute.umove.zoneservice.model.ZoneStatus;
 //import in.stackroute.umove.zoneservice.service.impl.ServiceVehicleImpl;
 import in.stackroute.umove.zoneservice.service.impl.ServiceZoneImpl;
+import in.stackroute.umove.zoneservice.service.impl.VehicleImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,8 +31,8 @@ public class ZoneController {
     @Autowired
     private ServiceZoneImpl serviceZoneDummy;
 
-//    @Autowired
-//    private ServiceVehicleImpl serviceVehicle;
+    @Autowired
+    private VehicleImpl vehicle;
 
     @Autowired
     private RestTemplate restTemplate;
@@ -101,19 +103,18 @@ public class ZoneController {
         return new ResponseEntity<Map>(map, HttpStatus.OK);
     }
 
-/*
+
     @GetMapping("/zones/{supervisorId}")
     public ResponseEntity<Map> getVehiclesBySupervisorId(@PathVariable String supervisorId){
         Zone zone = serviceZoneDummy.findZoneBySupervisorId(supervisorId);
-        List<Vehicle> vehicleList = serviceVehicle.findByZone(zone.getId());
+        List<Vehicle> vehicleList = vehicle.findByZone(zone.getId());
         Map<String, Object> map = new TreeMap<>();
         map.put("data", vehicleList);
         map.put("count", vehicleList.size());
         map.put("status", HttpStatus.OK);
         return new ResponseEntity<Map>(map, HttpStatus.OK);
-
     }
-    */
+
 
     @GetMapping("/zones/loc/{locality}")
     public ResponseEntity<Map> getLocality(@PathVariable String locality) {

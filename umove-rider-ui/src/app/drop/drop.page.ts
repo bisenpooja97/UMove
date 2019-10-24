@@ -4,6 +4,7 @@ import {Zone} from '../model/zone';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
 import {MapService} from "../service/zone/map.service";
+import {RideService} from "../service/ride.service";
 
 @Component({
   selector: 'app-drop',
@@ -11,12 +12,13 @@ import {MapService} from "../service/zone/map.service";
   styleUrls: ['./drop.page.scss'],
 })
 export class DropPage implements OnInit {
-  private isLoaded: boolean;
   ngOnInit(): void {
+
     this.geolocation.getCurrentPosition().then((resp) => {
       const lat = resp.coords.latitude;
       const lng = resp.coords.longitude;
-      this.mapService.buildMap(lat, lng,'drop');
+      this.mapService.buildMap(lat, lng,'drop',true);
+      // this.mapService.checkMapLoading();
       this.mapService.marker(lat, lng);
     }).catch((error) => {
       console.log('Error getting location', error);
@@ -31,64 +33,42 @@ export class DropPage implements OnInit {
     })
   }
   containerId = 'drop';
-  page = 'pick-up';
+  page = 'drop';
   trip : boolean;
-  isSelected = false;
+  isLoaded : boolean;
+
   private selectedZone: Zone;
   locality:string;
   constructor(private zoneService: ZoneService,
               private route: ActivatedRoute,
               private router: Router,
               private geolocation: Geolocation,
-              private mapService: MapService) {
+              private mapService: MapService,
+              private rideService: RideService) {
 
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
         this.page = this.router.getCurrentNavigation().extras.state.page;
-        // this.trip = this.router.getCurrentNavigation().extras.state.trip;
         console.log('page', this.page);
       }
     });
   }
 
-  sendDataToService() {
-    // const booking = this.bookingService.currentBooking;
-    // booking.sourceZone = this.selectedzone;
-    // if (this.trip) {
-    // booking.destinationZones.push(this.selectedzone);
-    // } else {
-    //   booking.destinationZones.push(this.selectedzone);
-    // }
-    //
-    // this.bookingService.setCurrentBooking(booking);
-    const navigationExtras: NavigationExtras = {
-      state: {
-        trip: this.trip,
-        pickUpZone: this.selectedZone
-      }
-    };
-    // this.coordinates = this.zoneService.getCoordinatesByLocality(this.locality);
-    this.router.navigate(['bikelist'], navigationExtras);
+  confirmBooking() {
+    const ride = this.rideService.currentBooking;
+    ride.destinationZones.push(this.selectedZone);
+    this.rideService.setCurrentBooking(ride);
+    this.router.navigate(['confirm-ride-detail']);
   }
 
-  booking() {
-    const navigationExtras: NavigationExtras = {
-      state: {
-        trip: this.trip,
-        pickUpZone: this.selectedZone
-      }
-    };
-    this.router.navigate(['confirm-ride-detail'], navigationExtras);
-  }
-
-  getSelected(selectedZone: Zone ) {
-
-    this.selectedZone = selectedZone;
-
+  rideDetails(){
+    const ride = this.rideService.currentBooking;
+    ride.destinationZones.push(this.selectedZone);
+    this.rideService.setCurrentBooking(ride);
+    this.router.navigate(['ride-details']);
   }
 
   gettingCoordinatesByLocality($event: any) {
     this.mapService.gettingCoordinatesByLocality($event);
   }
 }
-

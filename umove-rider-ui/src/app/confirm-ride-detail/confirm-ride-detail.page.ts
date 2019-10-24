@@ -3,6 +3,8 @@ import { Ride } from '../model/ride';
 import { RideService } from '../service/ride.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ActionSheetController } from '@ionic/angular';
+import {Geolocation} from "@ionic-native/geolocation/ngx";
+import {MapService} from "../service/zone/map.service";
 
 @Component({
   selector: 'app-confirm-ride-detail',
@@ -13,7 +15,7 @@ export class ConfirmRideDetailPage implements OnInit {
 
   booking: Ride;
 
-  constructor(private rideService: RideService,private actionSheetController: ActionSheetController,private router: Router, private route: ActivatedRoute) {
+  constructor(private rideService: RideService,private mapService: MapService,private geolocation: Geolocation,private actionSheetController: ActionSheetController,private router: Router, private route: ActivatedRoute) {
     this.route.queryParams.subscribe(params => {
       const state = this.router.getCurrentNavigation().extras.state;
       if (state) {
@@ -29,7 +31,15 @@ export class ConfirmRideDetailPage implements OnInit {
   }
 
   ngOnInit() {
-
+    this.geolocation.getCurrentPosition().then((resp) => {
+      const lat = resp.coords.latitude;
+      const lng = resp.coords.longitude;
+      this.mapService.buildMap(lat, lng,'booking',false);
+      // this.mapService.checkMapLoading();
+      this.mapService.marker(lat, lng);
+    }).catch((error) => {
+      console.log('Error getting location', error);
+    });
     this.booking = this.rideService.getCurrentBooking();
     this.booking.destinationZones = [];
 

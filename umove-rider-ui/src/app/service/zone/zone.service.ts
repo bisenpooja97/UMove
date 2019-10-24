@@ -17,6 +17,8 @@ export class ZoneService implements AutoCompleteService, OnInit {
     private data: any;
     constructor(private http: HTTP, private toastController: ToastController) {
         this.zoneList = [];
+        http.setDataSerializer('json');
+        http.setHeader('*', 'Content-Type', 'application/json');
     }
 
     public  getNearbyZones(lat: number, lon: number): Promise<HTTPResponse> {
