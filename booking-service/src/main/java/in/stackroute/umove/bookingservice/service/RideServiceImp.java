@@ -1,11 +1,14 @@
 package in.stackroute.umove.bookingservice.service;
 
+import in.stackroute.umove.bookingservice.controller.RideController;
 import in.stackroute.umove.bookingservice.exception.PaymentDetailsNotFoundException;
 import in.stackroute.umove.bookingservice.exception.RideNotFoundException;
 import in.stackroute.umove.bookingservice.model.*;
 import in.stackroute.umove.bookingservice.repo.PaymentRepo;
 import in.stackroute.umove.bookingservice.repo.ConfigRepo;
 import in.stackroute.umove.bookingservice.repo.RideRepo;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +21,8 @@ import java.util.Map;
 
 @Service
 public class RideServiceImp implements RideService {
+
+    private static final Logger logger = LogManager.getLogger(RideController.class);
 
     @Autowired
     private RideRepo rideRepo;
@@ -173,11 +178,11 @@ public class RideServiceImp implements RideService {
         if (ride.getStatus().equals(RideStatus.Confirmed)) {
             LocalDateTime bookedAt = ride.getBookedAt();
             Configuration configOfAutocancel = configRepo.findByName("autocancelTime");
-            System.out.println("AutocancelTime "+configOfAutocancel.getValue());
             LocalDateTime autoCancelTime = bookedAt.plusMinutes(configOfAutocancel.getValue());
+            logger.info("Autocancel Time from configuration is "+configOfAutocancel.getValue());
             Configuration configOfCancel = configRepo.findByName("cancelThresholdTime");
-            System.out.println("cancelThresholdTime "+configOfCancel.getValue());
             LocalDateTime cancelTime = bookedAt.plusMinutes(configOfCancel.getValue());
+            logger.info("Cancel Threshold Time from configuration is "+configOfCancel.getValue());
             int compareValue = rightNow.compareTo(cancelTime);
             if (compareValue <= 0) {
                 ride.setStatus(RideStatus.CancelledWithinThreshold);
