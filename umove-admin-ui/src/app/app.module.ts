@@ -79,9 +79,6 @@ import { TypesModule } from './types/types.module';
     MatDialogModule,
     MatDatepickerModule,
     MatNativeDateModule
-
-
-
   ],
   providers: [MatDatepickerModule],
   bootstrap: [AppComponent]
