@@ -24,6 +24,8 @@
 //import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 //import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 //
+//import javax.mail.MessagingException;
+//import java.io.IOException;
 //import java.lang.Exception;
 //import java.time.LocalDateTime;
 //import java.util.ArrayList;
@@ -165,7 +167,13 @@
 //     }
 //
 //    @Test
-//    public void payForBooking() {
+//    public void payForBooking() throws Exception {
+//        when(rideServiceImp.payForRide(new ObjectId("5d89c3cf651a913a1cf2d31e"),"PM1","Paid")).thenReturn(payment);
+//        mockMvc.perform(get("api/v1/rides/payments")
+//                .contentType(MediaType.APPLICATION_JSON)
+//                .content(jsonToString(payment)))
+//                .andExpect(MockMvcResultMatchers.status().isCreated())
+//                .andDo(MockMvcResultHandlers.print());
 //    }
 //
 //    @Test
