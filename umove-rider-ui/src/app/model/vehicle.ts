@@ -2,11 +2,12 @@ import {VehicleType} from './vehicle-type';
 
 export class Vehicle {
   public id: string;
-  public zoneid: string;
+  public zoneId: string;
   public insuranceNo: string;
   public status: string;
   public registrationNo: string;
-  public type: VehicleType;
+  public vehicleType: VehicleType;
   public lastServiceDate: Date;
-  public vehiclePurchased: Date;
+  public purchasedDate: Date;
+  public chassisNumber: string;
 }

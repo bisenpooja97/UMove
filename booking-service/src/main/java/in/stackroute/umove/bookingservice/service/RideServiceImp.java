@@ -75,7 +75,7 @@ public class RideServiceImp implements RideService {
             System.out.println("AutocancelTime "+configOfAutocancel.getValue());
             LocalDateTime autoCancelTime = bookedAt.plusMinutes(configOfAutocancel.getValue());
             Configuration configOfCancel = configRepo.findByName("cancelThresholdTime");
-            System.out.println("cancelThresholdTime "+configOfCancel.getValue());
+            System.out.println("CancelThresholdTime "+configOfCancel.getValue());
             LocalDateTime cancelTime = bookedAt.plusMinutes(configOfCancel.getValue());
             int compareValue = rightNow.compareTo(cancelTime);
             if (compareValue <= 0) {
@@ -90,7 +90,7 @@ public class RideServiceImp implements RideService {
                     ride.setStatus(RideStatus.Auto_Cancelled);
                 }
                 PaymentDetail paymentDetail = ride.getPaymentDetail();
-                paymentDetail.setRideAmount((double)ride.getVehicle().getType().getBaseFare());
+                paymentDetail.setRideAmount((double)ride.getVehicle().getVehicleType().getBaseFare());
                 ride.setPaymentDetail(paymentDetail);
             }
             rideRepo.save(ride);
