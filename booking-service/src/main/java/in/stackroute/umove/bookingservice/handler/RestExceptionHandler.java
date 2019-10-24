@@ -2,8 +2,7 @@ package in.stackroute.umove.bookingservice.handler;
 
 
 import in.stackroute.umove.bookingservice.error.ApiError;
-import in.stackroute.umove.bookingservice.exception.RideAlreadyBookedException;
-import in.stackroute.umove.bookingservice.exception.RideNotFoundException;
+import in.stackroute.umove.bookingservice.exception.*;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpHeaders;
@@ -43,6 +42,30 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(RideAlreadyBookedException.class)
     protected ResponseEntity<Object> handleEntityAlreadyExists(
             RideAlreadyBookedException ex) {
+        ApiError apiError = new ApiError(ALREADY_REPORTED);
+        apiError.setMessage(ex.getMessage());
+        return buildResponseEntity(apiError);
+    }
+
+    @ExceptionHandler(PaymentDetailsNotFoundException.class)
+    protected ResponseEntity<Object> handleEntityNotFoundForPayment(
+            PaymentDetailsNotFoundException ex) {
+        ApiError apiError = new ApiError(NOT_FOUND);
+        apiError.setMessage(ex.getMessage());
+        return buildResponseEntity(apiError);
+    }
+
+    @ExceptionHandler(ConfigurationNotFoundException.class)
+    protected ResponseEntity<Object> handleEntityNotFoundForConfiguration(
+            ConfigurationNotFoundException ex) {
+        ApiError apiError = new ApiError(NOT_FOUND);
+        apiError.setMessage(ex.getMessage());
+        return buildResponseEntity(apiError);
+    }
+
+    @ExceptionHandler(ConfigurationAlreadyExistsException.class)
+    protected ResponseEntity<Object> handleEntityAlreadyExistsForConfiguration(
+            ConfigurationAlreadyExistsException ex) {
         ApiError apiError = new ApiError(ALREADY_REPORTED);
         apiError.setMessage(ex.getMessage());
         return buildResponseEntity(apiError);

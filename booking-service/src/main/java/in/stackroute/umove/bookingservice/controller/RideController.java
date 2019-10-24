@@ -62,6 +62,7 @@ public class RideController {
     // Retrieve
     @GetMapping("rides")
     public ResponseEntity<Map> getRides(@RequestParam(value = "userId", required = false) String userId, @RequestParam(value = "rideStatus", required = false) String rideStatus) {
+        logger.debug("Hello from Log4j 2 ");
         if(userId!= null && rideStatus!= null) {
             Ride ride = rideService.getRideByUserIdNStatus(userId, rideStatus);
             Map<String, Object> map = new TreeMap<>();
@@ -104,7 +105,7 @@ public class RideController {
     // to apply extra charges from supervisior side at zone for a specific ride
     @PatchMapping("rides/{rideId}/extra-charges")
     public ResponseEntity<Map> addExtraCharge(@PathVariable("rideId") ObjectId rideId, @RequestBody() List<ExtraCharge> extraCharges) {
-        System.out.println("Extracharge" + extraCharges + " | ride id " + rideId);
+//        System.out.println("Extracharge" + extraCharges + " | ride id " + rideId);
         Ride ride = rideService.addExtraCharges(rideId, extraCharges);
         Map<String, Object> payload = new LinkedHashMap<>();
         payload.put("status", "Ended");

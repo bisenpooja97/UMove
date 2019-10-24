@@ -1,5 +1,7 @@
 package in.stackroute.umove.bookingservice.service;
 
+import in.stackroute.umove.bookingservice.exception.PaymentDetailsNotFoundException;
+import in.stackroute.umove.bookingservice.exception.RideNotFoundException;
 import in.stackroute.umove.bookingservice.model.*;
 import in.stackroute.umove.bookingservice.repo.PaymentRepo;
 import in.stackroute.umove.bookingservice.repo.ConfigRepo;
@@ -96,6 +98,9 @@ public class RideServiceImp implements RideService {
     public Ride addExtraCharges(ObjectId rideId, List<ExtraCharge> extraCharges) {
         LocalDateTime rightNow = LocalDateTime.now();
         Ride ride = rideRepo.findBy_id(rideId);
+        if(ride == null) {
+            throw new RideNotFoundException("Ride", "rideId", rideId);
+        }
         ride.getPaymentDetail().setExtraCharges(extraCharges);
         ride.setRideEndAt(rightNow);
         LocalDateTime rideStarted = ride.getRideStartAt();
@@ -134,6 +139,9 @@ public class RideServiceImp implements RideService {
     public Ride startRide(ObjectId rideId, String registrationNo) {
         LocalDateTime startRideRequestAt = LocalDateTime.now();
         Ride ride = rideRepo.findBy_id(rideId);
+        if(ride == null) {
+            throw new RideNotFoundException("Ride", "rideId", rideId);
+        }
         if (ride.getStatus().equals(RideStatus.Confirmed)) {
             LocalDateTime bookedAt = ride.getBookedAt();
             Configuration configOfAutocancel = configRepo.findByName("autocancelTime");
@@ -159,6 +167,9 @@ public class RideServiceImp implements RideService {
     public Ride cancelRide(ObjectId rideId) {
         LocalDateTime rightNow = LocalDateTime.now();
         Ride ride = rideRepo.findBy_id(rideId);
+        if(ride == null) {
+            throw new RideNotFoundException("Ride", "rideId", rideId);
+        }
         if (ride.getStatus().equals(RideStatus.Confirmed)) {
             LocalDateTime bookedAt = ride.getBookedAt();
             Configuration configOfAutocancel = configRepo.findByName("autocancelTime");
@@ -192,6 +203,9 @@ public class RideServiceImp implements RideService {
     @Override
     public Ride updateDestination(Zone destinationZone, ObjectId rideId) {
         Ride ride = rideRepo.findBy_id(rideId);
+        if(ride == null) {
+            throw new RideNotFoundException("Ride", "rideId", rideId);
+        }
         if (ride.getStatus().equals(RideStatus.Started)) {
             List<Zone> destinationZones = ride.getDestinationZones();
             destinationZones.add(destinationZone);
@@ -204,6 +218,9 @@ public class RideServiceImp implements RideService {
     @Override
     public Payment payForRide(ObjectId rideId, String paymentId, String paymentStatus) {
         Ride ride = rideRepo.findBy_id(rideId);
+        if(ride == null) {
+            throw new RideNotFoundException("Ride", "rideId", rideId);
+        }
         Payment payment = new Payment();
         int sizeOfDestinationZones = ride.getDestinationZones().size();
         int discount_percent = 0;
@@ -236,6 +253,9 @@ public class RideServiceImp implements RideService {
     @Override
     public Payment getPaymentDetails(String rideId) {
         Payment payment = paymentRepo.findByRideId(rideId);
+        if(payment == null) {
+            throw new PaymentDetailsNotFoundException("Payment Details", "rideId", rideId);
+        }
         return payment;
 
     }
