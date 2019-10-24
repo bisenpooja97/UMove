@@ -43,7 +43,7 @@ public class VehicleTypeImpl implements ServiceVehicleType {
 
     //To get details of all type
     public List<VehicleType> find(int page) {
-        return repo.findAll(new PageRequest(page,9)).getContent();
+        return repo.findAll(new PageRequest(page,100)).getContent();
     }
 
     //To get vehicle type by fuel type

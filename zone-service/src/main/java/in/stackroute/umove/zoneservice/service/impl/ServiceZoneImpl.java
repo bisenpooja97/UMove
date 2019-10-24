@@ -47,7 +47,7 @@ public class ServiceZoneImpl implements ServiceZone {
     // Zone service for getting all zones
     @Override
     public List<Zone> findAllZones(int page) {
-        List<Zone> zone = zoneRepository.findAll(new PageRequest(page,9)).getContent();
+        List<Zone> zone = zoneRepository.findAll(new PageRequest(page,100)).getContent();
         if(zone.isEmpty())
             throw new ZonesNotFoundException("No data found!!!!");
         return zone;

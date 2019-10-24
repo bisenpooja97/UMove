@@ -104,7 +104,7 @@ public class VehicleImpl implements ServiceVehicle {
 
     @Override
     public List<Vehicle> findByStatus(VehicleStatus status,int page) {
-        List<Vehicle> vehicles=repo.findByStatus(status,new PageRequest(page,12)).getContent();
+        List<Vehicle> vehicles=repo.findByStatus(status,new PageRequest(page,100)).getContent();
         return vehicles;
     }
 
