@@ -33,7 +33,7 @@ export class VehicleDetailsComponent implements OnInit {
   buttonDisable: boolean;
   zoneType: ZoneTypeCount[];
   displayCount: number;
-  
+
   ngOnInit() {
     this.buttonDisable = false;
     this.route.queryParams.subscribe(params => {
