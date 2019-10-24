@@ -53,7 +53,7 @@ public class VehicleImpl implements ServiceVehicle {
     //Find vehicles based on zone
     @Override
     public List<Vehicle> findByZone(String zone_id,int page) {
-        List<Vehicle> vehicleList=repo.findByzoneId(zone_id,new PageRequest(page,12)).getContent();
+        List<Vehicle> vehicleList=repo.findByzoneId(zone_id,new PageRequest(page,100)).getContent();
         return vehicleList;
     }
 
