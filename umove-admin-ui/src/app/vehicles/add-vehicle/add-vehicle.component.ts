@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { VehicleType } from 'src/app/model/VehicleType';
+import { VehicleType } from 'src/app/model/vehicleType';
 import { VehicleTypeService } from 'src/app/types/vehicle-type.service';
 import { VehicleService } from '../vehicle.service';
 import { MatSnackBar, MatDialogRef } from '@angular/material';

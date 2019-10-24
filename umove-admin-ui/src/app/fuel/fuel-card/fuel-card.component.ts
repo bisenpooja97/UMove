@@ -1,9 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Fuel } from 'src/app/model/Fuel';
-import { Router, ActivatedRoute } from '@angular/router';
-import { FuelService } from '../fuel.service';
-import { MatSnackBar, MatDialog, MatDialogConfig } from '@angular/material';
-import { UpdateFuelComponent } from '../update-fuel/update-fuel.component';
+import { Fuel } from 'src/app/model/fuel';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-fuel-card',
@@ -17,7 +14,6 @@ export class FuelCardComponent implements OnInit {
 
   constructor(private router: Router) { }
 
-
   ngOnInit() {
      this.name = this.fuel.name;
      this.fuelCost = this.fuel.fuelCost;
@@ -25,7 +21,5 @@ export class FuelCardComponent implements OnInit {
 
   ok() {
     this.router.navigate(['fuel/', this.name]);
-
   }
-
 }

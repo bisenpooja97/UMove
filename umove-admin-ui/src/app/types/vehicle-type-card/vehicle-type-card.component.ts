@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { VehicleType } from 'src/app/model/VehicleType';
+import { VehicleType } from 'src/app/model/vehicleType';
 import { Router } from '@angular/router';
 
 
@@ -23,8 +23,6 @@ export class VehicleTypeCardComponent implements OnInit {
     this.costPerMin = Object.values(this.vehicleTypes)[3];
     this.url = Object.values(this.vehicleTypes)[6];
     console.log(Object.values(this.vehicleTypes));
-
-
 }
 
 ok() {

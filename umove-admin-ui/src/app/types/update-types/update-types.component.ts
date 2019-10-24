@@ -19,7 +19,6 @@ export class UpdateTypesComponent implements OnInit {
       this.costPerMin = data.costPerMin;
     }
 
-
     typeForm = this.fb.group({
       costPerMin: ['']
     });
@@ -33,7 +32,7 @@ export class UpdateTypesComponent implements OnInit {
       console.log(this.typeForm.value);
       this.dialogRef.close(this.typeForm.value);
     }
-    
+
   ngOnInit() {
   }
 

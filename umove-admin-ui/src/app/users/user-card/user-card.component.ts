@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { from } from 'rxjs';
 import { UserService } from '../service/user.service';
-import { User } from 'src/model/user';
+import { User } from 'src/app/model/user';
 
 @Component({
   selector: 'app-user-card',

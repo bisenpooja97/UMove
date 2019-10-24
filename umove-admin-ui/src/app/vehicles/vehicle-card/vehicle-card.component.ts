@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Vehicle } from 'src/app/model/Vehicle';
+import { Vehicle } from 'src/app/model/vehicle';
 import { Router } from '@angular/router';
 
 @Component({

@@ -52,7 +52,7 @@ export class ZonesComponent implements OnInit {
 
   getZonesInfo() {
     return this.zoneService.getZones().subscribe(res => {
-      if (res.count === undefined) {
+      if (res.count === undefined || res.count === 0) {
         this.displayCount = 0;
       } else {
         this.zones = res.data;

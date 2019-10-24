@@ -6,8 +6,8 @@ import { Observable } from 'rxjs';
 import { Zone } from 'src/app/model/zone';
 import { RespSupervisor, RespSupervisor2 } from 'src/app/model/supervisor-response';
 import { Supervisor } from 'src/app/model/supervisor';
-import { RespZTC } from 'src/app/model/ZoneTypeRepo';
-import { ZoneTypeCount } from 'src/app/model/ZoneTypeCount';
+import { RespZTC } from 'src/app/model/zone-type-repo';
+import { ZoneTypeCount } from 'src/app/model/zone-type-count';
 
 @Injectable({
   providedIn: 'root'

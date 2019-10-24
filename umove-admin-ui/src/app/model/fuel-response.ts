@@ -1,4 +1,4 @@
-import { Fuel } from './Fuel';
+import { Fuel } from './fuel';
 
 export class Resp {
   public count: number;

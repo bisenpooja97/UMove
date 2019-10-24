@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { Resp } from '../model/Fuel-response';
+import { Resp } from '../model/fuel-response';
 import { Observable } from 'rxjs';
 
-import { Fuel } from '../model/Fuel';
-import { Resp1 } from '../model/Fuel-single-response';
+import { Fuel } from '../model/fuel';
+import { Resp1 } from '../model/fuel-single-response';
 
 @Injectable({
   providedIn: 'root'
 })
-export class FuelService{
+export class FuelService {
 
   constructor(private httpClient: HttpClient) { }
   baseUrl = environment.baseUrl2 + environment.fuelBaseApi;

@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Zone } from 'src/app/model/zone';
 import { Router } from '@angular/router';
 import { VehicleService } from 'src/app/vehicles/vehicle.service';
-import { Vehicle } from 'src/app/model/Vehicle';
+import { Vehicle } from 'src/app/model/vehicle';
 import { count } from 'rxjs/operators';
 
 @Component({

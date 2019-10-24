@@ -1,4 +1,4 @@
-import { VehicleType } from './VehicleType';
+import { VehicleType } from './vehicleType';
 
 export class Vehicle {
   public id: string;

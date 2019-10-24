@@ -1,13 +1,13 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
 import { VehicleService } from 'src/app/vehicles/vehicle.service';
-import { Vehicle } from 'src/app/model/Vehicle';
+import { Vehicle } from 'src/app/model/vehicle';
 import { ZoneService } from '../service/zone.service';
 import { ActivatedRoute } from '@angular/router';
 import { Zone } from 'src/app/model/zone';
 import { AddVehicleComponent } from '../add-vehicle/add-vehicle.component';
 import { MatDialogConfig, MatDialog } from '@angular/material';
 import { NotificationService } from 'src/app/shared/notification.service';
-import { ZoneTypeCount } from 'src/app/model/ZoneTypeCount';
+import { ZoneTypeCount } from 'src/app/model/zone-type-count';
 
 @Component({
   selector: 'app-vehicle-details',
@@ -33,7 +33,7 @@ export class VehicleDetailsComponent implements OnInit {
   buttonDisable: boolean;
   zoneType: ZoneTypeCount[];
   displayCount: number;
-
+  
   ngOnInit() {
     this.buttonDisable = false;
     this.route.queryParams.subscribe(params => {
@@ -110,21 +110,19 @@ export class VehicleDetailsComponent implements OnInit {
   vDetails() {
     this.vehicleService.getVehicles().subscribe(res => {
       if (res.count === 0) {
-        this.displayCount = res.count;
+        this.displayCount = 0;
         console.log(res, 'https://www.doodadi.com/assets/images/data-not-found.svg');
       } else {
         res.data.filter(val => {
           if ((val.zoneId === this.id)) {
             this.displayCount = 1;
             this.vehicle.push(val);
-            console.log(res, 'hi this' , 'https://www.doodadi.com/assets/images/data-not-found.svg');
           } else {
             this.displayCount = 0;
-            console.log(res, 'hi this' , 'https://www.doodadi.com/assets/images/data-not-found.svg');
           }
         });
         res.data.filter(val => {
-          if (((val.zoneId === null) || (val.zoneId !== this.id)) && (
+          if (((val.zoneId === null)) && (
             (val.status !== 'No_More_In_Use') && (val.status !== 'Stolen') && (val.status !== 'Busy') && (val.status !== 'Servicing'))) {
             this.vehicle2.push(val);
             this.tname = val.vehicleType.name;
@@ -134,7 +132,6 @@ export class VehicleDetailsComponent implements OnInit {
           }
         });
       }
-
     });
   }
 }

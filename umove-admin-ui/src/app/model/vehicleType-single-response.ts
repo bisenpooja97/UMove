@@ -1,7 +1,7 @@
-import { Fuel } from './Fuel';
+import { VehicleType } from './vehicleType';
 
 export class Resp1 {
-  public data: Fuel;
+  public data: VehicleType;
   public message: string;
   public status: string;
   }

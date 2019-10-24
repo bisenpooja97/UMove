@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { VehicleType } from '../model/VehicleType';
-import { Resp } from '../model/VehicleType-response';
+import { VehicleType } from '../model/vehicleType';
+import { Resp } from '../model/vehicleType-response';
 import { environment } from 'src/environments/environment';
-import { Resp1 } from '../model/VehicleType-single-response';
+import { Resp1 } from '../model/vehicleType-single-response';
 
 @Injectable({
   providedIn: 'root'

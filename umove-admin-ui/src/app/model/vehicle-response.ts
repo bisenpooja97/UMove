@@ -1,8 +1,8 @@
-import { VehicleType } from './VehicleType';
+import { Vehicle } from './vehicle';
 
 export class Resp {
   public count: number;
-  public data: VehicleType[];
+  public data: Vehicle[];
   public message: string;
   public status: string;
   }

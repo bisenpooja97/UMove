@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { MatSnackBar, MatDialogRef } from '@angular/material';
 import { HttpClient } from '@angular/common/http';
-import { Fuel } from 'src/app/model/Fuel';
+import { Fuel } from 'src/app/model/fuel';
 import { FuelService } from 'src/app/fuel/fuel.service';
 import { environment } from 'src/environments/environment';
 

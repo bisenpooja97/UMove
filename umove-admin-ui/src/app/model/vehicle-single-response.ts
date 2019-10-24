@@ -1,4 +1,4 @@
-import { Vehicle } from './Vehicle';
+import { Vehicle } from './vehicle';
 
 export class Resp1 {
   public data: Vehicle;

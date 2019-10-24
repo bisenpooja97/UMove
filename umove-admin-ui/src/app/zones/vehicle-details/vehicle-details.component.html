@@ -3,9 +3,6 @@
 
 </h1>
 <mat-list>
-    <div *ngIf="displayCount === 0" fxLayoutAlign="center center">
-        <img src="http://miceemporio.com/img/no-record-found.jpeg">{{displayCount}}
-    </div>
     <mat-list-item *ngFor="let folder of vehicle" fxLayoutAlign="center center">
         <mat-icon mat-list-icon>motorcycle</mat-icon>
         <h4 mat-line>{{folder.vehicleType.name}}</h4>

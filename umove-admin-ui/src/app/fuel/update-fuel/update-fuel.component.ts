@@ -1,6 +1,4 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { FuelService } from '../fuel.service';
-import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormBuilder } from '@angular/forms';
 
@@ -12,13 +10,10 @@ import { FormBuilder } from '@angular/forms';
 export class UpdateFuelComponent implements OnInit {
   fuelCost: number;
 
-
   constructor(public dialogRef: MatDialogRef<UpdateFuelComponent>,
-              private fb: FormBuilder, private route: ActivatedRoute,
-              private router: Router, private fuelService: FuelService,
+              private fb: FormBuilder,
               @Inject(MAT_DIALOG_DATA) data) {
                 this.fuelCost = data.fuelCost;
-
 }
 
 fuelForm = this.fb.group({
@@ -26,7 +21,6 @@ fuelForm = this.fb.group({
  });
 
  onClose() {
-
   this.dialogRef.close();
 }
 

@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { Vehicle } from 'src/app/model/Vehicle';
+import { Vehicle } from 'src/app/model/vehicle';
 import { VehicleService } from '../vehicle.service';
-import { Router, ActivatedRoute } from '@angular/router';
-import { MatSnackBar, MatDialogConfig, MatDialog } from '@angular/material';
+import { ActivatedRoute } from '@angular/router';
+import { MatDialogConfig, MatDialog } from '@angular/material';
 import { UpdateVehiclesComponent } from '../update-vehicles/update-vehicles.component';
 import { NotificationService } from 'src/app/shared/notification.service';
 export interface Status {
   value: string;
   viewValue: string;
 }
-
 
 @Component({
   selector: 'app-vehicle-deatils',
@@ -22,7 +21,6 @@ export class VehicleDeatilsComponent implements OnInit {
   lastServiceDate: Date;
   zoneId: string;
   insuranceNo: string;
-
   name: string;
   category: string;
   costkm: number;
@@ -41,13 +39,10 @@ export class VehicleDeatilsComponent implements OnInit {
 
   ];
 
-
-
-  constructor(private router: Router, private vehicleService: VehicleService,
-    private activatedRoute: ActivatedRoute, private route: ActivatedRoute,
-    private matDialog: MatDialog,
-    private notificationService: NotificationService) { }
-
+  constructor(private vehicleService: VehicleService,
+              private route: ActivatedRoute,
+              private matDialog: MatDialog,
+              private notificationService: NotificationService) { }
 
   ngOnInit() {
     this.getVehicleDetails();
@@ -72,15 +67,10 @@ export class VehicleDeatilsComponent implements OnInit {
     });
   }
 
-  onEdit() {
-
-  }
-
   onChange(newValue) {
     console.log(this.vehicle, newValue);
     this.vehicle.status = newValue;
     this.vehicleService.updateVehicle(this.route.snapshot.paramMap.get('registrationNo'), this.vehicle).subscribe(
-
     );
   }
 
@@ -96,21 +86,17 @@ export class VehicleDeatilsComponent implements OnInit {
     const dRef = this.matDialog.open(UpdateVehiclesComponent, dialogConfig);
     dRef.afterClosed().subscribe(result => {
       if (result !== undefined) {
-      console.log('Back to parent', result);
-      this.vehicleService.updateVehicle(this.registrationNo, result).subscribe(
-        response => {
-          this.notificationService.success('Vehicle details updated succesffuly');
-          this.getVehicleDetails();
-
-        },
-        error => {
-          this.notificationService.warn('not updated');
-        }
-
-      );
-    }
+        console.log('Back to parent', result);
+        this.vehicleService.updateVehicle(this.registrationNo, result).subscribe(
+          response => {
+            this.notificationService.success('Vehicle details updated succesffuly');
+            this.getVehicleDetails();
+          },
+          error => {
+            this.notificationService.warn('not updated');
+          }
+        );
+      }
     });
-
   }
-
 }

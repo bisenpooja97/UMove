@@ -9,7 +9,10 @@
         </div>
         <div fxLayout="column wrap">
                 <div fxLayout.xs="column" fxLayout.lg="row wrap" fxLayoutGap="50px" class="card" fxLayoutAlign.sm="center center">
-                        <app-vehicle-card *ngFor="let type of vehicle| paginate: { itemsPerPage: 9, currentPage: p } | filter:term" [vehicle]="type"></app-vehicle-card>
+                    <div *ngIf="displayCount === 0">
+                        <img src="http://miceemporio.com/img/no-record-found.jpeg">
+                    </div>   
+                    <app-vehicle-card *ngFor="let type of vehicle| paginate: { itemsPerPage: 9, currentPage: p } | filter:term" [vehicle]="type"></app-vehicle-card>
 
                 </div>
                 <pagination-controls (pageChange)="p = $event" fxLayoutAlign="center center"></pagination-controls> 
