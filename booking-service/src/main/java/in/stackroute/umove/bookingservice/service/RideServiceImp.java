@@ -163,6 +163,9 @@ public class RideServiceImp implements RideService {
             }
             else {
                 ride.setStatus(RideStatus.Auto_Cancelled);
+                PaymentDetail paymentDetail = ride.getPaymentDetail();
+                paymentDetail.setRideAmount((double)ride.getVehicle().getVehicleType().getBaseFare());
+                ride.setPaymentDetail(paymentDetail);
             }
             rideRepo.save(ride);
         }
