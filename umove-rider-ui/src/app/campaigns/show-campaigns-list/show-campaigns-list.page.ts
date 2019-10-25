@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {NavigationExtras, Router} from '@angular/router';
-import {CampaignService} from '../../services/campaign-service/campaign.service';
+import {CampaignService} from '../../service/campaign-service/campaign.service';
 import {HTTP} from '@ionic-native/http/ngx';
 import {Campaign} from '../../model/campaigns/campaign';
 
