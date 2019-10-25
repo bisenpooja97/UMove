@@ -1,43 +1,16 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, NavigationExtras, Router} from "@angular/router";
-import {ZoneService} from "../service/zone/zone.service";
-import {Zone} from "../model/zone";
-import {Geolocation} from "@ionic-native/geolocation/ngx";
-import {MapService} from "../service/zone/map.service";
+import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
+import {ZoneService} from '../service/zone/zone.service';
+import {Zone} from '../model/zone';
+import {Geolocation} from '@ionic-native/geolocation/ngx';
+import {MapService} from '../service/zone/map.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage implements OnInit{
-    ngOnInit(): void {
-
-      this.geolocation.getCurrentPosition().then((resp) => {
-        const lat = resp.coords.latitude;
-        const lng = resp.coords.longitude;
-        this.mapService.buildMap(lat, lng,'pickup');
-        // this.mapService.checkMapLoading();
-        this.mapService.marker(lat, lng);
-      }).catch((error) => {
-        console.log('Error getting location', error);
-      });
-      this.mapService.selectZone$.subscribe(zone => {
-        console.log('selected zone',zone);
-        this.selectedZone = zone;
-      });
-      this.mapService.onLoad$.subscribe((message:string)=>{
-        console.log('lo ho gya load ab tofinally~~~');
-        this.isLoaded = true;
-      })
-    }
-  containerId = 'pick';
-  page = 'pick-up';
-  trip : boolean;
-  isLoaded : boolean;
-
-  private selectedZone: Zone;
-  locality:string;
+export class HomePage implements OnInit {
   constructor(private zoneService: ZoneService,
               private route: ActivatedRoute,
               private router: Router,
@@ -52,6 +25,45 @@ export class HomePage implements OnInit{
       }
     });
   }
+  containerId = 'pick';
+  page = 'pick-up';
+  trip: boolean;
+  isLoaded: boolean;
+
+  private selectedZone: Zone;
+  locality: string;
+    ngOnInit(): void {
+      let lat = 0.0;
+      let lng = 0.0;
+
+      this.geolocation.getCurrentPosition().then((resp) => {
+        lat = resp.coords.latitude;
+        lng = resp.coords.longitude;
+        this.mapService.buildMap(lat, lng, 'pickup');
+        // this.mapService.checkMapLoading();
+        this.mapService.marker(lat, lng);
+      }).catch((error) => {
+        console.log('Error getting location', error);
+      });
+      this.mapService.selectZone$.subscribe(zone => {
+        console.log('selected zone', zone);
+        this.selectedZone = zone;
+      });
+      this.mapService.onLoad$.subscribe((message: string) => {
+        console.log('lo ho gya load ab tofinally~~~');
+        this.mapService.addCurrentLocationController();
+        this.mapService.map.on('style.load', () => {
+          console.log('style loaded');
+          // setTimeout(() => {
+          //   this.addLayer(lat,lng);
+          //   console.log('Async operation has ended');
+          //   style();
+          // }, 500);
+          this.mapService.addLayer(lat, lng);
+        });
+        this.isLoaded = true;
+      });
+    }
 
   sendDataToService() {
     // const booking = this.bookingService.currentBooking;
@@ -86,7 +98,7 @@ export class HomePage implements OnInit{
   getSelected(selectedZone: Zone ) {
 
     this.selectedZone = selectedZone;
-    
+
   }
 
   gettingCoordinatesByLocality($event: any) {

@@ -22,7 +22,9 @@
             <ion-row>
               <ion-col>
             <ion-avatar class = "i2" item-start>
-              <img src="assets/icon/UPI.jpg">
+              <ion-img src="assets/icon/paytm.png" *ngIf="item.paymentProvider==='Paytm'" style="height: 48px; width: 48px;"></ion-img>
+              <ion-img src="assets/icon/phonepe.png" *ngIf="item.paymentProvider==='PhonePe'" style="height: 48px; width: 48px;"></ion-img>
+              <ion-img src="assets/icon/gpay.png" *ngIf="item.paymentProvider==='Google Pay'" style="height: 48px; width: 48px;"></ion-img>
             </ion-avatar>
               </ion-col>
               <ion-col>
@@ -30,7 +32,8 @@
               <h4> {{item.paymentMethodNumber}} </h4>
                 </ion-row>
                 <ion-row>
-              <p> {{item.paymentType}} </p>
+                  <ion-img src="assets/icon/wallet.jpg" *ngIf="item.paymentType==='Wallet'" style="height: 30px; width: 30px;"></ion-img>
+                  <ion-img src="assets/icon/UPI.jpg" *ngIf="item.paymentType==='UPI'" style="height: 45px; width: 45px;"></ion-img>
                 </ion-row>
               </ion-col>
             </ion-row>

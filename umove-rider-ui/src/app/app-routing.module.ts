@@ -29,7 +29,8 @@ const routes: Routes = [
   // tslint:disable-next-line:max-line-length
   { path: 'add-payment-method', loadChildren: './user-payment-method/add-payment-method/add-payment-method.module#AddPaymentMethodPageModule' },
   // tslint:disable-next-line:max-line-length
-  { path: 'show-payment-method', loadChildren: './user-payment-method/show-payment-method/show-payment-method.module#ShowPaymentMethodPageModule' }
+  { path: 'show-payment-method', loadChildren: './user-payment-method/show-payment-method/show-payment-method.module#ShowPaymentMethodPageModule' },
+  { path: 'error', loadChildren: './error/error.module#ErrorPageModule' }
 ];
 
 @NgModule({

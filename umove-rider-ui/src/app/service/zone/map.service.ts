@@ -1,17 +1,17 @@
 import {Injectable, OnInit} from '@angular/core';
 import * as mapboxgl from 'mapbox-gl';
-import {Observable, Observer, of, Subject, timer} from "rxjs";
-import {Zone} from "../../model/zone";
-import {ZoneService} from "./zone.service";
-import {GeoJson} from "../../map";
-import {Geolocation} from "@ionic-native/geolocation/ngx";
-import {environment} from "../../../environments/environment";
+import {Observable, Observer, of, Subject, timer} from 'rxjs';
+import {Zone} from '../../model/zone';
+import {ZoneService} from './zone.service';
+import {GeoJson} from '../../map';
+import {Geolocation} from '@ionic-native/geolocation/ngx';
+import {environment} from '../../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class MapService implements OnInit{
+export class MapService implements OnInit {
 
-  markers :any;
+  markers: any;
   map: mapboxgl.Map;
   private layoutCount: number;
   private isSelected: boolean;
@@ -22,23 +22,24 @@ export class MapService implements OnInit{
 
   private features = [];
 
-  constructor(private zoneService : ZoneService,private geolocation: Geolocation,) {
+  constructor(private zoneService: ZoneService, private geolocation: Geolocation, ) {
     this.layoutCount = 0;
     this.onZoneSelected = new Subject<Zone>();
     this.selectZone$ = this.onZoneSelected.asObservable();
     this.loading = new Subject<any>();
     this.onLoad$ = this.loading.asObservable();
   }
+
   ngOnInit(): void {
   }
 
-  buildMap(lat: number, lng: number, containerId:string){
-    this.layoutCount =0;
+  buildMap(lat: number, lng: number, containerId: string) {
+    this.layoutCount = 0;
     mapboxgl.accessToken = environment.map;
-    this.markers =new mapboxgl.Marker();
-    console.log('map bn rha h',this.map);
+    this.markers = new mapboxgl.Marker();
+    console.log('map bn rha h', this.map);
 
-    if(this.map !== undefined) {
+    if (this.map !== undefined) {
       this.map = undefined;
     }
 
@@ -47,7 +48,7 @@ export class MapService implements OnInit{
       style: 'mapbox://styles/mapbox/light-v10',
       center: [lat, lng],
       zoom: 15,
-      optimize :false
+      optimize : false
 
     });
     this.checkMapLoading();
@@ -56,15 +57,8 @@ export class MapService implements OnInit{
       console.log('map loaded');
       this.map.resize();
       this.flyTo(
-         [lng, lat]
+          [lng, lat]
       );
-
-      this.map.addControl(new mapboxgl.GeolocateControl({
-        positionOptions: {
-          enableHighAccuracy: true
-        },
-        trackUserLocation: true
-      }));
 
       // When a click event occurs on a feature in the places layer, open a popup at the
       // location of the feature, with description HTML from its properties.
@@ -76,25 +70,15 @@ export class MapService implements OnInit{
         this.map.getCanvas().style.cursor = '';
       });
     });
-    this.map.on('style.load',() => {
-      console.log('style loaded');
-      // setTimeout(() => {
-      //   this.addLayer(lat,lng);
-      //   console.log('Async operation has ended');
-      //   style();
-      // }, 500);
-      this.addLayer(lat,lng);
-    });
-
   }
 
   marker(lat, lng) {
 
-    console.log('coordinates',lat,lng);
+    console.log('coordinates', lat, lng);
     this.map.on('mouseenter', 'places', () => {
       this.map.getCanvas().style.cursor = 'pointer';
     });
-     this.markers
+    this.markers
         .setLngLat([lng, lat])
         .addTo(this.map);
     // function onDragEnd() {
@@ -106,17 +90,17 @@ export class MapService implements OnInit{
   }
 
   // For fly to different co-ordinates on map
-  flyTo(coordinates:number[]) {
+  flyTo(coordinates: number[]) {
     this.map.flyTo({
       center: coordinates,
-      maxDuration:100,
+      maxDuration: 100,
       // speed:2.4
     });
   }
 
 
 
-  clickPopUp(){
+  clickPopUp() {
     this.map.on('click', 'places' + this.layoutCount, (e) => {
       const coordinates = e.features[0].geometry.coordinates.slice();
       const description = e.features[0].properties.description;
@@ -137,20 +121,29 @@ export class MapService implements OnInit{
     });
   }
 
-   addLayer(lat: number, lng: number) {
-    if(this.layoutCount!==0) {
+  addCurrentLocationController() {
+    this.map.addControl(new mapboxgl.GeolocateControl({
+      positionOptions: {
+        enableHighAccuracy: true
+      },
+      trackUserLocation: true
+    }));
+  }
+
+  addLayer(lat: number, lng: number) {
+    if (this.layoutCount !== 0) {
       this.map.removeLayer('places' + this.layoutCount);
       this.map.removeImage('cat');
       this.features = [];
     }
-    console.log('layer',this.layoutCount);
+    console.log('layer', this.layoutCount);
     this.layoutCount++;
     this.clickPopUp();
 
-    this.zoneService.getNearbyZones(lat, lng).then(response =>{
+    this.zoneService.getNearbyZones(lat, lng).then(response => {
       const data = JSON.parse(response.data);
-      console.log("Nearby Zones",data);
-      data.data.forEach(d=>{
+      console.log('Nearby Zones', data);
+      data.data.forEach(d => {
             this.features.push({
               type: 'Feature',
               properties: {
@@ -168,37 +161,15 @@ export class MapService implements OnInit{
                   d.lat,
                 ]
               }
-            })
+            });
           }
-
       );
-      console.log('features:',this.features);
+      this.loadAndAddImageLayer('https://images.vexels.com/media/users/3/129788/isolated/preview/' +
+          '04c91b04215f603567324d459b761807-chopper-bike-front-icon-by-vexels.png');
+      console.log('features:', this.features);
     }).catch(error => {
       console.log(error);
       this.zoneService.presentToast(error);
-    });
-    // tslint:disable-next-line:max-line-length
-    this.map.loadImage('https://images.vexels.com/media/users/3/129788/isolated/preview/04c91b04215f603567324d459b761807-chopper-bike-front-icon-by-vexels.png', (error, image) => {
-      if (error) { throw error; }
-      this.map.addImage('cat', image);
-      // Add a layer showing the places.
-
-      this.map.addLayer({
-        id: 'places' + this.layoutCount,
-        type: 'symbol',
-        source: {
-          type: 'geojson',
-          data: {
-            type: 'FeatureCollection',
-            features: this.features,
-          }
-        },
-        layout: {
-          'icon-image': 'cat',
-          'icon-size': 0.10,
-          'icon-allow-overlap': true
-        }
-      });
     });
   }
 
@@ -224,14 +195,68 @@ export class MapService implements OnInit{
 
   checkMapLoading() {
     timer(1000).subscribe(() => {
-      if(this.map.loaded()) {
+      if (this.map.loaded()) {
         console.log('load ho gya');
-        this.loading.next("Map is loaded");
-      }
-      else {
+        this.loading.next('Map is loaded');
+      } else {
         console.log('abhi ni hua');
         this.checkMapLoading();
       }
     });
+  }
+
+  loadAndAddImageLayer(imgUrl) {
+    // tslint:disable-next-line:max-line-length
+    this.map.loadImage(imgUrl, (error, image) => {
+      if (error) { throw error; }
+      this.map.addImage('cat', image);
+      // Add a layer showing the places.
+
+      this.map.addLayer({
+        id: 'places' + this.layoutCount,
+        type: 'symbol',
+        source: {
+          type: 'geojson',
+          data: {
+            type: 'FeatureCollection',
+            features: this.features,
+          }
+        },
+        layout: {
+          'icon-image': 'cat',
+          'icon-size': 0.10,
+          'icon-allow-overlap': true
+        }
+      });
+    });
+  }
+
+  addPathLayer(coords: number[][]) {
+    this.map.addLayer({
+      id: 'route',
+      type: 'line',
+      source: {
+        type: 'geojson',
+        data: {
+          type: 'Feature',
+          properties: {
+
+          },
+          geometry: {
+            type: 'LineString',
+            coordinates: coords
+          }
+        }
+      },
+      layout: {
+        'line-join': 'round',
+        'line-cap': 'round'
+      },
+      paint: {
+        'line-color': '#326da8',
+        'line-width': 8
+      }
+    });
+
   }
 }

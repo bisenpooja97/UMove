@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
+import {ErrorHandler, NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouteReuseStrategy } from '@angular/router';
+import {Router, RouteReuseStrategy} from '@angular/router';
 
 import { MbscModule } from '@mobiscroll/angular';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
@@ -18,19 +18,20 @@ import {BikeListPage} from './bike-list/bike-list.page';
 import {BikeListPageModule} from './bike-list/bike-list.module';
 import {AutoCompleteModule} from 'ionic4-auto-complete';
 import {FormsModule} from '@angular/forms';
-import {HomePage} from "./home/home.page";
-import {HomePageModule} from "./home/home.module";
-import {DropPageModule} from "./drop/drop.module";
-import {DropPage} from "./drop/drop.page";
+import {HomePage} from './home/home.page';
+import {HomePageModule} from './home/home.module';
+import {DropPageModule} from './drop/drop.module';
+import {DropPage} from './drop/drop.page';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {UserProfileServiceService} from './service/users-profile/user-profile-service.service';
 import {ReactiveFormsModule} from '@angular/forms';
 import {Environment} from '@angular/compiler-cli/src/ngtsc/typecheck/src/environment';
 import {UserPaymentMethodService} from './service/user-payment-method/user-payment-method.service';
 import {IonicStorageModule} from '@ionic/storage';
+import {CustomerErrorHandler} from "./customer-error-handler";
 
 @NgModule({
-  declarations: [AppComponent, BikeListPage,DropPage],
+  declarations: [AppComponent, BikeListPage, DropPage],
   entryComponents: [],
   imports: [
     BrowserModule,
@@ -39,29 +40,30 @@ import {IonicStorageModule} from '@ionic/storage';
     AppRoutingModule,
     HttpClientModule, ReactiveFormsModule,
     AppRoutingModule,
-      BikeListPageModule,
-      AutoCompleteModule,
-      HomePageModule,
-      DropPageModule,
-      FormsModule,
-      SharedModule,
-      MbscModule
+    BikeListPageModule,
+    AutoCompleteModule,
+    HomePageModule,
+    DropPageModule,
+    FormsModule,
+    SharedModule,
+    MbscModule
   ],
   providers: [
-      HTTP,
-      Geolocation,
-      LaunchNavigator,
+    HTTP,
+    Geolocation,
+    LaunchNavigator,
     StatusBar,
-      BarcodeScanner,
+    BarcodeScanner,
     SplashScreen,
     HttpClient,
-      HTTP,
+    HTTP,
     UserProfileServiceService,
     UserPaymentMethodService,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    { provide: ErrorHandler, useClass: CustomerErrorHandler }
   ],
-    exports: [
-    ],
+  exports: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -285,7 +285,7 @@ public class RideServiceImp implements RideService {
     @Override
     public boolean isValidUser(String userId) {
         RestTemplate restTemplate = new RestTemplate();
-        Map<String, Object> response = restTemplate.getForObject("http://localhost:8080/userservice/api/v1/users/" + userId, Map.class);
+        Map<String, Object> response = restTemplate.getForObject("http://13.235.35.202:8080/userservice/api/v1/users/" + userId, Map.class);
         Map<String, Object> user = (Map<String, Object>) response.get("data");
         if(user.get("userStatus").equals("Active")) {
             return true;
