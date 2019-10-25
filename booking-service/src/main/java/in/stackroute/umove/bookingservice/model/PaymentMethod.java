@@ -3,9 +3,8 @@ package in.stackroute.umove.bookingservice.model;
 import lombok.*;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-@ToString
+@NoArgsConstructor
 @Getter
 @Setter
 public class PaymentMethod {
@@ -13,5 +12,4 @@ public class PaymentMethod {
     private String paymentMethodNumber;
     private String paymentType;
     private String paymentProvider;
-
 }

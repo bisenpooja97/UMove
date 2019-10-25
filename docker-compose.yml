@@ -111,7 +111,6 @@ services:
     depends_on:
       - config
       - discovery
-      #- api-gateway
     restart: on-failure
     links:
       - config
@@ -163,6 +162,7 @@ services:
       - mysql
       - rabbitmq
     restart: on-failure
+
 
   campaigns:
     build:

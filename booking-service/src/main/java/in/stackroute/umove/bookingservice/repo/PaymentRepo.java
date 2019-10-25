@@ -9,5 +9,5 @@ import java.util.List;
 public interface PaymentRepo extends JpaRepository<Payment,String> {
 
     @Query("SELECT p FROM Payment p WHERE p.rideId = ?1")
-    List<Payment> findByRideId(String rideId);
+    Payment findByRideId(String rideId);
 }

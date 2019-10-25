@@ -1,4 +1,3 @@
-
 export class Payment {
     bookingId: string;
     rider: string;

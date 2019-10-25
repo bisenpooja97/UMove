@@ -1,4 +1,5 @@
-import { ExtraCharge } from './extra-charges';
+import {ExtraCharge} from './extra-charge';
+
 
 export class PaymentDetail {
   status: string;

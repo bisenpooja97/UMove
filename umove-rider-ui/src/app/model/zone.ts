@@ -1,4 +1,5 @@
 export class Zone {
+    id: string;
     zoneId: string;
     name: string;
     locality: string;
@@ -14,5 +15,6 @@ export class Zone {
     supervisorName: string;
     supervisorNumber: string;
     supervisorEmail: string;
+    createdAt: Date;
 }
 

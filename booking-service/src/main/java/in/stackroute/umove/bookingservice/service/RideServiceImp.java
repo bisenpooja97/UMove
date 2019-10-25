@@ -3,6 +3,12 @@ package in.stackroute.umove.bookingservice.service;
 import in.stackroute.umove.bookingservice.model.*;
 import in.stackroute.umove.bookingservice.repo.PaymentRepo;
 import in.stackroute.umove.bookingservice.repo.RideRepo;
+import in.stackroute.umove.bookingservice.controller.RideController;
+import in.stackroute.umove.bookingservice.exception.PaymentDetailsNotFoundException;
+import in.stackroute.umove.bookingservice.exception.RideNotFoundException;
+import in.stackroute.umove.bookingservice.repo.ConfigRepo;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,11 +17,19 @@ import javax.mail.MessagingException;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 @Service
 public class RideServiceImp implements RideService {
+
+    private static final Logger logger = LogManager.getLogger(RideController.class);
 
     @Autowired
     private RideRepo rideRepo;
@@ -23,16 +37,13 @@ public class RideServiceImp implements RideService {
     private PaymentRepo paymentRepo;
     @Autowired
     private MailService mailService;
+    @Autowired
+    private ConfigRepo configRepo;
 
     @Override
     public Ride confirmRide(Ride ride) {
         rideRepo.save(ride);
         return ride;
-    }
-
-    @Override
-    public List<Ride> getAllRides() {
-        return rideRepo.findAll();
     }
 
     @Override
@@ -54,7 +65,6 @@ public class RideServiceImp implements RideService {
             return rideRepo.findBy_id(id);
         }
     }
-
 
     private int deductFuelAmount(Ride ride) {
         double rideAmount = ride.getPaymentDetail().getRideAmount();
@@ -86,6 +96,141 @@ public class RideServiceImp implements RideService {
 
     }
     @Override
+    public Map<String, Object> deleteAll() {
+        rideRepo.deleteAll();
+        return null;
+    }
+
+    @Override
+    public Ride addExtraCharges(ObjectId rideId, List<ExtraCharge> extraCharges) {
+        LocalDateTime rightNow = LocalDateTime.now();
+        Ride ride = rideRepo.findBy_id(rideId);
+        if(ride == null) {
+            throw new RideNotFoundException("Ride", "rideId", rideId);
+        }
+        System.out.println("extra charges "+extraCharges);
+        System.out.println("payment deta"+ride.getPaymentDetail());
+        PaymentDetail paymentDetail = new PaymentDetail();
+        paymentDetail.setExtraCharges(extraCharges);
+        ride.setPaymentDetail(paymentDetail);
+        ride.setRideEndAt(rightNow);
+        LocalDateTime rideStarted = ride.getRideStartAt();
+        Duration duration = Duration.between(rideStarted, rightNow);
+        int totalDuration = (int) duration.toMinutes();
+        ride.setDuration(totalDuration);
+        Double distance = 5 + (Math.random() * 5);
+        Double roundUpDistance = Double.valueOf(Math.round(distance*100)/100);
+        ride.setDistance(roundUpDistance);
+        Double rideAmount = (totalDuration*ride.getVehicle().getVehicleType().getCostPerMin() +roundUpDistance*ride.getVehicle().getVehicleType().getCostPerKm());
+        Double roundUpRideAmount = Double.valueOf(Math.round(rideAmount*100)/100);
+        ride.getPaymentDetail().setRideAmount(roundUpRideAmount);
+        ride.setStatus(RideStatus.Ended);
+        rideRepo.save(ride);
+        return ride;
+    }
+
+    //Function to get ride details by userId and rideStatus
+    @Override
+    public Ride getRideByUserIdNStatus(String userId, String rideStatus){
+        Ride ride = rideRepo.findByUserIdNStatus(userId, rideStatus);
+        return ride;
+    }
+    @Override
+    public List<Ride> getRidesByUserId(String userId) {
+        return rideRepo.findRidesByUserId(userId);
+    }
+
+    @Override
+    public List<Ride> getAllRides() {
+        return rideRepo.findAll();
+    }
+
+    //Function to start a ride for the user
+    @Override
+    public Ride startRide(ObjectId rideId, String registrationNo) {
+        LocalDateTime startRideRequestAt = LocalDateTime.now();
+        Ride ride = rideRepo.findBy_id(rideId);
+        if(ride == null) {
+            throw new RideNotFoundException("Ride", "rideId", rideId);
+        }
+        if (ride.getStatus().equals(RideStatus.Confirmed)) {
+            LocalDateTime bookedAt = ride.getBookedAt();
+            Configuration configOfAutocancel = configRepo.findByName("autocancelTime");
+            LocalDateTime autoCancelTime = bookedAt.plusMinutes(configOfAutocancel.getValue());
+            int compareValue = startRideRequestAt.compareTo(autoCancelTime);
+            if (compareValue <= 0) {
+                ride.setStatus(RideStatus.Started);
+                ride.setRideStartAt(startRideRequestAt);
+                Vehicle vehicle = ride.getVehicle();
+                vehicle.setRegistrationNo(registrationNo);
+                ride.setVehicle(vehicle);
+            }
+            else {
+                ride.setStatus(RideStatus.Auto_Cancelled);
+                PaymentDetail paymentDetail = ride.getPaymentDetail();
+                paymentDetail.setRideAmount((double)ride.getVehicle().getVehicleType().getBaseFare());
+                ride.setPaymentDetail(paymentDetail);
+            }
+            rideRepo.save(ride);
+        }
+        return ride;
+    }
+
+
+    //Function to cancel a ride for the user
+    @Override
+    public Ride cancelRide(ObjectId rideId) {
+        LocalDateTime rightNow = LocalDateTime.now();
+        Ride ride = rideRepo.findBy_id(rideId);
+        if(ride == null) {
+            throw new RideNotFoundException("Ride", "rideId", rideId);
+        }
+        if (ride.getStatus().equals(RideStatus.Confirmed)) {
+            LocalDateTime bookedAt = ride.getBookedAt();
+            Configuration configOfAutocancel = configRepo.findByName("autocancelTime");
+            LocalDateTime autoCancelTime = bookedAt.plusMinutes(configOfAutocancel.getValue());
+            logger.info("Autocancel Time from configuration is "+configOfAutocancel.getValue());
+            Configuration configOfCancel = configRepo.findByName("cancelThresholdTime");
+            LocalDateTime cancelTime = bookedAt.plusMinutes(configOfCancel.getValue());
+            logger.info("Cancel Threshold Time from configuration is "+configOfCancel.getValue());
+            int compareValue = rightNow.compareTo(cancelTime);
+            if (compareValue <= 0) {
+                ride.setStatus(RideStatus.CancelledWithinThreshold);
+            }
+            else {
+                int compareValueForAutocancelling = rightNow.compareTo(autoCancelTime);
+                if (compareValueForAutocancelling <= 0) {
+                    ride.setStatus(RideStatus.CancelledAfterThreshold);
+                }
+                else{
+                    ride.setStatus(RideStatus.Auto_Cancelled);
+                }
+                PaymentDetail paymentDetail = ride.getPaymentDetail();
+                paymentDetail.setRideAmount((double)ride.getVehicle().getVehicleType().getBaseFare());
+                ride.setPaymentDetail(paymentDetail);
+            }
+            rideRepo.save(ride);
+        }
+        return ride;
+    }
+
+    //Function to update destination for a ride
+    @Override
+    public Ride updateDestination(Zone destinationZone, ObjectId rideId) {
+        Ride ride = rideRepo.findBy_id(rideId);
+        if(ride == null) {
+            throw new RideNotFoundException("Ride", "rideId", rideId);
+        }
+        if (ride.getStatus().equals(RideStatus.Started)) {
+            List<Zone> destinationZones = ride.getDestinationZones();
+            destinationZones.add(destinationZone);
+            ride.setDestinationZones(destinationZones);
+            rideRepo.save(ride);
+        }
+        return ride;
+    }
+
+    @Override
     public Payment payForRide(ObjectId rideId, String paymentId, String paymentStatus) throws IOException, MessagingException {
         Ride ride = rideRepo.findBy_id(rideId);
         Payment payment = new Payment();
@@ -113,38 +258,39 @@ public class RideServiceImp implements RideService {
         payment.setAmountPaid(ride.getPaymentDetail().getTotalAmount());
         payment.setDeductedAt(LocalDateTime.now());
         paymentRepo.save(payment);
-        sendEmail(ride, discount_percent );
+    //    sendEmail(ride, discount_percent );
         return payment;
     }
-
     private void sendEmail(Ride ride, int discount_percent) throws IOException, MessagingException {
-            Mail mail = new Mail();
-            mail.setFrom("umove742@gmail.com");
-            mail.setTo(ride.getRider().getEmail());
-            mail.setSubject("Ride Recipt");
-            Map<String, Object> model = new HashMap<>();
-            model.put("name", ride.getRider().getName());
-            model.put("distance", ride.getDistance());
-            model.put("time", ride.getDuration());
-            model.put("rideAmount", ride.getPaymentDetail().getRideAmount());
-            if(ride.getPaymentDetail().getTotalExtraCharges() != 0.0){model.put("totalExtraCharges", ride.getPaymentDetail().getTotalExtraCharges());}
-            if(discount_percent != 0){model.put("discountPercent", discount_percent);}
-            if(ride.getPaymentDetail().getFuelRefillAmount() != 0.0){model.put("fuelRefillAmount", ride.getPaymentDetail().getFuelRefillAmount());}
-            model.put("totalAmount", ride.getPaymentDetail().getTotalAmount());
-            model.put("paymentStatus", ride.getPaymentDetail().getStatus());
-            model.put("location", "Bangalore");
-            model.put("signature", "UMOVE");
+        Mail mail = new Mail();
+        mail.setFrom("umove742@gmail.com");
+        mail.setTo(ride.getRider().getEmail());
+        mail.setSubject("Ride Recipt");
+        Map<String, Object> model = new HashMap<>();
+        model.put("name", ride.getRider().getName());
+        model.put("distance", ride.getDistance());
+        model.put("time", ride.getDuration());
+        model.put("rideAmount", ride.getPaymentDetail().getRideAmount());
+        if(ride.getPaymentDetail().getTotalExtraCharges() != 0.0){model.put("totalExtraCharges", ride.getPaymentDetail().getTotalExtraCharges());}
+        if(discount_percent != 0){model.put("discountPercent", discount_percent);}
+        if(ride.getPaymentDetail().getFuelRefillAmount() != 0.0){model.put("fuelRefillAmount", ride.getPaymentDetail().getFuelRefillAmount());}
+        model.put("totalAmount", ride.getPaymentDetail().getTotalAmount());
+        model.put("paymentStatus", ride.getPaymentDetail().getStatus());
+        model.put("location", "Bangalore");
+        model.put("signature", "UMOVE");
 
-            mail.setModel(model);
+        mail.setModel(model);
 
-            mailService.sendSimpleMessage(mail, ride, discount_percent);
+        mailService.sendSimpleMessage(mail, ride, discount_percent);
     }
 
-
     @Override
-    public List<Payment> getPaymentDetails(String rideId) {
-        List<Payment> payments = paymentRepo.findByRideId(rideId);
-        return payments;
+    public Payment getPaymentDetails(String rideId) {
+        Payment payment = paymentRepo.findByRideId(rideId);
+        if(payment == null) {
+            throw new PaymentDetailsNotFoundException("Payment Details", "rideId", rideId);
+        }
+        return payment;
 
     }
 }

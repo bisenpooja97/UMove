@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Ride } from 'src/app/model/ride';
 
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { PaymentDetail } from 'src/app/model/paymentdetail';
 import { Payment } from 'src/app/model/payment';
 import { RideService } from '../service/ride.service';
@@ -34,7 +34,7 @@ export class PaymentDetailsPage implements OnInit {
   showExtraCharge: boolean;
 
 
-  constructor(private rideService: RideService, private route: Router) {
+  constructor(private rideService: RideService, private route: Router, private router: ActivatedRoute) {
     this.bookingId = '5db071a0d02e7d0001e5d7b5';
     this.rideStatusPaid = false;
     this.rideStatusUnPaid = false;
@@ -43,6 +43,7 @@ export class PaymentDetailsPage implements OnInit {
   }
 
   ngOnInit() {
+    this.bookingId = this.router.snapshot.paramMap.get('rideId');
     this.rideService.getBookingById(this.bookingId).then(response => {
       this.rides = JSON.parse(response.data).data;
       this.name = this.rides.rider.name;
@@ -104,10 +105,10 @@ export class PaymentDetailsPage implements OnInit {
     };
 
     const successCallback = (paymentId) => {
-      this.rideService.setPaymentDetails(this.bookingId, paymentId, "Paid").then(response => {
+      this.rideService.setPaymentDetails(this.bookingId, paymentId, 'Paid').then(response => {
         console.log('data of payment in sql: ', response['data']);
         this.payment = JSON.parse(response.data).data;
-        this.route.navigateByUrl('/home');
+        this.route.navigateByUrl('/confirm-ride-detail');
       });
     };
 
@@ -115,14 +116,11 @@ export class PaymentDetailsPage implements OnInit {
       this.rideService.setPaymentDetails(this.bookingId, null, "Pending").then(response => {
         console.log('data of payment in sql: ', response['data']);
         this.payment = JSON.parse(response.data).data;
-        this.route.navigateByUrl('/home');
+        this.route.navigateByUrl('/confirm-ride-detail');
       });
       alert(error.description + ' (Error ' + error.code + ')');
     };
 
     RazorpayCheckout.open(options, successCallback, cancelCallback);
   }
-
-
-
 }

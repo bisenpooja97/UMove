@@ -7,12 +7,16 @@ import lombok.Setter;
 
 import java.util.Date;
 
+/*
+ *  Model for exception
+ */
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-public class Exception
-{
+public class Exception {
+
     private Date timeStamp;
     private String message;
     private String details;
