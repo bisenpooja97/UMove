@@ -140,7 +140,8 @@ public ResponseEntity<Map> getUsersById(@PathVariable String id)
         UserData user = userService.getById(uid);
         DocumentVerification documentVerification = user.getDocument();
         documentVerification.setImage(fileDownloaduri);
-        user.setUserStatus(UserStatus.Pending);
+        documentVerification.setDocumentStatus(DocumentStatus.Pending);
+        user.setUserStatus(UserStatus.Inactive);
         this.userService.updateUser(uid,user);
 
         return new UploadFileResponse(fileName, fileDownloadUri,

@@ -70,6 +70,8 @@ export class ConfirmRideDetailPage implements OnInit {
       console.log('Before:', value);
       this.booking.rider = new User();
       this.booking.rider._id = value.id;
+      this.booking.rider.email = 'punit@gmail.com';
+      this.booking.rider.name = 'Punit Setia';
     });
 
     // this.booking.rider = {

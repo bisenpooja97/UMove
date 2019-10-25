@@ -26,27 +26,6 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit() {
-    this.storage.ready().then(() => {
-      this.storage.get(this.key).then(value => {
-        console.log('this is in storage', value);
-        this.localUserData = value;
-        if (this.localUserData && this.localUserData.id != null) {
-          this.router.navigateByUrl('/home');
-        } else {
-          if (!firebase.apps.length) {
-            firebase.initializeApp(environment.firebase);
-          }
-          // firebase.initializeApp(environment.firebase);
-          this.windowRef = this.win.windowRef;
-          this.windowRef.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
-            size: 'invisible'});
-          // this.windowRef.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container');
-          this.windowRef.recaptchaVerifier.render();
-        }
-      });
-    });
-
-
   }
   sendLoginCode() {
     this.disableButton = true;
@@ -75,5 +54,28 @@ export class LoginPage implements OnInit {
   //       })
   //       .catch( error => console.log(error, 'Incorrect code entered?'));
   // }
+
+  ionViewWillEnter() {
+    this.disableButton = false;
+    this.storage.ready().then(() => {
+      this.storage.get(this.key).then(value => {
+        console.log('this is in storage', value);
+        this.localUserData = value;
+        if (this.localUserData && this.localUserData.id != null) {
+          this.router.navigateByUrl('/home');
+        } else {
+          if (!firebase.apps.length) {
+            firebase.initializeApp(environment.firebase);
+          }
+          // firebase.initializeApp(environment.firebase);
+          this.windowRef = this.win.windowRef;
+          this.windowRef.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
+            size: 'invisible'});
+          // this.windowRef.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container');
+          this.windowRef.recaptchaVerifier.render();
+        }
+      });
+    });
+  }
 }
 

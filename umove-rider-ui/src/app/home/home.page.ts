@@ -14,24 +14,6 @@ import {RideService} from "../service/ride.service";
 
 export class HomePage implements OnInit{
     ngOnInit(): void {
-
-      this.geolocation.getCurrentPosition().then((resp) => {
-        const lat = resp.coords.latitude;
-        const lng = resp.coords.longitude;
-        this.mapService.buildMap(lat, lng,'pickup',true);
-        // this.mapService.checkMapLoading();
-        this.mapService.marker(lat, lng);
-      }).catch((error) => {
-        console.log('Error getting location', error);
-      });
-      this.mapService.selectZone$.subscribe(zone => {
-        console.log('selected zone',zone);
-        this.selectedZone = zone;
-      });
-      this.mapService.onLoad$.subscribe((message:string)=>{
-        console.log('lo ho gya load ab tofinally~~~');
-        this.isLoaded = true;
-      })
     }
   containerId = 'pick';
   page = 'pick-up';
@@ -71,6 +53,26 @@ export class HomePage implements OnInit{
 
   gettingCoordinatesByLocality($event: any) {
     this.mapService.gettingCoordinatesByLocality($event);
+  }
+
+  ionViewDidEnter() {
+    this.geolocation.getCurrentPosition().then((resp) => {
+      const lat = resp.coords.latitude;
+      const lng = resp.coords.longitude;
+      this.mapService.buildMap(lat, lng, 'pickup', true);
+      // this.mapService.checkMapLoading();
+      this.mapService.marker(lat, lng);
+    }).catch((error) => {
+      console.log('Error getting location', error);
+    });
+    this.mapService.selectZone$.subscribe(zone => {
+      console.log('selected zone', zone);
+      this.selectedZone = zone;
+    });
+    this.mapService.onLoad$.subscribe((message: string) => {
+      console.log('lo ho gya load ab tofinally~~~');
+      this.isLoaded = true;
+    });
   }
 }
 
