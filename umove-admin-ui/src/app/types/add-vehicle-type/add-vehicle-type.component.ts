@@ -94,7 +94,7 @@ export class AddVehicleTypeComponent implements OnInit {
     console.log('', uploadData);
    //  this.http; is; the; injected; HttpClient;
 
-    this.http.post(environment.baseUrl + '/api/v1/uploadFile?id=' + this.typeForm.value.name, uploadData)
+    this.http.post(environment.baseUrl + environment.zoneService + '/api/v1/uploadFile?id=' + this.typeForm.value.name, uploadData)
        .subscribe(event => {
          let eventData;
          eventData = event;
