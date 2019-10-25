@@ -63,6 +63,7 @@ export class DropPage implements OnInit {
 
   rideDetails(){
     const ride = this.rideService.currentBooking;
+    ride.destinationZones = [];
     ride.destinationZones.push(this.selectedZone);
     this.rideService.setCurrentBooking(ride);
     this.router.navigate(['ride-details']);

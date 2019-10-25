@@ -50,10 +50,15 @@ export class HomePage implements OnInit{
 
   }
 
-  confirmBooking() {
+  showVehicleList() {
+    if (!this.trip) {
      const ride = this.rideService.currentBooking;
+     console.log('pickup zone me ride', ride);
      ride.sourceZone = this.selectedZone;
+     ride.destinationZones = [];
+     ride.destinationZones.push(this.selectedZone);
      this.rideService.setCurrentBooking(ride);
+    }
     const navigationExtras: NavigationExtras = {
       state: {
         trip: this.trip,

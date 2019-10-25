@@ -64,7 +64,7 @@
               <h2>{{ booking?.promocode?.promocode }} Promocode Applied!</h2>
             </ion-text>
             <ion-text>
-              <p>Get {{ booking?.promocode?.discount }}% off on your ride upto {{ 50 | currency: 'INR' }}</p>
+              <p>Get {{ booking?.promocode?.discountPercent }}% off on your ride upto {{ 50 | currency: 'INR' }}</p>
             </ion-text>
           </ion-col>
           <ion-icon name="close-circle" size="large" (click)="removeSelectedPromocode()"></ion-icon>
