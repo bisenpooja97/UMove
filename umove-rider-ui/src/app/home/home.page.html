@@ -39,10 +39,8 @@
   </ion-grid>
 </ion-content>
 <ion-footer *ngIf="isLoaded">
-  <ion-row *ngIf="page=='pick-up'">
-    <ion-button [class.button-disabled]="selectedZone===undefined" expand="block" class="ion-no-margin btn-bottom" style="width: 100vw" (click)="sendDataToService()">Show vehicles</ion-button>
+  <ion-row >
+    <ion-button [class.button-disabled]="selectedZone===undefined" expand="block" class="ion-no-margin btn-bottom" style="width: 100vw" (click)="confirmBooking()">Show vehicles</ion-button>
   </ion-row>
-  <ion-row *ngIf="page=='drop'">
-    <ion-button [class.button-disabled]="selectedZone===undefined" expand="block" class="ion-no-margin btn-bottom" style="width: 100vw" (click)="booking()">Get Booking Details</ion-button>
-  </ion-row>
+
 </ion-footer>

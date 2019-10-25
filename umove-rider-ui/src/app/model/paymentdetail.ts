@@ -1,6 +1,5 @@
 import { ExtraCharge } from './extra-charge';
 
-
 export class PaymentDetail {
     status: string;
     rideAmount: number;

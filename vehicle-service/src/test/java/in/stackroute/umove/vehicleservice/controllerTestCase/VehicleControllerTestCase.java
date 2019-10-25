@@ -95,7 +95,7 @@ public class VehicleControllerTestCase {
 
     @Test
     public void getAllVehicle() throws Exception{
-        when(serviceVehicle.find()).thenReturn(vehicleList);
+        when(serviceVehicle.find(1)).thenReturn(vehicleList);
         mockMvc.perform(get("/api/v1/vehicles")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(jsonToString(vehicle)))
@@ -107,7 +107,7 @@ public class VehicleControllerTestCase {
 
     @Test
     public void getAllTypeByRegistrationNoFail() throws Exception{
-        when(serviceVehicle.find()).thenReturn(vehicleList);
+        when(serviceVehicle.find(1)).thenReturn(vehicleList);
         mockMvc.perform(get("/api/v1/typse/{name}",vehicle.getRegistrationNo())
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(jsonToString(vehicle)))

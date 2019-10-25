@@ -34,6 +34,8 @@ import {CustomerErrorHandler} from "./customer-error-handler";
   declarations: [AppComponent, BikeListPage, DropPage],
   entryComponents: [],
   imports: [
+    MbscModule,
+    FormsModule,
     BrowserModule,
     IonicModule.forRoot(),
     IonicStorageModule.forRoot(),

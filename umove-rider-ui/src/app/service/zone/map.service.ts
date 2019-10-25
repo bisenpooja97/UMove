@@ -1,17 +1,17 @@
 import {Injectable, OnInit} from '@angular/core';
 import * as mapboxgl from 'mapbox-gl';
-import {Observable, Observer, of, Subject, timer} from 'rxjs';
-import {Zone} from '../../model/zone';
-import {ZoneService} from './zone.service';
-import {GeoJson} from '../../map';
-import {Geolocation} from '@ionic-native/geolocation/ngx';
-import {environment} from '../../../environments/environment';
+import {Observable, Observer, of, Subject, timer} from "rxjs";
+import {Zone} from "../../model/zone";
+import {ZoneService} from "./zone.service";
+import {GeoJson,FeatureCollection} from "../../map";
+import {Geolocation} from "@ionic-native/geolocation/ngx";
+import {environment} from "../../../environments/environment";
 @Injectable({
   providedIn: 'root'
 })
-export class MapService implements OnInit {
+export class MapService implements OnInit{
 
-  markers: any;
+  markers :any;
   map: mapboxgl.Map;
   private layoutCount: number;
   private isSelected: boolean;
@@ -20,26 +20,25 @@ export class MapService implements OnInit {
   loading: Subject<any>;
   onLoad$: Observable<any>;
 
-  private features = [];
 
-  constructor(private zoneService: ZoneService, private geolocation: Geolocation, ) {
+  constructor(private zoneService : ZoneService,private geolocation: Geolocation,) {
     this.layoutCount = 0;
     this.onZoneSelected = new Subject<Zone>();
     this.selectZone$ = this.onZoneSelected.asObservable();
     this.loading = new Subject<any>();
     this.onLoad$ = this.loading.asObservable();
   }
-
   ngOnInit(): void {
   }
 
-  buildMap(lat: number, lng: number, containerId: string) {
-    this.layoutCount = 0;
-    mapboxgl.accessToken = environment.map;
-    this.markers = new mapboxgl.Marker();
-    console.log('map bn rha h', this.map);
+  buildMap(lat: number, lng: number, containerId:string, isZone:boolean){
 
-    if (this.map !== undefined) {
+    this.layoutCount =0;
+    mapboxgl.accessToken = environment.map;
+    this.markers =new mapboxgl.Marker();
+    console.log('map bn rha h',this.map);
+
+    if(this.map !== undefined) {
       this.map = undefined;
     }
 
@@ -47,8 +46,8 @@ export class MapService implements OnInit {
       container: containerId,
       style: 'mapbox://styles/mapbox/light-v10',
       center: [lat, lng],
-      zoom: 15,
-      optimize : false
+      optimize :false,
+      interactive :isZone
 
     });
     this.checkMapLoading();
@@ -56,10 +55,29 @@ export class MapService implements OnInit {
     this.map.on('load', () => {
       console.log('map loaded');
       this.map.resize();
-      this.flyTo(
-          [lng, lat]
-      );
+      if(isZone){
+        this.flyTo(
+            [lng, lat],
+            1000,
+            15
+        );
+      }
+      else {
+        this.flyTo(
+            [lng, lat],
+            4000,
+            13
+        );
+      }
 
+      if(isZone){
+      this.map.addControl(new mapboxgl.GeolocateControl({
+        positionOptions: {
+          enableHighAccuracy: true
+        },
+        trackUserLocation: true
+      }));
+      }
       // When a click event occurs on a feature in the places layer, open a popup at the
       // location of the feature, with description HTML from its properties.
       this.clickPopUp();
@@ -70,15 +88,31 @@ export class MapService implements OnInit {
         this.map.getCanvas().style.cursor = '';
       });
     });
+
+    this.map.on('style.load',() => {
+      console.log('style loaded');
+      // setTimeout(() => {
+      //   this.addLayer(lat,lng);
+      //   console.log('Async operation has ended');
+      //   style();
+      // }, 500);
+      if (isZone) {
+        this.nearbyZonesLayer(lat, lng);
+      }
+      else {
+         this.addPathLayer([ [77.61134,12.93736], [77.62245,12.93395]],lat,lng);
+      }
+    });
+
   }
 
   marker(lat, lng) {
 
-    console.log('coordinates', lat, lng);
+    console.log('coordinates',lat,lng);
     this.map.on('mouseenter', 'places', () => {
       this.map.getCanvas().style.cursor = 'pointer';
     });
-    this.markers
+     this.markers
         .setLngLat([lng, lat])
         .addTo(this.map);
     // function onDragEnd() {
@@ -90,17 +124,18 @@ export class MapService implements OnInit {
   }
 
   // For fly to different co-ordinates on map
-  flyTo(coordinates: number[]) {
+  flyTo(coordinates:number[],maxDuration:number,zoom:number) {
     this.map.flyTo({
       center: coordinates,
-      maxDuration: 100,
+      maxDuration:maxDuration,
       // speed:2.4
+      zoom: zoom
     });
   }
 
 
 
-  clickPopUp() {
+  clickPopUp(){
     this.map.on('click', 'places' + this.layoutCount, (e) => {
       const coordinates = e.features[0].geometry.coordinates.slice();
       const description = e.features[0].properties.description;
@@ -121,117 +156,45 @@ export class MapService implements OnInit {
     });
   }
 
-  addCurrentLocationController() {
-    this.map.addControl(new mapboxgl.GeolocateControl({
-      positionOptions: {
-        enableHighAccuracy: true
+  addPathLayer(coords: number[][],lat:number,lng:number) {
+    this.createFeature([
+      {
+        "id":"5dab25ec149b3f000139f56b",
+        "name":"Koramangala-B7",
+        "lat":12.93736,
+        "lon":77.61134,
+        "city":"Bengaluru Urban",
+        "state":"Karnataka",
+        "country":"India",
+        "pincode":560002,
+        "locality":"Koramangala Block 7",
+        "capacity":25,
+        "createdAt":new Date(),
+        "supervisorId":"5da84c08a7b11b000121a8df",
+        "supervisorName":"Bherulal",
+        "supervisorNumber":"9234567890",
+        "supervisorEmail":"bherula@gmail.com",
+        "status":"ACTIVE"
       },
-      trackUserLocation: true
-    }));
-  }
-
-  addLayer(lat: number, lng: number) {
-    if (this.layoutCount !== 0) {
-      this.map.removeLayer('places' + this.layoutCount);
-      this.map.removeImage('cat');
-      this.features = [];
-    }
-    console.log('layer', this.layoutCount);
-    this.layoutCount++;
-    this.clickPopUp();
-
-    this.zoneService.getNearbyZones(lat, lng).then(response => {
-      const data = JSON.parse(response.data);
-      console.log('Nearby Zones', data);
-      data.data.forEach(d => {
-            this.features.push({
-              type: 'Feature',
-              properties: {
-                description: '<a href="http://maps.google.com/maps?saddr=' + lat + ',' + lng + '' +
-                    '&daddr=' + d.lat + ',' + d.lon + '">' +
-                    '<button>Get Directions</button></a> ',
-                icon: 'cat',
-                data: d,
-              },
-
-              geometry: {
-                type: 'Point',
-                coordinates: [
-                  d.lon,
-                  d.lat,
-                ]
-              }
-            });
-          }
-      );
-      this.loadAndAddImageLayer('https://images.vexels.com/media/users/3/129788/isolated/preview/' +
-          '04c91b04215f603567324d459b761807-chopper-bike-front-icon-by-vexels.png');
-      console.log('features:', this.features);
-    }).catch(error => {
-      console.log(error);
-      this.zoneService.presentToast(error);
-    });
-  }
-
-  gettingCoordinatesByLocality(locality) {
-    console.log('locality:', locality);
-    this.zoneService.getCoordinatesByLocality(locality).then(
-        response => {
-          const locationData = JSON.parse(response.data);
-          // this.location = res;
-          const lat = locationData.data.results[0].position.lat;
-          const lng = locationData.data.results[0].position.lon;
-          this.flyTo(
-              [lng, lat]
-          );
-          this.marker( lat, lng );
-          this.addLayer(lat, lng);
-
-        }
-    ).catch(error => {
-      console.log('Error', error);
-      this.zoneService.presentToast(error); });
-  }
-
-  checkMapLoading() {
-    timer(1000).subscribe(() => {
-      if (this.map.loaded()) {
-        console.log('load ho gya');
-        this.loading.next('Map is loaded');
-      } else {
-        console.log('abhi ni hua');
-        this.checkMapLoading();
+      {
+        "id":"5dab2691149b3f000139f56c",
+        "name":"Koramangala-B5",
+        "lat":12.93395,
+        "lon":77.62245,
+        "city":"Bengaluru Urban",
+        "state":"Karnataka",
+        "country":"India",
+        "pincode":560002,
+        "locality":"Koramangala Block 5",
+        "capacity":25,
+        "createdAt":new Date(),
+        "supervisorId":"5da84c08a7b11b000121a8df",
+        "supervisorName":"Bherulal",
+        "supervisorNumber":"9234567890",
+        "supervisorEmail":"bherula@gmail.com",
+        "status":"ACTIVE"
       }
-    });
-  }
-
-  loadAndAddImageLayer(imgUrl) {
-    // tslint:disable-next-line:max-line-length
-    this.map.loadImage(imgUrl, (error, image) => {
-      if (error) { throw error; }
-      this.map.addImage('cat', image);
-      // Add a layer showing the places.
-
-      this.map.addLayer({
-        id: 'places' + this.layoutCount,
-        type: 'symbol',
-        source: {
-          type: 'geojson',
-          data: {
-            type: 'FeatureCollection',
-            features: this.features,
-          }
-        },
-        layout: {
-          'icon-image': 'cat',
-          'icon-size': 0.10,
-          'icon-allow-overlap': true
-        }
-      });
-    });
-  }
-
-  addPathLayer(coords: number[][]) {
+    ],lat,lng)
     this.map.addLayer({
       id: 'route',
       type: 'line',
@@ -258,5 +221,104 @@ export class MapService implements OnInit {
       }
     });
 
+  }
+  createFeature(zoneList:Zone[],lat:number,lng:number){
+    if(this.layoutCount!==0) {
+      this.map.removeLayer('places' + this.layoutCount);
+      this.map.removeImage('cat');
+    }
+    console.log('layer',this.layoutCount);
+    this.layoutCount++;
+    this.clickPopUp();
+
+    const features= [];
+    zoneList.forEach(d=>{
+          features.push({
+            type: 'Feature',
+            properties: {
+              description: '<a href="http://maps.google.com/maps?saddr=' + lat + ',' + lng + '' +
+                  '&daddr=' + d.lat + ',' + d.lon + '">' +
+                  '<button>Get Directions</button></a> ',
+              icon: 'cat',
+              data: d,
+            },
+
+            geometry: {
+              type: 'Point',
+              coordinates: [
+                d.lon,
+                d.lat,
+              ]
+            }
+          })
+        }
+    );
+    this.map.loadImage('https://images.vexels.com/media/users/3/129788/isolated/preview/04c91b04215f603567324d459b761807-chopper-bike-front-icon-by-vexels.png', (error, image) => {
+      if (error) { throw error; }
+      this.map.addImage('cat', image);
+      // Add a layer showing the places.
+      this.map.addLayer({
+        id: 'places' + this.layoutCount,
+        type: 'symbol',
+        source: {
+          type: 'geojson',
+          data: {
+            type: 'FeatureCollection',
+            features: features,
+          }
+        },
+        layout: {
+          'icon-image': 'cat',
+          'icon-size': 0.10,
+          'icon-allow-overlap': true
+        }
+      });
+    });
+
+  }
+
+  nearbyZonesLayer(lat: number, lng: number){
+    this.zoneService.getNearbyZones(lat, lng).then(response =>{
+      const data = JSON.parse(response.data);
+      this.createFeature(data.data,lat,lng);
+    }).catch(error => {
+      console.log(error);
+      this.zoneService.presentToast(error);
+    });
+  }
+
+
+  gettingCoordinatesByLocality(locality) {
+    console.log('locality:', locality);
+    this.zoneService.getCoordinatesByLocality(locality).then(
+        response => {
+          const locationData = JSON.parse(response.data);
+          // this.location = res;
+          const lat = locationData.data.results[0].position.lat;
+          const lng = locationData.data.results[0].position.lon;
+          this.flyTo(
+              [lng, lat],
+              1000,15
+          );
+          this.marker( lat, lng );
+          this.nearbyZonesLayer(lat, lng);
+
+        }
+    ).catch(error => {
+      console.log('Error', error);
+      this.zoneService.presentToast(error); });
+  }
+
+  checkMapLoading() {
+    timer(1000).subscribe(() => {
+      if(this.map.loaded()) {
+        console.log('load ho gya');
+        this.loading.next("Map is loaded");
+      }
+      else {
+        console.log('abhi ni hua');
+        this.checkMapLoading();
+      }
+    });
   }
 }

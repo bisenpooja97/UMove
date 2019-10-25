@@ -2,6 +2,7 @@ package in.stackroute.umove.campaignservice.controller;
 
 import in.stackroute.umove.campaignservice.model.Campaign;
 import in.stackroute.umove.campaignservice.service.CampaignService;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,8 +14,15 @@ import java.util.TreeMap;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
+
 public class CampaignController
 {
+    private final RabbitTemplate messagingTemplate;
+
+    @Autowired
+    CampaignController( RabbitTemplate messagingTemplate) {
+        this.messagingTemplate = messagingTemplate;
+    }
 
     @Autowired
     private CampaignService campaignService;
@@ -45,6 +53,7 @@ public class CampaignController
         map.put("data", addCampaign);
         map.put("message","New campaign created");
         map.put("status", HttpStatus.OK);
+        messagingTemplate.convertAndSend("campaign_exchange", "campaign_created", map);
         return new ResponseEntity<>(map,HttpStatus.OK);
     }
     /**

@@ -3,7 +3,8 @@ package in.stackroute.umove.bookingservice.model;
 public enum RideStatus {
     Confirmed,
     Started,
-    Cancelled,
+    CancelledWithinThreshold,
+    CancelledAfterThreshold,
     Auto_Cancelled,
     Ended
 }

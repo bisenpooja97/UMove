@@ -1,12 +1,19 @@
+/**
+ *  Zones Model Class
+ */
+
+// Package
 package in.stackroute.umove.bookingservice.model;
 
 // Importing files
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.mongodb.core.mapping.Document;
-import javax.persistence.Id;
+
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -14,8 +21,7 @@ import java.time.LocalDateTime;
 @Document
 public class Zone {
 
-    @Id
-    private String id;
+    private String id = UUID.randomUUID().toString().substring(30);
     private String name;
     private double lat;
     private double lon;

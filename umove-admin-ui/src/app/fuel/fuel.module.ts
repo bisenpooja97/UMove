@@ -4,7 +4,9 @@ import { CommonModule } from '@angular/common';
 import { FuelRoutingModule } from './fuel-routing.module';
 import { FuelComponent } from './fuel.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatFormFieldModule, MatInputModule, MatCardModule, MatIconModule, MatButtonModule, MatPaginatorModule, MatSelectModule, MatOptionModule, MatDialogModule, MatToolbarModule, MatGridListModule, MatDatepickerModule } from '@angular/material';
+import { MatFormFieldModule, MatInputModule, MatCardModule, MatIconModule, MatButtonModule,
+   MatPaginatorModule, MatSelectModule, MatOptionModule, MatDialogModule, MatToolbarModule, MatGridListModule,
+    MatDatepickerModule } from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
@@ -13,6 +15,7 @@ import { FuelCardComponent } from './fuel-card/fuel-card.component';
 import { AddFuelComponent } from './add-fuel/add-fuel.component';
 import { UpdateFuelComponent } from './update-fuel/update-fuel.component';
 import { FuelDetailsComponent } from './fuel-details/fuel-details.component';
+import { AvatarModule } from 'ngx-avatar';
 
 
 @NgModule({
@@ -39,7 +42,7 @@ import { FuelDetailsComponent } from './fuel-details/fuel-details.component';
     MatGridListModule,
     MatIconModule,
     MatDialogModule,
-   // MatDatepicker,
+    AvatarModule,
     MatDatepickerModule,
   ],
   entryComponents: [AddFuelComponent, UpdateFuelComponent]
