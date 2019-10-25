@@ -10,7 +10,6 @@ const routes: Routes = [
    { path: 'bikelist', component: BikeListPage},
     { path: 'drop', component: DropPage},
     { path: 'confirm-ride-detail', loadChildren: './confirm-ride-detail/confirm-ride-detail.module#ConfirmRideDetailPageModule' },
-    { path: 'dummy-promocode', loadChildren: './dummy-promocode/dummy-promocode.module#DummyPromocodePageModule' },
     { path: 'ride-booking-details', loadChildren: './ride-booking-details/ride-booking-details.module#RideBookingDetailsPageModule' },
     { path: 'ride-details', loadChildren: './ride-details/ride-details.module#RideDetailsPageModule' },
     // tslint:disable-next-line:max-line-length
