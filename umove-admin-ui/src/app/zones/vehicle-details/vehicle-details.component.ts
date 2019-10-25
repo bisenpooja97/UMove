@@ -109,16 +109,10 @@ export class VehicleDetailsComponent implements OnInit {
 
   vDetails() {
     this.vehicleService.getVehicles().subscribe(res => {
-      if (res.count === 0) {
-        this.displayCount = 0;
-        console.log(res, 'https://www.doodadi.com/assets/images/data-not-found.svg');
-      } else {
         res.data.filter(val => {
           if ((val.zoneId === this.id)) {
             this.displayCount = 1;
             this.vehicle.push(val);
-          } else {
-            this.displayCount = 0;
           }
         });
         res.data.filter(val => {
@@ -131,7 +125,6 @@ export class VehicleDetailsComponent implements OnInit {
             console.log(this.tname);
           }
         });
-      }
     });
   }
 }

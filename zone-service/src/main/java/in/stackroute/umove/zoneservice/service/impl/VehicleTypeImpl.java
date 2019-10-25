@@ -144,7 +144,7 @@ public class VehicleTypeImpl implements ServiceVehicleType {
         for ( VehicleType vehicle : vehicleLists){
             float a=vehicle.getMileage();
             float b=fare/a;
-            vehicle.setMileage(b);
+            vehicle.setCostPerKm(b);
             updateTypeDetails(vehicle.getName(),vehicle);
         }
 

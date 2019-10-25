@@ -101,8 +101,7 @@ public class VehicleTypeController {
                         .path("api/v1/downloadFile/")
                         .path(fileName)
                         .toUriString();
-        String fileDownloaduri= ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("api/v1/downloadFile/"+fileName).toUriString();
+        String fileDownloaduri= "api/v1/downloadFile/"+fileName;
        // VehicleType vehicleType=typeManagementService.findName(id);
       //  vehicleType.getUrl();
       //  vehicleType.setUrl(fileDownloaduri);
@@ -110,7 +109,7 @@ public class VehicleTypeController {
 //       VehicleType vehicleType1=vehicleType.getUrl();
 
 
-        return new UploadFileResponse(fileName, fileDownloadUri,
+        return new UploadFileResponse(fileName, fileDownloaduri,
                 file.getContentType(), file.getSize());
     }
 
