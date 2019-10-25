@@ -5,32 +5,31 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.GeneratedValue;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 
-@Document
+import java.util.UUID;
 
 @Data
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class VehicleType {
-
-    private String id;
+    private String id = UUID.randomUUID().toString().substring(30);
     private String name;
-    private float costkm;
-    private float costtime;
-    private float costlt=100;
-    private Category category;
-    private String vehiclecc;
-    private float kilometer;
+    private float costPerKm;
+    private float costPerMin;
+    private String vehicleCC;
+    private float mileage;
     private String url;
+    @DBRef
+    private Fuel fuel;
+    private float baseFare;
 
-
-    public VehicleType(String name, int costkm, int costtime) {
-
+    public VehicleType(String name, float costPerKm, float costPerMin) {
         this.name = name;
-        this.costkm = costkm;
-        this.costtime = costtime;
+        this.costPerKm = costPerKm;
+        this.costPerMin = costPerMin;
     }
+
 }

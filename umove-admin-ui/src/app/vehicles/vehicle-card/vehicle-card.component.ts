@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Vehicle } from 'src/app/model/Vehicle';
+import { Vehicle } from 'src/app/model/vehicle';
 import { Router } from '@angular/router';
 
 @Component({
@@ -19,9 +19,9 @@ export class VehicleCardComponent implements OnInit {
   ngOnInit() {
      this.registrationNo = this.vehicle.registrationNo;
      this.status = this.vehicle.status;
-     this.type = this.vehicle.type.name;
+     this.type = this.vehicle.vehicleType.name;
    //  this.category = this.vehicle.type.category;
-     console.log(this.vehicle.type.name);
+     console.log(this.vehicle.vehicleType.name);
 
   }
 

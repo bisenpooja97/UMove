@@ -3,6 +3,8 @@ import { Ride } from '../model/ride';
 import { RideService } from '../service/ride.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ActionSheetController } from '@ionic/angular';
+import {Geolocation} from "@ionic-native/geolocation/ngx";
+import {MapService} from "../service/zone/map.service";
 
 @Component({
   selector: 'app-confirm-ride-detail',
@@ -13,7 +15,7 @@ export class ConfirmRideDetailPage implements OnInit {
 
   booking: Ride;
 
-  constructor(private rideService: RideService,private actionSheetController: ActionSheetController,private router: Router, private route: ActivatedRoute) {
+  constructor(private rideService: RideService,private mapService: MapService,private geolocation: Geolocation,private actionSheetController: ActionSheetController,private router: Router, private route: ActivatedRoute) {
     this.route.queryParams.subscribe(params => {
       const state = this.router.getCurrentNavigation().extras.state;
       if (state) {
@@ -29,7 +31,15 @@ export class ConfirmRideDetailPage implements OnInit {
   }
 
   ngOnInit() {
-
+    this.geolocation.getCurrentPosition().then((resp) => {
+      const lat = resp.coords.latitude;
+      const lng = resp.coords.longitude;
+      this.mapService.buildMap(lat, lng,'booking',false);
+      // this.mapService.checkMapLoading();
+      this.mapService.marker(lat, lng);
+    }).catch((error) => {
+      console.log('Error getting location', error);
+    });
     this.booking = this.rideService.getCurrentBooking();
     this.booking.destinationZones = [];
 
@@ -42,31 +52,30 @@ export class ConfirmRideDetailPage implements OnInit {
       email: 'bochiwal.visnu@gmail.com'
     };
 
-    this.booking.vehicle =
-    {
-      "id":"5daee3f4bfe5230001d14980",
-        "zoneid":null,
-        "registrationNo":"RJ27CA2345",
-        "insuranceNo":"yu78er34",
-        "status":"Free",
-        "type":{
-      "id":"5daedfd4bfe5230001d1497f",
-          "name":"KTM",
-          "costkm":9.083333,
-          "costtime":1.0,
-          "vehiclecc":"220",
-          "kilometer":12.0,
-          "url":'https://jtride-data.s3.ap-south-1.amazonaws.com/uploads/1570608854_vespa.png',
-          "fuel":{
-        "id":"5daedeecbfe5230001d1497e",
-            "name":"Petrol",
-            "costFuel":109.0
+    this.booking.vehicle = {
+      id: '5da1ab649bd1160001cb8a03',
+      zoneId: null,
+      registrationNo: 'RJ27CA3456',
+      insuranceNo: '678567',
+      status: 'Busy',
+      vehicleType: {
+        id: '5da1a0989bd1160001cb8a02',
+        name: 'R1',
+        costPerKm: 9,
+        costPerMin: 0.25,
+        vehicleCC: '220cc',
+        mileage: 25,
+        fuel: {
+          id: '5da1a0989bd1160001cb8a87',
+          name: 'Petrol',
+          fuelCost: 80
+        },
+        baseFare: 20,
+        url: 'https://jtride-data.s3.ap-south-1.amazonaws.com/uploads/1570608854_vespa.png'
       },
-      "baseFare":25.0
-    },
-        "lastServiceDate":new Date(),
-        "vehiclePurchased":new Date(),
-        "chassisNumber":"AS456TYU"
+      lastServiceDate: new Date(),
+      purchasedDate: new Date(),
+      chassisNumber: '987665'
     };
 
     this.booking.sourceZone = {

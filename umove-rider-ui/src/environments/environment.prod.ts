@@ -11,5 +11,6 @@ export const environment = {
   bookingService: 'bookingservice',
   bookingBaseApi: '/api/v1/rides',
   nearby : '/nearby',
-  zones : '/zones'
+  zones : '/zones',
+  configBaseApi: '/api/v1/config'
 };

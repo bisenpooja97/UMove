@@ -5,6 +5,7 @@ import lombok.*;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.persistence.Column;
 import javax.persistence.Id;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -37,12 +38,8 @@ public class Ride
     private PaymentDetail paymentDetail;
     private PromoCode promoCode;
 
-
-
     // ObjectId needs to be converted to string
     public String get_id() { return _id.toHexString(); }
     public void set_id(ObjectId _id) { this._id = _id; }
-
-
 
 }

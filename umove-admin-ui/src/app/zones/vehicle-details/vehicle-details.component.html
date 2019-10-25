@@ -1,20 +1,19 @@
+<h1 fxLayout="column" fxLayout.gt-md="row" fxLayoutGap.gt-md="15px" class="vehicles">
+    Vehicles
 
-                        <h1 fxLayout="column" fxLayout.gt-md="row" fxLayoutGap.gt-md="15px" class="vehicles">
-                                Vehicles
-                                
-                        </h1>
-                        <mat-list>
-  <mat-list-item *ngFor="let folder of vehicle"  fxLayoutAlign="center center">
-        <h4 mat-line>{{folder.type.name}}</h4>
-        <h4 mat-line>{{folder.registrationNo}}</h4>
-  </mat-list-item>
- 
+</h1>
+<mat-list>
+    <mat-list-item *ngFor="let folder of vehicle" fxLayoutAlign="center center">
+        <mat-icon mat-list-icon>motorcycle</mat-icon>
+        <h4 mat-line>{{folder.vehicleType.name}}</h4>
+        <h4 mat-line>{{folder.registrationNo}}</h4>   
+    </mat-list-item>
+
 </mat-list>
 
 <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutAlign="end" class="add-button">
-        <button mat-fab color="primary" disabled="{{buttonDisable}}" (click)="add()">
-            <i class="material-icons">
-                add
-            </i>
-        </button>
-                      
+    <button mat-fab color="primary" disabled="{{buttonDisable}}" (click)="add()">
+        <i class="material-icons">
+            add
+        </i>
+    </button>

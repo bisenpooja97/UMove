@@ -44,17 +44,6 @@ public class RideControllerTests {
                 .andExpect(status().isOk());
     }
 
-    //Test to check api end point for autocancelling a ride
-    @Test
-    public void autocancelRideTest() throws Exception {
-        Ride ride = new Ride();
-        ride.set_id(new ObjectId("5d89c3cf651a913a1cf2d31e"));
-        BDDMockito.given(rideService.autocancelRide(new ObjectId("5d89c3cf651a913a1cf2d31e"))).willReturn(ride);
-        mockMvc.perform(MockMvcRequestBuilders.patch("/api/v1/rides/5d89c3cf651a913a1cf2d31e/autocancel")
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
-    }
-
     //Test to check api end point for cancelling a ride
     @Test
     public void cancelRideRequestTest() throws Exception {

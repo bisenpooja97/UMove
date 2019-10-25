@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
-import { Resp } from 'src/model/user-response';
-import { User } from 'src/model/user';
-import {Document} from 'src/model/document';
+import { Resp } from 'src/app/model/user-response';
+import { User } from 'src/app/model/user';
+import {Document} from 'src/app/model/document';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -14,11 +14,11 @@ export class DocumentsService {
 
 
   constructor(private httpClient: HttpClient) { }
-  baseUrl = environment.baseUrl + environment.userBaseApi;
+  baseUrl = environment.baseUrl + environment.userService + environment.userBaseApi;
 
   getUsers(): Observable<Resp> {
     console.log(this.baseUrl + '/' +  '?role=User&documentStatus=Pending');
-    return this.httpClient.get<Resp>(this.baseUrl + '/' +  '?role=User&documentStatus=Pending');
+    return this.httpClient.get<Resp>(this.baseUrl  +  '?role=User&documentStatus=Pending');
   }
 
 

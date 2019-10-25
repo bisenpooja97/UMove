@@ -1,20 +1,21 @@
 package in.stackroute.umove.bookingservice.model;
 
 // Importing files
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.mongodb.core.mapping.Document;
 import javax.persistence.Id;
 import java.time.LocalDateTime;
 
-@Getter
-@Setter
+/*
+ * Zone details
+ */
+
+@Data
+@AllArgsConstructor
 @NoArgsConstructor
-@Document
+@ToString
 public class Zone {
 
-    @Id
     private String id;
     private String name;
     private double lat;
@@ -50,4 +51,5 @@ public class Zone {
         this.supervisorEmail = supervisorEmail;
         this.status = status;
     }
+
 }

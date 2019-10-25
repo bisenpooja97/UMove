@@ -39,7 +39,7 @@ import { SharedModule } from './shared/shared.module';
     AppComponent,
 
     NavigationComponent,
-    FooterComponent
+    FooterComponent,
   ],
   imports: [
     BrowserModule,

@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Zone } from 'src/app/model/zone';
 import { Router } from '@angular/router';
 import { VehicleService } from 'src/app/vehicles/vehicle.service';
-import { Vehicle } from 'src/app/model/Vehicle';
+import { Vehicle } from 'src/app/model/vehicle';
 import { count } from 'rxjs/operators';
 
 @Component({
@@ -57,7 +57,7 @@ getVehiclesDetails() {
   this.vehicleService.getVehicles().subscribe(res => {
 
     res.data.filter(val => {
-      if (val.zoneid === String(this.id)) {
+      if (val.zoneId === String(this.id)) {
           this.count += 1;
       }
     });

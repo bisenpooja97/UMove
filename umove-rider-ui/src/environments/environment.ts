@@ -27,4 +27,5 @@ export const environment = {
     messagingSenderId: '505919961682',
     appId: '1:505919961682:web:a1ad48542500c354403d8b'
   },
+  configBaseApi: '/api/v1/config'
 };

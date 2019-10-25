@@ -6,11 +6,11 @@ import { HTTP } from '@ionic-native/http/ngx';
 })
 export class VehicleService {
   baseUrl = environment.baseUrl + environment.zoneService + environment.vehiclesBaseApi;
-  // baseUrl = 'http:/localhost:8093/api/v1';
-  vehicleList: [];
 
-
-  constructor(private http: HTTP) { }
+  constructor(private http: HTTP) {
+    http.setDataSerializer('json');
+    http.setHeader('*', 'Content-Type', 'application/json');
+  }
 
   getVehiclesByZone(supervisorId: string) {
     console.log(this.baseUrl );

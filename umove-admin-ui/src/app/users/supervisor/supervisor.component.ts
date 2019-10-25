@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { User } from 'src/model/user';
-import { Router } from '@angular/router';
+import { User } from 'src/app/model/user';
 import { UserService } from '../service/user.service';
 import { MatTableDataSource, MatDialogConfig, MatDialog } from '@angular/material';
 import { AddUserComponent } from '../add-user/add-user.component';
@@ -59,5 +58,15 @@ export class SupervisorComponent implements OnInit {
   this.supervisors = res.data;
 });
   }
+
+  getColor(userStatus) {
+    switch (userStatus) {
+    case 'Allocated':
+    return '#1B5E20';
+    case 'Unallocated':
+    return '#FFC400';
+}
+
+}
 
 }
