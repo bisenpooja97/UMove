@@ -15,7 +15,7 @@ export class QrcodeGeneratorPage implements OnInit {
     ride: Ride;
 
     constructor(private rideService: RideService, private route: ActivatedRoute, private router: Router,
-                private websocketService: RideSocketService) {
+        private websocketService: RideSocketService) {
 
 
         this.rideService.getRideDetailsByUserIdNStatus('5d8bbc0da6e87d5404aa1921', 'Started')

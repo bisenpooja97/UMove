@@ -163,7 +163,6 @@ services:
       - rabbitmq
     restart: on-failure
 
-
   campaigns:
     build:
       context: ./campaign-service

@@ -36,7 +36,7 @@ export class ConfirmRideDetailPage implements OnInit {
     this.booking.rider = {
       _id: '5d8bbc0da6e87d5404aa1921',
       name: 'Visnu',
-      email: 'khannakhushal@gmail.com',
+      email: 'khannakhushalkk@gmail.com',
       mobileNumber: '75607690'
     };
 
@@ -50,7 +50,7 @@ export class ConfirmRideDetailPage implements OnInit {
         id: '5da1a0989bd1160001cb8a02',
         name: 'R1',
         costPerKm: 9,
-        costPerMin: 0.25,
+        costPerMin: 20,
         vehicleCC: '220cc',
         mileage: 25,
         fuel: {
