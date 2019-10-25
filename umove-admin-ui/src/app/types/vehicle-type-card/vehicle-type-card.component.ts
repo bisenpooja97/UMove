@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { VehicleType } from 'src/app/model/vehicleType';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment.prod';
 
 
 @Component({
@@ -13,7 +14,7 @@ export class VehicleTypeCardComponent implements OnInit {
   name: object;
   costPerKm: object;
   costPerMin: object;
-  url: object;
+  url: string;
 
   constructor(private router: Router) { }
 
@@ -21,7 +22,7 @@ export class VehicleTypeCardComponent implements OnInit {
     this.name = Object.values(this.vehicleTypes)[1];
     this.costPerKm = Object.values(this.vehicleTypes)[2];
     this.costPerMin = Object.values(this.vehicleTypes)[3];
-    this.url = Object.values(this.vehicleTypes)[6];
+    this.url = `${environment.baseUrl}/zoneservice/api/v1/downloadFile/${this.name}`;
     console.log(Object.values(this.vehicleTypes));
 }
 

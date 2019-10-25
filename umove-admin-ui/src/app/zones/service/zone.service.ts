@@ -55,15 +55,18 @@ export class ZoneService {
   }
 
   getZoneType(zid: string, tid: string): Observable<RespZTC> {
-    return this.httpClient.get<RespZTC>(environment.baseUrl + '/api/v1/zoneTypeCount' + '?zoneId=' + zid + '&typeId=' + tid);
+    return this.httpClient.get<RespZTC>(environment.baseUrl + environment.zoneService  +
+      '/api/v1/zoneTypeCount' + '?zoneId=' + zid + '&typeId=' + tid);
   }
 
   createNew(zoneTypeCount: ZoneTypeCount) {
-    return this.httpClient.post<ZoneTypeCount>(environment.baseUrl + '/api/v1/zoneTypeCount', zoneTypeCount);
+    return this.httpClient.post<ZoneTypeCount>(environment.baseUrl + environment.zoneService +
+       '/api/v1/zoneTypeCount', zoneTypeCount);
   }
 
   updateZoneTypeCount(zid: string, tid: string, zoneTypeCount: ZoneTypeCount) {
-    return this.httpClient.patch<ZoneTypeCount>(environment.baseUrl + '/api/v1/zoneTypeCount' +
+    return this.httpClient.patch<ZoneTypeCount>(environment.baseUrl + environment.zoneService +
+       '/api/v1/zoneTypeCount' +
      '?zoneId=' + zid + '&typeId=' + tid, zoneTypeCount);
   }
 }
