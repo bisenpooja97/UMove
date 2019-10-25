@@ -9,20 +9,39 @@
 </ion-header>
 
 <ion-content *ngIf="campaigns">
-  <ion-card *ngFor="let campaign of campaigns">
-    <ion-card-content>
-      <ion-item lines="none">
-        <ion-thumbnail slot="start">
-          <img src = "./assets/icon/hello.png">
-        </ion-thumbnail>
-        <ion-label>
-          <h3>PromoCode:{{campaign.promocode}}</h3>
-        </ion-label>
+<!--  <ion-card *ngFor="let campaign of campaigns">-->
+<!--    <ion-card-content>-->
+<!--      <ion-item lines="none">-->
+<!--        <ion-thumbnail slot="start">-->
+<!--          <img src = "./assets/icon/hello.png">-->
+<!--        </ion-thumbnail>-->
+<!--        <ion-label>-->
+<!--          <h3>PromoCode:{{campaign.promocode}}</h3>-->
+<!--        </ion-label>-->
+<!--        <ion-button (click)="sendCampaign(campaign)">Apply Code </ion-button>-->
+<!--      </ion-item>-->
+<!--      <ion-item>-->
+<!--        <p style="text-align: center">{{campaign.name}}.</p>-->
+<!--      </ion-item>-->
+<!--    </ion-card-content>-->
+<!--  </ion-card>-->
+  <ion-card>
+  <ion-card-content *ngFor="let campaign of campaigns">
+    <ion-grid no-padding>
+      <ion-row class="ion-align-items-center">
+        <ion-icon name="pricetags" size="large" color="success"></ion-icon>
+        <ion-col padding-horizontal>
+          <ion-text color="success">
+            <h3>PromoCode: {{campaign.promocode}}</h3>
+          </ion-text>
+          <ion-text>
+            <p style="text-align: left">{{campaign.name}}.</p>
+          </ion-text>
+        </ion-col>
         <ion-button (click)="sendCampaign(campaign)">Apply Code </ion-button>
-      </ion-item>
-      <ion-item>
-        <p style="text-align: center">{{campaign.name}}.</p>
-      </ion-item>
-    </ion-card-content>
+<!--        <ion-icon name="close-circle" size="large" (click)="removeSelectedPromocode()"></ion-icon>-->
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
   </ion-card>
 </ion-content>
