@@ -8,6 +8,7 @@ target/
 
 /user-service/uploads/**
 
+/user-service/uploads/
 ### STS ###
 .apt_generated
 .classpath
@@ -17,6 +18,7 @@ target/
 .springBeans
 .sts4-cache
 
+/user-service/uploads/
 ### IntelliJ IDEA ###
 .idea
 *.iws
