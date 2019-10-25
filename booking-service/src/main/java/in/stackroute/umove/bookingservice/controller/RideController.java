@@ -46,19 +46,19 @@ public class RideController {
     public ResponseEntity<Map> confirmBooking(@RequestBody() Ride ride) {
         Map<String, Object> map = new TreeMap<>();
 
-        if(!rideService.isValidUser(ride.getRider().get_id())) {
-            map.put("status", "Failed");
-            map.put("message", "Can't book your ride, Please check your status in your profile");
-            return new ResponseEntity<>(map, HttpStatus.OK);
-        }
-
-        Payment outstandingPayment = rideService.getOutstandingRideDetail(ride.getRider().get_id());
-        if(outstandingPayment != null) {
-            map.put("status", "Failed");
-            map.put("data", outstandingPayment);
-            map.put("message", "There is some outstanding amount pending. Pay that First to make a new Booking.");
-            return new ResponseEntity<>(map, HttpStatus.OK);
-        }
+//        if(!rideService.isValidUser(ride.getRider().get_id())) {
+//            map.put("status", "Failed");
+//            map.put("message", "Can't book your ride, Please check your status in your profile");
+//            return new ResponseEntity<>(map, HttpStatus.OK);
+//        }
+//
+//        Payment outstandingPayment = rideService.getOutstandingRideDetail(ride.getRider().get_id());
+//        if(outstandingPayment != null) {
+//            map.put("status", "Failed");
+//            map.put("data", outstandingPayment);
+//            map.put("message", "There is some outstanding amount pending. Pay that First to make a new Booking.");
+//            return new ResponseEntity<>(map, HttpStatus.OK);
+//        }
 
         Ride currentRide = rideService.getRideByUserIdNStatus(ride.getRider().get_id(), "Confirmed");
         if(currentRide != null)  {
