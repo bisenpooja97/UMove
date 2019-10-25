@@ -18,6 +18,8 @@ export const environment = {
   vehicles: '/vehicles',
   userService: 'userservice',
   usersBaseApi: '/api/v1/users',
+    campaignService: 'campaignservice',
+    campaignBaseApi: '/api/v1/campaigns',
   firebase: {
     apiKey: 'AIzaSyC5Fc9iQzehhW9yw9qDDCUYhU7YhWPFgoI',
     authDomain: 'sms-project-3.firebaseapp.com',

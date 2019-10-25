@@ -9,40 +9,38 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class CampaignServiceImpl implements CampaignService
+public class CampaignserviceImpl implements CampaignService
 {
 
     @Autowired
     private CampaignRepository campaignRepository;
-    /**
-     * Method to get list of campaigns
-     *
-     *
+
+    /*
+     *Method to get campaign list
      */
+
     @Override
     public List<Campaign> getCampaignList()
     {
         return campaignRepository.findAll();
     }
-
-    /**
-     * Method to add new campaigns
-     *
-     *
+    /*
+     *Method to add campaign
      */
+
+
     @Override
     public Campaign addCampaign(Campaign campaign) {
         return campaignRepository.save(campaign);
     }
-    /**
-     * Method to update campaigns
-     *
-     *
+    /*
+     *Method to update campaign
      */
+
     @Override
     public Campaign updateCampaign(String id, Campaign campaign)
     {
-        Campaign updatedCampaign = campaignRepository.findByid(id);
+        Campaign updatedCampaign = campaignRepository.findById(id);
         if (updatedCampaign != null) {
             if (campaign.getName() != null) {
                 updatedCampaign.setName(campaign.getName());
@@ -66,10 +64,15 @@ public class CampaignServiceImpl implements CampaignService
         }
         return null;
     }
+
+    /**
+     *  Method to delete campaign
+     */
+
     @Override
     public Campaign deleteCampaign(String id)
     {
-        Campaign campaign=campaignRepository.findByid(id);
+        Campaign campaign=campaignRepository.findById(id);
         campaignRepository.delete(campaign);
         return campaign;
     }

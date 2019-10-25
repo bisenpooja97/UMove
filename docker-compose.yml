@@ -233,7 +233,7 @@ services:
     depends_on:
       - discovery
       - config
-    restart: on-failure    
+    restart: on-failure
     deploy:
       resources:
         limits:

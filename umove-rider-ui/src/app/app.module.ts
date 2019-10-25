@@ -29,6 +29,7 @@ import {Environment} from '@angular/compiler-cli/src/ngtsc/typecheck/src/environ
 import {UserPaymentMethodService} from './service/user-payment-method/user-payment-method.service';
 import {IonicStorageModule} from '@ionic/storage';
 import {CustomerErrorHandler} from "./customer-error-handler";
+import {CampaignService} from './service/campaign-service/campaign.service';
 
 @NgModule({
   declarations: [AppComponent, BikeListPage, DropPage],
@@ -61,8 +62,9 @@ import {CustomerErrorHandler} from "./customer-error-handler";
     HTTP,
     UserProfileServiceService,
     UserPaymentMethodService,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    { provide: ErrorHandler, useClass: CustomerErrorHandler }
+      CampaignService,
+    { provide: ErrorHandler, useClass: CustomerErrorHandler },
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   exports: [
   ],
