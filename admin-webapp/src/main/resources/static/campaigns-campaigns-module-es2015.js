@@ -717,7 +717,7 @@ var NgxPaginationModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-toolbar>\n  <span class=\"fill-remaining-space\"></span>\n  <button class=\"btn-dialog-close\" mat-stroked-button (click)=\"onClose()\" tabIndex=\"-1\">\n    <mat-icon>clear</mat-icon>\n  </button>\n</mat-toolbar>\n<form fxLayout=\"column\" fxLayoutAlign=\"center center\" [formGroup]=\"userForm\" (ngSubmit)=\"onSubmit()\">\n  <h2>Create a new campaign</h2>\n  <div fxFlex=50% fxLayout=\"row\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\" class=\"form\"\n    fxLayoutAlign=\"center center\">\n    <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\" class=\"col\">\n\n      <mat-form-field appearance=\"outline\" fxFlex>\n        <mat-label>Campaign name</mat-label>\n        <input matInput #input placeholder=\"Campaign Name\" formControlName=\"name\" required>\n      </mat-form-field>\n      <mat-form-field appearance=\"outline\" fxFlex>\n\n        <mat-label>Objective</mat-label>\n        <input matInput #input placeholder=\"Enter objective\" formControlName=\"objective\" required>\n      </mat-form-field>\n    </div>\n    <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\" class=\"col\">\n      <mat-form-field appearance=\"outline\" fxFlex>\n        <mat-label>Start Date</mat-label>\n        <input matInput [matDatepicker]=\"picker\" placeholder=\"Choose a date\">\n        <mat-datepicker-toggle matSuffix [for]=\"picker\"></mat-datepicker-toggle>\n        <mat-datepicker #picker></mat-datepicker>\n      </mat-form-field>\n      <mat-form-field appearance=\"outline\" fxFlex>\n            <mat-label>End Date</mat-label>\n            <input matInput [matDatepicker]=\"picker\" placeholder=\"Choose a date\">\n            <mat-datepicker-toggle matSuffix [for]=\"picker\"></mat-datepicker-toggle>\n            <mat-datepicker #picker></mat-datepicker>\n      </mat-form-field>\n    </div>\n  </div>\n  <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\">\n    <button mat-raised-button class=\"btn\" [disabled]='!campaignForm.valid' color=\"primary\">\n      Submit\n    </button>\n  </div>\n</form>\n"
+module.exports = "<mat-toolbar>\n  <span class=\"fill-remaining-space\"></span>\n  <button class=\"btn-dialog-close\" mat-stroked-button (click)=\"onClose()\" tabIndex=\"-1\">\n    <mat-icon>clear</mat-icon>\n  </button>\n</mat-toolbar>\n<form fxLayout=\"column\" fxLayoutAlign=\"center center\" [formGroup]=\"campaignForm\" (ngSubmit)=\"onSubmit()\">\n  <h2>Create a new campaign</h2>\n  <div fxFlex=50% fxLayout=\"row\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\" class=\"form\"\n    fxLayoutAlign=\"center center\">\n    <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\" class=\"col\">\n\n      <mat-form-field appearance=\"outline\" fxFlex>\n        <mat-label>Campaign name</mat-label>\n        <input matInput #input placeholder=\"Campaign Name\" formControlName=\"name\" required>\n      </mat-form-field>\n      <mat-form-field appearance=\"outline\" fxFlex>\n\n        <mat-label>Objective</mat-label>\n        <input matInput #input placeholder=\"Enter objective\" formControlName=\"objective\" required>\n      </mat-form-field>\n    </div>\n    <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\" class=\"col\">\n      <mat-form-field appearance=\"outline\" fxFlex>\n        <mat-label>Start Date</mat-label>\n        <input matInput [matDatepicker]=\"picker\" placeholder=\"Choose a date\">\n        <mat-datepicker-toggle matSuffix [for]=\"picker1\"></mat-datepicker-toggle>\n        <mat-datepicker #picker></mat-datepicker>\n      </mat-form-field>\n      <mat-form-field appearance=\"outline\" fxFlex>\n            <mat-label>End Date</mat-label>\n            <input matInput [matDatepicker]=\"picker\" placeholder=\"Choose a date\">\n            <mat-datepicker-toggle matSuffix [for]=\"picker2\"></mat-datepicker-toggle>\n            <mat-datepicker #picker></mat-datepicker>\n      </mat-form-field>\n    </div>\n    <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\" class=\"col\">\n\n      <mat-form-field appearance=\"outline\" fxFlex>\n        <mat-label>Promo code</mat-label>\n        <input matInput #input placeholder=\"Promo code\" formControlName=\"promo code\" required>\n      </mat-form-field>\n      <mat-form-field appearance=\"outline\" fxFlex>\n\n        <mat-label>Discount Percent</mat-label>\n        <input matInput #input placeholder=\"Discount Percent\" formControlName=\"discount percent\" required>\n      </mat-form-field>\n    </div>\n  </div>\n  <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\">\n    <button mat-raised-button class=\"btn\" [disabled]='!campaignForm.valid' color=\"primary\">\n      Submit\n    </button>\n  </div>\n</form>\n"
 
 /***/ }),
 
@@ -750,7 +750,7 @@ module.exports = "<h1 fxLayout=\"column\" fxLayout.gt-md=\"row\" fxLayoutGap.gt-
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NhbXBhaWducy9hZGQtY2FtcGFpZ24vYWRkLWNhbXBhaWduLmNvbXBvbmVudC5jc3MifQ== */"
+module.exports = "mat-toolbar {\n    background-color: white;\n}\n\n.controles-container{\n    width: 100%;\n    padding: 5%;    \n}\n\n.fill-remaining-space {\n    /* This fills the remaining space, by using flexbox. \n       Every toolbar row uses a flexbox row layout. */\n    flex: 1 1 auto;\n  }\n\n.controles-container > * {\n    width: 100%;\n    }\n\n.btn-dialog-close{\n        width: 45px;\n        min-width: 0px !important;\n        height: 40px;\n        padding: 0px !important;\n      }\n\n.button {\n        padding-bottom: 21.5px;\n    }\n\n.btn {\n        width: 16em; height: 60px;\n      \n       }\n\n.col {\n        width: 80%;\n      }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY2FtcGFpZ25zL2FkZC1jYW1wYWlnbi9hZGQtY2FtcGFpZ24uY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLHVCQUF1QjtBQUMzQjs7QUFFQTtJQUNJLFdBQVc7SUFDWCxXQUFXO0FBQ2Y7O0FBRUE7SUFDSTtxREFDaUQ7SUFDakQsY0FBYztFQUNoQjs7QUFFRjtJQUNJLFdBQVc7SUFDWDs7QUFHSjtRQUNRLFdBQVc7UUFDWCx5QkFBeUI7UUFDekIsWUFBWTtRQUNaLHVCQUF1QjtNQUN6Qjs7QUFFQTtRQUNFLHNCQUFzQjtJQUMxQjs7QUFFSjtRQUNRLFdBQVcsRUFBRSxZQUFZOztPQUUxQjs7QUFFUDtRQUNRLFVBQVU7TUFDWiIsImZpbGUiOiJzcmMvYXBwL2NhbXBhaWducy9hZGQtY2FtcGFpZ24vYWRkLWNhbXBhaWduLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyJtYXQtdG9vbGJhciB7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGU7XG59XG5cbi5jb250cm9sZXMtY29udGFpbmVye1xuICAgIHdpZHRoOiAxMDAlO1xuICAgIHBhZGRpbmc6IDUlOyAgICBcbn1cblxuLmZpbGwtcmVtYWluaW5nLXNwYWNlIHtcbiAgICAvKiBUaGlzIGZpbGxzIHRoZSByZW1haW5pbmcgc3BhY2UsIGJ5IHVzaW5nIGZsZXhib3guIFxuICAgICAgIEV2ZXJ5IHRvb2xiYXIgcm93IHVzZXMgYSBmbGV4Ym94IHJvdyBsYXlvdXQuICovXG4gICAgZmxleDogMSAxIGF1dG87XG4gIH1cblxuLmNvbnRyb2xlcy1jb250YWluZXIgPiAqIHtcbiAgICB3aWR0aDogMTAwJTtcbiAgICB9XG5cbiBcbi5idG4tZGlhbG9nLWNsb3Nle1xuICAgICAgICB3aWR0aDogNDVweDtcbiAgICAgICAgbWluLXdpZHRoOiAwcHggIWltcG9ydGFudDtcbiAgICAgICAgaGVpZ2h0OiA0MHB4O1xuICAgICAgICBwYWRkaW5nOiAwcHggIWltcG9ydGFudDtcbiAgICAgIH1cblxuICAgICAgLmJ1dHRvbiB7XG4gICAgICAgIHBhZGRpbmctYm90dG9tOiAyMS41cHg7XG4gICAgfVxuICAgIFxuLmJ0biB7XG4gICAgICAgIHdpZHRoOiAxNmVtOyBoZWlnaHQ6IDYwcHg7XG4gICAgICBcbiAgICAgICB9XG4gICAgXG4uY29sIHtcbiAgICAgICAgd2lkdGg6IDgwJTtcbiAgICAgIH1cbiJdfQ== */"
 
 /***/ }),
 
@@ -779,8 +779,24 @@ let AddCampaignComponent = class AddCampaignComponent {
         this.campaignService = campaignService;
         this.fb = fb;
         this.dialogRef = dialogRef;
+        this.campaignForm = this.fb.group({
+            name: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].pattern('^[a-zA-Z0-9\-]*$')]],
+            objective: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].pattern('[0-9]+')]],
+            startDate: ['', []],
+            endDate: ['', []],
+            promocode: ['', []],
+            discountPercent: ['', []]
+        });
+    }
+    onClose() {
+        this.campaignForm.reset();
+        this.dialogRef.close();
     }
     ngOnInit() {
+    }
+    onSubmit() {
+        console.log(this.campaignForm.value);
+        this.dialogRef.close(this.campaignForm.value);
     }
 };
 AddCampaignComponent.ctorParameters = () => [
@@ -921,6 +937,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _service_campaigns_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./service/campaigns.service */ "./src/app/campaigns/service/campaigns.service.ts");
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm2015/material.js");
+/* harmony import */ var _add_campaign_add_campaign_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./add-campaign/add-campaign.component */ "./src/app/campaigns/add-campaign/add-campaign.component.ts");
+
 
 
 
@@ -936,6 +954,22 @@ let CampaignsComponent = class CampaignsComponent {
         this.campaignservice.getCampaigns().subscribe(res => {
             this.campaigns = res.data;
             console.log(res, 'parent');
+        });
+    }
+    add() {
+        const dialogConfig = new _angular_material__WEBPACK_IMPORTED_MODULE_3__["MatDialogConfig"]();
+        dialogConfig.disableClose = true;
+        dialogConfig.autoFocus = true;
+        dialogConfig.width = '40%';
+        const dRef = this.matDialog.open(_add_campaign_add_campaign_component__WEBPACK_IMPORTED_MODULE_4__["AddCampaignComponent"], dialogConfig);
+        dRef.afterClosed().subscribe(result => {
+            if (result !== undefined) {
+                this.campaignservice.addCampaign(result)
+                    .subscribe(response => {
+                    // this.notificationService.success(' Supervisor Added successfully');
+                    // this.getCampaignsInfo();
+                });
+            }
         });
     }
 };
@@ -1018,7 +1052,9 @@ CampaignsModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _angular_forms__WEBPACK_IMPORTED_MODULE_11__["FormsModule"],
             _angular_forms__WEBPACK_IMPORTED_MODULE_11__["ReactiveFormsModule"],
             _angular_material__WEBPACK_IMPORTED_MODULE_7__["MatToolbarModule"],
-        ]
+            _angular_material__WEBPACK_IMPORTED_MODULE_7__["MatDatepickerModule"]
+        ],
+        entryComponents: [_add_campaign_add_campaign_component__WEBPACK_IMPORTED_MODULE_12__["AddCampaignComponent"],],
     })
 ], CampaignsModule);
 

@@ -3,6 +3,8 @@ package in.stackroute.umove.campaignservice.controller;
 
 import in.stackroute.umove.campaignservice.model.Campaign;
 import in.stackroute.umove.campaignservice.service.CampaignService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +20,7 @@ import java.util.TreeMap;
 @RequestMapping("api/v1")
 public class CampaignController
 {
+    private static final Logger logger = LogManager.getLogger(CampaignController.class);
 
     @Autowired
     private CampaignService campaignService;

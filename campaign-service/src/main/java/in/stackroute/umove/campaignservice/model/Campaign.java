@@ -25,6 +25,9 @@ public class Campaign {
     private LocalDate endDate;
     private String promocode;
     private int discountPercent;
+    private int cost;
+    private int targetCustomers;
+    private int achievedCustomer;
 
 
     public Campaign(String name, String objective, LocalDate startDate, LocalDate endDate, String promocode,int discountPercent) {
