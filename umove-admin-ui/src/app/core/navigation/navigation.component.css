@@ -1,17 +1,24 @@
-.sidenav-container {
-  height: 100%;
+.toolbar-fullscreen {
+  display: none;
+  
+}
+
+.toolbar-filler {
+  flex: 1 1 auto;
+  background-color: rebeccapurple;
+  width: 50px;
 }
 
 .sidenav {
-  width: 200px;
+  width: 230px;
+  height: auto;
+  position: fixed;
 }
 
-.sidenav .mat-toolbar {
-  background: inherit;
+.box {
+  height: 200px;
 }
 
-.mat-toolbar.mat-primary {
-  position: sticky;
-  top: 0;
-  z-index: 1;
+.logout {
+  font-size: 1em;
 }

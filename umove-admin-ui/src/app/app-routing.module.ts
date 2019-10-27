@@ -13,7 +13,7 @@ const routes: Routes = [
 { path: '', loadChildren: () => import('./authentication/authentication.module').then(m => m.AuthenticationModule) },
 { path: 'types', loadChildren: () => import('./types/types.module').then(m => m.TypesModule), canActivate: [AuthGuardService] },
 { path: 'vehicles', loadChildren: () => import('./vehicles/vehicles.module').then(m => m.VehiclesModule), canActivate: [AuthGuardService] },
-{ path: '**', component: PageNotFoundComponent}
+{ path: '**', component: PageNotFoundComponent, canActivate: [AuthGuardService] }
 ];
 
 @NgModule({

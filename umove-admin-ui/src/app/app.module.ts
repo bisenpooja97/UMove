@@ -33,11 +33,12 @@ import {
 import { VehiclesModule } from './vehicles/vehicles.module';
 import { TypesModule } from './types/types.module';
 import { SharedModule } from './shared/shared.module';
+import { FullscreenService } from './shared/fullscreen.service';
+import { AvatarModule } from 'ngx-avatar';
 
 @NgModule({
   declarations: [
     AppComponent,
-
     NavigationComponent,
     FooterComponent
   ],
@@ -77,9 +78,10 @@ import { SharedModule } from './shared/shared.module';
     MatDialogModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    SharedModule
+    SharedModule,
+    AvatarModule
   ],
-  providers: [MatDatepickerModule],
+  providers: [MatDatepickerModule, FullscreenService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

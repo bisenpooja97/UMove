@@ -1,24 +1,49 @@
-<mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
-    <mat-toolbar>Menu</mat-toolbar>
+<mat-sidenav-container>
+
+  <mat-sidenav #sidenav mode="push" class="sidenav">
+    <mat-toolbar color="primary" class="box">
+      <ngx-avatar src="assets/img_avatar.png" fxLayoutAlign="center center"></ngx-avatar>
+      <p *ngIf="loginService.isUserLoggedIn()">&nbsp;&nbsp;Admin</p>
+    </mat-toolbar>
     <mat-nav-list>
-      <a *ngIf="loginService.isUserLoggedIn()" mat-list-item routerLink="/users">Users</a>
-      <a *ngIf="loginService.isUserLoggedIn()" mat-list-item routerLink="/zones">Zones</a>
-      <a *ngIf="loginService.isUserLoggedIn()" mat-list-item routerLink="/vehicles">Vehicles</a>
-      <a *ngIf="loginService.isUserLoggedIn()" mat-list-item routerLink="/types">Vehicle types</a>
-      <a *ngIf="loginService.isUserLoggedIn()" mat-list-item routerLink="/fuel">Fuel</a>
-      <a *ngIf="loginService.isUserLoggedIn()" mat-list-item routerLink="/logout">Logout</a>
+      <a mat-list-item class="sidenav-link" routerLink="/users" (click)="sidenav.toggle()">
+        <mat-icon mat-list-icon>person</mat-icon>
+        <span class="title" mat-line>Users</span>
+      </a>
+      <a mat-list-item class="sidenav-link" routerLink="/zones" (click)="sidenav.toggle()">
+        <mat-icon mat-list-icon>compass_calibration</mat-icon>
+        <span class="title" mat-line>Zones</span>
+      </a>
+      <a mat-list-item class="sidenav-link" routerLink="/vehicles" (click)="sidenav.toggle()">
+        <mat-icon mat-list-icon>motorcycle</mat-icon>
+        <span class="title" mat-line>Vehicles</span>
+      </a>
+      <a mat-list-item class="sidenav-link" routerLink="/types" (click)="sidenav.toggle()">
+        <mat-icon mat-list-icon>directions_bike</mat-icon>
+        <span class="title" mat-line>Vehicle Types</span>
+      </a>
+      <a mat-list-item class="sidenav-link" routerLink="/fuel" (click)="sidenav.toggle()">
+        <mat-icon mat-list-icon>local_gas_station</mat-icon>
+        <span class="title" mat-line>Fuels</span>
+      </a>
+
     </mat-nav-list>
   </mat-sidenav>
-  <mat-sidenav-content>
-    <mat-toolbar color="primary">
-      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
-        *ngIf="isHandset$ | async">
-        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-      </button>
-      <span>Operational Portal</span>
-    </mat-toolbar>
-    <!-- Add Content Here -->
-  </mat-sidenav-content>
+  <mat-toolbar id="appToolbar" [ngClass]="{'toolbar-fullscreen': (fullscreen$ | async)}" color="primary">
+    <button mat-icon-button (click)="sidenav.toggle()" class="md-icon-button sidenav-toggle-button"
+      [hidden]="sidenav.opened">
+      <mat-icon aria-label="Menu" class="material-icons">menu</mat-icon>
+    </button>
+    <h1 class="component-title">
+      <a class="title-link">{{title}}</a>
+    </h1>
+    <span class="toolbar-filler"></span>
+    <button id="button-logout" *ngIf="loginService.isUserLoggedIn()" mat-button routerLink="/logout" class="logout">Log
+      Out</button>
+  </mat-toolbar>
+
+  <router-outlet></router-outlet>
+  <app-footer></app-footer>
+
+
 </mat-sidenav-container>

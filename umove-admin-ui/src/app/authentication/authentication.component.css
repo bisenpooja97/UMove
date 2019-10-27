@@ -1,3 +1,12 @@
 .login {
-    padding-bottom: 35px;
+    padding-bottom: 8%;
+    font-size: 1.5em;
+}
+
+
+@media only screen and (max-width: 600px) {
+ 
+    .login {
+        padding-bottom: 25%;
+    }
 }
