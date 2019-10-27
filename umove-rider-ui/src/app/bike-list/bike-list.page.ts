@@ -82,5 +82,4 @@ export class BikeListPage implements OnInit {
       }, 500);
     })
   }
-
 }

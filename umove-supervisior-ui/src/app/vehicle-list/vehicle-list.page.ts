@@ -18,13 +18,11 @@ export class VehicleListPage implements OnInit {
     this.vehicleService.getVehiclesByZone('1').then(response => {
       const bikeList = JSON.parse(response.data);
       console.log('bikeslist',bikeList);
+
     });
   }
 
 changeVehicleStatus(vehicle : Vehicle){
-  // this.vehicleService.changeStatus(vehicle, vehicle.registrationNo).then(updatedData => {
-  //   console.log(updatedData);
-  // });
   console.log('updated vehicle', vehicle);
 }
 }
