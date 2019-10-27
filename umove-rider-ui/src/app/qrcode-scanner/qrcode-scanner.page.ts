@@ -52,13 +52,10 @@ export class QrcodeScannerPage implements OnInit {
         this.ride = JSON.parse(response.data).data;
         this.rideStatus = this.ride.status;
         if (this.rideStatus === 'Auto_Cancelled') {
+          this.router.navigateByUrl('ride-booking-details');
           mobiscroll.alert({
             title: 'Your ride is autocancelled',
-            message: 'Please book a new ride.',
-            callback: () => {
-              // Apply the url of home page
-              this.router.navigateByUrl('ride-booking-details');
-            }
+            message: 'Please book a new ride.'
           });
         } else {
           this.router.navigateByUrl('ride-details');
