@@ -10,5 +10,3 @@ export class Vehicle{
   public purchasedDate: Date;
   public chassisNumber: string;
 }
-
-

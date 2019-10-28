@@ -5,13 +5,20 @@ import in.stackroute.umove.zoneservice.model.VehicleType;
 import in.stackroute.umove.zoneservice.repository.VehicleTypeRepo;
 import in.stackroute.umove.zoneservice.service.ServiceVehicleType;
 import in.stackroute.umove.zoneservice.service.impl.FileStorageService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -20,7 +27,7 @@ import java.util.TreeMap;
 @RestController
 @RequestMapping("/api/v1")
 public class VehicleTypeController {
-
+    private static final Logger logger = LogManager.getLogger(VehicleTypeController.class);
     @Autowired
     private FileStorageService fileStorageService;
     @Autowired
@@ -31,6 +38,9 @@ public class VehicleTypeController {
     // To add new type
     @PostMapping("/types")
     public ResponseEntity<Map> addType(@RequestBody VehicleType type) {
+        logger.debug("Hello from Log4j 2 ");
+
+
         VehicleType typeList = typeManagementService.addType(type);
         Map<String, Object> map = new TreeMap<>();
         map.put("data", typeList);
@@ -38,11 +48,13 @@ public class VehicleTypeController {
         return new ResponseEntity<>(map, HttpStatus.CREATED);
     }
 
+
     //To fetch data of all types
 
     @GetMapping("/types")
     public ResponseEntity<Map> getType(@RequestParam(value = "name", required = false) String name,
-                                       @RequestParam(value = "id", required = false) String id,@RequestParam(value = "fuel", required = false) String fuel) {
+                                       @RequestParam(value = "id", required = false) String id,@RequestParam(value = "fuel", required = false) String fuel
+            ,@RequestParam(value = "page", required = false) Integer page) {
 
         if (name != null && !name.isEmpty()) {
             VehicleType typeList = typeManagementService.findName(name);
@@ -60,13 +72,14 @@ public class VehicleTypeController {
             return new ResponseEntity<Map>(map, HttpStatus.OK);
         }
 
-        List<VehicleType> typeList = typeManagementService.find();
+        List<VehicleType> typeList = typeManagementService.find((page !=null) ? page : 0 );
         Map<String, Object> map = new TreeMap<>();
         map.put("data", typeList);
         map.put("count", typeList.size());
         map.put("status", HttpStatus.OK);
         return new ResponseEntity<Map>(map, HttpStatus.OK);
     }
+
 
     // To update the type values
     @PatchMapping("/types/{name}")
@@ -81,15 +94,44 @@ public class VehicleTypeController {
 
     // Function to save image in local sysytem
     @PostMapping("/uploadFile")
-    public UploadFileResponse uploadFile(@RequestParam("file") MultipartFile file, @RequestParam(name="id",required = true)String id) {
+    public UploadFileResponse uploadFile(@RequestParam("file") MultipartFile file,@RequestParam(name="id",required = true)String id) {
         String fileName = fileStorageService.storeFile(file,id);
         String fileDownloadUri =
                 ServletUriComponentsBuilder.fromCurrentContextPath()
-                        .path("/downloadFile/")
+                        .path("api/v1/downloadFile/")
                         .path(fileName)
                         .toUriString();
-        return new UploadFileResponse(fileName, fileDownloadUri,
+        String fileDownloaduri= "api/v1/downloadFile/"+fileName;
+       // VehicleType vehicleType=typeManagementService.findName(id);
+      //  vehicleType.getUrl();
+      //  vehicleType.setUrl(fileDownloaduri);
+      //  typeManagementService.updateTypeDetails(id,vehicleType);
+//       VehicleType vehicleType1=vehicleType.getUrl();
+
+
+        return new UploadFileResponse(fileName, fileDownloaduri,
                 file.getContentType(), file.getSize());
+    }
+
+    @GetMapping("/downloadFile/{fileName:.+}")
+    public ResponseEntity<Resource> downloadFile(@PathVariable String fileName, HttpServletRequest request) {
+        // Loaddata file as Resource
+        Resource resource = fileStorageService.loadFileAsResource(fileName);
+        // Try to determine file's content type
+        String contentType = null;
+        try {
+            contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
+        } catch (IOException ex) {
+//            logger.info("Could not determine file type.");
+        }
+        // Fallback to the default content type if type could not be determined
+        if(contentType == null) {
+            contentType = "application/octet-stream";
+        }
+        return ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType(contentType))
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+                .body(resource);
     }
 
     //To fetch type data based on id
@@ -103,7 +145,6 @@ public class VehicleTypeController {
         map.put("status", HttpStatus.OK);
         return new ResponseEntity<Map>(map, HttpStatus.OK);
     }
-
 
 
 

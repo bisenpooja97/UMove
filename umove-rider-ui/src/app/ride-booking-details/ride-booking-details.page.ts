@@ -6,6 +6,7 @@ import { Ride } from '../model/ride';
 import { Zone } from '../model/zone';
 import { ConfigurationService } from '../service/configuration.service';
 import { Configuration } from '../model/configuration';
+import {Storage} from '@ionic/storage';
 
 @Component({
   selector: 'app-ride-booking-details',
@@ -25,9 +26,10 @@ export class RideBookingDetailsPage implements OnInit {
   rightNow: Date;
   timerSeconds: number;
   timerSettings: MbscTimerOptions;
+    key = 'details';
 
   constructor(private rideService: RideService, private router: Router, private route: ActivatedRoute,
-              private configurationService: ConfigurationService) {
+              private configurationService: ConfigurationService, private storage: Storage) {
   }
 
   ngOnInit() {
@@ -40,36 +42,38 @@ export class RideBookingDetailsPage implements OnInit {
         this.timerTimeInMins = this.configuration.value;
         console.log('Auto cancel time is ', this.timerTimeInMins);
 
-        this.rideService.getRideDetailsByUserIdNStatus('5d8bbc0da6e87d5404aa1921', 'Confirmed')
-          .then(response2 => {
-            console.log('Booking details: ', response2);
-            this.ride = JSON.parse(response2.data).data;
-            console.log(this.ride);
-            this.rideBookedAt = new Date(this.ride.bookedAt + 'Z');
-            console.log('Ride booked at ', this.rideBookedAt);
-            console.log(typeof (this.rideBookedAt));
-            // // this.timerTime = this.ride.timer;
-            console.log('Timer time in minutes is ', this.timerTimeInMins);
-            this.rideBookedAt.setMinutes(this.rideBookedAt.getMinutes() + this.timerTimeInMins);
-            console.log('Autocancel time is ', this.rideBookedAt);
-            this.rightNow = new Date();
-            console.log('RightNow time is ', this.rightNow);
-            this.timerSeconds = (this.rideBookedAt.getTime() - this.rightNow.getTime()) / 1000;
-            console.log('Scanner timer', this.timerSeconds);
-            console.log(this.timerSeconds);
-            if (this.timerSeconds > 0) {
-              this.timerSettings = {
-                display: 'inline',
-                targetTime: this.timerSeconds,
-                maxWheel: 'minutes',
-                minWidth: 100,
-                autostart: true,
-                buttons: []
-              };
-            } else {
-              this.timerFinished();
-            }
-          });
+        this.storage.get(this.key).then(value => {
+            this.rideService.getRideDetailsByUserIdNStatus(value.id, 'Confirmed')
+                .then(response2 => {
+                    console.log('Booking details: ', response2);
+                    this.ride = JSON.parse(response2.data).data;
+                    console.log(this.ride);
+                    this.rideBookedAt = new Date(this.ride.bookedAt + 'Z');
+                    console.log('Ride booked at ', this.rideBookedAt);
+                    console.log(typeof (this.rideBookedAt));
+                    // // this.timerTime = this.ride.timer;
+                    console.log('Timer time in minutes is ', this.timerTimeInMins);
+                    this.rideBookedAt.setMinutes(this.rideBookedAt.getMinutes() + this.timerTimeInMins);
+                    console.log('Autocancel time is ', this.rideBookedAt);
+                    this.rightNow = new Date();
+                    console.log('RightNow time is ', this.rightNow);
+                    this.timerSeconds = (this.rideBookedAt.getTime() - this.rightNow.getTime()) / 1000;
+                    console.log('Scanner timer', this.timerSeconds);
+                    console.log(this.timerSeconds);
+                    if (this.timerSeconds > 0) {
+                        this.timerSettings = {
+                            display: 'inline',
+                            targetTime: this.timerSeconds,
+                            maxWheel: 'minutes',
+                            minWidth: 100,
+                            autostart: true,
+                            buttons: []
+                        };
+                    } else {
+                        this.timerFinished();
+                    }
+                });
+        });
       });
   }
 

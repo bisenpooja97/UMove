@@ -47,14 +47,14 @@ export class ZoneService implements AutoCompleteService, OnInit {
 
     //  Service for getting vehicles of a specific zone
     getVehiclesByZoneTypes(id: string): Promise<HTTPResponse> {
-        console.log(environment.baseUrl + environment.vehicleService + environment.vehicles);
+        console.log(this.baseUrl + environment.vehicles);
         return this.http.get(this.baseUrl + environment.vehicles, {}, {}  )
 
     }
 
     getCoordinatesByLocality(locality: string): Promise<HTTPResponse> {
         console.log('locality:', locality);
-        return this.http.get(this.baseUrl+environment.zones+'/loc/'+locality, {}, {})
+        return this.http.get(this.baseUrl + environment.zones + '/loc/'+locality, {}, {})
     }
 
     getResults(keyword: string): string[] {

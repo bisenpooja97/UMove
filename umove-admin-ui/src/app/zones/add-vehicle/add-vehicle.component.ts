@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { AddSupervisorComponent } from '../add-supervisor/add-supervisor.component';
-import { Vehicle } from 'src/app/model/Vehicle';
+import { Vehicle } from 'src/app/model/vehicle';
 import { VehicleService } from 'src/app/vehicles/vehicle.service';
 import { ZoneService } from '../service/zone.service';
 import { ActivatedRoute } from '@angular/router';
@@ -29,6 +29,7 @@ export class AddVehicleComponent implements OnInit {
                   this.vehicle = data.vehicle;
                   this.options = data.vehicle;
                   this.zId = data.zId;
+                  console.log(this.options);
               }
               vehicleForm = this.fb.group({
                 rNo: ['']

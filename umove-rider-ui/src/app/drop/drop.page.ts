@@ -56,16 +56,19 @@ export class DropPage implements OnInit {
 
   confirmBooking() {
     const ride = this.rideService.currentBooking;
+    ride.destinationZones = [];
     ride.destinationZones.push(this.selectedZone);
     this.rideService.setCurrentBooking(ride);
     this.router.navigate(['confirm-ride-detail']);
   }
 
-  rideDetails(){
-    const ride = this.rideService.currentBooking;
-    ride.destinationZones.push(this.selectedZone);
-    this.rideService.setCurrentBooking(ride);
-    this.router.navigate(['ride-details']);
+  rideDetails() {
+    const navigationExtras: NavigationExtras = {
+      state: {
+        dropZone: this.selectedZone
+      }
+    };
+    this.router.navigate(['ride-details'],navigationExtras);
   }
 
   gettingCoordinatesByLocality($event: any) {

@@ -27,7 +27,7 @@
 
             <mat-form-field appearance="outline" fxFlex>
                 <mat-label>Cost</mat-label>
-                <input matInput #input placeholder="Cost" formControlName="costFuel" required>
+                <input matInput #input placeholder=" Fuel Cost" formControlName="fuelCost" required>
 
                 <!-- <mat-error *ngIf="RinsuranceNo.invalid">
 
@@ -42,7 +42,7 @@
 
 
 
-            <button mat-raised-button class="btn">
+            <button mat-raised-button class="btn"  [disabled]='!fuelForm.valid'  color="primary">
     Submit
   </button>
 

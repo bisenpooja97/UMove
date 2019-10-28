@@ -2,15 +2,15 @@
   <ion-grid>
     <ion-row>
       <ion-col size="4">
-        <img src="{{type.type.url}}" />
+        <img src="http://13.235.35.202:8080/zoneservice/{{type.vehicle.vehicleType.url}}" />
       </ion-col>
       <ion-col size="8">
         <ion-card-content>
-          <ion-card-title>{{ type.type.name}}</ion-card-title>
-          <ion-card-subtitle>{{ type.type.costkm | currency: "INR" }}/Km +
-            {{ type.type.costtime | currency : "INR" }}/Mints</ion-card-subtitle>
+          <ion-card-title>{{ type.vehicle.vehicleType.name}}</ion-card-title>
+          <ion-card-subtitle>{{ type.vehicle.vehicleType.costPerKm | currency: "INR" }}/Km +
+            {{ type.vehicle.vehicleType.costPerMin | currency : "INR" }}/Mints</ion-card-subtitle>
           <ion-card-subtitle>Available: {{ type.count }}</ion-card-subtitle>
-          <ion-button color="tertiary" slot="end" (click)="selectingBike(type.type)">Select</ion-button>
+          <ion-button color="secondary" slot="end" (click)="selectingBike(type.vehicle)">Select</ion-button>
         </ion-card-content>
       </ion-col>
     </ion-row>

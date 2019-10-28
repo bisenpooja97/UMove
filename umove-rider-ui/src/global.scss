@@ -29,3 +29,14 @@
 @import "../node_modules/ionic4-auto-complete/auto-complete";
 
 @import "~@mobiscroll/angular/dist/css/mobiscroll.scss";
+
+.mapboxgl-popup-close-button {
+  display: none;
+}
+.bottom-button{
+  width: 100vw;
+  height: 56px
+}
+::ng-deep.searchbar-input.sc-ion-searchbar-md{
+  border-radius: 10px !important;
+}

@@ -4,7 +4,7 @@ import { UserCardComponent } from './user-card.component';
 import {  MatCardModule } from '@angular/material';
 import { RouterTestingModule } from '@angular/router/testing';
 
-fdescribe('UserCardComponent', () => {
+describe('UserCardComponent', () => {
   let component: UserCardComponent;
   let fixture: ComponentFixture<UserCardComponent>;
 
@@ -12,7 +12,8 @@ fdescribe('UserCardComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ UserCardComponent ],
       imports: [
-        MatCardModule,RouterTestingModule
+        MatCardModule,
+        RouterTestingModule
       ]
     })
     .compileComponents();

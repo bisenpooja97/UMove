@@ -17,6 +17,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddVehicleTypeComponent } from './add-vehicle-type/add-vehicle-type.component';
 import { UpdateTypesComponent } from './update-types/update-types.component';
 import { AvatarModule } from 'ngx-avatar';
+import { LazyLoadImageModule } from 'ng-lazyload-image';
 
 @NgModule({
   declarations: [TypesComponent, VehicleTypeCardComponent, TypeDeatilsComponent, AddVehicleTypeComponent, UpdateTypesComponent],
@@ -46,7 +47,7 @@ import { AvatarModule } from 'ngx-avatar';
    // MatDatepicker,
     MatDatepickerModule,
     AvatarModule,
-
+    LazyLoadImageModule
 
   ],
   entryComponents: [AddVehicleTypeComponent,UpdateTypesComponent]

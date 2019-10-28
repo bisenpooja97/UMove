@@ -34,21 +34,21 @@
     <ion-card-content>
       <ion-grid no-padding>
         <ion-row class="ion-align-items-center">
-          <ion-col size="2">
-            <ion-icon name="wallet" style="zoom: 2.0"></ion-icon>
-          </ion-col>
-          <ion-col size="6">
-            <ion-card-subtitle>{{ ride?.paymentMethod?.paymentMethodNumber }}</ion-card-subtitle>
-          </ion-col>
-          <ion-col size="4">
-            <ion-card-subtitle>{{ ride?.paymentMethod?.paymentProvider }} | {{ rideData?.paymentMethod?.paymentType }}
-            </ion-card-subtitle>
+          <ion-img src="assets/icon/gpay.png" *ngIf="ride?.paymentMethod?.paymentProvider==='Google Pay'" style="height: 48px; width: 48px;"></ion-img>
+          <ion-img src="assets/icon/phonepe.png" *ngIf="ride?.paymentMethod?.paymentProvider==='PhonePe'" style="height: 48px; width: 48px;"></ion-img>
+          <ion-img src="assets/icon/paytm.png" *ngIf="ride?.paymentMethod?.paymentProvider==='Paytm'" style="height: 48px; width: 48px;"></ion-img>
+          <ion-col padding-horizontal>
+            <ion-text color="dark">
+              <h2>{{ ride?.paymentMethod?.paymentMethodNumber }}</h2>
+            </ion-text>
+            <ion-text>
+              <h3>{{ ride?.paymentMethod?.paymentType }}</h3>
+            </ion-text>
           </ion-col>
         </ion-row>
       </ion-grid>
     </ion-card-content>
   </ion-card>
-</ion-content>
 
 <ion-footer>
   <ion-button class="startRide_btn" (click)="startRide($event)">Start ride</ion-button>

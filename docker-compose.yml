@@ -158,6 +158,8 @@ services:
       resources:
         limits:
           memory: 1000M
+    volumes:
+      - '$HOME/umove/data/uploads/documents:/uploads/documents'
 
   vehicles:
     build:
@@ -190,6 +192,8 @@ services:
       resources:
         limits:
           memory: 1000M
+    volumes:
+      - '$HOME/umove/data/uploads/vehicle-type:/uploads/vehicle-type'
 
   bookings:
     build:
@@ -233,7 +237,7 @@ services:
     depends_on:
       - discovery
       - config
-    restart: on-failure    
+    restart: on-failure
     deploy:
       resources:
         limits:

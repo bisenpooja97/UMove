@@ -52,7 +52,7 @@ module.exports = "<mat-toolbar color=\"primary\" fxLayoutAlign=\"center center\"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-sidenav-container class=\"sidenav-container\">\n  <mat-sidenav #drawer class=\"sidenav\" fixedInViewport\n      [attr.role]=\"(isHandset$ | async) ? 'dialog' : 'navigation'\"\n      [mode]=\"(isHandset$ | async) ? 'over' : 'side'\"\n      [opened]=\"(isHandset$ | async) === false\">\n    <mat-toolbar>Menu</mat-toolbar>\n    <mat-nav-list>\n      <a *ngIf=\"loginService.isUserLoggedIn()\" mat-list-item routerLink=\"/users\">Users</a>\n      <a *ngIf=\"loginService.isUserLoggedIn()\" mat-list-item routerLink=\"/documents\">KYC Approval</a>\n      <a *ngIf=\"loginService.isUserLoggedIn()\" mat-list-item routerLink=\"users/supervisor\">Supervisors</a>\n      <a *ngIf=\"loginService.isUserLoggedIn()\" mat-list-item routerLink=\"/zones\">Zones</a>\n      <a *ngIf=\"loginService.isUserLoggedIn()\" mat-list-item routerLink=\"/vehicles\">Vehicles</a>\n      <a *ngIf=\"loginService.isUserLoggedIn()\" mat-list-item routerLink=\"/types\">Vehicle types</a>\n      <a *ngIf=\"loginService.isUserLoggedIn()\" mat-list-item routerLink=\"/fuel\">Fuel</a>\n      <a *ngIf=\"loginService.isUserLoggedIn()\" mat-list-item routerLink=\"/logout\">Logout</a>\n    </mat-nav-list>\n  </mat-sidenav>\n  <mat-sidenav-content>\n    <mat-toolbar color=\"primary\">\n      <button\n        type=\"button\"\n        aria-label=\"Toggle sidenav\"\n        mat-icon-button\n        (click)=\"drawer.toggle()\"\n        *ngIf=\"isHandset$ | async\">\n        <mat-icon aria-label=\"Side nav toggle icon\">menu</mat-icon>\n      </button>\n      <span>umove-admin-ui</span>\n    </mat-toolbar>\n    <!-- Add Content Here -->\n  </mat-sidenav-content>\n</mat-sidenav-container>\n"
+module.exports = "<mat-sidenav-container class=\"sidenav-container\">\n  <mat-sidenav #drawer class=\"sidenav\" fixedInViewport [attr.role]=\"(isHandset$ | async) ? 'dialog' : 'navigation'\"\n    [mode]=\"(isHandset$ | async) ? 'over' : 'side'\" [opened]=\"(isHandset$ | async) === false\">\n    <mat-toolbar>Menu</mat-toolbar>\n    <mat-nav-list>\n      <a *ngIf=\"loginService.isUserLoggedIn()\" mat-list-item routerLink=\"/users\">Users</a>\n      <a *ngIf=\"loginService.isUserLoggedIn()\" mat-list-item routerLink=\"/documents\">KYC Approval</a>\n      <a *ngIf=\"loginService.isUserLoggedIn()\" mat-list-item routerLink=\"users/supervisor\">Supervisors</a>\n      <a *ngIf=\"loginService.isUserLoggedIn()\" mat-list-item routerLink=\"/zones\">Zones</a>\n      <a *ngIf=\"loginService.isUserLoggedIn()\" mat-list-item routerLink=\"/vehicles\">Vehicles</a>\n      <a *ngIf=\"loginService.isUserLoggedIn()\" mat-list-item routerLink=\"/types\">Vehicle types</a>\n      <a *ngIf=\"loginService.isUserLoggedIn()\" mat-list-item routerLink=\"/fuel\">Fuel</a>\n      <a *ngIf=\"loginService.isUserLoggedIn()\" mat-list-item routerLink=\"/logout\">Logout</a>\n    </mat-nav-list>\n  </mat-sidenav>\n  <mat-sidenav-content>\n    <mat-toolbar color=\"primary\">\n      <button type=\"button\" aria-label=\"Toggle sidenav\" mat-icon-button (click)=\"drawer.toggle()\"\n        *ngIf=\"isHandset$ | async\">\n        <mat-icon aria-label=\"Side nav toggle icon\">menu</mat-icon>\n      </button>\n      <span>Operational Portal</span>\n    </mat-toolbar>\n    <!-- Add Content Here -->\n  </mat-sidenav-content>\n</mat-sidenav-container>"
 
 /***/ }),
 
@@ -74,7 +74,7 @@ module.exports = "<div fxLayoutAlign=\"center\" class=\"error\">\n    <img src=\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"add\">\n    <mat-toolbar>\n        <span class=\"fill-remaining-space\"></span>\n        <button class=\"btn-dialog-close\" mat-stroked-button (click)=\"onClose()\" tabIndex=\"-1\">\n          <mat-icon>clear</mat-icon>\n      </button>\n    </mat-toolbar>\n\n\n    <form fxLayout=\"column\" fxLayoutAlign=\"center center\" [formGroup]=\"typeForm\" (ngSubmit)=\"onSubmit()\">\n        <h2 fxLayout=\"column\" fxLayout.gt-md=\"row\" fxLayoutGap.gt-md=\"15px\" fxLayoutAlign=\"center center\">Add New Types</h2>\n\n        <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\" class=\"form\">\n\n            <mat-form-field appearance=\"outline\" fxFlex>\n                <mat-label>Type Name</mat-label>\n                <input matInput #input placeholder=\"Type Name\" formControlName=\"name\" required>\n\n                <mat-error *ngIf=\"rName.invalid\">\n\n                    {{getErrorType()}}\n                </mat-error>\n\n            </mat-form-field>\n\n\n            <mat-form-field appearance=\"outline\" fxFlex>\n                <mat-label>Km Per Litre</mat-label>\n                <input matInput #input placeholder=\"Km per litre\" formControlName=\"kilometer\" required>\n                <mat-error *ngIf=\"Rkm.invalid\">\n\n                    {{getErrorkm()}}\n                </mat-error>\n            </mat-form-field>\n\n\n            <mat-form-field appearance=\"outline\" fxFlex>\n                <mat-label>CC</mat-label>\n                <input matInput #input placeholder=\"CC\" formControlName=\"vehiclecc\" required>\n                <mat-error *ngIf=\"Rcc.invalid\">\n                    {{getErrorCC()}}\n\n                </mat-error>\n            </mat-form-field>\n\n            <mat-form-field appearance=\"outline\" fxFlex>\n                <mat-label>Base Fare</mat-label>\n                <input matInput #input placeholder=\"Base Fare\" formControlName=\"baseFare\" required>\n                <mat-error *ngIf=\"Rbasefare.invalid\">\n                    {{getErrorBaseFare()}}\n\n                </mat-error>\n\n            </mat-form-field>\n\n\n            <mat-form-field appearance=\"outline\" fxFlex>\n                <mat-label>Fuel Type</mat-label>\n                <mat-select formControlName=\"fuel\">\n                    <mat-option *ngFor=\"let fuel of  fuels\" [value]=\"fuel\">\n                        {{fuel.name}}\n                    </mat-option>\n                </mat-select>\n            </mat-form-field>\n\n            <!-- <mat-form-field appearance=\"outline\" fxFlex>\n                <mat-label>Category</mat-label>\n                 <input matInput #input placeholder=\"Placeholder\" formControlName=\"status\" required> -->\n            <!-- <select matNativeControl formControlName=\"category\">\n        <option value=\"Sports\">Sports</option>\n        <option value=\"Cruiser\">Cruiser</option>\n        <option value=\"Touring\">Touring</option>\n        <option value=\"Standard\">Standard</option>\n        <option value=\"Dual_Purpose\">Dual Purpose</option>\n        <option value=\"Dirt_Bikes\">Dirt Bikes</option>\n      </select>\n            </mat-form-field> -->\n\n\n            <mat-form-field appearance=\"outline\" fxFlex>\n                <mat-label>Cost Time</mat-label>\n                <input matInput #input placeholder=\"Cost Time\" formControlName=\"costtime\" required>\n\n                <mat-error *ngIf=\"Rcosttime.invalid\">\n\n                    {{getErrorCosttime()}}\n                </mat-error>\n\n            </mat-form-field>\n\n\n            <input name=\"file\" type=\"file\" class=\"ng-hide\" (change)=\"onFileChanged($event)\" #fileInput>\n\n\n\n\n            <button mat-raised-button class=\"btn\">\n          Submit\n        </button>\n\n\n        </div>\n\n    </form>\n\n</div>\n"
+module.exports = "<div class=\"add\">\n    <mat-toolbar>\n        <span class=\"fill-remaining-space\"></span>\n        <button class=\"btn-dialog-close\" mat-stroked-button (click)=\"onClose()\" tabIndex=\"-1\">\n          <mat-icon>clear</mat-icon>\n      </button>\n    </mat-toolbar>\n\n\n    <form fxLayout=\"column\" fxLayoutAlign=\"center center\" [formGroup]=\"typeForm\" (ngSubmit)=\"onSubmit()\">\n        <h2 fxLayout=\"column\" fxLayout.gt-md=\"row\" fxLayoutGap.gt-md=\"15px\" fxLayoutAlign=\"center center\">Add New Types</h2>\n\n        <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\" class=\"form\">\n\n            <mat-form-field appearance=\"outline\" fxFlex>\n                <mat-label>Type Name</mat-label>\n                <input matInput #input placeholder=\"Type Name\" formControlName=\"name\" required>\n\n                <mat-error *ngIf=\"rName.invalid\">\n\n                    {{getErrorType()}}\n                </mat-error>\n\n            </mat-form-field>\n\n\n            <mat-form-field appearance=\"outline\" fxFlex>\n                <mat-label>KM Per Litre</mat-label>\n                <input matInput #input placeholder=\"Mileage\" formControlName=\"mileage\" required>\n                <mat-error *ngIf=\"Rkm.invalid\">\n\n                    {{getErrorkm()}}\n                </mat-error>\n            </mat-form-field>\n\n\n            <mat-form-field appearance=\"outline\" fxFlex>\n                <mat-label>Vehicle CC</mat-label>\n                <input matInput #input placeholder=\"vehicle CC\" formControlName=\"vehicleCC\" required>\n                <mat-error *ngIf=\"Rcc.invalid\">\n                    {{getErrorCC()}}\n\n                </mat-error>\n            </mat-form-field>\n\n            <mat-form-field appearance=\"outline\" fxFlex>\n                <mat-label>Base Fare</mat-label>\n                <input matInput #input placeholder=\"Base Fare\" formControlName=\"baseFare\" required>\n                <mat-error *ngIf=\"Rbasefare.invalid\">\n                    {{getErrorBaseFare()}}\n\n                </mat-error>\n\n            </mat-form-field>\n\n\n            <mat-form-field appearance=\"outline\" fxFlex>\n                <mat-label>Fuel Type</mat-label>\n                <mat-select formControlName=\"fuel\">\n                    <mat-option *ngFor=\"let fuel of  fuels\" [value]=\"fuel\">\n                        {{fuel.name}}\n                    </mat-option>\n                </mat-select>\n            </mat-form-field>\n\n            <mat-form-field appearance=\"outline\" fxFlex>\n                <mat-label>Cost Time</mat-label>\n                <input matInput #input placeholder=\"Cost Per Minute\" formControlName=\"costPerMin\" required>\n                  <mat-error *ngIf=\"Rcosttime.invalid\">\n\n                    {{getErrorCosttime()}}\n                </mat-error>\n\n            </mat-form-field>\n\n\n            <input name=\"file\" type=\"file\" class=\"ng-hide\" (change)=\"onFileChanged($event)\" #fileInput>\n\n\n\n\n            <button mat-raised-button class=\"btn\"  [disabled]='!typeForm.valid'  color=\"primary\">\n          Submit\n        </button>\n\n\n        </div>\n\n    </form>\n\n</div>\n"
 
 /***/ }),
 
@@ -85,7 +85,7 @@ module.exports = "<div class=\"add\">\n    <mat-toolbar>\n        <span class=\"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div fxLayout=\"row\" fxLayout.lt-md=\"column\" fxLayoutGap=\"10%\" fxLayoutGap.lt-md=\"0px\">\n    <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"50px\" fxLayoutGap.lt-md=\"0px\">\n        <h1 fxLayout=\"column\" fxLayout.gt-md=\"row\" fxLayoutGap.gt-md=\"15px\" class=\"vehicleName\">\n            {{name}}\n\n        </h1>\n    </div>\n\n\n\n    <!--  -->\n\n    <mat-card class=\"my-card\" fxFlex.sm=\"0 1 calc(50%-10px)\" fxFlex.md=\"0 1 calc(33%-10px)\" fxLayout=\"column\" fxLayoutGap=\"20px\">\n        <mat-card-title fxLayoutAlign=\"start\">Fuel-type: {{fuelname}}</mat-card-title>\n        <br><br>\n        <div fxFlex=50% fxLayout=\"row\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20%\" fxLayoutGap.lt-md=\"0px\" class=\"form\" fxLayoutAlign=\"center center\">\n            <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"50px\" fxLayoutGap.lt-md=\"0px\" class=\"col\">\n                <mat-card-title fxLayoutAlign=\"center center\">Vehicle cc: {{cc}}</mat-card-title>\n                <mat-card-title fxLayoutAlign=\"center center\">Cost/km: {{costkm}}</mat-card-title>\n                <mat-card-title fxLayoutAlign=\"center center\">cost/min: {{costtime}}\n                    <span>\n                    <i class=\"material-icons iconCapacity\" (click)=\"update()\" >\n                        create\n                    </i>\n                </span>\n\n                </mat-card-title>\n                <mat-card-title fxLayoutAlign=\"center center\">kilometers/lt: {{kilometer}}</mat-card-title>\n\n            </div>\n\n        </div>\n\n    </mat-card>\n"
+module.exports = "<div fxLayout.gt-sm=\"row\" fxLayout.sm=\"column\" fxLayoutGap=\"10%\">\n    <div fxLayout=\"column\" fxLayout.sm=\"column\" fxLayoutGap=\"50px\" fxLayoutGap.lt-md=\"0px\">\n        <h1 fxLayout=\"column\" fxLayout.gt-md=\"row\" fxLayoutGap.gt-md=\"15px\" class=\"vehicleName\">\n            {{name}}\n\n        </h1>\n    </div>\n</div>\n    <mat-card class=\"type\" fxFlex.sm=\"0 1 calc(50%-10px)\" fxFlex.md=\"0 1 calc(33%-10px)\" fxLayout=\"column\" fxLayoutGap=\"20px\">\n        <mat-card-title fxLayoutAlign=\"start\">Fuel-type: {{fuelname}}</mat-card-title>\n        <br><br>\n        <div fxFlex=50% fxLayout=\"column\" fxLayout.gt-sm=\"row\" fxLayoutGap=\"20%\" fxLayoutGap.lt-md=\"0px\"\n        class=\"form\" fxLayoutAlign=\"center center\">    \n        <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"50px\" fxLayoutGap.lt-md=\"0px\" class=\"col\">\n                <mat-card-title fxLayoutAlign=\"center center\">Vehicle cc: {{cc}}</mat-card-title>\n                <mat-card-title fxLayoutAlign=\"center center\">Cost/km: {{costPerKm}}</mat-card-title>\n        </div>\n        <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"50px\" fxLayoutGap.lt-md=\"0px\" class=\"col\">\n           \n                <mat-card-title fxLayoutAlign=\"center center\">cost/min: {{costPerMin}}\n                    <span>\n                    <i class=\"material-icons iconCapacity\" (click)=\"update()\" >\n                        create\n                    </i>\n                </span>\n\n                </mat-card-title>\n                <mat-card-title fxLayoutAlign=\"center center\">kilometers/lt: {{mileage}}</mat-card-title>\n\n            </div>\n\n        </div>\n\n    </mat-card>\n"
 
 /***/ }),
 
@@ -96,7 +96,7 @@ module.exports = "<div fxLayout=\"row\" fxLayout.lt-md=\"column\" fxLayoutGap=\"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div fxLayout=\"column\">\n    <h1 class=\"header\">\n        Vehicle Types\n    </h1>\n     <div fxLayout=\"row\" class=\"search\">\n        <mat-form-field fxFlex=\"20%\">\n            <input matInput [(ngModel)]=\"term\" placeholder=\"Search\">\n        </mat-form-field>\n    </div>\n    <div fxLayout=\"column wrap\">\n        <div fxLayout.xs=\"column\" fxLayout.lg=\"row wrap\" fxLayoutGap=\"50px\" class=\"card\" fxLayoutAlign.sm=\"center center\">\n            <app-vehicle-type-card *ngFor=\"let type of vehicleTypes | paginate: { itemsPerPage: 9, currentPage: p}  | filter:term\" [vehicleTypes]=\"type\">\n\n            </app-vehicle-type-card>\n        </div>\n        <pagination-controls (pageChange)=\"p = $event\" fxLayoutAlign=\"center center\"></pagination-controls>\n        </div>\n        <div fxLayout=\"column\" fxLayout.gt-xs=\"row\" fxLayoutAlign=\"end\" class=\"add-button\">\n            <button mat-fab color=\"primary\" (click)=\"add()\">\n                <i class=\"material-icons\">\n                    add\n                </i>\n            </button>\n        </div>\n    </div>\n\n<!-- <app-search-vehicleType></app-search-vehicleType> -->\n<!-- <div fxLayout.xs=\"column\" fxLayout.gt=\"row\" fxLayout=\"row wrap\" fxLayoutGap=\"10px\" class=\"card\">\n    <app-vehicle-type-card *ngFor=\"let type of vehicleTypes | paginate: { itemsPerPage: 9, currentPage: p}  | filter:term\" [vehicleTypes]=\"type\"></app-vehicle-type-card>\n\n    <pagination-controls fxLayout=\"column\" (pageChange)=\"p = $event\"></pagination-controls>\n</div>\n<div fxLayout=\"column\" fxLayout.gt-xs=\"row \" fxLayoutAlign=\"end\" class=\"add-button\">\n    <button mat-fab color=\"primary\" (click)=\"add()\"><i class=\"material-icons\">\n          add\n      </i>\n    </button>\n</div> -->\n"
+module.exports = "<div fxLayout=\"column\">\n    <h1 class=\"header\">\n        Vehicle Types\n    </h1>\n     <div fxLayout=\"row\" class=\"search\">\n        <mat-form-field fxFlex=\"20%\">\n            <input matInput [(ngModel)]=\"term\" placeholder=\"Search\">\n        </mat-form-field>\n    </div>\n    <div fxLayout=\"column wrap\">\n        <div fxLayout.xs=\"column\" fxLayout.lg=\"row wrap\" fxLayoutGap=\"50px\" class=\"card\" fxLayoutAlign.sm=\"center center\">\n            <div *ngIf=\"displayCount === 0\">\n                <img src=\"http://miceemporio.com/img/no-record-found.jpeg\">\n            </div>\n            <app-vehicle-type-card *ngFor=\"let type of vehicleTypes | paginate: { itemsPerPage: 12, currentPage: p}  | filter:term\" [vehicleTypes]=\"type\">\n\n            </app-vehicle-type-card>\n        </div>\n        <pagination-controls (pageChange)=\"p = $event\" fxLayoutAlign=\"center center\"></pagination-controls>\n        </div>\n        <div fxLayout=\"column\" fxLayout.gt-xs=\"row\" fxLayoutAlign=\"end\" class=\"add-button\">\n            <button mat-fab color=\"primary\" (click)=\"add()\">\n                <i class=\"material-icons\">\n                    add\n                </i>\n            </button>\n        </div>\n    </div>\n"
 
 /***/ }),
 
@@ -107,7 +107,7 @@ module.exports = "<div fxLayout=\"column\">\n    <h1 class=\"header\">\n        
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-toolbar>\n    <span class=\"fill-remaining-space\"></span>\n    <button class=\"btn-dialog-close\" mat-stroked-button (click)=\"onClose()\" tabIndex=\"-1\">\n    <mat-icon>clear</mat-icon>\n</button>\n</mat-toolbar>\n\n<form fxLayout=\"column\" fxLayoutAlign=\"center center\" [formGroup]=\"typeForm\" (ngSubmit)=\"onSubmit()\">\n\n    <div fxFlex=50% fxLayout=\"row\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\" class=\"form\" fxLayoutAlign=\"center center\">\n        <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\" class=\"col\">\n\n            <mat-form-field appearance=\"outline\" fxFlex>\n                <mat-label>Cost/min </mat-label>\n                <input matInput maxlength=\"6\" #input placeholder=\"cost/min\" formControlName=\"costtime\" [(ngModel)]=\"costtime\" required>\n\n            </mat-form-field>\n        </div>\n    </div>\n    <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\">\n        <button mat-raised-button class=\"btn\" [disabled]='!typeForm.valid' color=\"primary\">\n                        Submit\n                    </button>\n\n    </div>\n</form>\n"
+module.exports = "<mat-toolbar>\n    <span class=\"fill-remaining-space\"></span>\n    <button class=\"btn-dialog-close\" mat-stroked-button (click)=\"onClose()\" tabIndex=\"-1\">\n    <mat-icon>clear</mat-icon>\n</button>\n</mat-toolbar>\n\n<form fxLayout=\"column\" fxLayoutAlign=\"center center\" [formGroup]=\"typeForm\" (ngSubmit)=\"onSubmit()\">\n\n    <div fxFlex=50% fxLayout=\"row\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\" class=\"form\" fxLayoutAlign=\"center center\">\n        <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\" class=\"col\">\n\n            <mat-form-field appearance=\"outline\" fxFlex>\n                <mat-label>Cost/min </mat-label>\n                <input matInput #input placeholder=\"cost/min\" formControlName=\"costPerMin\" [(ngModel)]=\"costPerMin\" required>\n            </mat-form-field>\n        </div>\n    </div>\n    <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\">\n        <button mat-raised-button class=\"btn\" [disabled]='!typeForm.valid' color=\"primary\">\n                        Submit\n                    </button>\n\n    </div>\n</form>\n"
 
 /***/ }),
 
@@ -118,7 +118,7 @@ module.exports = "<mat-toolbar>\n    <span class=\"fill-remaining-space\"></span
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-card (click)=\"ok()\" class=\"my-card\">\n      <mat-card-content fxLayoutAlign=\"space-between\" >\n                <ngx-avatar name=\"{{name}}\"></ngx-avatar>\n        </mat-card-content>\n    <mat-card-title  class=\"typeName\">{{name}}</mat-card-title>\n    <mat-card-content>Cost/km : {{costkm}}</mat-card-content>\n    <mat-card-content>Cost/min :{{costtime}}</mat-card-content>\n</mat-card>\n"
+module.exports = "<mat-card (click)=\"ok()\" class=\"my-card\">\n      <mat-card-content fxLayoutAlign=\"center center\" >\n                <img mat-card-image src=\"{{url}}\" [lazyLoad]=\"url\">\n        </mat-card-content>\n    <mat-card-title  class=\"typeName\">{{name}}</mat-card-title>\n    <mat-card-content>Cost/km : {{costPerKm}}</mat-card-content>\n    <mat-card-content>Cost/min :{{costPerMin}}</mat-card-content>\n</mat-card>\n"
 
 /***/ }),
 
@@ -129,7 +129,7 @@ module.exports = "<mat-card (click)=\"ok()\" class=\"my-card\">\n      <mat-card
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"add\">\n    <mat-toolbar>\n        <span class=\"fill-remaining-space\"></span>\n        <button class=\"btn-dialog-close\" mat-stroked-button (click)=\"onClose()\" tabIndex=\"-1\">\n            <mat-icon>clear</mat-icon>\n        </button>\n    </mat-toolbar>\n\n\n\n    <form fxLayout=\"column\" fxLayoutAlign=\"center center\" [formGroup]=\"vehicleForm\" (ngSubmit)=\"onSubmit()\">\n        <h2 fxLayout=\"column\" fxLayout.gt-md=\"row\" fxLayoutGap.gt-md=\"15px\" fxLayoutAlign=\"center center\">Add New Vehicle</h2>\n\n        <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\" class=\"form\">\n\n            <mat-form-field appearance=\"outline\" fxFlex>\n                <mat-label>Registration No.</mat-label>\n                <input matInput #input placeholder=\"Registration No\" formControlName=\"registrationNo\" required>\n\n                <mat-error *ngIf=\"rNum.invalid\">\n\n                    {{getErrorRegistrationNo()}}\n                </mat-error>\n            </mat-form-field>\n\n\n\n\n            <mat-form-field appearance=\"outline\" fxFlex>\n                <mat-label>Type</mat-label>\n                <mat-select formControlName=\"type\">\n                    <mat-option *ngFor=\"let type of types\" [value]=\"type\">\n                        {{type.name}}\n                    </mat-option>\n                </mat-select>\n            </mat-form-field>\n\n\n\n            <mat-form-field appearance=\"outline\" fxFlex>\n                <mat-label>Insurance No.</mat-label>\n                <input matInput #input placeholder=\"Insurance No.\" formControlName=\"insuranceNo\" required>\n\n                <mat-error *ngIf=\"RinsuranceNo.invalid\">\n\n                    {{getErrorInsuranceNo()}}\n                </mat-error>\n\n            </mat-form-field>\n\n            <mat-form-field appearance=\"outline\" fxFlex>\n                <mat-label>Chassis Number.</mat-label>\n                <input matInput #input placeholder=\"Chassis No.\" formControlName=\"chassisNumber\" required>\n\n                <mat-error *ngIf=\"RchassisNumber.invalid\">\n\n                    {{getErrorChassisNo()}}\n                </mat-error>\n\n            </mat-form-field>\n\n\n\n\n            <!-- <mat-form-field appearance=\"outline\" fxFlex>\n          <mat-label>Status</mat-label>\n          <input matInput #input placeholder=\"Placeholder\" formControlName=\"status\" required>\n      </mat-form-field> -->\n\n\n            <!-- <mat-form-field appearance=\"outline\" fxFlex>\n          <mat-label>Last Service date</mat-label>\n          <input matInput #input placeholder=\"Placeholder\"  required>\n      </mat-form-field> -->\n            <!-- <mat-label>Last Service date</mat-label>\n      <mat-form-field>\n          <input matInput [matDatepicker]=\"lastServiceDate\" formControlName=\"lastServiceDate\" [max]=\"todaydate\" placeholder=\"Last Service Date\" #input>\n          <mat-datepicker-toggle matSuffix [for]=\"lastServiceDate\"></mat-datepicker-toggle>\n          <mat-datepicker #lastServiceDate></mat-datepicker>\n      </mat-form-field> -->\n\n            <mat-label>Vehicle purchase date</mat-label>\n            <mat-form-field>\n                <input matInput [matDatepicker]=\"vehiclePurchased\" formControlName=\"vehiclePurchased\" [max]=\"todaydate\" placeholder=\"Vehicle Purchased Date\" #input>\n                <mat-datepicker-toggle matSuffix [for]=\"vehiclePurchased\"></mat-datepicker-toggle>\n                <mat-datepicker #vehiclePurchased></mat-datepicker>\n            </mat-form-field>\n\n\n\n            <!-- <mat-form-field appearance=\"outline\" fxFlex>\n        <input matInput #input placeholder=\"Placeholder\" formControlName=\"vehiclePurchased\" required>\n    </mat-form-field> -->\n\n\n            <button mat-raised-button class=\"btn\">\n      Submit\n    </button>\n\n\n        </div>\n\n    </form>\n\n</div>\n"
+module.exports = "<div class=\"add\">\n    <mat-toolbar>\n        <span class=\"fill-remaining-space\"></span>\n        <button class=\"btn-dialog-close\" mat-stroked-button (click)=\"onClose()\" tabIndex=\"-1\">\n            <mat-icon>clear</mat-icon>\n        </button>\n    </mat-toolbar>\n\n\n\n    <form fxLayout=\"column\" fxLayoutAlign=\"center center\" [formGroup]=\"vehicleForm\" (ngSubmit)=\"onSubmit()\">\n        <h2 fxLayout=\"column\" fxLayout.gt-md=\"row\" fxLayoutGap.gt-md=\"15px\" fxLayoutAlign=\"center center\">Add New Vehicle</h2>\n\n        <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\" class=\"form\">\n\n            <mat-form-field appearance=\"outline\" fxFlex>\n                <mat-label>Registration No.</mat-label>\n                <input matInput #input placeholder=\"Registration No\" formControlName=\"registrationNo\" required>\n                <mat-error *ngIf=\"rNum.invalid\">\n\n                    {{getErrorRegistrationNo()}}\n                </mat-error>\n            </mat-form-field>\n\n\n\n\n            <mat-form-field appearance=\"outline\" fxFlex>\n                <mat-label>Vehicle Type</mat-label>\n                <mat-select formControlName=\"vehicleType\">\n                    <mat-option *ngFor=\"let vehicleType of Vehicletypes\" [value]=\"vehicleType\">\n                        {{vehicleType.name}}\n                    </mat-option>\n                </mat-select>\n            </mat-form-field>\n\n\n\n\n            <mat-form-field appearance=\"outline\" fxFlex>\n                <mat-label>Insurance No.</mat-label>\n                <input matInput #input placeholder=\"Insurance No.\" formControlName=\"insuranceNo\" required>\n\n                <mat-error *ngIf=\"RinsuranceNo.invalid\">\n\n                    {{getErrorInsuranceNo()}}\n                </mat-error>\n\n            </mat-form-field>\n\n\n            <mat-form-field appearance=\"outline\" fxFlex>\n                <mat-label>Chassis Number.</mat-label>\n                <input matInput #input placeholder=\"Chassis No.\" formControlName=\"chassisNumber\" required>\n\n                <mat-error *ngIf=\"RchassisNumber.invalid\">\n\n                    {{getErrorChassisNo()}}\n                </mat-error>\n\n            </mat-form-field>\n\n            <mat-label>Vehicle purchase date</mat-label>\n            <mat-form-field>\n                <input matInput [matDatepicker]=\"purchasedDate\" formControlName=\"purchasedDate\" [max]=\"todaydate\" placeholder=\"Vehicle Purchased Date\" #input>\n                <mat-datepicker-toggle matSuffix [for]=\"purchasedDate\"></mat-datepicker-toggle>\n                <mat-datepicker #purchasedDate></mat-datepicker>\n            </mat-form-field>\n\n\n\n            <!-- <mat-form-field appearance=\"outline\" fxFlex>\n        <input matInput #input placeholder=\"Placeholder\" formControlName=\"vehiclePurchased\" required>\n    </mat-form-field> -->\n\n\n            <button mat-raised-button  [disabled]='!vehicleForm.valid' class=\"btn\" color=\"primary\">\n      Submit\n    </button>\n\n\n        </div>\n\n    </form>\n\n</div>\n"
 
 /***/ }),
 
@@ -140,7 +140,7 @@ module.exports = "<div class=\"add\">\n    <mat-toolbar>\n        <span class=\"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-toolbar>\n    <span class=\"fill-remaining-space\"></span>\n    <button class=\"btn-dialog-close\" mat-stroked-button (click)=\"onClose()\" tabIndex=\"-1\">\n    <mat-icon>clear</mat-icon>\n</button>\n</mat-toolbar>\n\n<form fxLayout=\"column\" fxLayoutAlign=\"center center\" [formGroup]=\"vehicleForm\" (ngSubmit)=\"onSubmit()\">\n\n    <div fxFlex=50% fxLayout=\"row\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\" class=\"form\" fxLayoutAlign=\"center center\">\n        <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\" class=\"col\">\n\n            <mat-form-field appearance=\"outline\" fxFlex>\n                <mat-label>Insurance No.</mat-label>\n                <input matInput #input placeholder=\"Insurance No.\" formControlName=\"insuranceNo\" [(ngModel)]=\"insuranceNo\" required>\n\n            </mat-form-field>\n        </div>\n    </div>\n\n\n    <div fxFlex=50% fxLayout=\"row\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\" class=\"form\" fxLayoutAlign=\"center center\">\n        <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\" class=\"col\">\n\n            <mat-label>Vehicle Last Service date</mat-label>\n            <mat-form-field>\n                <input matInput [matDatepicker]=\"lastServiceDate\" formControlName=\"lastServiceDate\" [min]=\"minDate\" [max]=\"todaydate\" placeholder=\"Vehicle Last Service  Date\" #input>\n                <mat-datepicker-toggle matSuffix [for]=\"lastServiceDate\"></mat-datepicker-toggle>\n                <mat-datepicker #lastServiceDate></mat-datepicker>\n            </mat-form-field>\n        </div>\n    </div>\n\n\n\n    <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\">\n        <button mat-raised-button class=\"btn\" [disabled]='!vehicleForm.valid' color=\"primary\">\n                        Submit\n                    </button>\n\n    </div>\n</form>\n"
+module.exports = "<mat-toolbar>\n    <span class=\"fill-remaining-space\"></span>\n    <button class=\"btn-dialog-close\" mat-stroked-button (click)=\"onClose()\" tabIndex=\"-1\">\n    <mat-icon>clear</mat-icon>\n</button>\n</mat-toolbar>\n\n<form fxLayout=\"column\" fxLayoutAlign=\"center center\" [formGroup]=\"vehicleForm\" (ngSubmit)=\"onSubmit()\">\n\n    <div fxFlex=50% fxLayout=\"row\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\" class=\"form\" fxLayoutAlign=\"center center\">\n        <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\" class=\"col\">\n\n            <mat-form-field appearance=\"outline\" fxFlex>\n                <mat-label>Insurance No.</mat-label>\n                <input matInput #input placeholder=\"Insurance No.\" formControlName=\"insuranceNo\" [(ngModel)]=\"insuranceNo\" required>\n\n            </mat-form-field>\n\n        </div>\n    </div>\n\n\n    <div fxFlex=50% fxLayout=\"row\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\" class=\"form\" fxLayoutAlign=\"center center\">\n        <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\" class=\"col\">\n\n            <mat-label>Vehicle Last Service date</mat-label>\n            <mat-form-field>\n                <input matInput [matDatepicker]=\"lastServiceDate\" formControlName=\"lastServiceDate\" [max]=\"todaydate\" [min]=\"minDate\" placeholder=\"Vehicle Last Service  Date\" #input>\n                <mat-datepicker-toggle matSuffix [for]=\"lastServiceDate\"></mat-datepicker-toggle>\n                <mat-datepicker #lastServiceDate></mat-datepicker>\n            </mat-form-field>\n\n        </div>\n    </div>\n\n\n\n    <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\">\n        <button mat-raised-button class=\"btn\" [disabled]='!vehicleForm.valid' color=\"primary\">\n                        Submit\n                    </button>\n\n    </div>\n</form>\n"
 
 /***/ }),
 
@@ -151,7 +151,7 @@ module.exports = "<mat-toolbar>\n    <span class=\"fill-remaining-space\"></span
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-card (click)=\"ok()\" class=\"my-card\">\n        <mat-card-content fxLayoutAlign=\"space-between\" >\n                <ngx-avatar name=\"{{type}}\"></ngx-avatar>\n                <mat-chip-list aria-label=\"Fish selection\">\n            <mat-chip [ngStyle]=\"{'background-color':getColor(status)}\" class=\"status\">{{status}}</mat-chip>\n            </mat-chip-list>\n        </mat-card-content>\n   <mat-card-title class=\"typeName\">{{registrationNo}}</mat-card-title>\n    <mat-card-content>Vehicle type: {{type}}</mat-card-content>\n</mat-card>\n"
+module.exports = "<mat-card (click)=\"ok()\" class=\"my-card\">\n        <mat-card-content fxLayoutAlign=\"space-between\" >\n                <ngx-avatar name=\"{{type}}\"></ngx-avatar>\n                <mat-chip-list aria-label=\"Fish selection\">\n            <mat-chip [ngStyle]=\"{'background-color':getColor(status)}\" class=\"status\">{{status}}</mat-chip>\n            </mat-chip-list>\n        </mat-card-content>\n        <mat-card-title class=\"typeName\">{{registrationNo}}</mat-card-title>\n        <mat-card-content >Vehicle Type: {{type}}</mat-card-content>\n    \n</mat-card>\n"
 
 /***/ }),
 
@@ -162,7 +162,7 @@ module.exports = "<mat-card (click)=\"ok()\" class=\"my-card\">\n        <mat-ca
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div fxLayout=\"row\" fxLayout.lt-md=\"column\" fxLayoutGap=\"10%\" fxLayoutGap.lt-md=\"0px\">\n    <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"50px\" fxLayoutGap.lt-md=\"0px\">\n        <h1 fxLayout=\"column\" fxLayout.gt-md=\"row\" fxLayoutGap.gt-md=\"15px\" class=\"vehicleName\">\n            {{registrationNo}}\n\n        </h1>\n    </div>\n\n    <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap.lt-md=\"0px\">\n        <mat-form-field appearance=\"outline\" fxFlex class=\"status\">\n            <mat-label>Vehicle Status</mat-label>\n            <mat-select [(ngModel)]=\"status1\" (ngModelChange)=\"onChange($event)\">\n                <mat-option *ngFor=\"let z of vehicleStatus\" [value]=\"z.value\">\n                    {{z.viewValue}}\n                </mat-option>\n            </mat-select>\n        </mat-form-field>\n    </div>\n</div>\n\n<!--  -->\n\n<mat-card class=\"my-card\" fxFlex.sm=\"0 1 calc(50%-10px)\" fxFlex.md=\"0 1 calc(33%-10px)\" fxLayout=\"column\" fxLayoutGap=\"20px\">\n    <mat-card-title fxLayoutAlign=\"start\">{{vehiclePurchased| date:\"dd LLLL yyyy\"}}</mat-card-title>\n    <br><br>\n    <div fxFlex=50% fxLayout=\"row\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20%\" fxLayoutGap.lt-md=\"0px\" class=\"form\" fxLayoutAlign=\"center center\">\n        <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"50px\" fxLayoutGap.lt-md=\"0px\" class=\"col\">\n\n\n\n\n\n            <mat-card-title fxLayoutAlign=\"center center\">insurance Number: {{insuranceNo}}\n\n                <span>\n                        <i class=\"material-icons iconCapacity\"  (click)=\"update()\"  >\n                            create\n                        </i>\n                  </span>\n\n\n            </mat-card-title>\n            <mat-card-title fxLayoutAlign=\"center center\">last Service Date: {{lastServiceDate| date:\"dd LLLL yyyy\"}}</mat-card-title>\n            <mat-card-title fxLayoutAlign=\"center center\">Vehicle Purchase Date: {{vehiclePurchased| date:\"dd LLLL yyyy\"}}</mat-card-title>\n            <mat-card-title fxLayoutAlign=\"center center\">name: {{name}}</mat-card-title>\n            <mat-card-title fxLayoutAlign=\"center center\">category: {{category}}</mat-card-title>\n            <mat-card-title fxLayoutAlign=\"center center\">costkm: {{costkm}}</mat-card-title>\n            <mat-card-title fxLayoutAlign=\"center center\">cost-Time: {{costtime}}</mat-card-title>\n            <mat-card-title fxLayoutAlign=\"center center\">chassis number: {{chassisNumber}}</mat-card-title>\n\n\n        </div>\n\n    </div>\n\n</mat-card>\n"
+module.exports = "<div fxLayout.gt-sm=\"row\" fxLayout.sm=\"column\" fxLayoutGap=\"10%\"> \n    <div fxLayout=\"column\" fxLayout.sm=\"column\" fxLayoutGap=\"50px\" fxLayoutGap.lt-md=\"0px\">\n      <h1 fxLayout=\"column\" fxLayout.gt-md=\"row\" fxLayoutGap.gt-md=\"15px\" class=\"vehicleName\">\n            {{registrationNo}}\n\n        </h1>\n    </div>\n\n    <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap.lt-md=\"0px\">\n        <mat-form-field appearance=\"outline\" fxFlex class=\"status\">\n            <mat-label>Vehicle Status</mat-label>\n            <mat-select [(ngModel)]=\"status1\" (ngModelChange)=\"onChange($event)\">\n                <mat-option *ngFor=\"let z of vehicleStatus\" [value]=\"z.value\">\n                    {{z.viewValue}}\n                </mat-option>\n            </mat-select>\n        </mat-form-field>\n    </div>\n</div>\n\n<div fxLayout=\"column\">\n<mat-card class=\"vehicle\" fxFlex.sm=\"0 1 calc(50%-10px)\" fxFlex.md=\"0 1 calc(33%-10px)\" fxLayout=\"column\" fxLayoutGap=\"20px\">\n    <mat-card-title fxLayoutAlign=\"start\" class=\"date\">{{purchasedDate| date:\"dd LLLL yyyy\"}}\n        <button mat-button class=\"icon\" (click)=\"update()\">\n            <mat-icon>\n                    create\n            </mat-icon>\n    </button>\n    </mat-card-title>\n    <br><br>\n    <div fxFlex=50% fxLayout=\"column\" fxLayout.gt-sm=\"row\" fxLayoutGap=\"20%\" fxLayoutGap.lt-md=\"0px\"\n    class=\"form\" fxLayoutAlign=\"center center\">    \n<div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"50px\" fxLayoutGap.lt-md=\"0px\" class=\"col\">\n         <mat-card-title fxLayoutAlign=\"center center\">Insurance No: {{insuranceNo}}</mat-card-title>\n            <mat-card-title fxLayoutAlign=\"center center\">Last Service Date: {{lastServiceDate| date:\"dd LLLL yyyy\"}}</mat-card-title>\n            <mat-card-title fxLayoutAlign=\"center center\">Name: {{name}}</mat-card-title>\n</div>\n<div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"50px\" fxLayoutGap.lt-md=\"0px\" class=\"col\">\n \n    <mat-card-title fxLayoutAlign=\"center center\">cost-Km: {{costkm}}</mat-card-title>\n    <mat-card-title fxLayoutAlign=\"center center\">cost-Time: {{costtime}}</mat-card-title>\n    <mat-card-title fxLayoutAlign=\"center center\">Chassis No: {{chassisNumber}}</mat-card-title>\n\n\n        </div>\n\n    </div>\n\n</mat-card>\n</div>\n"
 
 /***/ }),
 
@@ -173,7 +173,7 @@ module.exports = "<div fxLayout=\"row\" fxLayout.lt-md=\"column\" fxLayoutGap=\"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div fxLayout=\"column\">\n        <h1 class=\"header\">\n            Vehicles\n        </h1>\n         <div fxLayout=\"row\" class=\"search\">\n            <mat-form-field fxFlex=\"20%\">\n                <input matInput [(ngModel)]=\"term\" placeholder=\"Search\">\n            </mat-form-field>\n        </div>\n        <div fxLayout=\"column wrap\">\n                <div fxLayout.xs=\"column\" fxLayout.lg=\"row wrap\" fxLayoutGap=\"50px\" class=\"card\" fxLayoutAlign.sm=\"center center\">\n                        <app-vehicle-card *ngFor=\"let type of vehicle| paginate: { itemsPerPage: 9, currentPage: p } | filter:term\" [vehicle]=\"type\"></app-vehicle-card>\n\n                </div>\n                <pagination-controls (pageChange)=\"p = $event\" fxLayoutAlign=\"center center\"></pagination-controls>\n                </div>\n                <div fxLayout=\"column\" fxLayout.gt-xs=\"row\" fxLayoutAlign=\"end\" class=\"add-button\">\n                    <button mat-fab color=\"primary\" (click)=\"add()\">\n                        <i class=\"material-icons\">\n                            add\n                        </i>\n                    </button>\n                </div>\n            </div>\n\n\n<!-- <app-search-vehicleType></app-search-vehicleType> -->\n<!-- <div fxLayout.xs=\"column\" fxLayout.gt=\"row\" fxLayout=\"row wrap\" fxLayoutGap=\"10px\" class=\"card\">\n    <app-vehicle-card *ngFor=\"let type of vehicle| paginate: { itemsPerPage: 9, currentPage: p } | filter:term\" [vehicle]=\"type\"></app-vehicle-card>\n\n    <pagination-controls fxLayout=\"column\" (pageChange)=\"p = $event\"></pagination-controls>\n</div>\n<div fxLayout=\"column\" fxLayout.gt-xs=\"row \" fxLayoutAlign=\"end\" class=\"add-button\">\n    <button mat-fab color=\"primary\" (click)=\"add()\"><i class=\"material-icons\">\n          add\n      </i>\n    </button>\n</div> -->\n"
+module.exports = "<div fxLayout=\"column\">\n        <h1 class=\"header\">\n            Vehicles\n        </h1>\n         <div fxLayout=\"row\" class=\"search\">\n            <mat-form-field fxFlex=\"20%\">\n                <input matInput [(ngModel)]=\"term\" placeholder=\"Search\">\n            </mat-form-field>\n        </div>\n        <div fxLayout=\"column wrap\">\n                <div fxLayout.xs=\"column\" fxLayout.lg=\"row wrap\" fxLayoutGap=\"50px\" class=\"card\" fxLayoutAlign.sm=\"center center\">\n                    <div *ngIf=\"displayCount === 0\">\n                        <img src=\"http://miceemporio.com/img/no-record-found.jpeg\">\n                    </div>   \n                    <app-vehicle-card *ngFor=\"let type of vehicle| paginate: { itemsPerPage: 9, currentPage: p } | filter:term\" [vehicle]=\"type\"></app-vehicle-card>\n\n                </div>\n                <pagination-controls (pageChange)=\"p = $event\" fxLayoutAlign=\"center center\"></pagination-controls>\n                </div>\n                <div fxLayout=\"column\" fxLayout.gt-xs=\"row\" fxLayoutAlign=\"end\" class=\"add-button\">\n                    <button mat-fab color=\"primary\" (click)=\"add()\">\n                        <i class=\"material-icons\">\n                            add\n                        </i>\n                    </button>\n                </div>\n            </div>\n\n\n<!-- <app-search-vehicleType></app-search-vehicleType> -->\n<!-- <div fxLayout.xs=\"column\" fxLayout.gt=\"row\" fxLayout=\"row wrap\" fxLayoutGap=\"10px\" class=\"card\">\n    <app-vehicle-card *ngFor=\"let type of vehicle| paginate: { itemsPerPage: 9, currentPage: p } | filter:term\" [vehicle]=\"type\"></app-vehicle-card>\n\n    <pagination-controls fxLayout=\"column\" (pageChange)=\"p = $event\"></pagination-controls>\n</div>\n<div fxLayout=\"column\" fxLayout.gt-xs=\"row \" fxLayoutAlign=\"end\" class=\"add-button\">\n    <button mat-fab color=\"primary\" (click)=\"add()\"><i class=\"material-icons\">\n          add\n      </i>\n    </button>\n</div> -->\n"
 
 /***/ }),
 
@@ -184,7 +184,7 @@ module.exports = "<div fxLayout=\"column\">\n        <h1 class=\"header\">\n    
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-toolbar>\n        <span class=\"fill-remaining-space\"></span>\n        <button class=\"btn-dialog-close\" mat-stroked-button (click)=\"onClose()\" tabIndex=\"-1\">\n            <mat-icon>clear</mat-icon>\n        </button>\n    </mat-toolbar>\n\n    <form fxLayout=\"column\" fxLayoutAlign=\"center center\" [formGroup]=\"zoneForm\" (ngSubmit)=\"onSubmit()\">\n\n            <div fxFlex=50% fxLayout=\"row\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\" class=\"form\"\n                fxLayoutAlign=\"center center\">\n                <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\" class=\"col\">\n        \n                        <mat-form-field appearance=\"outline\" fxFlex>\n                                <mat-label>Supervisor Name</mat-label>\n                                <input #input aria-label=\"Number\" matInput [formControl]=\"myControl\" [matAutocomplete]=\"auto\" [(ngModel)]=\"sname2\">\n                                <mat-autocomplete #auto=\"matAutocomplete\" (optionSelected)=\"selectedclient($event)\" [displayWith]=\"getOptionText\">\n                                    <mat-option *ngFor=\"let option of options ; let i = index\" [value]=\"option\">\n                                        {{option.name}}\n                                    </mat-option>\n                                </mat-autocomplete>\n        \n                            </mat-form-field>\n            </div>\n            </div>\n        \n            <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\">\n                <button mat-raised-button class=\"btn\"  color=\"primary\">\n                    Submit\n                </button>\n        \n            </div>\n        \n        \n        \n        </form>"
+module.exports = "<mat-toolbar>\n        <span class=\"fill-remaining-space\"></span>\n        <button class=\"btn-dialog-close\" mat-stroked-button (click)=\"onClose()\" tabIndex=\"-1\">\n            <mat-icon>clear</mat-icon>\n        </button>\n    </mat-toolbar>\n\n    <form fxLayout=\"column\" fxLayoutAlign=\"center center\" [formGroup]=\"zoneForm\" (ngSubmit)=\"onSubmit()\">\n        <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\" class=\"form\"\n        fxLayoutAlign=\"center center\">\n                        <mat-form-field appearance=\"outline\" fxFlex>\n                                <mat-label>Supervisor Name</mat-label>\n                                <input #input aria-label=\"Number\" matInput [formControl]=\"myControl\" [matAutocomplete]=\"auto\" [(ngModel)]=\"sname2\">\n                                <mat-autocomplete #auto=\"matAutocomplete\" (optionSelected)=\"selectedclient($event)\" [displayWith]=\"getOptionText\">\n                                    <mat-option *ngFor=\"let option of options ; let i = index\" [value]=\"option\">\n                                        {{option.name}}\n                                    </mat-option>\n                                </mat-autocomplete>\n        \n                            </mat-form-field>\n                            <button mat-raised-button class=\"btn\" [disabled]='!zoneForm.valid' color=\"primary\">\n                                Submit\n                            </button>\n        \n            </div>\n        \n        \n        \n        </form>"
 
 /***/ }),
 
@@ -206,7 +206,7 @@ module.exports = "<mat-toolbar>\n    <span class=\"fill-remaining-space\"></span
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-toolbar>\n    <span class=\"fill-remaining-space\"></span>\n    <button class=\"btn-dialog-close\" mat-stroked-button (click)=\"onClose()\" tabIndex=\"-1\">\n        <mat-icon>clear</mat-icon>\n    </button>\n</mat-toolbar>\n<form fxLayout=\"column\" fxLayoutAlign=\"center center\" [formGroup]=\"zoneForm\" (ngSubmit)=\"onSubmit()\">\n\n    <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\" class=\"form\"\n        fxLayoutAlign=\"center center\">\n\n\n            <mat-form-field appearance=\"outline\" fxFlex>\n                <mat-label>Zone Locality</mat-label>\n                <input matInput #input placeholder=\"Zone Locality\" formControlName=\"locality\" required (keyup.enter)=\"getLocation()\">\n                <mat-hint>\n                    Press Enter after writing locality\n                </mat-hint>\n                <mat-error *ngIf=\"locality.invalid\">\n                                        {{getErrorZoneLocality()}}\n                                    </mat-error>\n            </mat-form-field>\n            <mat-form-field appearance=\"outline\" fxFlex>\n\n                <mat-label>Zone Name</mat-label>\n                <input matInput #input placeholder=\"Zone Name\" formControlName=\"name\" required>\n\n                <mat-error *ngIf=\"zone.invalid\">\n\n                                            {{getErrorZoneName()}}\n                                        </mat-error>\n\n            </mat-form-field>\n\n\n\n\n            <mat-form-field appearance=\"outline\" fxFlex>\n                <mat-label>Capacity</mat-label>\n                <input matInput #input placeholder=\"Capacity\" formControlName=\"capacity\" required>\n                <mat-error *ngIf=\"capacity.invalid\">\n\n                                                                {{getErrorCapacity()}}\n                                                            </mat-error>\n            </mat-form-field>\n\n            <button mat-raised-button class=\"btn\" [disabled]='!zoneForm.valid' color=\"primary\">\n                Submit\n            </button>\n\n\n    </div>\n\n\n\n\n</form>\n"
+module.exports = "<mat-toolbar>\n    <span class=\"fill-remaining-space\"></span>\n    <button class=\"btn-dialog-close\" mat-stroked-button (click)=\"onClose()\" tabIndex=\"-1\">\n        <mat-icon>clear</mat-icon>\n    </button>\n</mat-toolbar>\n<form fxLayout=\"column\" fxLayoutAlign=\"center center\" [formGroup]=\"zoneForm\" (ngSubmit)=\"onSubmit()\">\n\n    <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\" class=\"form\"\n        fxLayoutAlign=\"center center\">\n\n\n            <mat-form-field appearance=\"outline\" fxFlex>\n                <mat-label>Zone Locality</mat-label>\n                <input matInput #input placeholder=\"Zone Locality\" formControlName=\"locality\" required (keyup.enter)=\"getLocation()\"  (blur)=\"getLocation()\">\n                <mat-hint>\n                    Press Enter after writing locality\n                </mat-hint>\n                <mat-error *ngIf=\"locality.invalid\">\n                                        {{getErrorZoneLocality()}}\n                                    </mat-error>\n            </mat-form-field>\n            <mat-form-field appearance=\"outline\" fxFlex>\n\n                <mat-label>Zone Name</mat-label>\n                <input matInput #input placeholder=\"Zone Name\" formControlName=\"name\" required>\n\n                <mat-error *ngIf=\"zone.invalid\">\n\n                                            {{getErrorZoneName()}}\n                                        </mat-error>\n\n            </mat-form-field>\n\n\n\n\n            <mat-form-field appearance=\"outline\" fxFlex>\n                <mat-label>Capacity</mat-label>\n                <input matInput #input placeholder=\"Capacity\" formControlName=\"capacity\" required>\n                <mat-error *ngIf=\"capacity.invalid\">\n\n                                                                {{getErrorCapacity()}}\n                                                            </mat-error>\n            </mat-form-field>\n\n            <button mat-raised-button class=\"btn\" [disabled]='!zoneForm.valid' color=\"primary\">\n                Submit\n            </button>\n\n\n    </div>\n\n\n\n\n</form>\n"
 
 /***/ }),
 
@@ -217,7 +217,7 @@ module.exports = "<mat-toolbar>\n    <span class=\"fill-remaining-space\"></span
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n<div fxLayout=\"column\">\n<mat-card class=\"my-card\" fxFlex.sm=\"0 1 calc(50%-10px)\" fxFlex.md=\"0 1 calc(33%-10px)\" fxLayout=\"column\" fxLayoutGap=\"20px\">\n                <mat-card-title fxLayoutAlign=\"start\" class=\"zoneName\">Supervisor\n                        <button mat-button class=\"icon\" disabled=\"{{buttonDisabled2}}\"  (click)=\"updateSupervisor()\">\n                                <mat-icon>\n                                        create\n                                </mat-icon>\n                        </button>\n                </mat-card-title>\n\n                <br><br>\n\n    <div fxFlex=50% fxLayout=\"column\" fxLayout.gt-sm=\"row\" fxLayoutGap=\"20%\" fxLayoutGap.lt-md=\"0px\"\n        class=\"form\" fxLayoutAlign=\"center center\">\n    <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"50px\" fxLayoutGap.lt-md=\"0px\" class=\"col\">\n            <mat-card-title fxLayoutAlign=\"center center\">Name: {{sName}}</mat-card-title>\n            <mat-card-title fxLayoutAlign=\"center center\">Contact No: {{sNumber}}</mat-card-title>\n\n\n    </div>\n    <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"50px\" fxLayoutGap.lt-md=\"0px\" class=\"col\">\n            <mat-card-title fxLayoutAlign=\"center center\">Email: {{sEmail}}</mat-card-title>\n            <mat-card-title fxLayoutAlign=\"center center\">Shift: Daily</mat-card-title>\n\n    </div>\n    </div>\n    <div fxLayout=\"column\" fxLayout.gt-xs=\"row\" fxLayoutAlign=\"end\" class=\"add-button\">\n            <button mat-fab color=\"primary\" disabled=\"{{buttonDisabled}}\" (click)=\"addSupervisor()\">\n                <i class=\"material-icons\">\n                    add\n                </i>\n            </button>\n        </div>\n</mat-card>\n</div>\n\n"
+module.exports = "\n<div fxLayout=\"column\">\n        <mat-card class=\"supervisor\" fxFlex.sm=\"0 1 calc(50%-10px)\" fxFlex.md=\"0 1 calc(33%-10px)\" fxLayout=\"column\" fxLayoutGap=\"20px\">\n                        <mat-card-title fxLayoutAlign=\"start\" class=\"zoneName\">Supervisor\n                                <button mat-button class=\"icon\" disabled=\"{{buttonDisabled2}}\"  (click)=\"updateSupervisor()\">\n                                        <mat-icon>\n                                                create\n                                        </mat-icon>\n                                </button>\n                        </mat-card-title>\n        \n                        <br><br>\n        \n            <div fxFlex=50% fxLayout=\"column\" fxLayout.gt-sm=\"row\" fxLayoutGap=\"20%\" fxLayoutGap.lt-md=\"0px\"\n                class=\"form\" fxLayoutAlign=\"center center\">    \n            <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"50px\" fxLayoutGap.lt-md=\"0px\" class=\"col\">\n                    <mat-card-title fxLayoutAlign=\"center center\">Name: {{sName}}</mat-card-title> \n                    <mat-card-title fxLayoutAlign=\"center center\">Contact No: {{sNumber}}</mat-card-title>\n                    \n                       \n            </div>  \n            <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"50px\" fxLayoutGap.lt-md=\"0px\" class=\"col\">\n                    <mat-card-title fxLayoutAlign=\"center center\">Email: {{sEmail}}</mat-card-title> \n                    <mat-card-title fxLayoutAlign=\"center center\">Shift: Daily</mat-card-title>\n                    \n            </div> \n            </div>  \n            <div fxLayout=\"column\" fxLayout.gt-xs=\"row\" fxLayoutAlign=\"end\" class=\"add-button\">\n                    <button mat-fab color=\"primary\" disabled=\"{{buttonDisabled}}\" (click)=\"addSupervisor()\">\n                        <i class=\"material-icons\">\n                            add\n                        </i>\n                    </button>\n                </div>\n        </mat-card>\n        "
 
 /***/ }),
 
@@ -239,7 +239,7 @@ module.exports = "<mat-toolbar>\n        <span class=\"fill-remaining-space\"></
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n                        <h1 fxLayout=\"column\" fxLayout.gt-md=\"row\" fxLayoutGap.gt-md=\"15px\" class=\"vehicles\">\n                                Vehicles\n                                \n                        </h1>\n                        <mat-list>\n  <mat-list-item *ngFor=\"let folder of vehicle\"  fxLayoutAlign=\"center center\">\n        <h4 mat-line>{{folder.type.name}}</h4>\n        <h4 mat-line>{{folder.registrationNo}}</h4>\n  </mat-list-item>\n \n</mat-list>\n\n<div fxLayout=\"column\" fxLayout.gt-xs=\"row\" fxLayoutAlign=\"end\" class=\"add-button\">\n        <button mat-fab color=\"primary\" disabled=\"{{buttonDisable}}\" (click)=\"add()\">\n            <i class=\"material-icons\">\n                add\n            </i>\n        </button>\n                      "
+module.exports = "<h1 fxLayout=\"column\" fxLayout.gt-md=\"row\" fxLayoutGap.gt-md=\"15px\" class=\"vehicles\">\n    Vehicles\n\n</h1>\n<mat-list>\n    <mat-list-item *ngFor=\"let folder of vehicle\" fxLayoutAlign=\"center center\">\n        <mat-icon mat-list-icon>motorcycle</mat-icon>\n        <h4 mat-line>{{folder.vehicleType.name}}</h4>\n        <h4 mat-line>{{folder.registrationNo}}</h4>   \n    </mat-list-item>\n\n</mat-list>\n\n<div fxLayout=\"column\" fxLayout.gt-xs=\"row\" fxLayoutAlign=\"end\" class=\"add-button\">\n    <button mat-fab color=\"primary\" disabled=\"{{buttonDisable}}\" (click)=\"add()\">\n        <i class=\"material-icons\">\n            add\n        </i>\n    </button>\n"
 
 /***/ }),
 
@@ -261,7 +261,7 @@ module.exports = "<mat-card (click)=\"ok()\" class=\"my-card\">\n\n    <mat-card
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div fxLayout.gt-sm=\"row\" fxLayout.sm=\"column\" fxLayoutGap=\"10%\">\n        <div fxLayout=\"column\" fxLayout.sm=\"column\" fxLayoutGap=\"50px\" fxLayoutGap.lt-md=\"0px\">\n        <h1 fxLayout=\"column\" fxLayout.gt-md=\"row\" fxLayoutGap.gt-md=\"15px\" class=\"zoneName\">\n                {{name}}\n\n        </h1>\n        </div>\n\n<div fxLayout=\"column\" fxLayout.sm=\"column\" fxLayoutGap.lt-md=\"0px\">\n        <mat-icon class=\"graph\">\n                assessment\n        </mat-icon>\n</div>\n\n<div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap.lt-md=\"0px\">\n        <mat-form-field appearance=\"outline\" fxFlex class=\"status\">\n                <mat-label>Zone Status</mat-label>\n                <mat-select [(ngModel)]=\"status\" (ngModelChange)=\"onChange($event)\">\n                    <mat-option *ngFor=\"let z of zoneStatus\" [value]=\"z.value\" [ngStyle]=\"{'color':getColor(z.viewValue)}\">\n                        {{z.viewValue}}\n                    </mat-option>\n                </mat-select>\n            </mat-form-field>\n</div>\n</div>\n\n<div fxLayout=\"column\">\n<mat-card class=\"zone\" fxFlex.sm=\"0 1 calc(50%-10px)\" fxFlex.md=\"0 1 calc(33%-10px)\" fxLayout=\"column\" fxLayoutGap=\"20px\">\n        <mat-card-title fxLayoutAlign=\"start\">{{creationTime | date:\"dd LLLL yyyy\"}}</mat-card-title>\n        <br><br>\n    <div fxFlex=50% fxLayout=\"column\" fxLayout.gt-sm=\"row\" fxLayoutGap=\"20%\" fxLayoutGap.lt-md=\"0px\"\n        class=\"form\" fxLayoutAlign=\"center center\">\n    <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"50px\" fxLayoutGap.lt-md=\"0px\" class=\"col\">\n            <mat-card-title fxLayoutAlign=\"center center\">City: {{city}}</mat-card-title>\n            <mat-card-title fxLayoutAlign=\"center center\">Country: {{country}}</mat-card-title>\n            <mat-card-title fxLayoutAlign=\"center center\">Locality: {{locality}}</mat-card-title>\n\n    </div>\n    <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"50px\" fxLayoutGap.lt-md=\"0px\" class=\"col\">\n            <mat-card-title fxLayoutAlign=\"center center\">State: {{state}}</mat-card-title>\n            <mat-card-title fxLayoutAlign=\"center center\">Pincode: {{pincode}}</mat-card-title>\n\n            <mat-card-title fxLayoutAlign=\"center center\">Capacity: {{capacity}}\n                    <span>\n                        <i class=\"material-icons iconCapacity\" (click)=\"update()\" >\n                            create\n                        </i>\n                    </span>\n\n            </mat-card-title>\n    </div>\n    </div>\n\n</mat-card>\n\n<app-supervisor-details></app-supervisor-details>\n<app-vehicle-details></app-vehicle-details>\n</div>\n"
+module.exports = "<div fxLayout.gt-sm=\"row\" fxLayout.sm=\"column\" fxLayoutGap=\"10%\">\n        <div fxLayout=\"column\" fxLayout.sm=\"column\" fxLayoutGap=\"50px\" fxLayoutGap.lt-md=\"0px\">\n        <h1 fxLayout=\"column\" fxLayout.gt-md=\"row\" fxLayoutGap.gt-md=\"15px\" class=\"zoneName\">\n                {{name}}\n\n        </h1>\n        </div>\n\n<div fxLayout=\"column\" fxLayout.sm=\"column\" fxLayoutGap.lt-md=\"0px\">\n        <mat-icon class=\"graph\">\n                assessment\n        </mat-icon>\n</div>\n\n<div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap.lt-md=\"0px\">\n        <mat-form-field appearance=\"outline\" fxFlex class=\"status\">\n                <mat-label>Zone Status</mat-label>\n                <mat-select [(ngModel)]=\"status\" (ngModelChange)=\"onChange($event)\">\n                    <mat-option *ngFor=\"let z of zoneStatus\" [value]=\"z.value\" [ngStyle]=\"{'color':getColor(z.viewValue)}\">\n                        {{z.viewValue}}\n                    </mat-option>\n                </mat-select>\n            </mat-form-field>\n</div>\n</div>\n\n<div fxLayout=\"column\">\n<mat-card class=\"zone\" fxFlex.sm=\"0 1 calc(50%-10px)\" fxFlex.md=\"0 1 calc(33%-10px)\" fxLayout=\"column\" fxLayoutGap=\"20px\">\n        <mat-card-title fxLayoutAlign=\"start\">{{creationTime | date:\"dd LLLL yyyy\"}}</mat-card-title>\n        <br><br>\n    <div fxFlex=50% fxLayout=\"column\" fxLayout.gt-sm=\"row\" fxLayoutGap=\"20%\" fxLayoutGap.lt-md=\"0px\"\n        class=\"form\" fxLayoutAlign=\"center center\">\n    <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"50px\" fxLayoutGap.lt-md=\"0px\" class=\"col\">\n            <mat-card-title fxLayoutAlign=\"center center\">City: {{city}}</mat-card-title>\n            <mat-card-title fxLayoutAlign=\"center center\">Country: {{country}}</mat-card-title>\n            <mat-card-title fxLayoutAlign=\"center center\">Locality: {{locality}}</mat-card-title>\n\n    </div>\n    <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"50px\" fxLayoutGap.lt-md=\"0px\" class=\"col\">\n            <mat-card-title fxLayoutAlign=\"center center\">State: {{state}}</mat-card-title>\n            <mat-card-title fxLayoutAlign=\"center center\">Pincode: {{pincode}}</mat-card-title>\n            <mat-card-title fxLayoutAlign=\"center center\">Capacity: {{capacity}}\n                    <span>\n                        <i class=\"material-icons iconCapacity\" (click)=\"update()\" >\n                            create\n                        </i>\n                    </span>\n\n            </mat-card-title>\n    </div>\n    </div>\n\n</mat-card>\n\n<app-supervisor-details></app-supervisor-details>\n<app-vehicle-details></app-vehicle-details>\n</div>\n"
 
 /***/ }),
 
@@ -272,7 +272,7 @@ module.exports = "<div fxLayout.gt-sm=\"row\" fxLayout.sm=\"column\" fxLayoutGap
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div fxLayout=\"column\">\n    <h1 class=\"header\">\n        Zones\n    </h1>\n     <div fxLayout=\"row\" class=\"search\">\n        <mat-form-field fxFlex=\"20%\">\n            <input matInput [(ngModel)]=\"term\" placeholder=\"Search\">\n        </mat-form-field>\n    </div>\n   <div fxLayout=\"column wrap\">\n    <div fxLayout.xs=\"column\" fxLayout.lg=\"row wrap\" fxLayoutGap=\"50px\" class=\"card\" fxLayoutAlign.sm=\"center center\">\n        <app-zone-card *ngFor=\"let zone of zones | paginate: { itemsPerPage: 12, currentPage: p } | filter:term\"\n            [zones]=\"zone\">\n        </app-zone-card>\n    </div>\n    <pagination-controls (pageChange)=\"p = $event\" fxLayoutAlign=\"center center\"></pagination-controls>\n    </div>\n    <div fxLayout=\"column\" fxLayout.gt-xs=\"row\" fxLayoutAlign=\"end\" class=\"add-button\">\n        <button mat-fab color=\"primary\" (click)=\"add()\">\n            <i class=\"material-icons\">\n                add\n            </i>\n        </button>\n    </div>\n</div>\n\n"
+module.exports = "<div fxLayout=\"column\">\n    <h1 class=\"header\">\n        Zones\n    </h1>\n    <div fxLayout=\"row\" class=\"search\">\n        <mat-form-field fxFlex=\"20%\">\n            <input matInput [(ngModel)]=\"term\" placeholder=\"Search\">\n        </mat-form-field>\n    </div>\n    <div fxLayout=\"column wrap\">\n        <div fxLayout.xs=\"column\" fxLayout.lg=\"row wrap\" fxLayoutGap=\"50px\" class=\"card\"\n            fxLayoutAlign.sm=\"center center\">\n            <div *ngIf=\"displayCount === 0\">\n                    <img src=\"http://miceemporio.com/img/no-record-found.jpeg\">\n                </div>\n            <app-zone-card *ngFor=\"let zone of zones | paginate: { itemsPerPage: 12, currentPage: p } | filter:term\"\n                [zones]=\"zone\">\n            </app-zone-card>\n        </div>\n        <pagination-controls (pageChange)=\"p = $event\" fxLayoutAlign=\"center center\"></pagination-controls>\n    </div>\n    <div fxLayout=\"column\" fxLayout.gt-xs=\"row\" fxLayoutAlign=\"end\" class=\"add-button\">\n        <button mat-fab color=\"primary\" (click)=\"add()\">\n            <i class=\"material-icons\">\n                add\n            </i>\n        </button>\n    </div>\n</div>"
 
 /***/ }),
 
@@ -424,7 +424,7 @@ AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         declarations: [
             _app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"],
             _core_navigation_navigation_component__WEBPACK_IMPORTED_MODULE_6__["NavigationComponent"],
-            _core_footer_footer_component__WEBPACK_IMPORTED_MODULE_13__["FooterComponent"]
+            _core_footer_footer_component__WEBPACK_IMPORTED_MODULE_13__["FooterComponent"],
         ],
         imports: [
             _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
@@ -643,7 +643,7 @@ let NavigationComponent = class NavigationComponent {
         this.route = route;
         this.isHandset$ = this.breakpointObserver.observe(_angular_cdk_layout__WEBPACK_IMPORTED_MODULE_2__["Breakpoints"].Handset)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(result => result.matches), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["shareReplay"])());
-        console.log(route.firstChild);
+        console.log(route.snapshot.data);
     }
 };
 NavigationComponent.ctorParameters = () => [
@@ -847,7 +847,7 @@ SharedModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "mat-toolbar {\n    background-color: white;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvdHlwZXMvYWRkLXZlaGljbGUtdHlwZS9hZGQtdmVoaWNsZS10eXBlLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7SUFDSSx1QkFBdUI7QUFDM0IiLCJmaWxlIjoic3JjL2FwcC90eXBlcy9hZGQtdmVoaWNsZS10eXBlL2FkZC12ZWhpY2xlLXR5cGUuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIm1hdC10b29sYmFyIHtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiB3aGl0ZTtcbn0iXX0= */"
+module.exports = "mat-toolbar {\n  background-color: white;\n}\n\ncontroles-container{\n  width: 100%;\n  padding: 5%;    \n}\n\n.fill-remaining-space {\n  /* This fills the remaining space, by using flexbox. \n     Every toolbar row uses a flexbox row layout. */\n  flex: 1 1 auto;\n}\n\n.controles-container > * {\n  width: 100%;\n  }\n\n.btn {\n  width: 16em; height: 60px;\n }\n\n.btn-dialog-close{\n  width: 45px;\n  min-width: 0px !important;\n  height: 40px;\n  padding: 0px !important;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvdHlwZXMvYWRkLXZlaGljbGUtdHlwZS9hZGQtdmVoaWNsZS10eXBlLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSx1QkFBdUI7QUFDekI7O0FBRUE7RUFDRSxXQUFXO0VBQ1gsV0FBVztBQUNiOztBQUVBO0VBQ0U7bURBQ2lEO0VBQ2pELGNBQWM7QUFDaEI7O0FBRUE7RUFDRSxXQUFXO0VBQ1g7O0FBRUY7RUFDRSxXQUFXLEVBQUUsWUFBWTtDQUMxQjs7QUFFQTtFQUNDLFdBQVc7RUFDWCx5QkFBeUI7RUFDekIsWUFBWTtFQUNaLHVCQUF1QjtBQUN6QiIsImZpbGUiOiJzcmMvYXBwL3R5cGVzL2FkZC12ZWhpY2xlLXR5cGUvYWRkLXZlaGljbGUtdHlwZS5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsibWF0LXRvb2xiYXIge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiB3aGl0ZTtcbn1cblxuY29udHJvbGVzLWNvbnRhaW5lcntcbiAgd2lkdGg6IDEwMCU7XG4gIHBhZGRpbmc6IDUlOyAgICBcbn1cblxuLmZpbGwtcmVtYWluaW5nLXNwYWNlIHtcbiAgLyogVGhpcyBmaWxscyB0aGUgcmVtYWluaW5nIHNwYWNlLCBieSB1c2luZyBmbGV4Ym94LiBcbiAgICAgRXZlcnkgdG9vbGJhciByb3cgdXNlcyBhIGZsZXhib3ggcm93IGxheW91dC4gKi9cbiAgZmxleDogMSAxIGF1dG87XG59XG5cbi5jb250cm9sZXMtY29udGFpbmVyID4gKiB7XG4gIHdpZHRoOiAxMDAlO1xuICB9XG5cbi5idG4ge1xuICB3aWR0aDogMTZlbTsgaGVpZ2h0OiA2MHB4O1xuIH1cblxuIC5idG4tZGlhbG9nLWNsb3Nle1xuICB3aWR0aDogNDVweDtcbiAgbWluLXdpZHRoOiAwcHggIWltcG9ydGFudDtcbiAgaGVpZ2h0OiA0MHB4O1xuICBwYWRkaW5nOiAwcHggIWltcG9ydGFudDtcbn0iXX0= */"
 
 /***/ }),
 
@@ -894,27 +894,25 @@ let AddVehicleTypeComponent = class AddVehicleTypeComponent {
         this.baseUrl = src_environments_environment__WEBPACK_IMPORTED_MODULE_8__["environment"].baseUrl + src_environments_environment__WEBPACK_IMPORTED_MODULE_8__["environment"].zoneService + src_environments_environment__WEBPACK_IMPORTED_MODULE_8__["environment"].typeBaseApi;
         this.typeForm = this.fb.group({
             name: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].pattern('^[a-zA-Z0-9\-]*$')]],
-            kilometer: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].pattern('^[0-9]*$')]],
-            costtime: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].pattern('^[0-9]*$')]],
-            vehiclecc: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].pattern('^[0-9]*$')]],
+            mileage: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].pattern('^[0-9]*$')]],
+            costPerMin: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].pattern('^[0-9]*$')]],
+            vehicleCC: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].pattern('^[0-9]*$')]],
             baseFare: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].pattern('^[0-9]*$')]],
-            fuel: []
+            fuel: [],
+            url: []
         });
     }
     get rName() {
         return this.typeForm.get('name');
     }
     get Rcc() {
-        return this.typeForm.get('vehiclecc');
+        return this.typeForm.get('vehicleCC');
     }
     get Rkm() {
-        return this.typeForm.get('kilometer');
-    }
-    get Rcategory() {
-        return this.typeForm.get('category');
+        return this.typeForm.get('mileage');
     }
     get Rcosttime() {
-        return this.typeForm.get('costtime');
+        return this.typeForm.get('costPerMin');
     }
     get Rbasefare() {
         return this.typeForm.get('baseFare');
@@ -946,10 +944,14 @@ let AddVehicleTypeComponent = class AddVehicleTypeComponent {
         console.log('this is upload call');
         const uploadData = new FormData();
         uploadData.append('file', this.selectedFile, this.selectedFile.name);
+        console.log('', uploadData);
         //  this.http; is; the; injected; HttpClient;
-        this.http.post(this.baseUrl + '/uploadFile?id=' + this.typeForm.value.name, uploadData)
+        this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_8__["environment"].baseUrl + src_environments_environment__WEBPACK_IMPORTED_MODULE_8__["environment"].zoneService + '/api/v1/uploadFile?id=' + this.typeForm.value.name, uploadData)
             .subscribe(event => {
-            console.log('response', event); // handle event here
+            let eventData;
+            eventData = event;
+            console.log('response', eventData.fileDownloadUri); // handle event here
+            this.typeForm.value.url = eventData.fileDownloadUri;
         });
     }
     onClose() {
@@ -963,10 +965,14 @@ let AddVehicleTypeComponent = class AddVehicleTypeComponent {
         });
     }
     onSubmit() {
-        this.onUpload();
-        console.log(this.typeForm.value);
-        console.log(this.typeForm.value, 'child');
-        this.dialogRef.close(this.typeForm.value);
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            yield this.onUpload();
+            setTimeout(() => {
+                console.log(this.typeForm.value);
+                console.log(this.typeForm.value, 'child');
+                this.dialogRef.close(this.typeForm.value);
+            }, 2000);
+        });
     }
     ngOnInit() {
         this.getFuelList();
@@ -1007,7 +1013,7 @@ AddVehicleTypeComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".vehicleName {\n    margin-left: 240px;\n    padding-bottom: 2%;\n}\n\n.graph {\n    margin-top: 20px;\n    padding-left: 850px;\n    cursor: pointer;\n}\n\n.my-card {\n    margin-bottom: 40px;\n    margin-left: 450px;\n    height: 500px;\n    width: 50%;\n    background-color: whitesmoke;\n}\n\n@media only screen and (max-width: 600px) {\n    .my-card {\n        margin-left: 150px;\n        height: 200px;\n        width: 55%;\n    }\n}\n\n.add-button {\n    padding-right: 450px;\n    padding-bottom: 2%;\n}\n\nmat-icon {\n    font-size: 60px;\n}\n\n.icon {\n    margin-left: 80%;\n    cursor: pointer;\n}\n\n.status {\n    margin-top: 20px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvdHlwZXMvdHlwZS1kZWF0aWxzL3R5cGUtZGVhdGlscy5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksa0JBQWtCO0lBQ2xCLGtCQUFrQjtBQUN0Qjs7QUFFQTtJQUNJLGdCQUFnQjtJQUNoQixtQkFBbUI7SUFDbkIsZUFBZTtBQUNuQjs7QUFFQTtJQUNJLG1CQUFtQjtJQUNuQixrQkFBa0I7SUFDbEIsYUFBYTtJQUNiLFVBQVU7SUFDViw0QkFBNEI7QUFDaEM7O0FBRUE7SUFDSTtRQUNJLGtCQUFrQjtRQUNsQixhQUFhO1FBQ2IsVUFBVTtJQUNkO0FBQ0o7O0FBRUE7SUFDSSxvQkFBb0I7SUFDcEIsa0JBQWtCO0FBQ3RCOztBQUVBO0lBQ0ksZUFBZTtBQUNuQjs7QUFFQTtJQUNJLGdCQUFnQjtJQUNoQixlQUFlO0FBQ25COztBQUVBO0lBQ0ksZ0JBQWdCO0FBQ3BCIiwiZmlsZSI6InNyYy9hcHAvdHlwZXMvdHlwZS1kZWF0aWxzL3R5cGUtZGVhdGlscy5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnZlaGljbGVOYW1lIHtcbiAgICBtYXJnaW4tbGVmdDogMjQwcHg7XG4gICAgcGFkZGluZy1ib3R0b206IDIlO1xufVxuXG4uZ3JhcGgge1xuICAgIG1hcmdpbi10b3A6IDIwcHg7XG4gICAgcGFkZGluZy1sZWZ0OiA4NTBweDtcbiAgICBjdXJzb3I6IHBvaW50ZXI7XG59XG5cbi5teS1jYXJkIHtcbiAgICBtYXJnaW4tYm90dG9tOiA0MHB4O1xuICAgIG1hcmdpbi1sZWZ0OiA0NTBweDtcbiAgICBoZWlnaHQ6IDUwMHB4O1xuICAgIHdpZHRoOiA1MCU7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGVzbW9rZTtcbn1cblxuQG1lZGlhIG9ubHkgc2NyZWVuIGFuZCAobWF4LXdpZHRoOiA2MDBweCkge1xuICAgIC5teS1jYXJkIHtcbiAgICAgICAgbWFyZ2luLWxlZnQ6IDE1MHB4O1xuICAgICAgICBoZWlnaHQ6IDIwMHB4O1xuICAgICAgICB3aWR0aDogNTUlO1xuICAgIH1cbn1cblxuLmFkZC1idXR0b24ge1xuICAgIHBhZGRpbmctcmlnaHQ6IDQ1MHB4O1xuICAgIHBhZGRpbmctYm90dG9tOiAyJTtcbn1cblxubWF0LWljb24ge1xuICAgIGZvbnQtc2l6ZTogNjBweDtcbn1cblxuLmljb24ge1xuICAgIG1hcmdpbi1sZWZ0OiA4MCU7XG4gICAgY3Vyc29yOiBwb2ludGVyO1xufVxuXG4uc3RhdHVzIHtcbiAgICBtYXJnaW4tdG9wOiAyMHB4O1xufSJdfQ== */"
+module.exports = ".vehicleName {\n    margin-left: 240px;\n    padding-bottom: 2%;\n}\n\n.graph {\n    margin-top: 20px;\n    padding-left: 850px;\n    cursor: pointer;\n}\n\n.type {\n    margin-bottom: 40px;\n    margin-left: 450px;\n    height: 300px;\n    width: 50%;\n}\n\n.iconCapacity {\n    \n    cursor: pointer;\n}\n\n@media only screen and (max-width: 600px) {\n    .type {\n        margin-left: 30px;\n        height: 300px;\n        width: 85%;\n    }\n    .vehicleName {\n        margin-left: 50px;\n        font-size: 1.5em;\n        padding-bottom: 5px;\n    }\n}\n\n.add-button {\n    padding-right: 450px;\n    padding-bottom: 2%;\n}\n\nmat-icon {\n    font-size: 60px;\n}\n\n.icon {\n    margin-left: 80%;\n    cursor: pointer;\n}\n\n.status {\n    margin-top: 20px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvdHlwZXMvdHlwZS1kZWF0aWxzL3R5cGUtZGVhdGlscy5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksa0JBQWtCO0lBQ2xCLGtCQUFrQjtBQUN0Qjs7QUFFQTtJQUNJLGdCQUFnQjtJQUNoQixtQkFBbUI7SUFDbkIsZUFBZTtBQUNuQjs7QUFFQTtJQUNJLG1CQUFtQjtJQUNuQixrQkFBa0I7SUFDbEIsYUFBYTtJQUNiLFVBQVU7QUFDZDs7QUFFQTs7SUFFSSxlQUFlO0FBQ25COztBQUVBO0lBQ0k7UUFDSSxpQkFBaUI7UUFDakIsYUFBYTtRQUNiLFVBQVU7SUFDZDtJQUNBO1FBQ0ksaUJBQWlCO1FBQ2pCLGdCQUFnQjtRQUNoQixtQkFBbUI7SUFDdkI7QUFDSjs7QUFFQTtJQUNJLG9CQUFvQjtJQUNwQixrQkFBa0I7QUFDdEI7O0FBRUE7SUFDSSxlQUFlO0FBQ25COztBQUVBO0lBQ0ksZ0JBQWdCO0lBQ2hCLGVBQWU7QUFDbkI7O0FBRUE7SUFDSSxnQkFBZ0I7QUFDcEIiLCJmaWxlIjoic3JjL2FwcC90eXBlcy90eXBlLWRlYXRpbHMvdHlwZS1kZWF0aWxzLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIudmVoaWNsZU5hbWUge1xuICAgIG1hcmdpbi1sZWZ0OiAyNDBweDtcbiAgICBwYWRkaW5nLWJvdHRvbTogMiU7XG59XG5cbi5ncmFwaCB7XG4gICAgbWFyZ2luLXRvcDogMjBweDtcbiAgICBwYWRkaW5nLWxlZnQ6IDg1MHB4O1xuICAgIGN1cnNvcjogcG9pbnRlcjtcbn1cblxuLnR5cGUge1xuICAgIG1hcmdpbi1ib3R0b206IDQwcHg7XG4gICAgbWFyZ2luLWxlZnQ6IDQ1MHB4O1xuICAgIGhlaWdodDogMzAwcHg7XG4gICAgd2lkdGg6IDUwJTtcbn1cblxuLmljb25DYXBhY2l0eSB7XG4gICAgXG4gICAgY3Vyc29yOiBwb2ludGVyO1xufVxuXG5AbWVkaWEgb25seSBzY3JlZW4gYW5kIChtYXgtd2lkdGg6IDYwMHB4KSB7XG4gICAgLnR5cGUge1xuICAgICAgICBtYXJnaW4tbGVmdDogMzBweDtcbiAgICAgICAgaGVpZ2h0OiAzMDBweDtcbiAgICAgICAgd2lkdGg6IDg1JTtcbiAgICB9XG4gICAgLnZlaGljbGVOYW1lIHtcbiAgICAgICAgbWFyZ2luLWxlZnQ6IDUwcHg7XG4gICAgICAgIGZvbnQtc2l6ZTogMS41ZW07XG4gICAgICAgIHBhZGRpbmctYm90dG9tOiA1cHg7XG4gICAgfVxufVxuXG4uYWRkLWJ1dHRvbiB7XG4gICAgcGFkZGluZy1yaWdodDogNDUwcHg7XG4gICAgcGFkZGluZy1ib3R0b206IDIlO1xufVxuXG5tYXQtaWNvbiB7XG4gICAgZm9udC1zaXplOiA2MHB4O1xufVxuXG4uaWNvbiB7XG4gICAgbWFyZ2luLWxlZnQ6IDgwJTtcbiAgICBjdXJzb3I6IHBvaW50ZXI7XG59XG5cbi5zdGF0dXMge1xuICAgIG1hcmdpbi10b3A6IDIwcHg7XG59Il19 */"
 
 /***/ }),
 
@@ -1027,6 +1033,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm2015/material.js");
 /* harmony import */ var _update_types_update_types_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../update-types/update-types.component */ "./src/app/types/update-types/update-types.component.ts");
+/* harmony import */ var src_app_shared_notification_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/shared/notification.service */ "./src/app/shared/notification.service.ts");
+
 
 
 
@@ -1034,13 +1042,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let TypeDeatilsComponent = class TypeDeatilsComponent {
-    constructor(router, vehicleTypeService, activatedRoute, route, snackbar, matDialog) {
-        this.router = router;
+    constructor(vehicleTypeService, route, matDialog, notificationService) {
         this.vehicleTypeService = vehicleTypeService;
-        this.activatedRoute = activatedRoute;
         this.route = route;
-        this.snackbar = snackbar;
         this.matDialog = matDialog;
+        this.notificationService = notificationService;
     }
     ngOnInit() {
         this.getVehicleTypeDetails();
@@ -1051,49 +1057,37 @@ let TypeDeatilsComponent = class TypeDeatilsComponent {
             console.log('data', res.data);
             console.log(res);
             this.name = this.type.name;
-            this.cc = this.type.vehiclecc;
+            this.cc = this.type.vehicleCC;
             this.fuelname = this.type.fuel.name;
-            // this.category = this.type.category;
-            this.costkm = this.type.costkm;
-            this.costtime = this.type.costtime;
-            this.kilometer = this.type.kilometer;
-        });
-    }
-    onEdit() {
-    }
-    openSnackbar(message, action) {
-        this.snackbar.open(message, action, {
-            duration: 2000,
-            panelClass: ['blue-snackbar']
+            this.costPerKm = this.type.costPerKm;
+            this.costPerMin = this.type.costPerMin;
+            this.mileage = this.type.mileage;
         });
     }
     update() {
         const dialogConfig = new _angular_material__WEBPACK_IMPORTED_MODULE_4__["MatDialogConfig"]();
         dialogConfig.disableClose = true;
         dialogConfig.autoFocus = true;
-        dialogConfig.width = '20%';
         dialogConfig.data = {
-            costtime: this.type.costtime,
+            costPerMin: this.type.costPerMin,
         };
         const dRef = this.matDialog.open(_update_types_update_types_component__WEBPACK_IMPORTED_MODULE_5__["UpdateTypesComponent"], dialogConfig);
         dRef.afterClosed().subscribe(result => {
             console.log('Back to parent', result);
             this.vehicleTypeService.updateVehicleType(this.name, result).subscribe(response => {
-                this.openSnackbar('Cost updated succesffuly', 'ok');
+                this.notificationService.success('Cost updated successfully!!');
                 this.getVehicleTypeDetails();
             }, error => {
-                console.log('not updated');
+                this.notificationService.warn('not updated');
             });
         });
     }
 };
 TypeDeatilsComponent.ctorParameters = () => [
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] },
     { type: _vehicle_type_service__WEBPACK_IMPORTED_MODULE_2__["VehicleTypeService"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"] },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"] },
-    { type: _angular_material__WEBPACK_IMPORTED_MODULE_4__["MatSnackBar"] },
-    { type: _angular_material__WEBPACK_IMPORTED_MODULE_4__["MatDialog"] }
+    { type: _angular_material__WEBPACK_IMPORTED_MODULE_4__["MatDialog"] },
+    { type: src_app_shared_notification_service__WEBPACK_IMPORTED_MODULE_6__["NotificationService"] }
 ];
 TypeDeatilsComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -1168,40 +1162,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm2015/material.js");
 /* harmony import */ var _vehicle_type_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./vehicle-type.service */ "./src/app/types/vehicle-type.service.ts");
 /* harmony import */ var _add_vehicle_type_add_vehicle_type_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./add-vehicle-type/add-vehicle-type.component */ "./src/app/types/add-vehicle-type/add-vehicle-type.component.ts");
+/* harmony import */ var _shared_notification_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../shared/notification.service */ "./src/app/shared/notification.service.ts");
+
 
 
 
 
 
 let TypesComponent = class TypesComponent {
-    constructor(typeService, matDialog, snackBar) {
+    constructor(typeService, matDialog, notificationService) {
         this.typeService = typeService;
         this.matDialog = matDialog;
-        this.snackBar = snackBar;
+        this.notificationService = notificationService;
         this.p = 1;
-        this.dataSource = new _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatTableDataSource"]();
+        this.page = 0;
     }
     ngOnInit() {
-        this.typeService.getType().subscribe(res => {
-            this.vehicleTypes = res.data;
-            console.log(res, 'parent');
-        });
-        return this.typeService.getType().subscribe(res => this.dataSource.data = res.data, length => this.dataSource.data.length = length);
-    }
-    ngAfterViewInit() {
-        this.dataSource.paginator = this.paginator;
-    }
-    openSnackbar(message, action) {
-        this.snackBar.open(message, action, {
-            duration: 2000,
-            panelClass: ['blue-snackbar']
-        });
+        this.getTypes();
     }
     add() {
         const dialogConfig = new _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatDialogConfig"]();
         dialogConfig.disableClose = true;
         dialogConfig.autoFocus = true;
-        dialogConfig.width = '40%';
         const dRef = this.matDialog.open(_add_vehicle_type_add_vehicle_type_component__WEBPACK_IMPORTED_MODULE_4__["AddVehicleTypeComponent"], dialogConfig);
         dRef.afterClosed().subscribe(result => {
             if (result !== undefined) {
@@ -1210,15 +1192,25 @@ let TypesComponent = class TypesComponent {
                     this.message = response.message;
                     console.log(this.message);
                     if (this.message === 'Type already exists') {
-                        this.openSnackbar('Type already exists', 'ok');
+                        this.notificationService.warn('Type already exists');
                     }
                     else {
-                        this.openSnackbar('Type added succesfully', 'ok');
+                        this.notificationService.success('Type added succesfully');
                     }
-                    this.typeService.getType().subscribe(res => {
-                        this.vehicleTypes = res.data;
-                    });
+                    this.getTypes();
                 });
+            }
+        });
+    }
+    getTypes() {
+        this.typeService.getType().subscribe(res => {
+            if (res.count === 0 || res.count === undefined) {
+                this.displayCount = 0;
+            }
+            else {
+                this.vehicleTypes = res.data;
+                console.log(res, 'parent');
+                this.displayCount = 1;
             }
         });
     }
@@ -1226,11 +1218,8 @@ let TypesComponent = class TypesComponent {
 TypesComponent.ctorParameters = () => [
     { type: _vehicle_type_service__WEBPACK_IMPORTED_MODULE_3__["VehicleTypeService"] },
     { type: _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatDialog"] },
-    { type: _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatSnackBar"] }
+    { type: _shared_notification_service__WEBPACK_IMPORTED_MODULE_5__["NotificationService"] }
 ];
-tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])(_angular_material__WEBPACK_IMPORTED_MODULE_2__["MatPaginator"], { static: true })
-], TypesComponent.prototype, "paginator", void 0);
 tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()
 ], TypesComponent.prototype, "vehicleTypes", void 0);
@@ -1272,6 +1261,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _add_vehicle_type_add_vehicle_type_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./add-vehicle-type/add-vehicle-type.component */ "./src/app/types/add-vehicle-type/add-vehicle-type.component.ts");
 /* harmony import */ var _update_types_update_types_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./update-types/update-types.component */ "./src/app/types/update-types/update-types.component.ts");
 /* harmony import */ var ngx_avatar__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ngx-avatar */ "./node_modules/ngx-avatar/fesm2015/ngx-avatar.js");
+/* harmony import */ var ng_lazyload_image__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ng-lazyload-image */ "./node_modules/ng-lazyload-image/fesm2015/ng-lazyload-image.js");
+
 
 
 
@@ -1319,6 +1310,7 @@ TypesModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             // MatDatepicker,
             _angular_material__WEBPACK_IMPORTED_MODULE_6__["MatDatepickerModule"],
             ngx_avatar__WEBPACK_IMPORTED_MODULE_15__["AvatarModule"],
+            ng_lazyload_image__WEBPACK_IMPORTED_MODULE_16__["LazyLoadImageModule"]
         ],
         entryComponents: [_add_vehicle_type_add_vehicle_type_component__WEBPACK_IMPORTED_MODULE_13__["AddVehicleTypeComponent"], _update_types_update_types_component__WEBPACK_IMPORTED_MODULE_14__["UpdateTypesComponent"]]
     })
@@ -1335,7 +1327,7 @@ TypesModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "mat-toolbar {\n    background-color: white;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvdHlwZXMvdXBkYXRlLXR5cGVzL3VwZGF0ZS10eXBlcy5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksdUJBQXVCO0FBQzNCIiwiZmlsZSI6InNyYy9hcHAvdHlwZXMvdXBkYXRlLXR5cGVzL3VwZGF0ZS10eXBlcy5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsibWF0LXRvb2xiYXIge1xuICAgIGJhY2tncm91bmQtY29sb3I6IHdoaXRlO1xufSJdfQ== */"
+module.exports = "mat-toolbar {\n    background-color: white;\n}\n\n.controles-container{\n    width: 100%;\n    padding: 5%;    \n}\n\n.fill-remaining-space {\n    /* This fills the remaining space, by using flexbox. \n       Every toolbar row uses a flexbox row layout. */\n    flex: 1 1 auto;\n  }\n\n.controles-container > * {\n    width: 100%;\n    }\n\n.btn-dialog-close{\n        width: 45px;\n        min-width: 0px !important;\n        height: 40px;\n        padding: 0px !important;\n      }\n\n.btn {\n        width: 16em; height: 60px;\n       }\n    \n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvdHlwZXMvdXBkYXRlLXR5cGVzL3VwZGF0ZS10eXBlcy5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksdUJBQXVCO0FBQzNCOztBQUVBO0lBQ0ksV0FBVztJQUNYLFdBQVc7QUFDZjs7QUFFQTtJQUNJO3FEQUNpRDtJQUNqRCxjQUFjO0VBQ2hCOztBQUVGO0lBQ0ksV0FBVztJQUNYOztBQUVBO1FBQ0ksV0FBVztRQUNYLHlCQUF5QjtRQUN6QixZQUFZO1FBQ1osdUJBQXVCO01BQ3pCOztBQUVBO1FBQ0UsV0FBVyxFQUFFLFlBQVk7T0FDMUIiLCJmaWxlIjoic3JjL2FwcC90eXBlcy91cGRhdGUtdHlwZXMvdXBkYXRlLXR5cGVzLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyJtYXQtdG9vbGJhciB7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGU7XG59XG5cbi5jb250cm9sZXMtY29udGFpbmVye1xuICAgIHdpZHRoOiAxMDAlO1xuICAgIHBhZGRpbmc6IDUlOyAgICBcbn1cblxuLmZpbGwtcmVtYWluaW5nLXNwYWNlIHtcbiAgICAvKiBUaGlzIGZpbGxzIHRoZSByZW1haW5pbmcgc3BhY2UsIGJ5IHVzaW5nIGZsZXhib3guIFxuICAgICAgIEV2ZXJ5IHRvb2xiYXIgcm93IHVzZXMgYSBmbGV4Ym94IHJvdyBsYXlvdXQuICovXG4gICAgZmxleDogMSAxIGF1dG87XG4gIH1cblxuLmNvbnRyb2xlcy1jb250YWluZXIgPiAqIHtcbiAgICB3aWR0aDogMTAwJTtcbiAgICB9XG5cbiAgICAuYnRuLWRpYWxvZy1jbG9zZXtcbiAgICAgICAgd2lkdGg6IDQ1cHg7XG4gICAgICAgIG1pbi13aWR0aDogMHB4ICFpbXBvcnRhbnQ7XG4gICAgICAgIGhlaWdodDogNDBweDtcbiAgICAgICAgcGFkZGluZzogMHB4ICFpbXBvcnRhbnQ7XG4gICAgICB9XG5cbiAgICAgIC5idG4ge1xuICAgICAgICB3aWR0aDogMTZlbTsgaGVpZ2h0OiA2MHB4O1xuICAgICAgIH1cbiAgICAiXX0= */"
 
 /***/ }),
 
@@ -1369,9 +1361,9 @@ let UpdateTypesComponent = class UpdateTypesComponent {
         this.router = router;
         this.vehicleTypeService = vehicleTypeService;
         this.typeForm = this.fb.group({
-            costtime: ['']
+            costPerMin: ['']
         });
-        this.costtime = data.costtime;
+        this.costPerMin = data.costPerMin;
     }
     onClose() {
         // this.zoneForm.reset();
@@ -1412,7 +1404,7 @@ UpdateTypesComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n.typeName {\n    padding-top: 10%;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvdHlwZXMvdmVoaWNsZS10eXBlLWNhcmQvdmVoaWNsZS10eXBlLWNhcmQuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQ0E7SUFDSSxnQkFBZ0I7QUFDcEIiLCJmaWxlIjoic3JjL2FwcC90eXBlcy92ZWhpY2xlLXR5cGUtY2FyZC92ZWhpY2xlLXR5cGUtY2FyZC5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiXG4udHlwZU5hbWUge1xuICAgIHBhZGRpbmctdG9wOiAxMCU7XG59XG4iXX0= */"
+module.exports = "\n.typeName {\n    padding-top: 4%;\n}\n\nimg {\nheight: 40%;\nwidth: 55%;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvdHlwZXMvdmVoaWNsZS10eXBlLWNhcmQvdmVoaWNsZS10eXBlLWNhcmQuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQ0E7SUFDSSxlQUFlO0FBQ25COztBQUVBO0FBQ0EsV0FBVztBQUNYLFVBQVU7QUFDViIsImZpbGUiOiJzcmMvYXBwL3R5cGVzL3ZlaGljbGUtdHlwZS1jYXJkL3ZlaGljbGUtdHlwZS1jYXJkLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyJcbi50eXBlTmFtZSB7XG4gICAgcGFkZGluZy10b3A6IDQlO1xufVxuXG5pbWcge1xuaGVpZ2h0OiA0MCU7XG53aWR0aDogNTUlO1xufVxuIl19 */"
 
 /***/ }),
 
@@ -1438,8 +1430,10 @@ let VehicleTypeCardComponent = class VehicleTypeCardComponent {
     }
     ngOnInit() {
         this.name = Object.values(this.vehicleTypes)[1];
-        this.costkm = Object.values(this.vehicleTypes)[2];
-        this.costtime = Object.values(this.vehicleTypes)[3];
+        this.costPerKm = Object.values(this.vehicleTypes)[2];
+        this.costPerMin = Object.values(this.vehicleTypes)[3];
+        this.url = Object.values(this.vehicleTypes)[6];
+        console.log(Object.values(this.vehicleTypes));
     }
     ok() {
         console.log('hi');
@@ -1523,7 +1517,7 @@ VehicleTypeService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "mat-toolbar {\n    background-color: white;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvdmVoaWNsZXMvYWRkLXZlaGljbGUvYWRkLXZlaGljbGUuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLHVCQUF1QjtBQUMzQiIsImZpbGUiOiJzcmMvYXBwL3ZlaGljbGVzL2FkZC12ZWhpY2xlL2FkZC12ZWhpY2xlLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyJtYXQtdG9vbGJhciB7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGU7XG59Il19 */"
+module.exports = "mat-toolbar {\n    background-color: white;\n}\n\ncontroles-container{\n    width: 100%;\n    padding: 5%;    \n}\n\n.fill-remaining-space {\n    /* This fills the remaining space, by using flexbox. \n       Every toolbar row uses a flexbox row layout. */\n    flex: 1 1 auto;\n  }\n\n.controles-container > * {\n    width: 100%;\n    }\n\n.btn {\n    width: 16em; height: 60px;\n   }\n\n.btn-dialog-close{\n    width: 45px;\n    min-width: 0px !important;\n    height: 40px;\n    padding: 0px !important;\n  }\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvdmVoaWNsZXMvYWRkLXZlaGljbGUvYWRkLXZlaGljbGUuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLHVCQUF1QjtBQUMzQjs7QUFFQTtJQUNJLFdBQVc7SUFDWCxXQUFXO0FBQ2Y7O0FBRUE7SUFDSTtxREFDaUQ7SUFDakQsY0FBYztFQUNoQjs7QUFFRjtJQUNJLFdBQVc7SUFDWDs7QUFFSjtJQUNJLFdBQVcsRUFBRSxZQUFZO0dBQzFCOztBQUVBO0lBQ0MsV0FBVztJQUNYLHlCQUF5QjtJQUN6QixZQUFZO0lBQ1osdUJBQXVCO0VBQ3pCIiwiZmlsZSI6InNyYy9hcHAvdmVoaWNsZXMvYWRkLXZlaGljbGUvYWRkLXZlaGljbGUuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIm1hdC10b29sYmFyIHtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiB3aGl0ZTtcbn1cblxuY29udHJvbGVzLWNvbnRhaW5lcntcbiAgICB3aWR0aDogMTAwJTtcbiAgICBwYWRkaW5nOiA1JTsgICAgXG59XG5cbi5maWxsLXJlbWFpbmluZy1zcGFjZSB7XG4gICAgLyogVGhpcyBmaWxscyB0aGUgcmVtYWluaW5nIHNwYWNlLCBieSB1c2luZyBmbGV4Ym94LiBcbiAgICAgICBFdmVyeSB0b29sYmFyIHJvdyB1c2VzIGEgZmxleGJveCByb3cgbGF5b3V0LiAqL1xuICAgIGZsZXg6IDEgMSBhdXRvO1xuICB9XG5cbi5jb250cm9sZXMtY29udGFpbmVyID4gKiB7XG4gICAgd2lkdGg6IDEwMCU7XG4gICAgfVxuXG4uYnRuIHtcbiAgICB3aWR0aDogMTZlbTsgaGVpZ2h0OiA2MHB4O1xuICAgfVxuICBcbiAgIC5idG4tZGlhbG9nLWNsb3Nle1xuICAgIHdpZHRoOiA0NXB4O1xuICAgIG1pbi13aWR0aDogMHB4ICFpbXBvcnRhbnQ7XG4gICAgaGVpZ2h0OiA0MHB4O1xuICAgIHBhZGRpbmc6IDBweCAhaW1wb3J0YW50O1xuICB9Il19 */"
 
 /***/ }),
 
@@ -1565,11 +1559,10 @@ let AddVehicleComponent = class AddVehicleComponent {
         this.vehicleForm = this.fb.group({
             registrationNo: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].pattern('^[a-zA-Z0-9\-]*$')]],
             insuranceNo: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].pattern('^[a-zA-Z0-9\-]*$')]],
-            type: [''],
+            vehicleType: [''],
             status: 'Free',
-            // lastServiceDate: [''],
-            vehiclePurchased: [''],
-            chassisNumber: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].pattern('^[a-zA-Z0-9\-]*$')]],
+            purchasedDate: [''],
+            chassisNumber: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].pattern('^[a-zA-Z0-9\-]*$')]]
         });
     }
     get rNum() {
@@ -1581,14 +1574,11 @@ let AddVehicleComponent = class AddVehicleComponent {
     get status() {
         return this.vehicleForm.get('status');
     }
-    get type() {
-        return this.vehicleForm.get('type');
+    get Vehicletype() {
+        return this.vehicleForm.get('vehicleType');
     }
-    // get lastServiceDate() {
-    //   return this.vehicleForm.get('lastServiceDate');
-    // }
-    get vehiclePurchased() {
-        return this.vehicleForm.get('vehiclePurchased');
+    get purchasedDate() {
+        return this.vehicleForm.get('purchasedDate');
     }
     get RchassisNumber() {
         return this.vehicleForm.get('chassisNumber');
@@ -1611,27 +1601,10 @@ let AddVehicleComponent = class AddVehicleComponent {
     }
     getTypeList() {
         this.typeService.getType().subscribe(res => {
-            this.types = res.data;
-            console.log('types list: ', this.types);
+            this.Vehicletypes = res.data;
+            console.log('types list: ', this.Vehicletypes);
         });
     }
-    // onSubmit() {
-    //   console.log(this.vehicleForm.value);
-    //   this.vehicleService.createVehicles(this.vehicleForm.value)
-    //     .subscribe(response => {
-    //       console.log('repsonse: ', response);
-    //       this.message = response.message;
-    //       console.log('ddd', this.message);
-    //       if (this.message === 'Vehicle already exists') {
-    //           this.openSnackbar('Vehicle already exists', 'ok');
-    //         } else {
-    //           this.openSnackbar('Vehicle added succesfully', 'ok');
-    //         }
-    //      // this.router.navigate(['/vehicles']);
-    //         // // this.openSnackbar(this.message,'ok');
-    //       });
-    //   // this.router.navigateByUrl('/welcome');
-    // }
     onSubmit() {
         console.log(this.vehicleForm.value);
         console.log(this.vehicleForm.value, 'child');
@@ -1639,12 +1612,6 @@ let AddVehicleComponent = class AddVehicleComponent {
     }
     ngOnInit() {
         this.getTypeList();
-    }
-    openSnackbar(message, action) {
-        this.snackBar.open(message, action, {
-            duration: 2000,
-            panelClass: ['blue-snackbar']
-        });
     }
 };
 AddVehicleComponent.ctorParameters = () => [
@@ -1675,7 +1642,7 @@ AddVehicleComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "mat-toolbar {\n    background-color: white;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvdmVoaWNsZXMvdXBkYXRlLXZlaGljbGVzL3VwZGF0ZS12ZWhpY2xlcy5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksdUJBQXVCO0FBQzNCIiwiZmlsZSI6InNyYy9hcHAvdmVoaWNsZXMvdXBkYXRlLXZlaGljbGVzL3VwZGF0ZS12ZWhpY2xlcy5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsibWF0LXRvb2xiYXIge1xuICAgIGJhY2tncm91bmQtY29sb3I6IHdoaXRlO1xufSJdfQ== */"
+module.exports = "mat-toolbar {\n    background-color: white;\n}\n\ncontroles-container{\n    width: 100%;\n    padding: 5%;    \n}\n\n.fill-remaining-space {\n    /* This fills the remaining space, by using flexbox. \n       Every toolbar row uses a flexbox row layout. */\n    flex: 1 1 auto;\n  }\n\n.controles-container > * {\n    width: 100%;\n    }\n\n.btn {\n    width: 16em; height: 60px;\n   }\n\n.btn-dialog-close{\n      width: 45px;\n      min-width: 0px !important;\n      height: 40px;\n      padding: 0px !important;\n    }\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvdmVoaWNsZXMvdXBkYXRlLXZlaGljbGVzL3VwZGF0ZS12ZWhpY2xlcy5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksdUJBQXVCO0FBQzNCOztBQUVBO0lBQ0ksV0FBVztJQUNYLFdBQVc7QUFDZjs7QUFFQTtJQUNJO3FEQUNpRDtJQUNqRCxjQUFjO0VBQ2hCOztBQUVGO0lBQ0ksV0FBVztJQUNYOztBQUdKO0lBQ0ksV0FBVyxFQUFFLFlBQVk7R0FDMUI7O0FBRUQ7TUFDSSxXQUFXO01BQ1gseUJBQXlCO01BQ3pCLFlBQVk7TUFDWix1QkFBdUI7SUFDekIiLCJmaWxlIjoic3JjL2FwcC92ZWhpY2xlcy91cGRhdGUtdmVoaWNsZXMvdXBkYXRlLXZlaGljbGVzLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyJtYXQtdG9vbGJhciB7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGU7XG59XG5cbmNvbnRyb2xlcy1jb250YWluZXJ7XG4gICAgd2lkdGg6IDEwMCU7XG4gICAgcGFkZGluZzogNSU7ICAgIFxufVxuXG4uZmlsbC1yZW1haW5pbmctc3BhY2Uge1xuICAgIC8qIFRoaXMgZmlsbHMgdGhlIHJlbWFpbmluZyBzcGFjZSwgYnkgdXNpbmcgZmxleGJveC4gXG4gICAgICAgRXZlcnkgdG9vbGJhciByb3cgdXNlcyBhIGZsZXhib3ggcm93IGxheW91dC4gKi9cbiAgICBmbGV4OiAxIDEgYXV0bztcbiAgfVxuXG4uY29udHJvbGVzLWNvbnRhaW5lciA+ICoge1xuICAgIHdpZHRoOiAxMDAlO1xuICAgIH1cblxuXG4uYnRuIHtcbiAgICB3aWR0aDogMTZlbTsgaGVpZ2h0OiA2MHB4O1xuICAgfVxuICBcbiAgLmJ0bi1kaWFsb2ctY2xvc2V7XG4gICAgICB3aWR0aDogNDVweDtcbiAgICAgIG1pbi13aWR0aDogMHB4ICFpbXBvcnRhbnQ7XG4gICAgICBoZWlnaHQ6IDQwcHg7XG4gICAgICBwYWRkaW5nOiAwcHggIWltcG9ydGFudDtcbiAgICB9Il19 */"
 
 /***/ }),
 
@@ -1716,7 +1683,8 @@ let UpdateVehiclesComponent = class UpdateVehiclesComponent {
         });
         this.lastServiceDate = data.lastServiceDate;
         this.insuranceNo = data.insuranceNo;
-        this.minDate = new Date(data.vehiclePurchased);
+        // this.vehiclePurchased = data.vehiclePurchased;
+        this.minDate = new Date(data.purchasedDate);
     }
     onClose() {
         this.dialogRef.close();
@@ -1726,7 +1694,7 @@ let UpdateVehiclesComponent = class UpdateVehiclesComponent {
         this.dialogRef.close(this.vehicleForm.value);
     }
     ngOnInit() {
-        console.log(this.lastServiceDate);
+        console.log(this.lastServiceDate, this.minDate);
     }
 };
 UpdateVehiclesComponent.ctorParameters = () => [
@@ -1785,9 +1753,9 @@ let VehicleCardComponent = class VehicleCardComponent {
     ngOnInit() {
         this.registrationNo = this.vehicle.registrationNo;
         this.status = this.vehicle.status;
-        this.type = this.vehicle.type.name;
+        this.type = this.vehicle.vehicleType.name;
         //  this.category = this.vehicle.type.category;
-        console.log(this.vehicle.type.name);
+        console.log(this.vehicle.vehicleType.name);
     }
     ok() {
         console.log('hi');
@@ -1833,7 +1801,7 @@ VehicleCardComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".vehicleName {\n    margin-left: 240px;\n    padding-bottom: 2%;\n}\n\n.graph {\n    margin-top: 20px;\n    padding-left: 850px;\n    cursor: pointer;\n}\n\n.my-card {\n    margin-bottom: 40px;\n    margin-left: 450px;\n    height: 600px;\n    width: 50%;\n    background-color: whitesmoke;\n}\n\n@media only screen and (max-width: 600px) {\n    .my-card {\n        margin-left: 150px;\n        height: 300px;\n        width: 55%;\n    }\n}\n\n.add-button {\n    padding-right: 450px;\n    padding-bottom: 2%;\n}\n\nmat-icon {\n    font-size: 60px;\n}\n\n.icon {\n    margin-left: 80%;\n    cursor: pointer;\n}\n\n.status {\n    margin-top: 20px;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvdmVoaWNsZXMvdmVoaWNsZS1kZWF0aWxzL3ZlaGljbGUtZGVhdGlscy5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksa0JBQWtCO0lBQ2xCLGtCQUFrQjtBQUN0Qjs7QUFFQTtJQUNJLGdCQUFnQjtJQUNoQixtQkFBbUI7SUFDbkIsZUFBZTtBQUNuQjs7QUFFQTtJQUNJLG1CQUFtQjtJQUNuQixrQkFBa0I7SUFDbEIsYUFBYTtJQUNiLFVBQVU7SUFDViw0QkFBNEI7QUFDaEM7O0FBRUE7SUFDSTtRQUNJLGtCQUFrQjtRQUNsQixhQUFhO1FBQ2IsVUFBVTtJQUNkO0FBQ0o7O0FBRUE7SUFDSSxvQkFBb0I7SUFDcEIsa0JBQWtCO0FBQ3RCOztBQUVBO0lBQ0ksZUFBZTtBQUNuQjs7QUFFQTtJQUNJLGdCQUFnQjtJQUNoQixlQUFlO0FBQ25COztBQUVBO0lBQ0ksZ0JBQWdCO0FBQ3BCIiwiZmlsZSI6InNyYy9hcHAvdmVoaWNsZXMvdmVoaWNsZS1kZWF0aWxzL3ZlaGljbGUtZGVhdGlscy5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnZlaGljbGVOYW1lIHtcbiAgICBtYXJnaW4tbGVmdDogMjQwcHg7XG4gICAgcGFkZGluZy1ib3R0b206IDIlO1xufVxuXG4uZ3JhcGgge1xuICAgIG1hcmdpbi10b3A6IDIwcHg7XG4gICAgcGFkZGluZy1sZWZ0OiA4NTBweDtcbiAgICBjdXJzb3I6IHBvaW50ZXI7XG59XG5cbi5teS1jYXJkIHtcbiAgICBtYXJnaW4tYm90dG9tOiA0MHB4O1xuICAgIG1hcmdpbi1sZWZ0OiA0NTBweDtcbiAgICBoZWlnaHQ6IDYwMHB4O1xuICAgIHdpZHRoOiA1MCU7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGVzbW9rZTtcbn1cblxuQG1lZGlhIG9ubHkgc2NyZWVuIGFuZCAobWF4LXdpZHRoOiA2MDBweCkge1xuICAgIC5teS1jYXJkIHtcbiAgICAgICAgbWFyZ2luLWxlZnQ6IDE1MHB4O1xuICAgICAgICBoZWlnaHQ6IDMwMHB4O1xuICAgICAgICB3aWR0aDogNTUlO1xuICAgIH1cbn1cblxuLmFkZC1idXR0b24ge1xuICAgIHBhZGRpbmctcmlnaHQ6IDQ1MHB4O1xuICAgIHBhZGRpbmctYm90dG9tOiAyJTtcbn1cblxubWF0LWljb24ge1xuICAgIGZvbnQtc2l6ZTogNjBweDtcbn1cblxuLmljb24ge1xuICAgIG1hcmdpbi1sZWZ0OiA4MCU7XG4gICAgY3Vyc29yOiBwb2ludGVyO1xufVxuXG4uc3RhdHVzIHtcbiAgICBtYXJnaW4tdG9wOiAyMHB4O1xufVxuIl19 */"
+module.exports = ".vehicleName {\n    margin-left: 240px;\n    padding-bottom: 2%;\n    padding-right: 750px;\n}\n\n.date {\n    font-size: 1.4em;\n}\n\n.graph {\n    margin-top: 20px;\n    padding-left: 850px;\n    cursor: pointer;\n}\n\n.vehicle {\n    margin-bottom: 40px;\n    margin-left: 450px;\n    height: 350px;\n    width: 50%;\n}\n\n@media only screen and (max-width: 600px) {\n    .vehicle {\n        margin-left: 30px;\n        height: 300px;\n        width: 85%;\n    }\n    .vehicleName {\n        margin-left: 50px;\n        font-size: 1.4em;\n        padding-bottom: 5px;\n    }\n    .status {\n            margin-top: 20px;\n            padding-right: 60px;\n           \n        }\n        .icon {\n            margin-left: 20%;\n        }\n\n        .date {\n            font-size: 1.2em;\n        }\n}\n\n@media only screen and (min-width: 600px) {\n    .icon {\n        margin-left: 70%;\n        background-color:transparent;\n        }   \n        \n}\n\n.status {\n    margin-top: 20px;\n    padding-left: 60px;\n    font-weight: bold;\n    font-size: 1em;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvdmVoaWNsZXMvdmVoaWNsZS1kZWF0aWxzL3ZlaGljbGUtZGVhdGlscy5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksa0JBQWtCO0lBQ2xCLGtCQUFrQjtJQUNsQixvQkFBb0I7QUFDeEI7O0FBRUE7SUFDSSxnQkFBZ0I7QUFDcEI7O0FBRUE7SUFDSSxnQkFBZ0I7SUFDaEIsbUJBQW1CO0lBQ25CLGVBQWU7QUFDbkI7O0FBRUE7SUFDSSxtQkFBbUI7SUFDbkIsa0JBQWtCO0lBQ2xCLGFBQWE7SUFDYixVQUFVO0FBQ2Q7O0FBRUE7SUFDSTtRQUNJLGlCQUFpQjtRQUNqQixhQUFhO1FBQ2IsVUFBVTtJQUNkO0lBQ0E7UUFDSSxpQkFBaUI7UUFDakIsZ0JBQWdCO1FBQ2hCLG1CQUFtQjtJQUN2QjtJQUNBO1lBQ1EsZ0JBQWdCO1lBQ2hCLG1CQUFtQjs7UUFFdkI7UUFDQTtZQUNJLGdCQUFnQjtRQUNwQjs7UUFFQTtZQUNJLGdCQUFnQjtRQUNwQjtBQUNSOztBQUVBO0lBQ0k7UUFDSSxnQkFBZ0I7UUFDaEIsNEJBQTRCO1FBQzVCOztBQUVSOztBQUVBO0lBQ0ksZ0JBQWdCO0lBQ2hCLGtCQUFrQjtJQUNsQixpQkFBaUI7SUFDakIsY0FBYztBQUNsQiIsImZpbGUiOiJzcmMvYXBwL3ZlaGljbGVzL3ZlaGljbGUtZGVhdGlscy92ZWhpY2xlLWRlYXRpbHMuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi52ZWhpY2xlTmFtZSB7XG4gICAgbWFyZ2luLWxlZnQ6IDI0MHB4O1xuICAgIHBhZGRpbmctYm90dG9tOiAyJTtcbiAgICBwYWRkaW5nLXJpZ2h0OiA3NTBweDtcbn1cblxuLmRhdGUge1xuICAgIGZvbnQtc2l6ZTogMS40ZW07XG59XG5cbi5ncmFwaCB7XG4gICAgbWFyZ2luLXRvcDogMjBweDtcbiAgICBwYWRkaW5nLWxlZnQ6IDg1MHB4O1xuICAgIGN1cnNvcjogcG9pbnRlcjtcbn1cblxuLnZlaGljbGUge1xuICAgIG1hcmdpbi1ib3R0b206IDQwcHg7XG4gICAgbWFyZ2luLWxlZnQ6IDQ1MHB4O1xuICAgIGhlaWdodDogMzUwcHg7XG4gICAgd2lkdGg6IDUwJTtcbn1cblxuQG1lZGlhIG9ubHkgc2NyZWVuIGFuZCAobWF4LXdpZHRoOiA2MDBweCkge1xuICAgIC52ZWhpY2xlIHtcbiAgICAgICAgbWFyZ2luLWxlZnQ6IDMwcHg7XG4gICAgICAgIGhlaWdodDogMzAwcHg7XG4gICAgICAgIHdpZHRoOiA4NSU7XG4gICAgfVxuICAgIC52ZWhpY2xlTmFtZSB7XG4gICAgICAgIG1hcmdpbi1sZWZ0OiA1MHB4O1xuICAgICAgICBmb250LXNpemU6IDEuNGVtO1xuICAgICAgICBwYWRkaW5nLWJvdHRvbTogNXB4O1xuICAgIH1cbiAgICAuc3RhdHVzIHtcbiAgICAgICAgICAgIG1hcmdpbi10b3A6IDIwcHg7XG4gICAgICAgICAgICBwYWRkaW5nLXJpZ2h0OiA2MHB4O1xuICAgICAgICAgICBcbiAgICAgICAgfVxuICAgICAgICAuaWNvbiB7XG4gICAgICAgICAgICBtYXJnaW4tbGVmdDogMjAlO1xuICAgICAgICB9XG5cbiAgICAgICAgLmRhdGUge1xuICAgICAgICAgICAgZm9udC1zaXplOiAxLjJlbTtcbiAgICAgICAgfVxufVxuXG5AbWVkaWEgb25seSBzY3JlZW4gYW5kIChtaW4td2lkdGg6IDYwMHB4KSB7XG4gICAgLmljb24ge1xuICAgICAgICBtYXJnaW4tbGVmdDogNzAlO1xuICAgICAgICBiYWNrZ3JvdW5kLWNvbG9yOnRyYW5zcGFyZW50O1xuICAgICAgICB9ICAgXG4gICAgICAgIFxufVxuXG4uc3RhdHVzIHtcbiAgICBtYXJnaW4tdG9wOiAyMHB4O1xuICAgIHBhZGRpbmctbGVmdDogNjBweDtcbiAgICBmb250LXdlaWdodDogYm9sZDtcbiAgICBmb250LXNpemU6IDFlbTtcbn0iXX0= */"
 
 /***/ }),
 
@@ -1853,6 +1821,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm2015/material.js");
 /* harmony import */ var _update_vehicles_update_vehicles_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../update-vehicles/update-vehicles.component */ "./src/app/vehicles/update-vehicles/update-vehicles.component.ts");
+/* harmony import */ var src_app_shared_notification_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/shared/notification.service */ "./src/app/shared/notification.service.ts");
+
 
 
 
@@ -1860,13 +1830,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let VehicleDeatilsComponent = class VehicleDeatilsComponent {
-    constructor(router, vehicleService, activatedRoute, route, snackbar, matDialog) {
-        this.router = router;
+    constructor(vehicleService, route, matDialog, notificationService) {
         this.vehicleService = vehicleService;
-        this.activatedRoute = activatedRoute;
         this.route = route;
-        this.snackbar = snackbar;
         this.matDialog = matDialog;
+        this.notificationService = notificationService;
         this.vehicleStatus = [
             { value: 'Busy', viewValue: 'BUSY' },
             { value: 'Free', viewValue: 'FREE' },
@@ -1884,60 +1852,51 @@ let VehicleDeatilsComponent = class VehicleDeatilsComponent {
             console.log('data', res.data);
             console.log(res);
             this.registrationNo = this.vehicle.registrationNo;
-            this.name = this.vehicle.type.name;
+            this.name = this.vehicle.vehicleType.name;
             this.lastServiceDate = this.vehicle.lastServiceDate;
-            this.vehiclePurchased = this.vehicle.vehiclePurchased;
+            this.purchasedDate = this.vehicle.purchasedDate;
             this.insuranceNo = this.vehicle.insuranceNo;
-            this.zoneId = this.vehicle.zoneid;
+            this.zoneId = this.vehicle.zoneId;
             this.chassisNumber = this.vehicle.chassisNumber;
-            this.cc = this.vehicle.type.vehiclecc;
-            this.costkm = this.vehicle.type.costkm;
-            this.costtime = this.vehicle.type.costtime;
+            this.cc = this.vehicle.vehicleType.vehicleCC;
+            this.costkm = this.vehicle.vehicleType.costPerKm;
+            this.costtime = this.vehicle.vehicleType.costPerMin;
             this.status1 = this.vehicle.status;
         });
-    }
-    onEdit() {
     }
     onChange(newValue) {
         console.log(this.vehicle, newValue);
         this.vehicle.status = newValue;
         this.vehicleService.updateVehicle(this.route.snapshot.paramMap.get('registrationNo'), this.vehicle).subscribe();
     }
-    openSnackbar(message, action) {
-        this.snackbar.open(message, action, {
-            duration: 2000,
-            panelClass: ['blue-snackbar']
-        });
-    }
     update() {
         const dialogConfig = new _angular_material__WEBPACK_IMPORTED_MODULE_4__["MatDialogConfig"]();
         dialogConfig.disableClose = true;
         dialogConfig.autoFocus = true;
-        dialogConfig.width = '20%';
         dialogConfig.data = {
             insuranceNo: this.vehicle.insuranceNo,
             lastServiceDate: this.vehicle.lastServiceDate,
-            vehiclePurchased: this.vehicle.vehiclePurchased
+            purchasedDate: this.vehicle.purchasedDate
         };
         const dRef = this.matDialog.open(_update_vehicles_update_vehicles_component__WEBPACK_IMPORTED_MODULE_5__["UpdateVehiclesComponent"], dialogConfig);
         dRef.afterClosed().subscribe(result => {
-            console.log('Back to parent', result);
-            this.vehicleService.updateVehicle(this.registrationNo, result).subscribe(response => {
-                this.openSnackbar('Vehicle details updated succesffuly', 'ok');
-                this.getVehicleDetails();
-            }, error => {
-                this.openSnackbar('not updated', 'ok');
-            });
+            if (result !== undefined) {
+                console.log('Back to parent', result);
+                this.vehicleService.updateVehicle(this.registrationNo, result).subscribe(response => {
+                    this.notificationService.success('Vehicle details updated succesffuly');
+                    this.getVehicleDetails();
+                }, error => {
+                    this.notificationService.warn('not updated');
+                });
+            }
         });
     }
 };
 VehicleDeatilsComponent.ctorParameters = () => [
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] },
     { type: _vehicle_service__WEBPACK_IMPORTED_MODULE_2__["VehicleService"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"] },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"] },
-    { type: _angular_material__WEBPACK_IMPORTED_MODULE_4__["MatSnackBar"] },
-    { type: _angular_material__WEBPACK_IMPORTED_MODULE_4__["MatDialog"] }
+    { type: _angular_material__WEBPACK_IMPORTED_MODULE_4__["MatDialog"] },
+    { type: src_app_shared_notification_service__WEBPACK_IMPORTED_MODULE_6__["NotificationService"] }
 ];
 VehicleDeatilsComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -1983,6 +1942,10 @@ let VehicleService = class VehicleService {
     getVehicleByRegistrationNo(registrationNo) {
         console.log(this.baseUrl + '?registrationNo=' + registrationNo);
         return this.httpClient.get(this.baseUrl + '?registrationNo=' + registrationNo);
+    }
+    getVehicleByZoneIdType(zoneId, type) {
+        console.log(this.baseUrl + '?zoneId=' + zoneId + '&type=' + type);
+        return this.httpClient.get(this.baseUrl + '?zoneId=' + zoneId + '&type=' + type);
     }
     updateVehicle(registrationNo, vehicle) {
         return this.httpClient.patch(this.baseUrl + '/' + registrationNo, vehicle);
@@ -2062,36 +2025,27 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm2015/material.js");
 /* harmony import */ var _vehicle_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./vehicle.service */ "./src/app/vehicles/vehicle.service.ts");
 /* harmony import */ var _add_vehicle_add_vehicle_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./add-vehicle/add-vehicle.component */ "./src/app/vehicles/add-vehicle/add-vehicle.component.ts");
+/* harmony import */ var _shared_notification_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../shared/notification.service */ "./src/app/shared/notification.service.ts");
+
 
 
 
 
 
 let VehiclesComponent = class VehiclesComponent {
-    constructor(vehicleService, matDialog, snackBar) {
+    constructor(vehicleService, matDialog, notificationService) {
         this.vehicleService = vehicleService;
         this.matDialog = matDialog;
-        this.snackBar = snackBar;
+        this.notificationService = notificationService;
         this.p = 1;
     }
     ngOnInit() {
-        this.vehicleService.getVehicles().subscribe(res => {
-            this.vehicle = res.data;
-            console.log(res, 'parent');
-        });
-    }
-    openSnackbar(message, action) {
-        this.snackBar.open(message, action, {
-            duration: 2000,
-            panelClass: ['blue-snackbar']
-        });
+        this.getVehicles();
     }
     add() {
         const dialogConfig = new _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatDialogConfig"]();
         dialogConfig.disableClose = true;
         dialogConfig.autoFocus = true;
-        dialogConfig.width = '40%';
-        this.matDialog.open(_add_vehicle_add_vehicle_component__WEBPACK_IMPORTED_MODULE_4__["AddVehicleComponent"], dialogConfig);
         const dRef = this.matDialog.open(_add_vehicle_add_vehicle_component__WEBPACK_IMPORTED_MODULE_4__["AddVehicleComponent"], dialogConfig);
         dRef.afterClosed().subscribe(result => {
             if (result !== undefined) {
@@ -2100,15 +2054,24 @@ let VehiclesComponent = class VehiclesComponent {
                     this.message = response.message;
                     console.log(this.message);
                     if (this.message === 'Vehicle already exists') {
-                        this.openSnackbar('Vehicle already exists', 'ok');
+                        this.notificationService.warn('Vehicle already exists');
                     }
                     else {
-                        this.openSnackbar('Vehicle added succesfully', 'ok');
+                        this.notificationService.success('Vehicle added succesfully');
                     }
-                    this.vehicleService.getVehicles().subscribe(res => {
-                        this.vehicle = res.data;
-                    });
+                    this.getVehicles();
                 });
+            }
+        });
+    }
+    getVehicles() {
+        this.vehicleService.getVehicles().subscribe(res => {
+            if (res.count === undefined || res.count === 0) {
+                this.displayCount = 0;
+            }
+            else {
+                this.vehicle = res.data;
+                this.displayCount = 1;
             }
         });
     }
@@ -2116,11 +2079,8 @@ let VehiclesComponent = class VehiclesComponent {
 VehiclesComponent.ctorParameters = () => [
     { type: _vehicle_service__WEBPACK_IMPORTED_MODULE_3__["VehicleService"] },
     { type: _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatDialog"] },
-    { type: _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatSnackBar"] }
+    { type: _shared_notification_service__WEBPACK_IMPORTED_MODULE_5__["NotificationService"] }
 ];
-tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])(_angular_material__WEBPACK_IMPORTED_MODULE_2__["MatPaginator"], { static: true })
-], VehiclesComponent.prototype, "paginator", void 0);
 tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()
 ], VehiclesComponent.prototype, "vehicle", void 0);
@@ -2225,7 +2185,7 @@ VehiclesModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".fill-remaining-space {\n    /* This fills the remaining space, by using flexbox. \n       Every toolbar row uses a flexbox row layout. */\n    flex: 1 1 auto;\n  }\n\n    .btn-dialog-close{\n        width: 45px;\n        min-width: 0px !important;\n        height: 40px;\n        padding: 0px !important;\n      }\n\n    mat-toolbar {\n    background-color: white;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvem9uZXMvYWRkLXN1cGVydmlzb3IvYWRkLXN1cGVydmlzb3IuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJO3FEQUNpRDtJQUNqRCxjQUFjO0VBQ2hCOztJQUVFO1FBQ0ksV0FBVztRQUNYLHlCQUF5QjtRQUN6QixZQUFZO1FBQ1osdUJBQXVCO01BQ3pCOztJQUVOO0lBQ0ksdUJBQXVCO0FBQzNCIiwiZmlsZSI6InNyYy9hcHAvem9uZXMvYWRkLXN1cGVydmlzb3IvYWRkLXN1cGVydmlzb3IuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5maWxsLXJlbWFpbmluZy1zcGFjZSB7XG4gICAgLyogVGhpcyBmaWxscyB0aGUgcmVtYWluaW5nIHNwYWNlLCBieSB1c2luZyBmbGV4Ym94LiBcbiAgICAgICBFdmVyeSB0b29sYmFyIHJvdyB1c2VzIGEgZmxleGJveCByb3cgbGF5b3V0LiAqL1xuICAgIGZsZXg6IDEgMSBhdXRvO1xuICB9XG5cbiAgICAuYnRuLWRpYWxvZy1jbG9zZXtcbiAgICAgICAgd2lkdGg6IDQ1cHg7XG4gICAgICAgIG1pbi13aWR0aDogMHB4ICFpbXBvcnRhbnQ7XG4gICAgICAgIGhlaWdodDogNDBweDtcbiAgICAgICAgcGFkZGluZzogMHB4ICFpbXBvcnRhbnQ7XG4gICAgICB9XG5cbm1hdC10b29sYmFyIHtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiB3aGl0ZTtcbn0iXX0= */"
+module.exports = ".fill-remaining-space {\n    /* This fills the remaining space, by using flexbox. \n       Every toolbar row uses a flexbox row layout. */\n    flex: 1 1 auto;\n  }\n\n    .btn-dialog-close{\n        width: 45px;\n        min-width: 0px !important;\n        height: 40px;\n        padding: 0px !important;\n      }\n\n    mat-toolbar {\n    background-color: white;\n}\n\n    .btn {\n  width: 16em; height: 60px;\n }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvem9uZXMvYWRkLXN1cGVydmlzb3IvYWRkLXN1cGVydmlzb3IuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJO3FEQUNpRDtJQUNqRCxjQUFjO0VBQ2hCOztJQUVFO1FBQ0ksV0FBVztRQUNYLHlCQUF5QjtRQUN6QixZQUFZO1FBQ1osdUJBQXVCO01BQ3pCOztJQUVOO0lBQ0ksdUJBQXVCO0FBQzNCOztJQUVBO0VBQ0UsV0FBVyxFQUFFLFlBQVk7Q0FDMUIiLCJmaWxlIjoic3JjL2FwcC96b25lcy9hZGQtc3VwZXJ2aXNvci9hZGQtc3VwZXJ2aXNvci5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmZpbGwtcmVtYWluaW5nLXNwYWNlIHtcbiAgICAvKiBUaGlzIGZpbGxzIHRoZSByZW1haW5pbmcgc3BhY2UsIGJ5IHVzaW5nIGZsZXhib3guIFxuICAgICAgIEV2ZXJ5IHRvb2xiYXIgcm93IHVzZXMgYSBmbGV4Ym94IHJvdyBsYXlvdXQuICovXG4gICAgZmxleDogMSAxIGF1dG87XG4gIH1cblxuICAgIC5idG4tZGlhbG9nLWNsb3Nle1xuICAgICAgICB3aWR0aDogNDVweDtcbiAgICAgICAgbWluLXdpZHRoOiAwcHggIWltcG9ydGFudDtcbiAgICAgICAgaGVpZ2h0OiA0MHB4O1xuICAgICAgICBwYWRkaW5nOiAwcHggIWltcG9ydGFudDtcbiAgICAgIH1cblxubWF0LXRvb2xiYXIge1xuICAgIGJhY2tncm91bmQtY29sb3I6IHdoaXRlO1xufVxuXG4uYnRuIHtcbiAgd2lkdGg6IDE2ZW07IGhlaWdodDogNjBweDtcbiB9XG4iXX0= */"
 
 /***/ }),
 
@@ -2364,6 +2324,7 @@ let AddVehicleComponent = class AddVehicleComponent {
         this.vehicle = data.vehicle;
         this.options = data.vehicle;
         this.zId = data.zId;
+        console.log(this.options);
     }
     ngOnInit() {
         this.vehicleService.getVehicles().subscribe(res => {
@@ -2578,21 +2539,29 @@ let ZoneService = class ZoneService {
         return this.httpClient.get(this.baseUrl + '/locality/' + name);
     }
     getAddress(locality) {
-        return this.httpClient.
-            get(this.baseUrl + '/loc/' + locality);
+        return this.httpClient.get(this.baseUrl + '/loc/' + locality);
     }
     updateZones(name, zone) {
-        console.log(zone);
         return this.httpClient.patch(this.baseUrl + '/' + name, zone);
     }
     getSupervisor() {
-        return this.httpClient.get('http://172.23.234.83:8091/api/v1/users?role=Supervisor&status=Unallocated');
+        return this.httpClient.get('http://13.235.35.202:8080/userservice/api/v1/users?role=Supervisor&status=Unallocated');
     }
     getSupervisorById(id) {
-        return this.httpClient.get('http://172.23.234.83:8091/api/v1/users/' + id);
+        return this.httpClient.get('http://13.235.35.202:8080/userservice/api/v1/users/' + id);
     }
     updateSupervisorStatus(id, supervisor) {
-        return this.httpClient.patch('http://172.23.234.83:8091/api/v1/users/' + id, supervisor);
+        return this.httpClient.patch('http://13.235.35.202:8080/userservice/api/v1/users/' + id, supervisor);
+    }
+    getZoneType(zid, tid) {
+        return this.httpClient.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].baseUrl + '/api/v1/zoneTypeCount' + '?zoneId=' + zid + '&typeId=' + tid);
+    }
+    createNew(zoneTypeCount) {
+        return this.httpClient.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].baseUrl + '/api/v1/zoneTypeCount', zoneTypeCount);
+    }
+    updateZoneTypeCount(zid, tid, zoneTypeCount) {
+        return this.httpClient.patch(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].baseUrl + '/api/v1/zoneTypeCount' +
+            '?zoneId=' + zid + '&typeId=' + tid, zoneTypeCount);
     }
 };
 ZoneService.ctorParameters = () => [
@@ -2615,7 +2584,7 @@ ZoneService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".my-card {\n    margin-bottom: 40px;\n    margin-left: 450px;\n    height: 300px;\n    width: 50%;\n    background-color: whitesmoke;\n}\n\n.zoneName {\n    font-weight: bold;\n    font-size: 1.5em;\n}\n\n@media only screen and (max-width: 600px) {\n    .my-card {\n        margin-left: 30px;\n        height: 300px;\n        width: 85%;\n    }\n    .zoneName {\n        font-size: 1.5em;\n        font-weight: bold;\n    }\n    .add-button {\n        padding-left: 250px;\n        margin-top: -18%;\n    }\n    .icon {\n        margin-left: 40%;\n    }\n\n\n}\n\n@media only screen and (min-width: 600px) {\n    .icon {\n        margin-left: 80%;\n        background-color:transparent;\n        }\n\n        .mat-button-focus-overlay {\n            background-color:transparent;\n        }\n    }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvem9uZXMvc3VwZXJ2aXNvci1kZXRhaWxzL3N1cGVydmlzb3ItZGV0YWlscy5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksbUJBQW1CO0lBQ25CLGtCQUFrQjtJQUNsQixhQUFhO0lBQ2IsVUFBVTtJQUNWLDRCQUE0QjtBQUNoQzs7QUFFQTtJQUNJLGlCQUFpQjtJQUNqQixnQkFBZ0I7QUFDcEI7O0FBRUE7SUFDSTtRQUNJLGlCQUFpQjtRQUNqQixhQUFhO1FBQ2IsVUFBVTtJQUNkO0lBQ0E7UUFDSSxnQkFBZ0I7UUFDaEIsaUJBQWlCO0lBQ3JCO0lBQ0E7UUFDSSxtQkFBbUI7UUFDbkIsZ0JBQWdCO0lBQ3BCO0lBQ0E7UUFDSSxnQkFBZ0I7SUFDcEI7OztBQUdKOztBQUVBO0lBQ0k7UUFDSSxnQkFBZ0I7UUFDaEIsNEJBQTRCO1FBQzVCOztRQUVBO1lBQ0ksNEJBQTRCO1FBQ2hDO0lBQ0oiLCJmaWxlIjoic3JjL2FwcC96b25lcy9zdXBlcnZpc29yLWRldGFpbHMvc3VwZXJ2aXNvci1kZXRhaWxzLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIubXktY2FyZCB7XG4gICAgbWFyZ2luLWJvdHRvbTogNDBweDtcbiAgICBtYXJnaW4tbGVmdDogNDUwcHg7XG4gICAgaGVpZ2h0OiAzMDBweDtcbiAgICB3aWR0aDogNTAlO1xuICAgIGJhY2tncm91bmQtY29sb3I6IHdoaXRlc21va2U7XG59XG5cbi56b25lTmFtZSB7XG4gICAgZm9udC13ZWlnaHQ6IGJvbGQ7XG4gICAgZm9udC1zaXplOiAxLjVlbTtcbn1cblxuQG1lZGlhIG9ubHkgc2NyZWVuIGFuZCAobWF4LXdpZHRoOiA2MDBweCkge1xuICAgIC5teS1jYXJkIHtcbiAgICAgICAgbWFyZ2luLWxlZnQ6IDMwcHg7XG4gICAgICAgIGhlaWdodDogMzAwcHg7XG4gICAgICAgIHdpZHRoOiA4NSU7XG4gICAgfVxuICAgIC56b25lTmFtZSB7XG4gICAgICAgIGZvbnQtc2l6ZTogMS41ZW07XG4gICAgICAgIGZvbnQtd2VpZ2h0OiBib2xkO1xuICAgIH1cbiAgICAuYWRkLWJ1dHRvbiB7XG4gICAgICAgIHBhZGRpbmctbGVmdDogMjUwcHg7XG4gICAgICAgIG1hcmdpbi10b3A6IC0xOCU7XG4gICAgfVxuICAgIC5pY29uIHtcbiAgICAgICAgbWFyZ2luLWxlZnQ6IDQwJTtcbiAgICB9XG5cblxufVxuXG5AbWVkaWEgb25seSBzY3JlZW4gYW5kIChtaW4td2lkdGg6IDYwMHB4KSB7XG4gICAgLmljb24ge1xuICAgICAgICBtYXJnaW4tbGVmdDogODAlO1xuICAgICAgICBiYWNrZ3JvdW5kLWNvbG9yOnRyYW5zcGFyZW50O1xuICAgICAgICB9XG5cbiAgICAgICAgLm1hdC1idXR0b24tZm9jdXMtb3ZlcmxheSB7XG4gICAgICAgICAgICBiYWNrZ3JvdW5kLWNvbG9yOnRyYW5zcGFyZW50O1xuICAgICAgICB9XG4gICAgfVxuIl19 */"
+module.exports = ".supervisor {\n    margin-bottom: 40px;\n    margin-left: 450px;\n    height: 300px;\n    width: 50%;\n}\n\n.zoneName {\n    font-weight: bold;\n    font-size: 1.5em;\n}\n\n.add-button {\n    padding-left: 100%;\n}\n\n@media only screen and (max-width: 600px) {\n    .supervisor {\n        margin-left: 30px;\n        height: 300px;\n        width: 85%;\n    }\n    .zoneName {\n        font-size: 1.5em;\n        font-weight: bold;\n    }\n    .add-button {\n        padding-left: 250px;\n        margin-top: -5%;\n    }\n    .icon {\n        margin-left: 40%;\n    }\n    mat-card-title {\n        font-size: 1.4em;\n    }  \n}\n\n@media only screen and (min-width: 600px) {\n    .icon {\n        margin-left: 80%;\n        background-color:transparent;\n        }   \n        \n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvem9uZXMvc3VwZXJ2aXNvci1kZXRhaWxzL3N1cGVydmlzb3ItZGV0YWlscy5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksbUJBQW1CO0lBQ25CLGtCQUFrQjtJQUNsQixhQUFhO0lBQ2IsVUFBVTtBQUNkOztBQUVBO0lBQ0ksaUJBQWlCO0lBQ2pCLGdCQUFnQjtBQUNwQjs7QUFFQTtJQUNJLGtCQUFrQjtBQUN0Qjs7QUFFQTtJQUNJO1FBQ0ksaUJBQWlCO1FBQ2pCLGFBQWE7UUFDYixVQUFVO0lBQ2Q7SUFDQTtRQUNJLGdCQUFnQjtRQUNoQixpQkFBaUI7SUFDckI7SUFDQTtRQUNJLG1CQUFtQjtRQUNuQixlQUFlO0lBQ25CO0lBQ0E7UUFDSSxnQkFBZ0I7SUFDcEI7SUFDQTtRQUNJLGdCQUFnQjtJQUNwQjtBQUNKOztBQUVBO0lBQ0k7UUFDSSxnQkFBZ0I7UUFDaEIsNEJBQTRCO1FBQzVCOztBQUVSIiwiZmlsZSI6InNyYy9hcHAvem9uZXMvc3VwZXJ2aXNvci1kZXRhaWxzL3N1cGVydmlzb3ItZGV0YWlscy5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnN1cGVydmlzb3Ige1xuICAgIG1hcmdpbi1ib3R0b206IDQwcHg7XG4gICAgbWFyZ2luLWxlZnQ6IDQ1MHB4O1xuICAgIGhlaWdodDogMzAwcHg7XG4gICAgd2lkdGg6IDUwJTtcbn1cblxuLnpvbmVOYW1lIHtcbiAgICBmb250LXdlaWdodDogYm9sZDtcbiAgICBmb250LXNpemU6IDEuNWVtO1xufVxuXG4uYWRkLWJ1dHRvbiB7XG4gICAgcGFkZGluZy1sZWZ0OiAxMDAlO1xufVxuXG5AbWVkaWEgb25seSBzY3JlZW4gYW5kIChtYXgtd2lkdGg6IDYwMHB4KSB7XG4gICAgLnN1cGVydmlzb3Ige1xuICAgICAgICBtYXJnaW4tbGVmdDogMzBweDtcbiAgICAgICAgaGVpZ2h0OiAzMDBweDtcbiAgICAgICAgd2lkdGg6IDg1JTtcbiAgICB9XG4gICAgLnpvbmVOYW1lIHtcbiAgICAgICAgZm9udC1zaXplOiAxLjVlbTtcbiAgICAgICAgZm9udC13ZWlnaHQ6IGJvbGQ7XG4gICAgfVxuICAgIC5hZGQtYnV0dG9uIHtcbiAgICAgICAgcGFkZGluZy1sZWZ0OiAyNTBweDtcbiAgICAgICAgbWFyZ2luLXRvcDogLTUlO1xuICAgIH1cbiAgICAuaWNvbiB7XG4gICAgICAgIG1hcmdpbi1sZWZ0OiA0MCU7XG4gICAgfVxuICAgIG1hdC1jYXJkLXRpdGxlIHtcbiAgICAgICAgZm9udC1zaXplOiAxLjRlbTtcbiAgICB9ICBcbn1cblxuQG1lZGlhIG9ubHkgc2NyZWVuIGFuZCAobWluLXdpZHRoOiA2MDBweCkge1xuICAgIC5pY29uIHtcbiAgICAgICAgbWFyZ2luLWxlZnQ6IDgwJTtcbiAgICAgICAgYmFja2dyb3VuZC1jb2xvcjp0cmFuc3BhcmVudDtcbiAgICAgICAgfSAgIFxuICAgICAgICBcbn1cbiJdfQ== */"
 
 /***/ }),
 
@@ -2858,7 +2827,7 @@ UpdateZonesComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".vehicles {\n    margin-left: 240px;\n    padding-bottom: 2%;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvem9uZXMvdmVoaWNsZS1kZXRhaWxzL3ZlaGljbGUtZGV0YWlscy5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksa0JBQWtCO0lBQ2xCLGtCQUFrQjtBQUN0QiIsImZpbGUiOiJzcmMvYXBwL3pvbmVzL3ZlaGljbGUtZGV0YWlscy92ZWhpY2xlLWRldGFpbHMuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi52ZWhpY2xlcyB7XG4gICAgbWFyZ2luLWxlZnQ6IDI0MHB4O1xuICAgIHBhZGRpbmctYm90dG9tOiAyJTtcbn0iXX0= */"
+module.exports = ".vehicles {\n    margin-left: 240px;\n    padding-bottom: 2%;\n    font-weight: bold;\n}\n\nmat-icon {\n    font-size: 50px;\n}\n\n@media only screen and (max-width: 600px) {\n\n    .vehicles {\n        margin-left: 40px;\n    }\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvem9uZXMvdmVoaWNsZS1kZXRhaWxzL3ZlaGljbGUtZGV0YWlscy5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksa0JBQWtCO0lBQ2xCLGtCQUFrQjtJQUNsQixpQkFBaUI7QUFDckI7O0FBRUE7SUFDSSxlQUFlO0FBQ25COztBQUVBOztJQUVJO1FBQ0ksaUJBQWlCO0lBQ3JCO0FBQ0oiLCJmaWxlIjoic3JjL2FwcC96b25lcy92ZWhpY2xlLWRldGFpbHMvdmVoaWNsZS1kZXRhaWxzLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIudmVoaWNsZXMge1xuICAgIG1hcmdpbi1sZWZ0OiAyNDBweDtcbiAgICBwYWRkaW5nLWJvdHRvbTogMiU7XG4gICAgZm9udC13ZWlnaHQ6IGJvbGQ7XG59XG5cbm1hdC1pY29uIHtcbiAgICBmb250LXNpemU6IDUwcHg7XG59XG5cbkBtZWRpYSBvbmx5IHNjcmVlbiBhbmQgKG1heC13aWR0aDogNjAwcHgpIHtcblxuICAgIC52ZWhpY2xlcyB7XG4gICAgICAgIG1hcmdpbi1sZWZ0OiA0MHB4O1xuICAgIH1cbn1cbiJdfQ== */"
 
 /***/ }),
 
@@ -2931,30 +2900,69 @@ let VehicleDetailsComponent = class VehicleDetailsComponent {
             if (result !== undefined) {
                 this.vehicleService.getVehicleByRegistrationNo(String(Object.values(result)[0])).subscribe(res => {
                     this.selectedVehicle = res.data;
-                    this.selectedVehicle.zoneid = this.id;
+                    this.selectedVehicle.zoneId = this.id;
                     console.log(this.selectedVehicle);
                     this.vehicleService.updateVehicle(String(Object.values(result)[0]), this.selectedVehicle).subscribe(response => {
                         this.notificationService.success('Vehicle added to zone successfully!!');
-                        this.getZoneDetails();
-                        this.vDetails();
                     });
-                    console.log(Object.values(result), JSON.stringify(Object.values(result)[0]));
+                    this.getZoneDetails();
+                    this.vDetails();
+                    console.log(this.vehicle);
+                    this.zoneService.getZoneType(this.id, this.tid).subscribe(val => {
+                        console.log(val);
+                        if (val.data === null) {
+                            console.log(res.count, { zoneId: this.id, typeId: this.tid, typeName: this.tname, count: 1 });
+                            const reqBody = {
+                                zoneId: this.id,
+                                typeId: this.tid,
+                                typeName: this.tname,
+                                count: 1
+                            };
+                            this.zoneService.createNew(reqBody)
+                                .subscribe();
+                        }
+                        else {
+                            val.data.count = val.data.count + 1;
+                            const reqBody = {
+                                zoneId: this.id,
+                                typeId: this.tid,
+                                typeName: this.tname,
+                                count: val.data.count
+                            };
+                            this.zoneService.updateZoneTypeCount(this.id, this.tid, reqBody).subscribe();
+                        }
+                    });
                 });
+                console.log(Object.values(result), JSON.stringify(Object.values(result)[0]));
             }
         });
     }
     vDetails() {
         this.vehicleService.getVehicles().subscribe(res => {
-            res.data.filter(val => {
-                if ((val.zoneid === this.id)) {
-                    this.vehicle.push(val);
-                }
-            });
-            res.data.filter(val => {
-                if (((val.zoneid === null) || (val.zoneid !== this.id)) && ((val.status !== 'No_More_In_Use') && (val.status !== 'Stolen') && (val.status !== 'Busy') && (val.status !== 'Servicing'))) {
-                    this.vehicle2.push(val);
-                }
-            });
+            if (res.count === 0) {
+                this.displayCount = 0;
+                console.log(res, 'https://www.doodadi.com/assets/images/data-not-found.svg');
+            }
+            else {
+                res.data.filter(val => {
+                    if ((val.zoneId === this.id)) {
+                        this.displayCount = 1;
+                        this.vehicle.push(val);
+                    }
+                    else {
+                        this.displayCount = 0;
+                    }
+                });
+                res.data.filter(val => {
+                    if (((val.zoneId === null)) && ((val.status !== 'No_More_In_Use') && (val.status !== 'Stolen') && (val.status !== 'Busy') && (val.status !== 'Servicing'))) {
+                        this.vehicle2.push(val);
+                        this.tname = val.vehicleType.name;
+                        this.tid = val.vehicleType.id;
+                        console.log(this.tid);
+                        console.log(this.tname);
+                    }
+                });
+            }
         });
     }
 };
@@ -3040,7 +3048,7 @@ let ZoneCardComponent = class ZoneCardComponent {
     getVehiclesDetails() {
         this.vehicleService.getVehicles().subscribe(res => {
             res.data.filter(val => {
-                if (val.zoneid === String(this.id)) {
+                if (val.zoneId === String(this.id)) {
                     this.count += 1;
                 }
             });
@@ -3269,8 +3277,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm2015/material.js");
 /* harmony import */ var _add_zone_add_zone_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./add-zone/add-zone.component */ "./src/app/zones/add-zone/add-zone.component.ts");
 /* harmony import */ var _shared_notification_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../shared/notification.service */ "./src/app/shared/notification.service.ts");
-/* harmony import */ var _vehicles_vehicle_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../vehicles/vehicle.service */ "./src/app/vehicles/vehicle.service.ts");
-
 
 
 
@@ -3278,9 +3284,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let ZonesComponent = class ZonesComponent {
-    constructor(zoneService, vehicleService, matDialog, notificationService) {
+    constructor(zoneService, matDialog, notificationService) {
         this.zoneService = zoneService;
-        this.vehicleService = vehicleService;
         this.matDialog = matDialog;
         this.notificationService = notificationService;
         this.p = 1;
@@ -3298,7 +3303,6 @@ let ZonesComponent = class ZonesComponent {
                 this.zoneService.createZone(result)
                     .subscribe(response => {
                     this.message = response.message;
-                    // console.log(this.message);
                     if (this.message === 'Zone name is already exist!!!') {
                         this.notificationService.warn('Zone name already exist!!!');
                     }
@@ -3315,13 +3319,18 @@ let ZonesComponent = class ZonesComponent {
     }
     getZonesInfo() {
         return this.zoneService.getZones().subscribe(res => {
-            this.zones = res.data;
+            if (res.count === undefined || res.count === 0) {
+                this.displayCount = 0;
+            }
+            else {
+                this.zones = res.data;
+                this.displayCount = 1;
+            }
         });
     }
 };
 ZonesComponent.ctorParameters = () => [
     { type: _service_zone_service__WEBPACK_IMPORTED_MODULE_2__["ZoneService"] },
-    { type: _vehicles_vehicle_service__WEBPACK_IMPORTED_MODULE_6__["VehicleService"] },
     { type: _angular_material__WEBPACK_IMPORTED_MODULE_3__["MatDialog"] },
     { type: _shared_notification_service__WEBPACK_IMPORTED_MODULE_5__["NotificationService"] }
 ];
@@ -3507,7 +3516,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/ruchi/umove/umove-admin-ui/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /home/ashwin/umove/umove-admin-ui/src/main.ts */"./src/main.ts");
 
 
 /***/ })

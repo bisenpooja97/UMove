@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ZoneService} from '../service/zone/zone.service';
 import {NavigationExtras, Router} from '@angular/router';
+import {TypeCountList} from "../model/type-count-list";
 
 
 @Component({
@@ -10,7 +11,7 @@ import {NavigationExtras, Router} from '@angular/router';
 })
 export class BikeComponent implements OnInit {
 
-  @Input() type: {};
+  @Input() type: TypeCountList;
   @Input() trip: boolean;
   selectedType: object;
   @Output() selectedTypes = new EventEmitter();
@@ -19,6 +20,7 @@ export class BikeComponent implements OnInit {
               // private bookingService: BookingService
   ) { }
   ngOnInit() {
+    console.log('type: ', this.type);
     console.log('trip', this.trip);
     // console.log(this.bookingService.getCurrentBooking());
   }

@@ -15,6 +15,7 @@ export class RideService {
   baseUrl = environment.baseUrl + environment.bookingService + environment.bookingBaseApi;
 
   constructor(private http: HTTP, private toastController: ToastController) {
+    console.log('ride service ka constuctor call hua');
     this.currentBooking = new Ride();
     http.setDataSerializer('json');
     http.setHeader('*', 'Content-Type', 'application/json');

@@ -96,6 +96,11 @@ public class UserImplService implements UserService {
                 return userRepository.findByMobileNumber(mobileNumber);
             }
         }
+        if(user.getRole() == Role.User) {
+            user.setUserStatus(UserStatus.Inactive);
+        } else if (user.getRole() == Role.Supervisor) {
+            user.setUserStatus(UserStatus.Unallocated);
+        }
         user.setPaymentMethod(new ArrayList<>());
         return userRepository.save(user);
     }

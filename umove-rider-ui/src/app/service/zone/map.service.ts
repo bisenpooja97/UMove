@@ -106,6 +106,7 @@ export class MapService implements OnInit{
 
   }
 
+
   marker(lat, lng) {
 
     console.log('coordinates',lat,lng);
@@ -114,7 +115,8 @@ export class MapService implements OnInit{
     });
      this.markers
         .setLngLat([lng, lat])
-        .addTo(this.map);
+        .addTo(this.map)
+
     // function onDragEnd() {
     //   const lngLat = this.markers.getLngLat();
     //   console.log(lngLat.lat);
@@ -194,7 +196,7 @@ export class MapService implements OnInit{
         "supervisorEmail":"bherula@gmail.com",
         "status":"ACTIVE"
       }
-    ],lat,lng)
+    ],lat,lng);
     this.map.addLayer({
       id: 'route',
       type: 'line',
@@ -222,6 +224,7 @@ export class MapService implements OnInit{
     });
 
   }
+
   createFeature(zoneList:Zone[],lat:number,lng:number){
     if(this.layoutCount!==0) {
       this.map.removeLayer('places' + this.layoutCount);
@@ -236,9 +239,10 @@ export class MapService implements OnInit{
           features.push({
             type: 'Feature',
             properties: {
-              description: '<a href="http://maps.google.com/maps?saddr=' + lat + ',' + lng + '' +
+              description: '<ion-grid style="height: 40px"><ion-row style="align-items: center"><ion-col size="9">' +d.locality+
+                  '</ion-col><ion-col size="3"><a href="http://maps.google.com/maps?saddr=' + lat + ',' + lng + '' +
                   '&daddr=' + d.lat + ',' + d.lon + '">' +
-                  '<button>Get Directions</button></a> ',
+                  '<ion-icon style="width: 40px;height: 40px" name="compass"></ion-icon></a></ion-col></ion-row></ion-grid> ',
               icon: 'cat',
               data: d,
             },
@@ -253,7 +257,7 @@ export class MapService implements OnInit{
           })
         }
     );
-    this.map.loadImage('https://images.vexels.com/media/users/3/129788/isolated/preview/04c91b04215f603567324d459b761807-chopper-bike-front-icon-by-vexels.png', (error, image) => {
+    this.map.loadImage('assets/icon.png', (error, image) => {
       if (error) { throw error; }
       this.map.addImage('cat', image);
       // Add a layer showing the places.

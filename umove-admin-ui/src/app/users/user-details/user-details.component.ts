@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from 'src/model/user';
-import { Document } from 'src/model/document';
+import { User } from 'src/app/model/user';
+import { Document } from 'src/app/model/document';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from '../service/user.service';
 import { NotificationService } from 'src/app/shared/notification.service';

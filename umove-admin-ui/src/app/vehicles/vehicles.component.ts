@@ -1,10 +1,9 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
-import { MatPaginator, MatDialogConfig, MatDialog, MatSnackBar } from '@angular/material';
-import { Vehicle } from '../model/Vehicle';
+import { Component, OnInit, Input } from '@angular/core';
+import { MatDialogConfig, MatDialog } from '@angular/material';
+import { Vehicle } from '../model/vehicle';
 import { VehicleService } from './vehicle.service';
-import { VehicleTypeService } from '../types/vehicle-type.service';
-import { VehicleType } from '../model/VehicleType';
 import { AddVehicleComponent } from './add-vehicle/add-vehicle.component';
+import { NotificationService } from '../shared/notification.service';
 
 @Component({
   selector: 'app-vehicles',
@@ -12,64 +11,52 @@ import { AddVehicleComponent } from './add-vehicle/add-vehicle.component';
   styleUrls: ['./vehicles.component.css']
 })
 export class VehiclesComponent implements OnInit {
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @Input() vehicle: Vehicle[];
-
   p = 1;
   searchText;
   message: string;
+  displayCount: number;
 
-  constructor(private vehicleService: VehicleService, private matDialog: MatDialog, private snackBar: MatSnackBar) { }
+  constructor(private vehicleService: VehicleService,
+              private matDialog: MatDialog,
+              private notificationService: NotificationService) { }
 
   ngOnInit() {
-    this.vehicleService.getVehicles().subscribe(res => { this.vehicle = res.data;
-                                                         console.log(res, 'parent');
-    } );
+    this.getVehicles();
   }
 
+  add() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    const dRef = this.matDialog.open(AddVehicleComponent, dialogConfig);
 
-openSnackbar(message: string, action: string) {
-  this.snackBar.open(message, action, {
-    duration: 2000,
-    panelClass: ['blue-snackbar']
-  });
+    dRef.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+        this.vehicleService.createVehicles(result)
+          .subscribe(
+            response => {
+              this.message = response.message;
+              console.log(this.message);
+              if (this.message === 'Vehicle already exists') {
+                this.notificationService.warn('Vehicle already exists');
+              } else {
+                this.notificationService.success('Vehicle added succesfully');
+              }
+              this.getVehicles();
+            });
+      }
+    });
+  }
+
+  getVehicles() {
+    this.vehicleService.getVehicles().subscribe(res => {
+      if (res.count === undefined || res.count === 0) {
+        this.displayCount = 0;
+      } else {
+        this.vehicle = res.data;
+        this.displayCount = 1;
+      }
+    });
+  }
 }
-
-add() {
-  const dialogConfig = new MatDialogConfig();
-  dialogConfig.disableClose = true;
-  dialogConfig.autoFocus = true;
-  dialogConfig.width = '40%';
-  this.matDialog.open(AddVehicleComponent, dialogConfig);
-  const dRef = this.matDialog.open(AddVehicleComponent, dialogConfig);
-
-  dRef.afterClosed().subscribe(result => {
-    if (result !== undefined) {
-    this.vehicleService.createVehicles(result)
-        .subscribe(
-          response => {
-          this.message = response.message;
-          console.log(this.message);
-          if (this.message === 'Vehicle already exists') {
-            this.openSnackbar('Vehicle already exists', 'ok');
-          } else {
-            this.openSnackbar('Vehicle added succesfully', 'ok');
-          }
-          this.vehicleService.getVehicles().subscribe(res => { this.vehicle = res.data;
-                                                        });
-
-          }); }
-   });
-
-}
-}
-
-
-
-
-
-
-
-
-
-

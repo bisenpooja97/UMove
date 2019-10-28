@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Fuel } from 'src/app/model/Fuel';
+import { Fuel } from 'src/app/model/fuel';
 import { FuelService } from '../fuel.service';
-import { Router, ActivatedRoute } from '@angular/router';
-import { MatSnackBar, MatDialog, MatDialogConfig } from '@angular/material';
+import { ActivatedRoute } from '@angular/router';
+import { MatDialog, MatDialogConfig } from '@angular/material';
 import { UpdateFuelComponent } from '../update-fuel/update-fuel.component';
+import { NotificationService } from 'src/app/shared/notification.service';
 
 @Component({
   selector: 'app-fuel-details',
@@ -12,17 +13,16 @@ import { UpdateFuelComponent } from '../update-fuel/update-fuel.component';
 })
 export class FuelDetailsComponent implements OnInit {
   fuel: Fuel;
+  name: string;
+  fuelCost: number;
 
- name: string;
- costFuel: number;
-
- constructor(private router: Router, private fuelService: FuelService,
-             private activatedRoute: ActivatedRoute, private route: ActivatedRoute,
-             private snackbar: MatSnackBar,  private matDialog: MatDialog) { }
+  constructor(private fuelService: FuelService,
+              private route: ActivatedRoute,
+              private matDialog: MatDialog,
+              private notificationService: NotificationService) { }
 
   ngOnInit() {
     this.getFueletails();
-
   }
 
   getFueletails() {
@@ -30,55 +30,32 @@ export class FuelDetailsComponent implements OnInit {
       this.fuel = res.data;
       console.log('data', res.data);
       console.log(res);
-
       this.name = this.fuel.name;
-      this.costFuel = this.fuel.costFuel;
+      this.fuelCost = this.fuel.fuelCost;
+    });
+  }
 
-
-
-
-
-     });
-    }
-
-    openSnackbar(message: string, action: string) {
-      this.snackbar.open(message, action, {
-        duration: 2000,
-        panelClass: ['blue-snackbar']
-      });
-    }
-
-
-
-
-
-update() {
-  const dialogConfig = new MatDialogConfig();
-  dialogConfig.disableClose = true;
-  dialogConfig.autoFocus = true;
-  dialogConfig.width = '20%';
-  dialogConfig.data = {
-    costFuel : this.fuel.costFuel,
-
-  };
-  const dRef = this.matDialog.open(UpdateFuelComponent, dialogConfig);
-  dRef.afterClosed().subscribe(result => {
-    console.log('Back to parent', result);
-    this.fuelService.updateFuel(this.name, result).subscribe(
-      response => {
-                    this.openSnackbar('Fuel details updated succesffuly', 'ok');
-                    this.getFueletails();
-
-                                                    },
-                                                    error => {
-                                                      this.openSnackbar('not updated', 'ok');
-                                                    }
-
-                                                    );
-                                                  });
-
-
-
-}
-
+  update() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+      fuelCost: this.fuel.fuelCost,
+    };
+    const dRef = this.matDialog.open(UpdateFuelComponent, dialogConfig);
+    dRef.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+        console.log('Back to parent', result);
+        this.fuelService.updateFuel(this.name, result).subscribe(
+          response => {
+            this.notificationService.success('Fuel details updated succesffuly');
+            this.getFueletails();
+          },
+          error => {
+            this.notificationService.warn('not updated');
+          }
+        );
+      }
+    });
+  }
 }

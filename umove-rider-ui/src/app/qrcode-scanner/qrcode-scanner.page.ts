@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { ConfigurationService } from '../service/configuration.service';
 import { Configuration } from '../model/configuration';
-
+import {Storage} from '@ionic/storage';
 @Component({
   selector: 'app-qrcode-scanner',
   templateUrl: './qrcode-scanner.page.html',
@@ -22,20 +22,22 @@ export class QrcodeScannerPage implements OnInit {
   rightNow: Date;
   timerSeconds: number;
   rideStatus: string;
+  key = 'details';
 
   constructor(private barcodeScanner: BarcodeScanner, private router: Router, private rideService: RideService,
-              private configurationService: ConfigurationService) {
+              private configurationService: ConfigurationService, private storage: Storage) {
   }
 
   ngOnInit() {
 
-    this.rideService.getRideDetailsByUserIdNStatus('5d8bbc0da6e87d5404aa1921', 'Confirmed')
-      .then(response1 => {
-        console.log('Booking details in scanner: ', response1);
-        this.ride = JSON.parse(response1.data).data;
-        console.log(this.ride);
-      });
-
+    this.storage.get(this.key).then(value => {
+      this.rideService.getRideDetailsByUserIdNStatus(value.id, 'Confirmed')
+          .then(response1 => {
+            console.log('Booking details in scanner: ', response1);
+            this.ride = JSON.parse(response1.data).data;
+            console.log(this.ride);
+          });
+    });
     this.barcodeScanner.scan().then(qrCodeData => {
       console.log('QR Data:', qrCodeData);
       let vehicleNumber;

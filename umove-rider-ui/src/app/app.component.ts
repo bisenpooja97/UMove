@@ -31,6 +31,10 @@ export class AppComponent {
       {
           title: 'Update KYC',
           url: '/update-kyc',
+      },
+      {
+          title: 'Offers',
+          url: '/campaigns',
       }
   ];
 

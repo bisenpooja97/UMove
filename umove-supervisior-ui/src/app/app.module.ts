@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {ErrorHandler, NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { Dialogs } from '@ionic-native/dialogs/ngx';
@@ -10,9 +10,10 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import {VehicleComponent} from './vehicle/vehicle.component';
 import { HTTP } from '@ionic-native/http/ngx';
-import {VehicleListPageModule} from "./vehicle-list/vehicle-list.module";
-import {BarcodeScanner} from "@ionic-native/barcode-scanner/ngx";
-import {BikeDetailComponent} from "./bike-detail/bike-detail.component";
+import {VehicleListPageModule} from './vehicle-list/vehicle-list.module';
+import {BarcodeScanner} from '@ionic-native/barcode-scanner/ngx';
+import {BikeDetailComponent} from './bike-detail/bike-detail.component';
+import {CustomerErrorHandler} from './custom-error-handler';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,7 +25,8 @@ import {BikeDetailComponent} from "./bike-detail/bike-detail.component";
     Dialogs,
       HTTP,
       BarcodeScanner,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    // { provide: ErrorHandler, useClass: CustomerErrorHandler}
   ],
   bootstrap: [AppComponent]
 })

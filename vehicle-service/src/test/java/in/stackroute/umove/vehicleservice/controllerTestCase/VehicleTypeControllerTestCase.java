@@ -45,7 +45,7 @@ public class VehicleTypeControllerTestCase {
         typeList = new ArrayList<VehicleType>();
         MockitoAnnotations.initMocks(this);
         mockMvc = MockMvcBuilders.standaloneSetup(typeController).build();
-        type = new VehicleType("a",1,1);
+        type = new VehicleType("a",1.0F,1.0F);
         typeList.add(type);
     }
     @After
@@ -96,7 +96,7 @@ public class VehicleTypeControllerTestCase {
 
     @Test
     public void getAllType() throws Exception{
-        when(serviceType.find()).thenReturn(typeList);
+        when(serviceType.find(1)).thenReturn(typeList);
         mockMvc.perform(get("/api/v1/types")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(jsonToString(type)))
@@ -106,7 +106,7 @@ public class VehicleTypeControllerTestCase {
 
     @Test
     public void getAllTypeByName() throws Exception{
-        when(serviceType.find()).thenReturn(typeList);
+        when(serviceType.find(1)).thenReturn(typeList);
         mockMvc.perform(get("/api/v1/types?name={name}",type.getName())
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(jsonToString(type)))
@@ -116,7 +116,7 @@ public class VehicleTypeControllerTestCase {
 
     @Test
     public void getAllTypeByNameFail() throws Exception{
-        when(serviceType.find()).thenReturn(typeList);
+        when(serviceType.find(1)).thenReturn(typeList);
         mockMvc.perform(get("/api/v1/typse/{name}",type.getName())
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(jsonToString(type)))

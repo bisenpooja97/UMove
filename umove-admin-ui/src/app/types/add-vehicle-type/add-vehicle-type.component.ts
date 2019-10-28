@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { MatSnackBar, MatDialogRef } from '@angular/material';
 import { HttpClient } from '@angular/common/http';
-import { Fuel } from 'src/app/model/Fuel';
+import { Fuel } from 'src/app/model/fuel';
 import { FuelService } from 'src/app/fuel/fuel.service';
 import { environment } from 'src/environments/environment';
 
@@ -21,23 +21,21 @@ export class AddVehicleTypeComponent implements OnInit {
   selectedFile: File;
   upload: any ;
   message: string;
+
   get rName() {
     return this.typeForm.get('name');
   }
 
   get Rcc() {
-    return this.typeForm.get('vehiclecc');
+    return this.typeForm.get('vehicleCC');
   }
 
   get Rkm() {
-    return this.typeForm.get('kilometer');
+    return this.typeForm.get('mileage');
   }
 
-  get Rcategory() {
-    return this.typeForm.get('category');
-  }
   get Rcosttime() {
-    return this.typeForm.get('costtime');
+    return this.typeForm.get('costPerMin');
   }
   get Rbasefare() {
     return this.typeForm.get('baseFare');
@@ -53,11 +51,12 @@ export class AddVehicleTypeComponent implements OnInit {
 
   typeForm = this.fb.group({
     name: ['', [Validators.pattern('^[a-zA-Z0-9\-]*$')]],
-    kilometer: ['', [Validators.pattern('^[0-9]*$')]],
-    costtime: ['', [Validators.pattern('^[0-9]*$')]],
-    vehiclecc: ['', [Validators.pattern('^[0-9]*$')]],
+    mileage: ['', [Validators.pattern('^[0-9]*$')]],
+    costPerMin: ['', [Validators.pattern('^[0-9]*$')]],
+    vehicleCC: ['', [Validators.pattern('^[0-9]*$')]],
      baseFare: ['', [Validators.pattern('^[0-9]*$')]],
-     fuel: []
+     fuel: [],
+     url: []
   });
 
   getErrorType() {
@@ -89,13 +88,18 @@ export class AddVehicleTypeComponent implements OnInit {
     this.selectedFile = event.target.files[0];
   }
    onUpload() {
-     console.log('this is upload call');
-     const uploadData = new FormData();
-     uploadData.append('file', this.selectedFile, this.selectedFile.name);
-    //  this.http; is; the; injected; HttpClient;
-     this.http.post(this.baseUrl + '/uploadFile?id=' + this.typeForm.value.name, uploadData)
+    console.log('this is upload call');
+    const uploadData = new FormData();
+    uploadData.append('file', this.selectedFile, this.selectedFile.name);
+    console.log('', uploadData);
+   //  this.http; is; the; injected; HttpClient;
+
+    this.http.post(environment.baseUrl + environment.zoneService + '/api/v1/uploadFile?id=' + this.typeForm.value.name, uploadData)
        .subscribe(event => {
-           console.log('response', event); // handle event here
+         let eventData;
+         eventData = event;
+         console.log('response', eventData.fileDownloadUri); // handle event here
+         this.typeForm.value.url = eventData.fileDownloadUri;
         });
   }
 
@@ -114,15 +118,14 @@ export class AddVehicleTypeComponent implements OnInit {
     );
   }
 
-
-
-
-  onSubmit() {
-    this.onUpload();
-    console.log(this.typeForm.value);
-    console.log(this.typeForm.value, 'child');
-    this.dialogRef.close(this.typeForm.value);
-}
+  async onSubmit() {
+    await this.onUpload();
+    setTimeout(() => {
+               console.log(this.typeForm.value);
+               console.log(this.typeForm.value, 'child');
+               this.dialogRef.close(this.typeForm.value);
+            }, 2000);
+   }
 
   ngOnInit() {
     this.getFuelList();

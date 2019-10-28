@@ -1,34 +1,22 @@
-.my-card {
-    margin-bottom: 40px;
-    height: 250px;
-    cursor: pointer;
-}
 
-.my-card:hover {
-    -webkit-transform: scale(1.1);
-    -ms-transform: scale(1.1);
-    transform: scale(1.1);
-}
-
-.name {
+.userName {
     padding-top: 10%;
 }
 
 .status {
     font-weight: bold;
     font-size: 1em;
+    color: white;
 }
 .search {
     margin-left: 240px;
     margin-bottom: 50px;
 }
+
+
 @media only screen and (max-width: 600px) {
     .card {
         margin-left: 10%;
-    }
-
-    app-user-card {
-        width: 75%;
     }
     
     .search {

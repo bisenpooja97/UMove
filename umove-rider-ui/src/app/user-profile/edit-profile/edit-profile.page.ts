@@ -51,7 +51,7 @@ export class EditProfilePage implements OnInit {
                 console.log(this.localUser.id);
                 this.userDataService.editProfileById(this.localUser.id, data).then(res => {
                     console.log(res);
-                    this.router.navigateByUrl('/home');
+                    this.router.navigateByUrl('/view-profile');
                 });
                 const toast = await this.toastController.create({
                     message: 'Profile Updated Successfully.',
