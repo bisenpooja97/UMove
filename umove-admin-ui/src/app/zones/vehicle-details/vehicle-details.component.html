@@ -2,18 +2,17 @@
     Vehicles
 
 </h1>
-<mat-list>
-        <div *ngIf="displayCount === 0" fxLayoutAlign="center center">
+<mat-nav-list>
+        <div *ngIf="displayCount === 0" fxLayoutAlign="center center" class="error-handling">
                 <img src="http://miceemporio.com/img/no-record-found.jpeg">
             </div>
     <mat-list-item *ngFor="let folder of vehicles; let i = index" fxLayoutAlign="center center">
         <mat-icon mat-list-icon>motorcycle</mat-icon>
         <h4 mat-line>{{folder.registrationNo}}</h4>
         <h4 mat-line>{{folder.vehicleType.name}}</h4>
-           
+        <mat-divider></mat-divider>
     </mat-list-item>
-
-</mat-list>
+</mat-nav-list>
 
 <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutAlign="end" class="add-button">
     <button mat-fab color="primary" disabled="{{buttonDisable}}" (click)="add()">

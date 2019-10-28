@@ -13,7 +13,6 @@ import { NotificationService } from '../shared/notification.service';
 export class ZonesComponent implements OnInit {
 
   @Input() zones: Zone[];
-
   @Output() p = 1;
   message: string;
   displayCount: number;
@@ -31,7 +30,6 @@ export class ZonesComponent implements OnInit {
     dialogConfig.autoFocus = true;
     dialogConfig.width = '40%';
     const dRef = this.matDialog.open(AddZoneComponent, dialogConfig);
-
     dRef.afterClosed().subscribe(result => {
       if (result !== undefined) {
         this.zoneService.createZone(result)

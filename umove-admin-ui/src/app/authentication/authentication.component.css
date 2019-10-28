@@ -1,6 +1,11 @@
 .login {
+    padding-top: 2%;
     padding-bottom: 8%;
     font-size: 1.5em;
+}
+
+.login-heading {
+    padding-top: 2%;
 }
 
 
