@@ -16,6 +16,12 @@
     width: 50%;
 }
 
+.space-top {
+    padding-top: 12%;
+    padding-bottom: 10%;
+}
+
+
 .iconCapacity {
     
     cursor: pointer;
