@@ -17,7 +17,9 @@ export const environment = {
   vehicleBaseApi: '/api/v1/vehicles',
   typeBaseApi: '/api/v1/types',
   fuelBaseApi: '/api/v1/fuel',
-
+  baseUrl3: 'http://192.168.0.123:8080/',
+  bookingService: 'bookingservice',
+  configBaseApi: '/api/v1/config'
 };
 /*
  * For easier debugging in development mode, you can import the following file
