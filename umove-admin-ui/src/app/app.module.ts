@@ -35,6 +35,7 @@ import { TypesModule } from './types/types.module';
 import { SharedModule } from './shared/shared.module';
 import { FullscreenService } from './shared/fullscreen.service';
 import { AvatarModule } from 'ngx-avatar';
+import { SettingsModule } from './settings/settings.module';
 
 @NgModule({
   declarations: [
@@ -79,7 +80,8 @@ import { AvatarModule } from 'ngx-avatar';
     MatDatepickerModule,
     MatNativeDateModule,
     SharedModule,
-    AvatarModule
+    AvatarModule,
+    SettingsModule
   ],
   providers: [MatDatepickerModule, FullscreenService],
   bootstrap: [AppComponent]

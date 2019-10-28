@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ZoneService } from './zone.service';
+import { SettingsService } from './settings.service';
 
-describe('ZoneService', () => {
+describe('SettingsService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: ZoneService = TestBed.get(ZoneService);
+    const service: SettingsService = TestBed.get(SettingsService);
     expect(service).toBeTruthy();
   });
 });
