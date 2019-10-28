@@ -19,6 +19,8 @@ export class MapService implements OnInit{
   selectZone$: Observable<Zone>;
   loading: Subject<any>;
   onLoad$: Observable<any>;
+  popup = new mapboxgl.Popup({  closeOnClick: false,closeButton: false,alwaysOpen:true})
+      .setText('No Nearby Zones Available');
 
 
   constructor(private zoneService : ZoneService,private geolocation: Geolocation,) {
@@ -107,15 +109,23 @@ export class MapService implements OnInit{
   }
 
 
-  marker(lat, lng) {
+  marker(lat, lng,status) {
 
     console.log('coordinates',lat,lng);
     this.map.on('mouseenter', 'places', () => {
       this.map.getCanvas().style.cursor = 'pointer';
     });
+    if(status){
      this.markers
         .setLngLat([lng, lat])
-        .addTo(this.map)
+         .setPopup(this.popup)
+         .addTo(this.map)
+    }
+    else {
+      this.markers
+          .setLngLat([lng, lat])
+          .addTo(this.map)
+    }
 
     // function onDragEnd() {
     //   const lngLat = this.markers.getLngLat();
@@ -151,7 +161,7 @@ export class MapService implements OnInit{
       while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
         coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
       }
-      new mapboxgl.Popup()
+      new mapboxgl.Popup({closeButton: false})
           .setLngLat(coordinates)
           .setHTML(description)
           .addTo(this.map);
@@ -284,7 +294,14 @@ export class MapService implements OnInit{
   nearbyZonesLayer(lat: number, lng: number){
     this.zoneService.getNearbyZones(lat, lng).then(response =>{
       const data = JSON.parse(response.data);
-      this.createFeature(data.data,lat,lng);
+
+      if(data.data==[]){
+        this.marker(lat, lng,true);
+      }
+      else {
+        this.marker(lat, lng,false);
+        this.createFeature(data.data,lat,lng);
+      }
     }).catch(error => {
       console.log(error);
       this.zoneService.presentToast(error);
@@ -304,7 +321,7 @@ export class MapService implements OnInit{
               [lng, lat],
               1000,15
           );
-          this.marker( lat, lng );
+          // this.marker( lat, lng );
           this.nearbyZonesLayer(lat, lng);
 
         }
