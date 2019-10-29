@@ -4,7 +4,6 @@
             Settings
         </h1>
     </div>
-    
     <form class="settings-form">
         <mat-form-field class="settings-full-width">
             <input matInput #autocancelTime name="autocancelTime" value="{{autocancelTimeValue}}" type="text" 
@@ -16,5 +15,5 @@
             type="text" placeholder="Cancel Threshold Time" (change)="onTimeChange(cancelThresholdTime.name,
             cancelThresholdTime.value)">
         </mat-form-field>
-    </form> 
+    </form>
 </div>
