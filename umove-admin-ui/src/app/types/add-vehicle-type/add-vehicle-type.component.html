@@ -1,0 +1,91 @@
+<div class="add">
+    <mat-toolbar>
+        <span class="fill-remaining-space"></span>
+        <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabIndex="-1">
+          <mat-icon>clear</mat-icon>
+      </button>
+    </mat-toolbar>
+
+
+    <form fxLayout="column" fxLayoutAlign="center center" [formGroup]="typeForm" (ngSubmit)="onSubmit()">
+        <h2 fxLayout="column" fxLayout.gt-md="row" fxLayoutGap.gt-md="15px" fxLayoutAlign="center center">Add New Types</h2>
+
+        <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px" class="form">
+
+            <mat-form-field appearance="outline" fxFlex>
+                <mat-label>Type Name</mat-label>
+                <input matInput #input placeholder="Type Name" formControlName="name" required>
+
+                <mat-error *ngIf="rName.invalid">
+
+                    {{getErrorType()}}
+                </mat-error>
+
+            </mat-form-field>
+
+
+            <mat-form-field appearance="outline" fxFlex>
+                <mat-label>KM Per Litre</mat-label>
+                <input matInput #input placeholder="Mileage" formControlName="mileage" required>
+                <mat-error *ngIf="Rkm.invalid">
+
+                    {{getErrorkm()}}
+                </mat-error>
+            </mat-form-field>
+
+
+            <mat-form-field appearance="outline" fxFlex>
+                <mat-label>Vehicle CC</mat-label>
+                <input matInput #input placeholder="vehicle CC" formControlName="vehicleCC" required>
+                <mat-error *ngIf="Rcc.invalid">
+                    {{getErrorCC()}}
+
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" fxFlex>
+                <mat-label>Base Fare</mat-label>
+                <input matInput #input placeholder="Base Fare" formControlName="baseFare" required>
+                <mat-error *ngIf="Rbasefare.invalid">
+                    {{getErrorBaseFare()}}
+
+                </mat-error>
+
+            </mat-form-field>
+
+
+            <mat-form-field appearance="outline" fxFlex>
+                <mat-label>Fuel Type</mat-label>
+                <mat-select formControlName="fuel">
+                    <mat-option *ngFor="let fuel of  fuels" [value]="fuel">
+                        {{fuel.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" fxFlex>
+                <mat-label>Cost Time</mat-label>
+                <input matInput #input placeholder="Cost Per Minute" formControlName="costPerMin" required>
+                  <mat-error *ngIf="Rcosttime.invalid">
+
+                    {{getErrorCosttime()}}
+                </mat-error>
+
+            </mat-form-field>
+
+
+            <input name="file" type="file" class="ng-hide" (change)="onFileChanged($event)" #fileInput>
+
+
+
+
+            <button mat-raised-button class="btn"  [disabled]='!typeForm.valid'  color="primary">
+          Submit
+        </button>
+
+
+        </div>
+
+    </form>
+
+</div>

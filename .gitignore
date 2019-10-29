@@ -4,7 +4,11 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**
 !**/src/test/**
+/user-service/uploads/
 
+/user-service/uploads/**
+
+/user-service/uploads/
 ### STS ###
 .apt_generated
 .classpath
@@ -14,6 +18,7 @@ target/
 .springBeans
 .sts4-cache
 
+/user-service/uploads/
 ### IntelliJ IDEA ###
 .idea
 *.iws

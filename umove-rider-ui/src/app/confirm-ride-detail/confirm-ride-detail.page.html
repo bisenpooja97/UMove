@@ -1,0 +1,82 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Confirm Ride Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <app-bike-detail [selectedVehicle]="booking?.vehicle"></app-bike-detail>
+
+  <ion-card>
+    <ion-card-content>
+      <ion-card-subtitle>
+        <ion-icon name="pin" color="tertiary"></ion-icon> {{ booking?.sourceZone?.name }}
+      </ion-card-subtitle>
+      <ion-card-subtitle>
+        <ion-icon name="pin" color="tertiary"></ion-icon> {{ booking?.destinationZones[0]?.name }}
+      </ion-card-subtitle>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="!booking?.paymentMethod">
+      <ion-item lines="none" routerLink="/show-payment-method">
+        <a>Select Payment Method</a>
+      </ion-item>
+  </ion-card>
+
+  <ion-card *ngIf="booking?.paymentMethod">
+    <ion-card-content>
+      <ion-grid no-padding>
+        <ion-row class="ion-align-items-center">
+          <ion-img src="assets/icon/gpay.png" *ngIf="booking?.paymentMethod?.paymentProvider==='Google Pay'" style="height: 48px; width: 48px;"></ion-img>
+          <ion-img src="assets/icon/phonepe.png" *ngIf="booking?.paymentMethod?.paymentProvider==='PhonePe'" style="height: 48px; width: 48px;"></ion-img>
+          <ion-img src="assets/icon/paytm.png" *ngIf="booking?.paymentMethod?.paymentProvider==='Paytm'" style="height: 48px; width: 48px;"></ion-img>
+          <ion-col padding-horizontal>
+            <ion-text color="dark">
+              <h2>{{ booking?.paymentMethod?.paymentMethodNumber }}</h2>
+            </ion-text>
+            <ion-text>
+              <h3>{{ booking?.paymentMethod?.paymentType }}</h3>
+            </ion-text>
+          </ion-col>
+          <ion-icon name="close-circle" size="large" (click)="removeSelectedPaymentMethod()"></ion-icon>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="!booking?.promocode">
+    <ion-item lines="none" routerLink="/campaigns">
+      <a>Apply Promocode</a>
+    </ion-item>
+  </ion-card>
+
+  <ion-card *ngIf="booking?.promocode">
+    <ion-card-content>
+      <ion-grid no-padding>
+        <ion-row class="ion-align-items-center">
+          <ion-icon name="pricetags" size="large" color="success"></ion-icon>
+          <ion-col padding-horizontal>
+            <ion-text color="success">
+              <h2>{{ booking?.promocode?.promocode }} Promocode Applied!</h2>
+            </ion-text>
+            <ion-text>
+              <p>Get {{ booking?.promocode?.discountPercent }}% off on your ride upto {{ 50 | currency: 'INR' }}</p>
+            </ion-text>
+          </ion-col>
+          <ion-icon name="close-circle" size="large" (click)="removeSelectedPromocode()"></ion-icon>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+        <ion-row  class="map" id="booking" style="height: 300px;" ></ion-row>
+  </ion-card>
+
+  <ion-button expand="block" class="ion-no-margin btn-bottom" (click)="confirmBooking()">
+    Confirm Booking
+  </ion-button>
+</ion-content>

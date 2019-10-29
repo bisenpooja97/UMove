@@ -11,7 +11,7 @@ The architecture is composed by eight services:
 - `user-service`: REST service created with **Spring Boot** for User related services
 - `vehicle-service`: REST service created with **Spring Boot** for Vehicle related services
 - `zone-service`: Simple REST service created with **Spring Boot** for Zones related services
-- `booking-service`: Simple REST service created with **Spring Boot** for booking related services
+- `ride-service`: Simple REST service created with **Spring Boot** for ride related services
 - `help-service`: Simple REST service created with **Spring Boot** for help related services
 - `report-service`: Simple REST service created with **Spring Boot** for generating reports for all the data
 

@@ -1,0 +1,12 @@
+<mat-card (click)="ok()" class="my-card">
+  <mat-card-content fxLayoutAlign="space-between" >
+    <ngx-avatar name="{{name}}"></ngx-avatar>
+    <mat-chip-list aria-label="Fish selection">
+<mat-chip [ngStyle]="{'background-color':getColor(userStatus)}" class="status">{{userStatus}}</mat-chip>
+</mat-chip-list>
+</mat-card-content>
+<mat-card-title class="userName">{{name}}</mat-card-title>
+  <mat-card-content>Mobile No: {{mobileNumber}}</mat-card-content>
+</mat-card>
+
+

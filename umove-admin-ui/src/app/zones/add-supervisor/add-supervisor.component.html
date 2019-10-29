@@ -1,0 +1,29 @@
+<mat-toolbar>
+        <span class="fill-remaining-space"></span>
+        <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabIndex="-1">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </mat-toolbar>
+
+    <form fxLayout="column" fxLayoutAlign="center center" [formGroup]="zoneForm" (ngSubmit)="onSubmit()">
+        <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px" class="form"
+        fxLayoutAlign="center center">
+                        <mat-form-field appearance="outline" fxFlex>
+                                <mat-label>Supervisor Name</mat-label>
+                                <input #input aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto" [(ngModel)]="sname2">
+                                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedclient($event)" [displayWith]="getOptionText">
+                                    <mat-option *ngFor="let option of options ; let i = index" [value]="option">
+                                        {{option.name}}
+                                    </mat-option>
+                                </mat-autocomplete>
+        
+                            </mat-form-field>
+                            <button mat-raised-button class="btn" [disabled]='!zoneForm.valid' color="primary">
+                                Submit
+                            </button>
+        
+            </div>
+        
+        
+        
+        </form>

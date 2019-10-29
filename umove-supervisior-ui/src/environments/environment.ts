@@ -3,7 +3,14 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  baseUrl: 'http://13.235.35.202:8080/',
+  bookingService: 'bookingservice',
+  bookingBaseApi: '/api/v1/rides',
+  vehiclesBaseApi: '/api/v1/vehicles',
+  zoneService : 'zoneservice',
+  zones : '/zones',
+  vehicles: '/vehicles',
 };
 
 /*

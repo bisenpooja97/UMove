@@ -1,44 +1,52 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>
-      Home
-    </ion-title>
+    <ion-row *ngIf="page==='pick-up' && !trip">
+      <ion-col size="6">
+        <ion-button color="secondary" shape="round" expand="block" fill="solid" (click)="trip=false" >Round Trip</ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button  color="secondary" shape="round" expand="block" fill="outline"  (click)="trip=true">One Way</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="page==='pick-up' && trip">
+      <ion-col size="6">
+        <ion-button color="secondary" shape="round" expand="block" fill="outline"  (click)="trip=false" >Round Trip</ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button color="secondary" shape="round" expand="block" fill="solid"  (click)="trip=true">One Way</ion-button>
+      </ion-col>
+    </ion-row>
   </ion-toolbar>
 </ion-header>
-
-<ion-content>
-    <ion-card class="welcome-card">
-      <img src="/assets/shapes.svg" alt="" />
-      <ion-card-header>
-        <ion-card-subtitle>Get Started</ion-card-subtitle>
-        <ion-card-title>Welcome to Ionic</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <p>Now that your app has been created, you'll want to start building out features and components. Check out some of the resources below for next steps.</p>
-      </ion-card-content>
-    </ion-card>
-    <ion-list lines="none">
-      <ion-list-header>
-        <ion-label>Resources</ion-label>
-      </ion-list-header>
-      <ion-item href="https://ionicframework.com/docs/">
-        <ion-icon slot="start" color="medium" name="book"></ion-icon>
-        <ion-label>Ionic Documentation</ion-label>
-      </ion-item>
-      <ion-item href="https://ionicframework.com/docs/building/scaffolding">
-        <ion-icon slot="start" color="medium" name="build"></ion-icon>
-        <ion-label>Scaffold Out Your App</ion-label>
-      </ion-item>
-      <ion-item href="https://ionicframework.com/docs/layout/structure">
-        <ion-icon slot="start" color="medium" name="grid"></ion-icon>
-        <ion-label>Change Your App Layout</ion-label>
-      </ion-item>
-      <ion-item href="https://ionicframework.com/docs/theming/basics">
-        <ion-icon slot="start" color="medium" name="color-fill"></ion-icon>
-        <ion-label>Theme Your App</ion-label>
-      </ion-item>
-    </ion-list>
+<ion-content [ngClass]="{'loader': !isLoaded}" *ngIf="!isLoaded">
+  <ion-grid style="height: 100%">
+    <ion-row style="height: 100%;">
+      <ion-img src="assets/icon/loader.svg" style="margin: 0 auto;" ></ion-img>
+    </ion-row>
+  </ion-grid>
 </ion-content>
+<ion-content>
+  <!--<app-map [containerId]="containerId"  (onSelected)="getSelected($event);" ></app-map>-->
+  <ion-grid style="height: 100%;">
+    <ion-row>
+      <ion-auto-complete style="width: 100%"  [dataProvider]="zoneService" (itemSelected)="gettingCoordinatesByLocality($event)"></ion-auto-complete>
+    </ion-row>
+    <ion-row  class="map" id="pickup" style="height: 100%;" >
+    </ion-row>
+    <ion-row class="buttonStyle">
+      <ion-button color="secondary" *ngIf="localUserData?.userStatus==='Inative'" shape="round" fill="solid"    href="/update-kyc"  ><ion-icon name="document"></ion-icon>&nbsp;Complete KYC to Book</ion-button>
+      <ion-button color="secondary" *ngIf="localUserData?.userStatus==='Active'" shape="round"  fill="solid"   href="/campaigns"><ion-icon name="pricetags"></ion-icon>&nbsp;Offers</ion-button>
+    </ion-row>
+<!--    <ion-button *ngIf="localUserData?.userStatus==='Inactive'">Complete Your KYC</ion-button>-->
+
+  </ion-grid>
+</ion-content>
+<ion-footer *ngIf="isLoaded">
+  <ion-row >
+    <ion-button  [class.button-disabled]="selectedZone===undefined" expand="full" class="ion-no-margin btn-bottom bottom-button"  (click)="showVehicleList()">Show vehicles</ion-button>
+  </ion-row>
+
+</ion-footer>

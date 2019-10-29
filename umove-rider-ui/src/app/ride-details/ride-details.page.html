@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Ride details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <app-bike-detail [selectedVehicle]="ride?.vehicle"></app-bike-detail>
+
+  <ion-card>
+    <ion-card-content>
+      <ion-card-subtitle>
+        <ion-icon name="pin" color="tertiary"></ion-icon> {{ ride?.sourceZone?.locality }}
+      </ion-card-subtitle>
+      <ion-card-subtitle>
+        <ion-icon name="pin" color="tertiary"></ion-icon> {{ destinationZone?.locality }}
+      </ion-card-subtitle>
+    </ion-card-content>
+  </ion-card>
+
+
+  <!-- <ion-card>
+    <ion-card-content>
+      <ion-row>
+        <ion-col size="5">
+          <ion-card-subtitle>{{ ride?.sourceZone?.locality }}</ion-card-subtitle>
+        </ion-col>
+        <ion-col size="5">
+          <ion-card-subtitle> {{ destinationZone?.locality }}</ion-card-subtitle>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card> -->
+
+  <ion-card>
+    <ion-input required type="text" placeholder="Need help?"></ion-input>
+  </ion-card>
+</ion-content>
+
+<ion-footer>
+  <ion-button class="changeDestination_btn" (click)="changeDestination()">Change destination</ion-button>
+  <ion-button class="endRide_btn" (click)="endRideRequest()">End ride</ion-button>
+</ion-footer>

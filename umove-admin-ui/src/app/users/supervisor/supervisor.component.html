@@ -1,0 +1,33 @@
+<h1 fxLayout="column" fxLayout.gt-md="row" fxLayoutGap.gt-md="15px" class="header">
+    Supervisors
+</h1>
+<div fxLayout="row" fxLayoutGap="20px" class="search" fxLayout.gt-xs="row">
+    <mat-form-field fxFlex=20%>
+        <input matInput [(ngModel)]="term" placeholder="Search">
+    </mat-form-field>
+</div>
+<div fxLayout="row wrap">
+<div *ngFor="let data of supervisors | paginate: { itemsPerPage: 12, currentPage: p}| filter:term"
+fxLayout.xs="column" fxLayout.lg="row wrap" fxLayoutGap="50px" class="card" fxLayoutAlign.sm="center center">
+<mat-card class="my-card card">
+ <mat-card-content fxLayoutAlign="space-between" >
+    <ngx-avatar name="{{name}}"></ngx-avatar>
+    <mat-chip-list aria-label="Fish selection">
+<mat-chip [ngStyle]="{'background-color':getColor(data.userStatus)}" class="status">{{data.userStatus}}</mat-chip>
+</mat-chip-list>
+</mat-card-content>
+<mat-card-title class="userName">{{data.name}}</mat-card-title>
+  <mat-card-content>Mobile Number:{{data.mobileNumber}}</mat-card-content>
+  <mat-card-content>Email:{{data.email}}</mat-card-content>
+  </mat-card>
+</div>
+ <pagination-controls fxLayoutAlign="center center" (pageChange)="p = $event"></pagination-controls>
+</div>
+
+<div fxLayout="column" fxLayout.gt-xs="row" fxLayoutAlign="end" class="add-button">
+    <button mat-fab color="primary" (click)="add()">
+        <i class="material-icons">
+            add
+        </i>
+    </button>
+</div>

@@ -1,0 +1,18 @@
+<mat-card class="my-card">
+
+  <!-- <mat-card-content fxLayoutAlign="end" [ngStyle]="{'color':getColor(documentStatus)}">{{documentStatus}}</mat-card-content>
+  <ngx-avatar name="{{name}}"></ngx-avatar> -->
+  <mat-card-content fxLayoutAlign="space-between" >
+    <ngx-avatar name="{{name}}"></ngx-avatar>
+    <mat-chip-list aria-label="Fish selection">
+<mat-chip [ngStyle]="{'background-color':getColor(documentStatus)}" class="status">{{documentStatus}}</mat-chip>
+</mat-chip-list>
+</mat-card-content>
+  <mat-card-title fxLayoutAlign="start" >{{name}}</mat-card-title>
+  <mat-card-content fxLayoutAlign="start" >Mobile Number:{{mobileNumber}}</mat-card-content>
+  <mat-card-content fxLayoutAlign="start" class="userName">Driving Licence Number:{{dLicenceNumber}}</mat-card-content>
+  <mat-card-content fxLayoutAlign="start">Expiry Date:{{expiryDate|date: "dd LLLL yyyy"}}</mat-card-content>
+   <mat-card-actions >
+    <button mat-raised-button color="primary" class="view-button" (click)=view()>VIEW</button>
+  </mat-card-actions>
+</mat-card>

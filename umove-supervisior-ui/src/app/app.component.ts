@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
@@ -13,12 +12,12 @@ export class AppComponent {
   public appPages = [
     {
       title: 'Home',
-      url: '/home',
+      url: '',
       icon: 'home'
     },
     {
-      title: 'List',
-      url: '/list',
+      title: 'Change Status',
+      url: '/vehiclelist',
       icon: 'list'
     }
   ];
