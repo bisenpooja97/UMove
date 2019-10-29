@@ -1,0 +1,19 @@
+<div class="settings">
+    <div fxLayout="column">
+        <h1 class="header">
+            Settings
+        </h1>
+    </div>
+    <form class="settings-form">
+        <mat-form-field class="settings-full-width">
+            <input matInput #autocancelTime name="autocancelTime" value="{{autocancelTimeValue}}" type="text" 
+            placeholder="Autocancel Time" (change)="onTimeChange(autocancelTime.name, autocancelTime.value)">
+        </mat-form-field> 
+    
+        <mat-form-field class="settings-full-width">
+            <input matInput #cancelThresholdTime name="cancelThresholdTime" value="{{cancelThresholdTimeValue}}" 
+            type="text" placeholder="Cancel Threshold Time" (change)="onTimeChange(cancelThresholdTime.name,
+            cancelThresholdTime.value)">
+        </mat-form-field>
+    </form>
+</div>

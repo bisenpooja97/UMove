@@ -8,23 +8,23 @@
                                         </mat-icon>
                                 </button>
                         </mat-card-title>
-        
+
                         <br><br>
-        
+
             <div fxFlex=50% fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="20%" fxLayoutGap.lt-md="0px"
-                class="form" fxLayoutAlign="center center">    
+                class="form" fxLayoutAlign="center center">
             <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="50px" fxLayoutGap.lt-md="0px" class="col">
-                    <mat-card-title fxLayoutAlign="center center">Name: {{sName}}</mat-card-title> 
+                    <mat-card-title fxLayoutAlign="center center">Name: {{sName}}</mat-card-title>
                     <mat-card-title fxLayoutAlign="center center">Contact No: {{sNumber}}</mat-card-title>
-                    
-                       
-            </div>  
+
+
+            </div>
             <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="50px" fxLayoutGap.lt-md="0px" class="col">
-                    <mat-card-title fxLayoutAlign="center center">Email: {{sEmail}}</mat-card-title> 
+                    <mat-card-title fxLayoutAlign="center center">Email: {{sEmail}}</mat-card-title>
                     <mat-card-title fxLayoutAlign="center center">Shift: Daily</mat-card-title>
-                    
-            </div> 
-            </div>  
+
+            </div>
+            </div>
             <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutAlign="end" class="add-button">
                     <button mat-fab color="primary" disabled="{{buttonDisabled}}" (click)="addSupervisor()">
                         <i class="material-icons">
@@ -33,4 +33,3 @@
                     </button>
                 </div>
         </mat-card>
-        

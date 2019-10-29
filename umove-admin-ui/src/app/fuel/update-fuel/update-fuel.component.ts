@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-update-fuel',
@@ -16,9 +16,18 @@ export class UpdateFuelComponent implements OnInit {
                 this.fuelCost = data.fuelCost;
 }
 
+get rCost() {
+  return this.fuelForm.get('fuelCost');
+}
+
 fuelForm = this.fb.group({
-  fuelCost: ['']
+  fuelCost: ['', [Validators.pattern('[0-9]+(\.[0-9][0-9]?)?')]],
  });
+
+ getErrorCost() {
+  return  this.rCost.hasError('pattern') ? 'Invalid cost' :
+      '';
+}
 
  onClose() {
   this.dialogRef.close();

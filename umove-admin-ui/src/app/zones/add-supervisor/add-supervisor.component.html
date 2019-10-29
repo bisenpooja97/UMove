@@ -9,21 +9,19 @@
         <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px" class="form"
         fxLayoutAlign="center center">
                         <mat-form-field appearance="outline" fxFlex>
-                                <mat-label>Supervisor Name</mat-label>
-                                <input #input aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto" [(ngModel)]="sname2">
+                                <mat-label class="font-style">Supervisor Name</mat-label>
+                                <input #input aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto"
+                                class="font-style" [(ngModel)]="sname2">
                                 <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedclient($event)" [displayWith]="getOptionText">
-                                    <mat-option *ngFor="let option of options ; let i = index" [value]="option">
+                                    <mat-option *ngFor="let option of options ; let i = index" [value]="option" class="font-style">
                                         {{option.name}}
                                     </mat-option>
                                 </mat-autocomplete>
         
                             </mat-form-field>
-                            <button mat-raised-button class="btn" [disabled]='!zoneForm.valid' color="primary">
+                            <button mat-raised-button class="btn font-style" [disabled]='!zoneForm.valid' color="primary">
                                 Submit
                             </button>
         
             </div>
-        
-        
-        
         </form>

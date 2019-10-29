@@ -10,4 +10,5 @@ public interface ServiceZoneTypeCount {
     ZoneTypeCount create(ZoneTypeCount zoneTypeCount);
     ZoneTypeCount updateCount(String zoneId, String typeId, ZoneTypeCount zoneTypeCount);
     List<ZoneTypeCount> findAllTypeCount();
+    ZoneTypeCount bookingConfirmed(String zoneId, String typeId);
 }

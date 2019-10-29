@@ -39,6 +39,7 @@ export class FuelDetailsComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
+    dialogConfig.width = '40%';
     dialogConfig.data = {
       fuelCost: this.fuel.fuelCost,
     };

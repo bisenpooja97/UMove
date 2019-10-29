@@ -1,0 +1,16 @@
+.settings-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+    margin-left: 10%;
+    margin-bottom: 50px;
+    font-size: 2em;
+    padding-top: 5%;
+}
+.settings-full-width {
+    width: 100%;
+}
+
+.settings {
+    padding-bottom: 20%;
+}

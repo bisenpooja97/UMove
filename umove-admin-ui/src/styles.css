@@ -1,48 +1,73 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+html {
+    height: 100%;
+    background-color:#FAFAFA;
+}
+
 body {
     margin: 0;
     height: 100%;
+    font-size: 1em;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .header {
-    margin-left: 240px;
+    margin-left: 10%;
 }
 
 .card {
-    margin-left: 15%;
+    margin-left: 10%;
 }
 
 .add-button {
-    padding-right: 150px;
+    position: fixed;
+    right: 5%;
+    bottom: 10%;
 }
 
 .search {
-    margin-left: 240px;
+    margin-left: 10%;
     margin-bottom: 50px;
 }
 
+pagination-controls {
+   margin-top: 5%;
+   margin-bottom: 10%;
+}
+
+
 @media only screen and (max-width: 600px) {
-    .search {
-        margin-left: 60px;
-        margin-bottom: 50px;
+
+    .card {
+        margin-left: 0%;
     }
-    .header {
-        margin-left: 50px;
-    }
+
     .add-button {
-        padding-left: 300px;
+        right: 0%;
     }
+
+    pagination-controls {
+        margin-top: 5%;
+        margin-bottom: 25%;
+
+     }
+
+
 }
 .my-card {
     height: 250px;
     cursor: pointer;
 }
 .my-card:hover {
-    -webkit-transform: scale(1.1);
-    -ms-transform: scale(1.1);
-    transform: scale(1.1);
+    -webkit-box-shadow: 3px 3px 5px 6px #ccc;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+    -moz-box-shadow:    3px 3px 5px 6px #ccc;  /* Firefox 3.5 - 3.6 */
+    box-shadow:         2px 2px 5px 6px red;  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
+
 }
 
-
+.font-style {
+    font-family: 'Montserrat', sans-serif;
+  }

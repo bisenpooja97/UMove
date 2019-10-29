@@ -9,3 +9,15 @@ app-fuel-card {
         width: 75%;
     }
 }
+
+.paginator ::ng-deep .ngx-pagination .current {
+    background: #344955;
+    color: white;
+    font-size: 1.5em;
+    border-radius: 10px;
+   }
+
+   .no-data {
+       padding-bottom: 15%;
+       padding-top: 13%;
+   }

@@ -1,6 +1,6 @@
 <div fxLayout.gt-sm="row" fxLayout.sm="column" fxLayoutGap="10%"> 
     <div fxLayout="column" fxLayout.sm="column" fxLayoutGap="50px" fxLayoutGap.lt-md="0px">
-      <h1 fxLayout="column" fxLayout.gt-md="row" fxLayoutGap.gt-md="15px" class="vehicleName">
+      <h1 fxLayout="column" fxLayout.gt-md="row" fxLayoutGap.gt-md="15px" class="vehicleName font-style">
             {{registrationNo}}
 
         </h1>
@@ -8,9 +8,9 @@
 
     <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap.lt-md="0px">
         <mat-form-field appearance="outline" fxFlex class="status">
-            <mat-label>Vehicle Status</mat-label>
-            <mat-select [(ngModel)]="status1" (ngModelChange)="onChange($event)">
-                <mat-option *ngFor="let z of vehicleStatus" [value]="z.value">
+            <mat-label class="font-style">Vehicle Status</mat-label>
+            <mat-select [(ngModel)]="status1" (ngModelChange)="onChange($event)" class="font-style">
+                <mat-option *ngFor="let z of vehicleStatus" [value]="z.value" class="font-style">
                     {{z.viewValue}}
                 </mat-option>
             </mat-select>
@@ -18,9 +18,9 @@
     </div>
 </div>
 
-<div fxLayout="column">
+<div fxLayout="column" class="space-top">
 <mat-card class="vehicle" fxFlex.sm="0 1 calc(50%-10px)" fxFlex.md="0 1 calc(33%-10px)" fxLayout="column" fxLayoutGap="20px">
-    <mat-card-title fxLayoutAlign="start" class="date">{{purchasedDate| date:"dd LLLL yyyy"}}
+    <mat-card-title fxLayoutAlign="start" class="date font-style">{{purchasedDate| date:"dd LLLL yyyy"}}
         <button mat-button class="icon" (click)="update()">
             <mat-icon>
                     create
@@ -31,15 +31,15 @@
     <div fxFlex=50% fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="20%" fxLayoutGap.lt-md="0px"
     class="form" fxLayoutAlign="center center">    
 <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="50px" fxLayoutGap.lt-md="0px" class="col">
-         <mat-card-title fxLayoutAlign="center center">Insurance No: {{insuranceNo}}</mat-card-title>
-            <mat-card-title fxLayoutAlign="center center">Last Service Date: {{lastServiceDate| date:"dd LLLL yyyy"}}</mat-card-title>
-            <mat-card-title fxLayoutAlign="center center">Name: {{name}}</mat-card-title>
+         <mat-card-title fxLayoutAlign="center center" class="font-style">Insurance No: {{insuranceNo}}</mat-card-title>
+            <mat-card-title fxLayoutAlign="center center" class="font-style">Last Service Date: {{lastServiceDate| date:"dd LLLL yyyy"}}</mat-card-title>
+            <mat-card-title fxLayoutAlign="center center" class="font-style">Name: {{name}}</mat-card-title>
 </div>
 <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="50px" fxLayoutGap.lt-md="0px" class="col">
  
-    <mat-card-title fxLayoutAlign="center center">cost-Km: {{costkm}}</mat-card-title>
-    <mat-card-title fxLayoutAlign="center center">cost-Time: {{costtime}}</mat-card-title>
-    <mat-card-title fxLayoutAlign="center center">Chassis No: {{chassisNumber}}</mat-card-title>
+    <mat-card-title fxLayoutAlign="center center" class="font-style">Cost/KM: {{costkm | number: '1.2-2'}}</mat-card-title>
+    <mat-card-title fxLayoutAlign="center center" class="font-style">Cost/min: {{costtime}}</mat-card-title>
+    <mat-card-title fxLayoutAlign="center center" class="font-style">Chassis No: {{chassisNumber}}</mat-card-title>
 
 
         </div>
