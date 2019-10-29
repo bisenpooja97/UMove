@@ -15,6 +15,7 @@
                 <input matInput #input placeholder="Insurance No." formControlName="insuranceNo" [(ngModel)]="insuranceNo" required>
 
             </mat-form-field>
+
         </div>
     </div>
 
@@ -24,12 +25,14 @@
 
             <mat-label>Vehicle Last Service date</mat-label>
             <mat-form-field>
-                <input matInput [matDatepicker]="lastServiceDate" formControlName="lastServiceDate" [max]="todaydate" placeholder="Vehicle Last Service  Date" #input>
+                <input matInput [matDatepicker]="lastServiceDate" formControlName="lastServiceDate" [max]="todaydate" [min]="minDate" placeholder="Vehicle Last Service  Date" #input>
                 <mat-datepicker-toggle matSuffix [for]="lastServiceDate"></mat-datepicker-toggle>
                 <mat-datepicker #lastServiceDate></mat-datepicker>
             </mat-form-field>
+
         </div>
     </div>
+
 
 
     <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">

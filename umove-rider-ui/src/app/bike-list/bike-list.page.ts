@@ -1,6 +1,10 @@
-import {Component, OnInit, Output} from '@angular/core';
+import {Component, OnInit, Output,ViewChild} from '@angular/core';
+import { IonInfiniteScroll } from '@ionic/angular';
 import {ZoneService} from '../service/zone/zone.service';
 import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
+import {Zone} from "../model/zone";
+import {HTTPResponse} from "@ionic-native/http";
+import {TypeCountList} from "../model/type-count-list";
 
 
 @Component({
@@ -10,13 +14,16 @@ import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
 })
 // tslint:disable-next-line:component-class-suffix
 export class BikeListPage implements OnInit {
+  @ViewChild(IonInfiniteScroll,{static:false}) infiniteScroll: IonInfiniteScroll;
+  private response = null;
+  private data: any;
 
   constructor(private zoneService: ZoneService, private route: ActivatedRoute, private router: Router) { }
-  bikeList = null;
-  pickUpZone: string;
+
+  pickUpZone: Zone;
   trip: boolean;
   formattedData: {} = {};
-  typeList = [];
+  typeList : TypeCountList[];
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
@@ -25,91 +32,11 @@ export class BikeListPage implements OnInit {
         this.trip = this.router.getCurrentNavigation().extras.state.trip;
         this.pickUpZone = this.router.getCurrentNavigation().extras.state.pickUpZone;
         console.log('trip', this.pickUpZone);
+        this.doInfinite();
       }
     });
-
-    // Subsribing service for getting vehicles list for a particular zone
-    // this.zoneService.getVehiclesByZoneTypes(this.pickUpZone).then(data => {
-    //    this.bikeList = data;
-    //   this.bikeList.data.map(item => {
-    //     if (this.formattedData.hasOwnProperty(item.type.name)) {
-    //       this.formattedData[item.type.name].count++;
-    //     } else {
-    //       this.formattedData[item.type.name] = {
-    //         type: item.type,
-    //         count: 1
-    //       };
-    //     }
-    //   });
-    //   this.typeList = Object.values(this.formattedData);
-    // });
-    //
-    // this.dialogs.confirm('Hello world')
-    //   .then(() => console.log('Dialog dismissed'))
-    //   .catch(e => console.log('Error displaying dialog', e));
-    this.bikeList = {
-      'count': 2,
-      'data': [
-        {
-          'id': '5da1ab649bd1160001cb8a03',
-          'zoneid': null,
-          'registrationNo': 'RJ27CA3456',
-          'insuranceNo': '678567',
-          'status': 'Busy',
-          'type': {
-            'id': '5da1a0989bd1160001cb8a02',
-            'name': 'R1',
-            'costkm': 9,
-            'costtime': 0.25,
-            'costlt': 100,
-            'category': 'Sports',
-            'vehiclecc': '220cc',
-            'kilometer': 25,
-            'url': 'https://library.kissclipart.com/20190225' +
-                '/exw/kissclipart-yamaha-yzf-r1-yamaha-motor-company-yamaha-yzf-r6-m-7798c5450bd8897d.png'
-          },
-          'time': '2019-10-12T09:10:56.415+0000',
-          'lastServiceDate': '2019-10-12T09:10:56.415+0000',
-          'vehiclePurchased': '2019-10-12T09:10:56.415+0000'
-        },
-        {
-          'id': '5da1ab649bd1160001cb8a03',
-          'zoneid': null,
-          'registrationNo': 'RJ27CA3456',
-          'insuranceNo': '678567',
-          'status': 'Busy',
-          'type': {
-            'id': '5da1a0989bd1160001cb8a02',
-            'name': 'R1',
-            'costkm': 9,
-            'costtime': 0.25,
-            'costlt': 100,
-            'category': 'Sports',
-            'vehiclecc': '220cc',
-            'kilometer': 25,
-            'url': 'https://library.kissclipart.com' +
-                '/20190225/exw/kissclipart-yamaha-yzf-r1-yamaha-motor-company-yamaha-yzf-r6-m-7798c5450bd8897d.png'
-          },
-          'time': '2019-10-12T09:10:56.415+0000',
-          'lastServiceDate': '2019-10-12T09:10:56.415+0000',
-          'vehiclePurchased': '2019-10-12T09:10:56.415+0000'
-        }
-      ],
-      'status': 'OK'
-    };
-    this.bikeList.data.map(item => {
-      if (this.formattedData.hasOwnProperty(item.type.name)) {
-        this.formattedData[item.type.name].count++;
-      } else {
-        this.formattedData[item.type.name] = {
-          type: item.type,
-          count: 1
-        };
-      }
-    });
-    this.typeList = Object.values(this.formattedData);
-    console.log('TypeList:', this.typeList);
   }
+  
 
   onVehicleSelected(type: {}) {
     const navigationExtras: NavigationExtras  = {
@@ -118,9 +45,36 @@ export class BikeListPage implements OnInit {
       }
     };
     if (this.trip) {
-      this.router.navigate([''], navigationExtras);
+      this.router.navigate(['drop'], navigationExtras);
     } else {
-      this.router.navigate(['booking'], navigationExtras);
+      this.router.navigate(['confirm-ride-detail'], navigationExtras);
     }
   }
+
+  doInfinite(): Promise<any> {
+    console.log('Begin async operation');
+
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        this.zoneService.getVehiclesByZoneTypes(this.pickUpZone.id).then(response => {
+          const bikeList = JSON.parse(response.data);
+          bikeList.data.map(item => {
+            if (this.formattedData.hasOwnProperty(item.type.name)) {
+              this.formattedData[item.type.name].count++;
+            } else {
+              this.formattedData[item.type.name] = {
+                type: item.type,
+                count: 1
+              };
+            }
+          });
+          this.typeList = Object.values(this.formattedData);
+          console.log('TypeList:', this.typeList);
+        });
+        console.log('Async operation has ended');
+        resolve();
+      }, 500);
+    })
+  }
+
 }

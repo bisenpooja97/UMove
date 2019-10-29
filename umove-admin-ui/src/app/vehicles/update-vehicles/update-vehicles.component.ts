@@ -13,23 +13,28 @@ export class UpdateVehiclesComponent implements OnInit {
   lastServiceDate: Date;
   insuranceNo: string;
   todaydate: Date = new Date();
+  purchasedDate: Date;
+  minDate: Date = new Date();
+
 
   constructor(public dialogRef: MatDialogRef<UpdateVehiclesComponent>,
               private fb: FormBuilder, private route: ActivatedRoute,
               private router: Router, private vehicleService: VehicleService,
               @Inject(MAT_DIALOG_DATA) data) {
-this.lastServiceDate = data.lastServiceDate;
-this.insuranceNo = data.insuranceNo;
+                this.lastServiceDate = data.lastServiceDate;
+                this.insuranceNo = data.insuranceNo;
+                // this.vehiclePurchased = data.vehiclePurchased;
+                this.minDate = new Date(data.purchasedDate);
 }
 
 vehicleForm = this.fb.group({
- lastServiceDate: [''],
+  lastServiceDate: [''],
  insuranceNo: ['']
 });
 
 
 onClose() {
-
+  
   this.dialogRef.close();
 }
 
@@ -40,6 +45,7 @@ onSubmit() {
 
 
   ngOnInit() {
+    console.log(this.lastServiceDate,  this.minDate);
   }
 
 }

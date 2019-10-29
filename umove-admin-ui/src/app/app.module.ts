@@ -13,7 +13,6 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { FooterComponent } from './core/footer/footer.component';
-import { PageNotFoundComponent } from './core/page-not-found/page-not-found.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ZonesModule } from './zones/zones.module';
 import { MatDialogModule } from '@angular/material';
@@ -26,7 +25,6 @@ import {
  MatSortModule, MatAutocompleteModule,
       MatPaginatorModule,
       MatSelectModule,
-
       MatSnackBarModule,
       MatDatepickerModule,
 
@@ -34,6 +32,7 @@ import {
 } from '@angular/material';
 import { VehiclesModule } from './vehicles/vehicles.module';
 import { TypesModule } from './types/types.module';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -41,7 +40,6 @@ import { TypesModule } from './types/types.module';
 
     NavigationComponent,
     FooterComponent,
-    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -78,10 +76,8 @@ import { TypesModule } from './types/types.module';
     MatIconModule,
     MatDialogModule,
     MatDatepickerModule,
-    MatNativeDateModule
-
-
-
+    MatNativeDateModule,
+    SharedModule
   ],
   providers: [MatDatepickerModule],
   bootstrap: [AppComponent]

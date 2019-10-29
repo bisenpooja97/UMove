@@ -1,25 +1,28 @@
 package in.stackroute.umove.userservice.repository;
 
+import in.stackroute.umove.userservice.model.DocumentStatus;
 import in.stackroute.umove.userservice.model.Role;
 import in.stackroute.umove.userservice.model.UserData;
 import in.stackroute.umove.userservice.model.UserStatus;
+import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.mongodb.repository.Query;
 
 import java.util.List;
 
-@Repository
-public interface UserRepository extends MongoRepository<UserData,String>
-{
+public interface UserRepository extends MongoRepository<UserData, String> {
     List<UserData> findByName(String name);
 
-    List<UserData> findByRole(Role Role);
-
-    List<UserData> findByUserStatus(UserStatus userStatus);
+    UserData findByid(String id);
+    UserData findByMobileNumber(String mobileNumber);
 
     UserData getUserByid(String id);
 
-    UserData findByid(String id);
+    List<UserData> findByRole(Role role);
 
-    UserData getByid(String id);
+    List<UserData> findByUserStatus(UserStatus userStatus);
+
+    @Query("{'document.documentStatus':'?0' , 'role':'User'}")
+    List<UserData> findByDocumentStatus(DocumentStatus documentStatus);
+
 }

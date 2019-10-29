@@ -6,15 +6,17 @@ import { DocumentsComponent } from './documents.component';
 import { DocumentCardComponent } from './document-card/document-card.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatFormFieldModule, MatInputModule, MatCardModule, MatIconModule, MatButtonModule,
-   MatPaginatorModule, MatDialogModule, MatSelectModule, MatOptionModule, MatToolbarModule } from '@angular/material';
+   MatPaginatorModule, MatDialogModule, MatSelectModule, MatOptionModule, MatToolbarModule, MatChipsModule } from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AvatarModule } from 'ngx-avatar';
+import { UpdateKycComponent } from './update-kyc/update-kyc.component';
 
 
 @NgModule({
-  declarations: [DocumentsComponent, DocumentCardComponent],
+  declarations: [DocumentsComponent, DocumentCardComponent, UpdateKycComponent],
   imports: [
     CommonModule,
     DocumentsRoutingModule,
@@ -33,7 +35,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatOptionModule,
     FormsModule,
     ReactiveFormsModule,
-    MatToolbarModule
-  ]
+    MatToolbarModule,
+    AvatarModule,
+    MatChipsModule,
+  ],
+  entryComponents: [UpdateKycComponent]
 })
 export class DocumentsModule { }

@@ -64,7 +64,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({"authentication-authentication-module":"authentication-authentication-module","common":"common","documents-documents-module":"documents-documents-module","users-users-module":"users-users-module"}[chunkId]||chunkId) + "-es2015.js"
+/******/ 		return __webpack_require__.p + "" + ({"authentication-authentication-module":"authentication-authentication-module","documents-documents-module":"documents-documents-module","fuel-fuel-module":"fuel-fuel-module","users-users-module":"users-users-module"}[chunkId]||chunkId) + "-es2015.js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -203,7 +203,7 @@
 /******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
 /******/
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "http://localhost:8080/adminwebapp/";
+/******/ 	__webpack_require__.p = "http://13.235.35.202:8080/adminwebapp/";
 /******/
 /******/ 	// on error function for async loading
 /******/ 	__webpack_require__.oe = function(err) { console.error(err); throw err; };

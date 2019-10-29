@@ -9,7 +9,7 @@
   <div fxFlex=50% fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px" class="form"
     fxLayoutAlign="center center">
     <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px" class="col">
-    
+
       <mat-form-field appearance="outline" fxFlex>
         <mat-label>Supervisor Name</mat-label>
         <input matInput #input placeholder="Supervisor Name" formControlName="name" required>
@@ -19,21 +19,18 @@
         <mat-label>Mobile Number</mat-label>
         <input matInput #input placeholder="Mobile Number" formControlName="mobileNumber" required>
       </mat-form-field>
-
     </div>
     <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px" class="col">
       <mat-form-field appearance="outline" fxFlex>
         <mat-label>Email-Id</mat-label>
         <input matInput #input placeholder="Email-Id" formControlName="email" required>
       </mat-form-field>
-
     <mat-form-field appearance="outline" fxFlex>
           <mat-label>Role</mat-label>
           <input matInput #input placeholder="Enter supervisor" formControlName="role" required>
         </mat-form-field>
       </div>
   </div>
-
   <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
     <button mat-raised-button class="btn" [disabled]='!userForm.valid' color="primary">
       Submit

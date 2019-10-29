@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
-import { Resp } from 'src/model/user-response';
-import { User } from 'src/model/user';
+import { Resp } from 'src/app/model/user-response';
+import { User } from 'src/app/model/user';
 
 @Injectable({
   providedIn: 'root'
@@ -11,10 +11,15 @@ import { User } from 'src/model/user';
 export class UserService {
 
   constructor(private httpClient: HttpClient) { }
-  baseUrl = environment.baseUrl + environment.userBaseApi;
+  baseUrl = environment.baseUrl + environment.userService + environment.userBaseApi;
+
 
   getUsers(): Observable<Resp> {
-    return this.httpClient.get<Resp>(this.baseUrl);
+    return this.httpClient.get<Resp>(this.baseUrl  +  '?role=User');
+  }
+
+  getSupervisors(): Observable<Resp> {
+    return this.httpClient.get<Resp>(this.baseUrl  + '?role=Supervisor');
   }
 
   getUsersById(id: string): Observable<Resp> {

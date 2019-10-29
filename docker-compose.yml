@@ -13,6 +13,10 @@ services:
       MYSQL_ROOT_PASSWORD: 'Umove@2019'
     volumes:
       - '$HOME/umove/data/mysql:/var/lib/mysql'
+    deploy:
+      resources:
+        limits:
+          memory: 1000M
 
   # mongodb
   mongo:
@@ -26,6 +30,10 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: 'Umove@2019'
     volumes:
       - '$HOME/umove/data/mongo:/data/db'
+    deploy:
+      resources:
+        limits:
+          memory: 1000M
 
 #  # cassendra
 #  cassandra:
@@ -66,6 +74,10 @@ services:
     ports:
       - '15672:15672'
       - '5672:5672'
+    deploy:
+      resources:
+        limits:
+          memory: 1000M
 
   # Config Server
   config:
@@ -75,6 +87,10 @@ services:
     ports:
       - 8888:8888
     restart: on-failure
+    deploy:
+      resources:
+        limits:
+          memory: 1000M
 
   # DISCOVERY SERVICE
   discovery:
@@ -86,6 +102,10 @@ services:
     depends_on:
       - config
     restart: on-failure
+    deploy:
+      resources:
+        limits:
+          memory: 1000M
 
   # API GATEWAY
   apigateway:
@@ -101,6 +121,10 @@ services:
     links:
       - config
       - discovery
+    deploy:
+      resources:
+        limits:
+          memory: 1000M
 
   adminwebapp:
     build:
@@ -111,11 +135,14 @@ services:
     depends_on:
       - config
       - discovery
-      # - api-gateway
     restart: on-failure
     links:
       - config
       - discovery
+    deploy:
+      resources:
+        limits:
+          memory: 1000M
 
   users:
     build:
@@ -127,6 +154,10 @@ services:
       - config
       - discovery
     restart: on-failure
+    deploy:
+      resources:
+        limits:
+          memory: 1000M
 
   vehicles:
     build:
@@ -135,9 +166,15 @@ services:
     ports:
       - 8092:8092
     depends_on:
-      - discovery
       - config
+      - discovery
+      - mongo
+      - rabbitmq
     restart: on-failure
+    deploy:
+      resources:
+        limits:
+          memory: 1000M
 
   zones:
     build:
@@ -149,6 +186,10 @@ services:
       - discovery
       - config
     restart: on-failure
+    deploy:
+      resources:
+        limits:
+          memory: 1000M
 
   bookings:
     build:
@@ -157,10 +198,16 @@ services:
     ports:
       - 8094:8094
     depends_on:
-      - discovery
       - config
+      - discovery
+      - mongo
+      - mysql
+      - rabbitmq
     restart: on-failure
-
+    deploy:
+      resources:
+        limits:
+          memory: 1000M
 
   campaigns:
     build:
@@ -172,6 +219,10 @@ services:
       - discovery
       - config
     restart: on-failure
+    deploy:
+      resources:
+        limits:
+          memory: 1000M
 
   reports:
     build:
@@ -182,5 +233,9 @@ services:
     depends_on:
       - discovery
       - config
-    restart: on-failures
+    restart: on-failure
+    deploy:
+      resources:
+        limits:
+          memory: 1000M
 

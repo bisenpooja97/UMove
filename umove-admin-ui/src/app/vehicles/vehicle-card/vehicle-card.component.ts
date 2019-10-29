@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Vehicle } from 'src/app/model/Vehicle';
+import { Vehicle } from 'src/app/model/vehicle';
 import { Router } from '@angular/router';
 
 @Component({
@@ -12,39 +12,35 @@ export class VehicleCardComponent implements OnInit {
  registrationNo: string;
  status: string;
  type: string;
- category: string;
+ // category: string;
 
   constructor(private router: Router) { }
 
   ngOnInit() {
      this.registrationNo = this.vehicle.registrationNo;
      this.status = this.vehicle.status;
-     this.type = this.vehicle.type.name;
-     this.category=this.vehicle.type.category;
-    console.log(this.vehicle.type.name);
+     this.type = this.vehicle.vehicleType.name;
+   //  this.category = this.vehicle.type.category;
+     console.log(this.vehicle.vehicleType.name);
 
   }
 
   ok() {
     console.log('hi');
     this.router.navigate(['vehicles/', this.registrationNo]);
+  }
+  getColor(status) {
+    switch (status) {
+      case 'Busy':
+        return '#F44336';
+      case 'Free':
+        return '#1B5E20';
+      case 'Servicing':
+        return '#6D4C41';
+      case 'No_More_In_Use':
+        return '#FFC400';
+      case 'Stolen':
+        return '#757575';
     }
-    getColor(status) {
-      switch (status) {
-case 'Busy':
-return 'green';
-case 'Free':
-return 'black';
-case 'Servicing':
-return 'red';
-case 'No_More_In_Use':
-return 'gray';
-case 'Stolen':
-return 'gray';
+  }
 }
-}
-}
-
-
-
-

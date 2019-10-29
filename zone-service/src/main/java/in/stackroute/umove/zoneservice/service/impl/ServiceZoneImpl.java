@@ -14,11 +14,11 @@ import in.stackroute.umove.zoneservice.model.ZoneStatus;
 import in.stackroute.umove.zoneservice.repository.ZoneRepository;
 import in.stackroute.umove.zoneservice.service.ServiceZone;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -39,14 +39,15 @@ public class ServiceZoneImpl implements ServiceZone {
                 throw new ZoneAlreadyExistException("Zone name is already exist!!!");
             }
         }
+        zone.setCreatedAt(LocalDateTime.now());
         zoneRepository.save(zone);
         return zone;
     }
 
     // Zone service for getting all zones
     @Override
-    public List<Zone> findAllZones() {
-        List<Zone> zone = zoneRepository.findAll();
+    public List<Zone> findAllZones(int page) {
+        List<Zone> zone = zoneRepository.findAll(new PageRequest(page,100)).getContent();
         if(zone.isEmpty())
             throw new ZonesNotFoundException("No data found!!!!");
         return zone;
@@ -63,8 +64,8 @@ public class ServiceZoneImpl implements ServiceZone {
 
     // Zone service for finding zones by locality
     @Override
-    public List<Zone> findZonesByLocality(String locality) {
-        List<Zone> zones = zoneRepository.findZonesByLocality(locality);
+    public List<Zone> findZonesByLocality(String locality, int page) {
+        List<Zone> zones = zoneRepository.findZonesByLocality(locality, new PageRequest(page,9)).getContent();
         if(zones.isEmpty()) {
             throw new ZonesNotFoundException("No data found");
         }
@@ -74,7 +75,7 @@ public class ServiceZoneImpl implements ServiceZone {
     // Zone service for updating zones according to zone name
     @Override
     public Zone updateZoneDetails(String name, Zone zone) {
-        Zone zoneModel = zoneRepository.findByName(name);
+        Zone zoneModel = zoneRepository.findByNameIgnoreCase(name);
         if(zoneModel != null){
             if(zone.getName() != null){
                 zoneModel.setName(zone.getName());
@@ -136,10 +137,10 @@ public class ServiceZoneImpl implements ServiceZone {
        }
        return nearbyZones;
    }
-   
+
     @Override
-    public List<Zone> findByStatus(ZoneStatus status) {
-        List<Zone> zones = zoneRepository.findByStatus(status);
+    public List<Zone> findByStatus(ZoneStatus status, int page) {
+        List<Zone> zones = zoneRepository.findByStatus(status,new PageRequest(page,9)).getContent();
         return zones;
     }
 

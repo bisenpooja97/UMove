@@ -10,8 +10,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.mongodb.core.mapping.Document;
-import javax.persistence.Id;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -19,8 +19,7 @@ import java.time.LocalDateTime;
 @Document
 public class Zone {
 
-    @Id
-    private String id;
+    private String id = UUID.randomUUID().toString().substring(30);
     private String name;
     private double lat;
     private double lon;
@@ -30,7 +29,7 @@ public class Zone {
     private int pincode;
     private String locality;
     private int capacity;
-    private LocalDateTime createdAt = LocalDateTime.now();
+    private LocalDateTime createdAt;
     private String supervisorId;
     private String supervisorName;
     private String supervisorNumber;

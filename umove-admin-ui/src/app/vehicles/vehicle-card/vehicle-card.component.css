@@ -1,20 +1,10 @@
-.my-card {
-    margin-bottom: 40px;
-    height: 250px;
-    background-color: antiquewhite;
-    cursor: pointer;
-}
 
-.my-card:hover {
-    -webkit-transform: scale(1.1);
-    -ms-transform: scale(1.1);
-    transform: scale(1.1);
-}
 
 .typeName {
-    padding-top: 10%;
+    padding-top: 20px;
 }
 .status {
     font-weight: bold;
     font-size: 1em;
+    color: white;
 }

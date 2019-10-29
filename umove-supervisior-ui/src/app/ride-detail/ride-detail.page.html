@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Confirm Ride Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <app-bike-detail [selectedVehicle]="ride?.vehicle"></app-bike-detail>
+
+  <ion-card>
+    <ion-card-content>
+      <ion-card-subtitle>
+        <ion-icon name="pin" color="tertiary"></ion-icon> {{ ride?.sourceZone?.locality }}
+      </ion-card-subtitle>
+      <ion-card-subtitle>
+        <ion-icon name="pin" color="tertiary"></ion-icon> {{ ride?.destinationZones[0]?.locality }}
+      </ion-card-subtitle>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-content>
+      <ion-grid no-padding>
+        <ion-row class="ion-align-items-center">
+          <ion-icon name="person" size="large"></ion-icon>
+          <ion-col padding-horizontal>
+            <ion-text color="dark">
+              <h2>{{ ride?.rider?.name }}</h2>
+            </ion-text>
+            <ion-text>
+              <h3>{{ ride?.rider?.email }}</h3>
+            </ion-text>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-button expand="block" class="btn-bottom" (click)="onEndRide()">Confirm & End The Ride</ion-button>
+
+</ion-content>

@@ -11,16 +11,15 @@
     cursor: pointer;
 }
 
-.my-card {
+.zone {
     margin-bottom: 40px;
     margin-left: 450px;
     height: 300px;
     width: 50%;
-    background-color: whitesmoke;
 }
 
 @media only screen and (max-width: 600px) {
-    .my-card {
+    .zone {
         margin-left: 30px;
         height: 300px;
         width: 85%;
@@ -32,11 +31,11 @@
     }
     .add-button {
         padding-left: 300px;
-        padding-bottom: 2%; 
+        padding-bottom: 2%;
     }
     .graph {
         padding-left: 300px;;
-        padding-bottom: 50px; 
+        padding-bottom: 50px;
     }
     .status {
         margin-top: 20px;
@@ -45,16 +44,18 @@
     .iconCapacity {
         margin-left: 70%;
         cursor: pointer;
-        margin-top: -200px;
+    }
+    mat-card-title {
+        font-size: 1.4em;
     }
 }
 
 @media only screen and (min-width: 600px) {
     .add-button {
         padding-right: 450px;
-        padding-bottom: 2%; 
+        padding-bottom: 2%;
     }
-    
+
 }
 
 mat-icon {

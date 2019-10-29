@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { from } from 'rxjs';
 import { UserService } from '../service/user.service';
-import { User } from 'src/model/user';
+import { User } from 'src/app/model/user';
 
 @Component({
   selector: 'app-user-card',
@@ -32,19 +32,19 @@ export class UserCardComponent implements OnInit {
 
   ok() {
     console.log('ok', this.id);
-    this.router.navigate(['users/', this.id]);
+    this.router.navigate(['users/details', this.id]);
     }
 
   getColor(userStatus) {
     switch (userStatus) {
     case 'Active':
-    return 'green';
+    return '#1B5E20';
     case 'Inactive':
-    return 'blue';
+    return '#FFC400';
     case 'Suspended':
-    return 'red';
+    return '#F44336';
     case 'Pending':
-    return 'blue';
+    return '#6D4C41';
 }
 
 }
