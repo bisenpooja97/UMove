@@ -13,8 +13,8 @@ export class SettingsService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getConfigurationByName(name: string): Observable<Configuration> {
-    return this.httpClient.get<Configuration>(this.baseUrl + '/' + name);
+  getConfigurations(): Observable<Response> {
+    return this.httpClient.get<Response>(this.baseUrl);
   }
 
   updateConfigurationByName(name: string, value: number): Observable<Configuration> {
