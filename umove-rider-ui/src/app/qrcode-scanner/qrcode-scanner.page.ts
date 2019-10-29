@@ -43,8 +43,8 @@ export class QrcodeScannerPage implements OnInit {
         console.log('vehicle number: ', JSON.parse(qrCodeData.text).registrationNo);
         vehicleNumber = JSON.parse(qrCodeData.text).registrationNo;
       } catch (e) {
+        this.router.navigateByUrl('ride-booking-details');
         this.rideService.presentToast('Wrong QR Code.', 3000);
-        this.router.navigateByUrl('confirm-ride-detail');
       }
       if (vehicleNumber !== undefined) {
       this.rideService.startRideById(this.ride._id, vehicleNumber).then(response => {
@@ -52,13 +52,14 @@ export class QrcodeScannerPage implements OnInit {
         this.ride = JSON.parse(response.data).data;
         this.rideStatus = this.ride.status;
         if (this.rideStatus === 'Auto_Cancelled') {
+          this.router.navigateByUrl('payment-detail/' + this.ride._id);
           mobiscroll.alert({
             title: 'Your ride is autocancelled',
             message: 'Please book a new ride.',
-            callback: () => {
-              // Apply the url of home page
-              this.router.navigateByUrl('ride-booking-details');
-            }
+            // callback: () => {
+            //   // Apply the url of payment page
+            //   this.router.navigateByUrl('payment-detail/' + this.ride._id);
+            // }
           });
         } else {
           this.router.navigateByUrl('ride-details');

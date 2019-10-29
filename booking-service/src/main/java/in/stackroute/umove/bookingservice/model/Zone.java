@@ -1,8 +1,3 @@
-/**
- *  Zones Model Class
- */
-
-// Package
 package in.stackroute.umove.bookingservice.model;
 
 // Importing files

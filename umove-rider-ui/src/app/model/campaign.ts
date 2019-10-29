@@ -1,5 +1,6 @@
 export class Campaign {
     campaignId: string;
+    name: string;
     promocode: string;
-    discount: number;
+    discountPercent: number;
 }
