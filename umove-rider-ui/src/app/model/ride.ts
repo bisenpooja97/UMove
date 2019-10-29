@@ -14,7 +14,7 @@ export class Ride {
     sourceZone: Zone;
     destinationZones: Zone[];
     paymentMethod: PaymentMethod;
-    promocode: Campaign;
+    promoCode: Campaign;
     rider: User;
     rideStartAt: Date;
     rideEndAt: Date;

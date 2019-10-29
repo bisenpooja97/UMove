@@ -59,47 +59,42 @@ public class RideServiceImp implements RideService {
         if(ride.getPaymentDetail().getStatus().equals(PaymentStatus.Paid))
         {
             return rideRepo.findBy_id(id);
-        } else{
-            double totalExtraCharges = calculateTotalExtraCharges(ride);
-            int totalAmount = deductFuelAmount(ride);
-            totalAmount = deductDiscount(ride,totalAmount);
-            totalAmount = calculateRideAmount(totalAmount, totalExtraCharges);
-            ride.getPaymentDetail().setTotalExtraCharges(totalExtraCharges);
-            ride.getPaymentDetail().setTotalAmount((double) totalAmount);
+        }
+        else {
+            ride = calculateRideFare(ride);
             rideRepo.save(ride);
             return rideRepo.findBy_id(id);
         }
     }
 
-    private int deductFuelAmount(Ride ride) {
-        double rideAmount = ride.getPaymentDetail().getRideAmount();
-        if(ride.getPaymentDetail().getFuelRefillAmount()==null){
-            return  (int)(rideAmount);
-        }else {
-            return  (int)((rideAmount)- (ride.getPaymentDetail().getFuelRefillAmount()));
+    public Ride calculateRideFare(Ride ride) {
+        Double totalAmount = 0.0;
+        PaymentDetail paymentDetail = ride.getPaymentDetail();
+        // add base fare for vehicle
+        totalAmount += paymentDetail.getBaseFare();
+
+        // add ride fare
+        totalAmount += paymentDetail.getRideAmount();
+
+        // deduct discount amount
+        if(ride.getPromoCode() != null) {
+            totalAmount -= ride.getPromoCode().getDiscountPercent() * totalAmount / 100;
         }
+        // added extra charges
+        Double totalExtraChareges = paymentDetail.getExtraCharges().stream()
+                .mapToDouble(value -> value.getAmount()).sum();
+        totalAmount += totalExtraChareges;
+
+        // deduct fuel amount
+        totalAmount -= paymentDetail.getFuelRefillAmount();
+
+        //set total amount, paid amount, total extracharges
+        paymentDetail.setTotalAmount(totalAmount);
+        paymentDetail.setTotalExtraCharges(totalExtraChareges);
+        ride.setPaymentDetail(paymentDetail);
+        return ride;
     }
 
-    private int deductDiscount(Ride ride, int totalAmount) {
-
-        if(ride.getPromoCode()==null)
-        {
-            return totalAmount;
-        } else {
-            totalAmount = (totalAmount - ((ride.getPromoCode().getDiscountPercent() * totalAmount) / 100));
-            return totalAmount;
-        }
-    }
-
-    private double calculateTotalExtraCharges(Ride ride) {
-        List<ExtraCharge> extraCharges = ride.getPaymentDetail().getExtraCharges();
-        return extraCharges.stream().mapToDouble(f -> f.getAmount() ).sum();
-    }
-
-    private int calculateRideAmount(int totalAmount, double totalExtraCharges) {
-        return (int)(totalAmount+(int)(totalExtraCharges));
-
-    }
     @Override
     public Map<String, Object> deleteAll() {
         rideRepo.deleteAll();
@@ -115,7 +110,7 @@ public class RideServiceImp implements RideService {
         }
         System.out.println("extra charges "+extraCharges);
         System.out.println("payment deta"+ride.getPaymentDetail());
-        PaymentDetail paymentDetail = new PaymentDetail();
+        PaymentDetail paymentDetail = ride.getPaymentDetail();
         paymentDetail.setExtraCharges(extraCharges);
         ride.setPaymentDetail(paymentDetail);
 //        ride.getPaymentDetail().setTotalExtraCharges(extraCharges);
@@ -132,6 +127,7 @@ public class RideServiceImp implements RideService {
         Double rideAmount = (totalDuration*ride.getVehicle().getVehicleType().getCostPerMin() +distance*ride.getVehicle().getVehicleType().getCostPerKm());
         Double roundUpRideAmount = Double.valueOf(Math.round(rideAmount*100)/100);
         ride.getPaymentDetail().setRideAmount(roundUpRideAmount);
+        ride.getPaymentDetail().setBaseFare((double) ride.getVehicle().getVehicleType().getBaseFare());
         ride.setStatus(RideStatus.Ended);
         rideRepo.save(ride);
         return ride;
@@ -176,7 +172,7 @@ public class RideServiceImp implements RideService {
             else {
                 ride.setStatus(RideStatus.Auto_Cancelled);
                 PaymentDetail paymentDetail = ride.getPaymentDetail();
-                paymentDetail.setRideAmount((double)ride.getVehicle().getVehicleType().getBaseFare());
+                paymentDetail.setBaseFare((double)ride.getVehicle().getVehicleType().getBaseFare());
                 ride.setPaymentDetail(paymentDetail);
             }
             rideRepo.save(ride);
@@ -215,7 +211,7 @@ public class RideServiceImp implements RideService {
                     ride.setStatus(RideStatus.Auto_Cancelled);
                 }
                 PaymentDetail paymentDetail = ride.getPaymentDetail();
-                paymentDetail.setRideAmount((double)ride.getVehicle().getVehicleType().getBaseFare());
+                paymentDetail.setBaseFare((double)ride.getVehicle().getVehicleType().getBaseFare());
                 ride.setPaymentDetail(paymentDetail);
             }
             rideRepo.save(ride);
@@ -240,21 +236,30 @@ public class RideServiceImp implements RideService {
     }
 
     @Override
-    public Payment payForRide(ObjectId rideId, String paymentId, String paymentStatus) throws IOException, MessagingException {
+    public Payment payForRide(ObjectId rideId, String paymentId, PaymentStatus paymentStatus) throws IOException, MessagingException {
         Ride ride = rideRepo.findBy_id(rideId);
         if(ride == null) {
             throw new RideNotFoundException("Ride", "rideId", rideId);
         }
+
         Payment payment = new Payment();
         int sizeOfDestinationZones = ride.getDestinationZones().size();
         int discount_percent = 0;
-        if(ride.getPromoCode()!= null){ discount_percent= ride.getPromoCode().getDiscountPercent();}
+
+        if(ride.getPromoCode()!= null){
+            discount_percent= ride.getPromoCode().getDiscountPercent();
+        }
+
         PaymentDetail paymentDetail = ride.getPaymentDetail();
-        if(paymentStatus.equals("Paid")){paymentDetail.setStatus(PaymentStatus.Paid); payment.setStatus("Paid");}
-        else {paymentDetail.setStatus(PaymentStatus.Pending); payment.setStatus("Pending");}
+        paymentDetail.setStatus(paymentStatus);
+        payment.setStatus(paymentStatus);
+
         ride.setPaymentDetail(paymentDetail);
+
+        // store payment info in the mongo db
         rideRepo.save(ride);
 
+        // save payment transaction detail in mysql db for consistency
         payment.setRideId(rideId.toString());
         payment.setPaymentId(paymentId);
         payment.setUserId(ride.getRider().get_id());
@@ -270,9 +275,12 @@ public class RideServiceImp implements RideService {
         payment.setAmountPaid(ride.getPaymentDetail().getTotalAmount());
         payment.setDeductedAt(LocalDateTime.now());
         paymentRepo.save(payment);
+
+        // email receipt to rider
         sendEmail(ride, discount_percent );
         return payment;
     }
+
     private void sendEmail(Ride ride, int discount_percent) throws IOException, MessagingException {
         Mail mail = new Mail();
         mail.setFrom("umove742@gmail.com");

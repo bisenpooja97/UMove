@@ -8,4 +8,5 @@ export class PaymentDetail {
   totalAmount: number;
   totalExtraCharges: number;
   fuelRefillAmount: number;
+  baseFare: number;
 }

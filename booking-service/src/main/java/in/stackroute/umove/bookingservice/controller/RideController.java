@@ -204,7 +204,7 @@ public class RideController {
     // End Point: api/v1/payments Method: PUT
     // to pay for a specific ride by id
     @PutMapping("rides/payments")
-    public ResponseEntity<Map> payForBooking(@RequestParam(value = "rideId") ObjectId rideId, @RequestParam(value = "paymentId") String paymentId, @RequestParam(value="paymentStatus") String paymentStatus) throws IOException, MessagingException {
+    public ResponseEntity<Map> payForBooking(@RequestParam(value = "rideId") ObjectId rideId, @RequestParam(value = "paymentId") String paymentId, @RequestParam(value="paymentStatus") PaymentStatus paymentStatus) throws IOException, MessagingException {
         Payment payment = rideService.payForRide(rideId, paymentId, paymentStatus);
         Map<String, Object> map = new TreeMap<>();
         map.put("data", payment);

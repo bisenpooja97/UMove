@@ -18,7 +18,7 @@ export class PaymentDetailsPage implements OnInit {
   name: string;
   email: string;
   contact: string;
-  rides: Ride;
+  ride: Ride;
   paymentAmount = 333;
   currency = 'INR';
   currencyIcon = '$';
@@ -35,52 +35,29 @@ export class PaymentDetailsPage implements OnInit {
 
 
   constructor(private rideService: RideService, private route: Router, private router: ActivatedRoute) {
-    this.bookingId = '5db071a0d02e7d0001e5d7b5';
-    this.rideStatusPaid = false;
-    this.rideStatusUnPaid = false;
-    this.petrolCharge = false;
-    this.extraChargeStatus = false;
+
   }
 
   ngOnInit() {
     this.bookingId = this.router.snapshot.paramMap.get('rideId');
     this.rideService.getBookingById(this.bookingId).then(response => {
-      this.rides = JSON.parse(response.data).data;
-      this.name = this.rides.rider.name;
-      this.email = this.rides.rider.email;
-      this.contact = this.rides.rider.mobileNumber;
-      this.paymentAmount = Number(this.rides.paymentDetail.totalAmount) * 100;
-      if (this.rides.paymentDetail.totalExtraCharges === undefined) {
-        this.extraChargeStatus = false;
-      } else {
-        this.extraChargeStatus = true;
-      }
-      if (this.rides.paymentDetail.fuelRefillAmount === undefined || this.rides.paymentDetail.fuelRefillAmount === 0) {
-        this.petrolCharge = false;
-      } else {
-        this.petrolCharge = true;
-      }
-      if (this.rides.promocode === null) {
-         this.appliedPromoCode = false;
-      } else {
-        this.appliedPromoCode = true;
-      }
-      if (this.rides.paymentDetail.status === 'Paid') {
-        this.rideStatusPaid = true;
-      } else {
-        this.rideStatusUnPaid = true;
-      }
+      this.ride = JSON.parse(response.data).data;
+      console.log('ride: ', this.ride);
+      this.name = this.ride.rider.name;
+      this.email = this.ride.rider.email;
+      this.contact = this.ride.rider.mobileNumber;
+      this.paymentAmount = Number(this.ride.paymentDetail.totalAmount) * 100;
      });
   }
-  showExtraCharges(statusExtraCharge: boolean) {
-    if (statusExtraCharge === false) {
-    this.showExtraCharge = true;
-    console.log(this.showExtraCharge);
-    this.rideService.presentToast(this.showExtraCharge, 3000);
-  } else {
-      this.showExtraCharge = false;
-    }
-  }
+  // showExtraCharges(statusExtraCharge: boolean) {
+  //   if (statusExtraCharge === false) {
+  //   this.showExtraCharge = true;
+  //   console.log(this.showExtraCharge);
+  //   this.rideService.presentToast(this.showExtraCharge, 3000);
+  // } else {
+  //     this.showExtraCharge = false;
+  //   }
+  // }
   payWithRazor() {
     const options = {
       description: 'Credits towards consultation',
@@ -106,15 +83,18 @@ export class PaymentDetailsPage implements OnInit {
 
     const successCallback = (paymentId) => {
       this.rideService.setPaymentDetails(this.bookingId, paymentId, 'Paid').then(response => {
-        console.log('data of payment in sql: ', response['data']);
+        console.log('data of payment in sql: ', response.data);
         this.payment = JSON.parse(response.data).data;
-        this.route.navigateByUrl('/confirm-ride-detail');
       });
+      this.rideService.presentAlert('', 'Your payment is successful.', 'Ok', () => {
+        this.route.navigateByUrl('/home');
+      });
+
     };
 
     const cancelCallback = (error) => {
       this.rideService.setPaymentDetails(this.bookingId, null, "Pending").then(response => {
-        console.log('data of payment in sql: ', response['data']);
+        console.log('data of payment in sql: ', response.data);
         this.payment = JSON.parse(response.data).data;
         this.route.navigateByUrl('/confirm-ride-detail');
       });

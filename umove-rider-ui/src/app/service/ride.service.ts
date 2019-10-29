@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Zone } from '../model/zone';
 import { environment } from '../../environments/environment';
 import { HTTP } from '@ionic-native/http/ngx';
-import { ToastController } from '@ionic/angular';
+import {AlertController, ToastController} from '@ionic/angular';
 import { Ride } from '../model/ride';
 
 @Injectable({
@@ -13,7 +13,7 @@ export class RideService {
 
   currentBooking: Ride;
   baseUrl = environment.baseUrl + environment.bookingService + environment.bookingBaseApi;
-  constructor(private http: HTTP, private toastController: ToastController) {
+  constructor(private http: HTTP, private toastController: ToastController, private alertController: AlertController) {
     console.log('ride service ka constuctor call hua');
     this.currentBooking = new Ride();
     http.setDataSerializer('json');
@@ -26,6 +26,23 @@ export class RideService {
       duration
     });
     toast.present();
+  }
+
+  async presentAlert(header: string, message: string, btnLabel: string, action) {
+    const alert = await this.alertController.create({
+      header: header,
+      message: message,
+      buttons: [{
+        text: btnLabel,
+        handler: action
+      }]
+    });
+
+    alert.onDidDismiss().then(value => {
+      action();
+    })
+
+    await alert.present();
   }
 
   confirmBooking(data) {

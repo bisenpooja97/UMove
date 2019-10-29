@@ -21,7 +21,7 @@ public interface RideService {
     Ride cancelRide(ObjectId rideId);
     Ride updateDestination(Zone destinationZone, ObjectId rideId);
    // Ride endRide(ObjectId rideId);
-    Payment payForRide(ObjectId rideId, String paymentId, String paymentStatus) throws IOException, MessagingException;;
+    Payment payForRide(ObjectId rideId, String paymentId, PaymentStatus paymentStatus) throws IOException, MessagingException;;
     List<Ride> getRidesByUserId(String userId);
     Payment getPaymentDetails(String rideId);
 //    Ride endRideRequest(ObjectId rideId);

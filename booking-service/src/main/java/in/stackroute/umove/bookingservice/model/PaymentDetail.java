@@ -18,6 +18,5 @@ public class PaymentDetail
     private Double fuelRefillAmount=0.0;
     private Double totalExtraCharges=0.0;
     private Double totalAmount=0.0;
-
-
+    private Double baseFare=0.0;
 }

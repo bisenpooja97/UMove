@@ -63,6 +63,6 @@ public class Payment {
     private LocalDateTime deductedAt;
 
     @Column
-    private String status;
+    private PaymentStatus status;
 
 }
