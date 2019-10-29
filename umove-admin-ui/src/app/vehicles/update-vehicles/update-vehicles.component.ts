@@ -46,6 +46,12 @@ onClose() {
 }
 
 onSubmit() {
+  let lsd = new Date();
+  lsd = new Date(this.vehicleForm.value.lastServiceDate);
+  let lsd2;
+  lsd2 = lsd.getDate();
+  lsd.setDate(lsd2 + 1);
+  this.vehicleForm.value.lastServiceDate = lsd;
   console.log(this.vehicleForm.value);
   this.dialogRef.close(this.vehicleForm.value);
 }
