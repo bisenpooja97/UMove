@@ -9,7 +9,7 @@ import { Configuration } from 'src/app/model/configuration';
 })
 export class SettingsService {
 
-  baseUrl = environment.baseUrl3 /*+ environment.bookingService */+ environment.configBaseApi;
+  baseUrl = environment.baseUrl + environment.bookingService + environment.configBaseApi;
 
   constructor(private httpClient: HttpClient) { }
 
