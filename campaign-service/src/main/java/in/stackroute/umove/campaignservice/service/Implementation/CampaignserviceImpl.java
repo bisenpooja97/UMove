@@ -28,7 +28,6 @@ public class CampaignserviceImpl implements CampaignService
      *Method to add campaign
      */
 
-
     @Override
     public Campaign addCampaign(Campaign campaign) {
         return campaignRepository.save(campaign);
@@ -59,6 +58,15 @@ public class CampaignserviceImpl implements CampaignService
             }
             if(campaign.getDiscountPercent() != 0){
                 updatedCampaign.setDiscountPercent(campaign.getDiscountPercent());
+            }
+            if(campaign.getUpperBound()!=0) {
+                updatedCampaign.setUpperBound(campaign.getUpperBound());
+            }
+            if(campaign.getTotalCoupons()!=0){
+                updatedCampaign.setTotalCoupons(campaign.getUsedCoupons());
+            }
+            if(campaign.getUsedCoupons()!=0){
+                updatedCampaign.setUsedCoupons(campaign.getUsedCoupons()+1);
             }
             return campaignRepository.save(updatedCampaign);
         }

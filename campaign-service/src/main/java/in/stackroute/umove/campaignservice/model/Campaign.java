@@ -21,25 +21,31 @@ public class Campaign {
     private String id= UUID.randomUUID().toString().substring(30);
     private String name;
     private String objective;
-    private LocalDate startDate;
-    private LocalDate endDate;
+    private String startDate;
+    private String endDate;
     private String promocode;
     private int discountPercent;
-    private int cost;
     private int targetCustomers;
-    private int achievedCustomer;
+    private int achievedCustomers;
+    private int upperBound;
+    private int totalCoupons;
+    private int usedCoupons;
 
-
-    public Campaign(String name, String objective, LocalDate startDate, LocalDate endDate, String promocode,int discountPercent) {
+    public Campaign(String name, String objective, String startDate, String endDate, String promocode, int discountPercent, int targetCustomers, int achievedCustomers, int upperBound, int totalCoupons, int usedCoupons) {
         this.name = name;
         this.objective = objective;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.promocode=promocode;
+        this.promocode = promocode;
         this.discountPercent = discountPercent;
+        this.targetCustomers = targetCustomers;
+        this.achievedCustomers = achievedCustomers;
+        this.upperBound = upperBound;
+        this.totalCoupons = totalCoupons;
+        this.usedCoupons = usedCoupons;
     }
 
-//    public String get_id()
+    //    public String get_id()
 //    {
 //        return _id.toHexString();
 //    }

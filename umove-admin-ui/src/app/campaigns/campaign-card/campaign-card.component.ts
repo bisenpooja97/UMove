@@ -15,6 +15,9 @@ export class CampaignCardComponent implements OnInit {
   endDate: string;
   promocode: string;
   discountPercent: number;
+  upperBound: number;
+  totalCoupons: number;
+  usedCoupons: number;
   constructor(private router: Router) { }
 
   ngOnInit() {
@@ -25,6 +28,9 @@ export class CampaignCardComponent implements OnInit {
     this.endDate = this.campaign.endDate;
     this.promocode = this.campaign.promocode;
     this.discountPercent = this.campaign.discountPercent;
+    this.upperBound = this.campaign.upperBound;
+    this.totalCoupons = this.campaign.totalCoupons;
+    this.usedCoupons = this.campaign.usedCoupons;
 
   }
 

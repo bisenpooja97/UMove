@@ -717,7 +717,7 @@ var NgxPaginationModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-toolbar>\n  <span class=\"fill-remaining-space\"></span>\n  <button class=\"btn-dialog-close\" mat-stroked-button (click)=\"onClose()\" tabIndex=\"-1\">\n    <mat-icon>clear</mat-icon>\n  </button>\n</mat-toolbar>\n<form fxLayout=\"column\" fxLayoutAlign=\"center center\" [formGroup]=\"campaignForm\" (ngSubmit)=\"onSubmit()\">\n  <h2>Create a new campaign</h2>\n  <div fxFlex=50% fxLayout=\"row\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\" class=\"form\"\n    fxLayoutAlign=\"center center\">\n    <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\" class=\"col\">\n\n      <mat-form-field appearance=\"outline\" fxFlex>\n        <mat-label>Campaign name</mat-label>\n        <input matInput #input placeholder=\"Campaign Name\" formControlName=\"name\" required>\n      </mat-form-field>\n      <mat-form-field appearance=\"outline\" fxFlex>\n\n        <mat-label>Objective</mat-label>\n        <input matInput #input placeholder=\"Enter objective\" formControlName=\"objective\" required>\n      </mat-form-field>\n    </div>\n    <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\" class=\"col\">\n      <mat-form-field appearance=\"outline\" fxFlex>\n        <mat-label>Start Date</mat-label>\n        <input matInput [matDatepicker]=\"picker\" placeholder=\"Choose a date\">\n        <mat-datepicker-toggle matSuffix [for]=\"picker1\"></mat-datepicker-toggle>\n        <mat-datepicker #picker></mat-datepicker>\n      </mat-form-field>\n      <mat-form-field appearance=\"outline\" fxFlex>\n            <mat-label>End Date</mat-label>\n            <input matInput [matDatepicker]=\"picker\" placeholder=\"Choose a date\">\n            <mat-datepicker-toggle matSuffix [for]=\"picker2\"></mat-datepicker-toggle>\n            <mat-datepicker #picker></mat-datepicker>\n      </mat-form-field>\n    </div>\n    <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\" class=\"col\">\n\n      <mat-form-field appearance=\"outline\" fxFlex>\n        <mat-label>Promo code</mat-label>\n        <input matInput #input placeholder=\"Promo code\" formControlName=\"promo code\" required>\n      </mat-form-field>\n      <mat-form-field appearance=\"outline\" fxFlex>\n\n        <mat-label>Discount Percent</mat-label>\n        <input matInput #input placeholder=\"Discount Percent\" formControlName=\"discount percent\" required>\n      </mat-form-field>\n    </div>\n  </div>\n  <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\">\n    <button mat-raised-button class=\"btn\" [disabled]='!campaignForm.valid' color=\"primary\">\n      Submit\n    </button>\n  </div>\n</form>\n"
+module.exports = "<mat-toolbar>\n  <span class=\"fill-remaining-space\"></span>\n  <button class=\"btn-dialog-close\" mat-stroked-button (click)=\"onClose()\" tabIndex=\"-1\">\n    <mat-icon>clear</mat-icon>\n  </button>\n</mat-toolbar>\n\n<form fxLayout=\"column\" fxLayoutAlign=\"center center\" [formGroup]=\"campaignForm\" (ngSubmit)=\"onSubmit()\">\n  <h2>Create a new campaign</h2>\n  <div fxFlex=50% fxLayout=\"row\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\" class=\"form\"\n    fxLayoutAlign=\"center center\">\n    <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\" class=\"col\">\n      <mat-form-field appearance=\"outline\" fxFlex>\n        <mat-label>Campaign name</mat-label>\n        <input matInput #input placeholder=\"Campaign Name\" formControlName=\"name\" required>\n      </mat-form-field>\n      \n      <mat-form-field appearance=\"outline\" fxFlex>\n        <mat-label>Objective</mat-label>\n        <input matInput #input placeholder=\"Enter objective\" formControlName=\"objective\" required>\n      </mat-form-field>\n\n      <mat-form-field>\n        <input matInput [matDatepicker]=\"picker1\" placeholder=\"Choose a start date\">\n        <mat-datepicker-toggle matSuffix [for]=\"picker1\"></mat-datepicker-toggle>\n        <mat-datepicker #picker1></mat-datepicker>\n      </mat-form-field>\n\n      <mat-form-field appearance=\"outline\" fxFlex>\n        <mat-label>Upper Bound</mat-label>\n        <input matInput #input placeholder=\"upper Bound\" formControlName=\"upperBound\" required>\n      </mat-form-field>\n      \n    </div>\n    <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\" class=\"col\">\n    \n      <mat-form-field appearance=\"outline\" fxFlex>\n        <mat-label>Promo code</mat-label>\n        <input matInput #input placeholder=\"Promo code\" formControlName=\"promocode\" required>\n      </mat-form-field>\n      <mat-form-field appearance=\"outline\" fxFlex>\n        <mat-label>Discount Percent</mat-label>\n        <input matInput #input placeholder=\"Discount Percent\" formControlName=\"discountPercent\" required>\n      </mat-form-field>\n      <mat-form-field>\n        <input matInput [matDatepicker]=\"picker2\" placeholder=\"Choose an end date\">\n        <mat-datepicker-toggle matSuffix [for]=\"picker2\"></mat-datepicker-toggle>\n        <mat-datepicker #picker2></mat-datepicker>\n      </mat-form-field>\n      <mat-form-field appearance=\"outline\" fxFlex>\n        <mat-label>Total Coupons</mat-label>\n        <input matInput #input placeholder=\"Total Coupons\" formControlName=\"totalCoupons\" required>\n      </mat-form-field>\n    </div>\n  </div>\n\n  <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\">\n    <button mat-raised-button class=\"btn\" [disabled]='!campaignForm.valid' color=\"primary\">\n      Submit\n    </button>\n  </div>\n</form>\n"
 
 /***/ }),
 
@@ -728,7 +728,7 @@ module.exports = "<mat-toolbar>\n  <span class=\"fill-remaining-space\"></span>\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-card class=\"my-card\" fxFlex.sm=\"0 1 calc(50%-10px)\" fxFlex.md=\"0 1 calc(33%-10px)\" fxLayout=\"column\" fxLayoutGap=\"20px\" (click)=\"ok()\">\n    <mat-card-title fxLayoutAlign=\"start\" class=\"name\" >{{name}}</mat-card-title>\n    <mat-card-content fxLayoutAlign=\"start\" class=\"objective\">Objective:{{objective}}</mat-card-content>\n    <div>\n        <mat-card-content fxLayoutAlign=\"start\">Start date:{{startDate}}</mat-card-content>\n        <mat-card-content fxLayoutAlign=\"start\">End date:{{endDate}}</mat-card-content>\n\n    </div>\n    \n    <mat-card-content fxLayoutAlign=\"start\">Promocode:{{promocode}}</mat-card-content>\n    <mat-card-content fxLayoutAlign=\"start\">Discount Percent:{{discountPercent}}</mat-card-content>\n\n  </mat-card>\n  \n"
+module.exports = "<mat-card class=\"my-card\" fxFlex.sm=\"0 1 calc(50%-10px)\" fxFlex.md=\"0 1 calc(33%-10px)\" fxLayout=\"column\" fxLayoutGap=\"20px\" (click)=\"ok()\">\n    <mat-card-title fxLayoutAlign=\"start\" class=\"name\" >{{name}}</mat-card-title>\n    <mat-card-content fxLayoutAlign=\"start\" class=\"objective\">Objective:{{objective}}</mat-card-content>\n    <div>\n        <mat-card-content fxLayoutAlign=\"start\">Start date:{{startDate}}</mat-card-content>\n        <mat-card-content fxLayoutAlign=\"start\">End date:{{endDate}}</mat-card-content>\n    </div>\n    <mat-card-content fxLayoutAlign=\"start\">Promocode:{{promocode}}</mat-card-content>\n    <mat-card-content fxLayoutAlign=\"start\">Discount Percent:{{discountPercent}}</mat-card-content>\n    <mat-card-content fxLayoutAlign=\"start\">Upper Bound:{{upperBound}}</mat-card-content>\n    <mat-card-content fxLayoutAlign=\"start\">Total Coupons:{{totalCoupons}}</mat-card-content>\n    <mat-card-content fxLayoutAlign=\"start\">Used Coupons:{{usedCoupons}}</mat-card-content>\n  </mat-card>\n  \n"
 
 /***/ }),
 
@@ -750,7 +750,7 @@ module.exports = "<h1 fxLayout=\"column\" fxLayout.gt-md=\"row\" fxLayoutGap.gt-
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "mat-toolbar {\n    background-color: white;\n}\n\n.controles-container{\n    width: 100%;\n    padding: 5%;    \n}\n\n.fill-remaining-space {\n    /* This fills the remaining space, by using flexbox. \n       Every toolbar row uses a flexbox row layout. */\n    flex: 1 1 auto;\n  }\n\n.controles-container > * {\n    width: 100%;\n    }\n\n.btn-dialog-close{\n        width: 45px;\n        min-width: 0px !important;\n        height: 40px;\n        padding: 0px !important;\n      }\n\n.button {\n        padding-bottom: 21.5px;\n    }\n\n.btn {\n        width: 16em; height: 60px;\n      \n       }\n\n.col {\n        width: 80%;\n      }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY2FtcGFpZ25zL2FkZC1jYW1wYWlnbi9hZGQtY2FtcGFpZ24uY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLHVCQUF1QjtBQUMzQjs7QUFFQTtJQUNJLFdBQVc7SUFDWCxXQUFXO0FBQ2Y7O0FBRUE7SUFDSTtxREFDaUQ7SUFDakQsY0FBYztFQUNoQjs7QUFFRjtJQUNJLFdBQVc7SUFDWDs7QUFHSjtRQUNRLFdBQVc7UUFDWCx5QkFBeUI7UUFDekIsWUFBWTtRQUNaLHVCQUF1QjtNQUN6Qjs7QUFFQTtRQUNFLHNCQUFzQjtJQUMxQjs7QUFFSjtRQUNRLFdBQVcsRUFBRSxZQUFZOztPQUUxQjs7QUFFUDtRQUNRLFVBQVU7TUFDWiIsImZpbGUiOiJzcmMvYXBwL2NhbXBhaWducy9hZGQtY2FtcGFpZ24vYWRkLWNhbXBhaWduLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyJtYXQtdG9vbGJhciB7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGU7XG59XG5cbi5jb250cm9sZXMtY29udGFpbmVye1xuICAgIHdpZHRoOiAxMDAlO1xuICAgIHBhZGRpbmc6IDUlOyAgICBcbn1cblxuLmZpbGwtcmVtYWluaW5nLXNwYWNlIHtcbiAgICAvKiBUaGlzIGZpbGxzIHRoZSByZW1haW5pbmcgc3BhY2UsIGJ5IHVzaW5nIGZsZXhib3guIFxuICAgICAgIEV2ZXJ5IHRvb2xiYXIgcm93IHVzZXMgYSBmbGV4Ym94IHJvdyBsYXlvdXQuICovXG4gICAgZmxleDogMSAxIGF1dG87XG4gIH1cblxuLmNvbnRyb2xlcy1jb250YWluZXIgPiAqIHtcbiAgICB3aWR0aDogMTAwJTtcbiAgICB9XG5cbiBcbi5idG4tZGlhbG9nLWNsb3Nle1xuICAgICAgICB3aWR0aDogNDVweDtcbiAgICAgICAgbWluLXdpZHRoOiAwcHggIWltcG9ydGFudDtcbiAgICAgICAgaGVpZ2h0OiA0MHB4O1xuICAgICAgICBwYWRkaW5nOiAwcHggIWltcG9ydGFudDtcbiAgICAgIH1cblxuICAgICAgLmJ1dHRvbiB7XG4gICAgICAgIHBhZGRpbmctYm90dG9tOiAyMS41cHg7XG4gICAgfVxuICAgIFxuLmJ0biB7XG4gICAgICAgIHdpZHRoOiAxNmVtOyBoZWlnaHQ6IDYwcHg7XG4gICAgICBcbiAgICAgICB9XG4gICAgXG4uY29sIHtcbiAgICAgICAgd2lkdGg6IDgwJTtcbiAgICAgIH1cbiJdfQ== */"
+module.exports = "mat-toolbar {\n  background-color: white;\n}\n\n.controles-container{\n  width: 100%;\n  padding: 5%;    \n}\n\n.fill-remaining-space {\n  /* This fills the remaining space, by using flexbox. \n     Every toolbar row uses a flexbox row layout. */\n  flex: 1 1 auto;\n}\n\n.controles-container > * {\n  width: 100%;\n  }\n\n.btn-dialog-close{\n      width: 45px;\n      min-width: 0px !important;\n      height: 40px;\n      padding: 0px !important;\n    }\n\n.button {\n      padding-bottom: 21.5px;\n  }\n\n.btn {\n      width: 16em; height: 60px;\n    \n     }\n\n.col {\n      width: 80%;\n    }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY2FtcGFpZ25zL2FkZC1jYW1wYWlnbi9hZGQtY2FtcGFpZ24uY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLHVCQUF1QjtBQUN6Qjs7QUFFQTtFQUNFLFdBQVc7RUFDWCxXQUFXO0FBQ2I7O0FBRUE7RUFDRTttREFDaUQ7RUFDakQsY0FBYztBQUNoQjs7QUFFQTtFQUNFLFdBQVc7RUFDWDs7QUFHRjtNQUNNLFdBQVc7TUFDWCx5QkFBeUI7TUFDekIsWUFBWTtNQUNaLHVCQUF1QjtJQUN6Qjs7QUFFQTtNQUNFLHNCQUFzQjtFQUMxQjs7QUFFRjtNQUNNLFdBQVcsRUFBRSxZQUFZOztLQUUxQjs7QUFFTDtNQUNNLFVBQVU7SUFDWiIsImZpbGUiOiJzcmMvYXBwL2NhbXBhaWducy9hZGQtY2FtcGFpZ24vYWRkLWNhbXBhaWduLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyJtYXQtdG9vbGJhciB7XG4gIGJhY2tncm91bmQtY29sb3I6IHdoaXRlO1xufVxuXG4uY29udHJvbGVzLWNvbnRhaW5lcntcbiAgd2lkdGg6IDEwMCU7XG4gIHBhZGRpbmc6IDUlOyAgICBcbn1cblxuLmZpbGwtcmVtYWluaW5nLXNwYWNlIHtcbiAgLyogVGhpcyBmaWxscyB0aGUgcmVtYWluaW5nIHNwYWNlLCBieSB1c2luZyBmbGV4Ym94LiBcbiAgICAgRXZlcnkgdG9vbGJhciByb3cgdXNlcyBhIGZsZXhib3ggcm93IGxheW91dC4gKi9cbiAgZmxleDogMSAxIGF1dG87XG59XG5cbi5jb250cm9sZXMtY29udGFpbmVyID4gKiB7XG4gIHdpZHRoOiAxMDAlO1xuICB9XG5cblxuLmJ0bi1kaWFsb2ctY2xvc2V7XG4gICAgICB3aWR0aDogNDVweDtcbiAgICAgIG1pbi13aWR0aDogMHB4ICFpbXBvcnRhbnQ7XG4gICAgICBoZWlnaHQ6IDQwcHg7XG4gICAgICBwYWRkaW5nOiAwcHggIWltcG9ydGFudDtcbiAgICB9XG5cbiAgICAuYnV0dG9uIHtcbiAgICAgIHBhZGRpbmctYm90dG9tOiAyMS41cHg7XG4gIH1cbiAgXG4uYnRuIHtcbiAgICAgIHdpZHRoOiAxNmVtOyBoZWlnaHQ6IDYwcHg7XG4gICAgXG4gICAgIH1cbiAgXG4uY29sIHtcbiAgICAgIHdpZHRoOiA4MCU7XG4gICAgfVxuIl19 */"
 
 /***/ }),
 
@@ -780,12 +780,15 @@ let AddCampaignComponent = class AddCampaignComponent {
         this.fb = fb;
         this.dialogRef = dialogRef;
         this.campaignForm = this.fb.group({
-            name: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].pattern('^[a-zA-Z0-9\-]*$')]],
-            objective: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].pattern('[0-9]+')]],
+            name: ['', []],
+            objective: ['', []],
             startDate: ['', []],
             endDate: ['', []],
-            promocode: ['', []],
-            discountPercent: ['', []]
+            promocode: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].pattern('[A-Z0-9]+')]],
+            discountPercent: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].pattern('[0-9]+')]],
+            upperBound: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].pattern('[0-9]+')]],
+            totalCoupons: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].pattern('[0-9]+')]],
+            usedCoupons: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].pattern('[0-9]+')]]
         });
     }
     onClose() {
@@ -795,7 +798,7 @@ let AddCampaignComponent = class AddCampaignComponent {
     ngOnInit() {
     }
     onSubmit() {
-        console.log(this.campaignForm.value);
+        console.log("form value", this.campaignForm.value);
         this.dialogRef.close(this.campaignForm.value);
     }
 };
@@ -825,7 +828,7 @@ AddCampaignComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".my-card {\n    margin-bottom: 40px;\n    height: 300px;\n    cursor: pointer;\n    background-color: peru;\n}\n\n.my-card:hover {\n    transform: scale(1.1);\n}\n\n.name {\n    padding-top: 10%;\n}\n\n.status {\n    font-weight: bold;\n    font-size: 1em;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY2FtcGFpZ25zL2NhbXBhaWduLWNhcmQvY2FtcGFpZ24tY2FyZC5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksbUJBQW1CO0lBQ25CLGFBQWE7SUFDYixlQUFlO0lBQ2Ysc0JBQXNCO0FBQzFCOztBQUVBO0lBR0kscUJBQXFCO0FBQ3pCOztBQUVBO0lBQ0ksZ0JBQWdCO0FBQ3BCOztBQUVBO0lBQ0ksaUJBQWlCO0lBQ2pCLGNBQWM7QUFDbEIiLCJmaWxlIjoic3JjL2FwcC9jYW1wYWlnbnMvY2FtcGFpZ24tY2FyZC9jYW1wYWlnbi1jYXJkLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIubXktY2FyZCB7XG4gICAgbWFyZ2luLWJvdHRvbTogNDBweDtcbiAgICBoZWlnaHQ6IDMwMHB4O1xuICAgIGN1cnNvcjogcG9pbnRlcjtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiBwZXJ1O1xufVxuXG4ubXktY2FyZDpob3ZlciB7XG4gICAgLXdlYmtpdC10cmFuc2Zvcm06IHNjYWxlKDEuMSk7XG4gICAgLW1zLXRyYW5zZm9ybTogc2NhbGUoMS4xKTtcbiAgICB0cmFuc2Zvcm06IHNjYWxlKDEuMSk7XG59XG5cbi5uYW1lIHtcbiAgICBwYWRkaW5nLXRvcDogMTAlO1xufVxuXG4uc3RhdHVzIHtcbiAgICBmb250LXdlaWdodDogYm9sZDtcbiAgICBmb250LXNpemU6IDFlbTtcbn1cbiJdfQ== */"
+module.exports = ".my-card {\n    margin-bottom: 40px;\n    height: 400px;\n    cursor: pointer;\n    \n}\n\n.my-card:hover {\n    transform: scale(1.1);\n}\n\n.name {\n    padding-top: 10%;\n}\n\n.status {\n    font-weight: bold;\n    font-size: 1em;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY2FtcGFpZ25zL2NhbXBhaWduLWNhcmQvY2FtcGFpZ24tY2FyZC5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksbUJBQW1CO0lBQ25CLGFBQWE7SUFDYixlQUFlOztBQUVuQjs7QUFFQTtJQUdJLHFCQUFxQjtBQUN6Qjs7QUFFQTtJQUNJLGdCQUFnQjtBQUNwQjs7QUFFQTtJQUNJLGlCQUFpQjtJQUNqQixjQUFjO0FBQ2xCIiwiZmlsZSI6InNyYy9hcHAvY2FtcGFpZ25zL2NhbXBhaWduLWNhcmQvY2FtcGFpZ24tY2FyZC5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLm15LWNhcmQge1xuICAgIG1hcmdpbi1ib3R0b206IDQwcHg7XG4gICAgaGVpZ2h0OiA0MDBweDtcbiAgICBjdXJzb3I6IHBvaW50ZXI7XG4gICAgXG59XG5cbi5teS1jYXJkOmhvdmVyIHtcbiAgICAtd2Via2l0LXRyYW5zZm9ybTogc2NhbGUoMS4xKTtcbiAgICAtbXMtdHJhbnNmb3JtOiBzY2FsZSgxLjEpO1xuICAgIHRyYW5zZm9ybTogc2NhbGUoMS4xKTtcbn1cblxuLm5hbWUge1xuICAgIHBhZGRpbmctdG9wOiAxMCU7XG59XG5cbi5zdGF0dXMge1xuICAgIGZvbnQtd2VpZ2h0OiBib2xkO1xuICAgIGZvbnQtc2l6ZTogMWVtO1xufVxuIl19 */"
 
 /***/ }),
 
@@ -857,6 +860,9 @@ let CampaignCardComponent = class CampaignCardComponent {
         this.endDate = this.campaign.endDate;
         this.promocode = this.campaign.promocode;
         this.discountPercent = this.campaign.discountPercent;
+        this.upperBound = this.campaign.upperBound;
+        this.totalCoupons = this.campaign.totalCoupons;
+        this.usedCoupons = this.campaign.usedCoupons;
     }
     ok() {
         this.router.navigate(['/campaigns']);
@@ -960,13 +966,13 @@ let CampaignsComponent = class CampaignsComponent {
         const dialogConfig = new _angular_material__WEBPACK_IMPORTED_MODULE_3__["MatDialogConfig"]();
         dialogConfig.disableClose = true;
         dialogConfig.autoFocus = true;
-        dialogConfig.width = '40%';
+        dialogConfig.width = '45%';
         const dRef = this.matDialog.open(_add_campaign_add_campaign_component__WEBPACK_IMPORTED_MODULE_4__["AddCampaignComponent"], dialogConfig);
         dRef.afterClosed().subscribe(result => {
             if (result !== undefined) {
                 this.campaignservice.addCampaign(result)
                     .subscribe(response => {
-                    // this.notificationService.success(' Supervisor Added successfully');
+                    // this.notificationService.success(' Campaign Added successfully');
                     // this.getCampaignsInfo();
                 });
             }
@@ -1054,7 +1060,7 @@ CampaignsModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _angular_material__WEBPACK_IMPORTED_MODULE_7__["MatToolbarModule"],
             _angular_material__WEBPACK_IMPORTED_MODULE_7__["MatDatepickerModule"]
         ],
-        entryComponents: [_add_campaign_add_campaign_component__WEBPACK_IMPORTED_MODULE_12__["AddCampaignComponent"],],
+        entryComponents: [_add_campaign_add_campaign_component__WEBPACK_IMPORTED_MODULE_12__["AddCampaignComponent"]],
     })
 ], CampaignsModule);
 

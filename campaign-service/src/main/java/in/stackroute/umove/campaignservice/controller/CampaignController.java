@@ -58,7 +58,9 @@ public class CampaignController
      */
     @PatchMapping(path = "/campaigns/{id}")
     public Campaign updateCampaign(@PathVariable String id, @RequestBody Campaign campaign){
+
         return campaignService.updateCampaign(id,campaign);
+
     }
     /**
      *

@@ -33,7 +33,7 @@ add() {
   const dialogConfig = new MatDialogConfig();
   dialogConfig.disableClose = true;
   dialogConfig.autoFocus = true;
-  dialogConfig.width = '40%';
+  dialogConfig.width = '45%';
   const dRef = this.matDialog.open(AddCampaignComponent, dialogConfig);
 
   dRef.afterClosed().subscribe(result => {
@@ -41,7 +41,7 @@ add() {
       this.campaignservice.addCampaign(result)
           .subscribe(
             response => {
-              // this.notificationService.success(' Supervisor Added successfully');
+              // this.notificationService.success(' Campaign Added successfully');
               // this.getCampaignsInfo();
             }); }
      });
