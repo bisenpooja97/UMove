@@ -18,6 +18,7 @@ export class SettingsComponent implements OnInit {
   ngOnInit() {
     this.settingsService.getConfigurationByName('autocancelTime').subscribe(response => {
       // tslint:disable-next-line: no-string-literal
+      console.log('response', response);
       this.autocancelTimeValue = response['data'].value;
       console.log('Autocancel time: ', this.autocancelTimeValue);
     });

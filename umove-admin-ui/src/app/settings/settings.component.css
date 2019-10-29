@@ -14,3 +14,21 @@
 .settings {
     padding-bottom: 20%;
 }
+
+
+@media only screen and (max-width: 600px) {
+
+    .settings {
+        padding-bottom: 80%;
+    } 
+
+    .settings-form { 
+        min-width: 100px;
+        max-width: 300px;
+        width: 100%;
+        margin-left: 10%;
+        margin-bottom: 50px;
+        padding-top: 5%;
+        font-size: 1.5em;
+    }
+}

@@ -15,7 +15,6 @@ import java.util.Map;
 import java.util.TreeMap;
 
 @RestController
-//@CrossOrigin("${umove.rider-ui.host}")
 @RequestMapping(value = "api/v1")
 public class ConfigurationController {
 
