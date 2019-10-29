@@ -13,6 +13,6 @@
        <domain includeSubdomains="true">172.23.234.112:8093</domain>
        <domain includeSubdomains="true">172.23.234.74:8091</domain>
        <domain includeSubdomains="true">172.23.234.74:8095</domain>
-       <domain includeSubdomains="true">172.23.234.60:8094</domain>
+       <domain includeSubdomains="true">172.23.234.75:8080</domain>
    </domain-config>
 </network-security-config>

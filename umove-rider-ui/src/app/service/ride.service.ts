@@ -13,7 +13,6 @@ export class RideService {
 
   currentBooking: Ride;
   baseUrl = environment.baseUrl + environment.bookingService + environment.bookingBaseApi;
-
   constructor(private http: HTTP, private toastController: ToastController) {
     console.log('ride service ka constuctor call hua');
     this.currentBooking = new Ride();
@@ -30,7 +29,7 @@ export class RideService {
   }
 
   confirmBooking(data) {
-    console.log('url', this.baseUrl);
+    console.log('url', this.baseUrl, JSON.stringify(data));
     return this.http.post(this.baseUrl, data, {});
   }
 
@@ -82,11 +81,12 @@ export class RideService {
   getRidesByUserId(userId) {
   return this.http.get(this.baseUrl + '?userId=' + userId, {} , {});
 }
-setPaymentDetails(rideId: string, paymentId: string) {
-  return this.http.put(this.baseUrl + '/payments?rideId=' + rideId + '&payment_Id=' + paymentId, {}, {});
+setPaymentDetails(rideId: string, paymentId: string, paymentStatus: string) {
+  return this.http.put(this.baseUrl + '/payments?rideId=' + rideId + '&paymentId=' + paymentId + '&paymentStatus=' + paymentStatus, {}, {});
 }
-getPaymentDetailsByRideId(id: string) {
-  return this.http.get(this.baseUrl + '/payments/' + id, {}, {});
+
+getPaymentDetailsByRideId(rideId: string) {
+  return this.http.get(this.baseUrl + '/payments/' + rideId, {}, {});
 }
 
 }

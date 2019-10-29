@@ -20,8 +20,7 @@ import java.util.List;
 @ToString
 @Getter
 @Setter
-public class Ride
-{
+public class Ride {
     @Id
     private ObjectId _id;
     private RideStatus status;
@@ -35,8 +34,8 @@ public class Ride
     private LocalDateTime rideEndAt;
     private Double distance;
     private int duration;
+    private Campaign promoCode;
     private PaymentDetail paymentDetail;
-    private PromoCode promoCode;
 
     // ObjectId needs to be converted to string
     public String get_id() { return _id.toHexString(); }

@@ -107,7 +107,7 @@ let DocumentCardComponent = class DocumentCardComponent {
             data: {
                 name: this.users.name,
                 id: this.users.id,
-                imageUrl: `${src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].baseUrl}/api/v1/downloadFile/${this.users.id}`,
+                imageUrl: `${src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].baseUrl}/userservice/api/v1/downloadFile/${this.users.id}`,
                 users: this.users
             }
         });
