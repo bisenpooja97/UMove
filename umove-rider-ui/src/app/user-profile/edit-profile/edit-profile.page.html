@@ -1,30 +1,61 @@
+<!--<ion-header>-->
+<!--  <ion-toolbar>-->
+<!--    <ion-buttons slot="start">-->
+<!--      <ion-back-button defaultHref="view-profile"></ion-back-button>-->
+<!--    </ion-buttons>-->
+<!--    <ion-title >Edit-Profile</ion-title>-->
+<!--  </ion-toolbar>-->
+<!--</ion-header>-->
+<!--<ion-content padding>-->
+<!--  <ion-card *ngIf="user">-->
+<!--    <ion-card-content>-->
+<!--      <form [formGroup]="todo" (ngSubmit)="logForm(todo.value)">-->
+<!--        <ion-label>Name</ion-label>-->
+<!--        <ion-item>-->
+<!--          <ion-input type="text" formControlName="name"></ion-input>-->
+<!--        </ion-item>-->
+<!--        <ion-label>Email</ion-label>-->
+<!--        <ion-item>-->
+<!--          <ion-input type="text" formControlName="email"></ion-input>-->
+<!--        </ion-item>-->
+<!--&lt;!&ndash;        <ion-label>Phone Number</ion-label>&ndash;&gt;-->
+<!--&lt;!&ndash;        <ion-item>&ndash;&gt;-->
+<!--&lt;!&ndash;          <ion-input type='text' formControlName="mobileNumber"></ion-input>&ndash;&gt;-->
+<!--&lt;!&ndash;        </ion-item>&ndash;&gt;-->
+<!--        <ion-button expand=block type="submit" [disabled]="!todo.valid">Submit</ion-button>-->
+<!--      </form>-->
+<!--      &lt;!&ndash;      <ion-button expand=block fill=outline >Submit</ion-button><br>&ndash;&gt;-->
+<!--    </ion-card-content>-->
+<!--  </ion-card>-->
+<!--</ion-content>-->
+<!--OLD CODE-->
 <ion-header>
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="view-profile"></ion-back-button>
-    </ion-buttons>
-    <ion-title >Edit-Profile</ion-title>
+    <ion-icon class="imagesize" ios="ios-person" md="md-person"></ion-icon>
+    <div class ="container">
+      <ion-back-button class="top-left" defaultHref="view-profile"></ion-back-button>
+      <div class="bottom-left">Edit Profile</div>
+    </div>
   </ion-toolbar>
 </ion-header>
-<ion-content padding>
-  <ion-card *ngIf="user">
-    <ion-card-content>
-      <form [formGroup]="todo" (ngSubmit)="logForm(todo.value)">
-        <ion-label>Name</ion-label>
-        <ion-item>
-          <ion-input type="text" formControlName="name"></ion-input>
-        </ion-item>
-        <ion-label>Email</ion-label>
-        <ion-item>
-          <ion-input type="text" formControlName="email"></ion-input>
-        </ion-item>
-<!--        <ion-label>Phone Number</ion-label>-->
-<!--        <ion-item>-->
-<!--          <ion-input type='text' formControlName="mobileNumber"></ion-input>-->
-<!--        </ion-item>-->
-        <ion-button expand=block type="submit" [disabled]="!todo.valid">Submit</ion-button>
-      </form>
-      <!--      <ion-button expand=block fill=outline >Submit</ion-button><br>-->
-    </ion-card-content>
-  </ion-card>
+<ion-content padding *ngIf="user">
+  <form [formGroup]="todo" (ngSubmit)="logForm(todo.value)">
+    <ion-label class="text-heading">Name</ion-label>
+    <ion-item class="phone-icon">
+      <ion-input required pattern="^[^\s-][a-zA-Z ]*" class="text-subheading" type="text"  formControlName="name" maxlength="18"></ion-input>
+      <div *ngIf="!todo.controls.name.valid"
+           class="validator-error">
+        Avoid 1-9 and special characters.
+      </div>
+    </ion-item>
+    <ion-label class="text-heading">Email</ion-label>
+    <ion-item class="phone-icon">
+      <ion-input required pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" class="text-subheading" type="text" formControlName="email"  maxlength="30"></ion-input>
+      <div *ngIf="!todo.controls.email.valid"
+           class="validator-error">
+        Enter a valid Email.
+      </div>
+    </ion-item>
+    <ion-button  class="btn-bottom ion-no-margin" expand=block type="submit" [disabled]="!todo.valid">Submit</ion-button>
+  </form>
 </ion-content>
