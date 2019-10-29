@@ -56,7 +56,13 @@ export class VehicleDeatilsComponent implements OnInit {
       this.registrationNo = this.vehicle.registrationNo;
       this.name = this.vehicle.vehicleType.name;
       this.lastServiceDate = this.vehicle.lastServiceDate;
-      this.purchasedDate = this.vehicle.purchasedDate;
+      // this.purchasedDate = this.vehicle.purchasedDate;
+      let pd = new Date();
+      pd = new Date(this.vehicle.purchasedDate);
+      let pd2;
+      pd2 = pd.getDate();
+      pd.setDate(pd2 + 1);
+      this.purchasedDate = pd;
       this.insuranceNo = this.vehicle.insuranceNo;
       this.zoneId = this.vehicle.zoneId;
       this.chassisNumber = this.vehicle.chassisNumber;
