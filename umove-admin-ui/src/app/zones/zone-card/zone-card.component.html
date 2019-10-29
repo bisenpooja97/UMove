@@ -1,13 +1,13 @@
 <mat-card (click)="ok()" class="my-card">
         
     <mat-card-content fxLayoutAlign="space-between" >
-            <ngx-avatar name="{{locality}}"></ngx-avatar>
+            <ngx-avatar class="font-style" name="{{locality}}"></ngx-avatar>
             <mat-chip-list aria-label="Fish selection">
-        <mat-chip [ngStyle]="{'background-color':getColor(status)}" class="status">{{status}}</mat-chip>
+        <mat-chip [ngStyle]="{'background-color':getColor(status)}" class="status font-style">{{status}}</mat-chip>
         </mat-chip-list>
     </mat-card-content>
-    <mat-card-title class="zoneName">{{zoneNames}}</mat-card-title>
-    <mat-card-content>{{city}}</mat-card-content>
-    <mat-card-content>Total Vehicle Capacity: {{capacity}}</mat-card-content>
-    <mat-card-content>Current Vehicle Capacity: {{count}}</mat-card-content>
+    <mat-card-title class="zoneName font-style">{{zoneNames}}</mat-card-title>
+    <mat-card-content class="font-style">{{city}}</mat-card-content>
+    <mat-card-content class="font-style">Total Vehicle Capacity: {{capacity}}</mat-card-content>
+    <mat-card-content class="font-style">Current Vehicle Capacity: {{count}}</mat-card-content>
 </mat-card>

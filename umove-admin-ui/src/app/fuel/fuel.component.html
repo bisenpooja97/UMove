@@ -8,7 +8,7 @@
     <ng-template #data>
         <div fxLayout="row" class="search">
             <mat-form-field fxFlex="20%">
-                <input matInput [(ngModel)]="term" placeholder="Search">
+                <input matInput [(ngModel)]="term" placeholder="Search" class="font-style">
             </mat-form-field>
         </div>
         <div fxLayout="column wrap">
@@ -17,7 +17,7 @@
                 <app-fuel-card *ngFor="let type of fuel| paginate: { itemsPerPage: 12, currentPage: p } | filter:term"
                     [fuel]="type"></app-fuel-card>
             </div>
-            <pagination-controls (pageChange)="p = $event" fxLayoutAlign="center center" class="paginator">
+            <pagination-controls (pageChange)="p = $event" fxLayoutAlign="center center" class="paginator font-style">
             </pagination-controls>
         </div>
     </ng-template>

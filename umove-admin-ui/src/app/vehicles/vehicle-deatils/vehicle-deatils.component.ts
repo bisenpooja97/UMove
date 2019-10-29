@@ -35,7 +35,7 @@ export class VehicleDeatilsComponent implements OnInit {
     { value: 'Free', viewValue: 'FREE' },
     { value: 'Servicing', viewValue: 'SERVICING' },
     { value: 'Stolen', viewValue: 'STOLEN' },
-    { value: 'No_More_In_Use', viewValue: 'No More In Use' }
+    { value: 'No_More_In_Use', viewValue: 'NO MORE IN USE' }
 
   ];
 
@@ -78,6 +78,7 @@ export class VehicleDeatilsComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
+    dialogConfig.width = '40%';
     dialogConfig.data = {
       insuranceNo: this.vehicle.insuranceNo,
       lastServiceDate: this.vehicle.lastServiceDate,

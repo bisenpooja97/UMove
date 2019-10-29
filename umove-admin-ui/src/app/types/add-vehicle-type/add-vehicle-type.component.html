@@ -8,15 +8,14 @@
 
 
     <form fxLayout="column" fxLayoutAlign="center center" [formGroup]="typeForm" (ngSubmit)="onSubmit()">
-        <h2 fxLayout="column" fxLayout.gt-md="row" fxLayoutGap.gt-md="15px" fxLayoutAlign="center center">Add New Types</h2>
-
+        
         <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px" class="form">
 
             <mat-form-field appearance="outline" fxFlex>
-                <mat-label>Type Name</mat-label>
-                <input matInput #input placeholder="Type Name" formControlName="name" required>
+                <mat-label class="font-style">Type Name</mat-label>
+                <input matInput #input placeholder="Type Name" formControlName="name" required class="font-style">
 
-                <mat-error *ngIf="rName.invalid">
+                <mat-error *ngIf="rName.invalid" class="font-style">
 
                     {{getErrorType()}}
                 </mat-error>
@@ -25,8 +24,8 @@
 
 
             <mat-form-field appearance="outline" fxFlex>
-                <mat-label>KM Per Litre</mat-label>
-                <input matInput #input placeholder="Mileage" formControlName="mileage" required>
+                <mat-label class="font-style">KM Per Litre</mat-label>
+                <input matInput #input placeholder="Mileage" formControlName="mileage" required class="font-style">
                 <mat-error *ngIf="Rkm.invalid">
 
                     {{getErrorkm()}}
@@ -35,18 +34,18 @@
 
 
             <mat-form-field appearance="outline" fxFlex>
-                <mat-label>Vehicle CC</mat-label>
-                <input matInput #input placeholder="vehicle CC" formControlName="vehicleCC" required>
-                <mat-error *ngIf="Rcc.invalid">
+                <mat-label class="font-style">Vehicle CC</mat-label>
+                <input matInput #input placeholder="vehicle CC" formControlName="vehicleCC" required class="font-style">
+                <mat-error *ngIf="Rcc.invalid" class="font-style">
                     {{getErrorCC()}}
 
                 </mat-error>
             </mat-form-field>
 
             <mat-form-field appearance="outline" fxFlex>
-                <mat-label>Base Fare</mat-label>
-                <input matInput #input placeholder="Base Fare" formControlName="baseFare" required>
-                <mat-error *ngIf="Rbasefare.invalid">
+                <mat-label class="font-style">Base Fare</mat-label>
+                <input matInput #input placeholder="Base Fare" formControlName="baseFare" required class="font-style">
+                <mat-error *ngIf="Rbasefare.invalid" class="font-style">
                     {{getErrorBaseFare()}}
 
                 </mat-error>
@@ -55,35 +54,30 @@
 
 
             <mat-form-field appearance="outline" fxFlex>
-                <mat-label>Fuel Type</mat-label>
+                <mat-label class="font-style">Fuel Type</mat-label>
                 <mat-select formControlName="fuel">
-                    <mat-option *ngFor="let fuel of  fuels" [value]="fuel">
+                    <mat-option *ngFor="let fuel of  fuels" [value]="fuel" class="font-style" class="font-style">
                         {{fuel.name}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
 
             <mat-form-field appearance="outline" fxFlex>
-                <mat-label>Cost Time</mat-label>
-                <input matInput #input placeholder="Cost Per Minute" formControlName="costPerMin" required>
-                  <mat-error *ngIf="Rcosttime.invalid">
+                <mat-label class="font-style">Cost Per Min</mat-label>
+                <input matInput #input placeholder="Cost Per Minute" formControlName="costPerMin" required class="font-style">
+                  <mat-error *ngIf="Rcosttime.invalid" class="font-style">
 
                     {{getErrorCosttime()}}
                 </mat-error>
 
             </mat-form-field>
-
-
-            <input name="file" type="file" class="ng-hide" (change)="onFileChanged($event)" #fileInput>
-
-
-
-
-            <button mat-raised-button class="btn"  [disabled]='!typeForm.valid'  color="primary">
+            <div class="upload">
+                <input name="file" type="file" class="ng-hide font-style" 
+                (change)="onFileChanged($event)" #fileInput required>
+            </div>
+            <button mat-raised-button class="btn font-style"  [disabled]='!typeForm.valid'  color="primary">
           Submit
         </button>
-
-
         </div>
 
     </form>

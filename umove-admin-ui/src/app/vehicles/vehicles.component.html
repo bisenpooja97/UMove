@@ -6,7 +6,7 @@
                 <img src="assets/no-record-found.jpeg">
             </div>
             <ng-template #data>
-                <div fxLayout="row" class="search">
+                <div fxLayout="row" class="search font-style">
                     <mat-form-field fxFlex="20%">
                         <input matInput [(ngModel)]="term" placeholder="Search">
                     </mat-form-field>
@@ -17,7 +17,7 @@
                     <app-vehicle-card *ngFor="let type of vehicle| paginate: { itemsPerPage: 12, currentPage: p } | filter:term" [vehicle]="type"></app-vehicle-card>
 
                 </div>
-                <pagination-controls (pageChange)="p = $event" fxLayoutAlign="center center" class="paginator"></pagination-controls> 
+                <pagination-controls (pageChange)="p = $event" fxLayoutAlign="center center" class="paginator font-style"></pagination-controls> 
                 </div>
                 </ng-template>
                 <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutAlign="end" class="add-button">

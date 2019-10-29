@@ -1,6 +1,6 @@
 <div fxLayout.gt-sm="row" fxLayout.sm="column" fxLayoutGap="10%">
     <div fxLayout="column" fxLayout.sm="column" fxLayoutGap="50px" fxLayoutGap.lt-md="0px">
-        <h1 fxLayout="column" fxLayout.gt-md="row" fxLayoutGap.gt-md="15px" class="vehicleName">
+        <h1 fxLayout="column" fxLayout.gt-md="row" fxLayoutGap.gt-md="15px" class="vehicleName font-style">
             {{name}}
 
         </h1>
@@ -8,17 +8,17 @@
 </div>
 <div fxLayout="column" class="space-top">
     <mat-card class="type" fxFlex.sm="0 1 calc(50%-10px)" fxFlex.md="0 1 calc(33%-10px)" fxLayout="column" fxLayoutGap="20px">
-        <mat-card-title fxLayoutAlign="start">Fuel-type: {{fuelname}}</mat-card-title>
+        <mat-card-title fxLayoutAlign="start" class="font-style">Fuel-type: {{fuelname}}</mat-card-title>
         <br><br>
         <div fxFlex=50% fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="20%" fxLayoutGap.lt-md="0px"
         class="form" fxLayoutAlign="center center">    
         <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="50px" fxLayoutGap.lt-md="0px" class="col">
-                <mat-card-title fxLayoutAlign="center center">Vehicle cc: {{cc}}</mat-card-title>
-                <mat-card-title fxLayoutAlign="center center">Cost/km: {{costPerKm}}</mat-card-title>
+                <mat-card-title fxLayoutAlign="center center" class="font-style">Vehicle cc: {{cc}}</mat-card-title>
+                <mat-card-title fxLayoutAlign="center center" class="font-style">Cost/km: {{costPerKm | number: '1.2-2'}}</mat-card-title>
         </div>
         <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="50px" fxLayoutGap.lt-md="0px" class="col">
            
-                <mat-card-title fxLayoutAlign="center center">cost/min: {{costPerMin}}
+                <mat-card-title fxLayoutAlign="center center" class="font-style">cost/min: {{costPerMin | number: '1.2-2'}}
                     <span>
                     <i class="material-icons iconCapacity" (click)="update()" >
                         create
@@ -26,7 +26,7 @@
                 </span>
 
                 </mat-card-title>
-                <mat-card-title fxLayoutAlign="center center">kilometers/lt: {{mileage}}</mat-card-title>
+                <mat-card-title fxLayoutAlign="center center" class="font-style">kilometers/lt: {{mileage}}</mat-card-title>
 
             </div>
 

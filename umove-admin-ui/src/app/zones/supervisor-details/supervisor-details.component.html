@@ -3,12 +3,12 @@
                 fxLayoutGap="20px">
 
                 <div *ngIf="sName === null; else sup">
-                                <mat-card-title fxLayoutAlign="start" class="zoneName">Supervisor
+                                <mat-card-title fxLayoutAlign="start" class="zoneName font-style">Supervisor
                                         </mat-card-title>
                                         <br><br>
-                        <h2 fxLayoutAlign="center center">No Supervisor allocated!!!</h2>
+                        <h2 fxLayoutAlign="center center" class="font-style">No Supervisor allocated!!!</h2>
                         <div fxLayoutAlign="center center">
-                                        <button mat-flat-button (click)="addSupervisor()" color="accent">
+                                        <button mat-flat-button (click)="addSupervisor()" color="accent" class="font-style">
                                                         Add Supervisor
                                                 </button>
                         </div>
@@ -29,16 +29,16 @@
                                 class="form" fxLayoutAlign="center center">
                                 <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="50px"
                                         fxLayoutGap.lt-md="0px" class="col">
-                                        <mat-card-title fxLayoutAlign="center center">Name: {{sName}}</mat-card-title>
-                                        <mat-card-title fxLayoutAlign="center center">Contact No: {{sNumber}}
+                                        <mat-card-title fxLayoutAlign="center center" class="font-style">Name: {{sName}}</mat-card-title>
+                                        <mat-card-title fxLayoutAlign="center center" class="font-style">Contact No: {{sNumber}}
                                         </mat-card-title>
 
 
                                 </div>
                                 <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="50px"
                                         fxLayoutGap.lt-md="0px" class="col">
-                                        <mat-card-title fxLayoutAlign="center center">Email: {{sEmail}}</mat-card-title>
-                                        <mat-card-title fxLayoutAlign="center center">Shift: Daily</mat-card-title>
+                                        <mat-card-title fxLayoutAlign="center center" class="font-style">Email: {{sEmail}}</mat-card-title>
+                                        <mat-card-title fxLayoutAlign="center center" class="font-style">Shift: Daily</mat-card-title>
 
                                 </div>
                         </div>

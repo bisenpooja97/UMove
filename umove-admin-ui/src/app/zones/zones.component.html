@@ -8,7 +8,7 @@
         <ng-template #data>
             <div fxLayout="row" class="search">
                 <mat-form-field fxFlex="20%">
-                    <input matInput [(ngModel)]="term" placeholder="Search">
+                    <input matInput [(ngModel)]="term" placeholder="Search" class="font-style">
                 </mat-form-field>
             </div>
     <div fxLayout="column wrap">
@@ -18,7 +18,7 @@
                 [zones]="zone">
             </app-zone-card>
         </div>
-        <pagination-controls (pageChange)="p = $event" fxLayoutAlign="center center" class="paginator"></pagination-controls>
+        <pagination-controls (pageChange)="p = $event" fxLayoutAlign="center center" class="paginator font-style"></pagination-controls>
     </div>
     </ng-template>
     <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutAlign ="end" class="add-button">
