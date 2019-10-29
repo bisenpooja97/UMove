@@ -5,15 +5,11 @@
 </div>
 
 <form class="settings-form">
-    <!-- <mat-form-field>
-        <input matInput [(ngModel)]="data.autocancelTimeValue" 
-        #autocancelTimeValue="ngModel" 
-        name="autocancelTimeValue" 
-        type="text" 
-        required placeholder="Autocancel Time">
-    </mat-form-field> -->
+    <mat-form-field class="settings-full-width">
+        <input matInput #autocancelTime name="autocancelTime" value="{{autocancelTimeValue}}" type="text" placeholder="Autocancel Time" (change)="onTimeChange(autocancelTime.name, autocancelTime.value)">
+    </mat-form-field> 
 
-    <!-- <mat-form-field class="settings-full-width">
-        <input matInput placeholder="Cancel Threshold Time">
-    </mat-form-field> -->
-</form>
+    <mat-form-field class="settings-full-width">
+        <input matInput #cancelThresholdTime name="cancelThresholdTime" value="{{cancelThresholdTimeValue}}" type="text" placeholder="Cancel Threshold Time" (change)="onTimeChange(cancelThresholdTime.name, cancelThresholdTime.value)">
+    </mat-form-field>
+</form> 

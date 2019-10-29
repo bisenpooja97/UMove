@@ -13,7 +13,7 @@ export const environment = {
   vehicleBaseApi: '/api/v1/vehicles',
   typeBaseApi: '/api/v1/types',
   fuelBaseApi: '/api/v1/fuel',
-  baseUrl3: 'http://192.168.0.123:8080/',
+  baseUrl3: 'http://172.23.234.60:8080/',
   bookingService: 'bookingservice',
   configBaseApi: '/api/v1/config'
 };

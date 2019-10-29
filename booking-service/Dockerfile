@@ -27,5 +27,5 @@
 # RUN mvn -f pom.xml clean package -DskipTests
 FROM openjdk:8-jre-alpine
 EXPOSE 8091
-ADD /target/booking-service.jar app.jar
+ADD /target/ride-service.jar app.jar
 ENTRYPOINT ["java","-jar","app.jar"]

@@ -9,7 +9,7 @@ import { Configuration } from 'src/app/model/configuration';
 })
 export class SettingsService {
 
-  baseUrl = environment.baseUrl3 + environment.bookingService + environment.configBaseApi;
+  baseUrl = environment.baseUrl3 /*+ environment.bookingService */+ environment.configBaseApi;
 
   constructor(private httpClient: HttpClient) { }
 
@@ -17,8 +17,8 @@ export class SettingsService {
     return this.httpClient.get<Configuration>(this.baseUrl + '/' + name);
   }
 
-  updateConfigurationByName(name: string): Observable<Configuration> {
-    return this.httpClient.patch<Configuration>(this.baseUrl + '/' + name, {});
+  updateConfigurationByName(name: string, value: number): Observable<Configuration> {
+    return this.httpClient.patch<Configuration>(this.baseUrl + '/' + name + '?configValue=' + value, {});
   }
 
 }
