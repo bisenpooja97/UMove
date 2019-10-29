@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { SettingsService } from './service/settings.service';
 import { NotificationService } from '../shared/notification.service';
+import { Configuration } from '../model/configuration';
 
 @Component({
   selector: 'app-settings',
@@ -9,6 +10,7 @@ import { NotificationService } from '../shared/notification.service';
 })
 export class SettingsComponent implements OnInit {
 
+  configurations: Configuration[];
   autocancelTimeValue: number;
   cancelThresholdTimeValue: number;
 
@@ -16,19 +18,19 @@ export class SettingsComponent implements OnInit {
               private notificationService: NotificationService) { }
 
   ngOnInit() {
-    this.settingsService.getConfigurationByName('autocancelTime').subscribe(response => {
+    this.settingsService.getConfigurations().subscribe(response => {
       // tslint:disable-next-line: no-string-literal
-      console.log('response', response);
-      this.autocancelTimeValue = response['data'].value;
-      console.log('Autocancel time: ', this.autocancelTimeValue);
+      this.configurations = response['data'];
+      console.log('Response is ', this.configurations);
+      this.configurations.map(configList => {
+        if (configList.name === 'autocancelTime') {
+          this.autocancelTimeValue = configList.value;
+        }
+        if (configList.name === 'cancelThresholdTime') {
+          this.cancelThresholdTimeValue = configList.value;
+        }
+      });
     });
-
-    this.settingsService.getConfigurationByName('cancelThresholdTime').subscribe(response => {
-      // tslint:disable-next-line: no-string-literal
-      this.cancelThresholdTimeValue = response['data'].value;
-      console.log('Autocancel time: ', this.cancelThresholdTimeValue);
-    });
-
   }
 
   onTimeChange(name: string, value: number) {
@@ -36,11 +38,11 @@ export class SettingsComponent implements OnInit {
       this.notificationService.success('Time Updated successfully!!');
       console.log('Response of updated time: ', response);
     },
-    error => {
-     if ( error.status === 400) {
-      this.notificationService.warn('Time cannot be Updated!!');
-     }
-    });
+      error => {
+        if (error.status === 400) {
+          this.notificationService.warn('Time cannot be Updated!!');
+        }
+      });
   }
 
 }
