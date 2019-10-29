@@ -1,23 +1,22 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title *ngIf="page!=='pick-up'">Select Drop Zone</ion-title>
     <ion-row *ngIf="page==='pick-up' && !trip">
       <ion-col size="6">
-        <ion-button shape="round" expand="block" fill="solid" (click)="trip=false" >Round Trip</ion-button>
+        <ion-button color="secondary" shape="round" expand="block" fill="solid" (click)="trip=false" >Round Trip</ion-button>
       </ion-col>
       <ion-col size="6">
-        <ion-button shape="round" expand="block" fill="outline" (click)="trip=true">One Way</ion-button>
+        <ion-button  color="secondary" shape="round" expand="block" fill="outline"  (click)="trip=true">One Way</ion-button>
       </ion-col>
     </ion-row>
     <ion-row *ngIf="page==='pick-up' && trip">
       <ion-col size="6">
-        <ion-button shape="round" expand="block" fill="outline" (click)="trip=false" >Rounded Trip</ion-button>
+        <ion-button color="secondary" shape="round" expand="block" fill="outline"  (click)="trip=false" >Round Trip</ion-button>
       </ion-col>
       <ion-col size="6">
-        <ion-button shape="round" expand="block" fill="solid" (click)="trip=true">One Way</ion-button>
+        <ion-button color="secondary" shape="round" expand="block" fill="solid"  (click)="trip=true">One Way</ion-button>
       </ion-col>
     </ion-row>
   </ion-toolbar>
@@ -35,12 +34,19 @@
     <ion-row>
       <ion-auto-complete style="width: 100%"  [dataProvider]="zoneService" (itemSelected)="gettingCoordinatesByLocality($event)"></ion-auto-complete>
     </ion-row>
-    <ion-row  class="map" id="pickup" style="height: 100%;" ></ion-row>
+    <ion-row  class="map" id="pickup" style="height: 100%;" >
+    </ion-row>
+    <ion-row class="buttonStyle">
+      <ion-button color="secondary" *ngIf="localUserData?.userStatus==='Inative'" shape="round" fill="solid"    href="/update-kyc"  ><ion-icon name="document"></ion-icon>&nbsp;Complete KYC to Book</ion-button>
+      <ion-button color="secondary" *ngIf="localUserData?.userStatus==='Active'" shape="round"  fill="solid"   href="/campaigns"><ion-icon name="pricetags"></ion-icon>&nbsp;Offers</ion-button>
+    </ion-row>
+<!--    <ion-button *ngIf="localUserData?.userStatus==='Inactive'">Complete Your KYC</ion-button>-->
+
   </ion-grid>
 </ion-content>
 <ion-footer *ngIf="isLoaded">
   <ion-row >
-    <ion-button [class.button-disabled]="selectedZone===undefined" expand="block" class="ion-no-margin btn-bottom" style="width: 100vw" (click)="showVehicleList()">Show vehicles</ion-button>
+    <ion-button  [class.button-disabled]="selectedZone===undefined" expand="full" class="ion-no-margin btn-bottom bottom-button"  (click)="showVehicleList()">Show vehicles</ion-button>
   </ion-row>
 
 </ion-footer>

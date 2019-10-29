@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
@@ -9,7 +9,7 @@
 <ion-content>
 <ion-list class="ion-wrap" >
   <ion-item *ngFor="let type of typeList" lines="none">
-    <app-bike [type]="type" [trip]="trip" (selectedTypes)="onVehicleSelected(type)"></app-bike>
+    <app-bike [type]="type" [trip]="trip" (selectedTypes)="onVehicleSelected(type.vehicle)"></app-bike>
   </ion-item>
 </ion-list>
   <ion-infinite-scroll threshold="100px" (ionInfinite)="doInfinite()">

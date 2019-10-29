@@ -6,6 +6,7 @@ import {Zone} from "../model/zone";
 import {HTTPResponse} from "@ionic-native/http";
 import {TypeCountList} from "../model/type-count-list";
 import {RideService} from "../service/ride.service";
+import {Vehicle} from "../model/vehicle";
 
 
 @Component({
@@ -19,7 +20,7 @@ export class BikeListPage implements OnInit {
   private response = null;
   private data: any;
 
-  constructor(private zoneService: ZoneService, private route: ActivatedRoute, private router: Router, private rideService: RideService) { }
+  constructor(private zoneService: ZoneService,private rideService: RideService, private route: ActivatedRoute, private router: Router) { }
 
   pickUpZone: Zone;
   trip: boolean;
@@ -37,26 +38,27 @@ export class BikeListPage implements OnInit {
       }
     });
   }
+  
 
-  onVehicleSelected(type: TypeCountList) {
+  onVehicleSelected(vehicle: Vehicle) {
     const navigationExtras: NavigationExtras  = {
       state: {
         page: 'drop',
       }
     };
+    console.log('type',vehicle);
     const ride = this.rideService.getCurrentBooking();
-    ride.vehicle = type.vehicle;
+    ride.vehicle = vehicle;
     this.rideService.setCurrentBooking(ride);
     if (this.trip) {
       this.router.navigate(['drop'], navigationExtras);
     } else {
-      this.router.navigate(['confirm-ride-detail'], navigationExtras);
+      this.router.navigate(['confirm-ride-detail']);
     }
   }
 
   doInfinite(): Promise<any> {
     console.log('Begin async operation');
-
     return new Promise((resolve) => {
       setTimeout(() => {
         this.zoneService.getVehiclesByZoneTypes('1').then(response => {

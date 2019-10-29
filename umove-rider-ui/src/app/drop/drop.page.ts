@@ -19,7 +19,7 @@ export class DropPage implements OnInit {
       const lng = resp.coords.longitude;
       this.mapService.buildMap(lat, lng,'drop',true);
       // this.mapService.checkMapLoading();
-      this.mapService.marker(lat, lng);
+      // this.mapService.marker(lat, lng);
     }).catch((error) => {
       console.log('Error getting location', error);
     });

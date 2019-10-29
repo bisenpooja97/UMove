@@ -5,6 +5,8 @@ import {Zone} from "../model/zone";
 import {Geolocation} from "@ionic-native/geolocation/ngx";
 import {MapService} from "../service/zone/map.service";
 import {RideService} from "../service/ride.service";
+import {UserProfile} from "../model/user-profile";
+import {Storage} from "@ionic/storage";
 
 @Component({
   selector: 'app-home',
@@ -14,12 +16,16 @@ import {RideService} from "../service/ride.service";
 
 export class HomePage implements OnInit{
     ngOnInit(): void {
+
     }
   containerId = 'pick';
   page = 'pick-up';
   trip : boolean;
   isLoaded : boolean;
-
+  key = 'details';
+  verificationCode: string;
+  localUserData: UserProfile;
+  user: any;
   private selectedZone: Zone;
   locality:string;
   constructor(private zoneService: ZoneService,
@@ -27,20 +33,23 @@ export class HomePage implements OnInit{
               private router: Router,
               private geolocation: Geolocation,
               private mapService: MapService,
-              private rideService: RideService) {
+              private rideService: RideService,
+              private storage: Storage) {
 
 
   }
 
   showVehicleList() {
-    if (!this.trip) {
+
      const ride = this.rideService.currentBooking;
      console.log('pickup zone me ride', ride);
      ride.sourceZone = this.selectedZone;
+    if (!this.trip) {
      ride.destinationZones = [];
      ride.destinationZones.push(this.selectedZone);
-     this.rideService.setCurrentBooking(ride);
     }
+     this.rideService.setCurrentBooking(ride);
+
     const navigationExtras: NavigationExtras = {
       state: {
         trip: this.trip,
@@ -61,7 +70,7 @@ export class HomePage implements OnInit{
       const lng = resp.coords.longitude;
       this.mapService.buildMap(lat, lng, 'pickup', true);
       // this.mapService.checkMapLoading();
-      this.mapService.marker(lat, lng);
+      // this.mapService.marker(lat, lng);
     }).catch((error) => {
       console.log('Error getting location', error);
     });
@@ -72,6 +81,12 @@ export class HomePage implements OnInit{
     this.mapService.onLoad$.subscribe((message: string) => {
       console.log('lo ho gya load ab tofinally~~~');
       this.isLoaded = true;
+    });
+    this.storage.ready().then(() => {
+      this.storage.get(this.key).then(value => {
+        console.log('this is in storage', value);
+        this.localUserData = value;
+      });
     });
   }
 }

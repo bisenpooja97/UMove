@@ -19,6 +19,8 @@ export class MapService implements OnInit{
   selectZone$: Observable<Zone>;
   loading: Subject<any>;
   onLoad$: Observable<any>;
+  popup = new mapboxgl.Popup({  closeOnClick: false,closeButton: false,alwaysOpen:true})
+      .setText('No Nearby Zones Available');
 
 
   constructor(private zoneService : ZoneService,private geolocation: Geolocation,) {
@@ -106,15 +108,25 @@ export class MapService implements OnInit{
 
   }
 
-  marker(lat, lng) {
+
+  marker(lat, lng,status) {
 
     console.log('coordinates',lat,lng);
     this.map.on('mouseenter', 'places', () => {
       this.map.getCanvas().style.cursor = 'pointer';
     });
+    if(status){
      this.markers
         .setLngLat([lng, lat])
-        .addTo(this.map);
+         .setPopup(this.popup)
+         .addTo(this.map)
+    }
+    else {
+      this.markers
+          .setLngLat([lng, lat])
+          .addTo(this.map)
+    }
+
     // function onDragEnd() {
     //   const lngLat = this.markers.getLngLat();
     //   console.log(lngLat.lat);
@@ -149,7 +161,7 @@ export class MapService implements OnInit{
       while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
         coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
       }
-      new mapboxgl.Popup()
+      new mapboxgl.Popup({closeButton: false})
           .setLngLat(coordinates)
           .setHTML(description)
           .addTo(this.map);
@@ -194,7 +206,7 @@ export class MapService implements OnInit{
         "supervisorEmail":"bherula@gmail.com",
         "status":"ACTIVE"
       }
-    ],lat,lng)
+    ],lat,lng);
     this.map.addLayer({
       id: 'route',
       type: 'line',
@@ -222,6 +234,7 @@ export class MapService implements OnInit{
     });
 
   }
+
   createFeature(zoneList:Zone[],lat:number,lng:number){
     if(this.layoutCount!==0) {
       this.map.removeLayer('places' + this.layoutCount);
@@ -236,9 +249,10 @@ export class MapService implements OnInit{
           features.push({
             type: 'Feature',
             properties: {
-              description: '<a href="http://maps.google.com/maps?saddr=' + lat + ',' + lng + '' +
+              description: '<ion-grid style="height: 40px"><ion-row style="align-items: center"><ion-col size="9">' +d.locality+
+                  '</ion-col><ion-col size="3"><a href="http://maps.google.com/maps?saddr=' + lat + ',' + lng + '' +
                   '&daddr=' + d.lat + ',' + d.lon + '">' +
-                  '<button>Get Directions</button></a> ',
+                  '<ion-icon style="width: 40px;height: 40px" name="compass"></ion-icon></a></ion-col></ion-row></ion-grid> ',
               icon: 'cat',
               data: d,
             },
@@ -253,7 +267,7 @@ export class MapService implements OnInit{
           })
         }
     );
-    this.map.loadImage('https://images.vexels.com/media/users/3/129788/isolated/preview/04c91b04215f603567324d459b761807-chopper-bike-front-icon-by-vexels.png', (error, image) => {
+    this.map.loadImage('assets/icon.png', (error, image) => {
       if (error) { throw error; }
       this.map.addImage('cat', image);
       // Add a layer showing the places.
@@ -280,7 +294,14 @@ export class MapService implements OnInit{
   nearbyZonesLayer(lat: number, lng: number){
     this.zoneService.getNearbyZones(lat, lng).then(response =>{
       const data = JSON.parse(response.data);
-      this.createFeature(data.data,lat,lng);
+
+      if(data.data==[]){
+        this.marker(lat, lng,true);
+      }
+      else {
+        this.marker(lat, lng,false);
+        this.createFeature(data.data,lat,lng);
+      }
     }).catch(error => {
       console.log(error);
       this.zoneService.presentToast(error);
@@ -300,7 +321,7 @@ export class MapService implements OnInit{
               [lng, lat],
               1000,15
           );
-          this.marker( lat, lng );
+          // this.marker( lat, lng );
           this.nearbyZonesLayer(lat, lng);
 
         }

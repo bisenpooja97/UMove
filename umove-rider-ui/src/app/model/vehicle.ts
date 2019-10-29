@@ -1,5 +1,4 @@
 import { VehicleType } from './vehicle-type';
-
 export class Vehicle{
   public id: string;
   public zoneId: string;
