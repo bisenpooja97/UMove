@@ -34,7 +34,7 @@ public class ServiceFuelImpl implements ServiceFuel {
     @Override
     public List<Fuel> find(int page) {
         //List<Fuel> list= new ArrayList<>();
-        List<Fuel> list=repo.findAll(new PageRequest(page,100)).getContent();
+        List<Fuel> list=repo.findAll(new PageRequest(page,1000)).getContent();
         // List<Fuel> list =  repo.findAllByName(page);
         //List<Fuel> list=repo.findAll(page);
         return list;

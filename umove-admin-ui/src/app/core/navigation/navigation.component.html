@@ -3,26 +3,26 @@
   <mat-sidenav #sidenav mode="push" class="sidenav">
     <mat-toolbar color="primary" class="box">
       <ngx-avatar src="assets/img_avatar.png" fxLayoutAlign="center center"></ngx-avatar>
-      <p *ngIf="loginService.isUserLoggedIn()">&nbsp;&nbsp;Admin</p>
+      <p *ngIf="loginService.isUserLoggedIn()" class="font-style">&nbsp;&nbsp;Admin</p>
     </mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item class="sidenav-link" routerLink="/users" (click)="sidenav.toggle()">
+      <a mat-list-item class="sidenav-link font-style" routerLink="/users" (click)="sidenav.toggle()">
         <mat-icon mat-list-icon>person</mat-icon>
         <span class="title" mat-line>Users</span>
       </a>
-      <a mat-list-item class="sidenav-link" routerLink="/zones" (click)="sidenav.toggle()">
+      <a mat-list-item class="sidenav-link font-style" routerLink="/zones" (click)="sidenav.toggle()">
         <mat-icon mat-list-icon>compass_calibration</mat-icon>
         <span class="title" mat-line>Zones</span>
       </a>
-      <a mat-list-item class="sidenav-link" routerLink="/vehicles" (click)="sidenav.toggle()">
+      <a mat-list-item class="sidenav-link font-style" routerLink="/vehicles" (click)="sidenav.toggle()">
         <mat-icon mat-list-icon>motorcycle</mat-icon>
         <span class="title" mat-line>Vehicles</span>
       </a>
-      <a mat-list-item class="sidenav-link" routerLink="/types" (click)="sidenav.toggle()">
+      <a mat-list-item class="sidenav-link font-style" routerLink="/types" (click)="sidenav.toggle()">
         <mat-icon mat-list-icon>directions_bike</mat-icon>
         <span class="title" mat-line>Vehicle Types</span>
       </a>
-      <a mat-list-item class="sidenav-link" routerLink="/fuel" (click)="sidenav.toggle()">
+      <a mat-list-item class="sidenav-link font-style" routerLink="/fuel" (click)="sidenav.toggle()">
         <mat-icon mat-list-icon>local_gas_station</mat-icon>
         <span class="title" mat-line>Fuels</span>
       </a>
@@ -39,10 +39,10 @@
       <mat-icon aria-label="Menu" class="material-icons">menu</mat-icon>
     </button>
     <h1 class="component-title">
-      <a class="title-link">{{title}}</a>
+      <a class="title-link font-style">{{title}}</a>
     </h1>
     <span class="toolbar-filler"></span>
-    <button id="button-logout" *ngIf="loginService.isUserLoggedIn()" mat-button routerLink="/logout" class="logout">Log
+    <button id="button-logout" *ngIf="loginService.isUserLoggedIn()" mat-button routerLink="/logout" class="logout font-style">Log
       Out</button>
   </mat-toolbar>
 

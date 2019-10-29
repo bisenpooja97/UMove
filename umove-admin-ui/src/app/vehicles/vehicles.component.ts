@@ -29,6 +29,7 @@ export class VehiclesComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
+    dialogConfig.width = '40%';
     const dRef = this.matDialog.open(AddVehicleComponent, dialogConfig);
 
     dRef.afterClosed().subscribe(result => {

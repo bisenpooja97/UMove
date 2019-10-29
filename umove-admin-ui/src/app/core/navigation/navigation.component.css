@@ -22,3 +22,7 @@
 .logout {
   font-size: 1em;
 }
+
+mat-sidenav {
+  height: 100%;
+}

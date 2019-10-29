@@ -3,7 +3,7 @@ import { VehicleTypeService } from '../vehicle-type.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { MatSnackBar, MatDialogRef } from '@angular/material';
+import { MatDialogRef } from '@angular/material';
 import { HttpClient } from '@angular/common/http';
 import { Fuel } from 'src/app/model/fuel';
 import { FuelService } from 'src/app/fuel/fuel.service';
@@ -46,21 +46,21 @@ export class AddVehicleTypeComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<AddVehicleTypeComponent>, private fb: FormBuilder, private route: ActivatedRoute,
               private router: Router, private typeService: VehicleTypeService,
               private fuelService: FuelService,
-              private http: HttpClient, private snackBar: MatSnackBar) {}
+              private http: HttpClient) {}
   baseUrl = environment.baseUrl2 + environment.typeBaseApi;
 
   typeForm = this.fb.group({
-    name: ['', [Validators.pattern('^[a-zA-Z0-9\-]*$')]],
+    name: ['', [Validators.pattern('^[a-zA-Z0-9 \-]*$')]],
     mileage: ['', [Validators.pattern('^[0-9]*$')]],
-    costPerMin: ['', [Validators.pattern('^[0-9]*$')]],
     vehicleCC: ['', [Validators.pattern('^[0-9]*$')]],
-     baseFare: ['', [Validators.pattern('^[0-9]*$')]],
+    costPerMin: ['', [Validators.pattern('[0-9]+(\.[0-9][0-9]?)?')]],
+    baseFare: ['', [Validators.pattern('[0-9]+(\.[0-9][0-9]?)?')]],
      fuel: [],
      url: []
   });
 
   getErrorType() {
-    return  this.rName.hasError('pattern') ? 'Registration No  should not contain any special characters.' :
+    return  this.rName.hasError('pattern') ? 'Type name should not contain special characters.' :
         '';
   }
 
@@ -124,18 +124,11 @@ export class AddVehicleTypeComponent implements OnInit {
                console.log(this.typeForm.value);
                console.log(this.typeForm.value, 'child');
                this.dialogRef.close(this.typeForm.value);
-            }, 2000);
+            }, 1000);
    }
 
   ngOnInit() {
     this.getFuelList();
-  }
-
-  openSnackbar(message: string, action: string) {
-    this.snackBar.open(message, action, {
-      duration: 2000,
-      panelClass: ['blue-snackbar']
-    });
   }
 }
 

@@ -2,7 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { VehicleService } from '../vehicle.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-update-vehicles',
@@ -27,14 +27,21 @@ export class UpdateVehiclesComponent implements OnInit {
                 this.minDate = new Date(data.purchasedDate);
 }
 
+get RinsuranceNo() {
+  return this.vehicleForm.get('insuranceNo');
+}
+
 vehicleForm = this.fb.group({
   lastServiceDate: [''],
- insuranceNo: ['']
+  insuranceNo: ['', [Validators.pattern('^[a-zA-Z0-9\-]*$')]],
 });
 
+getErrorInsuranceNo() {
+  return this.RinsuranceNo.hasError('pattern') ? 'Invalid insurance no' :
+    '';
+}
 
 onClose() {
-  
   this.dialogRef.close();
 }
 

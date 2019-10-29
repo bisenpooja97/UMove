@@ -45,4 +45,18 @@ public class ZoneTypeCountImpl implements ServiceZoneTypeCount {
             throw new ZonesNotFoundException("No data found");
     }
 
+    @Override
+    public ZoneTypeCount bookingConfirmed(String zoneId, String typeId) {
+        ZoneTypeCount typeList = repo.findZoneType(zoneId, typeId);
+        if(typeList != null) {
+            if(typeList.getCount() <= 0) {
+                return null;
+            } else  {
+                typeList.setCount(typeList.getCount() - 1);
+                return repo.save(typeList);
+            }
+        } else {
+            return null;
+        }
+    }
 }
