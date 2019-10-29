@@ -27,9 +27,8 @@ export class RideService {
     toast.present();
   }
 
-
   confirmBooking(data) {
-    console.log('url', this.baseUrl);
+    console.log('url', this.baseUrl, JSON.stringify(data));
     return this.http.post(this.baseUrl, data, {});
   }
 

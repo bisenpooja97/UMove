@@ -51,10 +51,8 @@ public class RideServiceImp implements RideService {
     @Override
     public Ride getRideById(ObjectId id) {
         Ride ride = rideRepo.findBy_id(id);
-        if(ride.getPaymentDetail().getStatus().equals("Paid"))
+        if(ride.getPaymentDetail().getStatus().equals(PaymentStatus.Paid))
         {
-            return rideRepo.findBy_id(id);
-        } else if(ride.getPaymentDetail().getStatus().equals("Pending")){
             return rideRepo.findBy_id(id);
         } else{
             double totalExtraCharges = calculateTotalExtraCharges(ride);
@@ -172,7 +170,7 @@ public class RideServiceImp implements RideService {
             }
             else {
                 ride.setStatus(RideStatus.Auto_Cancelled);
-                PaymentDetail paymentDetail = ride.getPaymentDetail();
+                PaymentDetail paymentDetail = new PaymentDetail();
                 paymentDetail.setRideAmount((double)ride.getVehicle().getVehicleType().getBaseFare());
                 ride.setPaymentDetail(paymentDetail);
             }
@@ -204,6 +202,8 @@ public class RideServiceImp implements RideService {
                 ride.setStatus(RideStatus.CancelledWithinThreshold);
             }
             else {
+                System.out.println("mei aya else mei");
+                System.out.println("mei aya else mei");
                 int compareValueForAutocancelling = rightNow.compareTo(autoCancelTime);
                 if (compareValueForAutocancelling <= 0) {
                     ride.setStatus(RideStatus.CancelledAfterThreshold);
@@ -211,8 +211,17 @@ public class RideServiceImp implements RideService {
                 else{
                     ride.setStatus(RideStatus.Auto_Cancelled);
                 }
-                PaymentDetail paymentDetail = ride.getPaymentDetail();
-                paymentDetail.setRideAmount((double)ride.getVehicle().getVehicleType().getBaseFare());
+                System.out.println("****************************************************");
+                PaymentDetail paymentDetail = new PaymentDetail();
+                System.out.println(paymentDetail);
+                System.out.println(ride);
+                System.out.println(ride.getVehicle());
+                System.out.println(ride.getVehicle().getVehicleType());
+                System.out.println(ride.getVehicle().getVehicleType().getBaseFare());
+                System.out.println("****************************************************");
+
+                paymentDetail.setRideAmount((double)(ride.getVehicle().getVehicleType().getBaseFare()));
+                paymentDetail.setTotalAmount((double)(ride.getVehicle().getVehicleType().getBaseFare()));
                 ride.setPaymentDetail(paymentDetail);
             }
             rideRepo.save(ride);

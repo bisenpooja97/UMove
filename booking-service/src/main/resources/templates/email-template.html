@@ -1,47 +1,151 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+​
 <head>
-
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
     <title>Email</title>
-    <meta charset="UTF-8">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
-    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
-
-    <style style="margin: 0; padding: 0;">
-        body {
-            font-family: 'Roboto', sans-serif;
-            font-size: 48px;
+    <style>
+        header{
+            overflow: hidden;
+            color: black;
+            background-color: #F9AA33;
+            text-align: left;
+            top: 0;
+            width: 100%;
+            margin: 0px;
+            padding-left: 40px;
+            padding-top: 40px;
+            font-family: 'Montserrat', sans-serif;
         }
+        body{
+            overflow: hidden;
+            padding: 0px;
+            margin: 0px;
+        }
+        footer{
+            overflow: hidden;
+            background-color: #F9AA33;
+            position: absolute;
+            bottom: 0;
+            padding: 10px;
+            margin: 0px;
+            width: 100%;
+            height: 2.5rem;
+        }
+        ​
+
+         tr td{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+        }
+        .paymentdetals{
+            display: flex;
+            flex-direction: row;
+            text-align: center;
+            justify-content: space-around;
+        }
+        .totalpaidamount{
+            font-size: 30px !important;
+            justify-content: space-between;
+            font-family: 'Montserrat', sans-serif;
+            border-bottom: 1px solid black;
+        ​}
+        ​
+        .totalpaidamount td{
+            justify-content: space-around;
+        }
+        main{
+            display: flex;
+            flex-direction: column;
+        }
+        .end_part{
+            justify-content: flex-start;
+            padding-top: 50px;
+            padding-left: 10px;
+        }
+        .pabc{
+            overflow-x: hidden;
+            overflow-y: hidden;
+            text-align: center;
+            font-size: 15px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
     </style>
-
-
 </head>
-<body>
-<table align="center" border="0" cellpadding="0" cellspacing="0" width="600" style="border-collapse: collapse;">
-    <tr>
-        <td bgcolor="#eaeaea" style="padding: 40px 30px 40px 30px;">
-            <tr><td>Dear </td><td th:text="${name}"/></tr>
-        </td>
-    </tr>
-    <tr>Your Ride Recipt : </tr>
-    <tr><td>Distance Travelled :</td><td th:text="${distance}"/></tr>
-    <tr><td>Ride Duration  :</td><td th:text="${time}"/></tr>
-    <tr><td>Ride Amount :</td><td th:text="${rideAmount}"/></tr>
-    <tr><td>Total Extra Charges :</td><td th:text="${totalExtraCharges}"/></tr>
-    <tr><td>Fuel Re-Fill Amount :</td><td th:text="${fuelRefillAmount}" /></tr>
-    <tr><td>Discount Percent : </td><td th:text="${discountPercent}"/></tr>
-    <tr><td>Total Amount : </td><td th:text="${totalAmount}"/></tr>
-    <tr><td>Payment Status : </td><td th:text="${paymentStatus}"/></tr>
-    <tr>
-        <td>Thank</td>
-    </tr>
-    <tr>
-        <td bgcolor="#777777" style="padding: 30px 30px 30px 30px;">
-            <p>UMOVE</p>
-        </td>
-    </tr>
-</table>
+
+​<body>
+<header>
+    <h1><strong>Thanks for riding,
+        <td th:text="${name}" /></strong></h1>
+    <h4>We hope you enjoyed your ride.</h4>
+</header>
+​
+<main>
+    <section>
+        <table class= "paymentdetals">
+            <tr class="totalpaidamount">
+                <td>Total</td>
+                <td th:text="${totalPaidAmount}" />
+            </tr>
+            <tr>
+                <td>Base fare</td>
+                <td th:text="${baseFare}" />
+            </tr>
+            <tr>
+                <td>Time</td>
+                <td th:text="${time}" />
+            </tr>
+            <tr>
+                <td>Distance</td>
+                <td th:text="${distance}" />
+            </tr>
+            <tr>
+                <td>Ride Amount</td>
+                <td th:text="${rideAmount}" />
+            </tr>
+            <tr>
+                <td>Total Extra Charges</td>
+                <td th:text="${totalExtraCharges}" />
+            </tr>
+            <tr>
+                <td>Fuel Re-Fill Amount</td>
+                <td th:text="${fuelRefillAmount}" />
+            </tr>
+            <tr>
+                <td>Discount Percent</td>
+                <td th:text="${discountPercent}" />
+            </tr>
+            <tr>
+                <td>Total Amount</td>
+                <td th:text="${totalAmount}" />
+            </tr>
+            <tr>
+                <td>Payment Status</td>
+                <td th:text="${paymentStatus}" />
+            </tr>
+        </table>
+    </section>
+    <section class="end_part">
+        <table>
+            <tr>
+                <td>Thanks</td>
+            </tr>
+            <tr>
+                <td>Umove</td>
+            </tr>
+            <tr>
+                <td>Bangalore</td>
+            </tr>
+        </table>
+    </section>
+</main>
+<footer>
+    <p class="pabc">©Copyright 2050 by nobody. All rights reversed.</p>
+</footer>
 </body>
+​
 </html>
