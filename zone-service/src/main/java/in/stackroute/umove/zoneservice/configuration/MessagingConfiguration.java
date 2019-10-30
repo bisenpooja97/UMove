@@ -24,11 +24,6 @@ public class MessagingConfiguration extends SpringBootServletInitializer impleme
         return application.sources(MessagingConfiguration.class);
     }
 
-    @Bean("ride_confirmed")
-    Queue rideConfirmedQueue() {
-        return new Queue("ride_confirmed", false);
-    }
-
     @Bean("ride_started")
     Queue rideStartedQueue() {
         return new Queue("ride_started", false);
@@ -57,32 +52,21 @@ public class MessagingConfiguration extends SpringBootServletInitializer impleme
     @Bean
     @Qualifier("zone_booking_binding")
     Binding zoneBookingBinding(TopicExchange zoneExchange, TopicExchange bookingExchange) {
-        return BindingBuilder.bind(zoneExchange).to(bookingExchange).with("ride_confirmed");
-    }
-
-    @Bean
-    @Qualifier("ride_confirmed_zone_binding")
-    Binding rideConfirmedZoneBinding(@Qualifier("ride_confirmed") Queue rideConfirmedQueue, TopicExchange zoneExchange) {
-        return BindingBuilder.bind(rideConfirmedQueue).to(zoneExchange).with("ride_confirmed");
+      return BindingBuilder.bind(zoneExchange).to(bookingExchange).with("ride_started");
     }
 
     @Bean
     @Qualifier("ride_cancelled_zone_binding")
-    Binding rideCancelledZoneBinding(@Qualifier("ride_cancelled") Queue rideConfirmedQueue, TopicExchange zoneExchange) {
-        return BindingBuilder.bind(rideConfirmedQueue).to(zoneExchange).with("ride_cancelled");
+    Binding rideCancelledZoneBinding(TopicExchange zoneExchange, TopicExchange bookingExchange) {
+        return BindingBuilder.bind(zoneExchange).to(bookingExchange).with("ride_cancelled");
     }
 
     @Bean
     @Qualifier("ride_ended_zone_binding")
-    Binding rideEndedZoneBinding(@Qualifier("ride_ended") Queue rideConfirmedQueue, TopicExchange zoneExchange) {
-        return BindingBuilder.bind(rideConfirmedQueue).to(zoneExchange).with("ride_ended");
+    Binding rideEndedZoneBinding(TopicExchange zoneExchange, TopicExchange bookingExchange) {
+        return BindingBuilder.bind(zoneExchange).to(bookingExchange).with("ride_ended");
     }
 
-    @Bean
-    @Qualifier("ride_started_zone_binding")
-    Binding rideStartedZoneBinding(@Qualifier("ride_started") Queue rideConfirmedQueue, TopicExchange zoneExchange) {
-        return BindingBuilder.bind(rideConfirmedQueue).to(zoneExchange).with("ride_started");
-    }
 
     /* Bean for rabbitTemplate */
     @Bean
