@@ -31,20 +31,15 @@ public class VehicleTypeTestCase {
 
     @Test
     public  void getTypesTest(){
-        when(typeRepo.findAll()).thenReturn(Stream.of(new VehicleType("a",1,1)).collect(Collectors.toList()));
-        assertEquals(1,serviceType.find().size());
+        when(typeRepo.findAll()).thenReturn(Stream.of(new VehicleType("a",1.0F,1.0F)).collect(Collectors.toList()));
+        assertEquals(1,serviceType.find(1).size());
 
     }
-//    @Test
-//    public void getTypeByName(){
-//        String type="KTM";
-//        when(typeRepo.findByName(type)).thenReturn(Stream.of(new VehicleType("KTM",1,1)).collect(Collectors.toList()));
-//        assertEquals(1,serviceType.findName("KTM").size());
-//    }
+
 
     @Test
     public void addTypeTest(){
-        VehicleType type=new VehicleType("a",1,1);
+        VehicleType type=new VehicleType("a",1.0F,1.0F);
         assertEquals(type,serviceType.addType(type));
     }
 

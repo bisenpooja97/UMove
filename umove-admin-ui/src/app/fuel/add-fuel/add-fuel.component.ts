@@ -18,40 +18,38 @@ export class AddFuelComponent implements OnInit {
   }
 
   get rCost() {
-    return this.fuelForm.get('costFuel');
+    return this.fuelForm.get('fuelCost');
   }
 
-  constructor( public dialogRef: MatDialogRef<AddFuelComponent>, private fb: FormBuilder, private route: ActivatedRoute,
-               private router: Router, private fuelService: FuelService,
-               private snackBar: MatSnackBar) { }
+  constructor(public dialogRef: MatDialogRef<AddFuelComponent>,
+              private fb: FormBuilder) { }
 
-               fuelForm = this.fb.group({
-                name: ['', [Validators.pattern('^[a-zA-Z0-9\-]*$')]],
-                costFuel: ['']
-              });
+  fuelForm = this.fb.group({
+    name: ['', [Validators.pattern('^[a-zA-Z\-]*$')]],
+    fuelCost: ['', [Validators.pattern('[0-9]+(\.[0-9][0-9]?)?')]],
+  });
 
-              onSubmit() {
-
-                console.log(this.fuelForm.value);
-                console.log(this.fuelForm.value, 'child');
-                this.dialogRef.close(this.fuelForm.value);
-
-
-            }
-
-            onClose() {
-              this.fuelForm.reset();
-              this.dialogRef.close();
-            }
-
-
-  openSnackbar(message: string, action: string) {
-    this.snackBar.open(message, action, {
-      duration: 2000,
-      panelClass: ['blue-snackbar']
-    });
+  getErrorName() {
+    return  this.rName.hasError('pattern') ? 'Fuel name should contain only alphabets.' :
+        '';
   }
 
+  getErrorCost() {
+    return  this.rCost.hasError('pattern') ? 'Invalid cost' :
+        '';
+  }
+
+  onSubmit() {
+
+    console.log(this.fuelForm.value);
+    console.log(this.fuelForm.value, 'child');
+    this.dialogRef.close(this.fuelForm.value);
+  }
+
+  onClose() {
+    this.fuelForm.reset();
+    this.dialogRef.close();
+  }
 
   ngOnInit() {
   }

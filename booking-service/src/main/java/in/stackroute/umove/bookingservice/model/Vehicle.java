@@ -1,25 +1,21 @@
 package in.stackroute.umove.bookingservice.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.UUID;
 
-/*
- * Vehicle details
- */
-
+@Document
+@Getter
+@Setter
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
+
 public class Vehicle {
 
-    private String id= UUID.randomUUID().toString().substring(30);
+    private String id = UUID.randomUUID().toString().substring(30);
     private String zoneId;
     private String registrationNo;
     private String insuranceNo;
@@ -34,6 +30,5 @@ public class Vehicle {
         this.zoneId = zoneId;
         this.registrationNo = registrationNo;
     }
-
 
 }

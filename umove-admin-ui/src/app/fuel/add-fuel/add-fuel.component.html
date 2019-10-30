@@ -9,30 +9,28 @@
 
 
     <form fxLayout="column" fxLayoutAlign="center center" [formGroup]="fuelForm" (ngSubmit)="onSubmit()">
-        <h2 fxLayout="column" fxLayout.gt-md="row" fxLayoutGap.gt-md="15px" fxLayoutAlign="center center">Add New Fuel Type</h2>
-
         <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px" class="form">
 
             <mat-form-field appearance="outline" fxFlex>
-                <mat-label>Name</mat-label>
-                <input matInput #input placeholder="Name" formControlName="name" required>
+                <mat-label class="font-style">Name</mat-label>
+                <input matInput #input placeholder="Name" formControlName="name" required class="font-style">
 
-                <!-- <mat-error *ngIf="rNum.invalid">
+                <mat-error *ngIf="rName.invalid" class="font-style">
 
-                  {{getErrorRegistrationNo()}}
-              </mat-error> -->
+                  {{getErrorName()}}
+              </mat-error>
             </mat-form-field>
 
 
 
             <mat-form-field appearance="outline" fxFlex>
-                <mat-label>Cost</mat-label>
-                <input matInput #input placeholder="Cost" formControlName="costFuel" required>
+                <mat-label class="font-style">Cost</mat-label>
+                <input matInput #input placeholder=" Fuel Cost" formControlName="fuelCost" required class="font-style">
 
-                <!-- <mat-error *ngIf="RinsuranceNo.invalid">
+                <mat-error *ngIf="rCost.invalid" class="font-style">
 
-                  {{getErrorInsuranceNo()}}
-              </mat-error> -->
+                  {{getErrorCost()}}
+              </mat-error>
 
             </mat-form-field>
 
@@ -42,7 +40,7 @@
 
 
 
-            <button mat-raised-button class="btn">
+            <button mat-raised-button class="btn font-style"  [disabled]='!fuelForm.valid'  color="primary">
     Submit
   </button>
 

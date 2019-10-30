@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import {BikeListPage} from './bike-list/bike-list.page';
-import {HomePage} from "./home/home.page";
-import {DropPage} from "./drop/drop.page";
+import {HomePage} from './home/home.page';
+import {DropPage} from './drop/drop.page';
 
 const routes: Routes = [
     { path: '', redirectTo: 'login', pathMatch: 'full'} ,
    { path: 'home', component: HomePage},
    { path: 'bikelist', component: BikeListPage},
-    { path:'drop',component:DropPage},
+    { path: 'drop', component: DropPage},
     { path: 'confirm-ride-detail', loadChildren: './confirm-ride-detail/confirm-ride-detail.module#ConfirmRideDetailPageModule' },
     { path: 'dummy-promocode', loadChildren: './dummy-promocode/dummy-promocode.module#DummyPromocodePageModule' },
     { path: 'ride-booking-details', loadChildren: './ride-booking-details/ride-booking-details.module#RideBookingDetailsPageModule' },
@@ -29,7 +29,12 @@ const routes: Routes = [
   // tslint:disable-next-line:max-line-length
   { path: 'add-payment-method', loadChildren: './user-payment-method/add-payment-method/add-payment-method.module#AddPaymentMethodPageModule' },
   // tslint:disable-next-line:max-line-length
-  { path: 'show-payment-method', loadChildren: './user-payment-method/show-payment-method/show-payment-method.module#ShowPaymentMethodPageModule' }
+  { path: 'show-payment-method', loadChildren: './user-payment-method/show-payment-method/show-payment-method.module#ShowPaymentMethodPageModule' },
+    { path: 'campaigns', loadChildren: './campaigns/show-campaigns-list/show-campaigns-list.module#ShowCampaignsListPageModule' },
+    { path: 'dummy-data-sent', loadChildren: './campaigns/dummy-data-sent/dummy-data-sent.module#DummyDataSentPageModule' },
+
+  { path: 'show-payment-method', loadChildren: './user-payment-method/show-payment-method/show-payment-method.module#ShowPaymentMethodPageModule' },
+  { path: 'error', loadChildren: './error/error.module#ErrorPageModule' }
 ];
 
 @NgModule({

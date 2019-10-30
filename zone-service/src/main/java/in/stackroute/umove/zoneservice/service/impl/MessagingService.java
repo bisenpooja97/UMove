@@ -10,11 +10,14 @@ public class MessagingService {
 
     @RabbitListener(queues = "ride_confirmed")
     public void onRideConfirmedMessageReceived(Map<String, Object> map) {
+
         System.out.println("\n\n\nmessage aaya --> " + map + "\n\n\n");
     }
 
     @RabbitListener(queues = "ride_started")
     public void onRideStartedMessageReceived(Map<String, Object> map) {
+    map.get("data");
+        System.out.println("data");
         System.out.println("\n\n\nmessage aaya --> " + map + "\n\n\n");
     }
 

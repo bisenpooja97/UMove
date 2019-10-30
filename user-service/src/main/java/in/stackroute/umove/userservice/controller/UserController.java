@@ -5,6 +5,7 @@ import in.stackroute.umove.userservice.service.PaymentServiceInterface;
 import in.stackroute.umove.userservice.service.UserService;
 import in.stackroute.umove.userservice.service.implementation.FileStorageService;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -34,6 +35,8 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("api/v1")
 @AllArgsConstructor
+//@CrossOrigin(origins="http://localhost:4200")
+//@NoArgsConstructor
 //@CrossOrigin(origins="http://localhost:4200")
 public class UserController
 {
@@ -149,7 +152,8 @@ public ResponseEntity<Map> getUsersById(@PathVariable String id)
         UserData user = userService.getById(uid);
         DocumentVerification documentVerification = user.getDocument();
         documentVerification.setImage(fileDownloaduri);
-        user.setUserStatus(UserStatus.Pending);
+        documentVerification.setDocumentStatus(DocumentStatus.Pending);
+        user.setUserStatus(UserStatus.Inactive);
         this.userService.updateUser(uid,user);
 
         return new UploadFileResponse(fileName, fileDownloadUri,

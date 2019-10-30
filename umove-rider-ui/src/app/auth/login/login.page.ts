@@ -24,6 +24,9 @@ export class LoginPage implements OnInit {
   constructor(private win: WindowService, private  router: Router, private storage: Storage) {
     this.localUserData = new UserProfile();
   }
+  ionViewWillEnter() {
+    this.disableButton = false;
+  }
 
   ngOnInit() {
     this.storage.ready().then(() => {

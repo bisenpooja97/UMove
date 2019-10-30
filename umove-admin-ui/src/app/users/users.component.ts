@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { MatPaginator, MatTableDataSource, MatDialog, MatDialogConfig } from '@angular/material';
 import { UserService } from './service/user.service';
+import { User } from 'src/app/model/user';
 import { AddUserComponent } from './add-user/add-user.component';
 import { NotificationService } from '../shared/notification.service';
-import { User } from '../model/user';
 
 @Component({
   selector: 'app-users',

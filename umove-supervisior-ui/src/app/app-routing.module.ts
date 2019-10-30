@@ -13,7 +13,8 @@ const routes: Routes = [
   // },
   { path: 'vehicle-list', loadChildren: './vehicle-list/vehicle-list.module#VehicleListPageModule' },
   { path: 'ride-detail', loadChildren: './ride-detail/ride-detail.module#RideDetailPageModule' },
-  { path: 'end-ride-form/:rideId', loadChildren: './end-ride-form/end-ride-form.module#EndRideFormPageModule' }
+  { path: 'end-ride-form/:rideId', loadChildren: './end-ride-form/end-ride-form.module#EndRideFormPageModule' },
+  { path: 'error', loadChildren: './error/error.module#ErrorPageModule' }
 ];
 
 @NgModule({

@@ -3,8 +3,8 @@ import { Ride } from '../model/ride';
 import { RideService } from '../service/ride.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ActionSheetController } from '@ionic/angular';
-import {Geolocation} from "@ionic-native/geolocation/ngx";
-import {MapService} from "../service/zone/map.service";
+import {Geolocation} from '@ionic-native/geolocation/ngx';
+import {MapService} from '../service/zone/map.service';
 
 @Component({
   selector: 'app-confirm-ride-detail',
@@ -15,12 +15,12 @@ export class ConfirmRideDetailPage implements OnInit {
 
   booking: Ride;
 
-  constructor(private rideService: RideService,private mapService: MapService,private geolocation: Geolocation,private actionSheetController: ActionSheetController,private router: Router, private route: ActivatedRoute) {
+  constructor(private rideService: RideService, private mapService: MapService, private geolocation: Geolocation, private actionSheetController: ActionSheetController, private router: Router, private route: ActivatedRoute) {
     this.route.queryParams.subscribe(params => {
       const state = this.router.getCurrentNavigation().extras.state;
       if (state) {
         if (state.selectedPaymentMethod) {
-          console.log('payment method, ', state.selectedPaymentMethod)
+          console.log('payment method, ', state.selectedPaymentMethod);
           this.booking.paymentMethod = state.selectedPaymentMethod;
           console.log('selected payment method: ', this.booking.paymentMethod);
         } else if (state.selectedPromocode) {
@@ -31,15 +31,7 @@ export class ConfirmRideDetailPage implements OnInit {
   }
 
   ngOnInit() {
-    this.geolocation.getCurrentPosition().then((resp) => {
-      const lat = resp.coords.latitude;
-      const lng = resp.coords.longitude;
-      this.mapService.buildMap(lat, lng,'booking',false);
-      // this.mapService.checkMapLoading();
-      this.mapService.marker(lat, lng);
-    }).catch((error) => {
-      console.log('Error getting location', error);
-    });
+
     this.booking = this.rideService.getCurrentBooking();
     this.booking.destinationZones = [];
 
@@ -49,7 +41,8 @@ export class ConfirmRideDetailPage implements OnInit {
     this.booking.rider = {
       _id: '5d8bbc0da6e87d5404aa1921',
       name: 'Visnu',
-      email: 'bochiwal.visnu@gmail.com'
+      email: 'bochiwal.visnu@gmail.com',
+      mobileNumber: '7727084821'
     };
 
     this.booking.vehicle = {
@@ -155,6 +148,21 @@ export class ConfirmRideDetailPage implements OnInit {
 
   removeSelectedPromocode() {
     this.booking.promocode = undefined;
+  }
+
+  ionViewDidEnter() {
+    console.log('map dikhana h !!')
+    this.geolocation.getCurrentPosition().then((resp) => {
+      console.log('ab to dikhna chahiye tha!')
+      const lat = resp.coords.latitude;
+      const lng = resp.coords.longitude;
+      this.mapService.buildMap(lat, lng, 'booking', false);
+      // this.mapService.checkMapLoading();
+      this.mapService.marker(lat, lng);
+    }).catch((error) => {
+      console.log('Error getting location', error);
+    });
+
   }
 
 }

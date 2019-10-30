@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
-import { Resp } from '../model/Vehicle-response';
-import { Resp1 } from '../model/Vehicle-single-response';
-import { Vehicle } from '../model/Vehicle';
+import { Resp } from '../model/vehicle-response';
+import { Resp1 } from '../model/vehicle-single-response';
+import { Vehicle } from '../model/vehicle';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +26,11 @@ export class VehicleService {
   getVehicleByRegistrationNo(registrationNo: string): Observable<Resp1> {
     console.log(this.baseUrl + '?registrationNo=' + registrationNo);
     return this.httpClient.get<Resp1>(this.baseUrl + '?registrationNo=' + registrationNo);
+  }
+
+  getVehicleByZoneIdType(zoneId: string, type: string): Observable<Resp1> {
+    console.log(this.baseUrl + '?zoneId=' + zoneId + '&type=' + type);
+    return this.httpClient.get<Resp1>(this.baseUrl + '?zoneId=' + zoneId + '&type=' + type);
   }
 
   updateVehicle(registrationNo: string, vehicle: Vehicle) {

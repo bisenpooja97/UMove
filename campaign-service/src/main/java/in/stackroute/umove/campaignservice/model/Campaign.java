@@ -1,5 +1,6 @@
 package in.stackroute.umove.campaignservice.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -8,15 +9,16 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.Id;
 import java.time.LocalDate;
+import java.util.UUID;
 
 @Document
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class Campaign
 {
-    @Id
-    private String id;
+    private String id= UUID.randomUUID().toString().substring(30);
     private String name;
     private String objective;
     private LocalDate startDate;

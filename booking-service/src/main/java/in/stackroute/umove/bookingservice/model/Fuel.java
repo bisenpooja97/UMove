@@ -1,9 +1,12 @@
 package in.stackroute.umove.bookingservice.model;
 
 import lombok.*;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.UUID;
 
+
+@Document
 @Data
 @Getter
 @Setter
@@ -15,3 +18,4 @@ public class Fuel {
     private Float fuelCost;
 
 }
+

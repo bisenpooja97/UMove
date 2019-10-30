@@ -6,5 +6,5 @@ public enum VehicleStatus {
     Servicing,
     Stolen,
     No_More_In_Use
-
 }
+

@@ -9,7 +9,7 @@ import {Observable} from 'rxjs';
 })
 export class RideSocketService {
 
-  SERVER_URL = 'http://13.235.35.202:8094/ws';
+  SERVER_URL = 'http://umove-dev.stackroute.io:8094/ws';
 
   private stompClient;
   private ws;

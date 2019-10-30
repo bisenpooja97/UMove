@@ -11,14 +11,18 @@
         <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px" class="col">
 
             <mat-form-field appearance="outline" fxFlex>
-                <mat-label>Cost/min </mat-label>
-                <input matInput maxlength="6" #input placeholder="cost/min" formControlName="costtime" [(ngModel)]="costtime" required>
+                <mat-label class="font-style">Cost/min </mat-label>
+                <input matInput #input placeholder="cost/min" formControlName="costPerMin" [(ngModel)]="costPerMin"
+                 required class="font-style">
+                <mat-error *ngIf="Rcosttime.invalid" class="font-style">
 
+                    {{getErrorCosttime()}}
+                </mat-error>
             </mat-form-field>
         </div>
     </div>
     <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
-        <button mat-raised-button class="btn" [disabled]='!typeForm.valid' color="primary">
+        <button mat-raised-button class="btn font-style" [disabled]='!typeForm.valid' color="primary">
                         Submit
                     </button>
 

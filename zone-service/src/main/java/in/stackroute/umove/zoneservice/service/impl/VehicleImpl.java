@@ -5,9 +5,13 @@ import in.stackroute.umove.zoneservice.exception.InsuranceNoAlreadyExistExceptio
 import in.stackroute.umove.zoneservice.exception.RegistrationNoAlreadyExistException;
 import in.stackroute.umove.zoneservice.model.Vehicle;
 import in.stackroute.umove.zoneservice.model.VehicleStatus;
+import in.stackroute.umove.zoneservice.model.VehicleType;
+import in.stackroute.umove.zoneservice.model.ZoneTypeCount;
 import in.stackroute.umove.zoneservice.repository.VehicleRepo;
+import in.stackroute.umove.zoneservice.repository.VehicleTypeRepo;
 import in.stackroute.umove.zoneservice.service.ServiceVehicle;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -21,15 +25,15 @@ public class VehicleImpl implements ServiceVehicle {
     //To add new vehicle
     @Override
     public Vehicle addVehicle(Vehicle vehicle) {
-        Vehicle vehicleList=repo.findByregistrationNo(vehicle.getRegistrationNo());
+        Vehicle vehicleList=repo.findByregistrationNoIgnoreCase(vehicle.getRegistrationNo());
         if(vehicleList != null){
             throw new RegistrationNoAlreadyExistException("Vehicle already exists");
         }
-        Vehicle vehicleList1=repo.findByChassisNumber(vehicle.getChassisNumber());
+        Vehicle vehicleList1=repo.findByChassisNumberIgnoreCase(vehicle.getChassisNumber());
         if(vehicleList1 != null){
             throw new ChassisNoAlreadyExistException("Vehicle already exists");
         }
-        Vehicle vehicleList2=repo.findByInsuranceNo(vehicle.getInsuranceNo());
+        Vehicle vehicleList2=repo.findByInsuranceNoIgnoreCase(vehicle.getInsuranceNo());
         if(vehicleList2 != null){
             throw new InsuranceNoAlreadyExistException("Vehicle already exists");
         }
@@ -41,52 +45,41 @@ public class VehicleImpl implements ServiceVehicle {
     }
 
     //To find data of all vehicles
-    public List<Vehicle> find() {
-        return repo.findAll();
+    public List<Vehicle> find(int page) {
+        return repo.findAll(new PageRequest(page,1000)).getContent();
     }
 
 
     //Find vehicles based on zone
     @Override
-    public List<Vehicle> findByZone(String zone_id) {
-        List<Vehicle> vehicleList=repo.findByzoneid(zone_id);
+    public List<Vehicle> findByZone(String zone_id,int page) {
+        List<Vehicle> vehicleList=repo.findByzoneId(zone_id,new PageRequest(page,12)).getContent();
         return vehicleList;
     }
 
     //To update the details of vehicles
     public Vehicle updateVehicleDetails(String name, Vehicle vehicle) {
-        Vehicle vehicleList = repo.findByregistrationNo(name);
+        Vehicle vehicleList = repo.findByregistrationNoIgnoreCase(name);
         if(vehicleList != null){
             if(vehicle.getInsuranceNo() != null){
-//                Vehicle vehicleList2=repo.findByInsuranceNo(vehicle.getInsuranceNo());
-//                if(vehicleList2 != null){
-//                    throw new InsuranceNoAlreadyExistException("Vehicle already exists");
-//                }
                 vehicleList.setInsuranceNo(vehicle.getInsuranceNo());
             }
             if(vehicle.getStatus() != null){
                 vehicleList.setStatus(vehicle.getStatus());
             }
             if(vehicle.getLastServiceDate()!= null){
-//                Date date1=vehicleList.getLastServiceDate();
-//                Date date2= vehicleList.getVehiclePurchased();
-//                if(date1.compareTo(date2)<0)
-//                {
-//                    throw new LastServiceDateWrongException("Vehicle already exists");
-//                }
                 vehicleList.setLastServiceDate(vehicle.getLastServiceDate()  );
             }
-            if(vehicle.getZoneid() != null){
-                vehicleList.setZoneid(vehicle.getZoneid());
+            if(vehicle.getZoneId() != null){
+                vehicleList.setZoneId(vehicle.getZoneId());
             }
-            if(vehicle.getType() != null){
-                vehicleList.setType(vehicle.getType());
+            if(vehicle.getVehicleType() != null){
+                vehicleList.setVehicleType(vehicle.getVehicleType());
             }
-            if(vehicle.getVehiclePurchased() != null){
-                vehicleList.setVehiclePurchased(vehicle.getVehiclePurchased());
+            if(vehicle.getPurchasedDate() != null){
+                vehicleList.setPurchasedDate(vehicle.getPurchasedDate());
             }
 
-            vehicleList.setTime(new Date());
             return repo.save(vehicleList);
         }
         else
@@ -94,8 +87,8 @@ public class VehicleImpl implements ServiceVehicle {
     }
 
     //Find vehicles based on type name
-    public List<Vehicle> findByType(String name){
-        List<Vehicle> v=repo.findByType(name);
+    public List<Vehicle> findByType(String name,int page){
+        List<Vehicle> v=repo.findByType(name,new PageRequest(page,12)).getContent();
         System.out.println("retrieved vehicles type" + v);
         return v;
 
@@ -103,15 +96,15 @@ public class VehicleImpl implements ServiceVehicle {
 
     //Find vehicles based on zone and type
 
-    public List<Vehicle> findByZoneAndType(String zone,String type){
-        List<Vehicle> v=repo.findByZoneType(zone,type);
+    public List<Vehicle> findByZoneAndType(String zone,String type,int page){
+        List<Vehicle> v=repo.findByZoneType(zone,type,new PageRequest(page,12)).getContent();
         System.out.println("retrieved vehicles of zone with type" + v);
         return v;
     }
 
     @Override
-    public List<Vehicle> findByStatus(VehicleStatus status) {
-        List<Vehicle> vehicles=repo.findByStatus(status);
+    public List<Vehicle> findByStatus(VehicleStatus status,int page) {
+        List<Vehicle> vehicles=repo.findByStatus(status,new PageRequest(page,100)).getContent();
         return vehicles;
     }
 
@@ -119,10 +112,6 @@ public class VehicleImpl implements ServiceVehicle {
     //To find vehicles based on Registartion No
     @Override
     public Vehicle findByRegistrationNo(String id){
-        return repo.findByregistrationNo(id);
+        return repo.findByregistrationNoIgnoreCase(id);
     }
-
-
-
-
 }

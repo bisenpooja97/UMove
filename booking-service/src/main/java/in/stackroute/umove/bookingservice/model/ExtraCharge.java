@@ -3,12 +3,13 @@ package in.stackroute.umove.bookingservice.model;
 import lombok.*;
 
 @Data
-@Getter
-@Setter
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
+@Getter
+@Setter
 public class ExtraCharge {
     private String chargedFor;
-    private Double amount;
+    private Double amount=0.0;
+
 }

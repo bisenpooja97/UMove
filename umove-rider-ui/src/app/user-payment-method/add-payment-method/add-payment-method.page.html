@@ -1,11 +1,14 @@
 <ion-header>
   <div class = "example">
     <ion-toolbar color = "primary">
-        <ion-buttons slot="start">
-            <ion-button (click)="goShowPayment()">
-                <ion-icon slot="icon-only" name="arrow-round-back"></ion-icon>
-            </ion-button>
-        </ion-buttons>
+        <ion-thumbnail slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-thumbnail>
+<!--        <ion-buttons slot="start">-->
+<!--            <ion-button (click)="goShowPayment()">-->
+<!--                <ion-icon slot="icon-only" name="arrow-round-back"></ion-icon>-->
+<!--            </ion-button>-->
+<!--        </ion-buttons>-->
       <ion-title>Add Payment</ion-title>
     </ion-toolbar>
   </div>
@@ -29,9 +32,9 @@
             </ion-item>
             <ion-item>
               <ion-label position="floating" style="color: black"> Method Number </ion-label>
-              <ion-input type = "text" formControlName="paymentMethodNumber"></ion-input>
+              <ion-input type = "text" maxlength="15" formControlName="paymentMethodNumber"></ion-input>
             </ion-item>
-              <ion-button class="button" expand="full" color="primary" type = "submit" [disabled]="!addPayment.valid">Save</ion-button>
+              <ion-button class="button" expand="full" color="primary" type = "submit" [disabled]="!addPayment.valid" (click)="goShowPayment()">Save</ion-button>
           </form>
 
 </ion-content>

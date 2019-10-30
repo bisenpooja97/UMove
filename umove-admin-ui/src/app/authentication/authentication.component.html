@@ -1,29 +1,36 @@
-<h1 fxLayout="column" fxLayout.gt-md="row" fxLayoutGap.gt-md="15px" fxLayoutAlign="center center">
-    Login
-</h1>
-<section fxLayout="column" fxLayoutGap="20px" fxLayoutAlign="center" fxLayout.gt-xs="row" class="login">
-    <mat-card fxFlex=30%>
-        <img mat-card-image src="https://previews.123rf.com/images/stodolskaya/stodolskaya1511/stodolskaya151100027/49219342-user-login-or-access-authentication-icon.jpg" alt="Photo of a Shiba Inu">
-        <mat-card-content>
+
+<section fxLayout="column" fxLayoutGap="20px" fxLayoutAlign="space-around" fxLayout.gt-xs="row" class="login">
+    <!-- <h1 fxLayout="column" fxLayout.gt-md="row" fxLayoutGap.gt-md="15px" fxLayoutAlign="center center" class="login-heading">
+        Umove Operational Portal 
+    </h1> -->
+
+    <img src="assets/login.jpg" alt="Photo of a Shiba Inu" height="50%" width="30%">
+
+    <mat-card fxFlex=25%>
+        <h3 fxLayout="column" fxLayout.gt-md="row" fxLayoutGap.gt-md="15px" fxLayoutAlign="center center" class="login-heading
+        font-style">
+            Umove Operational Portal 
+        </h3> 
+        <mat-card-title class="space-title">
             <div fxLayout="column" fxLayoutAlign="center center">
                 <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
                     <mat-form-field>
-                        <mat-label>Username</mat-label>
-                        <input matInput [(ngModel)]="username" required>
+                        <mat-label class="font-style">Username</mat-label>
+                        <input matInput [(ngModel)]="username" required class="font-style">
                     </mat-form-field>
 
                     <mat-form-field>
-                        <mat-label>Password</mat-label>
-                        <input matInput [(ngModel)]="password" type="password" required>
+                        <mat-label class="font-style">Password</mat-label>
+                        <input matInput [(ngModel)]="password" type="password" required class="font-style">
                     </mat-form-field>
-                    <mat-card-actions>
-                        <button mat-raised-button (click)="login()" color="primary">
-          Submit
-        </button>
+                    <mat-card-actions fxLayoutAlign="center center">
+                        <button mat-raised-button (click)="login()" color="primary" class="btn font-style">
+                            Submit
+                        </button>
                     </mat-card-actions>
                 </div>
             </div>
-        </mat-card-content>
+        </mat-card-title>
 
     </mat-card>
 </section>

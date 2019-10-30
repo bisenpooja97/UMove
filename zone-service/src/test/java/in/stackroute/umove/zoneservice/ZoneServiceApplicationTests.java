@@ -8,6 +8,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit4.SpringRunner;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -48,12 +49,12 @@ public class ZoneServiceApplicationTests {
 	@Test
 	public void getZoneByLocality(){
 		String locality = "Koramangala";
-		when(zoneRepository.findZonesByLocality(locality)).thenReturn((List<Zone>) Stream.of(new Zone("Zone-2", 128.23,23.87,
+		when(zoneRepository.findZonesByLocality(locality,new PageRequest(1,12)).getContent()).thenReturn((List<Zone>) Stream.of(new Zone("Zone-2", 128.23,23.87,
 				"Bangalore", "Karnataka", "India", "Koramangala",
 				10, "1", "Bherulal", "3434352525",
 				"Bherulal@gmail.com", ZoneStatus.ACTIVE)).collect(Collectors.toList())
 		);
-		assertEquals(1, serviceZone.findZonesByLocality("Koramangala").size());
+		assertEquals(1, serviceZone.findZonesByLocality("Koramangala",1).size());
 	}
 
 	@Test

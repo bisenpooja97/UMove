@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { VehicleType } from 'src/app/model/VehicleType';
+import { VehicleType } from 'src/app/model/vehicleType';
 import { VehicleTypeService } from 'src/app/types/vehicle-type.service';
 import { VehicleService } from '../vehicle.service';
 import { MatSnackBar, MatDialogRef } from '@angular/material';
@@ -13,11 +13,12 @@ import { FormBuilder, Validators } from '@angular/forms';
 })
 export class AddVehicleComponent implements OnInit {
 
-  types: VehicleType[];
+  Vehicletypes: VehicleType[];
   datas = [];
 
   todaydate: Date = new Date();
   message: string;
+
 
   get rNum() {
     return this.vehicleForm.get('registrationNo');
@@ -31,21 +32,19 @@ export class AddVehicleComponent implements OnInit {
     return this.vehicleForm.get('status');
   }
 
-  get type() {
-    return this.vehicleForm.get('type');
+  get Vehicletype() {
+    return this.vehicleForm.get('vehicleType');
   }
 
-  // get lastServiceDate() {
-  //   return this.vehicleForm.get('lastServiceDate');
-  // }
 
-  get vehiclePurchased() {
-    return this.vehicleForm.get('vehiclePurchased');
+  get purchasedDate() {
+    return this.vehicleForm.get('purchasedDate');
   }
 
-  get RchassisNumber(){
+  get RchassisNumber() {
     return this.vehicleForm.get('chassisNumber');
   }
+
 
 
 
@@ -54,13 +53,13 @@ export class AddVehicleComponent implements OnInit {
                private typeService: VehicleTypeService, private snackBar: MatSnackBar) { }
 
   vehicleForm = this.fb.group({
-    registrationNo: ['', [Validators.pattern('^[a-zA-Z0-9\-]*$')]],
+    registrationNo: ['', [Validators.pattern('^[A-Z]{2}[0-9]{1,2}[A-Z]{2}[0-9]{1,4}$')]],
     insuranceNo: ['', [Validators.pattern('^[a-zA-Z0-9\-]*$')]],
-    type: [''],
+    vehicleType: [''],
     status: 'Free',
-    // lastServiceDate: [''],
-    vehiclePurchased: [''],
-    chassisNumber: ['',[Validators.pattern('^[a-zA-Z0-9\-]*$')]],
+    purchasedDate: [''],
+    chassisNumber: ['', [Validators.pattern('^[a-zA-Z0-9\-]*$')]]
+
   });
 
   getErrorRegistrationNo() {
@@ -73,8 +72,8 @@ export class AddVehicleComponent implements OnInit {
       '';
   }
 
-  getErrorChassisNo(){
-    return this.RchassisNumber.hasError('pattern')?'Invalid no':
+  getErrorChassisNo() {
+    return this.RchassisNumber.hasError('pattern') ? 'Invalid no' :
     '';
   }
 
@@ -90,35 +89,14 @@ export class AddVehicleComponent implements OnInit {
   getTypeList() {
     this.typeService.getType().subscribe(
       res => {
-        this.types = res.data;
-        console.log('types list: ', this.types);
+        this.Vehicletypes = res.data;
+        console.log('types list: ', this.Vehicletypes);
       }
 
     );
   }
 
 
-
-  // onSubmit() {
-  //   console.log(this.vehicleForm.value);
-  //   this.vehicleService.createVehicles(this.vehicleForm.value)
-  //     .subscribe(response => {
-  //       console.log('repsonse: ', response);
-  //       this.message = response.message;
-  //       console.log('ddd', this.message);
-  //       if (this.message === 'Vehicle already exists') {
-  //           this.openSnackbar('Vehicle already exists', 'ok');
-  //         } else {
-  //           this.openSnackbar('Vehicle added succesfully', 'ok');
-  //         }
-  //      // this.router.navigate(['/vehicles']);
-  //         // // this.openSnackbar(this.message,'ok');
-
-  //       });
-
-
-  //   // this.router.navigateByUrl('/welcome');
-  // }
   onSubmit() {
 
     console.log(this.vehicleForm.value);
@@ -128,24 +106,8 @@ export class AddVehicleComponent implements OnInit {
 
 }
 
-
-
-
-
-
-
   ngOnInit() {
     this.getTypeList();
-  }
-
-
-
-
-  openSnackbar(message: string, action: string) {
-    this.snackBar.open(message, action, {
-      duration: 2000,
-      panelClass: ['blue-snackbar']
-    });
   }
 }
 

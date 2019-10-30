@@ -62,6 +62,7 @@ export class SupervisorDetailsComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
+    dialogConfig.width = '40%';
     dialogConfig.data = {
       supervisor: this.supervisor,
       sId: this.zone[0].supervisorId

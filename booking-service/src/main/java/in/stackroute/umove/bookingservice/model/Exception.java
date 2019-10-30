@@ -17,6 +17,7 @@ import java.util.Date;
 @Setter
 public class Exception {
 
+
     private Date timeStamp;
     private String message;
     private String details;

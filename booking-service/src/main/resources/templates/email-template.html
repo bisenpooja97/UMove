@@ -1,0 +1,196 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+​
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style type="text/css">
+        header{
+            overflow: hidden;
+            color: black;
+            background-color: #344955;
+            text-align: left;
+            top: 0;
+            width: 100%;
+            margin: 0px;
+            padding-left: 40px;
+            padding-top: 40px;
+            font-family: 'Montserrat', sans-serif;
+        }
+        header h1{
+            color: #FFFFFF;
+        }
+        header h4{
+            color: #FFFFFF;
+        }
+        body{
+            overflow: hidden;
+            padding: 0px;
+            margin: 0px;
+        }
+        footer{
+            overflow: hidden;
+            background-color: #344955;
+            position: absolute;
+            bottom: 0;
+            padding: 10px;
+            margin: 0px;
+            width: 100%;
+            height: 2.5rem;
+        }
+        ​
+        .paymentdetals{
+            display: flex;
+            flex-direction: row;
+            text-align: center;
+            justify-content: space-between;
+            align-content: flex-start;
+        }
+        .paymentdetals tr td{
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+        .totalpaidamount{
+            font-size: 30px !important;
+            justify-content: space-around;
+            font-family: 'Montserrat', sans-serif;
+            border-bottom: 1px solid black;
+            ​
+        }
+        .parentPayment{
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+        }
+        .childPayment1{
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start space-around;
+            flex-grow: 2;
+        }
+        .childPayment2{
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start space-around;
+            align-content: flex-start;
+            flex-grow: 2;
+        }
+        .childPayment3{
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start space-around;
+            flex-grow: 2;
+        }
+        ​
+        .tdtotalpaidamount2{
+            color: #f04c18;
+            justify-content: space-around;
+        }
+        ​
+        .tdtotalpaidamount1{
+            justify-content: space-around;
+            padding-top: 40px ;
+            padding-bottom: 15px;
+        }
+        main{
+            display: flex;
+            flex-direction: column;
+        }
+        .end_part{
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            padding-top: 50px;
+            padding-left: 10px;
+        }
+        .pabc{
+            overflow-x: hidden;
+            overflow-y: hidden;
+            text-align: center;
+            font-size: 15px;
+            color: #FFFFFF;
+            font-family: 'Montserrat', sans-serif;
+        }
+        ​
+    </style>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <title>Email</title>
+</head>
+​
+<body>
+<header>
+    <h1><strong>Thanks for riding,
+        <td th:text="${name}" /></strong></h1>
+    <h4>We hope you enjoyed your ride.</h4>
+</header>
+​
+<main>
+    <section class="parentPayment">
+        <article class="childPayment1"></article>
+        <article class="childPayment2">
+            <table class= "paymentdetals">
+                <tr class="totalpaidamount">
+                    <td align="left" class="tdtotalpaidamount1">Total</td>
+                    <td align="right" class="tdtotalpaidamount2" th:text="${totalPaidAmount}" />
+                </tr>
+                <tr style="border-bottom: 1px solid #000";>
+                    <td align="left">Base fare</td>
+                    <td align="right" th:text="${totalAmount}" />
+                </tr>
+                <tr>
+                    <td align="left">Time</td>
+                    <td align="right" th:text="${time}" />
+                </tr>
+                <tr>
+                    <td align="left">Distance</td>
+                    <td align="right" th:text="${distance}" />
+                </tr>
+                <tr>
+                    <td align="left">Ride Amount</td>
+                    <td align="right" th:text="${rideAmount}" />
+                </tr>
+                <tr>
+                    <td align="left">Total Extra Charges</td>
+                    <td align="right" th:text="${totalExtraCharges}" />
+                </tr>
+                <tr>
+                    <td align="left">Fuel Re-Fill Amount</td>
+                    <td align="right" th:text="${fuelRefillAmount}" />
+                </tr>
+                <tr>
+                    <td align="left">Discount Percent</td>
+                    <td align="right" th:text="${discountPercent}" />
+                </tr>
+                <tr>
+                    <td align="left">Total Amount</td>
+                    <td align="right" th:text="${totalAmount}" />
+                </tr>
+                <tr>
+                    <td align="left">Payment Status</td>
+                    <td align="right" th:text="${paymentStatus}" />
+                </tr>
+            </table>
+        </article>
+        <article class="childPayment3"></article>
+    </section>
+    <section class="end_part">
+        <table>
+            <tr>
+                <td>Thanks</td>
+            </tr>
+            <tr>
+                <td>Umove</td>
+            </tr>
+            <tr>
+                <td>Bangalore</td>
+            </tr>
+        </table>
+    </section>
+</main>
+<footer>
+    <p class="pabc">©Copyright 2050 by nobody. All rights reversed.</p>
+</footer>
+</body>
+​
+</html>
