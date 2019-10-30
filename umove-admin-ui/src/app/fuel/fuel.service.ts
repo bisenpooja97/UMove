@@ -13,7 +13,7 @@ import { Resp1 } from '../model/fuel-single-response';
 export class FuelService {
 
   constructor(private httpClient: HttpClient) { }
-  baseUrl = environment.baseUrl + environment.zoneService + environment.fuelBaseApi;
+  baseUrl = environment.baseUrl1 + environment.fuelBaseApi;
   getFuel(): Observable<Resp> {
     console.log(this.baseUrl);
     return this.httpClient.get<Resp>(this.baseUrl);

@@ -14,11 +14,11 @@
         class="form" fxLayoutAlign="center center">
         <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="50px" fxLayoutGap.lt-md="0px" class="col">
                 <mat-card-title fxLayoutAlign="center center" class="font-style">Vehicle cc: {{cc}}</mat-card-title>
-                <mat-card-title fxLayoutAlign="center center" class="font-style">Cost/km: {{costPerKm | number: '1.2-2'}}</mat-card-title>
+                <mat-card-title fxLayoutAlign="center center" class="font-style">Cost/KM: {{costPerKm | number: '1.2-2'}}</mat-card-title>
         </div>
         <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="50px" fxLayoutGap.lt-md="0px" class="col">
 
-                <mat-card-title fxLayoutAlign="center center" class="font-style">cost/min: {{costPerMin | number: '1.2-2'}}
+                <mat-card-title fxLayoutAlign="center center" class="font-style">Cost/Min: {{costPerMin | number: '1.2-2'}}
                     <span>
                     <i class="material-icons iconCapacity" (click)="update()" >
                         create
@@ -26,7 +26,7 @@
                 </span>
 
                 </mat-card-title>
-                <mat-card-title fxLayoutAlign="center center" class="font-style">kilometers/lt: {{mileage}}</mat-card-title>
+                <mat-card-title fxLayoutAlign="center center" class="font-style">Mileage: {{mileage}}</mat-card-title>
 
             </div>
 

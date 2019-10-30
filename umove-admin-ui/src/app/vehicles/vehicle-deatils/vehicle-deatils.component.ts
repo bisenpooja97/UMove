@@ -77,6 +77,8 @@ export class VehicleDeatilsComponent implements OnInit {
     console.log(this.vehicle, newValue);
     this.vehicle.status = newValue;
     this.vehicleService.updateVehicle(this.route.snapshot.paramMap.get('registrationNo'), this.vehicle).subscribe(
+      res => this.notificationService.success('status updated successfully!!!'),
+      error => this.notificationService.warn('Not updated!!'),
     );
   }
 

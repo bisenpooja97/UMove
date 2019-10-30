@@ -28,17 +28,17 @@
     </button>
     </mat-card-title>
     <br><br>
-    <div fxFlex=50% fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="20%" fxLayoutGap.lt-md="0px"
+    <div fxFlex=50% fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="20px" fxLayoutGap.lt-md="0px"
     class="form" fxLayoutAlign="center center">    
 <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="50px" fxLayoutGap.lt-md="0px" class="col">
          <mat-card-title fxLayoutAlign="center center" class="font-style">Insurance No: {{insuranceNo}}</mat-card-title>
             <mat-card-title fxLayoutAlign="center center" class="font-style">Last Service Date: {{lastServiceDate| date:"dd LLLL yyyy"}}</mat-card-title>
-            <mat-card-title fxLayoutAlign="center center" class="font-style">Name: {{name}}</mat-card-title>
+            <mat-card-title fxLayoutAlign="center center" class="font-style">Vehicle Type: {{name}}</mat-card-title>
 </div>
 <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="50px" fxLayoutGap.lt-md="0px" class="col">
  
     <mat-card-title fxLayoutAlign="center center" class="font-style">Cost/KM: {{costkm | number: '1.2-2'}}</mat-card-title>
-    <mat-card-title fxLayoutAlign="center center" class="font-style">Cost/min: {{costtime}}</mat-card-title>
+    <mat-card-title fxLayoutAlign="center center" class="font-style">Cost/Min: {{costtime}}</mat-card-title>
     <mat-card-title fxLayoutAlign="center center" class="font-style">Chassis No: {{chassisNumber}}</mat-card-title>
 
 

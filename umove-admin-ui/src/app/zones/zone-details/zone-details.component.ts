@@ -7,6 +7,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material';
 import { UpdateZonesComponent } from '../update-zones/update-zones.component';
 import { AddSupervisorComponent } from '../add-supervisor/add-supervisor.component';
 import { VehicleService } from 'src/app/vehicles/vehicle.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 export interface Status {
   value: string;
@@ -45,14 +46,19 @@ export class ZoneDetailsComponent implements OnInit {
               private activatedRoute: ActivatedRoute, private route: ActivatedRoute,
               private notificationService: NotificationService,
               private matDialog: MatDialog,
-              private vehicleService: VehicleService) { }
+              private vehicleService: VehicleService,
+              private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
+    this.spinner.show();
+    setTimeout(() => {
+      /** spinner ends after 2 seconds */
+      this.spinner.hide();
+    }, 2000);
     this.route.queryParams.subscribe(params => {
       this.count = params.count;
   });
     this.getZoneDetails();
-
   }
 
 

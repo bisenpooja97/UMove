@@ -22,6 +22,7 @@ import { SupervisorDetailsComponent } from './supervisor-details/supervisor-deta
 import { AvatarModule } from 'ngx-avatar';
 import { VehicleDetailsComponent } from './vehicle-details/vehicle-details.component';
 import { AddVehicleComponent } from './add-vehicle/add-vehicle.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [ZonesComponent, ZoneCardComponent, ZoneDetailsComponent, AddZoneComponent, UpdateZonesComponent,
@@ -51,7 +52,7 @@ import { AddVehicleComponent } from './add-vehicle/add-vehicle.component';
     MatChipsModule,
     AvatarModule,
     MatListModule,
-
+    NgxSpinnerModule
   ],
   entryComponents: [AddZoneComponent, UpdateZonesComponent, AddSupervisorComponent, AddVehicleComponent]
 })
