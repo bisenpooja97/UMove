@@ -1,47 +1,64 @@
+<!--<ion-header>-->
+<!--  <ion-toolbar>-->
+<!--    <ion-thumbnail slot="start">-->
+<!--      <ion-menu-button></ion-menu-button>-->
+<!--      <img src="./assets/icon/images.png">-->
+<!--    </ion-thumbnail>-->
+<!--    <ion-title>Offers</ion-title>-->
+<!--  </ion-toolbar>-->
+<!--</ion-header>-->
+
+<!--<ion-content *ngIf="campaigns">-->
+<!--  <ion-card *ngFor="let campaign of campaigns">-->
+<!--  <ion-card-content>-->
+<!--    <ion-grid no-padding>-->
+<!--      <ion-row class="ion-align-items-center">-->
+<!--        <ion-icon name="pricetags" size="large" color="success"></ion-icon>-->
+<!--        <ion-col padding-horizontal>-->
+<!--          <ion-text color="success">-->
+<!--            <h3>PromoCode: {{campaign.promocode}}</h3>-->
+<!--            <h3>PromoCode: 122134</h3>-->
+<!--          </ion-text>-->
+<!--          <ion-text>-->
+<!--            <p style="text-align: left">{{campaign.name}}.</p>-->
+<!--          </ion-text>-->
+<!--        </ion-col>-->
+<!--        <ion-button (click)="sendCampaign(campaign)">Apply Code </ion-button>-->
+<!--&lt;!&ndash;        <ion-icon name="close-circle" size="large" (click)="removeSelectedPromocode()"></ion-icon>&ndash;&gt;-->
+<!--      </ion-row>-->
+<!--    </ion-grid>-->
+<!--  </ion-card-content>-->
+<!--  </ion-card>-->
+<!--</ion-content>-->
 <ion-header>
   <ion-toolbar>
-    <ion-thumbnail slot="start">
-      <ion-menu-button></ion-menu-button>
-      <img src="./assets/icon/images.png">
-    </ion-thumbnail>
-    <ion-title>Offers</ion-title>
+    <ion-icon class="imagesize" ios="ios-pricetags" md="md-pricetags"></ion-icon>
+    <div class ="container">
+      <ion-menu-button class="top-left"></ion-menu-button>
+      <div class="bottom-left">Promotions</div>
+    </div>
   </ion-toolbar>
 </ion-header>
-
 <ion-content *ngIf="campaigns">
-<!--  <ion-card *ngFor="let campaign of campaigns">-->
-<!--    <ion-card-content>-->
-<!--      <ion-item lines="none">-->
-<!--        <ion-thumbnail slot="start">-->
-<!--          <img src = "./assets/icon/hello.png">-->
-<!--        </ion-thumbnail>-->
-<!--        <ion-label>-->
-<!--          <h3>PromoCode:{{campaign.promocode}}</h3>-->
-<!--        </ion-label>-->
-<!--        <ion-button (click)="sendCampaign(campaign)">Apply Code </ion-button>-->
-<!--      </ion-item>-->
-<!--      <ion-item>-->
-<!--        <p style="text-align: center">{{campaign.name}}.</p>-->
-<!--      </ion-item>-->
-<!--    </ion-card-content>-->
-<!--  </ion-card>-->
-  <ion-card *ngFor="let campaign of campaigns">
-  <ion-card-content>
+  <ion-item *ngFor="let campaign of campaigns">
     <ion-grid no-padding>
       <ion-row class="ion-align-items-center">
-        <ion-icon name="pricetags" size="large" color="success"></ion-icon>
         <ion-col padding-horizontal>
           <ion-text color="success">
-            <h3>PromoCode: {{campaign.promocode}}</h3>
-          </ion-text>
-          <ion-text>
-            <p style="text-align: left">{{campaign.name}}.</p>
+            <div class="box green">
+              <h3 text-center style="padding-top: 10px;color: white">{{campaign.discountPercent}}%OFF</h3>
+            </div>
           </ion-text>
         </ion-col>
-        <ion-button (click)="sendCampaign(campaign)">Apply Code </ion-button>
-<!--        <ion-icon name="close-circle" size="large" (click)="removeSelectedPromocode()"></ion-icon>-->
+        <ion-row class="text-heading">{{campaign.endDate}}</ion-row>
+      </ion-row>
+      <ion-row style="padding-top: 15px;padding-bottom: 15px; padding-left: 15px" class="text-subheading">Congrats! Enjoy {{campaign.discountPercent}}% off on bike rides | Valid till {{campaign.endDate}}| T&C Apply</ion-row>
+      <ion-row class="ion-align-items-center">
+      <ion-col padding-horizontal>
+        <ion-row style="padding-top: 15px;padding-bottom: 15px;padding-left: 15px" class="text-heading">India</ion-row>
+      </ion-col>
+        <ion-button *ngIf="!disableButton">Apply</ion-button>
       </ion-row>
     </ion-grid>
-  </ion-card-content>
-  </ion-card>
+  </ion-item>
 </ion-content>
