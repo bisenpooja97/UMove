@@ -21,7 +21,7 @@
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput [matDatepicker]="picker1" placeholder="Choose a start date">
+        <input matInput [matDatepicker]="picker1" placeholder="Choose a start date" formControlName="startDate">
         <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
         <mat-datepicker #picker1></mat-datepicker>
       </mat-form-field>
@@ -42,7 +42,7 @@
         <input matInput #input placeholder="Discount Percent" formControlName="discountPercent" required>
       </mat-form-field>
       <mat-form-field>
-        <input matInput [matDatepicker]="picker2" placeholder="Choose an end date">
+        <input matInput [matDatepicker]="picker2" placeholder="Choose an expired date" formControlName="expiredDate">
         <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
         <mat-datepicker #picker2></mat-datepicker>
       </mat-form-field>
@@ -52,7 +52,6 @@
       </mat-form-field>
     </div>
   </div>
-
   <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
     <button mat-raised-button class="btn" [disabled]='!campaignForm.valid' color="primary">
       Submit

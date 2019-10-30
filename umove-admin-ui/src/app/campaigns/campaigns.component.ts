@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CampaignsService } from './service/campaigns.service';
 import { MatPaginator, MatDialog, MatTableDataSource, MatDialogConfig } from '@angular/material';
-import { Campaign } from './model/campaign';
 import { AddCampaignComponent } from './add-campaign/add-campaign.component';
+import { Campaign } from './model/campaign';
+
 
 
 @Component({
@@ -42,8 +43,15 @@ add() {
           .subscribe(
             response => {
               // this.notificationService.success(' Campaign Added successfully');
-              // this.getCampaignsInfo();
-            }); }
+              this.getCampaignsInfo();
+            }
+            
+            ); }
+
      });
 }
-}
+  getCampaignsInfo() {
+    return this.campaignservice.getCampaigns().subscribe(res => {
+      this.campaigns = res.data;
+  });
+}}

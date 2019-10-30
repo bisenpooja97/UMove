@@ -12,13 +12,15 @@ export class AddCampaignComponent implements OnInit {
   form: FormGroup;
   name: string;
   objective: string;
-  startDate: string;
-  endDate: string;
+  startDate: Date;
+  endDate: Date;
+  expiredDate:Date;
   promocode: string;
   discountPercent: number;
   upperBound: number;
   totalCoupons: number;
   usedCoupons: number;
+  campaignStatus:string;
 
   constructor(private campaignService: CampaignsService, 
     private fb: FormBuilder,
@@ -31,11 +33,13 @@ campaignForm = this.fb.group({
   objective: ['', []],
   startDate: ['', []],
   endDate: ['', []],
+  expiredDate:['',[]],
   promocode: ['', [Validators.pattern('[A-Z0-9]+')]],
   discountPercent: ['', [Validators.pattern('[0-9]+')]],
   upperBound: ['', [Validators.pattern('[0-9]+')]],
   totalCoupons: ['', [Validators.pattern('[0-9]+')]],
-  usedCoupons: ['', [Validators.pattern('[0-9]+')]]
+  usedCoupons: ['', [Validators.pattern('[0-9]+')]],
+  campaignStatus: ['',[]]
 });
 
 onClose() {
@@ -53,6 +57,5 @@ onClose() {
     this.dialogRef.close(this.campaignForm.value);
 
 }
-
 
 }

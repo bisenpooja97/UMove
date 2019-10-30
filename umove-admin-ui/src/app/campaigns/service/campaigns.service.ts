@@ -5,6 +5,8 @@ import { Observable } from 'rxjs';
 import { Resp } from '../model/campaign-response';
 import { Campaign } from '../model/campaign';
 
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -18,6 +20,10 @@ export class CampaignsService {
     return this.httpClient.get<Resp>(this.baseUrl);
   }
 
+  getCampaignsById(id: string){
+    return this.httpClient.get<Resp>(this.baseUrl + '/' + id)
+  }
+
   public addCampaign(campaign: Resp) {
     return this.httpClient.post<Resp>(this.baseUrl + '/addcampaign', campaign);
   }
@@ -29,7 +35,5 @@ export class CampaignsService {
 public deleteCampaign(id: string) {
   return this.httpClient.delete<Resp>(this.baseUrl + '/' + id);
 }
-
-
 
 }

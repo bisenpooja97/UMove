@@ -1,6 +1,7 @@
 package in.stackroute.umove.campaignservice.service.Implementation;
 
 import in.stackroute.umove.campaignservice.model.Campaign;
+import in.stackroute.umove.campaignservice.model.CampaignStatus;
 import in.stackroute.umove.campaignservice.repository.CampaignRepository;
 import in.stackroute.umove.campaignservice.service.CampaignService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,10 @@ public class CampaignserviceImpl implements CampaignService
 
     @Override
     public Campaign addCampaign(Campaign campaign) {
-        return campaignRepository.save(campaign);
+
+            campaign.setCampaignStatus(CampaignStatus.Created);
+
+            return campaignRepository.save(campaign);
     }
     /*
      *Method to update campaign
@@ -53,6 +57,14 @@ public class CampaignserviceImpl implements CampaignService
             if (campaign.getEndDate()!= null) {
                 updatedCampaign.setEndDate(campaign.getEndDate());
             }
+
+            if (campaign.getExpiredDate()!= null) {
+                updatedCampaign.setExpiredDate(campaign.getExpiredDate());
+            }
+            if (campaign.getCampaignStatus()!= null) {
+                updatedCampaign.setCampaignStatus(campaign.getCampaignStatus());
+            }
+
             if (campaign.getPromocode() != null) {
                 updatedCampaign.setPromocode(campaign.getPromocode());
             }
@@ -83,6 +95,24 @@ public class CampaignserviceImpl implements CampaignService
         Campaign campaign=campaignRepository.findById(id);
         campaignRepository.delete(campaign);
         return campaign;
+    }
+
+    @Override
+    public Campaign getById(String id) {
+        return campaignRepository.getById(id);
+    }
+
+    @Override
+    public List<Campaign> findByName(String name) {
+        List<Campaign> campaigns = campaignRepository.findByName(name);
+      return campaigns;
+    }
+
+    @Override
+    public List<Campaign> findByCampaignStatus(CampaignStatus campaignStatus) {
+        List<Campaign> campaigns = campaignRepository.findByCampaignStatus(campaignStatus);
+        return campaigns;
+
     }
 
 }

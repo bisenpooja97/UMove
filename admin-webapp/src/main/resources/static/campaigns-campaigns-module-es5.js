@@ -719,7 +719,7 @@ var NgxPaginationModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-toolbar>\n  <span class=\"fill-remaining-space\"></span>\n  <button class=\"btn-dialog-close\" mat-stroked-button (click)=\"onClose()\" tabIndex=\"-1\">\n    <mat-icon>clear</mat-icon>\n  </button>\n</mat-toolbar>\n\n<form fxLayout=\"column\" fxLayoutAlign=\"center center\" [formGroup]=\"campaignForm\" (ngSubmit)=\"onSubmit()\">\n  <h2>Create a new campaign</h2>\n  <div fxFlex=50% fxLayout=\"row\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\" class=\"form\"\n    fxLayoutAlign=\"center center\">\n    <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\" class=\"col\">\n      <mat-form-field appearance=\"outline\" fxFlex>\n        <mat-label>Campaign name</mat-label>\n        <input matInput #input placeholder=\"Campaign Name\" formControlName=\"name\" required>\n      </mat-form-field>\n      \n      <mat-form-field appearance=\"outline\" fxFlex>\n        <mat-label>Objective</mat-label>\n        <input matInput #input placeholder=\"Enter objective\" formControlName=\"objective\" required>\n      </mat-form-field>\n\n      <mat-form-field>\n        <input matInput [matDatepicker]=\"picker1\" placeholder=\"Choose a start date\">\n        <mat-datepicker-toggle matSuffix [for]=\"picker1\"></mat-datepicker-toggle>\n        <mat-datepicker #picker1></mat-datepicker>\n      </mat-form-field>\n\n      <mat-form-field appearance=\"outline\" fxFlex>\n        <mat-label>Upper Bound</mat-label>\n        <input matInput #input placeholder=\"upper Bound\" formControlName=\"upperBound\" required>\n      </mat-form-field>\n      \n    </div>\n    <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\" class=\"col\">\n    \n      <mat-form-field appearance=\"outline\" fxFlex>\n        <mat-label>Promo code</mat-label>\n        <input matInput #input placeholder=\"Promo code\" formControlName=\"promocode\" required>\n      </mat-form-field>\n      <mat-form-field appearance=\"outline\" fxFlex>\n        <mat-label>Discount Percent</mat-label>\n        <input matInput #input placeholder=\"Discount Percent\" formControlName=\"discountPercent\" required>\n      </mat-form-field>\n      <mat-form-field>\n        <input matInput [matDatepicker]=\"picker2\" placeholder=\"Choose an end date\">\n        <mat-datepicker-toggle matSuffix [for]=\"picker2\"></mat-datepicker-toggle>\n        <mat-datepicker #picker2></mat-datepicker>\n      </mat-form-field>\n      <mat-form-field appearance=\"outline\" fxFlex>\n        <mat-label>Total Coupons</mat-label>\n        <input matInput #input placeholder=\"Total Coupons\" formControlName=\"totalCoupons\" required>\n      </mat-form-field>\n    </div>\n  </div>\n\n  <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\">\n    <button mat-raised-button class=\"btn\" [disabled]='!campaignForm.valid' color=\"primary\">\n      Submit\n    </button>\n  </div>\n</form>\n"
+module.exports = "<mat-toolbar>\n  <span class=\"fill-remaining-space\"></span>\n  <button class=\"btn-dialog-close\" mat-stroked-button (click)=\"onClose()\" tabIndex=\"-1\">\n    <mat-icon>clear</mat-icon>\n  </button>\n</mat-toolbar>\n\n<form fxLayout=\"column\" fxLayoutAlign=\"center center\" [formGroup]=\"campaignForm\" (ngSubmit)=\"onSubmit()\">\n  <h2>Create a new campaign</h2>\n  <div fxFlex=50% fxLayout=\"row\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\" class=\"form\"\n    fxLayoutAlign=\"center center\">\n    <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\" class=\"col\">\n      <mat-form-field appearance=\"outline\" fxFlex>\n        <mat-label>Campaign name</mat-label>\n        <input matInput #input placeholder=\"Campaign Name\" formControlName=\"name\" required>\n      </mat-form-field>\n      \n      <mat-form-field appearance=\"outline\" fxFlex>\n        <mat-label>Objective</mat-label>\n        <input matInput #input placeholder=\"Enter objective\" formControlName=\"objective\" required>\n      </mat-form-field>\n\n      <mat-form-field>\n        <input matInput [matDatepicker]=\"picker1\" placeholder=\"Choose a start date\" formControlName=\"startDate\">\n        <mat-datepicker-toggle matSuffix [for]=\"picker1\"></mat-datepicker-toggle>\n        <mat-datepicker #picker1></mat-datepicker>\n      </mat-form-field>\n\n      <mat-form-field appearance=\"outline\" fxFlex>\n        <mat-label>Upper Bound</mat-label>\n        <input matInput #input placeholder=\"upper Bound\" formControlName=\"upperBound\" required>\n      </mat-form-field>\n    </div>\n    <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\" class=\"col\">\n    \n      <mat-form-field appearance=\"outline\" fxFlex>\n        <mat-label>Promo code</mat-label>\n        <input matInput #input placeholder=\"Promo code\" formControlName=\"promocode\" required>\n      </mat-form-field>\n      <mat-form-field appearance=\"outline\" fxFlex>\n        <mat-label>Discount Percent</mat-label>\n        <input matInput #input placeholder=\"Discount Percent\" formControlName=\"discountPercent\" required>\n      </mat-form-field>\n      <mat-form-field>\n        <input matInput [matDatepicker]=\"picker2\" placeholder=\"Choose an end date\" formControlName=\"expiredDate\">\n        <mat-datepicker-toggle matSuffix [for]=\"picker2\"></mat-datepicker-toggle>\n        <mat-datepicker #picker2></mat-datepicker>\n      </mat-form-field>\n      <mat-form-field appearance=\"outline\" fxFlex>\n        <mat-label>Total Coupons</mat-label>\n        <input matInput #input placeholder=\"Total Coupons\" formControlName=\"totalCoupons\" required>\n      </mat-form-field>\n    </div>\n  </div>\n  <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\">\n    <button mat-raised-button class=\"btn\" [disabled]='!campaignForm.valid' color=\"primary\">\n      Submit\n    </button>\n  </div>\n</form>\n"
 
 /***/ }),
 
@@ -730,7 +730,18 @@ module.exports = "<mat-toolbar>\n  <span class=\"fill-remaining-space\"></span>\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-card class=\"my-card\" fxFlex.sm=\"0 1 calc(50%-10px)\" fxFlex.md=\"0 1 calc(33%-10px)\" fxLayout=\"column\" fxLayoutGap=\"20px\" (click)=\"ok()\">\n    <mat-card-title fxLayoutAlign=\"start\" class=\"name\" >{{name}}</mat-card-title>\n    <mat-card-content fxLayoutAlign=\"start\" class=\"objective\">Objective:{{objective}}</mat-card-content>\n    <div>\n        <mat-card-content fxLayoutAlign=\"start\">Start date:{{startDate}}</mat-card-content>\n        <mat-card-content fxLayoutAlign=\"start\">End date:{{endDate}}</mat-card-content>\n    </div>\n    <mat-card-content fxLayoutAlign=\"start\">Promocode:{{promocode}}</mat-card-content>\n    <mat-card-content fxLayoutAlign=\"start\">Discount Percent:{{discountPercent}}</mat-card-content>\n    <mat-card-content fxLayoutAlign=\"start\">Upper Bound:{{upperBound}}</mat-card-content>\n    <mat-card-content fxLayoutAlign=\"start\">Total Coupons:{{totalCoupons}}</mat-card-content>\n    <mat-card-content fxLayoutAlign=\"start\">Used Coupons:{{usedCoupons}}</mat-card-content>\n  </mat-card>\n  \n"
+module.exports = "<mat-card class=\"my-card\" fxFlex.sm=\"0 1 calc(50%-10px)\" fxFlex.md=\"0 1 calc(33%-10px)\" fxLayout=\"column\" fxLayoutGap=\"20px\" (click)=\"ok()\">\n    <mat-card-title fxLayoutAlign=\"start\" class=\"name\" >{{name}}</mat-card-title>\n    <mat-card-content fxLayoutAlign=\"start\" class=\"objective\">Objective:{{objective}}</mat-card-content>\n    <div>\n        <!-- <mat-card-content fxLayoutAlign=\"start\">Start date:{{startDate |date:\"dd LLLL yyyy\" }}</mat-card-content>\n        <mat-card-content fxLayoutAlign=\"start\">End date:{{endDate |date:\"dd LLLL yyyy\"}}</mat-card-content> -->\n    </div>\n    <!-- <mat-card-content fxLayoutAlign=\"start\">Promocode:{{promocode}}</mat-card-content>\n    <mat-card-content fxLayoutAlign=\"start\">Discount Percent:{{discountPercent}}</mat-card-content>\n    <mat-card-content fxLayoutAlign=\"start\">Upper Bound:{{upperBound}}</mat-card-content> -->\n    <mat-card-content fxLayoutAlign=\"start\">Total Coupons:{{totalCoupons}}</mat-card-content>\n    <mat-card-content fxLayoutAlign=\"start\">Used Coupons:{{usedCoupons}}</mat-card-content>\n\n    <div class=\"campaigneditdelete\">\n        <div fxLayout=\"column\" fxLayout.gt-xs=\"row\" fxLayoutAlign=\"end\" fxLayoutGap=\"10px\">\n        <button mat-raised-button color=\"primary\" (click)=\"delete()\" class=\"delete\">\n            <i class=\"material-icons\">\n                delete\n            </i>\n        </button>\n        <button mat-raised-button color=\"primary\" (click)=\"edit()\" class=\"edit\">\n                <i class=\"material-icons\">\n                    edit\n                </i>\n            </button>\n       </div>\n    </div>\n    \n  </mat-card>\n  \n"
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/index.js!./src/app/campaigns/campaigns-details/campaigns-details.component.html":
+/*!********************************************************************************************************!*\
+  !*** ./node_modules/raw-loader!./src/app/campaigns/campaigns-details/campaigns-details.component.html ***!
+  \********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div fxLayout.sm=\"column\" fxLayout.gt-sm=\"row\" fxLayoutGap=\"10%\">\n  <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap.lt-md=\"0px\">\n    <mat-form-field appearance=\"outline\" fxFlex class=\"status\">\n      <mat-label>Campaign Status</mat-label>\n      <mat-select [(ngModel)]=\"Status\" (ngModelChange)=\"onChange($event)\">\n        <mat-option *ngFor=\"let c of campaignStatus\" [value]=\"c.value\">\n          {{c.viewValue}}\n        </mat-option>\n      </mat-select>\n    </mat-form-field>\n  </div>\n</div>\n\n<div fxLayout=\"column\">\n    <mat-card class=\"campaign\" fxFlex.sm=\"0 1 calc(50%-10px)\" fxFlex.md=\"0 1 calc(33%-10px)\" fxLayout=\"column\"\n      fxLayoutGap=\"20px\">\n      <div fxFlex=50% fxLayout=\"column\" fxLayout.gt-sm=\"row\" fxLayoutGap=\"20%\" fxLayoutGap.lt-md=\"0px\" class=\"form\"\n        fxLayoutAlign=\"center center\">\n\n        <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"50px\" fxLayoutGap.lt-md=\"0px\" class=\"col\">\n          <mat-card-title fxLayoutAlign=\"start\">Start Date: {{campaign?.startDate|date:\"dd LLLL yyyy\" }}</mat-card-title>\n          <mat-card-title fxLayoutAlign=\"start\">Expired date: {{campaign?.expiredDate|date:\"dd LLLL yyyy\"}}</mat-card-title>\n          <mat-card-title fxLayoutAlign=\"start\">Promo Code: {{campaign?.promocode}}</mat-card-title>\n          <mat-card-title fxLayoutAlign=\"start\">Discount Percent: {{campaign?.discountPercent}}</mat-card-title>\n          <mat-card-title fxLayoutAlign=\"start\">Upper Bound: {{campaign?.upperBound}}         \n          </mat-card-title>\n        </div>\n      </div>\n    </mat-card>\n</div>\n    \n  \n"
 
 /***/ }),
 
@@ -742,6 +753,17 @@ module.exports = "<mat-card class=\"my-card\" fxFlex.sm=\"0 1 calc(50%-10px)\" f
 /***/ (function(module, exports) {
 
 module.exports = "<h1 fxLayout=\"column\" fxLayout.gt-md=\"row\" fxLayoutGap.gt-md=\"15px\" class=\"header\">\n  Campaigns\n</h1>\n<div fxLayout=\"row\" fxLayoutGap=\"20px\" class=\"search\" fxLayout.gt-xs=\"row\">\n  <mat-form-field fxFlex=20%>\n    <input matInput [(ngModel)]=\"term\" placeholder=\"Search\">\n  </mat-form-field>\n</div>\n<div fxLayout.xs=\"column\" fxLayout.gt=\"row\" fxLayout=\"row wrap\" fxLayoutGap=\"10px\" class=\"card\">\n  <app-campaign-card *ngFor=\"let campaign of campaigns | paginate: { itemsPerPage: 10, currentPage: p}| filter:term\"\n    [campaign]=\"campaign\">\n  </app-campaign-card>\n   <pagination-controls (pageChange)=\"p = $event\"></pagination-controls>\n</div>\n<div fxLayout=\"column\" fxLayout.gt-xs=\"row\" fxLayoutAlign=\"end\" class=\"add-button\">\n  <button mat-fab color=\"primary\" (click)=\"add()\">\n      <i class=\"material-icons\">\n          add\n      </i>\n  </button>\n\n"
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/index.js!./src/app/campaigns/edit-campaign/edit-campaign.component.html":
+/*!************************************************************************************************!*\
+  !*** ./node_modules/raw-loader!./src/app/campaigns/edit-campaign/edit-campaign.component.html ***!
+  \************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<mat-toolbar>\n        <span class=\"fill-remaining-space\"></span>\n        <button class=\"btn-dialog-close\" mat-stroked-button (click)=\"onClose()\" tabIndex=\"-1\">\n            <mat-icon>clear</mat-icon>\n        </button>\n    </mat-toolbar>\n\n    <form fxLayout=\"column\" fxLayoutAlign=\"center center\" [formGroup]=\"campaignForm\" (ngSubmit)=\"onSubmit()\">\n\n            <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\" class=\"form\"\n                fxLayoutAlign=\"center center\">\n\n                     <button mat-raised-button class=\"btn font-style\" [disabled]='!zoneForm.valid' color=\"primary\">\n                                Submit\n                            </button>\n\n                        </div>\n                    </form>\n\n\n\n"
 
 /***/ }),
 
@@ -786,11 +808,13 @@ var AddCampaignComponent = /** @class */ (function () {
             objective: ['', []],
             startDate: ['', []],
             endDate: ['', []],
+            expiredDate: ['', []],
             promocode: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].pattern('[A-Z0-9]+')]],
             discountPercent: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].pattern('[0-9]+')]],
             upperBound: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].pattern('[0-9]+')]],
             totalCoupons: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].pattern('[0-9]+')]],
-            usedCoupons: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].pattern('[0-9]+')]]
+            usedCoupons: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].pattern('[0-9]+')]],
+            campaignStatus: ['', []]
         });
     }
     AddCampaignComponent.prototype.onClose = function () {
@@ -831,7 +855,7 @@ var AddCampaignComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".my-card {\n    margin-bottom: 40px;\n    height: 400px;\n    cursor: pointer;\n    \n}\n\n.my-card:hover {\n    transform: scale(1.1);\n}\n\n.name {\n    padding-top: 10%;\n}\n\n.status {\n    font-weight: bold;\n    font-size: 1em;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY2FtcGFpZ25zL2NhbXBhaWduLWNhcmQvY2FtcGFpZ24tY2FyZC5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksbUJBQW1CO0lBQ25CLGFBQWE7SUFDYixlQUFlOztBQUVuQjs7QUFFQTtJQUdJLHFCQUFxQjtBQUN6Qjs7QUFFQTtJQUNJLGdCQUFnQjtBQUNwQjs7QUFFQTtJQUNJLGlCQUFpQjtJQUNqQixjQUFjO0FBQ2xCIiwiZmlsZSI6InNyYy9hcHAvY2FtcGFpZ25zL2NhbXBhaWduLWNhcmQvY2FtcGFpZ24tY2FyZC5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLm15LWNhcmQge1xuICAgIG1hcmdpbi1ib3R0b206IDQwcHg7XG4gICAgaGVpZ2h0OiA0MDBweDtcbiAgICBjdXJzb3I6IHBvaW50ZXI7XG4gICAgXG59XG5cbi5teS1jYXJkOmhvdmVyIHtcbiAgICAtd2Via2l0LXRyYW5zZm9ybTogc2NhbGUoMS4xKTtcbiAgICAtbXMtdHJhbnNmb3JtOiBzY2FsZSgxLjEpO1xuICAgIHRyYW5zZm9ybTogc2NhbGUoMS4xKTtcbn1cblxuLm5hbWUge1xuICAgIHBhZGRpbmctdG9wOiAxMCU7XG59XG5cbi5zdGF0dXMge1xuICAgIGZvbnQtd2VpZ2h0OiBib2xkO1xuICAgIGZvbnQtc2l6ZTogMWVtO1xufVxuIl19 */"
+module.exports = ".my-card {\n    margin-bottom: 40px;\n    height: 300px;\n    cursor: pointer;\n    \n}\n\n.my-card:hover {\n    transform: scale(1.1);\n}\n\n.name {\n    padding-top: 10%;\n}\n\n.status {\n    font-weight: bold;\n    font-size: 1em;\n}\n\n.campaigneditdelete\n{\n    flex-direction: row;\n    align-items: center;\n\n}\n\n\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY2FtcGFpZ25zL2NhbXBhaWduLWNhcmQvY2FtcGFpZ24tY2FyZC5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksbUJBQW1CO0lBQ25CLGFBQWE7SUFDYixlQUFlOztBQUVuQjs7QUFFQTtJQUdJLHFCQUFxQjtBQUN6Qjs7QUFFQTtJQUNJLGdCQUFnQjtBQUNwQjs7QUFFQTtJQUNJLGlCQUFpQjtJQUNqQixjQUFjO0FBQ2xCOztBQUVBOztJQUVJLG1CQUFtQjtJQUNuQixtQkFBbUI7O0FBRXZCIiwiZmlsZSI6InNyYy9hcHAvY2FtcGFpZ25zL2NhbXBhaWduLWNhcmQvY2FtcGFpZ24tY2FyZC5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLm15LWNhcmQge1xuICAgIG1hcmdpbi1ib3R0b206IDQwcHg7XG4gICAgaGVpZ2h0OiAzMDBweDtcbiAgICBjdXJzb3I6IHBvaW50ZXI7XG4gICAgXG59XG5cbi5teS1jYXJkOmhvdmVyIHtcbiAgICAtd2Via2l0LXRyYW5zZm9ybTogc2NhbGUoMS4xKTtcbiAgICAtbXMtdHJhbnNmb3JtOiBzY2FsZSgxLjEpO1xuICAgIHRyYW5zZm9ybTogc2NhbGUoMS4xKTtcbn1cblxuLm5hbWUge1xuICAgIHBhZGRpbmctdG9wOiAxMCU7XG59XG5cbi5zdGF0dXMge1xuICAgIGZvbnQtd2VpZ2h0OiBib2xkO1xuICAgIGZvbnQtc2l6ZTogMWVtO1xufVxuXG4uY2FtcGFpZ25lZGl0ZGVsZXRlXG57XG4gICAgZmxleC1kaXJlY3Rpb246IHJvdztcbiAgICBhbGlnbi1pdGVtczogY2VudGVyO1xuXG59XG5cblxuIl19 */"
 
 /***/ }),
 
@@ -848,6 +872,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
+
 
 
 
@@ -857,6 +883,7 @@ var CampaignCardComponent = /** @class */ (function () {
     }
     CampaignCardComponent.prototype.ngOnInit = function () {
         console.log('Campaign data is:', this.campaign);
+        this.id = this.campaign.id;
         this.name = this.campaign.name;
         this.objective = this.campaign.objective;
         this.startDate = this.campaign.startDate;
@@ -868,7 +895,17 @@ var CampaignCardComponent = /** @class */ (function () {
         this.usedCoupons = this.campaign.usedCoupons;
     };
     CampaignCardComponent.prototype.ok = function () {
-        this.router.navigate(['/campaigns']);
+        console.log(this.id);
+        this.router.navigate(['/campaigns/details', this.id]);
+    };
+    CampaignCardComponent.prototype.edit = function () {
+        var dialogConfig = new _angular_material__WEBPACK_IMPORTED_MODULE_3__["MatDialogConfig"]();
+        dialogConfig.disableClose = true;
+        dialogConfig.autoFocus = true;
+        dialogConfig.width = '40%';
+        dialogConfig.data = {};
+    };
+    CampaignCardComponent.prototype.delete = function () {
     };
     CampaignCardComponent.ctorParameters = function () { return [
         { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] }
@@ -890,6 +927,78 @@ var CampaignCardComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/campaigns/campaigns-details/campaigns-details.component.css":
+/*!*****************************************************************************!*\
+  !*** ./src/app/campaigns/campaigns-details/campaigns-details.component.css ***!
+  \*****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ".campaign {\n    margin-bottom: 40px;\n    margin-left: 450px;\n     height: 350px; \n    width: 55%;\n    margin-top: 50px;\n    \n}\n\n@media only screen and (max-width: 600px) {\n    .campaign {\n        margin-left: 30px;\n        height: 300px;\n        width: 85%;\n    }\n\n    mat-card-title {\n        font-size: 1.4em;\n    }\n}\n\n.col {\n    margin-top: 130px;\n}\n\n.doc {\n    margin-top: 70px;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY2FtcGFpZ25zL2NhbXBhaWducy1kZXRhaWxzL2NhbXBhaWducy1kZXRhaWxzLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7SUFDSSxtQkFBbUI7SUFDbkIsa0JBQWtCO0tBQ2pCLGFBQWE7SUFDZCxVQUFVO0lBQ1YsZ0JBQWdCOztBQUVwQjs7QUFFQTtJQUNJO1FBQ0ksaUJBQWlCO1FBQ2pCLGFBQWE7UUFDYixVQUFVO0lBQ2Q7O0lBRUE7UUFDSSxnQkFBZ0I7SUFDcEI7QUFDSjs7QUFFQTtJQUNJLGlCQUFpQjtBQUNyQjs7QUFFQTtJQUNJLGdCQUFnQjtBQUNwQiIsImZpbGUiOiJzcmMvYXBwL2NhbXBhaWducy9jYW1wYWlnbnMtZGV0YWlscy9jYW1wYWlnbnMtZGV0YWlscy5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmNhbXBhaWduIHtcbiAgICBtYXJnaW4tYm90dG9tOiA0MHB4O1xuICAgIG1hcmdpbi1sZWZ0OiA0NTBweDtcbiAgICAgaGVpZ2h0OiAzNTBweDsgXG4gICAgd2lkdGg6IDU1JTtcbiAgICBtYXJnaW4tdG9wOiA1MHB4O1xuICAgIFxufVxuXG5AbWVkaWEgb25seSBzY3JlZW4gYW5kIChtYXgtd2lkdGg6IDYwMHB4KSB7XG4gICAgLmNhbXBhaWduIHtcbiAgICAgICAgbWFyZ2luLWxlZnQ6IDMwcHg7XG4gICAgICAgIGhlaWdodDogMzAwcHg7XG4gICAgICAgIHdpZHRoOiA4NSU7XG4gICAgfVxuXG4gICAgbWF0LWNhcmQtdGl0bGUge1xuICAgICAgICBmb250LXNpemU6IDEuNGVtO1xuICAgIH1cbn1cblxuLmNvbCB7XG4gICAgbWFyZ2luLXRvcDogMTMwcHg7XG59XG5cbi5kb2Mge1xuICAgIG1hcmdpbi10b3A6IDcwcHg7XG59XG4iXX0= */"
+
+/***/ }),
+
+/***/ "./src/app/campaigns/campaigns-details/campaigns-details.component.ts":
+/*!****************************************************************************!*\
+  !*** ./src/app/campaigns/campaigns-details/campaigns-details.component.ts ***!
+  \****************************************************************************/
+/*! exports provided: CampaignsDetailsComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CampaignsDetailsComponent", function() { return CampaignsDetailsComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _service_campaigns_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../service/campaigns.service */ "./src/app/campaigns/service/campaigns.service.ts");
+
+
+
+
+var CampaignsDetailsComponent = /** @class */ (function () {
+    function CampaignsDetailsComponent(router, campaignService, activatedRoute, route) {
+        this.router = router;
+        this.campaignService = campaignService;
+        this.activatedRoute = activatedRoute;
+        this.route = route;
+        this.campaignStatus = [
+            { value: 'Created', viewValue: 'Created' },
+            { value: 'Running', viewValue: 'Running' },
+            { value: 'Ended', viewValue: 'Ended' },
+        ];
+    }
+    CampaignsDetailsComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.id = this.route.snapshot.paramMap.get('id');
+        console.log('ParamMap id', this.id);
+        this.campaignService.getCampaignsById(this.route.snapshot.paramMap.get('id')).subscribe(function (res) {
+            _this.campaign = res.data;
+            console.log('Response hello', typeof (res.data), res.data);
+        });
+    };
+    CampaignsDetailsComponent.prototype.edit = function () {
+    };
+    CampaignsDetailsComponent.ctorParameters = function () { return [
+        { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] },
+        { type: _service_campaigns_service__WEBPACK_IMPORTED_MODULE_3__["CampaignsService"] },
+        { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"] },
+        { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"] }
+    ]; };
+    CampaignsDetailsComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-campaigns-details',
+            template: __webpack_require__(/*! raw-loader!./campaigns-details.component.html */ "./node_modules/raw-loader/index.js!./src/app/campaigns/campaigns-details/campaigns-details.component.html"),
+            styles: [__webpack_require__(/*! ./campaigns-details.component.css */ "./src/app/campaigns/campaigns-details/campaigns-details.component.css")]
+        })
+    ], CampaignsDetailsComponent);
+    return CampaignsDetailsComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/campaigns/campaigns-routing.module.ts":
 /*!*******************************************************!*\
   !*** ./src/app/campaigns/campaigns-routing.module.ts ***!
@@ -904,11 +1013,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _campaigns_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./campaigns.component */ "./src/app/campaigns/campaigns.component.ts");
+/* harmony import */ var _campaigns_details_campaigns_details_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./campaigns-details/campaigns-details.component */ "./src/app/campaigns/campaigns-details/campaigns-details.component.ts");
 
 
 
 
-var routes = [{ path: '', component: _campaigns_component__WEBPACK_IMPORTED_MODULE_3__["CampaignsComponent"] }];
+
+var routes = [{ path: '', component: _campaigns_component__WEBPACK_IMPORTED_MODULE_3__["CampaignsComponent"] },
+    { path: 'details/:id', component: _campaigns_details_campaigns_details_component__WEBPACK_IMPORTED_MODULE_4__["CampaignsDetailsComponent"] },
+];
 var CampaignsRoutingModule = /** @class */ (function () {
     function CampaignsRoutingModule() {
     }
@@ -982,9 +1095,15 @@ var CampaignsComponent = /** @class */ (function () {
                 _this.campaignservice.addCampaign(result)
                     .subscribe(function (response) {
                     // this.notificationService.success(' Campaign Added successfully');
-                    // this.getCampaignsInfo();
+                    _this.getCampaignsInfo();
                 });
             }
+        });
+    };
+    CampaignsComponent.prototype.getCampaignsInfo = function () {
+        var _this = this;
+        return this.campaignservice.getCampaigns().subscribe(function (res) {
+            _this.campaigns = res.data;
         });
     };
     CampaignsComponent.ctorParameters = function () { return [
@@ -1031,6 +1150,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var ng2_search_filter__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ng2-search-filter */ "./node_modules/ng2-search-filter/ng2-search-filter.es5.js");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
 /* harmony import */ var _add_campaign_add_campaign_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./add-campaign/add-campaign.component */ "./src/app/campaigns/add-campaign/add-campaign.component.ts");
+/* harmony import */ var _edit_campaign_edit_campaign_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./edit-campaign/edit-campaign.component */ "./src/app/campaigns/edit-campaign/edit-campaign.component.ts");
+/* harmony import */ var _campaigns_details_campaigns_details_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./campaigns-details/campaigns-details.component */ "./src/app/campaigns/campaigns-details/campaigns-details.component.ts");
+
+
 
 
 
@@ -1049,7 +1172,7 @@ var CampaignsModule = /** @class */ (function () {
     }
     CampaignsModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
-            declarations: [_campaigns_component__WEBPACK_IMPORTED_MODULE_4__["CampaignsComponent"], _campaign_card_campaign_card_component__WEBPACK_IMPORTED_MODULE_5__["CampaignCardComponent"], _add_campaign_add_campaign_component__WEBPACK_IMPORTED_MODULE_12__["AddCampaignComponent"]],
+            declarations: [_campaigns_component__WEBPACK_IMPORTED_MODULE_4__["CampaignsComponent"], _campaign_card_campaign_card_component__WEBPACK_IMPORTED_MODULE_5__["CampaignCardComponent"], _add_campaign_add_campaign_component__WEBPACK_IMPORTED_MODULE_12__["AddCampaignComponent"], _edit_campaign_edit_campaign_component__WEBPACK_IMPORTED_MODULE_13__["EditCampaignComponent"], _campaigns_details_campaigns_details_component__WEBPACK_IMPORTED_MODULE_14__["CampaignsDetailsComponent"]],
             imports: [
                 _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"],
                 _campaigns_routing_module__WEBPACK_IMPORTED_MODULE_3__["CampaignsRoutingModule"],
@@ -1081,6 +1204,81 @@ var CampaignsModule = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/campaigns/edit-campaign/edit-campaign.component.css":
+/*!*********************************************************************!*\
+  !*** ./src/app/campaigns/edit-campaign/edit-campaign.component.css ***!
+  \*********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NhbXBhaWducy9lZGl0LWNhbXBhaWduL2VkaXQtY2FtcGFpZ24uY29tcG9uZW50LmNzcyJ9 */"
+
+/***/ }),
+
+/***/ "./src/app/campaigns/edit-campaign/edit-campaign.component.ts":
+/*!********************************************************************!*\
+  !*** ./src/app/campaigns/edit-campaign/edit-campaign.component.ts ***!
+  \********************************************************************/
+/*! exports provided: EditCampaignComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EditCampaignComponent", function() { return EditCampaignComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _service_campaigns_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../service/campaigns.service */ "./src/app/campaigns/service/campaigns.service.ts");
+
+
+
+
+
+
+var EditCampaignComponent = /** @class */ (function () {
+    function EditCampaignComponent(dialogRef, fb, route, router, campaignService, data) {
+        this.dialogRef = dialogRef;
+        this.fb = fb;
+        this.route = route;
+        this.router = router;
+        this.campaignService = campaignService;
+        this.campaignForm = this.fb.group({});
+    }
+    EditCampaignComponent.prototype.ngOnInit = function () {
+    };
+    EditCampaignComponent.prototype.onClose = function () {
+        this.campaignForm.reset();
+        this.dialogRef.close();
+    };
+    EditCampaignComponent.prototype.onSubmit = function () {
+        console.log(this.campaignForm.value);
+        this.dialogRef.close(this.campaignForm.value);
+    };
+    EditCampaignComponent.ctorParameters = function () { return [
+        { type: _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatDialogRef"] },
+        { type: _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormBuilder"] },
+        { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"] },
+        { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] },
+        { type: _service_campaigns_service__WEBPACK_IMPORTED_MODULE_5__["CampaignsService"] },
+        { type: undefined, decorators: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Inject"], args: [_angular_material__WEBPACK_IMPORTED_MODULE_2__["MAT_DIALOG_DATA"],] }] }
+    ]; };
+    EditCampaignComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-edit-campaign',
+            template: __webpack_require__(/*! raw-loader!./edit-campaign.component.html */ "./node_modules/raw-loader/index.js!./src/app/campaigns/edit-campaign/edit-campaign.component.html"),
+            styles: [__webpack_require__(/*! ./edit-campaign.component.css */ "./src/app/campaigns/edit-campaign/edit-campaign.component.css")]
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__param"](5, Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Inject"])(_angular_material__WEBPACK_IMPORTED_MODULE_2__["MAT_DIALOG_DATA"]))
+    ], EditCampaignComponent);
+    return EditCampaignComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/campaigns/service/campaigns.service.ts":
 /*!********************************************************!*\
   !*** ./src/app/campaigns/service/campaigns.service.ts ***!
@@ -1106,6 +1304,9 @@ var CampaignsService = /** @class */ (function () {
     }
     CampaignsService.prototype.getCampaigns = function () {
         return this.httpClient.get(this.baseUrl);
+    };
+    CampaignsService.prototype.getCampaignsById = function (id) {
+        return this.httpClient.get(this.baseUrl + '/' + id);
     };
     CampaignsService.prototype.addCampaign = function (campaign) {
         return this.httpClient.post(this.baseUrl + '/addcampaign', campaign);

@@ -12,10 +12,12 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddCampaignComponent } from './add-campaign/add-campaign.component';
+import { EditCampaignComponent } from './edit-campaign/edit-campaign.component';
+import { CampaignsDetailsComponent } from './campaigns-details/campaigns-details.component';
 
 
 @NgModule({
-  declarations: [CampaignsComponent, CampaignCardComponent, AddCampaignComponent],
+  declarations: [CampaignsComponent, CampaignCardComponent, AddCampaignComponent, EditCampaignComponent, CampaignsDetailsComponent],
   imports: [
     CommonModule,
     CampaignsRoutingModule,
@@ -35,7 +37,7 @@ import { AddCampaignComponent } from './add-campaign/add-campaign.component';
      FormsModule,
      ReactiveFormsModule,
      MatToolbarModule,
-     MatDatepickerModule
+     MatDatepickerModule,
   ],
   entryComponents: [AddCampaignComponent],
 })
