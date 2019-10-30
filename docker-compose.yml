@@ -8,7 +8,7 @@ services:
     container_name: 'umove-mysql'
     ports:
       - '3306:3306'
-    restart: on-failure
+    restart: always
     environment:
       MYSQL_ROOT_PASSWORD: 'Umove@2019'
     volumes:
@@ -22,7 +22,7 @@ services:
   mongo:
     image: mongo
     container_name: 'umove-mongodb'
-    restart: on-failure
+    restart: always
     ports:
       - '27017:27017'
     environment:
@@ -65,7 +65,7 @@ services:
   rabbitmq:
     image: 'rabbitmq:3-management'
     container_name: 'umove-rabbitmq'
-    restart: on-failure
+    restart: always
     hostname: 'rabbitmq'
     environment:
       RABBITMQ_DEFAULT_USER: 'umove'
