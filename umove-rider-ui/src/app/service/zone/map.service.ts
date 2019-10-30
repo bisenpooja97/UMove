@@ -1,12 +1,13 @@
 import {Injectable, OnInit} from '@angular/core';
 import * as mapboxgl from 'mapbox-gl';
- import * as MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
+import * as MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import {Observable,Subject, timer} from "rxjs";
 import {Zone} from "../../model/zone";
 import {ZoneService} from "./zone.service";
 import {GeoJson,FeatureCollection} from "../../map";
 import {Geolocation} from "@ionic-native/geolocation/ngx";
 import {environment} from "../../../environments/environment";
+
 @Injectable({
   providedIn: 'root'
 })
@@ -39,9 +40,9 @@ export class MapService implements OnInit{
 
     this.layoutCount =0;
     mapboxgl.accessToken = environment.map;
-    // this.markers =new mapboxgl.Marker({
-    //   color:'#344955'cd
-    // });
+    this.markers =new mapboxgl.Marker({
+      color:'#344955'
+    });
     console.log('map bn rha h',this.map);
 
     if(this.map !== undefined) {
@@ -66,7 +67,7 @@ export class MapService implements OnInit{
         this.flyTo(
             [lng, lat],
             1000,
-            15
+            13
         );
       }
       else {
@@ -99,14 +100,13 @@ export class MapService implements OnInit{
         });
       const geolocator = new MapboxGeocoder({
         accessToken: mapboxgl.accessToken,
-        marker: {
-          color: '#344955'
-        },
-        mapboxgl: mapboxgl
+        mapboxgl: mapboxgl,
+        zoom:13,
+        marker: this.markers
       });
       this.map.addControl(geolocator);
       geolocator.on('result',(result)=>{
-
+         // this.markers.remove('places'+this.layoutCount++);
          this.nearbyZonesLayer(result.result.geometry.coordinates[1],result.result.geometry.coordinates[0]);
       })
       }
@@ -133,7 +133,7 @@ export class MapService implements OnInit{
 
   marker(lat, lng,status) {
     console.log('coordinates',lat,lng);
-    this.map.on('mouseenter', 'places', () => {
+    this.map.on('mouseenter', 'places'+this.layoutCount, () => {
       this.map.getCanvas().style.cursor = 'pointer';
     });
     if(status){
@@ -343,7 +343,7 @@ export class MapService implements OnInit{
           const lng = locationData.data.results[0].position.lon;
           this.flyTo(
               [lng, lat],
-              1000,15
+              1000,13
           );
           // this.marker( lat, lng );
           this.nearbyZonesLayer(lat, lng);
