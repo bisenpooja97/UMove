@@ -82,6 +82,7 @@ export class HomePage implements OnInit{
       console.log('lo ho gya load ab tofinally~~~');
       this.isLoaded = true;
     });
+
     this.storage.ready().then(() => {
       this.storage.get(this.key).then(value => {
         console.log('this is in storage', value);

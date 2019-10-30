@@ -60,7 +60,7 @@ export class ViewProfilePage implements OnInit {
      });
   }
   ngOnInit() {
-      this.storage.get(this.key).then(async value => {
+      this.storage.get(this.key).then( value => {
           console.log('Before:', value);
           this.localUser = value;
           this.userDataService.getUserDetailById(this.localUser.id)
@@ -69,11 +69,11 @@ export class ViewProfilePage implements OnInit {
                   console.log('Response1 : ', data.data);
                   this.user = JSON.parse(data.data).data;
               });
-          const toast = await this.toastController.create({
-              message: 'Welcome',
-              duration: 2000
-          });
-          toast.present();
+          // const toast = await this.toastController.create({
+          //     message: 'Welcome',
+          //     duration: 2000
+          // });
+          // toast.present();
       });
       // this.storage.get(this.key).then(value => {
       //     console.log('Before:', value);
