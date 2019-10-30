@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --base-href http://13.235.35.202:8080/adminwebapp/ --deploy-url http://13.235.35.202:8080/adminwebapp/",
+    "build": "ng build --base-href http://umove-dev.stackroute.io:8761/adminwebapp/ --deploy-url http://umove-dev.stackroute.io:8761/adminwebapp/",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
