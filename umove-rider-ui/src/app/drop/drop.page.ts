@@ -13,24 +13,24 @@ import {RideService} from "../service/ride.service";
 })
 export class DropPage implements OnInit {
   ngOnInit(): void {
-
-    this.geolocation.getCurrentPosition().then((resp) => {
-      const lat = resp.coords.latitude;
-      const lng = resp.coords.longitude;
-      this.mapService.buildMap(lat, lng,'drop',true);
-      // this.mapService.checkMapLoading();
-      // this.mapService.marker(lat, lng);
-    }).catch((error) => {
-      console.log('Error getting location', error);
-    });
-    this.mapService.selectZone$.subscribe(zone => {
-      console.log('selected zone',zone);
-      this.selectedZone = zone;
-    });
-    this.mapService.onLoad$.subscribe((message:string)=>{
-      console.log('lo ho gya load ab tofinally~~~');
-      this.isLoaded = true;
-    })
+    //
+    // this.geolocation.getCurrentPosition().then((resp) => {
+    //   const lat = resp.coords.latitude;
+    //   const lng = resp.coords.longitude;
+    //   this.mapService.buildMap(lat, lng,'drop',true);
+    //   // this.mapService.checkMapLoading();
+    //   // this.mapService.marker(lat, lng);
+    // }).catch((error) => {
+    //   console.log('Error getting location', error);
+    // });
+    // this.mapService.selectZone$.subscribe(zone => {
+    //   console.log('selected zone',zone);
+    //   this.selectedZone = zone;
+    // });
+    // this.mapService.onLoad$.subscribe((message:string)=>{
+    //   console.log('lo ho gya load ab tofinally~~~');
+    //   this.isLoaded = true;
+    // })
   }
   containerId = 'drop';
   page = 'drop';
@@ -73,5 +73,31 @@ export class DropPage implements OnInit {
 
   gettingCoordinatesByLocality($event: any) {
     this.mapService.gettingCoordinatesByLocality($event);
+  }
+  ionViewDidEnter() {
+    this.geolocation.getCurrentPosition().then((resp) => {
+      const lat = resp.coords.latitude;
+      const lng = resp.coords.longitude;
+      this.mapService.buildMap(lat, lng, 'drop', true);
+      // this.mapService.checkMapLoading();
+      // this.mapService.marker(lat, lng);
+    }).catch((error) => {
+      console.log('Error getting location', error);
+    });
+    this.mapService.selectZone$.subscribe(zone => {
+      console.log('selected zone', zone);
+      this.selectedZone = zone;
+    });
+    this.mapService.onLoad$.subscribe((message: string) => {
+      console.log('lo ho gya load ab tofinally~~~');
+      this.isLoaded = true;
+    });
+
+    // this.storage.ready().then(() => {
+    //   this.storage.get(this.key).then(value => {
+    //     console.log('this is in storage', value);
+    //     this.localUserData = value;
+    //   });
+    // });
   }
 }

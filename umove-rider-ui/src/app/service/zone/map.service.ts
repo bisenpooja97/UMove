@@ -1,5 +1,6 @@
 import {Injectable, OnInit} from '@angular/core';
 import * as mapboxgl from 'mapbox-gl';
+ import * as MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import {Observable, Observer, of, Subject, timer} from "rxjs";
 import {Zone} from "../../model/zone";
 import {ZoneService} from "./zone.service";
@@ -10,9 +11,9 @@ import {environment} from "../../../environments/environment";
   providedIn: 'root'
 })
 export class MapService implements OnInit{
-
   markers :any;
   map: mapboxgl.Map;
+  controller :number;
   private layoutCount: number;
   private isSelected: boolean;
   onZoneSelected: Subject<Zone>;
@@ -28,6 +29,7 @@ export class MapService implements OnInit{
     this.onZoneSelected = new Subject<Zone>();
     this.selectZone$ = this.onZoneSelected.asObservable();
     this.loading = new Subject<any>();
+    this.controller=0;
     this.onLoad$ = this.loading.asObservable();
   }
   ngOnInit(): void {
@@ -37,7 +39,9 @@ export class MapService implements OnInit{
 
     this.layoutCount =0;
     mapboxgl.accessToken = environment.map;
-    this.markers =new mapboxgl.Marker();
+    this.markers =new mapboxgl.Marker({
+      color:'#344955'
+    });
     console.log('map bn rha h',this.map);
 
     if(this.map !== undefined) {
@@ -52,6 +56,7 @@ export class MapService implements OnInit{
       interactive :isZone
 
     });
+
     this.checkMapLoading();
     // this.map.on('idle', () => {
     this.map.on('load', () => {
@@ -73,15 +78,38 @@ export class MapService implements OnInit{
       }
 
       if(isZone){
-      this.map.addControl(new mapboxgl.GeolocateControl({
+        let controller =0;
+      const geolocateController =new mapboxgl.GeolocateControl({
         positionOptions: {
           enableHighAccuracy: true
         },
         trackUserLocation: true
-      }));
+      });
+      this.map.addControl(geolocateController);
+        geolocateController.on('geolocate', (result)=>
+        {
+          console.log('cntrlr',result.coords.latitude,result.coords.longitude);
+          controller++;
+          if(controller===1){
+            const lat=result.coords.latitude;
+            const lng=result.coords.longitude;
+            this.nearbyZonesLayer(lat,lng);
+          }
+
+        });
+      const geolocator = new MapboxGeocoder({
+        accessToken: mapboxgl.accessToken,
+        marker: {
+          color: '#344955'
+        },
+        mapboxgl: mapboxgl
+      });
+      this.map.addControl(geolocator);
+      geolocator.on('result',(result)=>{
+
+         this.nearbyZonesLayer(result.result.geometry.coordinates[1],result.result.geometry.coordinates[0]);
+      })
       }
-      // When a click event occurs on a feature in the places layer, open a popup at the
-      // location of the feature, with description HTML from its properties.
       this.clickPopUp();
 
       // Change the cursor to a pointer when the mouse is over the places layer
@@ -93,11 +121,6 @@ export class MapService implements OnInit{
 
     this.map.on('style.load',() => {
       console.log('style loaded');
-      // setTimeout(() => {
-      //   this.addLayer(lat,lng);
-      //   console.log('Async operation has ended');
-      //   style();
-      // }, 500);
       if (isZone) {
         this.nearbyZonesLayer(lat, lng);
       }
@@ -105,12 +128,10 @@ export class MapService implements OnInit{
          this.addPathLayer([ [77.61134,12.93736], [77.62245,12.93395]],lat,lng);
       }
     });
-
   }
 
 
   marker(lat, lng,status) {
-
     console.log('coordinates',lat,lng);
     this.map.on('mouseenter', 'places', () => {
       this.map.getCanvas().style.cursor = 'pointer';
@@ -127,12 +148,6 @@ export class MapService implements OnInit{
           .addTo(this.map)
     }
 
-    // function onDragEnd() {
-    //   const lngLat = this.markers.getLngLat();
-    //   console.log(lngLat.lat);
-    // }
-    // marker.on('dragend', this.addNewLayer(marker.getLngLat().lat, marker.getLngLat().lan));
-    // this.markers.on('dragend', onDragEnd);
   }
 
   // For fly to different co-ordinates on map
@@ -146,7 +161,8 @@ export class MapService implements OnInit{
   }
 
 
-
+  // When a click event occurs on a feature in the places layer, open a popup at the
+  // location of the feature, with description HTML from its properties.
   clickPopUp(){
     this.map.on('click', 'places' + this.layoutCount, (e) => {
       const coordinates = e.features[0].geometry.coordinates.slice();
@@ -168,6 +184,7 @@ export class MapService implements OnInit{
     });
   }
 
+  //For showing path between pick-up and drop zone
   addPathLayer(coords: number[][],lat:number,lng:number) {
     this.createFeature([
       {
@@ -206,7 +223,7 @@ export class MapService implements OnInit{
         "supervisorEmail":"bherula@gmail.com",
         "status":"ACTIVE"
       }
-    ],lat,lng);
+    ],lat,lng,true);
     this.map.addLayer({
       id: 'route',
       type: 'line',
@@ -235,11 +252,13 @@ export class MapService implements OnInit{
 
   }
 
-  createFeature(zoneList:Zone[],lat:number,lng:number){
+  //To create features array for any no. of zones
+  createFeature(zoneList:Zone[],lat:number,lng:number,nearbyZones:boolean){
     if(this.layoutCount!==0) {
       this.map.removeLayer('places' + this.layoutCount);
       this.map.removeImage('cat');
     }
+    if(nearbyZones){
     console.log('layer',this.layoutCount);
     this.layoutCount++;
     this.clickPopUp();
@@ -288,19 +307,24 @@ export class MapService implements OnInit{
         }
       });
     });
-
+    }
   }
 
+  //For adding Layer to map for showing nearyby zones
   nearbyZonesLayer(lat: number, lng: number){
+    console.log('i am in nearby layer');
     this.zoneService.getNearbyZones(lat, lng).then(response =>{
       const data = JSON.parse(response.data);
-
-      if(data.data==[]){
+      // console.log('zones',data.data.length);
+      if(data.data.length===0){
+        // console.log('ptanhi',data.data===[]);
         this.marker(lat, lng,true);
+        this.createFeature(data.data,lat,lng,false)
       }
       else {
+        console.log('in else block');
         this.marker(lat, lng,false);
-        this.createFeature(data.data,lat,lng);
+        this.createFeature(data.data,lat,lng,true);
       }
     }).catch(error => {
       console.log(error);
@@ -330,6 +354,7 @@ export class MapService implements OnInit{
       this.zoneService.presentToast(error); });
   }
 
+  //To check whether the map is fully loaded or not before showing to user
   checkMapLoading() {
     timer(1000).subscribe(() => {
       if(this.map.loaded()) {

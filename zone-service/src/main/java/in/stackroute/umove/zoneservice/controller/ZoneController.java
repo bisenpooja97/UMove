@@ -6,10 +6,12 @@
 package in.stackroute.umove.zoneservice.controller;
 
 // Importing files
+import in.stackroute.umove.zoneservice.model.Vehicle;
 import in.stackroute.umove.zoneservice.model.Zone;
 //import in.stackroute.umove.zoneservice.model.Vehicle;
 import in.stackroute.umove.zoneservice.model.ZoneStatus;
 //import in.stackroute.umove.zoneservice.service.impl.ServiceVehicleImpl;
+import in.stackroute.umove.zoneservice.service.ServiceVehicle;
 import in.stackroute.umove.zoneservice.service.impl.ServiceZoneImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -35,6 +37,9 @@ public class ZoneController {
 
     @Autowired
     private RestTemplate restTemplate;
+
+    @Autowired
+    private ServiceVehicle vehicleManagementService;
 
     // Zone creation API
     @PostMapping("/zones")
@@ -102,11 +107,11 @@ public class ZoneController {
         return new ResponseEntity<Map>(map, HttpStatus.OK);
     }
 
-/*
+
     @GetMapping("/zones/{supervisorId}")
-    public ResponseEntity<Map> getVehiclesBySupervisorId(@PathVariable String supervisorId){
+    public ResponseEntity<Map> getVehiclesBySupervisorId(@PathVariable String supervisorId,@RequestParam(value = "page", required = false) Integer page){
         Zone zone = serviceZoneDummy.findZoneBySupervisorId(supervisorId);
-        List<Vehicle> vehicleList = serviceVehicle.findByZone(zone.getId());
+        List<Vehicle> vehicleList =vehicleManagementService.findByZone(zone.getId(),(page !=null) ? page : 0 );
         Map<String, Object> map = new TreeMap<>();
         map.put("data", vehicleList);
         map.put("count", vehicleList.size());
@@ -114,7 +119,6 @@ public class ZoneController {
         return new ResponseEntity<Map>(map, HttpStatus.OK);
 
     }
-    */
 
     @GetMapping("/zones/loc/{locality}")
     public ResponseEntity<Map> getLocality(@PathVariable String locality) {

@@ -94,9 +94,9 @@ export class PaymentDetailsPage implements OnInit {
       this.rideService.setPaymentDetails(this.bookingId, paymentId).then(response => {
         console.log('data of payment in sql: ', response.data);
         this.payment = JSON.parse(response.data).data;
-        this.rideService.presentToast('hahaha' + response, 3000);
+        // this.rideService.presentToast('hahaha' + response, 3000);
       }).catch((e) => {
-        this.rideService.presentToast('hahaha' + e, 3000);
+        // this.rideService.presentToast('hahaha' + e, 3000);
         this.route.navigateByUrl('');
       });
     };
