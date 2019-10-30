@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {NavigationExtras, Router} from '@angular/router';
+import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
 import {CampaignService} from '../../service/campaign-service/campaign.service';
 import {HTTP} from '@ionic-native/http/ngx';
 import {Campaign} from '../../model/campaigns/campaign';
@@ -14,10 +14,26 @@ import {Campaign} from '../../model/campaigns/campaign';
 export class ShowCampaignsListPage implements OnInit {
 
     public campaigns: Campaign;
+    public disableButton: boolean;
 
-    constructor(private http: HTTP, private router: Router, private campaignService: CampaignService) { }
+    constructor(private http: HTTP, private router: Router, private campaignService: CampaignService,  private route: ActivatedRoute) {
+        this.route.queryParams.subscribe(params => {
+            const state = this.router.getCurrentNavigation().extras.state;
+            if (state) {
+                if (state.selectedPromocode !== '') {
+                    this.disableButton = true;
+                } else {
+                    this.disableButton = false;
+                }
+                this.disableButton = this.disableButton;
+            }
+        });
+    }
 
     ngOnInit() {
+        this.disableButton = !this.disableButton;
+        // this.disableButton = false;
+
         // this.campaignService.getCampaignsList()
         //     .subscribe(data => {
         //       console.log('filtered data: ', data);
@@ -49,3 +65,13 @@ export class ShowCampaignsListPage implements OnInit {
         this.router.navigateByUrl('/confirm-ride-detail', navigationExtras);
     }
 }
+// for ConfirmRide
+// gotoCampaigns() {
+//         this.disableButton = true;
+//         const navigationExtras: NavigationExtras = {
+//             state: {
+//                 selectedPromocode: this.disableButton
+//             }
+//         };
+//         this.router.navigateByUrl('/campaigns', navigationExtras);
+//     }
