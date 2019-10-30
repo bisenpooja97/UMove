@@ -46,7 +46,7 @@ public class VehicleImpl implements ServiceVehicle {
 
     //To find data of all vehicles
     public List<Vehicle> find(int page) {
-        return repo.findAll(new PageRequest(page,12)).getContent();
+        return repo.findAll(new PageRequest(page,1000)).getContent();
     }
 
 

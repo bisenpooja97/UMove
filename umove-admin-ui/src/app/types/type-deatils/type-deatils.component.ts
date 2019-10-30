@@ -48,6 +48,7 @@ export class TypeDeatilsComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
+    dialogConfig.width = '40%';
     dialogConfig.data = {
       costPerMin: this.type.costPerMin,
     };

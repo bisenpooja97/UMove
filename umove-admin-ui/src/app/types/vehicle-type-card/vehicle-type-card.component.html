@@ -2,7 +2,7 @@
       <mat-card-content fxLayoutAlign="center center" >
                 <img mat-card-image src="{{url}}" [lazyLoad]="url">
         </mat-card-content>
-    <mat-card-title  class="typeName">{{name}}</mat-card-title>
-    <mat-card-content>Cost/km : {{costPerKm}}</mat-card-content>
-    <mat-card-content>Cost/min :{{costPerMin}}</mat-card-content>
+    <mat-card-title  class="typeName font-style">{{name}}</mat-card-title>
+    <mat-card-content class="font-style">Cost/km : {{costPerKm | number: '1.2-2'}}</mat-card-content>
+    <mat-card-content class="font-style">Cost/min :{{costPerMin | number: '1.2-2'}}</mat-card-content>
 </mat-card>

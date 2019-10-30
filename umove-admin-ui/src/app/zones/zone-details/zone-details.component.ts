@@ -70,6 +70,7 @@ update() {
   const dialogConfig = new MatDialogConfig();
   dialogConfig.disableClose = true;
   dialogConfig.autoFocus = true;
+  dialogConfig.width = '40%';
   dialogConfig.data = {
     capacity : this.zone[0].capacity,
   };

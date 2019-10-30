@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { VehicleTypeService } from '../vehicle-type.service';
 
@@ -19,9 +19,18 @@ export class UpdateTypesComponent implements OnInit {
       this.costPerMin = data.costPerMin;
     }
 
+    get Rcosttime() {
+      return this.typeForm.get('costPerMin');
+    }
+
     typeForm = this.fb.group({
-      costPerMin: ['']
+      costPerMin: ['', [Validators.pattern('[0-9]+(\.[0-9][0-9]?)?')]]
     });
+
+    getErrorCosttime() {
+      return  this.Rcosttime.hasError('pattern') ? 'Invalid cost for  Time' :
+          '';
+    }
 
     onClose() {
       // this.zoneForm.reset();

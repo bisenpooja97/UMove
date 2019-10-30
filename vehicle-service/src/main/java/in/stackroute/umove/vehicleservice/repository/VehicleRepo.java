@@ -14,12 +14,10 @@ public interface VehicleRepo extends MongoRepository<Vehicle,String> {
 
     /*@Query(value = "{ 'type' : { 'name': {$regex : ?0, $options: 'i'}}}")
     List<Vehicle> findByTypeName(String name);*/
-    @Query("{'type.name':?0}")
-    Page<Vehicle> findByType(String type, Pageable pageable);
-
-    @Query("{ 'zoneid':?0, 'type.name':?1}")
-    Page<Vehicle> findByZoneType(String zone, String type, Pageable pageable);
-
+    @Query("{'vehicleType.name':?0}")
+   Page<Vehicle> findByType(String vehicleType, Pageable pageable);
+   @Query("{ 'zoneId':?0, 'vehicleType.name':?1}")
+   Page<Vehicle> findByZoneType(String zone, String type, Pageable pageable);
 
     Page<Vehicle> findByzoneId(String zone_id, Pageable pageable);
     Vehicle findByregistrationNoIgnoreCase(String name);
