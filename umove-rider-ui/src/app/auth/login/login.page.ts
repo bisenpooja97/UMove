@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import * as firebase from 'firebase';
 import {environment} from '../../../environments/environment';
@@ -11,7 +11,6 @@ import {UserProfile} from '../../model/user-profile';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
-// tslint:disable-next-line:component-class-suffix
 export class LoginPage implements OnInit {
   pnumber: string;
   windowRef: any;
@@ -24,9 +23,6 @@ export class LoginPage implements OnInit {
   constructor(private win: WindowService, private  router: Router, private storage: Storage) {
     this.localUserData = new UserProfile();
   }
-  ionViewWillEnter() {
-    this.disableButton = false;
-  }
 
   ngOnInit() {
   }
@@ -36,11 +32,9 @@ export class LoginPage implements OnInit {
     const countrycode = '+91';
     const p2 = countrycode.concat(this.pnumber);
     console.log(p2);
-    const num = p2;
-
     // console.log(this.pnumber);
 
-    firebase.auth().signInWithPhoneNumber(num, appVerifier)
+    firebase.auth().signInWithPhoneNumber(p2, appVerifier)
         .then(result => {
 
           this.windowRef.confirmationResult = result;

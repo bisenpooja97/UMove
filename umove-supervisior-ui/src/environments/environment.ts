@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'http://umove-dev.stackroute.io:8761/',
+  baseUrl: 'http://umove-dev.stackroute.io:8080/',
   bookingService: 'bookingservice',
   bookingBaseApi: '/api/v1/rides',
   vehiclesBaseApi: '/api/v1/vehicles',
