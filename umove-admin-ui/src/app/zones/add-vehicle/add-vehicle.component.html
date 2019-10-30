@@ -12,10 +12,10 @@
         <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px" class="col">
 
                 <mat-form-field appearance="outline" fxFlex>
-                        <mat-label>Select Vehicle</mat-label>
-                        <input #input aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto">
+                        <mat-label class="font-style">Select Vehicle</mat-label>
+                        <input #input aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto" class="font-style">
                         <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedclient($event)" [displayWith]="getOptionText">
-                            <mat-option *ngFor="let option of options ; let i = index" [value]="option">
+                            <mat-option *ngFor="let option of options ; let i = index" [value]="option" class="font-style">
                                 {{option.registrationNo}}
                             </mat-option>
                         </mat-autocomplete>
@@ -25,7 +25,7 @@
     </div>
 
     <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
-        <button mat-raised-button class="btn"  color="primary">
+        <button mat-raised-button class="btn font-style"  color="primary">
             Submit
         </button>
 
