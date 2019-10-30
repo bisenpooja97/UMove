@@ -12,7 +12,7 @@ export class RideSocketService {
   SERVER_URL = 'http://umove-dev.stackroute.io:8094/ws';
 
   private stompClient;
-  private ws; 
+  private ws;
 
   constructor() { }
 
