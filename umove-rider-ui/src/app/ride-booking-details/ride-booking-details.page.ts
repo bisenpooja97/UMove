@@ -85,7 +85,7 @@ export class RideBookingDetailsPage implements OnInit {
         message: 'Please book a new ride.',
         callback: () => {
           // Apply the url of home page
-          this.router.navigateByUrl('ride-booking-details');
+          this.router.navigateByUrl('payment-detail/' + this.ride._id);
         }
       });
     });

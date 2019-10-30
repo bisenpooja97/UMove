@@ -1486,6 +1486,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var src_environments_environment_prod__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/environments/environment.prod */ "./src/environments/environment.prod.ts");
+
 
 
 
@@ -1497,7 +1499,7 @@ var VehicleTypeCardComponent = /** @class */ (function () {
         this.name = Object.values(this.vehicleTypes)[1];
         this.costPerKm = Object.values(this.vehicleTypes)[2];
         this.costPerMin = Object.values(this.vehicleTypes)[3];
-        this.url = Object.values(this.vehicleTypes)[6];
+        this.url = src_environments_environment_prod__WEBPACK_IMPORTED_MODULE_3__["environment"].baseUrl + "/zoneservice/api/v1/downloadFile/" + this.name;
         console.log(Object.values(this.vehicleTypes));
     };
     VehicleTypeCardComponent.prototype.ok = function () {
@@ -2679,13 +2681,16 @@ var ZoneService = /** @class */ (function () {
         return this.httpClient.patch('http://13.235.35.202:8080/userservice/api/v1/users/' + id, supervisor);
     };
     ZoneService.prototype.getZoneType = function (zid, tid) {
-        return this.httpClient.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].baseUrl + '/api/v1/zoneTypeCount' + '?zoneId=' + zid + '&typeId=' + tid);
+        return this.httpClient.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].baseUrl + src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].zoneService +
+            '/api/v1/zoneTypeCount' + '?zoneId=' + zid + '&typeId=' + tid);
     };
     ZoneService.prototype.createNew = function (zoneTypeCount) {
-        return this.httpClient.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].baseUrl + '/api/v1/zoneTypeCount', zoneTypeCount);
+        return this.httpClient.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].baseUrl + src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].zoneService +
+            '/api/v1/zoneTypeCount', zoneTypeCount);
     };
     ZoneService.prototype.updateZoneTypeCount = function (zid, tid, zoneTypeCount) {
-        return this.httpClient.patch(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].baseUrl + '/api/v1/zoneTypeCount' +
+        return this.httpClient.patch(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].baseUrl + src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].zoneService +
+            '/api/v1/zoneTypeCount' +
             '?zoneId=' + zid + '&typeId=' + tid, zoneTypeCount);
     };
     ZoneService.ctorParameters = function () { return [
@@ -3079,30 +3084,21 @@ var VehicleDetailsComponent = /** @class */ (function () {
     VehicleDetailsComponent.prototype.vDetails = function () {
         var _this = this;
         this.vehicleService.getVehicles().subscribe(function (res) {
-            if (res.count === 0) {
-                _this.displayCount = 0;
-                console.log(res, 'https://www.doodadi.com/assets/images/data-not-found.svg');
-            }
-            else {
-                res.data.filter(function (val) {
-                    if ((val.zoneId === _this.id)) {
-                        _this.displayCount = 1;
-                        _this.vehicle.push(val);
-                    }
-                    else {
-                        _this.displayCount = 0;
-                    }
-                });
-                res.data.filter(function (val) {
-                    if (((val.zoneId === null)) && ((val.status !== 'No_More_In_Use') && (val.status !== 'Stolen') && (val.status !== 'Busy') && (val.status !== 'Servicing'))) {
-                        _this.vehicle2.push(val);
-                        _this.tname = val.vehicleType.name;
-                        _this.tid = val.vehicleType.id;
-                        console.log(_this.tid);
-                        console.log(_this.tname);
-                    }
-                });
-            }
+            res.data.filter(function (val) {
+                if ((val.zoneId === _this.id)) {
+                    _this.displayCount = 1;
+                    _this.vehicle.push(val);
+                }
+            });
+            res.data.filter(function (val) {
+                if (((val.zoneId === null)) && ((val.status !== 'No_More_In_Use') && (val.status !== 'Stolen') && (val.status !== 'Busy') && (val.status !== 'Servicing'))) {
+                    _this.vehicle2.push(val);
+                    _this.tname = val.vehicleType.name;
+                    _this.tid = val.vehicleType.id;
+                    console.log(_this.tid);
+                    console.log(_this.tname);
+                }
+            });
         });
     };
     VehicleDetailsComponent.ctorParameters = function () { return [
@@ -3599,6 +3595,36 @@ var ZonesModule = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/environments/environment.prod.ts":
+/*!**********************************************!*\
+  !*** ./src/environments/environment.prod.ts ***!
+  \**********************************************/
+/*! exports provided: environment */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "environment", function() { return environment; });
+var environment = {
+    production: true,
+    baseUrl: 'http://13.235.35.202:8080/',
+    userService: 'userservice',
+    userBaseApi: '/api/v1/users',
+    // baseUrl1: 'http://172.23.234.112:8093/',
+    zoneService: 'zoneservice',
+    zoneBaseApi: '/api/v1/zones',
+    // baseUrl2: 'http://172.23.234.112:8093/',
+    campaignService: 'campaignservice',
+    campaignBaseApi: '/api/v1/campaigns',
+    vehicleService: 'vehicleservice',
+    vehicleBaseApi: '/api/v1/vehicles',
+    typeBaseApi: '/api/v1/types',
+    fuelBaseApi: '/api/v1/fuel',
+};
+
+
+/***/ }),
+
 /***/ "./src/environments/environment.ts":
 /*!*****************************************!*\
   !*** ./src/environments/environment.ts ***!
@@ -3673,7 +3699,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/ashwin/umove/umove-admin-ui/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /home/vishnu/Desktop/umove/umove-admin-ui/src/main.ts */"./src/main.ts");
 
 
 /***/ })

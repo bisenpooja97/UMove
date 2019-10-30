@@ -7,7 +7,6 @@ import {Campaign} from './campaign';
 import { Payment } from './payment';
 
 export class Ride {
-    // tslint:disable-next-line: variable-name
     _id: string;
     bookedAt: Date;
     status: string;
@@ -15,7 +14,7 @@ export class Ride {
     sourceZone: Zone;
     destinationZones: Zone[];
     paymentMethod: PaymentMethod;
-    promocode: Campaign;
+    promoCode: Campaign;
     rider: User;
     rideStartAt: Date;
     rideEndAt: Date;

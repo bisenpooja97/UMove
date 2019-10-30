@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar color="primary">
+  <ion-toolbar>
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
@@ -7,53 +7,62 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <ion-card>
+
+  <ion-card *ngIf="ride; else err;">
     <ion-list lines="none">
       <ion-item class="heading">
         Fare Break-up
       </ion-item>
       <ion-row>
         <ion-item>
-          <ion-label class="DistTime">Distance</ion-label>{{ rides?.distance }} Km
+          <ion-label class="DistTime">Distance</ion-label>{{ ride?.distance }} Km
         </ion-item>
         <ion-item>
-          <ion-label class="DistTime">Time</ion-label> {{ rides?.duration }} mins
+          <ion-label class="DistTime">Time</ion-label> {{ ride?.duration }} Mints
         </ion-item>
       </ion-row>
       <ion-item class="baseFare">
         <ion-label>
-          Base Fare </ion-label> Rs{{ rides?.paymentDetail?.rideAmount }}
+          Ride Fare </ion-label>{{ (ride?.paymentDetail?.rideAmount + ride.vehicle?.vehicleType?.baseFare) | currency : 'INR' }}
       </ion-item>
-      <ion-item>
-        <ion-label class="belowBaseFare">Minimum Fare Applied</ion-label>
-      </ion-item>
-      <div *ngIf="appliedPromoCode || hideMe">
+      <div *ngIf="ride.promoCode">
         <ion-item>
-          <ion-label>Reward Points Discount </ion-label> - Rs.{{ rides?.promoCode?.discountPercent }}
+          <ion-label>Reward Points Discount </ion-label> - {{ ride?.promoCode?.discountPercent | currency : 'INR' }}
         </ion-item>
       </div>
-        <ion-item>
-          <ion-label> Fuel Refill Amount </ion-label> - Rs. {{ rides?.paymentDetail?.fuelRefillAmount }}
-        </ion-item>
-        <div *ngIf="extraChargeStatus || hideMe">
-          <ion-item>
-            <ion-label>Total Extra Charges </ion-label> + Rs. {{ rides?.paymentDetail?.totalExtraCharges }}
-          </ion-item>
-          </div >
-        <ion-item>
-          <ion-label>Total Amount </ion-label>  Rs. {{ rides?.paymentDetail?.totalAmount }}
-        </ion-item>
-      <ion-item>
-        <ion-label>Paid Amount </ion-label>  Rs. {{ rides?.paymentDetail?.totalAmount }}
+      <ion-item *ngIf="ride.paymentDetail?.fuelRefillAmount">
+        <ion-label> Fuel Refill Amount </ion-label> - {{ ride?.paymentDetail?.fuelRefillAmount | currency : 'INR' }}
       </ion-item>
-      </ion-list>
-      
-      <div *ngIf="rideStatusUnPaid || hideMe">
-        <ion-button expand="full" color="primary" (click)="payWithRazor()">Pay</ion-button>
-      </div> 
-      <div *ngIf="rideStatusPaid || hideMe">
-        <ion-text class="PaidForRide">You have Already Paid For This Ride</ion-text>
-      </div>  
-      
+      <ion-item *ngIf="ride.paymentDetail?.extraCharges?.length!==0" class="showCharge">
+        <ion-label>Extra-Charges</ion-label>
+      </ion-item>
+      <ion-item *ngFor="let extraCharge of ride.paymentDetail?.extraCharges" class="showCharge">
+        <ion-label>&nbsp;&nbsp;&nbsp;&nbsp;{{ extraCharge?.chargedFor }} </ion-label> {{ extraCharge?.amount | currency : 'INR' }}
+      </ion-item>
+      <ion-item *ngIf="ride.paymentDetail?.extraCharges">
+        <ion-label>Total Extra Charges </ion-label> {{ ride?.paymentDetail?.totalExtraCharges | currency : 'INR' }}
+      </ion-item>
+      <ion-item-divider></ion-item-divider>
+      <ion-item style="font-weight: bold">
+        <ion-label style="font-weight: bold">Total Amount </ion-label> {{ ride.paymentDetail?.totalAmount | currency : 'INR' }}
+      </ion-item>
+    </ion-list>
   </ion-card>
+
+  <ng-template #err>
+    <ion-card *ngIf="!ride">
+      <ion-card-content>
+        <ion-text>No Ride found for this ride Id.</ion-text>
+      </ion-card-content>
+    </ion-card>
+  </ng-template>
+
+  <ion-footer>
+    <div *ngIf="ride?.paymentDetail?.status==='Pending'">
+      <ion-button expand="full" color="primary" (click)="payWithRazor()">Pay</ion-button>
+    </div>
+    <div *ngIf="ride?.paymentDetail?.status==='Paid'">
+      <ion-text class="PaidForRide">You have Already Paid For This Ride</ion-text>
+    </div>
+  </ion-footer>
 </ion-content>
