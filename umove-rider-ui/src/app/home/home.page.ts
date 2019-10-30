@@ -7,6 +7,7 @@ import {MapService} from "../service/zone/map.service";
 import {RideService} from "../service/ride.service";
 import {UserProfile} from "../model/user-profile";
 import {Storage} from "@ionic/storage";
+import {MenuController} from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -34,9 +35,8 @@ export class HomePage implements OnInit{
               private geolocation: Geolocation,
               private mapService: MapService,
               private rideService: RideService,
-              private storage: Storage) {
-
-
+              private storage: Storage,
+              private menuCtrl: MenuController) {
   }
 
   showVehicleList() {
@@ -65,6 +65,7 @@ export class HomePage implements OnInit{
   }
 
   ionViewDidEnter() {
+    this.menuCtrl.enable(true);
     this.geolocation.getCurrentPosition().then((resp) => {
       const lat = resp.coords.latitude;
       const lng = resp.coords.longitude;

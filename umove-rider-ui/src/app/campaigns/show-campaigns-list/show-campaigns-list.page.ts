@@ -13,11 +13,12 @@ import {Campaign} from '../../model/campaigns/campaign';
 // tslint:disable-next-line:component-class-suffix
 export class ShowCampaignsListPage implements OnInit {
 
-    public campaigns: Campaign;
+    public campaigns: Campaign[];
     public disableButton: boolean;
 
     constructor(private http: HTTP, private router: Router, private campaignService: CampaignService,  private route: ActivatedRoute) {
         const page = this.route.snapshot.paramMap.get('page');
+        console.log('page', page);
         if (page === 'view') {
             this.disableButton = true;
         }
@@ -27,7 +28,6 @@ export class ShowCampaignsListPage implements OnInit {
     }
 
     ngOnInit() {
-        this.disableButton = !this.disableButton;
         // this.disableButton = false;
 
         // this.campaignService.getCampaignsList()

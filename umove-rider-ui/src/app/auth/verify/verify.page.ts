@@ -23,6 +23,7 @@ export class VerifyPage implements OnInit {
     userDataRecieved: UserProfile;
     userData: UserProfile;
     user: any;
+    disableButton: boolean;
     // inputtext: any;
 
     // tslint:disable-next-line:max-line-length
@@ -37,6 +38,7 @@ export class VerifyPage implements OnInit {
         this.windowRef = this.win.windowRef;
     }
     verifyLoginCode() {
+        this.disableButton = true;
         this.windowRef.confirmationResult
             .confirm(this.verificationCode)
             .then( result => {
@@ -51,14 +53,16 @@ export class VerifyPage implements OnInit {
                     this.storage.ready().then(() => {
                         console.log('storing data --', this.userDataRecieved);
                         this.storage.set(this.key, this.userDataRecieved);
-                        this.storage.get(this.key).then(value => {
-                            console.log('this is in storage', value);
-                            this.localUserData = value;
-                            if (this.localUserData.name != null) {
-                                this.router.navigateByUrl('/home');
-                            } else {
-                                this.router.navigateByUrl('/edit-profile');
-                            }
+                        this.storage.ready().then(() => {
+                            this.storage.get(this.key).then(value => {
+                                console.log('this is in storage', value);
+                                this.localUserData = value;
+                                if (this.localUserData.name != null) {
+                                    this.router.navigateByUrl('/home');
+                                } else {
+                                    this.router.navigateByUrl('/edit-profile');
+                                }
+                            });
                         });
                     });
                 });
@@ -76,6 +80,7 @@ export class VerifyPage implements OnInit {
             .catch( error => {
                 console.log(error, 'Incorrect code entered?');
                 this.error = true;
+                this.disableButton = false;
             });
     }
 

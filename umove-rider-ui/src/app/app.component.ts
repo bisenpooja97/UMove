@@ -23,7 +23,7 @@ export class AppComponent {
         },
         {
             title: 'Payment Method',
-            url: '/show-payment-method',
+            url: '/show-payment-method/view',
             icon: 'wallet'
         },
         {

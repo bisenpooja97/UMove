@@ -36,7 +36,7 @@
     <ion-row  class="map" id="pickup" style="height: 100%;" >
     </ion-row>
     <ion-row class="buttonStyle">
-      <ion-button color="secondary" *ngIf="localUserData?.userStatus==='Inative'" shape="round" fill="solid"    href="/update-kyc"  ><ion-icon name="document"></ion-icon>&nbsp;Complete KYC to Book</ion-button>
+      <ion-button color="secondary" *ngIf="localUserData?.userStatus==='Inactive'" shape="round" fill="solid"    href="/update-kyc"  ><ion-icon name="document"></ion-icon>&nbsp;Complete KYC to Book</ion-button>
       <ion-button color="secondary" *ngIf="localUserData?.userStatus==='Active'" shape="round"  fill="solid"   href="/campaigns"><ion-icon name="pricetags"></ion-icon>&nbsp;Offers</ion-button>
     </ion-row>
 

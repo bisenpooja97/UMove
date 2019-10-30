@@ -39,7 +39,7 @@
     </div>
   </ion-toolbar>
 </ion-header>
-<ion-content *ngIf="campaigns">
+<ion-content>
   <ion-item *ngFor="let campaign of campaigns">
     <ion-grid no-padding>
       <ion-row class="ion-align-items-center">
@@ -52,7 +52,7 @@
         </ion-col>
         <ion-row class="text-heading">{{campaign.endDate}}</ion-row>
       </ion-row>
-      <ion-row style="padding-top: 15px;padding-bottom: 15px; padding-left: 15px" class="text-subheading">Congrats! Enjoy {{campaign.discountPercent}}% off on bike rides | Valid till {{campaign.endDate}}| T&C Apply</ion-row>
+      <ion-row style="padding-top: 15px;padding-bottom: 15px; padding-left: 15px" class="text-subheading">Congrats! Enjoy {{campaign.discountPercent}}% off on bike rides. T&C Apply</ion-row>
       <ion-row class="ion-align-items-center">
       <ion-col padding-horizontal>
         <ion-row style="padding-top: 15px;padding-bottom: 15px;padding-left: 15px" class="text-heading">India</ion-row>

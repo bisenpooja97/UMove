@@ -3,7 +3,7 @@ import {Subscription} from 'rxjs';
 import {UserProfile} from '../../model/user-profile';
 import {UserProfileServiceService} from '../../service/users-profile/user-profile-service.service';
 import {Router} from '@angular/router';
-import {ToastController} from '@ionic/angular';
+import {MenuController, ToastController} from '@ionic/angular';
 import { HTTP } from '@ionic-native/http/ngx';
 import {Storage} from '@ionic/storage';
 
@@ -21,7 +21,9 @@ export class ViewProfilePage implements OnInit {
   key = 'details';
 
     // tslint:disable-next-line:max-line-length
-  constructor(private userDataService: UserProfileServiceService, private router: Router, public toastController: ToastController, private storage: Storage) {
+  constructor(private userDataService: UserProfileServiceService, private router: Router,
+              public toastController: ToastController, private storage: Storage, private menuCtrl: MenuController) {
+      this.menuCtrl.close();
       this.localUser = new UserProfile();
   }
   goAnOtherPage() {

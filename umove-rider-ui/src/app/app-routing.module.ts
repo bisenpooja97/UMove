@@ -28,7 +28,7 @@ const routes: Routes = [
     // tslint:disable-next-line:max-line-length
     { path: 'add-payment-method', loadChildren: './user-payment-method/add-payment-method/add-payment-method.module#AddPaymentMethodPageModule' },
     // tslint:disable-next-line:max-line-length
-    { path: 'show-payment-method', loadChildren: './user-payment-method/show-payment-method/show-payment-method.module#ShowPaymentMethodPageModule' },
+    { path: 'show-payment-method/:page', loadChildren: './user-payment-method/show-payment-method/show-payment-method.module#ShowPaymentMethodPageModule' },
     { path: 'campaigns/:page', loadChildren: './campaigns/show-campaigns-list/show-campaigns-list.module#ShowCampaignsListPageModule' },
     { path: 'dummy-data-sent', loadChildren: './campaigns/dummy-data-sent/dummy-data-sent.module#DummyDataSentPageModule' },
 
