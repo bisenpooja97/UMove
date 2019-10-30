@@ -63,9 +63,7 @@ export class ConfirmRideDetailPage implements OnInit {
   }
 
   ionViewDidEnter() {
-
     this.booking = this.rideService.getCurrentBooking();
-
     this.storage.get(this.key).then(value => {
       console.log('Before:', value);
       this.booking.rider = new User();
@@ -73,12 +71,6 @@ export class ConfirmRideDetailPage implements OnInit {
       this.booking.rider.email = 'punit@gmail.com';
       this.booking.rider.name = 'Punit Setia';
     });
-
-    // this.booking.rider = {
-    //   _id: '5d8bbc0da6e87d5404aa1921',
-    //   name: 'Visnu',
-    //   email: 'bochiwal.visnu@gmail.com'
-    // };
 
     if (!this.booking.vehicle) {
       this.rideService.presentToast('Please Select a Vehicle.', 2000);
@@ -100,7 +92,5 @@ export class ConfirmRideDetailPage implements OnInit {
     }).catch((error) => {
       console.log('Error getting location', error);
     });
-
   }
-
 }
