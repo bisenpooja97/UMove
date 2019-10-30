@@ -15,7 +15,7 @@ import { ZoneTypeCount } from 'src/app/model/zone-type-count';
 export class ZoneService {
 
   constructor(private httpClient: HttpClient) { }
-  baseUrl = environment.baseUrl1  + environment.zoneBaseApi;
+  baseUrl = environment.baseUrl + environment.zoneService  + environment.zoneBaseApi;
 
   createZone(zone: Resp) {
     return this.httpClient.post<Resp>(this.baseUrl, zone);
@@ -42,11 +42,11 @@ export class ZoneService {
   }
 
   getSupervisor(): Observable<RespSupervisor> {
-    return this.httpClient.get<RespSupervisor>('http://13.235.35.202:8080/userservice/api/v1/users?role=Supervisor&status=Unallocated');
+    return this.httpClient.get<RespSupervisor>('http://umove-dev.stackroute.io:8080/userservice/api/v1/users?role=Supervisor&status=Unallocated');
   }
 
   getSupervisorById(id: string): Observable<RespSupervisor2> {
-    return this.httpClient.get<RespSupervisor2>('http://13.235.35.202:8080/userservice/api/v1/users/' + id);
+    return this.httpClient.get<RespSupervisor2>('http://umove-dev.stackroute.io:8080/userservice/api/v1/users/' + id);
 
   }
 
@@ -55,17 +55,17 @@ export class ZoneService {
   }
 
   getZoneType(zid: string, tid: string): Observable<RespZTC> {
-    return this.httpClient.get<RespZTC>(environment.baseUrl1  +
+    return this.httpClient.get<RespZTC>(environment.baseUrl + environment.zoneService +
       '/api/v1/zoneTypeCount' + '?zoneId=' + zid + '&typeId=' + tid);
   }
 
   createNew(zoneTypeCount: ZoneTypeCount) {
-    return this.httpClient.post<ZoneTypeCount>(environment.baseUrl1 +
+    return this.httpClient.post<ZoneTypeCount>(environment.baseUrl + environment.zoneService +
        '/api/v1/zoneTypeCount', zoneTypeCount);
   }
 
   updateZoneTypeCount(zid: string, tid: string, zoneTypeCount: ZoneTypeCount) {
-    return this.httpClient.patch<ZoneTypeCount>(environment.baseUrl1 +
+    return this.httpClient.patch<ZoneTypeCount>(environment.baseUrl + environment.zoneService +
        '/api/v1/zoneTypeCount' +
      '?zoneId=' + zid + '&typeId=' + tid, zoneTypeCount);
   }
