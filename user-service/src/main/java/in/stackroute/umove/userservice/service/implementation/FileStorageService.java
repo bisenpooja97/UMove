@@ -12,10 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
+import java.nio.file.*;
 
 @Service
 public class FileStorageService {
@@ -49,9 +46,14 @@ public class FileStorageService {
             Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
 
             return fileName;
-        } catch (IOException ex) {
-            throw new FileStorageException("Could not store file " + fileName + ". Please try again!", ex);
+        } catch (FileAlreadyExistsException ex) {
+            return StringUtils.cleanPath(uid);
         }
+        catch (IOException ex) {
+            ex.printStackTrace();
+//            throw new FileStorageException("Could not store file " + fileName + ". Please try again!", ex);
+        }
+        return null;
     }
     public Resource loadFileAsResource(String fileName) {
         try {
