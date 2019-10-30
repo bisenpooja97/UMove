@@ -17,19 +17,13 @@ export class ViewProfilePage implements OnInit {
 
   private updateSubscription: Subscription;
   public user: UserProfile;
-  public localUser: UserProfile = {
-      id: null ,
-      name: '',
-      mobileNumber: '',
-      email: '',
-      role: 'User',
-      userStatus: null,
-      // document: null,
-  };
-    key = 'details';
+  public localUser: UserProfile;
+  key = 'details';
 
     // tslint:disable-next-line:max-line-length
-  constructor(private userDataService: UserProfileServiceService, private router: Router, public toastController: ToastController, private storage: Storage) { }
+  constructor(private userDataService: UserProfileServiceService, private router: Router, public toastController: ToastController, private storage: Storage) {
+      this.localUser = new UserProfile();
+  }
   goAnOtherPage() {
     this.router.navigateByUrl('/update-kyc');
   }

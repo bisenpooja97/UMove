@@ -6,8 +6,8 @@ import {DropPage} from './drop/drop.page';
 
 const routes: Routes = [
     { path: '', redirectTo: 'login', pathMatch: 'full'} ,
-   { path: 'home', component: HomePage},
-   { path: 'bikelist', component: BikeListPage},
+    { path: 'home', component: HomePage},
+    { path: 'bikelist', component: BikeListPage},
     { path: 'drop', component: DropPage},
     { path: 'confirm-ride-detail', loadChildren: './confirm-ride-detail/confirm-ride-detail.module#ConfirmRideDetailPageModule' },
     { path: 'ride-booking-details', loadChildren: './ride-booking-details/ride-booking-details.module#RideBookingDetailsPageModule' },
@@ -20,26 +20,26 @@ const routes: Routes = [
     { path: 'my-rides', loadChildren: './my-rides/my-rides.module#MyRidesPageModule' },
     { path: 'my-rides-details/:rideId', loadChildren: './my-rides-details/my-rides-details.module#MyRidesDetailsPageModule' },
     { path: 'payment-detail/:rideId', loadChildren: './payment-details/payment-details.module#PaymentDetailsPageModule' },
-  { path: 'view-profile', loadChildren: './user-profile/view-profile/view-profile.module#ViewProfilePageModule' },
-  { path: 'edit-profile', loadChildren: './user-profile/edit-profile/edit-profile.module#EditProfilePageModule' },
-  { path: 'update-kyc', loadChildren: './user-profile/update-kyc/update-kyc.module#UpdateKycPageModule' },
-  { path: 'login', loadChildren: './auth/login/login.module#LoginPageModule' },
-  { path: 'verify', loadChildren: './auth/verify/verify.module#VerifyPageModule' },
-  // tslint:disable-next-line:max-line-length
-  { path: 'add-payment-method', loadChildren: './user-payment-method/add-payment-method/add-payment-method.module#AddPaymentMethodPageModule' },
-  // tslint:disable-next-line:max-line-length
-  { path: 'show-payment-method', loadChildren: './user-payment-method/show-payment-method/show-payment-method.module#ShowPaymentMethodPageModule' },
-    { path: 'campaigns', loadChildren: './campaigns/show-campaigns-list/show-campaigns-list.module#ShowCampaignsListPageModule' },
+    { path: 'view-profile', loadChildren: './user-profile/view-profile/view-profile.module#ViewProfilePageModule' },
+    { path: 'edit-profile', loadChildren: './user-profile/edit-profile/edit-profile.module#EditProfilePageModule' },
+    { path: 'update-kyc', loadChildren: './user-profile/update-kyc/update-kyc.module#UpdateKycPageModule' },
+    { path: 'login', loadChildren: './auth/login/login.module#LoginPageModule' },
+    { path: 'verify', loadChildren: './auth/verify/verify.module#VerifyPageModule' },
+    // tslint:disable-next-line:max-line-length
+    { path: 'add-payment-method', loadChildren: './user-payment-method/add-payment-method/add-payment-method.module#AddPaymentMethodPageModule' },
+    // tslint:disable-next-line:max-line-length
+    { path: 'show-payment-method', loadChildren: './user-payment-method/show-payment-method/show-payment-method.module#ShowPaymentMethodPageModule' },
+    { path: 'campaigns/:page', loadChildren: './campaigns/show-campaigns-list/show-campaigns-list.module#ShowCampaignsListPageModule' },
     { path: 'dummy-data-sent', loadChildren: './campaigns/dummy-data-sent/dummy-data-sent.module#DummyDataSentPageModule' },
 
-  { path: 'show-payment-method', loadChildren: './user-payment-method/show-payment-method/show-payment-method.module#ShowPaymentMethodPageModule' },
-  { path: 'error', loadChildren: './error/error.module#ErrorPageModule' }
+    { path: 'error', loadChildren: './error/error.module#ErrorPageModule' },
+  { path: 'about-us', loadChildren: './about-us/about-us.module#AboutUsPageModule' }
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
-  ],
-  exports: [RouterModule]
+    imports: [
+        RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
+    ],
+    exports: [RouterModule]
 })
 export class AppRoutingModule { }

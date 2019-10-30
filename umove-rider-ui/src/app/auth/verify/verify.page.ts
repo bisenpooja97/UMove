@@ -5,6 +5,7 @@ import {UserProfile} from '../../model/user-profile';
 import {Storage} from '@ionic/storage';
 import {HTTP} from '@ionic-native/http/ngx';
 import {UserProfileServiceService} from '../../service/users-profile/user-profile-service.service';
+import {MenuController} from '@ionic/angular';
 
 @Component({
     selector: 'app-verify',
@@ -25,7 +26,9 @@ export class VerifyPage implements OnInit {
     // inputtext: any;
 
     // tslint:disable-next-line:max-line-length
-    constructor(private win: WindowService, private  router: Router, private http: HTTP , private storage: Storage, private userDataService: UserProfileServiceService) {
+    constructor(private win: WindowService, private  router: Router, private http: HTTP , private storage: Storage,
+                private userDataService: UserProfileServiceService, private menuCtrl: MenuController) {
+        this.menuCtrl.enable(false);
         this.error = false;
         this.userData = new UserProfile();
     }

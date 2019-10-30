@@ -5,6 +5,7 @@ import {environment} from '../../../environments/environment';
 import {WindowService} from '../../service/window/window.service';
 import {Storage} from '@ionic/storage';
 import {UserProfile} from '../../model/user-profile';
+import {MenuController} from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +22,8 @@ export class LoginPage implements OnInit {
   user: any;
   disableButton: boolean;
 
-  constructor(private win: WindowService, private  router: Router, private storage: Storage) {
+  constructor(private win: WindowService, private  router: Router, private storage: Storage, private menuCtrl: MenuController) {
+    this.menuCtrl.enable(false);
     this.localUserData = new UserProfile();
   }
 
