@@ -5,7 +5,7 @@
 }
 
 .date {
-    font-size: 1.4em;
+    font-size: 1.3em;
 }
 
 .graph {
@@ -14,11 +14,10 @@
     cursor: pointer;
 }
 
-.vehicle {
-    margin-bottom: 40px;
-    margin-left: 450px;
-    height: 350px;
-    width: 50%;
+
+.space-top {
+    padding-top: 10%;
+    padding-bottom: 10%;
 }
 
 @media only screen and (max-width: 600px) {
@@ -42,7 +41,7 @@
         }
 
         .date {
-            font-size: 1.2em;
+            font-size: 1em;
         }
 }
 
@@ -51,6 +50,14 @@
         margin-left: 70%;
         background-color:transparent;
         }   
+
+        .vehicle {
+            margin-bottom: 40px;
+            margin-left: 450px;
+            height: 350px;
+            width: 50%;
+        }
+        
         
 }
 

@@ -1,11 +1,9 @@
 package in.stackroute.umove.bookingservice.service;
 
-import in.stackroute.umove.bookingservice.model.*;
-import org.bson.types.ObjectId;
+    import in.stackroute.umove.bookingservice.model.*;
+    import org.bson.types.ObjectId;
 
-import javax.mail.MessagingException;
-import java.io.IOException;
-import java.util.List;
+    import java.util.List;
 import java.util.Map;
 
 public interface RideService {
@@ -23,14 +21,17 @@ public interface RideService {
    // Ride endRide(ObjectId rideId);
     Payment payForRide(ObjectId rideId, String paymentId, PaymentStatus paymentStatus) throws IOException, MessagingException;;
     List<Ride> getRidesByUserId(String userId);
+
     Payment getPaymentDetails(String rideId);
 //    Ride endRideRequest(ObjectId rideId);
-TrackingLatitudeLongitude updateTrackingData(String rideId, String latitude, String longitude);
+
+    TrackingLatitudeLongitude updateTrackingData(String rideId, String latitude, String longitude);
     List<TrackingLatitudeLongitude> getAllTrackingData();
 
     Payment getOutstandingRideDetail(String userId);
 
     boolean isValidUser(String userId);
+
     boolean isVehicleAllocated(String zoneId, String typeName);
 
 }

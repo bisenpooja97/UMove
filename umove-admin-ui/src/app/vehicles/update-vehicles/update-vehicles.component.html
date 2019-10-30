@@ -11,10 +11,17 @@
         <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px" class="col">
 
             <mat-form-field appearance="outline" fxFlex>
-                <mat-label>Insurance No.</mat-label>
-                <input matInput #input placeholder="Insurance No." formControlName="insuranceNo" [(ngModel)]="insuranceNo" required>
-
+                <mat-label class="font-style">Insurance No.</mat-label>
+                <input minlength="6" maxlength="10"  matInput #input placeholder="Insurance No." formControlName="insuranceNo" [(ngModel)]="insuranceNo" 
+                class="font-style" required>
+                <mat-hint class="font-style">
+                    Insurence No. is between 6-10 characters long
+                </mat-hint>
+                <mat-error *ngIf="RinsuranceNo.invalid" class="font-style">
+                    {{getErrorInsuranceNo()}}
+                </mat-error>
             </mat-form-field>
+            
 
         </div>
     </div>
@@ -22,10 +29,10 @@
 
     <div fxFlex=50% fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px" class="form" fxLayoutAlign="center center">
         <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px" class="col">
-
-            <mat-label>Vehicle Last Service date</mat-label>
+            
             <mat-form-field>
-                <input matInput [matDatepicker]="lastServiceDate" formControlName="lastServiceDate" [max]="todaydate" [min]="minDate" placeholder="Vehicle Last Service  Date" #input>
+                <input matInput [matDatepicker]="lastServiceDate" formControlName="lastServiceDate" [max]="todaydate" [min]="minDate" placeholder="Vehicle Last Service  Date" #input
+                class="font-style">
                 <mat-datepicker-toggle matSuffix [for]="lastServiceDate"></mat-datepicker-toggle>
                 <mat-datepicker #lastServiceDate></mat-datepicker>
             </mat-form-field>
@@ -36,7 +43,7 @@
 
 
     <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
-        <button mat-raised-button class="btn" [disabled]='!vehicleForm.valid' color="primary">
+        <button mat-raised-button class="btn font-style" [disabled]='!vehicleForm.valid' color="primary">
                         Submit
                     </button>
 
