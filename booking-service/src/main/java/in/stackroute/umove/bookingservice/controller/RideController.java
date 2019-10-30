@@ -144,10 +144,6 @@ public class RideController {
         this.template.convertAndSend("/topic/end-ride/" + rideId, payload);
         Map<String, Object> map = new TreeMap<>();
         map.put("data", ride);
-        map.put("registrationNo", ride.getVehicle().getRegistrationNo());
-        map.put("destinationId", ride.getDestinationZones().get(ride.getDestinationZones().size()-1).getId());
-        map.put("typeId", ride.getVehicle().getVehicleType().getId());
-        map.put("typeName", ride.getVehicle().getVehicleType().getName());
         messagingTemplate.convertAndSend("booking_exchange", "ride_ended", map);
         return new ResponseEntity<Map>(map, HttpStatus.OK);
     }
@@ -160,7 +156,6 @@ public class RideController {
         map.put("data", ride);
         map.put("status", HttpStatus.OK);
         template.convertAndSend("/topic/ride-started/" + registrationNo, map);
-        map.put("registrationNo", ride.getVehicle().getRegistrationNo());
         messagingTemplate.convertAndSend("booking_exchange", "ride_started", map);
         return new ResponseEntity<>(map, HttpStatus.OK);
     }
@@ -172,9 +167,6 @@ public class RideController {
         Map<String, Object> map = new TreeMap<>();
         map.put("data", ride);
         map.put("status", HttpStatus.OK);
-        map.put("typeId", ride.getVehicle().getVehicleType().getId());
-        map.put("typeName", ride.getVehicle().getVehicleType().getName());
-        map.put("srcZone", ride.getSourceZone().getId());
         messagingTemplate.convertAndSend("booking_exchange", "ride_cancelled", map);
         return new ResponseEntity<>(map, HttpStatus.OK);
     }

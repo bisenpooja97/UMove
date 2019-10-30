@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:8100",  "http://localhost:8000"})
+//@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:8100",  "http://localhost:8000"})
 @RestController
 @RequestMapping("/api/v1")
 public class VehicleController {
