@@ -86,7 +86,6 @@ public class VehicleTypeImpl implements ServiceVehicleType {
             if (type.getName() != null) {
                 typeList.setName(type.getName());
             }
-
             if (type.getCostPerKm() != 0) {
                 typeList.setCostPerKm(type.getCostPerKm());
             }
