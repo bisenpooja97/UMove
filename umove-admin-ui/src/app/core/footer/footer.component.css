@@ -1,8 +1,4 @@
 .footer {
-    color: white;
-    clear: both;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-
+  padding:30px;
+  color: white;
 }

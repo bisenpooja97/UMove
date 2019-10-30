@@ -2,22 +2,26 @@
     <h1 class="header">
         Vehicle Types
     </h1>
-     <div fxLayout="row" class="search">
-        <mat-form-field fxFlex="20%">
-            <input matInput [(ngModel)]="term" placeholder="Search">
-        </mat-form-field>
-    </div>
-    <div fxLayout="column wrap">
-        <div fxLayout.xs="column" fxLayout.lg="row wrap" fxLayoutGap="50px" class="card" fxLayoutAlign.sm="center center">
-            <div *ngIf="displayCount === 0">
-                <img src="http://miceemporio.com/img/no-record-found.jpeg">
+    <div *ngIf="displayCount === 0; else data" class="no-data" fxLayoutAlign="center center">
+            <img src="assets/no-record-found.jpeg">
+        </div>
+        <ng-template #data>
+            <div fxLayout="row" class="search">
+                <mat-form-field fxFlex="20%">
+                    <input matInput [(ngModel)]="term" placeholder="Search" class="font-style">
+                </mat-form-field>
             </div>
+    <div fxLayout="column wrap">
+        <div fxLayout.xs="column" fxLayout.lg="row wrap" fxLayoutGap="50px" class="card"
+        fxLayoutAlign.lt-sm="center center">
+
             <app-vehicle-type-card *ngFor="let type of vehicleTypes | paginate: { itemsPerPage: 12, currentPage: p}  | filter:term" [vehicleTypes]="type">
 
             </app-vehicle-type-card>
         </div>
-        <pagination-controls (pageChange)="p = $event" fxLayoutAlign="center center"></pagination-controls>
+        <pagination-controls (pageChange)="p = $event" fxLayoutAlign="center center" class="paginator font-style"></pagination-controls>
         </div>
+        </ng-template>
         <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutAlign="end" class="add-button">
             <button mat-fab color="primary" (click)="add()">
                 <i class="material-icons">

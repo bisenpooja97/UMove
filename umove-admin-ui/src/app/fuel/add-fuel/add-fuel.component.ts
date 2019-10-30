@@ -25,9 +25,19 @@ export class AddFuelComponent implements OnInit {
               private fb: FormBuilder) { }
 
   fuelForm = this.fb.group({
-    name: ['', [Validators.pattern('^[a-zA-Z0-9\-]*$')]],
-    fuelCost: ['']
+    name: ['', [Validators.pattern('^[a-zA-Z\-]*$')]],
+    fuelCost: ['', [Validators.pattern('[0-9]+(\.[0-9][0-9]?)?')]],
   });
+
+  getErrorName() {
+    return  this.rName.hasError('pattern') ? 'Fuel name should contain only alphabets.' :
+        '';
+  }
+
+  getErrorCost() {
+    return  this.rCost.hasError('pattern') ? 'Invalid cost' :
+        '';
+  }
 
   onSubmit() {
 

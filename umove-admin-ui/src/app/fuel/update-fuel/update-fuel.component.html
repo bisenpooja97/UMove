@@ -11,15 +11,20 @@
         <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px" class="col">
 
             <mat-form-field appearance="outline" fxFlex>
-                <mat-label>Cost</mat-label>
-                <input matInput #input placeholder="Fuel Cost" formControlName="fuelCost" [(ngModel)]="fuelCost" required>
+                <mat-label class="font-style">Cost</mat-label>
+                <input matInput #input placeholder="Fuel Cost" formControlName="fuelCost" [(ngModel)]="fuelCost" 
+                required class="font-style">
+                <mat-error *ngIf="rCost.invalid" class="font-style">
+
+                    {{getErrorCost()}}
+                </mat-error>
             </mat-form-field>
         </div>
     </div>
 
 
     <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
-        <button mat-raised-button class="btn" [disabled]='!fuelForm.valid' color="primary">
+        <button mat-raised-button class="btn font-style" [disabled]='!fuelForm.valid' color="primary">
                       Submit
                   </button>
 

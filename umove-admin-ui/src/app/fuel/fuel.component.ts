@@ -29,6 +29,7 @@ export class FuelComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
+    dialogConfig.width = '40%';
     const dRef = this.matDialog.open(AddFuelComponent, dialogConfig);
 
     dRef.afterClosed().subscribe(result => {

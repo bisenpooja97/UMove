@@ -6,6 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.Id;
 import java.util.List;
+import java.util.Set;
 
 @Document
 @Data
@@ -25,7 +26,7 @@ public class UserData
     private String name;
     private String mobileNumber;
     private String email;
-    private Role role;
+    private Set<Role> roles;
     private UserStatus userStatus;
     private DocumentVerification document;
     private List<UserPaymentMethod> paymentMethod;
@@ -36,12 +37,12 @@ public class UserData
         this.email = email;
     }
 
-    public UserData( String name, String mobileNumber, String email,  Role role,  UserStatus userStatus, DocumentVerification documentverification )
+    public UserData( String name, String mobileNumber, String email,  Set<Role> roles,  UserStatus userStatus, DocumentVerification documentverification )
     {
         this.name = name;
         this.mobileNumber = mobileNumber;
         this.email = email;
-        this.role = role;
+        this.roles = roles;
         this.userStatus = userStatus;
         this.document=document;
     }

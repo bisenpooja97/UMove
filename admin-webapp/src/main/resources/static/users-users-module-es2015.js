@@ -164,10 +164,10 @@ let UserService = class UserService {
         this.baseUrl = src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].baseUrl + src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].userService + src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].userBaseApi;
     }
     getUsers() {
-        return this.httpClient.get(this.baseUrl + '?role=User');
+        return this.httpClient.get(this.baseUrl + '?role=ROLE_USER');
     }
     getSupervisors() {
-        return this.httpClient.get(this.baseUrl + '?role=Supervisor');
+        return this.httpClient.get(this.baseUrl + '?role=ROLE_SUPERVISOR');
     }
     getUsersById(id) {
         return this.httpClient.get(this.baseUrl + '/' + id);

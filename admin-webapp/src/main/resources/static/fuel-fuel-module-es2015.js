@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"add\">\n    <mat-toolbar>\n        <span class=\"fill-remaining-space\"></span>\n        <button class=\"btn-dialog-close\" mat-stroked-button (click)=\"onClose()\" tabIndex=\"-1\">\n          <mat-icon>clear</mat-icon>\n      </button>\n    </mat-toolbar>\n\n\n\n    <form fxLayout=\"column\" fxLayoutAlign=\"center center\" [formGroup]=\"fuelForm\" (ngSubmit)=\"onSubmit()\">\n        <h2 fxLayout=\"column\" fxLayout.gt-md=\"row\" fxLayoutGap.gt-md=\"15px\" fxLayoutAlign=\"center center\">Add New Fuel Type</h2>\n\n        <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\" class=\"form\">\n\n            <mat-form-field appearance=\"outline\" fxFlex>\n                <mat-label>Name</mat-label>\n                <input matInput #input placeholder=\"Name\" formControlName=\"name\" required>\n\n                <!-- <mat-error *ngIf=\"rNum.invalid\">\n\n                  {{getErrorRegistrationNo()}}\n              </mat-error> -->\n            </mat-form-field>\n\n\n\n            <mat-form-field appearance=\"outline\" fxFlex>\n                <mat-label>Cost</mat-label>\n                <input matInput #input placeholder=\" Fuel Cost\" formControlName=\"fuelCost\" required>\n\n                <!-- <mat-error *ngIf=\"RinsuranceNo.invalid\">\n\n                  {{getErrorInsuranceNo()}}\n              </mat-error> -->\n\n            </mat-form-field>\n\n\n\n\n\n\n\n            <button mat-raised-button class=\"btn\"  [disabled]='!fuelForm.valid'  color=\"primary\">\n    Submit\n  </button>\n\n\n        </div>\n\n    </form>\n\n</div>\n"
+module.exports = "<div class=\"add\">\n    <mat-toolbar>\n        <span class=\"fill-remaining-space\"></span>\n        <button class=\"btn-dialog-close\" mat-stroked-button (click)=\"onClose()\" tabIndex=\"-1\">\n          <mat-icon>clear</mat-icon>\n      </button>\n    </mat-toolbar>\n\n\n\n    <form fxLayout=\"column\" fxLayoutAlign=\"center center\" [formGroup]=\"fuelForm\" (ngSubmit)=\"onSubmit()\">\n        <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\" class=\"form\">\n\n            <mat-form-field appearance=\"outline\" fxFlex>\n                <mat-label class=\"font-style\">Name</mat-label>\n                <input matInput #input placeholder=\"Name\" formControlName=\"name\" required class=\"font-style\">\n\n                <mat-error *ngIf=\"rName.invalid\" class=\"font-style\">\n\n                  {{getErrorName()}}\n              </mat-error>\n            </mat-form-field>\n\n\n\n            <mat-form-field appearance=\"outline\" fxFlex>\n                <mat-label class=\"font-style\">Cost</mat-label>\n                <input matInput #input placeholder=\" Fuel Cost\" formControlName=\"fuelCost\" required class=\"font-style\">\n\n                <mat-error *ngIf=\"rCost.invalid\" class=\"font-style\">\n\n                  {{getErrorCost()}}\n              </mat-error>\n\n            </mat-form-field>\n\n\n\n\n\n\n\n            <button mat-raised-button class=\"btn font-style\"  [disabled]='!fuelForm.valid'  color=\"primary\">\n    Submit\n  </button>\n\n\n        </div>\n\n    </form>\n\n</div>\n"
 
 /***/ }),
 
@@ -18,7 +18,7 @@ module.exports = "<div class=\"add\">\n    <mat-toolbar>\n        <span class=\"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-card (click)=\"ok()\" class=\"my-card\">\n\n    <mat-card-content fxLayoutAlign=\"space-between\">\n        <ngx-avatar name=\"{{name}}\"></ngx-avatar>\n    </mat-card-content>\n    <mat-card-title class=\"fuelName\">{{name}}</mat-card-title>\n\n</mat-card>"
+module.exports = "<mat-card class=\"my-card\">\n\n    <mat-card-content fxLayoutAlign=\"space-between\">\n        <ngx-avatar class=\"font-style\" name=\"{{name}}\"></ngx-avatar>\n    </mat-card-content>\n    <mat-card-title class=\"fuelName font-style\">{{name}}</mat-card-title>\n    <mat-card-title class=\"typeName font-style\">Cost: {{fuelCost}}\n        <span fxLayoutGap=\"50%\">\n            <i class=\"material-icons iconCapacity\"  (click)=\"update()\"  >\n                create\n            </i>\n       </span>\n    </mat-card-title>\n  \n\n</mat-card>"
 
 /***/ }),
 
@@ -29,7 +29,7 @@ module.exports = "<mat-card (click)=\"ok()\" class=\"my-card\">\n\n    <mat-card
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div fxLayout.gt-sm=\"row\" fxLayout.sm=\"column\" fxLayoutGap=\"10%\"> \n    <div fxLayout=\"column\" fxLayout.sm=\"column\" fxLayoutGap=\"50px\" fxLayoutGap.lt-md=\"0px\">\n    <h1 fxLayout=\"column\" fxLayout.gt-md=\"row\" fxLayoutGap.gt-md=\"15px\" class=\"fuelName\">\n            {{name}}\n\n    </h1>\n    </div>\n</div>\n   \n\n<div fxLayout=\"column\">\n    <mat-card class=\"fuel\" fxFlex.sm=\"0 1 calc(50%-10px)\" fxFlex.md=\"0 1 calc(33%-10px)\" fxLayout=\"column\" fxLayoutGap=\"20px\">\n        <div fxFlex=50% fxLayout=\"column\" fxLayout.gt-sm=\"row\" fxLayoutGap=\"20%\" fxLayoutGap.lt-md=\"0px\"\n        class=\"form\" fxLayoutAlign=\"center center\">    \n    <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"50px\" fxLayoutGap.lt-md=\"0px\" class=\"col\">\n            \n\n\n\n\n                <mat-card-title fxLayoutAlign=\"center center\">Cost: {{fuelCost}}\n\n                    <span>\n                      <i class=\"material-icons iconCapacity\"  (click)=\"update()\"  >\n                          create\n                      </i>\n                </span>\n\n\n                </mat-card-title>\n              </div>\n\n        </div>\n\n    </mat-card>\n"
+module.exports = "<div fxLayout.gt-sm=\"row\" fxLayout.sm=\"column\" fxLayoutGap=\"10%\">\n    <div fxLayout=\"column\" fxLayout.sm=\"column\" fxLayoutGap=\"50px\" fxLayoutGap.lt-md=\"0px\">\n        <h1 fxLayout=\"column\" fxLayout.gt-md=\"row\" fxLayoutGap.gt-md=\"15px\" class=\"fuelName\">\n            {{name}}\n        </h1>\n    </div>\n</div>\n<div fxLayout=\"column\" class=\"space-top\">\n    <mat-card class=\"fuel\" fxFlex.sm=\"0 1 calc(50%-10px)\" fxFlex.md=\"0 1 calc(33%-10px)\" fxLayout=\"column\"\n        fxLayoutGap=\"20px\">\n        <div fxFlex=50% fxLayout=\"column\" fxLayout.gt-sm=\"row\" fxLayoutGap=\"20%\" fxLayoutGap.lt-md=\"0px\" class=\"form\"\n            fxLayoutAlign=\"center center\">\n            <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"50px\" fxLayoutGap.lt-md=\"0px\" class=\"col\">\n                <mat-card-title fxLayoutAlign=\"center center\">Cost: {{fuelCost}}\n                    <span>\n                        <i class=\"material-icons iconCapacity\" (click)=\"update()\">\n                            create\n                        </i>\n                    </span>\n                </mat-card-title>\n            </div>\n        </div>\n    </mat-card>\n</div>"
 
 /***/ }),
 
@@ -40,7 +40,7 @@ module.exports = "<div fxLayout.gt-sm=\"row\" fxLayout.sm=\"column\" fxLayoutGap
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div fxLayout=\"column\">\n    <h1 class=\"header\">\n        Fuels\n    </h1>\n    <div fxLayout=\"row\" class=\"search\">\n        <mat-form-field fxFlex=\"20%\">\n            <input matInput [(ngModel)]=\"term\" placeholder=\"Search\">\n        </mat-form-field>\n    </div>\n    <div fxLayout=\"column wrap\">\n        <div fxLayout.xs=\"column\" fxLayout.lg=\"row wrap\" fxLayoutGap=\"50px\" class=\"card\"\n            fxLayoutAlign.sm=\"center center\">\n            <div *ngIf=\"displayCount === 0\">\n                <img src=\"http://miceemporio.com/img/no-record-found.jpeg\">\n            </div>\n            <app-fuel-card *ngFor=\"let type of fuel| paginate: { itemsPerPage: 12, currentPage: p } | filter:term\"\n                [fuel]=\"type\"></app-fuel-card>\n        </div>\n        <pagination-controls (pageChange)=\"p = $event\" fxLayoutAlign=\"center center\"></pagination-controls>\n    </div>\n    <div fxLayout=\"column\" fxLayout.gt-xs=\"row\" fxLayoutAlign=\"end\" class=\"add-button\">\n        <button mat-fab color=\"primary\" (click)=\"add()\">\n            <i class=\"material-icons\">\n                add\n            </i>\n        </button>\n    </div>\n</div>"
+module.exports = "<div fxLayout=\"column\">\n    <h1 class=\"header\">\n        Fuels\n    </h1>\n    <div *ngIf=\"displayCount === 0; else data\" class=\"no-data\" fxLayoutAlign=\"center center\">\n        <img src=\"assets/no-record-found.jpeg\">\n    </div>\n    <ng-template #data>\n        <div fxLayout=\"row\" class=\"search\">\n            <mat-form-field fxFlex=\"20%\">\n                <input matInput [(ngModel)]=\"term\" placeholder=\"Search\" class=\"font-style\">\n            </mat-form-field>\n        </div>\n        <div fxLayout=\"column wrap\">\n            <div fxLayout.xs=\"column\" fxLayout.lg=\"row wrap\" fxLayoutGap=\"50px\" class=\"card\"\n                fxLayoutAlign.lt-sm=\"center center\">\n                <app-fuel-card *ngFor=\"let type of fuel| paginate: { itemsPerPage: 12, currentPage: p } | filter:term\"\n                    [fuel]=\"type\"></app-fuel-card>\n            </div>\n            <pagination-controls (pageChange)=\"p = $event\" fxLayoutAlign=\"center center\" class=\"paginator font-style\">\n            </pagination-controls>\n        </div>\n    </ng-template>\n\n    <div fxLayout=\"column\" fxLayout.gt-xs=\"row\" fxLayoutAlign=\"end\" class=\"add-button\">\n        <button mat-fab color=\"primary\" (click)=\"add()\">\n            <i class=\"material-icons\">\n                add\n            </i>\n        </button>\n    </div>\n</div>"
 
 /***/ }),
 
@@ -51,7 +51,7 @@ module.exports = "<div fxLayout=\"column\">\n    <h1 class=\"header\">\n        
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-toolbar>\n    <span class=\"fill-remaining-space\"></span>\n    <button class=\"btn-dialog-close\" mat-stroked-button (click)=\"onClose()\" tabIndex=\"-1\">\n  <mat-icon>clear</mat-icon>\n</button>\n</mat-toolbar>\n\n<form fxLayout=\"column\" fxLayoutAlign=\"center center\" [formGroup]=\"fuelForm\" (ngSubmit)=\"onSubmit()\">\n\n    <div fxFlex=50% fxLayout=\"row\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\" class=\"form\" fxLayoutAlign=\"center center\">\n        <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\" class=\"col\">\n\n            <mat-form-field appearance=\"outline\" fxFlex>\n                <mat-label>Cost</mat-label>\n                <input matInput #input placeholder=\"Fuel Cost\" formControlName=\"fuelCost\" [(ngModel)]=\"fuelCost\" required>\n            </mat-form-field>\n        </div>\n    </div>\n\n\n    <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\">\n        <button mat-raised-button class=\"btn\" [disabled]='!fuelForm.valid' color=\"primary\">\n                      Submit\n                  </button>\n\n    </div>\n</form>\n"
+module.exports = "<mat-toolbar>\n    <span class=\"fill-remaining-space\"></span>\n    <button class=\"btn-dialog-close\" mat-stroked-button (click)=\"onClose()\" tabIndex=\"-1\">\n  <mat-icon>clear</mat-icon>\n</button>\n</mat-toolbar>\n\n<form fxLayout=\"column\" fxLayoutAlign=\"center center\" [formGroup]=\"fuelForm\" (ngSubmit)=\"onSubmit()\">\n\n    <div fxFlex=50% fxLayout=\"row\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\" class=\"form\" fxLayoutAlign=\"center center\">\n        <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\" class=\"col\">\n\n            <mat-form-field appearance=\"outline\" fxFlex>\n                <mat-label class=\"font-style\">Cost</mat-label>\n                <input matInput #input placeholder=\"Fuel Cost\" formControlName=\"fuelCost\" [(ngModel)]=\"fuelCost\" \n                required class=\"font-style\">\n                <mat-error *ngIf=\"rCost.invalid\" class=\"font-style\">\n\n                    {{getErrorCost()}}\n                </mat-error>\n            </mat-form-field>\n        </div>\n    </div>\n\n\n    <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\">\n        <button mat-raised-button class=\"btn font-style\" [disabled]='!fuelForm.valid' color=\"primary\">\n                      Submit\n                  </button>\n\n    </div>\n</form>\n"
 
 /***/ }),
 
@@ -90,8 +90,8 @@ let AddFuelComponent = class AddFuelComponent {
         this.fb = fb;
         this.datas = [];
         this.fuelForm = this.fb.group({
-            name: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].pattern('^[a-zA-Z0-9\-]*$')]],
-            fuelCost: ['']
+            name: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].pattern('^[a-zA-Z\-]*$')]],
+            fuelCost: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].pattern('[0-9]+(\.[0-9][0-9]?)?')]],
         });
     }
     get rName() {
@@ -99,6 +99,14 @@ let AddFuelComponent = class AddFuelComponent {
     }
     get rCost() {
         return this.fuelForm.get('fuelCost');
+    }
+    getErrorName() {
+        return this.rName.hasError('pattern') ? 'Fuel name should contain only alphabets.' :
+            '';
+    }
+    getErrorCost() {
+        return this.rCost.hasError('pattern') ? 'Invalid cost' :
+            '';
     }
     onSubmit() {
         console.log(this.fuelForm.value);
@@ -152,23 +160,66 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _fuel_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../fuel.service */ "./src/app/fuel/fuel.service.ts");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm2015/material.js");
+/* harmony import */ var _update_fuel_update_fuel_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../update-fuel/update-fuel.component */ "./src/app/fuel/update-fuel/update-fuel.component.ts");
+/* harmony import */ var src_app_shared_notification_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/shared/notification.service */ "./src/app/shared/notification.service.ts");
+
+
+
+
 
 
 
 let FuelCardComponent = class FuelCardComponent {
-    constructor(router) {
+    constructor(router, fuelService, activatedRoute, route, notificationService, matDialog) {
         this.router = router;
+        this.fuelService = fuelService;
+        this.activatedRoute = activatedRoute;
+        this.route = route;
+        this.notificationService = notificationService;
+        this.matDialog = matDialog;
     }
     ngOnInit() {
         this.name = this.fuel.name;
         this.fuelCost = this.fuel.fuelCost;
     }
-    ok() {
-        this.router.navigate(['fuel/', this.name]);
+    update() {
+        const dialogConfig = new _angular_material__WEBPACK_IMPORTED_MODULE_4__["MatDialogConfig"]();
+        dialogConfig.disableClose = true;
+        dialogConfig.autoFocus = true;
+        dialogConfig.width = '40%';
+        dialogConfig.data = {
+            fuelCost: this.fuel.fuelCost,
+        };
+        const dRef = this.matDialog.open(_update_fuel_update_fuel_component__WEBPACK_IMPORTED_MODULE_5__["UpdateFuelComponent"], dialogConfig);
+        dRef.afterClosed().subscribe(result => {
+            console.log('Back to parent', result);
+            this.fuelService.updateFuel(this.name, result).subscribe(response => {
+                this.notificationService.success('Fuel details updated succesffuly');
+                this.getFueletails();
+            }, error => {
+                this.notificationService.warn('not updated');
+            });
+        });
+    }
+    getFueletails() {
+        this.fuelService.getFuelByName(this.name).subscribe(res => {
+            this.fuel = res.data;
+            console.log('data', res.data);
+            console.log(res);
+            this.name = this.fuel.name;
+            this.fuelCost = this.fuel.fuelCost;
+        });
     }
 };
 FuelCardComponent.ctorParameters = () => [
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] }
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] },
+    { type: _fuel_service__WEBPACK_IMPORTED_MODULE_3__["FuelService"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"] },
+    { type: src_app_shared_notification_service__WEBPACK_IMPORTED_MODULE_6__["NotificationService"] },
+    { type: _angular_material__WEBPACK_IMPORTED_MODULE_4__["MatDialog"] }
 ];
 tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()
@@ -192,7 +243,7 @@ FuelCardComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".fuelName {\n    margin-left: 240px;\n    padding-bottom: 2%;\n}\n\n.fuel {\n    margin-bottom: 40px;\n    margin-left: 450px;\n    height: 300px;\n    width: 50%;\n}\n\n.iconCapacity {\n   \n    cursor: pointer;\n}\n\n@media only screen and (max-width: 600px) {\n    .fuel {\n        margin-left: 30px;\n        height: 300px;\n        width: 85%;\n    }\n    .fuelName {\n        margin-left: 50px;\n        font-size: 1.5em;\n        padding-bottom: 5px;\n    }\n\n    .iconCapacity {\n   \n        cursor: pointer;\n    }\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZnVlbC9mdWVsLWRldGFpbHMvZnVlbC1kZXRhaWxzLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7SUFDSSxrQkFBa0I7SUFDbEIsa0JBQWtCO0FBQ3RCOztBQUVBO0lBQ0ksbUJBQW1CO0lBQ25CLGtCQUFrQjtJQUNsQixhQUFhO0lBQ2IsVUFBVTtBQUNkOztBQUVBOztJQUVJLGVBQWU7QUFDbkI7O0FBRUE7SUFDSTtRQUNJLGlCQUFpQjtRQUNqQixhQUFhO1FBQ2IsVUFBVTtJQUNkO0lBQ0E7UUFDSSxpQkFBaUI7UUFDakIsZ0JBQWdCO1FBQ2hCLG1CQUFtQjtJQUN2Qjs7SUFFQTs7UUFFSSxlQUFlO0lBQ25CO0FBQ0oiLCJmaWxlIjoic3JjL2FwcC9mdWVsL2Z1ZWwtZGV0YWlscy9mdWVsLWRldGFpbHMuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5mdWVsTmFtZSB7XG4gICAgbWFyZ2luLWxlZnQ6IDI0MHB4O1xuICAgIHBhZGRpbmctYm90dG9tOiAyJTtcbn1cblxuLmZ1ZWwge1xuICAgIG1hcmdpbi1ib3R0b206IDQwcHg7XG4gICAgbWFyZ2luLWxlZnQ6IDQ1MHB4O1xuICAgIGhlaWdodDogMzAwcHg7XG4gICAgd2lkdGg6IDUwJTtcbn1cblxuLmljb25DYXBhY2l0eSB7XG4gICBcbiAgICBjdXJzb3I6IHBvaW50ZXI7XG59XG5cbkBtZWRpYSBvbmx5IHNjcmVlbiBhbmQgKG1heC13aWR0aDogNjAwcHgpIHtcbiAgICAuZnVlbCB7XG4gICAgICAgIG1hcmdpbi1sZWZ0OiAzMHB4O1xuICAgICAgICBoZWlnaHQ6IDMwMHB4O1xuICAgICAgICB3aWR0aDogODUlO1xuICAgIH1cbiAgICAuZnVlbE5hbWUge1xuICAgICAgICBtYXJnaW4tbGVmdDogNTBweDtcbiAgICAgICAgZm9udC1zaXplOiAxLjVlbTtcbiAgICAgICAgcGFkZGluZy1ib3R0b206IDVweDtcbiAgICB9XG5cbiAgICAuaWNvbkNhcGFjaXR5IHtcbiAgIFxuICAgICAgICBjdXJzb3I6IHBvaW50ZXI7XG4gICAgfVxufSJdfQ== */"
+module.exports = ".fuelName {\n    margin-left: 240px;\n    padding-bottom: 2%;\n}\n\n.fuel {\n    margin-bottom: 40px;\n    margin-left: 450px;\n    height: 300px;\n    width: 50%;\n}\n\n.space-top {\n    padding-top: 12%;\n    padding-bottom: 10%;\n}\n\n.iconCapacity {\n   \n    cursor: pointer;\n}\n\n@media only screen and (max-width: 600px) {\n    .fuel {\n        margin-left: 30px;\n        height: 300px;\n        width: 85%;\n    }\n    .fuelName {\n        margin-left: 50px;\n        font-size: 1.5em;\n        padding-bottom: 5px;\n    }\n\n    .iconCapacity {\n   \n        cursor: pointer;\n    }\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZnVlbC9mdWVsLWRldGFpbHMvZnVlbC1kZXRhaWxzLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7SUFDSSxrQkFBa0I7SUFDbEIsa0JBQWtCO0FBQ3RCOztBQUVBO0lBQ0ksbUJBQW1CO0lBQ25CLGtCQUFrQjtJQUNsQixhQUFhO0lBQ2IsVUFBVTtBQUNkOztBQUVBO0lBQ0ksZ0JBQWdCO0lBQ2hCLG1CQUFtQjtBQUN2Qjs7QUFFQTs7SUFFSSxlQUFlO0FBQ25COztBQUVBO0lBQ0k7UUFDSSxpQkFBaUI7UUFDakIsYUFBYTtRQUNiLFVBQVU7SUFDZDtJQUNBO1FBQ0ksaUJBQWlCO1FBQ2pCLGdCQUFnQjtRQUNoQixtQkFBbUI7SUFDdkI7O0lBRUE7O1FBRUksZUFBZTtJQUNuQjtBQUNKIiwiZmlsZSI6InNyYy9hcHAvZnVlbC9mdWVsLWRldGFpbHMvZnVlbC1kZXRhaWxzLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuZnVlbE5hbWUge1xuICAgIG1hcmdpbi1sZWZ0OiAyNDBweDtcbiAgICBwYWRkaW5nLWJvdHRvbTogMiU7XG59XG5cbi5mdWVsIHtcbiAgICBtYXJnaW4tYm90dG9tOiA0MHB4O1xuICAgIG1hcmdpbi1sZWZ0OiA0NTBweDtcbiAgICBoZWlnaHQ6IDMwMHB4O1xuICAgIHdpZHRoOiA1MCU7XG59XG5cbi5zcGFjZS10b3Age1xuICAgIHBhZGRpbmctdG9wOiAxMiU7XG4gICAgcGFkZGluZy1ib3R0b206IDEwJTtcbn1cblxuLmljb25DYXBhY2l0eSB7XG4gICBcbiAgICBjdXJzb3I6IHBvaW50ZXI7XG59XG5cbkBtZWRpYSBvbmx5IHNjcmVlbiBhbmQgKG1heC13aWR0aDogNjAwcHgpIHtcbiAgICAuZnVlbCB7XG4gICAgICAgIG1hcmdpbi1sZWZ0OiAzMHB4O1xuICAgICAgICBoZWlnaHQ6IDMwMHB4O1xuICAgICAgICB3aWR0aDogODUlO1xuICAgIH1cbiAgICAuZnVlbE5hbWUge1xuICAgICAgICBtYXJnaW4tbGVmdDogNTBweDtcbiAgICAgICAgZm9udC1zaXplOiAxLjVlbTtcbiAgICAgICAgcGFkZGluZy1ib3R0b206IDVweDtcbiAgICB9XG5cbiAgICAuaWNvbkNhcGFjaXR5IHtcbiAgIFxuICAgICAgICBjdXJzb3I6IHBvaW50ZXI7XG4gICAgfVxufSJdfQ== */"
 
 /***/ }),
 
@@ -243,6 +294,7 @@ let FuelDetailsComponent = class FuelDetailsComponent {
         const dialogConfig = new _angular_material__WEBPACK_IMPORTED_MODULE_4__["MatDialogConfig"]();
         dialogConfig.disableClose = true;
         dialogConfig.autoFocus = true;
+        dialogConfig.width = '40%';
         dialogConfig.data = {
             fuelCost: this.fuel.fuelCost,
         };
@@ -320,7 +372,7 @@ FuelRoutingModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "app-fuel-card {\n    \n    width: 20%;\n    margin-bottom: 20px;\n}\n\n@media only screen and (max-width: 600px) {\n    app-fuel-card {\n        width: 75%;\n    }\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZnVlbC9mdWVsLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7O0lBRUksVUFBVTtJQUNWLG1CQUFtQjtBQUN2Qjs7QUFFQTtJQUNJO1FBQ0ksVUFBVTtJQUNkO0FBQ0oiLCJmaWxlIjoic3JjL2FwcC9mdWVsL2Z1ZWwuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbImFwcC1mdWVsLWNhcmQge1xuICAgIFxuICAgIHdpZHRoOiAyMCU7XG4gICAgbWFyZ2luLWJvdHRvbTogMjBweDtcbn1cblxuQG1lZGlhIG9ubHkgc2NyZWVuIGFuZCAobWF4LXdpZHRoOiA2MDBweCkge1xuICAgIGFwcC1mdWVsLWNhcmQge1xuICAgICAgICB3aWR0aDogNzUlO1xuICAgIH1cbn1cbiJdfQ== */"
+module.exports = "app-fuel-card {\n    \n    width: 20%;\n    margin-bottom: 20px;\n}\n\n@media only screen and (max-width: 600px) {\n    app-fuel-card {\n        width: 75%;\n    }\n}\n\n.paginator ::ng-deep .ngx-pagination .current {\n    background: #344955;\n    color: white;\n    font-size: 1.5em;\n    border-radius: 10px;\n   }\n\n.no-data {\n       padding-bottom: 15%;\n       padding-top: 13%;\n   }\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZnVlbC9mdWVsLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7O0lBRUksVUFBVTtJQUNWLG1CQUFtQjtBQUN2Qjs7QUFFQTtJQUNJO1FBQ0ksVUFBVTtJQUNkO0FBQ0o7O0FBRUE7SUFDSSxtQkFBbUI7SUFDbkIsWUFBWTtJQUNaLGdCQUFnQjtJQUNoQixtQkFBbUI7R0FDcEI7O0FBRUE7T0FDSSxtQkFBbUI7T0FDbkIsZ0JBQWdCO0dBQ3BCIiwiZmlsZSI6InNyYy9hcHAvZnVlbC9mdWVsLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyJhcHAtZnVlbC1jYXJkIHtcbiAgICBcbiAgICB3aWR0aDogMjAlO1xuICAgIG1hcmdpbi1ib3R0b206IDIwcHg7XG59XG5cbkBtZWRpYSBvbmx5IHNjcmVlbiBhbmQgKG1heC13aWR0aDogNjAwcHgpIHtcbiAgICBhcHAtZnVlbC1jYXJkIHtcbiAgICAgICAgd2lkdGg6IDc1JTtcbiAgICB9XG59XG5cbi5wYWdpbmF0b3IgOjpuZy1kZWVwIC5uZ3gtcGFnaW5hdGlvbiAuY3VycmVudCB7XG4gICAgYmFja2dyb3VuZDogIzM0NDk1NTtcbiAgICBjb2xvcjogd2hpdGU7XG4gICAgZm9udC1zaXplOiAxLjVlbTtcbiAgICBib3JkZXItcmFkaXVzOiAxMHB4O1xuICAgfVxuXG4gICAubm8tZGF0YSB7XG4gICAgICAgcGFkZGluZy1ib3R0b206IDE1JTtcbiAgICAgICBwYWRkaW5nLXRvcDogMTMlO1xuICAgfSJdfQ== */"
 
 /***/ }),
 
@@ -360,6 +412,7 @@ let FuelComponent = class FuelComponent {
         const dialogConfig = new _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatDialogConfig"]();
         dialogConfig.disableClose = true;
         dialogConfig.autoFocus = true;
+        dialogConfig.width = '40%';
         const dRef = this.matDialog.open(_add_fuel_add_fuel_component__WEBPACK_IMPORTED_MODULE_4__["AddFuelComponent"], dialogConfig);
         dRef.afterClosed().subscribe(result => {
             if (result !== undefined) {
@@ -525,9 +578,16 @@ let UpdateFuelComponent = class UpdateFuelComponent {
         this.dialogRef = dialogRef;
         this.fb = fb;
         this.fuelForm = this.fb.group({
-            fuelCost: ['']
+            fuelCost: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].pattern('[0-9]+(\.[0-9][0-9]?)?')]],
         });
         this.fuelCost = data.fuelCost;
+    }
+    get rCost() {
+        return this.fuelForm.get('fuelCost');
+    }
+    getErrorCost() {
+        return this.rCost.hasError('pattern') ? 'Invalid cost' :
+            '';
     }
     onClose() {
         this.dialogRef.close();

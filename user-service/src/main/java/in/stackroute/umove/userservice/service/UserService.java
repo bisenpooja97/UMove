@@ -19,7 +19,7 @@ public interface UserService {
     UserData updateUser(String objid, UserData user);
     UserData updateDocumentStatus(String id, String status);
 //    void saveImage(MultipartFile imageFile, String uid) throws Exception;
-    List<UserData> findByRole(Role role);
+    List<UserData> findByRoles(Role role);
     List<UserData> findByDocumentStatus(DocumentStatus documentStatus);
     List<UserData> findByUserStatus(UserStatus userStatus);
 }

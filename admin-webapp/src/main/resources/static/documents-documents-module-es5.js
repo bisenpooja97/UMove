@@ -381,7 +381,7 @@ var DocumentsService = /** @class */ (function () {
     }
     DocumentsService.prototype.getUsers = function () {
         console.log(this.baseUrl + '/' + '?role=User&documentStatus=Pending');
-        return this.httpClient.get(this.baseUrl + '?role=User&documentStatus=Pending');
+        return this.httpClient.get(this.baseUrl + '?role=ROLE_USER&documentStatus=Pending');
     };
     DocumentsService.prototype.getUsersById = function (id) {
         return this.httpClient.get(this.baseUrl + '/' + id);

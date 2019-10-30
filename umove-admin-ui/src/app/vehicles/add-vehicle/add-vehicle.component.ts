@@ -53,7 +53,7 @@ export class AddVehicleComponent implements OnInit {
                private typeService: VehicleTypeService, private snackBar: MatSnackBar) { }
 
   vehicleForm = this.fb.group({
-    registrationNo: ['', [Validators.pattern('^[a-zA-Z0-9\-]*$')]],
+    registrationNo: ['', [Validators.pattern('^[A-Z]{2}[0-9]{1,2}[A-Z]{2}[0-9]{1,4}$')]],
     insuranceNo: ['', [Validators.pattern('^[a-zA-Z0-9\-]*$')]],
     vehicleType: [''],
     status: 'Free',

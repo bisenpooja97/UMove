@@ -17,8 +17,9 @@ export class DummyPromocodePage implements OnInit {
   ngOnInit() {
       this.selectedPromocode = {
           campaignId: '5d8c7a62adfffb7e746ccee8',
+          name: 'diwali',
           promocode : 'SEPT100',
-          discount : 100
+          discountPercent : 100
       };
   }
 
