@@ -29,12 +29,12 @@
     <input style="display: none" name="file" type="file" (change)="onFileChanged($event)" #fileInput required="">
 
 
-    <ion-button class="btn-bottom ion-no-margin" [disabled]="!todo.valid||disableButton" (click)="onUpload(todo.value)"ion-button icon-left ion-button type="submit">
+    <ion-button class="btn-bottom ion-no-margin bottom-button" [disabled]="!todo.valid||disableButton" (click)="onUpload(todo.value)"ion-button icon-left ion-button type="submit">
       <ion-icon name="cloud-upload"></ion-icon>&nbsp;Upload
     </ion-button>
     <!--    </form>-->
     <ion-footer>
-      <ion-button class="ion-no-margin" expand="block" ion-button icon-left (click)="fileInput.click()" >
+      <ion-button class="ion-no-margin bottom-button" expand="block" ion-button icon-left (click)="fileInput.click()" >
         <ion-icon name="camera"></ion-icon>&nbsp; Select Image
       </ion-button>
     </ion-footer>

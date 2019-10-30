@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
@@ -15,10 +15,10 @@
       </ion-item>
       <ion-row>
         <ion-item>
-          <ion-label class="DistTime">Distance</ion-label>{{ ride?.distance }} Km
+          <ion-label>Distance</ion-label>&nbsp;{{ ride?.distance }} Km
         </ion-item>
         <ion-item>
-          <ion-label class="DistTime">Time</ion-label> {{ ride?.duration }} Mints
+          <ion-label>Time</ion-label>&nbsp;{{ ride?.duration }} Mints
         </ion-item>
       </ion-row>
       <ion-item class="baseFare">
@@ -56,13 +56,12 @@
       </ion-card-content>
     </ion-card>
   </ng-template>
-
-  <ion-footer>
-    <div *ngIf="ride?.paymentDetail?.status==='Pending'">
-      <ion-button expand="full" color="primary" (click)="payWithRazor()">Pay</ion-button>
-    </div>
-    <div *ngIf="ride?.paymentDetail?.status==='Paid'">
-      <ion-text class="PaidForRide">You have Already Paid For This Ride</ion-text>
-    </div>
-  </ion-footer>
 </ion-content>
+<ion-footer>
+  <div *ngIf="ride?.paymentDetail?.status==='Pending'">
+    <ion-button expand="full" color="primary" (click)="payWithRazor()" class="ion-no-margin bottom-button">Pay</ion-button>
+  </div>
+  <div *ngIf="ride?.paymentDetail?.status==='Paid'">
+    <ion-text class="PaidForRide">You have Already Paid For This Ride</ion-text>
+  </div>
+</ion-footer>

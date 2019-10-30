@@ -40,6 +40,9 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
+  <p style="width: 100%; text-align: center; font-size: 1.4em;" *ngIf="!campaigns || campaigns.length===0">
+    There are no current active offers.
+  </p>
   <ion-item *ngFor="let campaign of campaigns">
     <ion-grid no-padding>
       <ion-row class="ion-align-items-center">

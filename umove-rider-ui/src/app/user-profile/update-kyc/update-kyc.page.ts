@@ -76,6 +76,7 @@ export class UpdateKycPage implements OnInit {
         message: 'KYC Details Uploaded Successfully.',
         duration: 2000
       });
+      this.router.navigateByUrl('/view-profile');
     });
   }
 
