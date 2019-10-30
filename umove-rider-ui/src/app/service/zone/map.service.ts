@@ -1,7 +1,7 @@
 import {Injectable, OnInit} from '@angular/core';
 import * as mapboxgl from 'mapbox-gl';
  import * as MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
-import {Observable, Observer, of, Subject, timer} from "rxjs";
+import {Observable,Subject, timer} from "rxjs";
 import {Zone} from "../../model/zone";
 import {ZoneService} from "./zone.service";
 import {GeoJson,FeatureCollection} from "../../map";
