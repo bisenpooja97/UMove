@@ -1,50 +1,30 @@
 package in.stackroute.umove.bookingservice.model;
 
 import lombok.*;
+import org.bson.types.ObjectId;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.*;
-import java.sql.Time;
-import java.sql.Timestamp;
-import java.util.Date;
+import javax.persistence.Id;
+import java.time.LocalDateTime;
 import java.util.List;
 
-/*
- * Vehicle Tracking
- */
 
-@Entity
-@Table(name="trackingData")
+@Document(collection="trackingData")
+@Data
+@NoArgsConstructor
+@ToString
 @Getter
 @Setter
-@ToString
-@AllArgsConstructor
-@NoArgsConstructor
 public class TrackingLatitudeLongitude
 {
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private long trackingId;
-  @NonNull
-  private long bookingId;
-  @NonNull
-  private long rider_id;
-  @NonNull
-  private String source;
-  @NonNull
-  private String destination;
-  @NonNull
-  private long vehicle_id;
-  @NonNull
-  @Column
-  @ElementCollection(targetClass = Double.class)
-  private List<Double> latitude;
-  @Column
-  @ElementCollection(targetClass = Double.class)
-  @NonNull
-  private List<Double> longitude;
-  @Column
-  @ElementCollection(targetClass = Timestamp.class)
-  @NonNull
-  private List<Timestamp> timestamps;
-
+    @Id
+    private String _id;
+    private String  rideId;
+    private String riderId;
+    private String source;
+    private String destination;
+    private String vehicleNumber;
+    private List<Double> latitude;
+    private List<Double> longitude;
+    private List<LocalDateTime> timestamps;
 }

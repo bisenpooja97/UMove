@@ -41,7 +41,8 @@ export class ConfirmRideDetailPage implements OnInit {
     this.booking.rider = {
       _id: '5d8bbc0da6e87d5404aa1921',
       name: 'Visnu',
-      email: 'bochiwal.visnu@gmail.com'
+      email: 'bochiwal.visnu@gmail.com',
+      mobileNumber: '7727084821'
     };
 
     this.booking.vehicle = {

@@ -1,5 +1,9 @@
 package in.stackroute.umove.bookingservice.controller;
 
+import in.stackroute.umove.bookingservice.model.Payment;
+import in.stackroute.umove.bookingservice.model.Ride;
+import in.stackroute.umove.bookingservice.model.RideStatus;
+import in.stackroute.umove.bookingservice.service.RideService;
 import in.stackroute.umove.bookingservice.exception.RideAlreadyBookedException;
 import in.stackroute.umove.bookingservice.exception.RideNotFoundException;
 import in.stackroute.umove.bookingservice.model.*;
@@ -18,6 +22,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.*;
+
+import javax.mail.MessagingException;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -82,10 +89,7 @@ public class RideController {
 
 
     // End Point: api/v1/rides Method: GET
-    // to get all the rides list
-    // End Point: api/v1/rides?userId Method: GET
-    // to get all the rides list for a particular user
-    // Retrieve
+    // to get the list of all rides
     @GetMapping("rides")
     public ResponseEntity<Map> getRides(@RequestParam(value = "userId", required = false) String userId, @RequestParam(value = "rideStatus", required = false) String rideStatus) {
 
@@ -112,8 +116,9 @@ public class RideController {
         map.put("status", HttpStatus.OK);
         return new ResponseEntity<Map>(map, HttpStatus.OK);
     }
-    // End Point: api/v1/rides/{ridesId} Method: GET
-    // to get a specific rides details by ridesId
+
+    // End Point: api/v1/rides/{id} Method: GET
+    // to get a specific rides details by id
     @GetMapping("rides/{rideId}")
     public ResponseEntity<Map> getRideById(@PathVariable("rideId") ObjectId id) {
         if(id == null) {
@@ -180,6 +185,17 @@ public class RideController {
         Ride ride = rideService.updateDestination(destinationZone, rideId);
         Map<String, Object> map = new TreeMap<>();
         map.put("data", ride);
+        messagingTemplate.convertAndSend("booking_exchange", "ride_ended", map);
+        return new ResponseEntity<Map>(map, HttpStatus.OK);
+    }
+
+    //End Point: api/v1/rides/track-ride
+    //to get tracking data for all rides
+    @GetMapping("rides/track-ride")
+    public ResponseEntity<Map> getAllTrackingInformation()
+    {
+        Map<String, Object> map = new TreeMap<>();
+        map.put("data", rideService.getAllTrackingData());
         map.put("status", HttpStatus.OK);
         return new ResponseEntity<>(map, HttpStatus.OK);
     }
@@ -192,10 +208,11 @@ public class RideController {
         map.put("status", HttpStatus.OK);
         return new ResponseEntity<Map>(map, HttpStatus.OK);
     }
+
     // End Point: api/v1/payments Method: PUT
     // to pay for a specific ride by id
     @PutMapping("rides/payments")
-    public ResponseEntity<Map> payForBooking(@RequestParam(value = "rideId") ObjectId rideId, @RequestParam(value = "paymentId") String paymentId, @RequestParam(value="paymentStatus") String paymentStatus) {
+    public ResponseEntity<Map> payForBooking(@RequestParam(value = "rideId") ObjectId rideId, @RequestParam(value = "paymentId") String paymentId, @RequestParam(value="paymentStatus") PaymentStatus paymentStatus) throws IOException, MessagingException {
         Payment payment = rideService.payForRide(rideId, paymentId, paymentStatus);
         Map<String, Object> map = new TreeMap<>();
         map.put("data", payment);
@@ -211,6 +228,15 @@ public class RideController {
         Payment payment = rideService.getPaymentDetails(rideId);
         Map<String, Object> map = new TreeMap<>();
         map.put("data", payment);
+        map.put("status", HttpStatus.OK);
+        return new ResponseEntity<>(map, HttpStatus.OK);
+    }
+    //update latitude and longitude
+    @PatchMapping("rides/track-ride/{rideId}")
+    public ResponseEntity<?> updateTrackingInformation(@PathVariable("rideId")String rideId, @RequestParam(value="latitude") String latitude, @RequestParam(value="longitude") String longitude)
+    {
+        Map<String, Object> map = new TreeMap<>();
+        map.put("data", rideService.updateTrackingData(rideId, latitude, longitude));
         map.put("status", HttpStatus.OK);
         return new ResponseEntity<>(map, HttpStatus.OK);
     }
