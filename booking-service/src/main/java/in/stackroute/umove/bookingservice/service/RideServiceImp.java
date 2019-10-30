@@ -240,7 +240,6 @@ public class RideServiceImp implements RideService {
         else {paymentDetail.setStatus(PaymentStatus.Pending); payment.setStatus("Pending");}
         ride.setPaymentDetail(paymentDetail);
         rideRepo.save(ride);
-
         payment.setRideId(rideId.toString());
         payment.setPaymentId(paymentId);
         payment.setUserId(ride.getRider().get_id());
@@ -280,6 +279,7 @@ public class RideServiceImp implements RideService {
     public boolean isValidUser(String userId) {
         RestTemplate restTemplate = new RestTemplate();
         Map<String, Object> response = restTemplate.getForObject("http://13.235.35.202:8080/userservice/api/v1/users/" + userId, Map.class);
+       // Map<String, Object> response = restTemplate.getForObject("http://localhost:8091/api/v1/users/" + userId, Map.class);
         Map<String, Object> user = (Map<String, Object>) response.get("data");
         if(user.get("userStatus").equals("Active")) {
             return true;
