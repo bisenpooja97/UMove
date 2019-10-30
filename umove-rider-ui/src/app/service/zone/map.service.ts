@@ -39,9 +39,9 @@ export class MapService implements OnInit{
 
     this.layoutCount =0;
     mapboxgl.accessToken = environment.map;
-    this.markers =new mapboxgl.Marker({
-      color:'#344955'
-    });
+    // this.markers =new mapboxgl.Marker({
+    //   color:'#344955'cd
+    // });
     console.log('map bn rha h',this.map);
 
     if(this.map !== undefined) {

@@ -4,6 +4,7 @@ import in.stackroute.umove.zoneservice.exception.TypeAlreadyExistException;
 import in.stackroute.umove.zoneservice.model.Vehicle;
 import in.stackroute.umove.zoneservice.model.VehicleType;
 import in.stackroute.umove.zoneservice.repository.FuelRepo;
+import in.stackroute.umove.zoneservice.repository.VehicleRepo;
 import in.stackroute.umove.zoneservice.repository.VehicleTypeRepo;
 import in.stackroute.umove.zoneservice.service.ServiceVehicle;
 import in.stackroute.umove.zoneservice.service.ServiceVehicleType;
@@ -27,6 +28,9 @@ public class VehicleTypeImpl implements ServiceVehicleType {
     VehicleTypeRepo repo;
     FuelRepo fuelRepo;
     //To add new type
+    @Autowired
+    VehicleRepo vehicleRepo;
+
     @Autowired
     ServiceVehicle serviceVehicle;
 
@@ -82,7 +86,6 @@ public class VehicleTypeImpl implements ServiceVehicleType {
             if (type.getName() != null) {
                 typeList.setName(type.getName());
             }
-
             if (type.getCostPerKm() != 0) {
                 typeList.setCostPerKm(type.getCostPerKm());
             }
@@ -107,6 +110,7 @@ public class VehicleTypeImpl implements ServiceVehicleType {
 
             for ( Vehicle vehicle : vehicleList){
                 vehicle.setVehicleType(typeList);
+                vehicleRepo.save(vehicle);
             }
             return repo.save(typeList);
         }
