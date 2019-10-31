@@ -5,7 +5,7 @@ export class User {
     public name: string;
     public mobileNumber: string;
     public email: string;
-    public role: string;
+    public role: [string];
     public userStatus: string;
     public document: Document;
 }

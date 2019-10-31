@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --base-href https://umove-dev.stackroute.io/adminwebapp/ --deploy-url http://umove-dev.stackroute.io/adminwebapp/",
+    "build": "ng build --base-href https://umove-dev.stackroute.io/adminwebapp/ --deploy-url https://umove-dev.stackroute.io/adminwebapp/",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

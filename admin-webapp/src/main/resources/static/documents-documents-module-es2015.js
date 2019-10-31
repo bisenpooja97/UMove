@@ -371,7 +371,7 @@ let DocumentsService = class DocumentsService {
     }
     getUsers() {
         console.log(this.baseUrl + '/' + '?role=User&documentStatus=Pending');
-        return this.httpClient.get(this.baseUrl + '?role=User&documentStatus=Pending');
+        return this.httpClient.get(this.baseUrl + '?role=ROLE_USER&documentStatus=Pending');
     }
     getUsersById(id) {
         return this.httpClient.get(this.baseUrl + '/' + id);

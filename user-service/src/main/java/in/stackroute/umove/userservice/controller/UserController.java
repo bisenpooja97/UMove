@@ -123,7 +123,7 @@ public ResponseEntity<Map> getUsersById(@PathVariable String id)
             users=userService.findByName(name);
         }
         if(role!= null ) {
-            users=userService.findByRole(role);
+            users=userService.findByRoles(role);
         }
         if(userStatus!= null ) {
             users=userService.findByUserStatus(userStatus);

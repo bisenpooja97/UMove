@@ -18,11 +18,11 @@ public interface UserRepository extends MongoRepository<UserData, String> {
 
     UserData getUserByid(String id);
 
-    List<UserData> findByRole(Role role);
+    List<UserData> findByRoles(Role role);
 
     List<UserData> findByUserStatus(UserStatus userStatus);
 
-    @Query("{'document.documentStatus':'?0' , 'role':'User'}")
+    @Query("{'document.documentStatus':'?0' , 'roles':['ROLE_USER']}")
     List<UserData> findByDocumentStatus(DocumentStatus documentStatus);
 
 }

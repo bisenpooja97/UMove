@@ -5,11 +5,15 @@ import in.stackroute.umove.userservice.model.*;
 import in.stackroute.umove.userservice.repository.UserRepository;
 import in.stackroute.umove.userservice.service.UserService;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.NoArgsConstructor;
+import net.bytebuddy.matcher.EqualityMatcher;
+import net.bytebuddy.pool.TypePool;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.validation.groups.Default;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -48,8 +52,8 @@ public class UserImplService implements UserService {
      */
 
     @Override
-    public List<UserData> findByRole(Role role) {
-        List<UserData> users = userRepository.findByRole(role);
+    public List<UserData> findByRoles(Role role) {
+        List<UserData> users = userRepository.findByRoles(role);
         return users;
     }
 
@@ -96,9 +100,19 @@ public class UserImplService implements UserService {
                 return userRepository.findByMobileNumber(mobileNumber);
             }
         }
-        if(user.getRole() == Role.User) {
+        System.out.println(user.getRoles() + ":" + Role.ROLE_USER + ":" + Role.ROLE_SUPERVISOR);
+
+        Role role = null;
+        Iterator<Role> iterator = user.getRoles().iterator();
+        if(iterator.hasNext()) {
+            role = iterator.next();
+        }
+
+        if(role.equals(Role.ROLE_USER)) {
+            System.out.println("Im inside if of user");
             user.setUserStatus(UserStatus.Inactive);
-        } else if (user.getRole() == Role.Supervisor) {
+        } else if (role.equals(Role.ROLE_SUPERVISOR)) {
+            System.out.println("another if");
             user.setUserStatus(UserStatus.Unallocated);
         }
         user.setPaymentMethod(new ArrayList<>());
@@ -143,8 +157,8 @@ public class UserImplService implements UserService {
             if (user.getUserStatus() != null) {
                 updatedUser.setUserStatus(user.getUserStatus());
             }
-            if (user.getRole() != null) {
-                updatedUser.setRole(user.getRole());
+            if (user.getRoles() != null) {
+                updatedUser.setRoles(user.getRoles());
             }
             if (user.getDocument() != null) {
                 updatedUser.setDocument(user.getDocument());
