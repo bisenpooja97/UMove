@@ -28,13 +28,13 @@ public class MessagingService {
     @Autowired
     private ZoneTypeCountRepo zoneTypeCountRepo;
 
-    @RabbitListener(queues = "ride_started")
-    public void onRideStartedMessageReceived(Map<String, Object> map) {
-        Vehicle list = vehicle.findByRegistrationNo((String) map.get("registrationNo"));
-        list.setZoneId(null);
-        list.setStatus(VehicleStatus.Busy);
-        vehicleRepo.save(list);
-        }
+//    @RabbitListener(queues = "ride_started")
+//    public void onRideStartedMessageReceived(Map<String, Object> map) {
+//        Vehicle list = vehicle.findByRegistrationNo((String) map.get("registrationNo"));
+//        list.setZoneId(null);
+//        list.setStatus(VehicleStatus.Busy);
+//        vehicleRepo.save(list);
+//        }
 
     @RabbitListener(queues = "ride_ended")
     public void onRideEndedMessageReceived(Map<String, Object> map) {

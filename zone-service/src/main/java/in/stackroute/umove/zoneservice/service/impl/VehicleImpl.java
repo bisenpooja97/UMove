@@ -5,16 +5,12 @@ import in.stackroute.umove.zoneservice.exception.InsuranceNoAlreadyExistExceptio
 import in.stackroute.umove.zoneservice.exception.RegistrationNoAlreadyExistException;
 import in.stackroute.umove.zoneservice.model.Vehicle;
 import in.stackroute.umove.zoneservice.model.VehicleStatus;
-import in.stackroute.umove.zoneservice.model.VehicleType;
-import in.stackroute.umove.zoneservice.model.ZoneTypeCount;
 import in.stackroute.umove.zoneservice.repository.VehicleRepo;
-import in.stackroute.umove.zoneservice.repository.VehicleTypeRepo;
 import in.stackroute.umove.zoneservice.service.ServiceVehicle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -113,5 +109,23 @@ public class VehicleImpl implements ServiceVehicle {
     @Override
     public Vehicle findByRegistrationNo(String id){
         return repo.findByregistrationNoIgnoreCase(id);
+    }
+
+    @Override
+    public Boolean onRideStart(String registrationNo) {
+        Vehicle vehicle = repo.findByregistrationNoIgnoreCase(registrationNo);
+        if(vehicle != null) {
+            if(vehicle.getStatus() == VehicleStatus.Busy) {
+                return false;
+            } else {
+                vehicle.setStatus(VehicleStatus.Busy);
+                vehicle.setZoneId(null);
+                 repo.save(vehicle);
+                 return true;
+            }
+        } else {
+            return false;
+        }
+
     }
 }
