@@ -42,16 +42,16 @@ export class ZoneService {
   }
 
   getSupervisor(): Observable<RespSupervisor> {
-    return this.httpClient.get<RespSupervisor>('http://umove-dev.stackroute.io:8080/userservice/api/v1/users?role=Supervisor&status=Unallocated');
+    return this.httpClient.get<RespSupervisor>('https://umove-dev.stackroute.io/userservice/api/v1/users?role=Supervisor&status=Unallocated');
   }
 
   getSupervisorById(id: string): Observable<RespSupervisor2> {
-    return this.httpClient.get<RespSupervisor2>('http://umove-dev.stackroute.io:8080/userservice/api/v1/users/' + id);
+    return this.httpClient.get<RespSupervisor2>('https://umove-dev.stackroute.io/userservice/api/v1/users/' + id);
 
   }
 
   updateSupervisorStatus(id: string, supervisor: Supervisor) {
-    return this.httpClient.patch<Supervisor>('http://13.235.35.202:8080/userservice/api/v1/users/' + id , supervisor);
+    return this.httpClient.patch<Supervisor>('https://umove-dev.stackroute.io/userservice/api/v1/users/' + id , supervisor);
   }
 
   getZoneType(zid: string, tid: string): Observable<RespZTC> {

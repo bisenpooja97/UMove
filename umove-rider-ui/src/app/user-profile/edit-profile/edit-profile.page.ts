@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
-import {Router} from '@angular/router';
+import {NavigationExtras, Router} from '@angular/router';
 import {UserProfileServiceService} from '../../service/users-profile/user-profile-service.service';
 import {UserProfile} from '../../model/user-profile';
 import {ToastController} from '@ionic/angular';
@@ -19,6 +19,7 @@ export class EditProfilePage implements OnInit {
     user: UserProfile;
     public localUser;
     key = 'details';
+    disableButton: boolean;
     // tslint:disable-next-line:max-line-length
     constructor(private formBuilder: FormBuilder, private userDataService: UserProfileServiceService, private router: Router, private  http: HttpClient, public toastController: ToastController, private storage: Storage) {
         this.localUser = new UserProfile();
