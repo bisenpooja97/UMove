@@ -14,7 +14,7 @@
             <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="50px" fxLayoutGap.lt-md="0px" class="col">
                 <mat-form-field appearance="outline" fxFlex>
                     <mat-label class="font-style">Type Name</mat-label>
-                    <input matInput #input placeholder="Type Name" formControlName="name" required class="font-style">
+                    <input matInput #input placeholder="Type Name" formControlName="name" required class="font-style" autocomplete="off">
 
                     <mat-error *ngIf="rName.invalid" class="font-style">
 
@@ -26,7 +26,7 @@
 
                 <mat-form-field appearance="outline" fxFlex>
                     <mat-label class="font-style">Mileage</mat-label>
-                    <input matInput #input placeholder="Mileage" formControlName="mileage" required class="font-style">
+                    <input matInput #input placeholder="Mileage" formControlName="mileage" required class="font-style" autocomplete="off">
                     <mat-error *ngIf="Rkm.invalid">
 
                         {{getErrorkm()}}
@@ -37,7 +37,7 @@
                 <mat-form-field appearance="outline" fxFlex>
                     <mat-label class="font-style">Vehicle CC</mat-label>
                     <input matInput #input placeholder="vehicle CC" formControlName="vehicleCC" required
-                        class="font-style">
+                        class="font-style" autocomplete="off">
                     <mat-error *ngIf="Rcc.invalid" class="font-style">
                         {{getErrorCC()}}
 
@@ -48,7 +48,7 @@
                 <mat-form-field appearance="outline" fxFlex>
                     <mat-label class="font-style">Base Fare</mat-label>
                     <input matInput #input placeholder="Base Fare" formControlName="baseFare" required
-                        class="font-style">
+                        class="font-style" autocomplete="off">
                     <mat-error *ngIf="Rbasefare.invalid" class="font-style">
                         {{getErrorBaseFare()}}
 
@@ -69,7 +69,7 @@
                 <mat-form-field appearance="outline" fxFlex>
                     <mat-label class="font-style">Cost Per Minute</mat-label>
                     <input matInput #input placeholder="Cost Per Minute" formControlName="costPerMin" required
-                        class="font-style">
+                        class="font-style" autocomplete="off">
                     <mat-error *ngIf="Rcosttime.invalid" class="font-style">
 
                         {{getErrorCosttime()}}
