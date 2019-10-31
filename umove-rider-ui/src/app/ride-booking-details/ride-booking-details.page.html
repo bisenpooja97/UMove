@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Booking Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <mbsc-form *ngIf="timerSettings">
+    <mbsc-form-group>
+      <mbsc-form-group-title>Timer</mbsc-form-group-title>
+      <div [(ngModel)]="timer" mbsc-timer #timerVariable="mobiscroll" [mbsc-options]="timerSettings"
+        (onFinish)="timerFinished()"></div>
+    </mbsc-form-group>
+  </mbsc-form>
+
+  <app-bike-detail [selectedVehicle]="ride?.vehicle"></app-bike-detail>
+
+  <ion-card>
+    <ion-card-content>
+      <ion-card-subtitle>
+        <ion-icon name="pin" color="tertiary"></ion-icon> {{ ride?.sourceZone?.locality }}
+      </ion-card-subtitle>
+      <ion-card-subtitle>
+        <ion-icon name="pin" color="tertiary"></ion-icon> {{ ride?.destinationZones[0]?.locality }}
+      </ion-card-subtitle>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-content>
+      <ion-grid no-padding>
+        <ion-row class="ion-align-items-center">
+          <ion-img src="assets/icon/gpay.png" *ngIf="ride?.paymentMethod?.paymentProvider==='Google Pay'" style="height: 48px; width: 48px;"></ion-img>
+          <ion-img src="assets/icon/phonepe.png" *ngIf="ride?.paymentMethod?.paymentProvider==='PhonePe'" style="height: 48px; width: 48px;"></ion-img>
+          <ion-img src="assets/icon/paytm.png" *ngIf="ride?.paymentMethod?.paymentProvider==='Paytm'" style="height: 48px; width: 48px;"></ion-img>
+          <ion-col padding-horizontal>
+            <ion-text color="dark">
+              <h2>{{ ride?.paymentMethod?.paymentMethodNumber }}</h2>
+            </ion-text>
+            <ion-text>
+              <h3>{{ ride?.paymentMethod?.paymentType }}</h3>
+            </ion-text>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+
+<ion-footer>
+  <ion-button class="startRide_btn" (click)="startRide($event)">Start ride</ion-button>
+  <ion-button class="endRide_btn" (click)="cancelRide($event)">Cancel ride</ion-button>
+</ion-footer>

@@ -1,0 +1,26 @@
+.login {
+    padding-top: 8%;
+    padding-bottom: 8%;
+    font-size: 1.5em;
+}
+
+.login-heading {
+    padding-top: 2%;
+}
+
+.space-title {
+    padding-top: 15%;
+}
+
+
+@media only screen and (max-width: 600px) {
+ 
+    .login {
+        padding-bottom: 25%;
+    }
+}
+
+.btn {
+    width: 12em; height: 60px;
+    font-size: 24px;
+   }

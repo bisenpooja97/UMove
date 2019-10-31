@@ -1,0 +1,57 @@
+<mat-toolbar>
+    <span class="fill-remaining-space"></span>
+    <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabIndex="-1">
+        <mat-icon>clear</mat-icon>
+    </button>
+</mat-toolbar>
+<form fxLayout="column" fxLayoutAlign="center center" [formGroup]="zoneForm" (ngSubmit)="onSubmit()">
+
+    <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px" class="form"
+        fxLayoutAlign="center center">
+
+
+            <mat-form-field appearance="outline" fxFlex>
+                <mat-label class="font-style">Zone Locality</mat-label>
+                <input matInput #input placeholder="Zone Locality" formControlName="locality" required (keyup.enter)="getLocation()"  (blur)="getLocation()" autocomplete="off">
+                <mat-hint class="font-style">
+                    Press Enter after writing locality
+                </mat-hint>
+                <mat-error *ngIf="locality.invalid" class="font-style">
+                                        {{getErrorZoneLocality()}}
+                                    </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" fxFlex>
+
+                <mat-label class="font-style">Zone Name</mat-label>
+                <input matInput #input placeholder="Zone Name" formControlName="name" required class="font-style" autocomplete="off">
+
+                <mat-error *ngIf="zone.invalid" class="font-style">
+
+                                            {{getErrorZoneName()}}
+                                        </mat-error>
+
+            </mat-form-field>
+
+
+
+
+            <mat-form-field appearance="outline" fxFlex>
+                <mat-label class="font-style">Capacity</mat-label>
+                <input matInput #input placeholder="Capacity" formControlName="capacity" required class="font-style" autocomplete="off">
+                <mat-error *ngIf="capacity.invalid" class="font-style">
+
+                                                                {{getErrorCapacity()}}
+                                                            </mat-error>
+            </mat-form-field>
+
+            <button mat-raised-button class="btn font-style" [disabled]='!zoneForm.valid' color="primary">
+                Submit
+            </button>
+
+
+    </div>
+
+
+
+
+</form>

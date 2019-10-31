@@ -1,0 +1,67 @@
+<div class="add">
+    <mat-toolbar>
+        <span class="fill-remaining-space"></span>
+        <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabIndex="-1">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </mat-toolbar>
+    <form fxLayout="column" fxLayoutAlign="center center" [formGroup]="vehicleForm" (ngSubmit)="onSubmit()">
+        <div fxFlex=50% fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="20%" fxLayoutGap.lt-md="0px" class="form"
+            fxLayoutAlign="center center">
+            <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="50px" fxLayoutGap.lt-md="0px" class="col">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label class="font-style">Insurance No.</mat-label>
+                    <input minlength="6" maxlength="10" matInput #input placeholder="Insurance No."
+                        formControlName="insuranceNo" required class="font-style" autocomplete="off">
+                    <mat-hint class="font-style">
+                        Insurence No. is between 6-10 characters long
+                    </mat-hint>
+                    <mat-error *ngIf="RinsuranceNo.invalid" class="font-style">
+                        {{getErrorInsuranceNo()}}
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label class="font-style">Vehicle Type</mat-label>
+                    <mat-select formControlName="vehicleType">
+                        <mat-option *ngFor="let vehicleType of Vehicletypes" [value]="vehicleType" class="font-style">
+                            {{vehicleType.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="50px" fxLayoutGap.lt-md="0px" class="col">
+               
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label class="font-style">Chassis Number.</mat-label>
+                    <input minlength="11" maxlength="17" matInput #input placeholder="Chassis No."
+                        formControlName="chassisNumber" class="font-style" required autocomplete="off">
+                    <mat-hint class="font-style">
+                        Chassis No. is between 11-17 characters long
+                    </mat-hint>
+                    <mat-error *ngIf="RchassisNumber.invalid" class="font-style">
+                        {{getErrorChassisNo()}}
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label class="font-style">Registration No.</mat-label>
+                    <input matInput #input placeholder="Registration No" formControlName="registrationNo" required
+                        class="font-style" autocomplete="off">
+                    <mat-error *ngIf="rNum.invalid" class="font-style">
+                        {{getErrorRegistrationNo()}}
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+            <mat-form-field style="padding-right: 40%;">
+                <input matInput [matDatepicker]="purchasedDate" formControlName="purchasedDate" [max]="todaydate"
+                    placeholder="Vehicle Purchased Date" #input class="font-style" required autocomplete="off">
+                <mat-datepicker-toggle matSuffix [for]="purchasedDate"></mat-datepicker-toggle>
+                <mat-datepicker #purchasedDate></mat-datepicker>
+            </mat-form-field>
+    
+        
+        <button mat-raised-button [disabled]='!vehicleForm.valid' class="btn font-style" color="primary">
+            Submit
+        </button>
+    </form>
+</div>

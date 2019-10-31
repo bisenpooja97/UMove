@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title style="color: white ">Sign In</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-grid>
+    <ion-row justify-content-center>
+      <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+        <img src = "./assets/icon/motorcycle_taxi_935220.png"><br>
+        <h2 style="font-size: 40px;font-weight: bold" text-center>UMove</h2>
+        <form>
+        <div padding>
+          <h4 >Sign in</h4>
+          <p>Enter your 10 digit mobile number</p>
+          <ion-input name="pnumber" type="tel" [(ngModel)]="pnumber" required maxlength="10"></ion-input>
+        </div>
+
+        <div padding>
+          <div id="recaptcha-container"></div>
+          <ion-button size="large" type="submit" (click)="sendLoginCode()" expand="block" [disabled]="disableButton">Get OTP</ion-button>
+        </div>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+

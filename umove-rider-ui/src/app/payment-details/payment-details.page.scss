@@ -1,0 +1,41 @@
+.heading{
+    font-family:  Ormont_Light !important;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+.DistTime{
+    color: #d7d8da;
+    padding-inline-end: 5px;
+    font-size: 1.0rem; 
+}
+ion-item {
+    font-size: 0.9rem; 
+}
+.baseFare{
+    font-size: 0.9rem;
+    padding-bottom: 0px;
+    margin-bottom: 0px;  
+}
+.baseFare ion-label{
+    font-size: 1.0rem;
+    padding-bottom: 0px;
+    margin-bottom: 0px; 
+}
+.belowBaseFare{
+    font-size: 0.8rem;   
+    color: #d7d8da;
+    padding-top: 0px;
+    margin-top: 0px;   
+}
+.PaidForRide{
+    color:#78c288;
+    }
+.showCharge ion-label{
+     padding-right: 0.4 rem;
+
+}
+.lab-dist{
+    padding-right: 0.2rem; 
+    margin-right: 0.2rem;
+}
+    

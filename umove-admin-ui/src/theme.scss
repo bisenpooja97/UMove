@@ -1,0 +1,21 @@
+@import '~@angular/material/theming';
+@include mat-core();
+
+$Umove-Admin-primary: mat-palette($mat-blue-gray, 800);
+$Umove-Admin-accent:  mat-palette($mat-red, 600);
+$Umove-Admin-warn:    mat-palette($mat-deep-orange);
+
+
+$Umove-Admin-theme: mat-light-theme($Umove-Admin-primary, $Umove-Admin-accent, $Umove-Admin-warn);
+
+@include angular-material-theme($Umove-Admin-theme);
+
+
+.alternate-theme {
+  $alternate-primary: mat-palette($mat-light-blue);
+  $alternate-accent:  mat-palette($mat-yellow, 400);
+
+  $alternate-theme: mat-light-theme($alternate-primary, $alternate-accent);
+
+  @include angular-material-theme($alternate-theme);
+}

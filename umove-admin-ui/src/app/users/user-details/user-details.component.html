@@ -1,0 +1,43 @@
+<div fxLayout.sm="column" fxLayout.gt-sm="row" fxLayoutGap="10%">
+  <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap.lt-md="0px">
+    <mat-form-field appearance="outline" fxFlex class="status">
+      <mat-label>User Status</mat-label>
+      <mat-select [(ngModel)]="Status" (ngModelChange)="onChange($event)">
+        <mat-option *ngFor="let u of userStatus" [value]="u.value">
+          {{u.viewValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>
+<div fxLayout="column">
+  <mat-card class="user" fxFlex.sm="0 1 calc(50%-10px)" fxFlex.md="0 1 calc(33%-10px)" fxLayout="column"
+    fxLayoutGap="20px">
+    <div fxFlex=50% fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="20%" fxLayoutGap.lt-md="0px" class="form"
+      fxLayoutAlign="center center">
+      <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="50px" fxLayoutGap.lt-md="0px" class="col">
+        <mat-card-title fxLayoutAlign="center center">Name: {{user?.name}}</mat-card-title>
+        <mat-card-title fxLayoutAlign="center center">Mobile No: {{user?.mobileNumber}}</mat-card-title>
+        <mat-card-title fxLayoutAlign="center center">E-mail: {{user?.email}}</mat-card-title>
+      </div>
+    </div>
+  </mat-card>
+
+  <h1 fxLayout="column" fxLayout.gt-md="row" fxLayoutGap.gt-md="15px" class="userName">
+  </h1>
+
+  <mat-card class="user" fxFlex.sm="0 1 calc(50%-10px)" fxFlex.md="0 1 calc(33%-10px)" fxLayout="column"
+    fxLayoutGap="20px">
+    <br><br>
+    <div fxFlex=50% fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="20%" fxLayoutGap.lt-md="0px" class="form"
+      fxLayoutAlign="center center">
+      <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="50px" fxLayoutGap.lt-md="0px" class="doc">
+        <mat-card-title fxLayoutAlign="center center">Driving Licence Number : {{document?.dlicenceNumber}}
+        </mat-card-title>
+        <mat-card-title fxLayoutAlign="center center">Expiry date: {{document?.expiryDate|date: "dd LLLL yyyy"}}
+        </mat-card-title>
+        <mat-card-title fxLayoutAlign="center center">Document Status: {{document?.documentStatus}}</mat-card-title>
+      </div>
+    </div>
+  </mat-card>
+</div>

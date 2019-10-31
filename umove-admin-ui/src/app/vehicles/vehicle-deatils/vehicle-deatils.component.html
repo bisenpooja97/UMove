@@ -1,0 +1,52 @@
+<div fxLayout.gt-sm="row" fxLayout.sm="column" fxLayoutGap="10%"> 
+    <div fxLayout="column" fxLayout.sm="column" fxLayoutGap="50px" fxLayoutGap.lt-md="0px">
+      <h1 fxLayout="column" fxLayout.gt-md="row" fxLayoutGap.gt-md="15px" class="vehicleName font-style">
+            <i class="material-icons back-btn" (click)="back()">
+                    keyboard_backspace
+            </i> {{registrationNo}}
+
+        </h1>
+    </div>
+
+    <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap.lt-md="0px">
+        <mat-form-field appearance="outline" fxFlex class="status">
+            <mat-label class="font-style">Vehicle Status</mat-label>
+            <mat-select [(ngModel)]="status1" (ngModelChange)="onChange($event)" class="font-style">
+                <mat-option *ngFor="let z of vehicleStatus" [value]="z.value" class="font-style">
+                    {{z.viewValue}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+</div>
+
+<div fxLayout="column" class="space-top">
+<mat-card class="vehicle" fxFlex.sm="0 1 calc(50%-10px)" fxFlex.md="0 1 calc(33%-10px)" fxLayout="column" fxLayoutGap="20px">
+    <mat-card-title fxLayoutAlign="start" class="date font-style">{{purchasedDate| date:"dd LLLL yyyy"}}
+        <button mat-button class="icon" (click)="update()">
+            <mat-icon>
+                    create
+            </mat-icon>
+    </button>
+    </mat-card-title>
+    <br><br>
+    <div fxFlex=50% fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="20px" fxLayoutGap.lt-md="0px"
+    class="form" fxLayoutAlign="center center">    
+<div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="50px" fxLayoutGap.lt-md="0px" class="col">
+         <mat-card-title fxLayoutAlign="center center" class="font-style">Insurance No: {{insuranceNo}}</mat-card-title>
+            <mat-card-title fxLayoutAlign="center center" class="font-style">Last Service Date: {{lastServiceDate| date:"dd LLLL yyyy"}}</mat-card-title>
+            <mat-card-title fxLayoutAlign="center center" class="font-style">Vehicle Type: {{name}}</mat-card-title>
+</div>
+<div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="50px" fxLayoutGap.lt-md="0px" class="col">
+ 
+    <mat-card-title fxLayoutAlign="center center" class="font-style">Cost/KM: {{costkm | number: '1.2-2'}}</mat-card-title>
+    <mat-card-title fxLayoutAlign="center center" class="font-style">Cost/Min: {{costtime}}</mat-card-title>
+    <mat-card-title fxLayoutAlign="center center" class="font-style">Chassis No: {{chassisNumber}}</mat-card-title>
+
+
+        </div>
+
+    </div>
+
+</mat-card>
+</div>

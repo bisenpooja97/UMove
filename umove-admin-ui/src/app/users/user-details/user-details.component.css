@@ -1,0 +1,44 @@
+.user {
+    margin-bottom: 40px;
+    margin-left: 450px;
+     height: 300px; 
+    width: 50%;
+    
+}
+
+.block-user
+{
+    color:purple;
+}
+
+.status {
+    margin-top: 20px;
+    padding-left: 1200px;
+}
+
+
+@media only screen and (max-width: 600px) {
+    .user {
+        margin-left: 30px;
+        height: 300px;
+        width: 85%;
+    }
+
+    .status {
+        margin-top: 20px;
+        padding-right: 60x;
+        padding-left: 0px;
+    }
+
+    mat-card-title {
+        font-size: 1.4em;
+    }
+}
+
+.col {
+    margin-top: 130px;
+}
+
+.doc {
+    margin-top: 70px;
+}

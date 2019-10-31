@@ -1,0 +1,28 @@
+.toolbar-fullscreen {
+  display: none;
+  
+}
+
+.toolbar-filler {
+  flex: 1 1 auto;
+  background-color: rebeccapurple;
+  width: 50px;
+}
+
+.sidenav {
+  width: 230px;
+  height: auto;
+  position: fixed;
+}
+
+.box {
+  height: 200px;
+}
+
+.logout {
+  font-size: 1em;
+}
+
+mat-sidenav {
+  height: 100%;
+}

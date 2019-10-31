@@ -12,7 +12,9 @@ public class UserServiceApplicationTests {
 
     @Test
     public void contextLoads() {
-        Assert.assertEquals(true, true);
+        Assert.assertTrue(true);
     }
+
+
 
 }

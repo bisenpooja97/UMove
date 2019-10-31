@@ -1,0 +1,23 @@
+<div fxLayout="column">
+    <h1 class="header">
+        Users
+    </h1>
+     <div fxLayout="row" class="search">
+        <mat-form-field fxFlex="20%">
+            <input matInput [(ngModel)]="term" placeholder="Search">
+        </mat-form-field>
+    </div>
+    <div fxLayout="column wrap">
+        <div fxLayout.xs="column" fxLayout.lg="row wrap" fxLayoutGap="50px" class="card" fxLayoutAlign.sm="center center">
+            <app-user-card *ngFor="let user of users | paginate: { itemsPerPage: 12, currentPage: p } | filter:term"
+                [users]="user">
+            </app-user-card>
+        </div>
+        <pagination-controls (pageChange)="p = $event" fxLayoutAlign="center center"></pagination-controls>
+        </div>
+    </div>
+
+
+
+
+

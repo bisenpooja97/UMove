@@ -1,0 +1,111 @@
+<ion-content>
+  <ion-list lines="none">
+    <ion-card>
+      <ion-row>
+        <ion-item>
+          <ion-label>{{ rides?.bookedAt | date: 'medium' }}</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>{{ rides?.paymentDetail?.totalAmount | currency : "INR" }}</ion-label>
+        </ion-item>
+      </ion-row>
+      <ion-item>
+        <ion-label>{{ rides?.vehicle?.name }}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>{{ rides?.vehicle?.registrationNo }}</ion-label>
+      </ion-item>
+    </ion-card>
+  </ion-list>
+  <ion-card>
+    <ion-list lines="none">
+      <ion-item>
+        <ion-grid class = "rideStartAt">
+          <ion-row>
+            <ion-col>
+              <ion-icon name="pin" color="tertiary"></ion-icon>
+              <ion-text>Pickup</ion-text>
+            </ion-col>
+            <ion-col>
+              <ion-text>{{ rides?.rideStartAt | date: 'hh:mm a' }}</ion-text>
+            </ion-col>
+          </ion-row>
+          <ion-text>
+            {{ rides?.sourceZone?.locality }},{{ rides?.sourceZone?.city }},{{ rides?.sourceZone?.state }},{{ rides?.sourceZone?.country }}-{{ rides?.sourceZone.pincode }}
+          </ion-text>
+        </ion-grid>
+      </ion-item>
+      <ion-item *ngFor="let ridesdestinationZones of rides?.destinationZones">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="4">
+              <ion-icon name="pin" color="tertiary"></ion-icon>
+              <ion-text>Drop</ion-text>
+            </ion-col>
+            <ion-col size="7">
+              <ion-text>{{ rides?.rideEndAt | date: 'hh:mm a' }}</ion-text>
+            </ion-col>
+            <ion-col>
+              <ion-text>
+                {{ ridesdestinationZones?.locality }},{{ ridesdestinationZones?.city }},{{ ridesdestinationZones?.state }},{{ ridesdestinationZones?.country }}-{{ ridesdestinationZones?.pincode }}
+              </ion-text>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+
+  <ion-card>
+    <ion-list lines="none">
+      <ion-item class="heading">
+        Fare Break-up
+      </ion-item>
+      <ion-row>
+        <ion-item>
+          <ion-label class="DistTime">Distance</ion-label>{{ rides?.distance }} Km
+        </ion-item>
+        <ion-item>
+          <ion-label class="DistTime">Time</ion-label> {{ rides?.duration }} mins
+        </ion-item>
+      </ion-row>
+      <ion-item class="baseFare">
+        <ion-label>
+          Base Fare </ion-label> {{ rides?.paymentDetail?.rideAmount | currency : "INR" }}
+      </ion-item>
+      <ion-item>
+        <ion-label class="belowBaseFare">Minimum Fare Applied</ion-label>
+      </ion-item>
+      <div *ngIf="appliedPromoCode || hideMe">
+        <ion-item>
+          <ion-label>Reward Points Discount </ion-label> - {{ rides?.promoCode?.discountPercent | currency : "INR" }}
+        </ion-item>
+      </div>
+      <ion-item>
+        <ion-label>Petrol Charge </ion-label> - {{ rides?.paymentDetail?.petrolCharges | currency : "INR" }}
+      </ion-item>
+      <div *ngIf="extraChargeStatus || hideMe">
+        <ion-item>
+          <ion-label>Total Extra Charges </ion-label> + {{ rides?.paymentDetail?.totalExtraCharges | currency : "INR" }}
+        </ion-item>
+      </div>
+      <ion-item>
+        <ion-label>Total Amount</ion-label> {{ rides?.paymentDetail?.totalAmount | currency : "INR" }}
+      </ion-item>
+
+
+      <ion-item>
+        <ion-label>Paid Amount </ion-label> {{ rides?.paymentDetail?.totalAmount | currency : "INR" }}
+      </ion-item>
+
+    </ion-list>
+    <div *ngIf="rideStatusPaid || hideMe">
+      <ion-button slot full (click)="pay()" expand="block">Pay</ion-button>
+    </div> 
+    <div *ngIf="rideStatusUnPaid || hideMe">
+      <ion-text class="PaidForRide">You have Already Paid For This Ride</ion-text>
+    </div>
+   </ion-card>
+
+ 
+</ion-content>

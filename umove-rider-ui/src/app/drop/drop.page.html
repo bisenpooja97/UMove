@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title >Select Drop Zone</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content [ngClass]="{'loader': !isLoaded}" *ngIf="!isLoaded">
+  <ion-grid style="height: 100%">
+    <ion-row style="height: 100%;">
+      <ion-img src="assets/icon/loader.svg" style="margin: 0 auto;" ></ion-img>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<ion-content>
+  <!--<app-map [containerId]="containerId"  (onSelected)="getSelected($event);" ></app-map>-->
+  <ion-grid style="height: 100%;">
+    <ion-row>
+      <ion-auto-complete style="width: 100%"  [dataProvider]="zoneService" (itemSelected)="gettingCoordinatesByLocality($event)"></ion-auto-complete>
+    </ion-row>
+    <ion-row  class="map" id="drop" style="height: 100%;" ></ion-row>
+  </ion-grid>
+</ion-content>
+<ion-footer>
+  <ion-row *ngIf="page=='drop'">
+    <ion-button [class.button-disabled]="selectedZone===undefined" expand="block" class="ion-no-margin btn-bottom" style="width: 100vw" (click)="confirmBooking()">Show Booking Details</ion-button>
+  </ion-row>
+  <ion-row *ngIf="page=='change-drop'">
+    <ion-button [class.button-disabled]="selectedZone===undefined" expand="block" class="ion-no-margin btn-bottom" style="width: 100vw" (click)="rideDetails()">Ride Details</ion-button>
+  </ion-row>
+</ion-footer>

@@ -1,0 +1,83 @@
+<!--<ion-header>-->
+<!--  <ion-toolbar>-->
+<!--    <ion-title>User-Profile</ion-title>-->
+<!--    <ion-thumbnail slot="start">-->
+<!--      <ion-menu-button></ion-menu-button>-->
+<!--    </ion-thumbnail>-->
+<!--  </ion-toolbar>-->
+<!--</ion-header>-->
+<!--<ion-content>-->
+<!--  <ion-card *ngIf="user">-->
+<!--    <ion-card-content>-->
+<!--      <img src = "./assets/icon/dummy-avatar-300x300.jpg"><br>-->
+<!--      <ion-row center>-->
+<!--        <ion-col text-center>-->
+<!--          <ion-button (click)="goAnOtherPage1()"><ion-icon name="create"></ion-icon>&nbsp;Edit Profile</ion-button>-->
+<!--        </ion-col>-->
+<!--      </ion-row><br>-->
+<!--      <ion-card-title text-center>{{user?.name}}</ion-card-title><br>-->
+<!--      <p text-center>Email:{{user?.email}}</p>-->
+<!--      <p text-center>Mobile:{{user?.mobileNumber}}</p><br>-->
+<!--      <ion-button expand=block fill=outline (click)="goAnOtherPage()">Update KYC</ion-button><br>-->
+<!--      <ion-row centers>-->
+<!--        <ion-col text-center>-->
+<!--          <ion-button (click)="goLogout()">Logout</ion-button>-->
+<!--        </ion-col>-->
+<!--      </ion-row>-->
+
+<!--    </ion-card-content>-->
+<!--  </ion-card>-->
+<!--</ion-content>-->
+<!--OLD CODE-->
+
+<ion-header>
+  <ion-toolbar>
+    <ion-icon class="imagesize" ios="ios-person" md="md-person"></ion-icon>
+    <div class ="container">
+      <ion-menu-button class="top-left"></ion-menu-button>
+      <div class="bottom-left">{{user?.name}}</div>
+      <ion-button class="top-right"(click)="goAnOtherPage1()">
+        <ion-icon ios="ios-create" md="md-create"></ion-icon>
+      </ion-button>
+    </div>
+  </ion-toolbar>
+</ion-header>
+<ion-content *ngIf="user">
+  <ion-item lines="none">
+    <ion-grid>
+      <ion-row class="text-subheading"><h4>Profile</h4></ion-row>
+    </ion-grid>
+  </ion-item>
+  <ion-item class="phone-icon">
+    <a><ion-icon class="icon-square" ios="ios-mail" md="md-mail"></ion-icon><span></span></a>
+    <ion-grid class="grid-style">
+      <ion-row class="text-heading">Email</ion-row>
+      <ion-row class="text-left">{{user?.email}}</ion-row>
+    </ion-grid>
+  </ion-item>
+  <ion-item class="phone-icon">
+    <a ><ion-icon class="icon-square"ios="ios-call" md="md-call"></ion-icon><span></span></a>
+    <ion-grid class="grid-style">
+      <ion-row class="text-heading">Mobile</ion-row>
+      <ion-row class="text-left">{{user?.mobileNumber}}</ion-row>
+    </ion-grid>
+  </ion-item>
+  <ion-item lines="none">
+    <ion-grid>
+      <ion-row class="text-subheading"><h4>Others</h4></ion-row>
+    </ion-grid>
+  </ion-item>
+  <ion-row centers >
+    <ion-col text-center>
+      <ion-button class="phone-icon" expand="block" fill=outline (click)="goAnOtherPage()">Update KYC</ion-button>
+    </ion-col>
+  </ion-row>
+  <ion-item class="phone-icon" lines="none" (click)="goLogout()">
+    <a><ion-icon class="icon-square" ios="ios-log-out" md="md-log-out" ></ion-icon><span></span></a>
+    <ion-grid class="grid-style">
+      <ion-row class="text-heading" >Logout</ion-row>
+    </ion-grid>
+  </ion-item>
+</ion-content>
+
+
