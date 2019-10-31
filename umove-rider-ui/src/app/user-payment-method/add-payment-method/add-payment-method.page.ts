@@ -1,6 +1,6 @@
 import {Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {HTTP} from '@ionic-native/http/ngx';
 import {PaymentMethod} from '../../model/payment-method';
 import {UserPaymentMethodService} from '../../service/user-payment-method/user-payment-method.service';
@@ -25,9 +25,13 @@ export class AddPaymentMethodPage implements OnInit {
     // document: null,
   };
   key = 'details';
+  page: string;
+
   // tslint:disable-next-line:max-line-length
-  constructor(private formBuilder: FormBuilder, private userPaymentMethodService: UserPaymentMethodService, private router: Router, private http: HTTP, private storage: Storage) { }
+  constructor(private formBuilder: FormBuilder, private userPaymentMethodService: UserPaymentMethodService, private router: Router,
+              private http: HTTP, private storage: Storage, private route: ActivatedRoute) { }
   ngOnInit() {
+    this.page = this.route.snapshot.paramMap.get('page');
     this.addPayment = new FormGroup({
       paymentProvider: new FormControl('', Validators.required),
       paymentType: new FormControl('', Validators.required),
@@ -38,7 +42,7 @@ export class AddPaymentMethodPage implements OnInit {
     });
   }
   goShowPayment() {
-    this.router.navigateByUrl('/show-payment-method');
+    this.router.navigateByUrl('/show-payment-method/' + this.page);
   }
   addForm(data) {
     this.storage.get(this.key).then(value => {

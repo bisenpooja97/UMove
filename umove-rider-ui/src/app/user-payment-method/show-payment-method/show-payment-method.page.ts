@@ -51,7 +51,7 @@ export class ShowPaymentMethodPage implements OnInit {
 
     goToHome() {}
     goAnotherPage() {
-        this.router.navigateByUrl('/add-payment-method');
+        this.router.navigateByUrl('/add-payment-method/' + this.page);
     }
     onSelect(data) {
         if (this.page==='select') {

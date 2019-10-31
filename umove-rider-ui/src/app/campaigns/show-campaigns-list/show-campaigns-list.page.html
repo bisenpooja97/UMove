@@ -60,7 +60,7 @@
       <ion-col padding-horizontal>
         <ion-row style="padding-top: 15px;padding-bottom: 15px;padding-left: 15px" class="text-heading">India</ion-row>
       </ion-col>
-        <ion-button *ngIf="!disableButton">Apply</ion-button>
+        <ion-button *ngIf="!disableButton" (click)="sendCampaign(campaign)">Apply</ion-button>
       </ion-row>
     </ion-grid>
   </ion-item>
