@@ -89,6 +89,7 @@ public class VehicleImpl implements ServiceVehicle {
         return v;
 
     }
+//Find vehicles based on type name
 
     public List<Vehicle> findByType(String name){
         List<Vehicle> v=repo.findByType(name);
@@ -110,6 +111,10 @@ public class VehicleImpl implements ServiceVehicle {
         List<Vehicle> vehicles=repo.findByStatus(status,new PageRequest(page,100)).getContent();
         return vehicles;
     }
+
+
+
+
 
 
     //To find vehicles based on Registartion No

@@ -110,9 +110,9 @@ public class VehicleTypeImpl implements ServiceVehicleType {
 
             for ( Vehicle vehicle : vehicleList){
                 vehicle.setVehicleType(typeList);
-                vehicleRepo.save(vehicle);
             }
             return repo.save(typeList);
+
         }
 
         return null;
