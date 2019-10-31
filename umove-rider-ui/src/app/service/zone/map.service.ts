@@ -42,7 +42,6 @@ export class MapService implements OnInit{
     this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION).then(
         result => {
           if (result.hasPermission) {
-
             //If having permission show 'Turn On GPS' dialogue
             this.askToTurnOnGPS();
           } else {
@@ -122,7 +121,6 @@ export class MapService implements OnInit{
 
 
     this.checkMapLoading();
-    // this.map.on('idle', () => {
     this.map.on('load', () => {
       console.log('map loaded');
       this.map.resize();
@@ -169,8 +167,7 @@ export class MapService implements OnInit{
       });
       this.map.addControl(geolocator);
       geolocator.on('result',(result)=>{
-         // this.markers.remove('places'+this.layoutCount++);
-         this.nearbyZonesLayer(result.result.geometry.coordinates[1],result.result.geometry.coordinates[0]);
+        this.nearbyZonesLayer(result.result.geometry.coordinates[1],result.result.geometry.coordinates[0]);
       })
       }
       this.clickPopUp();
