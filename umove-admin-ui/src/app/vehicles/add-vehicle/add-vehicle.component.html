@@ -12,7 +12,7 @@
                 <mat-form-field appearance="outline" fxFlex>
                     <mat-label class="font-style">Insurance No.</mat-label>
                     <input minlength="6" maxlength="10" matInput #input placeholder="Insurance No."
-                        formControlName="insuranceNo" required class="font-style">
+                        formControlName="insuranceNo" required class="font-style" autocomplete="off">
                     <mat-hint class="font-style">
                         Insurence No. is between 6-10 characters long
                     </mat-hint>
@@ -34,7 +34,7 @@
                 <mat-form-field appearance="outline" fxFlex>
                     <mat-label class="font-style">Chassis Number.</mat-label>
                     <input minlength="11" maxlength="17" matInput #input placeholder="Chassis No."
-                        formControlName="chassisNumber" class="font-style" required>
+                        formControlName="chassisNumber" class="font-style" required autocomplete="off">
                     <mat-hint class="font-style">
                         Chassis No. is between 11-17 characters long
                     </mat-hint>
@@ -45,7 +45,7 @@
                 <mat-form-field appearance="outline" fxFlex>
                     <mat-label class="font-style">Registration No.</mat-label>
                     <input matInput #input placeholder="Registration No" formControlName="registrationNo" required
-                        class="font-style">
+                        class="font-style" autocomplete="off">
                     <mat-error *ngIf="rNum.invalid" class="font-style">
                         {{getErrorRegistrationNo()}}
                     </mat-error>
@@ -54,7 +54,7 @@
         </div>
             <mat-form-field style="padding-right: 40%;">
                 <input matInput [matDatepicker]="purchasedDate" formControlName="purchasedDate" [max]="todaydate"
-                    placeholder="Vehicle Purchased Date" #input class="font-style" required>
+                    placeholder="Vehicle Purchased Date" #input class="font-style" required autocomplete="off">
                 <mat-datepicker-toggle matSuffix [for]="purchasedDate"></mat-datepicker-toggle>
                 <mat-datepicker #purchasedDate></mat-datepicker>
             </mat-form-field>
