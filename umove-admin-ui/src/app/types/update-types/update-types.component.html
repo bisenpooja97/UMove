@@ -12,8 +12,8 @@
 
             <mat-form-field appearance="outline" fxFlex>
                 <mat-label class="font-style">Cost/min </mat-label>
-                <input matInput #input placeholder="cost/min" formControlName="costPerMin" [(ngModel)]="costPerMin"
-                 required class="font-style">
+                <input matInput #input placeholder="Cost/Min" formControlName="costPerMin" [(ngModel)]="costPerMin"
+                 required class="font-style" autocomplete="off">
                 <mat-error *ngIf="Rcosttime.invalid" class="font-style">
 
                     {{getErrorCosttime()}}
