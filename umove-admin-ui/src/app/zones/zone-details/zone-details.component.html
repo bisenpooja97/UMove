@@ -1,60 +1,74 @@
 <div fxLayout.gt-sm="row" fxLayout.sm="column" fxLayoutGap="10%">
-        <div fxLayout="column" fxLayout.sm="column" fxLayoutGap="50px" fxLayoutGap.lt-md="0px">
-        <h1 fxLayout="column" fxLayout.gt-md="row" fxLayoutGap.gt-md="15px" class="zoneName">
-                {{name}}
 
-        </h1>
+
+        <div fxLayout="row" fxLayout.sm="column" fxLayoutGap="50px" fxLayoutGap.lt-md="0px">
+               
+                <h1 fxLayout="column" fxLayout.gt-md="row" fxLayoutGap.gt-md="15px" class="zoneName space-name">
+                               
+                        <i class="material-icons back-btn" (click)="back()">
+                                                keyboard_backspace
+                                        </i> {{name}}
+                </h1>
         </div>
 
-<div fxLayout="column" fxLayout.sm="column" fxLayoutGap.lt-md="0px">
-        <mat-icon class="graph">
-                assessment
-        </mat-icon>
-</div>
+        <div fxLayout="column" fxLayout.sm="column" fxLayoutGap.lt-md="0px">
+                <mat-icon class="graph">
+                        assessment
+                </mat-icon>
+        </div>
 
-<div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap.lt-md="0px">
-        <mat-form-field appearance="outline" fxFlex class="status">
-                <mat-label class="font-style">Zone Status</mat-label>
-                <mat-select [(ngModel)]="status" (ngModelChange)="onChange($event)" class="font-style">
-                    <mat-option *ngFor="let z of zoneStatus" [value]="z.value" [ngStyle]="{'color':getColor(z.viewValue)}">
-                        {{z.viewValue}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-</div>
+        <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap.lt-md="0px">
+                <mat-form-field appearance="outline" fxFlex class="status">
+                        <mat-label class="font-style">Zone Status</mat-label>
+                        <mat-select [(ngModel)]="status" (ngModelChange)="onChange($event)" class="font-style">
+                                <mat-option *ngFor="let z of zoneStatus" [value]="z.value"
+                                        [ngStyle]="{'color':getColor(z.viewValue)}">
+                                        {{z.viewValue}}
+                                </mat-option>
+                        </mat-select>
+                </mat-form-field>
+        </div>
 </div>
 
 <div fxLayout="column">
-<mat-card class="zone" fxFlex.sm="0 1 calc(50%-10px)" fxFlex.md="0 1 calc(33%-10px)" fxLayout="column" fxLayoutGap="20px">
+        <mat-card class="zone" fxFlex.sm="0 1 calc(50%-10px)" fxFlex.md="0 1 calc(33%-10px)" fxLayout="column"
+                fxLayoutGap="20px">
 
-        <br><br><br><br>
-    <div fxFlex=50% fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="20%" fxLayoutGap.lt-md="0px"
-        class="form" fxLayoutAlign="center center">
-    <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="50px" fxLayoutGap.lt-md="0px" class="col">
-            <mat-card-title fxLayoutAlign="center center" class="font-style">City: {{city}}</mat-card-title>
-            <mat-card-title fxLayoutAlign="center center" class="font-style">Country: {{country}}</mat-card-title>
-            <mat-card-title fxLayoutAlign="center center" class="font-style">Locality: {{locality}}</mat-card-title>
+                <br><br><br><br>
+                <div fxFlex=50% fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="20%" fxLayoutGap.lt-md="0px"
+                        class="form" fxLayoutAlign="center center">
+                        <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="50px" fxLayoutGap.lt-md="0px"
+                                class="col">
+                                <mat-card-title fxLayoutAlign="center center" class="font-style">City: {{city}}
+                                </mat-card-title>
+                                <mat-card-title fxLayoutAlign="center center" class="font-style">Country: {{country}}
+                                </mat-card-title>
+                                <mat-card-title fxLayoutAlign="center center" class="font-style">Locality: {{locality}}
+                                </mat-card-title>
 
-    </div>
-    <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="50px" fxLayoutGap.lt-md="0px" class="col">
-            <mat-card-title fxLayoutAlign="center center" class="font-style">State: {{state}}</mat-card-title>
-            <mat-card-title fxLayoutAlign="center center" class="font-style">Pincode: {{pincode}}</mat-card-title>
-            <mat-card-title fxLayoutAlign="center center" class="font-style">Capacity: {{capacity}}
-                    <span>
-                        <i class="material-icons iconCapacity" (click)="update()" >
-                            create
-                        </i>
-                    </span>
+                        </div>
+                        <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="50px" fxLayoutGap.lt-md="0px"
+                                class="col">
+                                <mat-card-title fxLayoutAlign="center center" class="font-style">State: {{state}}
+                                </mat-card-title>
+                                <mat-card-title fxLayoutAlign="center center" class="font-style">Pincode: {{pincode}}
+                                </mat-card-title>
+                                <mat-card-title fxLayoutAlign="center center" class="font-style">Capacity: {{capacity}}
+                                        <span>
+                                                <i class="material-icons iconCapacity" (click)="update()">
+                                                        create
+                                                </i>
+                                        </span>
 
-            </mat-card-title>
-    </div>
-    </div>
+                                </mat-card-title>
+                        </div>
+                </div>
 
-</mat-card>
+        </mat-card>
 
-<app-supervisor-details></app-supervisor-details>
-<app-vehicle-details></app-vehicle-details>
-<!-- <ngx-spinner
+        <app-supervisor-details></app-supervisor-details>
+        <app-vehicle-details></app-vehicle-details>
+        <!-- <ngx-spinner
   bdColor="rgba(51,51,51,0.8)"
   size="medium"
   color="#fff"

@@ -79,3 +79,11 @@ mat-icon {
     font-weight: bold;
     font-size: 1em;
 }
+
+.back-btn {
+    margin-top: -8px;
+    margin-right: 20px;
+    font-size: 50px;
+    background-color: transparent;
+    cursor: pointer;
+}

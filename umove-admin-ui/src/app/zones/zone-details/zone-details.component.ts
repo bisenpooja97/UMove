@@ -8,6 +8,7 @@ import { UpdateZonesComponent } from '../update-zones/update-zones.component';
 import { AddSupervisorComponent } from '../add-supervisor/add-supervisor.component';
 import { VehicleService } from 'src/app/vehicles/vehicle.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { Location } from '@angular/common';
 
 export interface Status {
   value: string;
@@ -47,7 +48,8 @@ export class ZoneDetailsComponent implements OnInit {
               private notificationService: NotificationService,
               private matDialog: MatDialog,
               private vehicleService: VehicleService,
-              private spinner: NgxSpinnerService) { }
+              private spinner: NgxSpinnerService,
+              private location: Location) { }
 
   ngOnInit() {
     this.spinner.show();
@@ -138,17 +140,7 @@ return '#6D4C41';
 }
 }
 
-// getVehiclesDetails() {
-//   this.vehicleService.getVehicles().subscribe(res => {
-
-//     res.data.filter(val => {
-//       if (val.zoneid === String(this.id)) {
-//           this.count += 1;
-//       }
-//       console.log(this.count, val.zoneid, this.id, val, this.count);
-//     });
-// });
-//   // console.log(this.count);
-//   // return this.count;
-// }
+back() {
+  this.location.back();
+}
 }

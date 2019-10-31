@@ -1,7 +1,9 @@
 <div fxLayout.gt-sm="row" fxLayout.sm="column" fxLayoutGap="10%">
     <div fxLayout="column" fxLayout.sm="column" fxLayoutGap="50px" fxLayoutGap.lt-md="0px">
         <h1 fxLayout="column" fxLayout.gt-md="row" fxLayoutGap.gt-md="15px" class="vehicleName font-style">
-            {{name}}
+                <i class="material-icons back-btn" (click)="back()">
+                        keyboard_backspace
+                </i> {{name}}
 
         </h1>
     </div>
