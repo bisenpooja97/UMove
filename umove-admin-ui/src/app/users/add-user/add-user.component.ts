@@ -13,7 +13,7 @@ export class AddUserComponent implements OnInit {
   form: FormGroup;
   name: string;
   mobileNumber: string;
-  Role: string;
+  Role: [string];
   emailId: string;
 
   get user() {

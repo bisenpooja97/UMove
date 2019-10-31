@@ -22,7 +22,7 @@ export class UserDetailsComponent implements OnInit {
       name: string;
       mobileNumber: string;
       email: string;
-      role: string;
+      role: [string];
       UserStatus: string;
       document: Document;
 
