@@ -16,20 +16,14 @@ import {PaymentMethod} from '../../model/payment-method';
 export class ShowPaymentMethodPage implements OnInit {
     public payment: PaymentMethod;
     private pid1: any;
-    public localUser: UserProfile = {
-        id: null ,
-        name: '',
-        mobileNumber: '',
-        email: '',
-        role: 'User',
-        userStatus: null,
-        // document: null,
-    };
+    public localUser: UserProfile;
     key = 'details';
     page: string;
     // tslint:disable-next-line:max-line-length
     constructor(private userPaymentMethodService: UserPaymentMethodService, private router: Router,
-                private http: HTTP, private storage: Storage, private route: ActivatedRoute) { }
+                private http: HTTP, private storage: Storage, private route: ActivatedRoute) {
+        this.localUser = new UserProfile();
+    }
 
     ionViewWillEnter() {
         this.storage.get(this.key).then( value => {
@@ -54,7 +48,7 @@ export class ShowPaymentMethodPage implements OnInit {
         this.router.navigateByUrl('/add-payment-method/' + this.page);
     }
     onSelect(data) {
-        if (this.page==='select') {
+        if (this.page === 'select') {
             const navigationExtras: NavigationExtras = {
                 state: {
                     selectedPaymentMethod: data

@@ -13,8 +13,6 @@ const routes: Routes = [
     // tslint:disable-next-line:max-line-length
     { path: 'confirm-ride-detail', loadChildren: './confirm-ride-detail/confirm-ride-detail.module#ConfirmRideDetailPageModule', canActivate: [AuthGuardService] },
     // tslint:disable-next-line:max-line-length
-    { path: 'dummy-promocode', loadChildren: './dummy-promocode/dummy-promocode.module#DummyPromocodePageModule', canActivate: [AuthGuardService] },
-    // tslint:disable-next-line:max-line-length
     { path: 'ride-booking-details', loadChildren: './ride-booking-details/ride-booking-details.module#RideBookingDetailsPageModule', canActivate: [AuthGuardService] },
     { path: 'ride-details', loadChildren: './ride-details/ride-details.module#RideDetailsPageModule', canActivate: [AuthGuardService] },
     // tslint:disable-next-line:max-line-length
