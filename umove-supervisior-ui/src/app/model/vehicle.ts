@@ -1,6 +1,6 @@
 import { VehicleType } from './vehicle-type';
 
-export class Vehicle  {
+export class Vehicle{
   public id: string;
   public zoneId: string;
   public insuranceNo: string;
