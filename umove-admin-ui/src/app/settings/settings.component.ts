@@ -13,6 +13,7 @@ export class SettingsComponent implements OnInit {
   configurations: Configuration[];
   autocancelTimeValue: number;
   cancelThresholdTimeValue: number;
+  vicinityDistanceValue: number;
 
   constructor(private settingsService: SettingsService,
               private notificationService: NotificationService) { }
@@ -29,18 +30,21 @@ export class SettingsComponent implements OnInit {
         if (configList.name === 'cancelThresholdTime') {
           this.cancelThresholdTimeValue = configList.value;
         }
+        if (configList.name === 'vicinityDistance') {
+          this.vicinityDistanceValue = configList.value;
+        }
       });
     });
   }
 
-  onTimeChange(name: string, value: number) {
+  onChange(name: string, value: number) {
     this.settingsService.updateConfigurationByName(name, value).subscribe(response => {
-      this.notificationService.success('Time Updated successfully!!');
+      this.notificationService.success('Updated successfully!!');
       console.log('Response of updated time: ', response);
     },
       error => {
         if (error.status === 400) {
-          this.notificationService.warn('Time cannot be Updated!!');
+          this.notificationService.warn('Updation Failed!!');
         }
       });
   }
