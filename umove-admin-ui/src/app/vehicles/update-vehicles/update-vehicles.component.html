@@ -13,7 +13,7 @@
             <mat-form-field appearance="outline" fxFlex>
                 <mat-label class="font-style">Insurance No.</mat-label>
                 <input minlength="6" maxlength="10"  matInput #input placeholder="Insurance No." formControlName="insuranceNo" [(ngModel)]="insuranceNo" 
-                class="font-style" required>
+                class="font-style" required autocomplete="off">
                 <mat-hint class="font-style">
                     Insurence No. is between 6-10 characters long
                 </mat-hint>
@@ -32,7 +32,7 @@
             
             <mat-form-field>
                 <input matInput [matDatepicker]="lastServiceDate" formControlName="lastServiceDate" [max]="todaydate" [min]="minDate" placeholder="Vehicle Last Service  Date" #input
-                class="font-style">
+                class="font-style" autocomplete="off">
                 <mat-datepicker-toggle matSuffix [for]="lastServiceDate"></mat-datepicker-toggle>
                 <mat-datepicker #lastServiceDate></mat-datepicker>
             </mat-form-field>
