@@ -13,7 +13,7 @@
                         <mat-form-field appearance="outline" fxFlex>
                                 <mat-label class="font-style">Zone Capacity</mat-label>
                                 <input matInput maxlength="6" #input placeholder="Zone Capacity" formControlName="capacity" [(ngModel)]="cap" required
-                                class="font-style">
+                                class="font-style" autocomplete="off">
                                 <mat-error *ngIf="capacity.invalid" class="font-style">
 
                                     {{getErrorCapacity()}}

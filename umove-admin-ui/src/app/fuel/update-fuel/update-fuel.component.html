@@ -13,7 +13,7 @@
             <mat-form-field appearance="outline" fxFlex>
                 <mat-label class="font-style">Cost</mat-label>
                 <input matInput #input placeholder="Fuel Cost" formControlName="fuelCost" [(ngModel)]="fuelCost" 
-                required class="font-style">
+                required class="font-style" autocomplete="off" >
                 <mat-error *ngIf="rCost.invalid" class="font-style">
 
                     {{getErrorCost()}}
