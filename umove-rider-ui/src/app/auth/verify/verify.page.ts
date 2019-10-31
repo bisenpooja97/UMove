@@ -5,6 +5,7 @@ import {UserProfile} from '../../model/user-profile';
 import {Storage} from '@ionic/storage';
 import {HTTP} from '@ionic-native/http/ngx';
 import {UserProfileServiceService} from '../../service/users-profile/user-profile-service.service';
+import {AuthenticationService} from '../../service/authentication-service/authentication.service';
 
 @Component({
     selector: 'app-verify',
@@ -22,10 +23,12 @@ export class VerifyPage implements OnInit {
     userDataRecieved: UserProfile;
     userData: UserProfile;
     user: any;
+    jsonkey = 'token';
+    jsonToken: string;
     // inputtext: any;
 
     // tslint:disable-next-line:max-line-length
-    constructor(private win: WindowService, private  router: Router, private http: HTTP , private storage: Storage, private userDataService: UserProfileServiceService) {
+    constructor(private win: WindowService, private  router: Router, private http: HTTP , private storage: Storage, private userDataService: UserProfileServiceService, private  authDataService: AuthenticationService) {
         this.error = false;
         this.userData = new UserProfile();
     }
@@ -40,14 +43,18 @@ export class VerifyPage implements OnInit {
                 this.user = result.user;
                 // console.log(this.user.phoneNumber);
                 this.userData.mobileNumber = this.user.phoneNumber;
-                this.userData.role = 'User';
+                this.userData.roles = ['ROLE_USER'];
                 console.log('In Verify Page', this.userData);
-                this.userDataService.addUser(this.userData).then(res => {
-                    this.userDataRecieved = JSON.parse(res.data).data;
+                this.authDataService.addUser(this.userData).then(res => {
+                    const data = JSON.parse(res.data);
+                    this.userDataRecieved = data.data;
+                    this.jsonToken = data.token;
                     console.log(this.userDataRecieved.id);
+                    console.log(this.jsonToken);
                     this.storage.ready().then(() => {
                         console.log('storing data --', this.userDataRecieved);
                         this.storage.set(this.key, this.userDataRecieved);
+                        this.storage.set(this.jsonkey, this.jsonToken);
                         this.storage.get(this.key).then(value => {
                             console.log('this is in storage', value);
                             this.localUserData = value;
@@ -75,7 +82,6 @@ export class VerifyPage implements OnInit {
                 this.error = true;
             });
     }
-
     loadData() {
         this.storage.get(this.key).then(value => {
             console.log('this is in storage', value);

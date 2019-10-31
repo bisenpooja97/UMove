@@ -100,9 +100,19 @@ public class UserImplService implements UserService {
                 return userRepository.findByMobileNumber(mobileNumber);
             }
         }
-        if(user.getRoles().equals(Role.ROLE_USER)) {
+        System.out.println(user.getRoles() + ":" + Role.ROLE_USER + ":" + Role.ROLE_SUPERVISOR);
+
+        Role role = null;
+        Iterator<Role> iterator = user.getRoles().iterator();
+        if(iterator.hasNext()) {
+            role = iterator.next();
+        }
+
+        if(role.equals(Role.ROLE_USER)) {
+            System.out.println("Im inside if of user");
             user.setUserStatus(UserStatus.Inactive);
-        } else if (user.getRoles().equals(Role.ROLE_SUPERVISOR)) {
+        } else if (role.equals(Role.ROLE_SUPERVISOR)) {
+            System.out.println("another if");
             user.setUserStatus(UserStatus.Unallocated);
         }
         user.setPaymentMethod(new ArrayList<>());

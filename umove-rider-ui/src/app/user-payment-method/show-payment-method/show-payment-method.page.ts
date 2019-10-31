@@ -16,18 +16,12 @@ import {PaymentMethod} from '../../model/payment-method';
 export class ShowPaymentMethodPage implements OnInit {
   public payment: PaymentMethod;
     private pid1: any;
-    public localUser: UserProfile = {
-        id: null ,
-        name: '',
-        mobileNumber: '',
-        email: '',
-        role: 'User',
-        userStatus: null,
-        // document: null,
-    };
+    public localUser: UserProfile;
     key = 'details';
     // tslint:disable-next-line:max-line-length
-  constructor(private userPaymentMethodService: UserPaymentMethodService, private router: Router, private http: HTTP, private storage: Storage) { }
+  constructor(private userPaymentMethodService: UserPaymentMethodService, private router: Router, private http: HTTP, private storage: Storage) {
+      this.localUser = new UserProfile();
+  }
 
   ionViewWillEnter() {
       this.storage.get(this.key).then( value => {

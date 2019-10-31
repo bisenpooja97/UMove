@@ -15,18 +15,12 @@ import {UserProfile} from '../../model/user-profile';
 export class AddPaymentMethodPage implements OnInit {
   public addPayment: FormGroup;
   public payment: PaymentMethod;
-  public localUser: UserProfile = {
-    id: null ,
-    name: '',
-    mobileNumber: '',
-    email: '',
-    role: 'User',
-    userStatus: null,
-    // document: null,
-  };
+  public localUser: UserProfile;
   key = 'details';
   // tslint:disable-next-line:max-line-length
-  constructor(private formBuilder: FormBuilder, private userPaymentMethodService: UserPaymentMethodService, private router: Router, private http: HTTP, private storage: Storage) { }
+  constructor(private formBuilder: FormBuilder, private userPaymentMethodService: UserPaymentMethodService, private router: Router, private http: HTTP, private storage: Storage) {
+    this.localUser = new UserProfile();
+  }
   ngOnInit() {
     this.addPayment = new FormGroup({
       paymentProvider: new FormControl('', Validators.required),
