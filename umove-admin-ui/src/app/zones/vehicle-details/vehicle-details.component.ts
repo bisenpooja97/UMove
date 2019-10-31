@@ -8,6 +8,7 @@ import { AddVehicleComponent } from '../add-vehicle/add-vehicle.component';
 import { MatDialogConfig, MatDialog } from '@angular/material';
 import { NotificationService } from 'src/app/shared/notification.service';
 import { ZoneTypeCount } from 'src/app/model/zone-type-count';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-vehicle-details',
@@ -19,7 +20,8 @@ export class VehicleDetailsComponent implements OnInit {
               private zoneService: ZoneService,
               private route: ActivatedRoute,
               private matDialog: MatDialog,
-              private notificationService: NotificationService) { }
+              private notificationService: NotificationService,
+              private spinner: NgxSpinnerService) { }
 
   count: number;
   vehicleZ: Vehicle[] = [];
@@ -37,6 +39,12 @@ export class VehicleDetailsComponent implements OnInit {
   i = 0;
 
   ngOnInit() {
+    this.spinner.show();
+
+    setTimeout(() => {
+      /** spinner ends after 5 seconds */
+      this.spinner.hide();
+    }, 2000);
     this.buttonDisable = false;
     this.route.queryParams.subscribe(params => {
       this.count = params.count;

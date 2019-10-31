@@ -1,8 +1,6 @@
 package in.stackroute.umove.userservice.ServiceTestCase;
 
-import in.stackroute.umove.userservice.model.Role;
-import in.stackroute.umove.userservice.model.UserData;
-import in.stackroute.umove.userservice.model.UserStatus;
+import in.stackroute.umove.userservice.model.*;
 import in.stackroute.umove.userservice.repository.UserRepository;
 import in.stackroute.umove.userservice.service.UserService;
 import org.junit.Test;
@@ -25,13 +23,19 @@ public class UserServiceTest
 
 //    @Test
 //    public void getUserListTest() {
+//        UserData userData = new UserData();
+//        userData.setUserStatus(UserStatus.Inactive);
+//        userData.setName("Ashwin");
+//        userData.setMobileNumber("9324175849");
+//        userData.setEmail("ashwin@gmail.com");
+//        userData.setRole(Role.User);
+//
 //        when(userRepository.findAll())
-//                .thenReturn(Stream.of(new UserData("XYZ", "9700056784", "xyz@gmail.com", Role.User, UserStatus.Inactive))
+//                .thenReturn(Stream.of(userData)
 //                        .collect(Collectors.toList()));
 //        assertEquals(1, userService.getUserList().size());
 //    }
-//
-//
+
 //    @Test
 //    public void findByNameTest() {
 //        String name = "ABC";
