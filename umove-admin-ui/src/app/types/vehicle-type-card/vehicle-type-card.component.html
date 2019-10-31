@@ -1,8 +1,8 @@
-<mat-card (click)="ok()" class="my-card">
+<mat-card (click)="ok()" class="my-card my-card2">
       <mat-card-content fxLayoutAlign="center center" >
                 <img mat-card-image src="{{url}}" [lazyLoad]="url">
         </mat-card-content>
     <mat-card-title  class="typeName font-style">{{name}}</mat-card-title>
-    <mat-card-content class="font-style">Cost/km : {{costPerKm | number: '1.2-2'}}</mat-card-content>
-    <mat-card-content class="font-style">Cost/min :{{costPerMin | number: '1.2-2'}}</mat-card-content>
+    <mat-card-content class="font-style content">Cost/km : {{costPerKm | number: '1.2-2'}}</mat-card-content>
+    <mat-card-content class="font-style content">Cost/min :{{costPerMin | number: '1.2-2'}}</mat-card-content>
 </mat-card>

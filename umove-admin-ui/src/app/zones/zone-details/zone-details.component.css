@@ -68,8 +68,9 @@ mat-icon {
 }
 
 .iconCapacity {
-    margin-left: 80%;
+    margin-left: 8%;
     cursor: pointer;
+    margin-top: 20%;
 }
 
 .status {
@@ -77,4 +78,12 @@ mat-icon {
     padding-left: 60px;
     font-weight: bold;
     font-size: 1em;
+}
+
+.back-btn {
+    margin-top: -8px;
+    margin-right: 20px;
+    font-size: 50px;
+    background-color: transparent;
+    cursor: pointer;
 }

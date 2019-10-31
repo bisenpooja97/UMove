@@ -16,6 +16,6 @@ public interface ServiceVehicle {
     public List<Vehicle> findByType(String name,int page);
     public List<Vehicle> findByZoneAndType(String zone,String type,int page);
     public List<Vehicle> findByStatus(VehicleStatus status, int page);
-    public List<Vehicle> findByType(String name);
+    Boolean onRideStart(String registrationNo);
 
 }

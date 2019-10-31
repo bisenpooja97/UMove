@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { MatDialogConfig, MatDialog } from '@angular/material';
 import { UpdateVehiclesComponent } from '../update-vehicles/update-vehicles.component';
 import { NotificationService } from 'src/app/shared/notification.service';
+import { Location } from '@angular/common';
 export interface Status {
   value: string;
   viewValue: string;
@@ -42,7 +43,8 @@ export class VehicleDeatilsComponent implements OnInit {
   constructor(private vehicleService: VehicleService,
               private route: ActivatedRoute,
               private matDialog: MatDialog,
-              private notificationService: NotificationService) { }
+              private notificationService: NotificationService,
+              private location: Location) { }
 
   ngOnInit() {
     this.getVehicleDetails();
@@ -77,6 +79,8 @@ export class VehicleDeatilsComponent implements OnInit {
     console.log(this.vehicle, newValue);
     this.vehicle.status = newValue;
     this.vehicleService.updateVehicle(this.route.snapshot.paramMap.get('registrationNo'), this.vehicle).subscribe(
+      res => this.notificationService.success('status updated successfully!!!'),
+      error => this.notificationService.warn('Not updated!!'),
     );
   }
 
@@ -105,5 +109,9 @@ export class VehicleDeatilsComponent implements OnInit {
         );
       }
     });
+  }
+
+  back() {
+    this.location.back();
   }
 }

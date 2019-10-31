@@ -1,11 +1,11 @@
-<mat-card (click)="ok()" class="my-card">
+<mat-card (click)="ok()" class="my-card my-card2">
         <mat-card-content fxLayoutAlign="space-between" >
                 <ngx-avatar class="font-style" name="{{type}}"></ngx-avatar>
                 <mat-chip-list aria-label="Fish selection">
-            <mat-chip [ngStyle]="{'background-color':getColor(status)}" class="status font-style">{{status}}</mat-chip>
+            <mat-chip [ngStyle]="{'background-color':getColor(status)}" class="status font-style content">{{status}}</mat-chip>
             </mat-chip-list>
         </mat-card-content>
         <mat-card-title class="typeName font-style">{{registrationNo}}</mat-card-title>
-        <mat-card-content class="font-style">Vehicle Type: {{type}}</mat-card-content>
+        <mat-card-content class="font-style content">Vehicle Type: {{type}}</mat-card-content>
     
 </mat-card>

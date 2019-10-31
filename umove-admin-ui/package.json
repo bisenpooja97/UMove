@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --base-href http://umove-dev.stackroute.io:8080/adminwebapp/ --deploy-url http://umove-dev.stackroute.io:8080/adminwebapp/",
+    "build": "ng build --base-href https://umove-dev.stackroute.io/adminwebapp/ --deploy-url http://umove-dev.stackroute.io/adminwebapp/",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -27,6 +27,7 @@
     "ng2-search-filter": "^0.5.1",
     "ngx-avatar": "^3.7.0",
     "ngx-pagination": "^4.1.0",
+    "ngx-spinner": "^8.0.3",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"

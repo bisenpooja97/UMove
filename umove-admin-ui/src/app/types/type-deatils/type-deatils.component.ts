@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialogConfig, MatSnackBar, MatDialog } from '@angular/material';
 import { UpdateTypesComponent } from '../update-types/update-types.component';
 import { NotificationService } from 'src/app/shared/notification.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-type-deatils',
@@ -24,7 +25,8 @@ export class TypeDeatilsComponent implements OnInit {
 
   constructor(private vehicleTypeService: VehicleTypeService,
               private route: ActivatedRoute, private matDialog: MatDialog,
-              private notificationService: NotificationService) { }
+              private notificationService: NotificationService,
+              private location: Location) { }
 
   ngOnInit() {
     this.getVehicleTypeDetails();
@@ -65,5 +67,9 @@ export class TypeDeatilsComponent implements OnInit {
         }
       );
     });
+  }
+
+  back() {
+    this.location.back();
   }
 }

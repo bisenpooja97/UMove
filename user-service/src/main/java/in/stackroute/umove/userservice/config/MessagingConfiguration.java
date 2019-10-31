@@ -1,8 +1,5 @@
-package in.stackroute.umove.zoneservice.configuration;
+package in.stackroute.umove.userservice.config;
 
-import org.springframework.amqp.core.Binding;
-import org.springframework.amqp.core.BindingBuilder;
-import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.core.TopicExchange;
 import org.springframework.amqp.rabbit.annotation.RabbitListenerConfigurer;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
@@ -24,49 +21,10 @@ public class MessagingConfiguration extends SpringBootServletInitializer impleme
         return application.sources(MessagingConfiguration.class);
     }
 
-    @Bean("ride_started")
-    Queue rideStartedQueue() {
-        return new Queue("ride_started", false);
-    }
-
-    @Bean("ride_ended")
-    Queue rideEndedQueue() {
-        return new Queue("ride_ended", false);
-    }
-
-    @Bean("ride_cancelled")
-    Queue rideCancelledQueue() {
-        return new Queue("ride_cancelled", false);
-    }
-
     @Bean
-    TopicExchange zoneExchange() {
-        return new TopicExchange("zone_exchange");
+    TopicExchange UserExchange() {
+        return new TopicExchange("user_exchange");
     }
-
-    @Bean
-    TopicExchange bookingExchange() {
-        return new TopicExchange("booking_exchange");
-    }
-
-    @Bean
-    @Qualifier("zone_booking_binding")
-    Binding zoneBookingBinding(TopicExchange zoneExchange, TopicExchange bookingExchange) {
-      return BindingBuilder.bind(zoneExchange).to(bookingExchange).with("ride_started");
-    }
-
-    @Bean
-    @Qualifier("ride_cancelled_zone_binding")
-    Binding rideCancelledZoneBinding(TopicExchange zoneExchange, TopicExchange bookingExchange) {
-        return BindingBuilder.bind(zoneExchange).to(bookingExchange).with("ride_cancelled");
-    }
-
-    @Bean
-    @Qualifier("ride_ended_zone_binding")
-    Binding rideEndedZoneBinding(TopicExchange zoneExchange, TopicExchange bookingExchange) {
-        return BindingBuilder.bind(zoneExchange).to(bookingExchange).with("ride_ended");
-    }
-
 
     /* Bean for rabbitTemplate */
     @Bean
@@ -95,8 +53,9 @@ public class MessagingConfiguration extends SpringBootServletInitializer impleme
     }
 
     @Override
-    public void configureRabbitListeners(final RabbitListenerEndpointRegistrar registrar) {
+    public void configureRabbitListeners(RabbitListenerEndpointRegistrar registrar) {
         registrar.setMessageHandlerMethodFactory(messageHandlerMethodFactory());
     }
+
 
 }

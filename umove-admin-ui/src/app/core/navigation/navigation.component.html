@@ -10,6 +10,18 @@
         <mat-icon mat-list-icon>person</mat-icon>
         <span class="title" mat-line>Users</span>
       </a>
+      <a mat-list-item class="sidenav-link font-style" routerLink="/documents" (click)="sidenav.toggle()">
+        <mat-icon mat-list-icon>verified_user</mat-icon>
+        <span class="title" mat-line>KYC Approval</span>
+      </a>
+      <a mat-list-item class="sidenav-link font-style" routerLink="/users/supervisor" (click)="sidenav.toggle()">
+        <mat-icon mat-list-icon>person</mat-icon>
+        <span class="title" mat-line>Supervisors</span>
+      </a>
+      <a mat-list-item class="sidenav-link font-style" routerLink="/campaigns" (click)="sidenav.toggle()">
+        <mat-icon mat-list-icon>local_offer</mat-icon>
+        <span class="title" mat-line>Campaigns</span>
+      </a>
       <a mat-list-item class="sidenav-link font-style" routerLink="/zones" (click)="sidenav.toggle()">
         <mat-icon mat-list-icon>compass_calibration</mat-icon>
         <span class="title" mat-line>Zones</span>
