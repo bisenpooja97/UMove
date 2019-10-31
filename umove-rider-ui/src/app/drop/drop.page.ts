@@ -5,6 +5,7 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
 import {MapService} from "../service/zone/map.service";
 import {RideService} from "../service/ride.service";
+import {MenuController} from "@ionic/angular";
 
 @Component({
   selector: 'app-drop',
@@ -44,7 +45,8 @@ export class DropPage implements OnInit {
               private router: Router,
               private geolocation: Geolocation,
               private mapService: MapService,
-              private rideService: RideService) {
+              private rideService: RideService,
+              private menuCtrl: MenuController) {
 
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
@@ -75,6 +77,8 @@ export class DropPage implements OnInit {
     this.mapService.gettingCoordinatesByLocality($event);
   }
   ionViewDidEnter() {
+    this.menuCtrl.enable(true);
+    // this.mapService.checkGPSPermission(this.containerId);
     this.geolocation.getCurrentPosition().then((resp) => {
       const lat = resp.coords.latitude;
       const lng = resp.coords.longitude;
