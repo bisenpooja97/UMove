@@ -3,11 +3,12 @@ import * as mapboxgl from 'mapbox-gl';
 import * as MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import {Observable,Subject, timer} from "rxjs";
 import {Zone} from "../../model/zone";
+import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
 import {ZoneService} from "./zone.service";
 import {GeoJson,FeatureCollection} from "../../map";
 import {Geolocation} from "@ionic-native/geolocation/ngx";
 import {environment} from "../../../environments/environment";
-
+import {AndroidPermissions} from "@ionic-native/android-permissions/ngx";
 @Injectable({
   providedIn: 'root'
 })
@@ -23,9 +24,10 @@ export class MapService implements OnInit{
   onLoad$: Observable<any>;
   popup = new mapboxgl.Popup({  closeOnClick: false,closeButton: false,alwaysOpen:true})
       .setText('No Nearby Zones Available');
+  private locationCoords: any;
 
 
-  constructor(private zoneService : ZoneService,private geolocation: Geolocation,) {
+  constructor(private zoneService : ZoneService,private geolocation: Geolocation,private locationAccuracy: LocationAccuracy,private androidPermissions: AndroidPermissions) {
     this.layoutCount = 0;
     this.onZoneSelected = new Subject<Zone>();
     this.selectZone$ = this.onZoneSelected.asObservable();
@@ -34,6 +36,65 @@ export class MapService implements OnInit{
     this.onLoad$ = this.loading.asObservable();
   }
   ngOnInit(): void {
+  }
+
+  checkGPSPermission() {
+    this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION).then(
+        result => {
+          if (result.hasPermission) {
+
+            //If having permission show 'Turn On GPS' dialogue
+            this.askToTurnOnGPS();
+          } else {
+
+            //If not having permission ask for permission
+            this.requestGPSPermission();
+          }
+        },
+        err => {
+          alert(err);
+        }
+    );
+  }
+
+  requestGPSPermission() {
+    this.locationAccuracy.canRequest().then((canRequest: boolean) => {
+      if (canRequest) {
+        console.log("4");
+      } else {
+        //Show 'GPS Permission Request' dialogue
+        this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION)
+            .then(
+                () => {
+                  // call method to turn on GPS
+                  this.askToTurnOnGPS();
+                },
+                error => {
+                  //Show alert if user click on 'No Thanks'
+                  alert('requestPermission Error requesting location permissions ' + error)
+                }
+            );
+      }
+    });
+  }
+
+  askToTurnOnGPS() {
+    this.locationAccuracy.request(this.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY).then(
+        () => {
+          // When GPS Turned ON call method to get Accurate location coordinates
+           this.getLocationCoordinates()
+        },
+        error => alert('Error requesting location permissions ' + JSON.stringify(error))
+    );
+  }
+  getLocationCoordinates() {
+    this.geolocation.getCurrentPosition().then((resp) => {
+      const lat = resp.coords.latitude;
+      const lng = resp.coords.longitude;
+      this.buildMap(lat, lng, 'pickup', true);
+    }).catch((error) => {
+      alert('Error getting location' + error);
+    });
   }
 
   buildMap(lat: number, lng: number, containerId:string, isZone:boolean){
@@ -58,6 +119,8 @@ export class MapService implements OnInit{
 
     });
 
+
+
     this.checkMapLoading();
     // this.map.on('idle', () => {
     this.map.on('load', () => {
@@ -67,7 +130,7 @@ export class MapService implements OnInit{
         this.flyTo(
             [lng, lat],
             1000,
-            13
+            12
         );
       }
       else {

@@ -21,6 +21,7 @@
     "@angular/platform-browser": "~8.1.2",
     "@angular/platform-browser-dynamic": "~8.1.2",
     "@angular/router": "~8.1.2",
+    "@ionic-native/android-permissions": "^5.16.0",
     "@ionic-native/barcode-scanner": "^5.15.0",
     "@ionic-native/core": "^5.0.0",
     "@ionic-native/geolocation": "^5.15.0",
@@ -116,7 +117,9 @@
       },
       "cordova-plugin-ionic-keyboard": {},
       "cordova-sqlite-storage": {},
-      "cordova-plugin-geolocation": {}
+      "cordova-plugin-geolocation": {},
+      "cordova-plugin-android-permissions": {},
+      "cordova-plugin-request-location-accuracy": {}
     },
     "platforms": [
       "android",

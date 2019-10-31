@@ -19,7 +19,7 @@ export class HomePage implements OnInit{
     ngOnInit(): void {
 
     }
-  containerId = 'pick';
+  containerId = 'pick-up';
   page = 'pick-up';
   trip : boolean;
   isLoaded : boolean;
@@ -66,15 +66,19 @@ export class HomePage implements OnInit{
 
   ionViewDidEnter() {
     this.menuCtrl.enable(true);
-    this.geolocation.getCurrentPosition().then((resp) => {
-      const lat = resp.coords.latitude;
-      const lng = resp.coords.longitude;
-      this.mapService.buildMap(lat, lng, 'pickup', true);
-      // this.mapService.checkMapLoading();
-      // this.mapService.marker(lat, lng);
-    }).catch((error) => {
-      console.log('Error getting location', error);
-    });
+    this.mapService.checkGPSPermission();
+    // this.mapService.requestGPSPermission();
+    // this.mapService.askToTurnOnGPS();
+    // this.mapService.getLocationCoordinates();
+    // // this.geolocation.getCurrentPosition().then((resp) => {
+    // //   const lat = resp.coords.latitude;
+    // //   const lng = resp.coords.longitude;
+    // //   this.mapService.buildMap(lat, lng, 'pickup', true);
+    // //   // this.mapService.checkMapLoading();
+    //   // this.mapService.marker(lat, lng);
+    // }).catch((error) => {
+    //   console.log('Error getting location', error);
+    // });
     this.mapService.selectZone$.subscribe(zone => {
       console.log('selected zone', zone);
       this.selectedZone = zone;

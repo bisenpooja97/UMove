@@ -9,7 +9,8 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { HTTP } from '@ionic-native/http/ngx';
 import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-navigator/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
-
+import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
+import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
@@ -53,7 +54,9 @@ import {CampaignService} from './service/campaign-service/campaign.service';
   ],
   providers: [
     HTTP,
+    AndroidPermissions,
     Geolocation,
+    LocationAccuracy,
     LaunchNavigator,
     StatusBar,
     BarcodeScanner,
