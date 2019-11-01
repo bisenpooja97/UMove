@@ -9,7 +9,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
-import {CampaignService} from './services/campaign-service/campaign.service';
+import {CampaignService} from './service/campaign-service/campaign.service';
 import {HTTP} from '@ionic-native/http/ngx';
 
 @NgModule({
