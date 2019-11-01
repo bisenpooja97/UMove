@@ -62,7 +62,7 @@ view() {
       data: {
         name: this.users.name,
         id: this.users.id,
-        imageUrl: `${environment.baseUrl}/userservice/api/v1/downloadFile/${this.users.id}`,
+        imageUrl: `${environment.baseUrl}userservice/api/v1/downloadFile/${this.users.id}`,
         users: this.users
       }
     });

@@ -18,7 +18,7 @@ const routes: Routes = [
 { path: '**', component: PageNotFoundComponent, canActivate: [AuthGuardService] },
 { path: 'customer-list', loadChildren: () => import('./customers/customers.module').then(m => m.CustomersModule) },
 { path: 'customer-list', loadChildren: () => import('./customers/customers.module').then(m => m.CustomersModule) },
-{ path: 'report-list', loadChildren: () => import('./report/report.module').then(m => m.ReportModule) },
+// { path: 'report-list', loadChildren: () => import('./report/report.module').then(m => m.ReportModule) },
 ];
 
 @NgModule({

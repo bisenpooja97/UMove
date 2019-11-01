@@ -335,6 +335,8 @@ public class RideServiceImp implements RideService {
     @Override
     public synchronized boolean isVehicleTypeAllocated(String zoneId, String typeId) {
         RestTemplate restTemplate = new RestTemplate();
+        System.out.println("url for vehicle type" + "https://umove-dev.stackroute.io/zoneservice/" +
+                "api/v1/bookingConfirmed?zoneId=" + zoneId + "&typeId=" + typeId);
         Map<String, Object> response = restTemplate.patchForObject("https://umove-dev.stackroute.io/zoneservice/" +
                 "api/v1/bookingConfirmed?zoneId=" + zoneId + "&typeId=" + typeId, null, Map.class);
         if(response.get("status").equals("Failed")) {
