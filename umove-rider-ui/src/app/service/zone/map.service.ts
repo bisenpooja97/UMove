@@ -101,7 +101,7 @@ export class MapService implements OnInit{
     this.layoutCount =0;
     mapboxgl.accessToken = environment.map;
     this.markers =new mapboxgl.Marker({
-      color:'#344955'
+      color:'#344955',
     });
     console.log('map bn rha h',this.map);
 
@@ -150,15 +150,20 @@ export class MapService implements OnInit{
       this.map.addControl(geolocateController);
         geolocateController.on('geolocate', (result)=>
         {
-          console.log('cntrlr',result.coords.latitude,result.coords.longitude);
-          controller++;
-          if(controller===1){
+          // console.log('cntrlr',result.coords.latitude,result.coords.longitude);
+          // controller++;
+          // if(controller===1){
             const lat=result.coords.latitude;
             const lng=result.coords.longitude;
             this.nearbyZonesLayer(lat,lng);
-          }
+          // }
+
 
         });
+        geolocateController.off('',(result) =>{
+            console.log('off me hu',result);
+        });
+
       const geolocator = new MapboxGeocoder({
         accessToken: mapboxgl.accessToken,
         mapboxgl: mapboxgl,
