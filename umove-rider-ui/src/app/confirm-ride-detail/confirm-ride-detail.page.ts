@@ -56,8 +56,7 @@ export class ConfirmRideDetailPage implements OnInit {
           else if(data.status === 'Pending_Outstanding_Amount') {
             this.rideService.presentAlert('', 'You have pending outstanding amount. Please pay' +
                 ' previous ride amount to book a new ride.', 'Pay', ()=> {
-              const ride: Ride = JSON.parse(data.data);
-              this.router.navigateByUrl('/payment-detail/' + ride._id);
+              this.router.navigateByUrl('/payment-detail/' + data.data.rideId);
             })
           }
           else if(data.status === 'Vehicle_Not_Available') {

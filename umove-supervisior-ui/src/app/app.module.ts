@@ -26,7 +26,7 @@ import {CustomerErrorHandler} from './custom-error-handler';
       HTTP,
       BarcodeScanner,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    { provide: ErrorHandler, useClass: CustomerErrorHandler}
+    // { provide: ErrorHandler, useClass: CustomerErrorHandler}
   ],
   bootstrap: [AppComponent]
 })
