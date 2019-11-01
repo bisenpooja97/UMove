@@ -18,6 +18,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -329,7 +330,9 @@ public class RideServiceImp implements RideService {
     public boolean isValidUser(String userId) {
         RestTemplate restTemplate = new RestTemplate();
         Map<String, Object> response = restTemplate.getForObject("https://umove-dev.stackroute.io/userservice/api/v1/users/" + userId, Map.class);
+        System.out.println("response for user status" + response);
         Map<String, Object> user = (Map<String, Object>) response.get("data");
+        System.out.println("user" + user);
         if(user.get("userStatus").equals("Active")) {
             return true;
         }
@@ -347,15 +350,19 @@ public class RideServiceImp implements RideService {
 
         RestTemplate restTemplate = new RestTemplate();
 
+        HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory();
+        restTemplate.setRequestFactory(requestFactory);
+
         restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
 
         ResponseEntity<Map> response = restTemplate.exchange("https://umove-dev.stackroute.io/zoneservice/" +
                 "api/v1/bookingConfirmed?zoneId=" + zoneId + "&typeId=" + typeId, HttpMethod.PATCH, requestEntity, Map.class);
 
-        if(response.getBody().get("status").equals("Failed")) {
-            return false;
+        System.out.println("vehicle type count ka status" + response.getBody().get("status"));
+        if(response.getBody().get("status").equals("Booked")) {
+            return true;
         }
-        return true;
+        return false;
     }
 
     @Override
@@ -369,16 +376,19 @@ public class RideServiceImp implements RideService {
 
         RestTemplate restTemplate = new RestTemplate();
 
+        HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory();
+        restTemplate.setRequestFactory(requestFactory);
+
         restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
 
         ResponseEntity<Map> response = restTemplate.exchange("https://umove-dev.stackroute.io/zoneservice/" +
         "api/v1/onRideStart?registrationNo=" + registrationNo, HttpMethod.PATCH, requestEntity, Map.class);
 
-        if(response.getBody().get("status").equals("Failed")) {
-            return false;
+        if(response.getBody().get("status").equals("Booked")) {
+            return true;
         }
 
-        return true;
+        return false;
     }
 
     public TrackingLatitudeLongitude storeTrackingData(Ride ride) {
