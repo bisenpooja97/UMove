@@ -1,14 +1,18 @@
 package in.stackroute.umove.zoneservice.service.impl;
 
 import in.stackroute.umove.zoneservice.exception.TypeAlreadyExistException;
+import in.stackroute.umove.zoneservice.model.Vehicle;
 import in.stackroute.umove.zoneservice.model.VehicleType;
 import in.stackroute.umove.zoneservice.repository.FuelRepo;
+import in.stackroute.umove.zoneservice.repository.VehicleRepo;
 import in.stackroute.umove.zoneservice.repository.VehicleTypeRepo;
+import in.stackroute.umove.zoneservice.service.ServiceVehicle;
 import in.stackroute.umove.zoneservice.service.ServiceVehicleType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import sun.tools.jconsole.JConsole;
 
 import java.io.BufferedWriter;
 import java.nio.charset.StandardCharsets;
@@ -24,6 +28,12 @@ public class VehicleTypeImpl implements ServiceVehicleType {
     @Autowired
     VehicleTypeRepo repo;
     FuelRepo fuelRepo;
+    @Autowired
+    VehicleRepo vehicleRepo;
+
+    @Autowired
+    ServiceVehicle serviceVehicle;
+
     //To add new type
     @Override
 
@@ -97,14 +107,22 @@ public class VehicleTypeImpl implements ServiceVehicleType {
             if(type.getBaseFare() != 0){
                 typeList.setBaseFare(type.getBaseFare());
             }
+            repo.save(typeList);
+            List<Vehicle> vehicleList = serviceVehicle.findByType(typeList.getName());
+            System.out.println("list k bad for h kya");
+            for ( Vehicle vehicle : vehicleList){
+                vehicle.setVehicleType(typeList);
+                System.out.println("vehicle aaya kya"+ vehicle);
+                vehicleRepo.save(vehicle);
+            }
             return repo.save(typeList);
-
 
         }
 
         return null;
 
     }
+
 
     //To store image in local system
 

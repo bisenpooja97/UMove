@@ -68,6 +68,7 @@ public class VehicleController {
             List<Vehicle> vehicleList = vehicleManagementService.findByType(type,(page !=null) ? page : 0);
             Map<String, Object> map = new TreeMap<>();
             map.put("data", vehicleList);
+            map.put("count",vehicleList.size());
             map.put("status", HttpStatus.OK);
             return new ResponseEntity<Map>(map, HttpStatus.OK);
         }
@@ -77,6 +78,7 @@ public class VehicleController {
             Vehicle vehicle = vehicleManagementService.findByRegistrationNo(registrationNo);
             Map<String, Object> map = new TreeMap<>();
             map.put("data", vehicle);
+
             map.put("status", HttpStatus.OK);
             return new ResponseEntity<Map>(map, HttpStatus.OK);
         }
@@ -86,6 +88,7 @@ public class VehicleController {
             List<Vehicle> vehicleList = vehicleManagementService.findByStatus(status,(page !=null) ? page : 0);
             Map<String, Object> map = new TreeMap<>();
             map.put("data", vehicleList);
+            map.put("count", vehicleList.size());
             map.put("status", HttpStatus.OK);
             return new ResponseEntity<Map>(map, HttpStatus.OK);
 
