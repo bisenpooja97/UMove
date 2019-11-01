@@ -150,13 +150,13 @@ export class MapService implements OnInit{
       this.map.addControl(geolocateController);
         geolocateController.on('geolocate', (result)=>
         {
-          // console.log('cntrlr',result.coords.latitude,result.coords.longitude);
-          // controller++;
-          // if(controller===1){
+          console.log('cntrlr',result.coords.latitude,result.coords.longitude);
+          controller++;
+          if(controller===1){
             const lat=result.coords.latitude;
             const lng=result.coords.longitude;
             this.nearbyZonesLayer(lat,lng);
-          // }
+          }
 
 
         });

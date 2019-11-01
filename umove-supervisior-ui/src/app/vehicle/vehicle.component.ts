@@ -36,6 +36,7 @@ export class VehicleComponent implements OnInit {
         },
 
       ],
+
       buttons: [
         {
           text: 'Cancel',
