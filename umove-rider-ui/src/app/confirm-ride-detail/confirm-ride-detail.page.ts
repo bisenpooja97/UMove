@@ -36,20 +36,42 @@ export class ConfirmRideDetailPage implements OnInit {
   }
 
   ngOnInit() {
-
   }
 
   confirmBooking() {
+    console.log('zoneId', this.booking.sourceZone.id, 'typeId', this.booking.vehicle.vehicleType.id);
     this.rideService.confirmBooking(this.booking).then(response => {
       console.log('response: ', response);
-      if (response && response.status === 201 && response.data) {
-        this.router.navigateByUrl('ride-booking-details');
-      } else if (!response) {
-        this.rideService.presentToast('Error: Something Went Wrong, Try again.', 2000);
-        this.router.navigateByUrl('');
-      } else {
-        this.rideService.presentToast(JSON.parse(response.data).message, 2000);
-        this.router.navigateByUrl('');
+      if(response) {
+        if(response.status === 200 && response.data) {
+          const data = JSON.parse(response.data);
+          if(data.status === 'Invalid_User') {
+            this.rideService.presentAlert('Kyc Pending', 'Please Upload your Driving license and complete ' +
+                'your kyc to book a ride. If already uploaded then wait for approval.', 'Complete Kyc', ()=> {
+              this.router.navigateByUrl('/update-kyc');
+            })
+          }
+          else if(data.status === 'Pending_Outstanding_Amount') {
+            this.rideService.presentAlert('', 'You have pending outstanding amount. Please pay' +
+                ' previous ride amount to book a new ride.', 'Pay', ()=> {
+              const ride: Ride = JSON.parse(data.data);
+              this.router.navigateByUrl('/payment-detail/' + ride._id);
+            })
+          }
+          else if(data.status === 'Vehicle_Not_Available') {
+            this.rideService.presentAlert('', 'This vehicle is already booked by someone else. Please try ' +
+                'another vehicle.', 'Book Again', ()=> {
+              const ride: Ride = JSON.parse(data.data);
+              this.router.navigateByUrl('/home');
+            })
+          }
+        }
+        else if (response.status === 201 && response.data) {
+          this.router.navigateByUrl('ride-booking-details');
+        } else {
+          this.rideService.presentToast(JSON.parse(response.data).message, 2000);
+          this.router.navigateByUrl('');
+        }
       }
     });
   }
@@ -82,6 +104,7 @@ export class ConfirmRideDetailPage implements OnInit {
       this.rideService.presentToast('Please Select a Destination Zone', 2000);
       this.router.navigateByUrl('home');
     }
+
     console.log('map dikhana h !!');
     this.geolocation.getCurrentPosition().then((resp) => {
       console.log('ab to dikhna chahiye tha!');

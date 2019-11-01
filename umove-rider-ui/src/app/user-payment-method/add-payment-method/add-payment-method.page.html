@@ -34,7 +34,7 @@
       <ion-label position="floating" style="color: black"> Method Number </ion-label>
       <ion-input type = "text" maxlength="25" pattern="^[0-9a-zA-Z.@]*$" formControlName="paymentMethodNumber"></ion-input>
     </ion-item>
-    <ion-button class="button" expand="full" color="primary" type = "submit" [disabled]="!addPayment.valid" (click)="goShowPayment()">Save</ion-button>
+    <ion-button class="button bottom-button ion-no-margin" expand="block" color="primary" type = "submit" [disabled]="!addPayment.valid" (click)="goShowPayment()">Save</ion-button>
   </form>
 
 </ion-content>

@@ -37,5 +37,4 @@ export class VehicleService {
     return this.httpClient.patch<Vehicle>(this.baseUrl + '/' + registrationNo, vehicle);
   }
 
-
 }

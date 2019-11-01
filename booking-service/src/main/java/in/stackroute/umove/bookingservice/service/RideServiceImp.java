@@ -14,6 +14,11 @@ import in.stackroute.umove.bookingservice.repo.RideRepo;
 import in.stackroute.umove.bookingservice.repo.TrackingRepo;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -334,10 +339,20 @@ public class RideServiceImp implements RideService {
 
     @Override
     public synchronized boolean isVehicleTypeAllocated(String zoneId, String typeId) {
+        System.out.println("url for vehicle type" + "https://umove-dev.stackroute.io/zoneservice/" +
+                "api/v1/bookingConfirmed?zoneId=" + zoneId + "&typeId=" + typeId);
+
+        HttpHeaders requestHeaders = new HttpHeaders();
+        HttpEntity<?> requestEntity = new HttpEntity<Object>(requestHeaders);
+
         RestTemplate restTemplate = new RestTemplate();
-        Map<String, Object> response = restTemplate.patchForObject("https://umove-dev.stackroute.io/zoneservice/" +
-                "api/v1/bookingConfirmed?zoneId=" + zoneId + "&typeId=" + typeId, null, Map.class);
-        if(response.get("status").equals("Failed")) {
+
+        restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
+
+        ResponseEntity<Map> response = restTemplate.exchange("https://umove-dev.stackroute.io/zoneservice/" +
+                "api/v1/bookingConfirmed?zoneId=" + zoneId + "&typeId=" + typeId, HttpMethod.PATCH, requestEntity, Map.class);
+
+        if(response.getBody().get("status").equals("Failed")) {
             return false;
         }
         return true;
@@ -345,12 +360,24 @@ public class RideServiceImp implements RideService {
 
     @Override
     public synchronized boolean isVehicleAllocated(String registrationNo) {
+
+        System.out.println("alocate vehicle url: " + "https://umove-dev.stackroute.io/zoneservice/" +
+        "api/v1/onRideStart?registrationNo=" + registrationNo);
+
+        HttpHeaders requestHeaders = new HttpHeaders();
+        HttpEntity<?> requestEntity = new HttpEntity<Object>(requestHeaders);
+
         RestTemplate restTemplate = new RestTemplate();
-        Map<String, Object> response = restTemplate.patchForObject("https://umove-dev.stackroute.io/zoneservice/" +
-                "api/v1/onRideStart?registrationNo=" + registrationNo, null, Map.class);
-        if(response.get("status").equals("Failed")) {
+
+        restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
+
+        ResponseEntity<Map> response = restTemplate.exchange("https://umove-dev.stackroute.io/zoneservice/" +
+        "api/v1/onRideStart?registrationNo=" + registrationNo, HttpMethod.PATCH, requestEntity, Map.class);
+
+        if(response.getBody().get("status").equals("Failed")) {
             return false;
         }
+
         return true;
     }
 
