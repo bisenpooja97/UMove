@@ -47,7 +47,7 @@ export class ZoneService implements AutoCompleteService, OnInit {
 
     //  Service for getting vehicles of a specific zone
     getVehiclesByZoneTypes(id: string): Promise<HTTPResponse> {
-        console.log(this.baseUrl + environment.vehicles);
+        console.log(this.baseUrl + environment.vehicles+'?zoneId='+id+'&status=Free');
         return this.http.get(this.baseUrl + environment.vehicles+'?zoneId='+id+'&status=Free', {}, {}  )
 
     }

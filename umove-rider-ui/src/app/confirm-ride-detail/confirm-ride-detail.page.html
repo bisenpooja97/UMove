@@ -48,23 +48,23 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-card *ngIf="!booking?.promocode">
+  <ion-card *ngIf="!booking?.promoCode">
     <ion-item lines="none" routerLink="/campaigns/apply">
       <a>Apply Promocode</a>
     </ion-item>
   </ion-card>
 
-  <ion-card *ngIf="booking?.promocode">
+  <ion-card *ngIf="booking?.promoCode">
     <ion-card-content>
       <ion-grid no-padding>
         <ion-row class="ion-align-items-center">
           <ion-icon name="pricetags" size="large" color="success"></ion-icon>
           <ion-col padding-horizontal>
             <ion-text color="success">
-              <h2>{{ booking?.promocode?.promocode }} Promocode Applied!</h2>
+              <h2>{{ booking?.promoCode?.promocode }} Promocode Applied!</h2>
             </ion-text>
             <ion-text>
-              <p>Get {{ booking?.promocode?.discountPercent }}% off on your ride upto {{ 50 | currency: 'INR' }}</p>
+              <p>Get {{ booking?.promoCode?.discountPercent }}% off on your ride upto {{ 50 | currency: 'INR' }}</p>
             </ion-text>
           </ion-col>
           <ion-icon name="close-circle" size="large" (click)="removeSelectedPromocode()"></ion-icon>
