@@ -1698,7 +1698,7 @@ let VehicleTypeCardComponent = class VehicleTypeCardComponent {
         this.name = Object.values(this.vehicleTypes)[1];
         this.costPerKm = Object.values(this.vehicleTypes)[2];
         this.costPerMin = Object.values(this.vehicleTypes)[3];
-        this.url = `${src_environments_environment_prod__WEBPACK_IMPORTED_MODULE_3__["environment"].baseUrl}/zoneservice/api/v1/downloadFile/${this.name}`;
+        this.url = `${src_environments_environment_prod__WEBPACK_IMPORTED_MODULE_3__["environment"].baseUrl}zoneservice/api/v1/downloadFile/${this.name}`;
         console.log(Object.values(this.vehicleTypes));
     }
     ok() {
@@ -3895,7 +3895,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/vishnu/Desktop/umove/umove-admin-ui/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /home/punit/umove/umove-admin-ui/src/main.ts */"./src/main.ts");
 
 
 /***/ })
