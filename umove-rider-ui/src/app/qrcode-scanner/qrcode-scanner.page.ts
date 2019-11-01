@@ -83,20 +83,29 @@ export class QrcodeScannerPage implements OnInit {
             if (vehicleNumber !== undefined) {
                 this.rideService.startRideById(this.ride._id, vehicleNumber).then(response => {
                     console.log('response', response);
-                    this.ride = JSON.parse(response.data).data;
-                    this.rideStatus = this.ride.status;
-                    if (this.rideStatus === 'Auto_Cancelled') {
-                        this.router.navigateByUrl('payment-detail/' + this.ride._id);
-                        mobiscroll.alert({
-                            title: 'Your ride is autocancelled',
-                            message: 'Please book a new ride.',
-                            // callback: () => {
-                            //   // Apply the url of payment page
-                            //   this.router.navigateByUrl('payment-detail/' + this.ride._id);
-                            // }
-                        });
-                    } else {
-                        this.router.navigateByUrl('ride-details');
+
+                    if(JSON.parse(response.data).status === 'Vehicle_Already_Booked') {
+                        this.rideService.presentAlert('Vehicle Already Booked', 'This Vehicle is already ' +
+                            'booked by someone else.', 'Try Again', () => {
+                            this.router.navigateByUrl('ride-booking-details');
+                        })
+                    }
+                    else {
+                        this.ride = JSON.parse(response.data).data;
+                        this.rideStatus = this.ride.status;
+                        if (this.rideStatus === 'Auto_Cancelled') {
+                            this.router.navigateByUrl('payment-detail/' + this.ride._id);
+                            mobiscroll.alert({
+                                title: 'Your ride is autocancelled',
+                                message: 'Please book a new ride.',
+                                // callback: () => {
+                                //   // Apply the url of payment page
+                                //   this.router.navigateByUrl('payment-detail/' + this.ride._id);
+                                // }
+                            });
+                        } else {
+                            this.router.navigateByUrl('ride-details');
+                        }
                     }
                 });
             }
