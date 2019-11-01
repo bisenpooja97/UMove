@@ -18,6 +18,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -347,6 +348,9 @@ public class RideServiceImp implements RideService {
 
         RestTemplate restTemplate = new RestTemplate();
 
+        HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory();
+        restTemplate.setRequestFactory(requestFactory);
+
         restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
 
         ResponseEntity<Map> response = restTemplate.exchange("https://umove-dev.stackroute.io/zoneservice/" +
@@ -368,6 +372,9 @@ public class RideServiceImp implements RideService {
         HttpEntity<?> requestEntity = new HttpEntity<Object>(requestHeaders);
 
         RestTemplate restTemplate = new RestTemplate();
+
+        HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory();
+        restTemplate.setRequestFactory(requestFactory);
 
         restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
 
