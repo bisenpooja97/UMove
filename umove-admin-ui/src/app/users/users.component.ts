@@ -14,6 +14,7 @@ export class UsersComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
    users: User;
    supervisors: User;
+   displayCount: number;
 
   p = 1;
   dataSource = new MatTableDataSource();
@@ -21,12 +22,22 @@ export class UsersComponent implements OnInit {
   constructor(private userService: UserService, private notificationService: NotificationService, private matDialog: MatDialog) { }
 
   ngOnInit() {
-    this.userService.getUsers().subscribe(res => { this.users = res.data;
-                                                   console.log(res, 'parent');
+    this.userService.getUsers().subscribe(res => {
+      console.log('hi');
+      if (res.count === undefined || res.count === 0) {
+        this.displayCount = 0;
+      } else { this.users = res.data;
+               console.log(res, 'parent');
+      }
 
-});
+}, error => {
+  if (error.status === 400) {
 
-  }
+    this.displayCount = 0;
+}
+  });
+}
+}
 
   // add() {
   //   const dialogConfig = new MatDialogConfig();
@@ -53,4 +64,4 @@ export class UsersComponent implements OnInit {
   // }
 
 
-}
+

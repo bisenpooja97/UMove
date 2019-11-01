@@ -19,6 +19,7 @@ export class SupervisorComponent implements OnInit {
   email: string;
   role: string;
   userStatus: string;
+  displayCount: number;
 
   p = 1;
   dataSource = new MatTableDataSource();
@@ -26,7 +27,6 @@ export class SupervisorComponent implements OnInit {
   constructor(private userService: UserService, private notificationService: NotificationService, private matDialog: MatDialog) { }
 
   ngOnInit() {
-    
  this.getSupervisorInfo();
   }
 
@@ -55,7 +55,16 @@ export class SupervisorComponent implements OnInit {
 
     getSupervisorInfo() {
     return this.userService.getSupervisors().subscribe(res => {
+      if (res.count === undefined || res.count === 0) {
+        this.displayCount = 0;
+      } else {
   this.supervisors = res.data;
+      }
+},
+error => {
+  if (error.status === 400) {
+    this.displayCount = 0;
+  }
 });
   }
 

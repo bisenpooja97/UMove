@@ -5,7 +5,6 @@ import { Zone } from 'src/app/model/zone';
 import { NotificationService } from 'src/app/shared/notification.service';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { UpdateZonesComponent } from '../update-zones/update-zones.component';
-import { AddSupervisorComponent } from '../add-supervisor/add-supervisor.component';
 import { VehicleService } from 'src/app/vehicles/vehicle.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Location } from '@angular/common';

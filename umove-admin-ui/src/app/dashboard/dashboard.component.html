@@ -1,0 +1,35 @@
+<h1 fxLayoutAlign="center center" class="font-style">Dash Board</h1>
+
+<app-count-display></app-count-display>
+
+<br><br><br>
+
+<h1 class="header font-style">Vehicles and Zones count</h1>
+<br>
+<div fxLayout="row" fxLayoutAlign="center center">
+   <div class="chart" fxFlex="50%">
+     <canvas baseChart
+       [datasets]="barChartData"
+       [labels]="barChartLabels"
+       [options]="barChartOptions"
+       [plugins]="barChartPlugins"
+       [colors]="barChartColors"
+       [legend]="barChartLegend"
+       [chartType]="barChartType">
+     </canvas>
+   </div>
+<div class="chart" fxFlex="50%">
+   <canvas baseChart
+     [data]="pieChartData"
+     [labels]="pieChartLabels"
+     [chartType]="pieChartType"
+     [options]="pieChartOptions"
+     [plugins]="pieChartPlugins"
+     [colors]="pieChartColors"
+     [legend]="pieChartLegend">
+     
+   </canvas>
+ </div>
+ </div>
+ <br><br>
+ 

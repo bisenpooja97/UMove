@@ -2,8 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PageNotFoundComponent } from './shared/page-not-found/page-not-found.component';
 import { AuthGuardService } from './authentication/service/auth-guard.service';
-import { SupervisorComponent } from './users/supervisor/supervisor.component';
-
 
 const routes: Routes = [
 { path: 'fuel', loadChildren: () => import('./fuel/fuel.module').then(m => m.FuelModule), canActivate: [AuthGuardService] },
@@ -15,7 +13,9 @@ const routes: Routes = [
 { path: 'types', loadChildren: () => import('./types/types.module').then(m => m.TypesModule), canActivate: [AuthGuardService] },
 { path: 'vehicles', loadChildren: () => import('./vehicles/vehicles.module').then(m => m.VehiclesModule), canActivate: [AuthGuardService] },
 { path: 'settings', loadChildren: () => import('./settings/settings.module').then(m => m.SettingsModule) },
-{ path: '**', component: PageNotFoundComponent, canActivate: [AuthGuardService] },
+{ path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) },
+// { path: 'campaigns', loadChildren: () => import('./campaign/campaign.module').then(m => m.DashboardModule) },
+{ path: '**', component: PageNotFoundComponent, canActivate: [AuthGuardService] }
 ];
 
 @NgModule({

@@ -35,3 +35,9 @@ app-user-card {
         margin-left: 50px;
     }
 }
+
+
+.no-data {
+    padding-bottom: 20%;
+    padding-top: 18%;
+}

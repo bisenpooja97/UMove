@@ -11,3 +11,8 @@ app-user-card {
         width: 75%;
     }
 }
+
+.no-data {
+    padding-bottom: 15%;
+    padding-top: 13%;
+}

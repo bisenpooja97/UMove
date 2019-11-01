@@ -15,11 +15,12 @@ export class UserService {
 
 
   getUsers(): Observable<Resp> {
-    return this.httpClient.get<Resp>(this.baseUrl  +  '?role=User');
+    console.log(this.baseUrl);
+    return this.httpClient.get<Resp>(this.baseUrl  +  '?role=ROLE_USER');
   }
 
   getSupervisors(): Observable<Resp> {
-    return this.httpClient.get<Resp>(this.baseUrl  + '?role=Supervisor');
+    return this.httpClient.get<Resp>(this.baseUrl  + '?role=ROLE_SUPERVISOR');
   }
 
   getUsersById(id: string): Observable<Resp> {
