@@ -13,7 +13,7 @@ export class CampaignsService {
 
   constructor(private httpClient: HttpClient) { }
 
-  baseUrl = environment.baseUrl + environment.campaignBaseApi;
+  baseUrl = environment.baseUrl + environment.campaignBaseApi+ environment.campaignBaseApi;
 
   getCampaigns(): Observable<Resp> {
     return this.httpClient.get<Resp>(this.baseUrl);
