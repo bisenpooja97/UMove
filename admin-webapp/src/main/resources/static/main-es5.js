@@ -318,8 +318,6 @@ var routes = [
     { path: 'vehicles', loadChildren: function () { return Promise.resolve(/*! import() */).then(__webpack_require__.bind(null, /*! ./vehicles/vehicles.module */ "./src/app/vehicles/vehicles.module.ts")).then(function (m) { return m.VehiclesModule; }); }, canActivate: [_authentication_service_auth_guard_service__WEBPACK_IMPORTED_MODULE_4__["AuthGuardService"]] },
     { path: 'settings', loadChildren: function () { return Promise.resolve(/*! import() */).then(__webpack_require__.bind(null, /*! ./settings/settings.module */ "./src/app/settings/settings.module.ts")).then(function (m) { return m.SettingsModule; }); } },
     { path: '**', component: _shared_page_not_found_page_not_found_component__WEBPACK_IMPORTED_MODULE_3__["PageNotFoundComponent"], canActivate: [_authentication_service_auth_guard_service__WEBPACK_IMPORTED_MODULE_4__["AuthGuardService"]] },
-    { path: 'customer-list', loadChildren: function () { return __webpack_require__.e(/*! import() | customers-customers-module */ "customers-customers-module").then(__webpack_require__.bind(null, /*! ./customers/customers.module */ "./src/app/customers/customers.module.ts")).then(function (m) { return m.CustomersModule; }); } },
-    { path: 'customer-list', loadChildren: function () { return __webpack_require__.e(/*! import() | customers-customers-module */ "customers-customers-module").then(__webpack_require__.bind(null, /*! ./customers/customers.module */ "./src/app/customers/customers.module.ts")).then(function (m) { return m.CustomersModule; }); } },
 ];
 var AppRoutingModule = /** @class */ (function () {
     function AppRoutingModule() {
@@ -1783,7 +1781,7 @@ var VehicleTypeCardComponent = /** @class */ (function () {
         this.name = Object.values(this.vehicleTypes)[1];
         this.costPerKm = Object.values(this.vehicleTypes)[2];
         this.costPerMin = Object.values(this.vehicleTypes)[3];
-        this.url = src_environments_environment_prod__WEBPACK_IMPORTED_MODULE_3__["environment"].baseUrl + "/zoneservice/api/v1/downloadFile/" + this.name;
+        this.url = src_environments_environment_prod__WEBPACK_IMPORTED_MODULE_3__["environment"].baseUrl + "zoneservice/api/v1/downloadFile/" + this.name;
         console.log(Object.values(this.vehicleTypes));
     };
     VehicleTypeCardComponent.prototype.ok = function () {

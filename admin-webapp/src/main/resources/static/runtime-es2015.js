@@ -64,7 +64,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({"authentication-authentication-module":"authentication-authentication-module","customers-customers-module":"customers-customers-module","documents-documents-module":"documents-documents-module","fuel-fuel-module":"fuel-fuel-module","users-users-module":"users-users-module"}[chunkId]||chunkId) + "-es2015.js"
+/******/ 		return __webpack_require__.p + "" + ({"authentication-authentication-module":"authentication-authentication-module","documents-documents-module":"documents-documents-module","fuel-fuel-module":"fuel-fuel-module","users-users-module":"users-users-module"}[chunkId]||chunkId) + "-es2015.js"
 /******/ 	}
 /******/
 /******/ 	// The require function
