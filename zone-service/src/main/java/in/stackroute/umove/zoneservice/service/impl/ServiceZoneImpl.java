@@ -116,7 +116,7 @@ public class ServiceZoneImpl implements ServiceZone {
     // Zone service for getting nearby zones
     @Override
     public List<Zone> getNearbyZones(Double lon, Double lat) {
-       List<Zone> zones=zoneRepository.findAll();
+       List<Zone> zones=findByStatus(ZoneStatus.ACTIVE);
        List<Zone> nearbyZones = new ArrayList<>();
        Iterator iterator=zones.iterator();
        while (iterator.hasNext()) {
@@ -148,6 +148,11 @@ public class ServiceZoneImpl implements ServiceZone {
     public List<Zone> findByStatus(ZoneStatus status, int page) {
         List<Zone> zones = zoneRepository.findByStatus(status,new PageRequest(page,9)).getContent();
         return zones;
+    }
+
+    @Override
+    public List<Zone> findByStatus(ZoneStatus status) {
+        return zoneRepository.findByStatus(status).getContent();
     }
 
     @Override
