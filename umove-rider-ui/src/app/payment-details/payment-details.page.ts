@@ -66,7 +66,7 @@ export class PaymentDetailsPage implements OnInit {
         name: this.name
       },
       theme: {
-        color: '#F37254'
+        color: '#344955'
       },
       modal: {
         ondistion() {

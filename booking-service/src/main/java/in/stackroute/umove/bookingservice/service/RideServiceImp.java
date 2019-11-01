@@ -248,7 +248,10 @@ public class RideServiceImp implements RideService {
             throw new RideNotFoundException("Ride", "rideId", rideId);
         }
 
-        Payment payment = new Payment();
+        Payment payment = paymentRepo.findByRideId(rideId.toString());
+        if(payment == null) {
+            payment = new Payment();
+        }
         int sizeOfDestinationZones = ride.getDestinationZones().size();
         int discount_percent = 0;
 

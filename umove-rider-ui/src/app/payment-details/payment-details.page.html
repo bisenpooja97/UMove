@@ -27,7 +27,7 @@
       </ion-item>
       <div *ngIf="ride.promoCode">
         <ion-item>
-          <ion-label>Reward Points Discount </ion-label> - {{ ride?.promoCode?.discountPercent | currency : 'INR' }}
+          <ion-label>Reward Points Discount </ion-label> - {{ ride?.promoCode?.discountPercent * (ride?.paymentDetail?.rideAmount + ride?.vehicle?.vehicleType?.baseFare) / 100 | currency : 'INR' }}
         </ion-item>
       </div>
       <ion-item *ngIf="ride.paymentDetail?.fuelRefillAmount">

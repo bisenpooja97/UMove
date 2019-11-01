@@ -29,7 +29,9 @@ export class ConfirmRideDetailPage implements OnInit {
           this.booking.paymentMethod = state.selectedPaymentMethod;
           console.log('selected payment method: ', this.booking.paymentMethod);
         } else if (state.selectedPromocode) {
+          console.log('promocode', state.selectedPromocode);
           this.booking.promoCode = state.selectedPromocode;
+          console.log('selected promocode', this.booking.promoCode);
         }
       }
     });
@@ -54,14 +56,12 @@ export class ConfirmRideDetailPage implements OnInit {
           else if(data.status === 'Pending_Outstanding_Amount') {
             this.rideService.presentAlert('', 'You have pending outstanding amount. Please pay' +
                 ' previous ride amount to book a new ride.', 'Pay', ()=> {
-              const ride: Ride = JSON.parse(data.data);
-              this.router.navigateByUrl('/payment-detail/' + ride._id);
+              this.router.navigateByUrl('/payment-detail/' + data.data.rideId);
             })
           }
           else if(data.status === 'Vehicle_Not_Available') {
             this.rideService.presentAlert('', 'This vehicle is already booked by someone else. Please try ' +
                 'another vehicle.', 'Book Again', ()=> {
-              const ride: Ride = JSON.parse(data.data);
               this.router.navigateByUrl('/home');
             })
           }
@@ -90,8 +90,9 @@ export class ConfirmRideDetailPage implements OnInit {
       console.log('Before:', value);
       this.booking.rider = new User();
       this.booking.rider._id = value.id;
-      this.booking.rider.email = 'punit@gmail.com';
-      this.booking.rider.name = 'Punit Setia';
+      this.booking.rider.email = value.email;
+      this.booking.rider.name = value.name;
+      this.booking.rider.mobileNumber = value.mobileNumber;
     });
 
     if (!this.booking.vehicle) {
