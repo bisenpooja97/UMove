@@ -106,7 +106,7 @@ var AuthenticationComponent = /** @class */ (function () {
     };
     AuthenticationComponent.prototype.login = function () {
         if (this.loginservice.authenticate(this.username, this.password)) {
-            this.router.navigate(['/zones']);
+            this.router.navigate(['/dashboard']);
             this.invalidLogin = false;
         }
         else {

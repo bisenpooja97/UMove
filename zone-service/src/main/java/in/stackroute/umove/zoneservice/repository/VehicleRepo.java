@@ -16,7 +16,11 @@ public interface VehicleRepo extends MongoRepository<Vehicle,String> {
     List<Vehicle> findByTypeName(String name);*/
     @Query("{'vehicleType.name':?0}")
    Page<Vehicle> findByType(String vehicleType, Pageable pageable);
-   @Query("{ 'zoneId':?0, 'vehicleType.name':?1}")
+    @Query("{'vehicleType.name':?0}")
+    List<Vehicle> findByType(String vehicleType);
+
+
+    @Query("{ 'zoneId':?0, 'vehicleType.name':?1}")
    Page<Vehicle> findByZoneType(String zone, String type, Pageable pageable);
 
     Page<Vehicle> findByzoneId(String zone_id, Pageable pageable);

@@ -24,7 +24,7 @@ export class AuthenticationComponent implements OnInit {
   login(): void {
     if (this.loginservice.authenticate(this.username, this.password)
     ) {
-      this.router.navigate(['/zones']);
+      this.router.navigate(['/dashboard']);
       this.invalidLogin = false;
     } else {
       this.notificationService.warn('Invalid credentials!!!');

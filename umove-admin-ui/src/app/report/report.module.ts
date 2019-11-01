@@ -13,6 +13,7 @@ import {MatInputModule} from "@angular/material/input";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {BrowserModule} from "@angular/platform-browser";
 import {MatButtonModule} from "@angular/material/button";
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [ReportComponent, BarChartComponent, LineChartComponent],
@@ -25,7 +26,8 @@ import {MatButtonModule} from "@angular/material/button";
     MatNativeDateModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    FlexLayoutModule
   ],
   exports: [
     MatDatepickerModule,

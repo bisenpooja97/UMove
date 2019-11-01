@@ -2,6 +2,10 @@
 <h1 fxLayout="column" fxLayout.gt-md="row" fxLayoutGap.gt-md="15px" class="header">
         Driving licence Verification Requests
     </h1>
+    <div *ngIf="displayCount === 0; else data" class="no-data" fxLayoutAlign="center center">
+        <h3 fxLayoutAlign="center center">No Pending Requests!!!</h3>
+    </div>
+    <ng-template #data>
     <div fxLayout="row" fxLayoutGap="20px" class="search" fxLayout.gt-xs="row">
         <mat-form-field fxFlex=20%>
             <input matInput [(ngModel)]="term" placeholder="Search">
@@ -15,5 +19,6 @@
         </div>
         <pagination-controls (pageChange)="p = $event" fxLayoutAlign="center center"></pagination-controls>
     </div>
+    </ng-template>
 </div>
     

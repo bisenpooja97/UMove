@@ -6,39 +6,69 @@
       <p *ngIf="loginService.isUserLoggedIn()" class="font-style">&nbsp;&nbsp;Admin</p>
     </mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item class="sidenav-link font-style" routerLink="/users" (click)="sidenav.toggle()">
+        <a mat-list-item class="sidenav-link font-style" routerLink="/dashboard" (click)="sidenav.toggle()"
+        routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:
+          true}">
+          <mat-icon mat-list-icon>dashboard</mat-icon>
+          <span class="title" mat-line>Dashboard</span>
+        </a>
+        <a mat-list-item class="sidenav-link font-style" routerLink="/report" (click)="sidenav.toggle()"
+        routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:
+          true}">
+          <mat-icon mat-list-icon>signal_cellular_alt</mat-icon>
+          <span class="title" mat-line>Reports</span>
+        </a>
+      <a mat-list-item class="sidenav-link font-style" routerLink="/users" (click)="sidenav.toggle()"
+      routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:
+        true}">
         <mat-icon mat-list-icon>person</mat-icon>
         <span class="title" mat-line>Users</span>
       </a>
-      <a mat-list-item class="sidenav-link font-style" routerLink="/documents" (click)="sidenav.toggle()">
+      <a mat-list-item class="sidenav-link font-style" routerLink="/documents" (click)="sidenav.toggle()" 
+      routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:
+        true}">
         <mat-icon mat-list-icon>verified_user</mat-icon>
         <span class="title" mat-line>KYC Approval</span>
       </a>
-      <a mat-list-item class="sidenav-link font-style" routerLink="/users/supervisor" (click)="sidenav.toggle()">
+      <a mat-list-item class="sidenav-link font-style" routerLink="/users/supervisor" (click)="sidenav.toggle()"
+      routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:
+        true}">
         <mat-icon mat-list-icon>person</mat-icon>
         <span class="title" mat-line>Supervisors</span>
       </a>
-      <a mat-list-item class="sidenav-link font-style" routerLink="/campaigns" (click)="sidenav.toggle()">
+      <a mat-list-item class="sidenav-link font-style" routerLink="/campaigns" (click)="sidenav.toggle()"
+      routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:
+        true}">
         <mat-icon mat-list-icon>local_offer</mat-icon>
         <span class="title" mat-line>Campaigns</span>
       </a>
-      <a mat-list-item class="sidenav-link font-style" routerLink="/zones" (click)="sidenav.toggle()">
+      <a mat-list-item class="sidenav-link font-style" routerLink="/zones" (click)="sidenav.toggle()"
+      routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:
+        true}">
         <mat-icon mat-list-icon>compass_calibration</mat-icon>
         <span class="title" mat-line>Zones</span>
       </a>
-      <a mat-list-item class="sidenav-link font-style" routerLink="/vehicles" (click)="sidenav.toggle()">
+      <a mat-list-item class="sidenav-link font-style" routerLink="/vehicles" (click)="sidenav.toggle()"
+      routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:
+        true}">
         <mat-icon mat-list-icon>motorcycle</mat-icon>
         <span class="title" mat-line>Vehicles</span>
       </a>
-      <a mat-list-item class="sidenav-link font-style" routerLink="/types" (click)="sidenav.toggle()">
+      <a mat-list-item class="sidenav-link font-style" routerLink="/types" (click)="sidenav.toggle()"
+      routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:
+        true}">
         <mat-icon mat-list-icon>directions_bike</mat-icon>
         <span class="title" mat-line>Vehicle Types</span>
       </a>
-      <a mat-list-item class="sidenav-link font-style" routerLink="/fuel" (click)="sidenav.toggle()">
+      <a mat-list-item class="sidenav-link font-style" routerLink="/fuel" (click)="sidenav.toggle()"
+      routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:
+        true}">
         <mat-icon mat-list-icon>local_gas_station</mat-icon>
         <span class="title" mat-line>Fuels</span>
       </a>
-      <a mat-list-item class="sidenav-link" routerLink="/settings" (click)="sidenav.toggle()">
+      <a mat-list-item class="sidenav-link" routerLink="/settings" (click)="sidenav.toggle()"
+      routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:
+        true}">
         <mat-icon mat-list-icon>settings_applications</mat-icon>
         <span class="title" mat-line>Other settings</span>
       </a>

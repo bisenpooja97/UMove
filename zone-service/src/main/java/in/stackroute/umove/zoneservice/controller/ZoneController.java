@@ -133,6 +133,7 @@ public class ZoneController {
     public ResponseEntity<Map> getZonesByStatus(@PathVariable ZoneStatus status, @RequestParam(value = "page", required = false) Integer page) {
         List<Zone> zones=serviceZoneDummy.findByStatus(status, (page !=null) ? page : 0 );
         Map<String, Object> map = new TreeMap<>();
+        map.put("count", zones.size());
         map.put("data", zones);
         map.put("status", HttpStatus.OK);
         return new ResponseEntity<Map>(map, HttpStatus.OK);
