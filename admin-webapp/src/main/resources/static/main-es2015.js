@@ -312,6 +312,7 @@ const routes = [
     { path: 'documents', loadChildren: () => __webpack_require__.e(/*! import() | documents-documents-module */ "documents-documents-module").then(__webpack_require__.bind(null, /*! ./documents/documents.module */ "./src/app/documents/documents.module.ts")).then(m => m.DocumentsModule),
         canActivate: [_authentication_service_auth_guard_service__WEBPACK_IMPORTED_MODULE_4__["AuthGuardService"]] },
     { path: 'users', loadChildren: () => __webpack_require__.e(/*! import() | users-users-module */ "users-users-module").then(__webpack_require__.bind(null, /*! ./users/users.module */ "./src/app/users/users.module.ts")).then(m => m.UsersModule) },
+    { path: 'report', loadChildren: () => __webpack_require__.e(/*! import() | report-report-module */ "report-report-module").then(__webpack_require__.bind(null, /*! ./report/report.module */ "./src/app/report/report.module.ts")).then(m => m.ReportModule) },
     { path: 'zones', loadChildren: () => Promise.resolve(/*! import() */).then(__webpack_require__.bind(null, /*! ./zones/zones.module */ "./src/app/zones/zones.module.ts")).then(m => m.ZonesModule), canActivate: [_authentication_service_auth_guard_service__WEBPACK_IMPORTED_MODULE_4__["AuthGuardService"]] },
     { path: '', loadChildren: () => __webpack_require__.e(/*! import() | authentication-authentication-module */ "authentication-authentication-module").then(__webpack_require__.bind(null, /*! ./authentication/authentication.module */ "./src/app/authentication/authentication.module.ts")).then(m => m.AuthenticationModule) },
     { path: 'types', loadChildren: () => Promise.resolve(/*! import() */).then(__webpack_require__.bind(null, /*! ./types/types.module */ "./src/app/types/types.module.ts")).then(m => m.TypesModule), canActivate: [_authentication_service_auth_guard_service__WEBPACK_IMPORTED_MODULE_4__["AuthGuardService"]] },
@@ -3839,7 +3840,7 @@ __webpack_require__.r(__webpack_exports__);
 // The list of file replacements can be found in `angular.json`.
 const environment = {
     production: false,
-    baseUrl: 'http://umove-dev.stackroute.io:8080/',
+    baseUrl: 'http://172.23.234.76:8080/',
     userService: 'userservice',
     userBaseApi: '/api/v1/users',
     baseUrl1: 'http://localhost:8093',
@@ -3854,7 +3855,9 @@ const environment = {
     fuelBaseApi: '/api/v1/fuel',
     // baseUrl3: 'http://172.23.234.77:8094/',
     bookingService: 'bookingservice',
-    configBaseApi: '/api/v1/config'
+    configBaseApi: '/api/v1/config',
+    reportService: 'reportservice',
+    reportBaseApi: '/api/v1/reports/'
 };
 /*
  * For easier debugging in development mode, you can import the following file

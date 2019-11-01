@@ -1,0 +1,23 @@
+<div class = "main">
+  <h2 align = "center">REPORT</h2>
+<mat-form-field class = "example">
+  <input matInput [matDatepicker]="picker"  (dateChange)="updateStartDate($event)" placeholder="Choose a date">
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker (selectedChanged)="updateStartDate($event)"  startView="year" [startAt]="startDate"></mat-datepicker>
+</mat-form-field>
+  <h2 align="center"> NO OF BOOKINGS PER HOUR</h2>
+<!--<div>-->
+<!--  <div style="display: block">-->
+<div>
+  <div style="display: block">
+    <canvas baseChart  height="135%"
+            [datasets]="barChartData"
+            [labels]="barChartLabels"
+            [options]="barChartOptions"
+            [legend]="barChartLegend"
+            [colors]="chartColors"
+            [chartType]="barChartType">
+    </canvas>
+  </div>
+</div>
+</div>

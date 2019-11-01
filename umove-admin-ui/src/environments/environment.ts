@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'http://umove-dev.stackroute.io:8080/',
+  baseUrl: 'http://192.168.1.9:8080/',
   userService: 'userservice',
   userBaseApi: '/api/v1/users',
   baseUrl1: 'http://localhost:8093',
@@ -19,7 +19,9 @@ export const environment = {
   fuelBaseApi: '/api/v1/fuel',
   // baseUrl3: 'http://172.23.234.77:8094/',
   bookingService: 'bookingservice',
-  configBaseApi: '/api/v1/config'
+  configBaseApi: '/api/v1/config',
+  reportService: 'reportservice',
+  reportBaseApi: '/api/v1/reports/'
 };
 /*
  * For easier debugging in development mode, you can import the following file
