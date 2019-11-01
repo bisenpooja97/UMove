@@ -39,6 +39,7 @@ export class ConfirmRideDetailPage implements OnInit {
   }
 
   confirmBooking() {
+    console.log('zoneId', this.booking.sourceZone.id, 'typeId', this.booking.vehicle.vehicleType.id);
     this.rideService.confirmBooking(this.booking).then(response => {
       console.log('response: ', response);
       if(response) {
