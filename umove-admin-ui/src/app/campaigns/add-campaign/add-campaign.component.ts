@@ -10,25 +10,41 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class AddCampaignComponent implements OnInit {
   form: FormGroup;
+  id: string;
   name: string;
   objective: string;
   startDate: Date;
   endDate: Date;
+  expiryDate: Date;
   promocode: string;
   discountPercent: number;
+  targetCustomers: number;
+  achievedCustomers: number;
+  maximumLimit: number;
+  totalCoupons: number;
+  usedCoupons: number;
+  maxDiscountAmount: number;
+  campaignStatus: string;
 
-  constructor(private campaignService: CampaignsService, private fb: FormBuilder,
+  constructor(private campaignService: CampaignsService, 
+    private fb: FormBuilder,
               private dialogRef: MatDialogRef<AddCampaignComponent>,
               @Inject(MAT_DIALOG_DATA) data
 ) { }
 
 campaignForm = this.fb.group({
-  name: ['', [Validators.pattern('^[a-zA-Z0-9\-]*$')]],
-  objective: ['', [Validators.pattern('[0-9]+')]],
+  name: ['', []],
+  objective: ['', []],
   startDate: ['', []],
   endDate: ['', []],
-  promocode: ['', []],
-  discountPercent: ['', []]
+  expiryDate:['',[]],
+  promocode: ['', [Validators.pattern('[A-Z0-9]+')]],
+  discountPercent: ['', [Validators.pattern('[0-9]+')]],
+  totalCoupons: ['', [Validators.pattern('[0-9]+')]],
+  usedCoupons: ['', [Validators.pattern('[0-9]+')]],
+  campaignStatus: ['IN_PROGRESS',[]],
+  maxDiscountAmount: ['',[Validators.pattern('[0-9]+')]],
+  targetCustomers:  ['',[Validators.pattern('[0-9]+')]]
 });
 
 onClose() {
@@ -36,15 +52,14 @@ onClose() {
   this.dialogRef.close();
 }
 
-
   ngOnInit() {
-  }
-
-  onSubmit() {
-    console.log(this.campaignForm.value);
-    this.dialogRef.close(this.campaignForm.value);
 
 }
 
+  onSubmit() {
+    console.log("form value" , this.campaignForm.value);
+    this.dialogRef.close(this.campaignForm.value);
+
+}
 
 }

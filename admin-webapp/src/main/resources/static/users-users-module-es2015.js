@@ -161,7 +161,7 @@ __webpack_require__.r(__webpack_exports__);
 let UserService = class UserService {
     constructor(httpClient) {
         this.httpClient = httpClient;
-        this.baseUrl = src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].baseUrl + src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].userBaseApi;
+        this.baseUrl = src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].baseUrl + src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].userBaseApi + src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].userBaseApi;
     }
     getUsers() {
         return this.httpClient.get(this.baseUrl + '?role=User');

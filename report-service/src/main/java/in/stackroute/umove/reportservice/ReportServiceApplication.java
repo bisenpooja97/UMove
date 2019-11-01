@@ -18,4 +18,5 @@ public class ReportServiceApplication {
         SpringApplication.run(ReportServiceApplication.class, args);
         System.in.read();
     }
+
 }
