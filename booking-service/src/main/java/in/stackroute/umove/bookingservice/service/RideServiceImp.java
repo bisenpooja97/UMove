@@ -135,7 +135,7 @@ public class RideServiceImp implements RideService {
 
     //Function to get ride details by userId and rideStatus
     @Override
-    public Ride getRideByUserIdNStatus(String userId, String rideStatus){
+    public Ride getRideByUserIdNStatus(String userId, RideStatus rideStatus){
         Ride ride = rideRepo.findByUserIdNStatus(userId, rideStatus);
         return ride;
     }
@@ -323,7 +323,7 @@ public class RideServiceImp implements RideService {
     @Override
     public boolean isValidUser(String userId) {
         RestTemplate restTemplate = new RestTemplate();
-        Map<String, Object> response = restTemplate.getForObject("http://13.235.35.202:8080/userservice/api/v1/users/" + userId, Map.class);
+        Map<String, Object> response = restTemplate.getForObject("https://umove-dev.stackroute.io/userservice/api/v1/users/" + userId, Map.class);
         Map<String, Object> user = (Map<String, Object>) response.get("data");
         if(user.get("userStatus").equals("Active")) {
             return true;
@@ -333,9 +333,27 @@ public class RideServiceImp implements RideService {
     }
 
     @Override
-    public boolean isVehicleAllocated(String zoneId, String typeName) {
-        return false;
+    public synchronized boolean isVehicleTypeAllocated(String zoneId, String typeId) {
+        RestTemplate restTemplate = new RestTemplate();
+        Map<String, Object> response = restTemplate.patchForObject("https://umove-dev.stackroute.io/zoneservice/" +
+                "api/v1/bookingConfirmed?zoneId=" + zoneId + "&typeId=" + typeId, null, Map.class);
+        if(response.get("status").equals("Failed")) {
+            return false;
+        }
+        return true;
     }
+
+    @Override
+    public synchronized boolean isVehicleAllocated(String registrationNo) {
+        RestTemplate restTemplate = new RestTemplate();
+        Map<String, Object> response = restTemplate.patchForObject("https://umove-dev.stackroute.io/zoneservice/" +
+                "api/v1/onRideStart?registrationNo=" + registrationNo, null, Map.class);
+        if(response.get("status").equals("Failed")) {
+            return false;
+        }
+        return true;
+    }
+
     public TrackingLatitudeLongitude storeTrackingData(Ride ride) {
         TrackingLatitudeLongitude trackingLatitudeLongitude = new TrackingLatitudeLongitude();
         if(ride.getStatus().equals(RideStatus.Started))

@@ -35,8 +35,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // allow all who are accessing "auth" service
                 .antMatchers(HttpMethod.POST, jwtConfig.getUri()).permitAll()
                 
-		.antMatchers("/").permitAll()
-		.antMatchers("/adminwebapp/**").permitAll()
+                .antMatchers("/").permitAll()
+                .antMatchers("/adminwebapp/**").permitAll()
                 .antMatchers("/userservice/api/v1/**").permitAll()
                 .antMatchers("/bookingservice/**").permitAll()
                 .antMatchers("/campaignservice/**").permitAll()
