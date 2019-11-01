@@ -61,7 +61,7 @@ export class BikeListPage implements OnInit {
     console.log('Begin async operation');
     return new Promise((resolve) => {
       setTimeout(() => {
-        this.zoneService.getVehiclesByZoneTypes('1').then(response => {
+        this.zoneService.getVehiclesByZoneTypes(this.pickUpZone.id).then(response => {
           console.log('responose', response);
           const bikeList = JSON.parse(response.data);
           bikeList.data.map(item => {

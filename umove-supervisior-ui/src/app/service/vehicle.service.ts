@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {environment} from '../../environments/environment';
 import { HTTP } from '@ionic-native/http/ngx';
+import {Vehicle} from "../model/vehicle";
 @Injectable({
   providedIn: 'root'
 })
@@ -17,7 +18,7 @@ export class VehicleService {
     return this.http.get(this.baseUrl , {}, {});
   }
 
-  changeStatus(vehicle: {}, registrationNo: string) {
+  changeStatus(vehicle:Vehicle, registrationNo: string) {
     return this.http.patch(this.baseUrl  + '/' + registrationNo, vehicle, {});
   }
 

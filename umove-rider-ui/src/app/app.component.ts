@@ -45,8 +45,11 @@ export class AppComponent {
         private storage: Storage
     ) {
         this.initializeApp();
+        console.log('user ka data le rhe h =>');
         storage.ready().then(() => {
-            storage.get('detail').then(value => {
+            console.log('storage bhi tyar h');
+            storage.get('details').then(value => {
+                console.log('or ye aagya data', value);
                 this.currentUser = value;
             })
         })

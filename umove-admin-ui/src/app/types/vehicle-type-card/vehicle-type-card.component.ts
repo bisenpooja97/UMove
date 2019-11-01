@@ -22,7 +22,7 @@ export class VehicleTypeCardComponent implements OnInit {
     this.name = Object.values(this.vehicleTypes)[1];
     this.costPerKm = Object.values(this.vehicleTypes)[2];
     this.costPerMin = Object.values(this.vehicleTypes)[3];
-    this.url = `${environment.baseUrl}/zoneservice/api/v1/downloadFile/${this.name}`;
+    this.url = `${environment.baseUrl}zoneservice/api/v1/downloadFile/${this.name}`;
     console.log(Object.values(this.vehicleTypes));
 }
 

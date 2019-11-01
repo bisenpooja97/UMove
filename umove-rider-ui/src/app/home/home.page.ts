@@ -8,6 +8,7 @@ import {RideService} from "../service/ride.service";
 import {UserProfile} from "../model/user-profile";
 import {Storage} from "@ionic/storage";
 import {MenuController} from '@ionic/angular';
+import {Ride} from '../model/ride';
 
 @Component({
   selector: 'app-home',
@@ -67,6 +68,28 @@ export class HomePage implements OnInit{
   ionViewDidEnter() {
     this.menuCtrl.enable(true);
     this.mapService.checkGPSPermission();
+
+    console.log('user ki current ride check rk rha hu');
+    this.storage.ready().then(() => {
+      this.storage.get('details').then(value => {
+        console.log('ye h wo user ', value);
+        this.rideService.getCurrentRide(value.id).then(response => {
+          console.log('ye aaya hresonse', response);
+          if(response.status === 200 && response.data && JSON.parse(response.data).data) {
+            console.log('data', response.data);
+            const currentRide: Ride = JSON.parse(response.data).data;
+            console.log('ye h ride ka data', currentRide);
+            if(currentRide.status === 'Confirmed') {
+              this.router.navigateByUrl('ride-booking-details');
+            }
+            else if(currentRide.status === 'Started') {
+              this.router.navigateByUrl('ride-details');
+            }
+          }
+        })
+      })
+    })
+
     // this.mapService.requestGPSPermission();
     // this.mapService.askToTurnOnGPS();
     // this.mapService.getLocationCoordinates();

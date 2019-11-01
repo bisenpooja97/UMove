@@ -77,7 +77,7 @@ public class RideController {
         }
 
         // allocate a vehicle type to user
-        if(rideService.isVehicleTypeAllocated(ride.getVehicle().getId(), ride.getVehicle().getVehicleType().getName())) {
+        if(rideService.isVehicleTypeAllocated(ride.getVehicle().getId(), ride.getVehicle().getVehicleType().getId())) {
             map.put("status", "Vehicle_Not_Available");
             map.put("message", "Sorry, The vehicle you have selected is not available now.");
             return new ResponseEntity<>(map, HttpStatus.OK);

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Zone } from '../model/zone';
 import { environment } from '../../environments/environment';
-import { HTTP } from '@ionic-native/http/ngx';
+import {HTTP, HTTPResponse} from '@ionic-native/http/ngx';
 import {AlertController, ToastController} from '@ionic/angular';
 import { Ride } from '../model/ride';
 
@@ -48,6 +48,10 @@ export class RideService {
   confirmBooking(data) {
     console.log('url', this.baseUrl, JSON.stringify(data));
     return this.http.post(this.baseUrl, data, {});
+  }
+
+  getCurrentRide(userId): Promise<HTTPResponse> {
+    return this.http.get(this.baseUrl + '/current?userId=' + userId, {}, {});
   }
 
   getAllBooking() {
