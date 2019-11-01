@@ -370,7 +370,7 @@ let DocumentsService = class DocumentsService {
         this.baseUrl = src_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].baseUrl + src_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].userService + src_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].userBaseApi;
     }
     getUsers() {
-        console.log(this.baseUrl + '/' + '?role=User&documentStatus=Pending');
+        console.log(this.baseUrl + '?role=User&documentStatus=Pending');
         return this.httpClient.get(this.baseUrl + '?role=User&documentStatus=Pending');
     }
     getUsersById(id) {

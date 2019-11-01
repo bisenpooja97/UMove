@@ -380,7 +380,7 @@ var DocumentsService = /** @class */ (function () {
         this.baseUrl = src_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].baseUrl + src_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].userService + src_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].userBaseApi;
     }
     DocumentsService.prototype.getUsers = function () {
-        console.log(this.baseUrl + '/' + '?role=User&documentStatus=Pending');
+        console.log(this.baseUrl + '?role=User&documentStatus=Pending');
         return this.httpClient.get(this.baseUrl + '?role=User&documentStatus=Pending');
     };
     DocumentsService.prototype.getUsersById = function (id) {

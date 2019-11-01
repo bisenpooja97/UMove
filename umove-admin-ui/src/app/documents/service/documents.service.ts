@@ -17,7 +17,7 @@ export class DocumentsService {
   baseUrl = environment.baseUrl + environment.userService + environment.userBaseApi;
 
   getUsers(): Observable<Resp> {
-    console.log(this.baseUrl + '/' +  '?role=User&documentStatus=Pending');
+    console.log(this.baseUrl  +  '?role=User&documentStatus=Pending');
     return this.httpClient.get<Resp>(this.baseUrl  +  '?role=User&documentStatus=Pending');
   }
 

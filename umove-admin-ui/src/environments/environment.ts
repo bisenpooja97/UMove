@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'http://192.168.1.9:8080/',
+   baseUrl: 'https://umove-dev.stackroute.io/',
   userService: 'userservice',
   userBaseApi: '/api/v1/users',
   baseUrl1: 'http://localhost:8093',

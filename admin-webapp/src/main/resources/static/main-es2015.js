@@ -3840,7 +3840,7 @@ __webpack_require__.r(__webpack_exports__);
 // The list of file replacements can be found in `angular.json`.
 const environment = {
     production: false,
-    baseUrl: 'http://172.23.234.76:8080/',
+    baseUrl: 'https://umove-dev.stackroute.io/',
     userService: 'userservice',
     userBaseApi: '/api/v1/users',
     baseUrl1: 'http://localhost:8093',
@@ -3904,7 +3904,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/kumardivyanshu/umove/umove-admin-ui/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /home/ruchi/umove/umove-admin-ui/src/main.ts */"./src/main.ts");
 
 
 /***/ })
