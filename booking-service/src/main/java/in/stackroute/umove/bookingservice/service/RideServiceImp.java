@@ -359,10 +359,10 @@ public class RideServiceImp implements RideService {
                 "api/v1/bookingConfirmed?zoneId=" + zoneId + "&typeId=" + typeId, HttpMethod.PATCH, requestEntity, Map.class);
 
         System.out.println("vehicle type count ka status" + response.getBody().get("status"));
-        if(response.getBody().get("status").equals("Failed")) {
-            return false;
+        if(response.getBody().get("status").equals("Booked")) {
+            return true;
         }
-        return true;
+        return false;
     }
 
     @Override
@@ -384,11 +384,11 @@ public class RideServiceImp implements RideService {
         ResponseEntity<Map> response = restTemplate.exchange("https://umove-dev.stackroute.io/zoneservice/" +
         "api/v1/onRideStart?registrationNo=" + registrationNo, HttpMethod.PATCH, requestEntity, Map.class);
 
-        if(response.getBody().get("status").equals("Failed")) {
-            return false;
+        if(response.getBody().get("status").equals("Booked")) {
+            return true;
         }
 
-        return true;
+        return false;
     }
 
     public TrackingLatitudeLongitude storeTrackingData(Ride ride) {
