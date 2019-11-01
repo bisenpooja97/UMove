@@ -8,8 +8,8 @@
               <ion-icon [color]="true ? 'primary' : 'primary'" name="person" style="margin: 4px; padding: 4px; width: 56px; height: 56px; border-radius: 50%; background: #ffffff;"></ion-icon>
             </ion-col>
             <ion-col style="color: #ffffff;">
-              <p>Vishnu Bochiwal</p>
-              <p>7727084821</p>
+              <p>{{ currentUser?.name }}</p>
+              <p>{{ currentUser?.mobileNumber }}</p>
             </ion-col>
             <ion-col size="1">
               <ion-icon name="create" [color]="true ? 'light' : 'light'" style="height: 100%; display: block;"></ion-icon>
@@ -25,6 +25,27 @@
               </ion-label>
             </ion-item>
           </ion-menu-toggle>
+
+          <ion-item-divider></ion-item-divider>
+
+          <ion-menu-toggle auto-hide="false">
+            <ion-item [routerDirection]="'root'" [routerLink]="['/about-us']">
+              <ion-icon slot="start" name="information-circle-outline"></ion-icon>
+              <ion-label>
+                {{ 'About Us' }}
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+
+          <ion-menu-toggle auto-hide="false">
+            <ion-item [routerDirection]="'root'" [routerLink]="['/terms-conditions']">
+              <ion-icon slot="start" name="paper"></ion-icon>
+              <ion-label>
+                {{ 'Terms & Conditions' }}
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+
         </ion-list>
       </ion-content>
     </ion-menu>
