@@ -13,7 +13,7 @@ public interface RideService {
     Ride confirmRide(Ride ride);
     Ride getRideById(ObjectId id);
     Map<String, Object> deleteAll();
-    Ride getRideByUserIdNStatus(String userId, String bookingStatus);
+    Ride getRideByUserIdNStatus(String userId, RideStatus bookingStatus);
     Ride addExtraCharges(ObjectId bookingId, List<ExtraCharge> extraCharges);
 
     List<Ride> getAllRides();
@@ -34,6 +34,7 @@ public interface RideService {
 
     boolean isValidUser(String userId);
 
-    boolean isVehicleAllocated(String zoneId, String typeName);
+    boolean isVehicleTypeAllocated(String zoneId, String typeId);
+    boolean isVehicleAllocated(String registrationNo);
 
 }

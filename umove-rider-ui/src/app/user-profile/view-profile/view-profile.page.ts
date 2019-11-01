@@ -23,7 +23,9 @@ export class ViewProfilePage implements OnInit {
     // tslint:disable-next-line:max-line-length
   constructor(private userDataService: UserProfileServiceService, private router: Router,
               public toastController: ToastController, private storage: Storage, private menuCtrl: MenuController) {
+      this.menuCtrl.enable(true);
       this.menuCtrl.close();
+      this.menuCtrl.enable(true);
       this.localUser = new UserProfile();
   }
   goAnOtherPage() {

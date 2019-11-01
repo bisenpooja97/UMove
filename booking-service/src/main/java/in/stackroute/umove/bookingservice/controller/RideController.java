@@ -53,30 +53,35 @@ public class RideController {
     public ResponseEntity<Map> confirmBooking(@RequestBody() Ride ride) {
         Map<String, Object> map = new TreeMap<>();
 
-//        if(!rideService.isValidUser(ride.getRider().get_id())) {
-//            map.put("status", "Failed");
-//            map.put("message", "Can't book your ride, Please check your status in your profile");
-//            return new ResponseEntity<>(map, HttpStatus.OK);
-//        }
-//
-//        Payment outstandingPayment = rideService.getOutstandingRideDetail(ride.getRider().get_id());
-//        if(outstandingPayment != null) {
-//            map.put("status", "Failed");
-//            map.put("data", outstandingPayment);
-//            map.put("message", "There is some outstanding amount pending. Pay that First to make a new Booking.");
-//            return new ResponseEntity<>(map, HttpStatus.OK);
-//        }
+        if(!rideService.isValidUser(ride.getRider().get_id())) {
+            map.put("status", "Invalid_User");
+            map.put("message", "Can't book your ride, Please check your status in your profile");
+            return new ResponseEntity<>(map, HttpStatus.OK);
+        }
 
-        Ride currentRide = rideService.getRideByUserIdNStatus(ride.getRider().get_id(), "Confirmed");
+        Payment outstandingPayment = rideService.getOutstandingRideDetail(ride.getRider().get_id());
+        if(outstandingPayment != null) {
+            map.put("status", "Pending_Outstanding_Amount");
+            map.put("data", outstandingPayment);
+            map.put("message", "There is some outstanding amount pending. Pay that First to make a new Booking.");
+            return new ResponseEntity<>(map, HttpStatus.OK);
+        }
+
+        // check if already any other ride is active
+        Ride currentRide = rideService.getRideByUserIdNStatus(ride.getRider().get_id(), RideStatus.Confirmed);
+        if(currentRide == null) {
+            currentRide = rideService.getRideByUserIdNStatus(ride.getRider().get_id(), RideStatus.Started);
+        }
         if(currentRide != null)  {
             throw new RideAlreadyBookedException("Ride", "userId", ride.getRider().get_id());
         }
 
-//        if(rideService.isVehicleAllocated(ride.getVehicle().getId(), ride.getVehicle().getType().getName())) {
-//            map.put("status", "Failed");
-//            map.put("message", "Sorry, The vehicle you have selected is not available now.");
-//            return new ResponseEntity<>(map, HttpStatus.OK);
-//        }
+        // allocate a vehicle type to user
+        if(rideService.isVehicleTypeAllocated(ride.getVehicle().getId(), ride.getVehicle().getVehicleType().getName())) {
+            map.put("status", "Vehicle_Not_Available");
+            map.put("message", "Sorry, The vehicle you have selected is not available now.");
+            return new ResponseEntity<>(map, HttpStatus.OK);
+        }
 
         ride.setStatus(RideStatus.Confirmed);
         ride.setBookedAt(LocalDateTime.now());
@@ -91,7 +96,7 @@ public class RideController {
     // End Point: api/v1/rides Method: GET
     // to get the list of all rides
     @GetMapping("rides")
-    public ResponseEntity<Map> getRides(@RequestParam(value = "userId", required = false) String userId, @RequestParam(value = "rideStatus", required = false) String rideStatus) {
+    public ResponseEntity<Map> getRides(@RequestParam(value = "userId", required = false) String userId, @RequestParam(value = "rideStatus", required = false) RideStatus rideStatus) {
 
         if(userId!= null && rideStatus!= null) {
             Ride ride = rideService.getRideByUserIdNStatus(userId, rideStatus);
@@ -113,6 +118,18 @@ public class RideController {
         Map<String, Object> map = new TreeMap<>();
         map.put("data", rides);
         map.put("count", rides.size());
+        map.put("status", HttpStatus.OK);
+        return new ResponseEntity<Map>(map, HttpStatus.OK);
+    }
+
+    @GetMapping("rides/current")
+    public ResponseEntity<Map> getCurrentRide(@RequestParam("userId") String userId) {
+        Ride ride = rideService.getRideByUserIdNStatus(userId, RideStatus.Confirmed);
+        if(ride == null) {
+            ride = rideService.getRideByUserIdNStatus(userId, RideStatus.Started);
+        }
+        Map<String, Object> map = new TreeMap<>();
+        map.put("data", ride);
         map.put("status", HttpStatus.OK);
         return new ResponseEntity<Map>(map, HttpStatus.OK);
     }
@@ -151,8 +168,14 @@ public class RideController {
     //Api end point for start ride request by the user
     @PatchMapping("rides/{rideId}/start")
     public ResponseEntity<Map> startRideRequest(@PathVariable("rideId") ObjectId rideId, @RequestParam(value = "vehicleNumber", required = true) String registrationNo) {
-        Ride ride = rideService.startRide(rideId, registrationNo);
         Map<String, Object> map = new TreeMap<>();
+        if(!rideService.isVehicleAllocated(registrationNo)) {
+            map.put("status", "Vehicle_Already_Booked");
+            map.put("message", "This Vehicle is already booked by other user. Kindly Scan another vehicle QR Code.");
+            return new ResponseEntity<>(map, HttpStatus.OK);
+        }
+
+        Ride ride = rideService.startRide(rideId, registrationNo);
         map.put("data", ride);
         map.put("status", HttpStatus.OK);
         template.convertAndSend("/topic/ride-started/" + registrationNo, map);

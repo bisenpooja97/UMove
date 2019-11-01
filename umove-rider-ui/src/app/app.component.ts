@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import {User} from './model/user';
+import {Storage} from '@ionic/storage';
 
 @Component({
     selector: 'app-root',
@@ -10,6 +12,9 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
     styleUrls: ['app.component.scss']
 })
 export class AppComponent {
+
+    currentUser: User;
+
     public appPages = [
         {
             title: 'Home',
@@ -29,16 +34,22 @@ export class AppComponent {
         {
             title: 'Offers',
             url: '/campaigns/view',
-            icon: 'pricetags'
+            icon: 'gift'
         }
     ];
 
     constructor(
         private platform: Platform,
         private splashScreen: SplashScreen,
-        private statusBar: StatusBar
+        private statusBar: StatusBar,
+        private storage: Storage
     ) {
         this.initializeApp();
+        storage.ready().then(() => {
+            storage.get('detail').then(value => {
+                this.currentUser = value;
+            })
+        })
     }
 
     initializeApp() {

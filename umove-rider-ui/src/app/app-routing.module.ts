@@ -44,7 +44,8 @@ const routes: Routes = [
     { path: 'dummy-data-sent', loadChildren: './campaigns/dummy-data-sent/dummy-data-sent.module#DummyDataSentPageModule', canActivate: [AuthGuardService] },
     // tslint:disable-next-line:max-line-length
   { path: 'error', loadChildren: './error/error.module#ErrorPageModule' },
-    { path: 'about-us', loadChildren: './about-us/about-us.module#AboutUsPageModule' }
+    { path: 'about-us', loadChildren: './about-us/about-us.module#AboutUsPageModule' },
+  { path: 'terms-conditions', loadChildren: './terms-conditions/terms-conditions.module#TermsConditionsPageModule' }
 ];
 
 @NgModule({
