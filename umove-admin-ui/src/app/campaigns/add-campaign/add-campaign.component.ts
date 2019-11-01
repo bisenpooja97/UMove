@@ -37,13 +37,14 @@ campaignForm = this.fb.group({
   objective: ['', []],
   startDate: ['', []],
   endDate: ['', []],
-  expiredDate:['',[]],
+  expiryDate:['',[]],
   promocode: ['', [Validators.pattern('[A-Z0-9]+')]],
   discountPercent: ['', [Validators.pattern('[0-9]+')]],
-  upperBound: ['', [Validators.pattern('[0-9]+')]],
   totalCoupons: ['', [Validators.pattern('[0-9]+')]],
   usedCoupons: ['', [Validators.pattern('[0-9]+')]],
-  campaignStatus: ['Created',[]],
+  campaignStatus: ['IN_PROGRESS',[]],
+  maxDiscountAmount: ['',[Validators.pattern('[0-9]+')]],
+  targetCustomers:  ['',[Validators.pattern('[0-9]+')]]
 });
 
 onClose() {
@@ -51,10 +52,9 @@ onClose() {
   this.dialogRef.close();
 }
 
-
   ngOnInit() {
 
-  }
+}
 
   onSubmit() {
     console.log("form value" , this.campaignForm.value);

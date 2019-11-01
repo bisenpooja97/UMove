@@ -16,7 +16,6 @@ export const environment = {
   vehicleService: 'vehicle-service',
   vehicleBaseApi: '/api/v1/vehicles',
   typeBaseApi: '/api/v1/types',
-
 };
 
 /*
