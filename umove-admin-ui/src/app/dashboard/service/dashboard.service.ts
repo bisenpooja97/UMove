@@ -26,7 +26,7 @@ export class DashboardService {
   }
 ​
   getZoneByStatus(status: string): Observable<Resp> {
-    console.log(environment.baseUrl + '/api/v1/zones/status/' + status);
+    console.log(this.baseUrl  + 'zoneservice/api/v1/zones/status/' + status);
     return this.httpClient.get<Resp>(this.baseUrl  + 'zoneservice/api/v1/zones/status/' + status);
   }
 }

@@ -8,6 +8,7 @@ const routes: Routes = [
 { path: 'documents', loadChildren: () => import('./documents/documents.module').then(m => m.DocumentsModule),
  canActivate: [AuthGuardService] },
 { path: 'users', loadChildren: () => import('./users/users.module').then(m => m.UsersModule) },
+{ path: 'report', loadChildren: () => import('./report/report.module').then(m => m.ReportModule) },
 { path: 'zones', loadChildren: () => import('./zones/zones.module').then(m => m.ZonesModule) , canActivate: [AuthGuardService]},
 { path: '', loadChildren: () => import('./authentication/authentication.module').then(m => m.AuthenticationModule) },
 { path: 'types', loadChildren: () => import('./types/types.module').then(m => m.TypesModule), canActivate: [AuthGuardService] },

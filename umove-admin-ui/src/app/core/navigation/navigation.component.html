@@ -12,6 +12,12 @@
           <mat-icon mat-list-icon>dashboard</mat-icon>
           <span class="title" mat-line>Dashboard</span>
         </a>
+        <a mat-list-item class="sidenav-link font-style" routerLink="/report" (click)="sidenav.toggle()"
+        routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:
+          true}">
+          <mat-icon mat-list-icon>signal_cellular_alt</mat-icon>
+          <span class="title" mat-line>Reports</span>
+        </a>
       <a mat-list-item class="sidenav-link font-style" routerLink="/users" (click)="sidenav.toggle()"
       routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:
         true}">
