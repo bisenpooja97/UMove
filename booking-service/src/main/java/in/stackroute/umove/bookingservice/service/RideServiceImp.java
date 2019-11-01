@@ -330,7 +330,9 @@ public class RideServiceImp implements RideService {
     public boolean isValidUser(String userId) {
         RestTemplate restTemplate = new RestTemplate();
         Map<String, Object> response = restTemplate.getForObject("https://umove-dev.stackroute.io/userservice/api/v1/users/" + userId, Map.class);
+        System.out.println("response for user status" + response);
         Map<String, Object> user = (Map<String, Object>) response.get("data");
+        System.out.println("user" + user);
         if(user.get("userStatus").equals("Active")) {
             return true;
         }
@@ -356,6 +358,7 @@ public class RideServiceImp implements RideService {
         ResponseEntity<Map> response = restTemplate.exchange("https://umove-dev.stackroute.io/zoneservice/" +
                 "api/v1/bookingConfirmed?zoneId=" + zoneId + "&typeId=" + typeId, HttpMethod.PATCH, requestEntity, Map.class);
 
+        System.out.println("vehicle type count ka status" + response.getBody().get("status"));
         if(response.getBody().get("status").equals("Failed")) {
             return false;
         }
