@@ -14,7 +14,7 @@ import { Campaign } from './model/campaign';
 
 export class CampaignsComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  campaigns: Campaign[];
+  campaigns: Campaign;
 
 
   p = 1;

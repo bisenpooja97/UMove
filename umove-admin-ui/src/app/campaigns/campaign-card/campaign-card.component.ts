@@ -9,16 +9,21 @@ import { MatDialogConfig } from '@angular/material';
 })
 export class CampaignCardComponent implements OnInit {
   @Input() campaign;
+
   id: string;
   name: string;
   objective: string;
   startDate: Date;
   endDate: Date;
+  expiryDate: Date;
   promocode: string;
   discountPercent: number;
-  upperBound: number;
+  targetCustomers: number;
+  achievedCustomers: number;
+  maximumLimit: number;
   totalCoupons: number;
   usedCoupons: number;
+  maxDiscountAmount: number;
   campaignStatus: string;
   constructor(private router: Router) { }
 
@@ -28,12 +33,13 @@ export class CampaignCardComponent implements OnInit {
     this.name = this.campaign.name;
     this.objective = this.campaign.objective;
     this.startDate = this.campaign.startDate;
-    this.endDate = this.campaign.endDate;
+    this.expiryDate = this.campaign.expiryDate;
     this.promocode = this.campaign.promocode;
     this.discountPercent = this.campaign.discountPercent;
-    this.upperBound = this.campaign.upperBound;
     this.totalCoupons = this.campaign.totalCoupons;
     this.usedCoupons = this.campaign.usedCoupons;
+    this.maximumLimit=this.campaign.maximumLimit;
+    this.maxDiscountAmount=this.campaign.maxDiscountAmount;
     this.campaignStatus = this.campaign.campaignStatus;
   }
 
@@ -45,23 +51,13 @@ export class CampaignCardComponent implements OnInit {
 
   getColor(campaignStatus) {
     switch (campaignStatus) {
-    case 'Created':
+    case 'IN_PROGRESS':
     return '#1B5E20';
-    case 'Running':
+    case 'SUCCESS':
     return '#FFC400';
-    case 'Ended':
+    case 'FAILURE':
     return '#F44336';
 }
-}
-
-
-  start()
-  {
-
-  }
-
-end(){
-
 }
 
 }

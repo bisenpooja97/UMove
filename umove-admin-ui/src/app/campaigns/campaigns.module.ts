@@ -39,6 +39,6 @@ import { CampaignsDetailsComponent } from './campaigns-details/campaigns-details
      MatToolbarModule,
      MatDatepickerModule,
   ],
-  entryComponents: [AddCampaignComponent],
+  entryComponents: [AddCampaignComponent,EditCampaignComponent],
 })
 export class CampaignsModule { }

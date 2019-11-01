@@ -79,12 +79,29 @@ public class CampaignController
      *
      * API endpoint for updating campaign
      */
-    @PatchMapping(path = "/campaigns/{id}")
-    public Campaign updateCampaign(@PathVariable String id, @RequestBody Campaign campaign){
+//    @PatchMapping(path = "/campaigns/{id}")
+//    public ResponseEntity<Map> updateCampaign(@PathVariable String id, @RequestBody Campaign campaign){
+//
+//        Campaign updatecampaign = campaignService.updateCampaign(id,campaign);
+//        Map<String , Object>map = new TreeMap<>();
+//        map.put("data", updatecampaign);
+//        map.put("message","Campaign updated");
+//        map.put("status", HttpStatus.OK);
+//        return new ResponseEntity<>(map,HttpStatus.OK);
+//        return campaignService.updateCampaign(id,campaign);
 
-        return campaignService.updateCampaign(id,campaign);
+    //}
 
+    @PatchMapping(path = "/campaigns/{id}",consumes = {"application/json"})
+    public ResponseEntity updateCampaign(@PathVariable String id, @RequestBody Campaign campaign){
+        Campaign updateCampaign = campaignService.updateCampaign(id,campaign);
+        Map<String, Object> map = new TreeMap<>();
+        map.put("data", updateCampaign);
+        map.put("status", HttpStatus.OK);
+        map.put("message","Campaign updated");
+        return new ResponseEntity<>(map, HttpStatus.OK);
     }
+
     /**
      *
      * API endpoint for deleting campaign

@@ -10,17 +10,21 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class AddCampaignComponent implements OnInit {
   form: FormGroup;
+  id: string;
   name: string;
   objective: string;
   startDate: Date;
   endDate: Date;
-  expiredDate:Date;
+  expiryDate: Date;
   promocode: string;
   discountPercent: number;
-  upperBound: number;
+  targetCustomers: number;
+  achievedCustomers: number;
+  maximumLimit: number;
   totalCoupons: number;
   usedCoupons: number;
-  campaignStatus:string;
+  maxDiscountAmount: number;
+  campaignStatus: string;
 
   constructor(private campaignService: CampaignsService, 
     private fb: FormBuilder,
@@ -39,7 +43,7 @@ campaignForm = this.fb.group({
   upperBound: ['', [Validators.pattern('[0-9]+')]],
   totalCoupons: ['', [Validators.pattern('[0-9]+')]],
   usedCoupons: ['', [Validators.pattern('[0-9]+')]],
-  campaignStatus: ['',[]]
+  campaignStatus: ['Created',[]],
 });
 
 onClose() {

@@ -31,8 +31,9 @@ public class CampaignserviceImpl implements CampaignService
 
     @Override
     public Campaign addCampaign(Campaign campaign) {
-
-            campaign.setCampaignStatus(CampaignStatus.Created);
+            campaign.setMaxDiscountAmount(100);
+            campaign.setMaximumLimit(campaign.getMaxDiscountAmount()*campaign.getTargetCustomers());
+            campaign.setCampaignStatus(CampaignStatus.CREATED);
 
             return campaignRepository.save(campaign);
     }
@@ -58,8 +59,8 @@ public class CampaignserviceImpl implements CampaignService
                 updatedCampaign.setEndDate(campaign.getEndDate());
             }
 
-            if (campaign.getExpiredDate()!= null) {
-                updatedCampaign.setExpiredDate(campaign.getExpiredDate());
+            if (campaign.getExpiryDate()!= null) {
+                updatedCampaign.setExpiryDate(campaign.getExpiryDate());
             }
             if (campaign.getCampaignStatus()!= null) {
                 updatedCampaign.setCampaignStatus(campaign.getCampaignStatus());
@@ -71,11 +72,17 @@ public class CampaignserviceImpl implements CampaignService
             if(campaign.getDiscountPercent() != 0){
                 updatedCampaign.setDiscountPercent(campaign.getDiscountPercent());
             }
-            if(campaign.getUpperBound()!=0) {
-                updatedCampaign.setUpperBound(campaign.getUpperBound());
+            if(campaign.getMaximumLimit()!=0) {
+                updatedCampaign.setMaximumLimit(campaign.getTargetCustomers()*campaign.getMaxDiscountAmount());
+            }
+            if(campaign.getTargetCustomers()!=0) {
+                updatedCampaign.setTargetCustomers(campaign.getTargetCustomers());
+            }
+            if(campaign.getAchievedCustomers()!=0){
+                updatedCampaign.setAchievedCustomers(campaign.getAchievedCustomers());
             }
             if(campaign.getTotalCoupons()!=0){
-                updatedCampaign.setTotalCoupons(campaign.getUsedCoupons());
+                updatedCampaign.setTotalCoupons(campaign.getTotalCoupons()-campaign.getUsedCoupons());
             }
             if(campaign.getUsedCoupons()!=0){
                 updatedCampaign.setUsedCoupons(campaign.getUsedCoupons()+1);

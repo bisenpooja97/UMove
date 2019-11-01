@@ -9,6 +9,7 @@ import { CampaignsService } from '../service/campaigns.service';
   templateUrl: './edit-campaign.component.html',
   styleUrls: ['./edit-campaign.component.css']
 })
+
 export class EditCampaignComponent implements OnInit {
   form: FormGroup;
   id: string;
@@ -16,13 +17,16 @@ export class EditCampaignComponent implements OnInit {
   objective: string;
   startDate: Date;
   endDate: Date;
-  expiredDate: Date;
+  expiryDate: Date;
   promocode: string;
   discountPercent: number;
-  upperBound: number;
+  targetCustomers: number;
+  achievedCustomers: number;
+  maximumLimit: number;
   totalCoupons: number;
   usedCoupons: number;
-  CampaignStatus: string;
+  maxDiscountAmount: number;
+  campaignStatus: string;
 
   
   constructor(public dialogRef: MatDialogRef<EditCampaignComponent>,
@@ -32,6 +36,8 @@ export class EditCampaignComponent implements OnInit {
 ) { }
 
 campaignForm = this.fb.group({
+  
+promocode: ['', [Validators.pattern('^[A-Z0-9]*$')]]
   
 });
 

@@ -21,8 +21,9 @@ public class SeedCommandLineRunner implements CommandLineRunner {
 //                ("SBI credit card","To increase the number of credit card users for SBI",
 //                        date1,date2,"OCT100",25);
 //        campaignRepository.save(campaign);
-               Campaign campaign=new Campaign("25% Off On Bike Rides","To increase the number of users","23-10-2019","30-10-2019","30-10-2019","25OFF",25,200,0,100,50,0, CampaignStatus.Created);
-        campaignRepository.save(campaign);
+//               Campaign campaign=new
+//                       Campaign("First free ride upto rupees 100","To increase onboarding rate by 50% in 1 month","23-10-2019","30-10-2019","30-10-2019","FREE_RIDES",20,100,0,,50,100,"IN_PROGRESS");
+//        campaignRepository.save(campaign);
 
     }
 }

@@ -7,8 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-
-import java.time.LocalDate;
 import java.util.UUID;
 
 @Document
@@ -23,28 +21,30 @@ public class Campaign {
     private String objective;
     private String startDate;
     private String endDate;
-    private String expiredDate;
+    private String expiryDate;
     private String promocode;
     private int discountPercent;
     private int targetCustomers;
     private int achievedCustomers;
-    private int upperBound;
+    private int maximumLimit;
     private int totalCoupons;
+    private int maxDiscountAmount;
     private int usedCoupons;
     private CampaignStatus campaignStatus;
 
-    public Campaign(String name, String objective, String startDate, String endDate, String expiredDate, String promocode, int discountPercent, int targetCustomers, int achievedCustomers, int upperBound, int totalCoupons, int usedCoupons, CampaignStatus campaignStatus) {
+    public Campaign(String name, String objective, String startDate, String endDate, String expiryDate, String promocode, int discountPercent, int targetCustomers, int achievedCustomers, int maximumLimit, int totalCoupons, int maxDiscountAmount, int usedCoupons, CampaignStatus campaignStatus) {
         this.name = name;
         this.objective = objective;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.expiredDate = expiredDate;
+        this.expiryDate = expiryDate;
         this.promocode = promocode;
         this.discountPercent = discountPercent;
         this.targetCustomers = targetCustomers;
         this.achievedCustomers = achievedCustomers;
-        this.upperBound = upperBound;
+        this.maximumLimit = maximumLimit;
         this.totalCoupons = totalCoupons;
+        this.maxDiscountAmount = maxDiscountAmount;
         this.usedCoupons = usedCoupons;
         this.campaignStatus = campaignStatus;
     }

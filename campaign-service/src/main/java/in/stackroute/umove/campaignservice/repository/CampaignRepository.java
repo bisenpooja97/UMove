@@ -2,7 +2,6 @@ package in.stackroute.umove.campaignservice.repository;
 
 import in.stackroute.umove.campaignservice.model.Campaign;
 import in.stackroute.umove.campaignservice.model.CampaignStatus;
-import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;

@@ -3,35 +3,43 @@
     <mat-form-field appearance="outline" fxFlex class="status">
       <mat-label>Campaign Status</mat-label>
       <mat-select [(ngModel)]="Status" (ngModelChange)="onChange($event)">
-        <mat-option *ngFor="let c of campaignStatus" [value]="c.value">
+        <mat-option *ngFor="let c of CampaignStatus" [value]="c.value">
           {{c.viewValue}}
         </mat-option>
       </mat-select>
     </mat-form-field>
   </div>
 </div>
-
 <div fxLayout="column">
     <mat-card class="campaign" fxFlex.sm="0 1 calc(50%-10px)" fxFlex.md="0 1 calc(33%-10px)" fxLayout="column"
       fxLayoutGap="20px">
+      <button mat-button class="icon" (click)="edit()">
+        <i class="material-icons">
+            edit
+        </i>
+    </button>
+      <br><br><br>
       <div fxFlex=50% fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="20%" fxLayoutGap.lt-md="0px" class="form"
         fxLayoutAlign="center center">
 
-        <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="50px" fxLayoutGap.lt-md="0px" class="col">
+        <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="30px" fxLayoutGap.lt-md="0px" class="col">
           <mat-card-title fxLayoutAlign="start">Start Date: {{campaign?.startDate|date:"dd LLLL yyyy" }}</mat-card-title>
-          <mat-card-title fxLayoutAlign="start">Expired date: {{campaign?.expiredDate|date:"dd LLLL yyyy"}}</mat-card-title>
+          <mat-card-title fxLayoutAlign="start">Expiry date: {{campaign?.expiryDate|date:"dd LLLL yyyy"}}</mat-card-title>
           <mat-card-title fxLayoutAlign="start">Promo Code: {{campaign?.promocode}}</mat-card-title>
           <mat-card-title fxLayoutAlign="start">Discount Percent: {{campaign?.discountPercent}}</mat-card-title>
-          <mat-card-title fxLayoutAlign="start">Upper Bound: {{campaign?.upperBound}}         
-          </mat-card-title>
-          <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutAlign="end" fxLayoutGap="10px">
-            <button mat-raised-button color="primary" (click)="edit()" class="edit">
-                    <i class="material-icons">
-                        edit
-                    </i>
+          <mat-card-title fxLayoutAlign="start">MaximumLimit: {{campaign?.maximumLimit}} </mat-card-title>
+          <mat-card-title fxLayoutAlign="start">Maximum Discount Amount: {{campaign?.maxDiscountAmount}} </mat-card-title>
+          
+           <div class="campaignestartend">
+            <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutAlign="center" fxLayoutGap="10px">
+            <button mat-raised-button color="primary" (click)="start()" class="start">
+                Start
+            </button>
+            <button mat-raised-button color="primary" (click)="end()" class="end">
+                    End
                 </button>
            </div>
-
+        </div>    
         </div>
       </div>
     </mat-card>
