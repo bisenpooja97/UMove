@@ -16,9 +16,6 @@ const routes: Routes = [
 { path: 'vehicles', loadChildren: () => import('./vehicles/vehicles.module').then(m => m.VehiclesModule), canActivate: [AuthGuardService] },
 { path: 'settings', loadChildren: () => import('./settings/settings.module').then(m => m.SettingsModule) },
 { path: '**', component: PageNotFoundComponent, canActivate: [AuthGuardService] },
-{ path: 'customer-list', loadChildren: () => import('./customers/customers.module').then(m => m.CustomersModule) },
-{ path: 'customer-list', loadChildren: () => import('./customers/customers.module').then(m => m.CustomersModule) },
-{ path: 'report-list', loadChildren: () => import('./report/report.module').then(m => m.ReportModule) },
 ];
 
 @NgModule({
