@@ -20,5 +20,4 @@ public interface ServiceZone {
     List<Zone> getNearbyZones(Double lon, Double lat);
     Zone findZoneBySupervisorId(String supervisorId);
     List<Zone> findByStatus(ZoneStatus status,int page);
-    List<Zone> findByStatus(ZoneStatus status);
 }

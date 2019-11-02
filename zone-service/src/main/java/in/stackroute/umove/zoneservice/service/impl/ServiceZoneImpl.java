@@ -69,7 +69,7 @@ public class ServiceZoneImpl implements ServiceZone {
     // Zone service for finding zones by locality
     @Override
     public List<Zone> findZonesByLocality(String locality, int page) {
-        List<Zone> zones = zoneRepository.findZonesByLocality(locality, new PageRequest(page,9)).getContent();
+        List<Zone> zones = zoneRepository.findZonesByLocality(locality, new PageRequest(page,1000)).getContent();
         if(zones.isEmpty()) {
             throw new ZonesNotFoundException("No data found");
         }
@@ -116,29 +116,27 @@ public class ServiceZoneImpl implements ServiceZone {
     // Zone service for getting nearby zones
     @Override
     public List<Zone> getNearbyZones(Double lon, Double lat) {
-       List<Zone> zones=findByStatus(ZoneStatus.ACTIVE);
+       List<Zone> zones=zoneRepository.findAll();
        List<Zone> nearbyZones = new ArrayList<>();
        Iterator iterator=zones.iterator();
-       while (iterator.hasNext()) {
-           Zone zones1 = (Zone) iterator.next();
-           Double lat1 = zones1.getLat();
-           Double lon1 = zones1.getLon();
+       while (iterator.hasNext()){
+           Zone zones1= (Zone) iterator.next();
+           Double lat1=zones1.getLat();
+           Double lon1=zones1.getLon();
            int R = 6371; // Radius of the earth in km
-           double dLat = (lat - lat1) * (Math.PI / 180);  // deg2rad below
-           double dLon = (lon - lon1) * (Math.PI / 180);
+           double dLat = (lat-lat1)*(Math.PI/180);  // deg2rad below
+           double dLon = (lon-lon1)*(Math.PI/180);
            double a =
-                   Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-                           Math.cos((lat1) * (Math.PI / 180)) * Math.cos((lat) * (Math.PI / 180)) *
-                                   Math.sin(dLon / 2) * Math.sin(dLon / 2);
-           double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+                   Math.sin(dLat/2) * Math.sin(dLat/2) +
+                           Math.cos((lat1)*(Math.PI/180)) * Math.cos((lat)*(Math.PI/180)) *
+                                   Math.sin(dLon/2) * Math.sin(dLon/2);
+           double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
            double d = R * c; // Distance in km
-           System.out.println("Distance " + d);
+           System.out.println("Distance "+d);
            // calculate the result
-           if (d <= 1) {
-               if (vehicleManagementService.findByZone(zones1.getId(), 0).size() > 0) {
-                   nearbyZones.add(zones1);
-                   //System.out.println(c*r);
-               }
+           if (d<=1){
+               nearbyZones.add(zones1);
+               //System.out.println(c*r);
            }
        }
        return nearbyZones;
@@ -146,13 +144,8 @@ public class ServiceZoneImpl implements ServiceZone {
 
     @Override
     public List<Zone> findByStatus(ZoneStatus status, int page) {
-        List<Zone> zones = zoneRepository.findByStatus(status,new PageRequest(page,9)).getContent();
+        List<Zone> zones = zoneRepository.findByStatus(status,new PageRequest(page,1000)).getContent();
         return zones;
-    }
-
-    @Override
-    public List<Zone> findByStatus(ZoneStatus status) {
-        return zoneRepository.findByStatus(status).getContent();
     }
 
     @Override
