@@ -126,7 +126,7 @@ public class ServiceZoneImpl implements ServiceZone {
         Map<String, Object> response = restTemplate.getForObject("https://umove-dev.stackroute.io/bookingservice/api/v1/config/vicinityDistance", Map.class);
         System.out.println("response for user status" + response);
         Map<String, Object> configuration = (Map<String, Object>) response.get("data");
-        Double vicinityDistance = (Double)configuration.get("value");
+        int vicinityDistance = (int) configuration.get("value");
         System.out.println("vicinity Distance"+vicinityDistance);
        Iterator iterator=zones.iterator();
        while (iterator.hasNext()){
