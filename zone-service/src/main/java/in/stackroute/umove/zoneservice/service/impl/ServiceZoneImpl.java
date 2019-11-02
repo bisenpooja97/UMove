@@ -136,7 +136,6 @@ public class ServiceZoneImpl implements ServiceZone {
            // calculate the result
            if (d<=1){
                nearbyZones.add(zones1);
-               //System.out.println(c*r);
            }
        }
        return nearbyZones;
