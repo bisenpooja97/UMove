@@ -17,7 +17,7 @@ export class AppComponent {
     },
     {
       title: 'Change Status',
-      url: '/vehiclelist',
+      url: '/vehicle-list',
       icon: 'list'
     }
   ];

@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import sun.tools.jconsole.JConsole;
 
 import java.io.BufferedWriter;
 import java.nio.charset.StandardCharsets;
@@ -27,13 +28,13 @@ public class VehicleTypeImpl implements ServiceVehicleType {
     @Autowired
     VehicleTypeRepo repo;
     FuelRepo fuelRepo;
-    //To add new type
     @Autowired
     VehicleRepo vehicleRepo;
 
     @Autowired
     ServiceVehicle serviceVehicle;
 
+    //To add new type
     @Override
     public  VehicleType addType(VehicleType type) {
         VehicleType typeList=repo.findByNameIgnoreCase(type.getName());
@@ -105,12 +106,12 @@ public class VehicleTypeImpl implements ServiceVehicleType {
                 typeList.setBaseFare(type.getBaseFare());
             }
             repo.save(typeList);
-            List<Vehicle> vehicleList = serviceVehicle.findByType(type.getName());
-//            for (vehicle in )
-
+            List<Vehicle> vehicleList = serviceVehicle.findByType(typeList.getName());
+            System.out.println("list k bad for h kya");
             for ( Vehicle vehicle : vehicleList){
                 vehicle.setVehicleType(typeList);
-                 vehicleRepo.save(vehicle);
+                System.out.println("vehicle aaya kya"+ vehicle);
+                vehicleRepo.save(vehicle);
             }
             return repo.save(typeList);
 
@@ -119,6 +120,7 @@ public class VehicleTypeImpl implements ServiceVehicleType {
         return null;
 
     }
+
 
     //To store image in local system
 

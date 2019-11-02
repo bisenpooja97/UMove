@@ -4,6 +4,7 @@ import { Zone } from '../model/zone';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { AddZoneComponent } from './add-zone/add-zone.component';
 import { NotificationService } from '../shared/notification.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-zones',
@@ -18,7 +19,8 @@ export class ZonesComponent implements OnInit {
   displayCount: number;
 
   constructor(private zoneService: ZoneService, private matDialog: MatDialog,
-              private notificationService: NotificationService) { }
+              private notificationService: NotificationService,
+              private location: Location) { }
 
   ngOnInit() {
     this.getZonesInfo();
@@ -58,5 +60,9 @@ export class ZonesComponent implements OnInit {
         this.displayCount = 1;
       }
     });
+  }
+
+  back() {
+    this.location.back();
   }
 }

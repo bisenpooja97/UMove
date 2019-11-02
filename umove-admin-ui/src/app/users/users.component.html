@@ -2,6 +2,10 @@
     <h1 class="header">
         Users
     </h1>
+    <div *ngIf="displayCount === 0; else data" class="no-data" fxLayoutAlign="center center">
+        <img src="assets/no-record-found.jpeg">
+    </div>
+    <ng-template #data>
      <div fxLayout="row" class="search">
         <mat-form-field fxFlex="20%">
             <input matInput [(ngModel)]="term" placeholder="Search">
@@ -15,6 +19,7 @@
         </div>
         <pagination-controls (pageChange)="p = $event" fxLayoutAlign="center center"></pagination-controls>
         </div>
+        </ng-template>
     </div>
 
 

@@ -1,14 +1,12 @@
 <mat-card class="my-card" fxFlex.sm="0 1 calc(50%-10px)" fxFlex.md="0 1 calc(33%-10px)" fxLayout="column" fxLayoutGap="20px" (click)="ok()">
+
+        <mat-card-title fxLayoutAlign="end" [ngStyle]="{'background-color':getColor(campaignStatus)}" class="status">{{campaignStatus}}</mat-card-title>
+        
     <mat-card-title fxLayoutAlign="start" class="name" >{{name}}</mat-card-title>
     <mat-card-content fxLayoutAlign="start" class="objective">Objective:{{objective}}</mat-card-content>
-    <div>
-        <mat-card-content fxLayoutAlign="start">Start date:{{startDate}}</mat-card-content>
-        <mat-card-content fxLayoutAlign="start">End date:{{endDate}}</mat-card-content>
-
-    </div>
-    
-    <mat-card-content fxLayoutAlign="start">Promocode:{{promocode}}</mat-card-content>
-    <mat-card-content fxLayoutAlign="start">Discount Percent:{{discountPercent}}</mat-card-content>
-
+     <mat-card-content fxLayoutAlign="start">Promo Code:{{promocode}}</mat-card-content>
+    <mat-card-content fxLayoutAlign="start">Total Coupons:{{totalCoupons}}</mat-card-content>
+    <mat-card-content fxLayoutAlign="start">Used Coupons:{{usedCoupons}}</mat-card-content>
+    <mat-card-content fxLayoutAlign="start">MaximumLimit:{{maximumLimit}}</mat-card-content>
   </mat-card>
   
