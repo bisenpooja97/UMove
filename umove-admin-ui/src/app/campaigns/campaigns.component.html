@@ -6,12 +6,16 @@
     <input matInput [(ngModel)]="term" placeholder="Search">
   </mat-form-field>
 </div>
-<div fxLayout.xs="column" fxLayout.gt="row" fxLayout="row wrap" fxLayoutGap="10px" class="card">
+<div fxLayout="column wrap">
+<div fxLayout.xs="column" fxLayout.lg="row wrap" fxLayoutGap="50px" class="card"
+fxLayoutAlign.lt-sm="center center">
   <app-campaign-card *ngFor="let campaign of campaigns | paginate: { itemsPerPage: 10, currentPage: p}| filter:term"
     [campaign]="campaign">
   </app-campaign-card>
-   <pagination-controls (pageChange)="p = $event"></pagination-controls>
 </div>
+   <pagination-controls (pageChange)="p = $event" fxLayoutAlign="center center" class="paginator font-style"></pagination-controls>
+</div>
+
 <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutAlign="end" class="add-button">
   <button mat-fab color="primary" (click)="add()">
       <i class="material-icons">

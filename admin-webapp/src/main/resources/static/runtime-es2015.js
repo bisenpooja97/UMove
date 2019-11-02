@@ -64,7 +64,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({"authentication-authentication-module":"authentication-authentication-module","common":"common","users-users-module":"users-users-module","default~dashboard-dashboard-module~report-report-module":"default~dashboard-dashboard-module~report-report-module","dashboard-dashboard-module":"dashboard-dashboard-module","report-report-module":"report-report-module","documents-documents-module":"documents-documents-module","fuel-fuel-module":"fuel-fuel-module"}[chunkId]||chunkId) + "-es2015.js"
+/******/ 		return __webpack_require__.p + "" + ({"authentication-authentication-module":"authentication-authentication-module","campaigns-campaigns-module":"campaigns-campaigns-module","common":"common","users-users-module":"users-users-module","default~dashboard-dashboard-module~report-report-module":"default~dashboard-dashboard-module~report-report-module","dashboard-dashboard-module":"dashboard-dashboard-module","report-report-module":"report-report-module","documents-documents-module":"documents-documents-module","fuel-fuel-module":"fuel-fuel-module"}[chunkId]||chunkId) + "-es2015.js"
 /******/ 	}
 /******/
 /******/ 	// The require function

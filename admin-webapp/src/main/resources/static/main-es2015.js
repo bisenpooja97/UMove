@@ -319,7 +319,7 @@ const routes = [
     { path: 'vehicles', loadChildren: () => Promise.resolve(/*! import() */).then(__webpack_require__.bind(null, /*! ./vehicles/vehicles.module */ "./src/app/vehicles/vehicles.module.ts")).then(m => m.VehiclesModule), canActivate: [_authentication_service_auth_guard_service__WEBPACK_IMPORTED_MODULE_4__["AuthGuardService"]] },
     { path: 'settings', loadChildren: () => Promise.resolve(/*! import() */).then(__webpack_require__.bind(null, /*! ./settings/settings.module */ "./src/app/settings/settings.module.ts")).then(m => m.SettingsModule) },
     { path: 'dashboard', loadChildren: () => Promise.all(/*! import() | dashboard-dashboard-module */[__webpack_require__.e("default~dashboard-dashboard-module~report-report-module"), __webpack_require__.e("common"), __webpack_require__.e("dashboard-dashboard-module")]).then(__webpack_require__.bind(null, /*! ./dashboard/dashboard.module */ "./src/app/dashboard/dashboard.module.ts")).then(m => m.DashboardModule) },
-    // { path: 'campaigns', loadChildren: () => import('./campaign/campaign.module').then(m => m.DashboardModule) },
+    { path: 'campaigns', loadChildren: () => __webpack_require__.e(/*! import() | campaigns-campaigns-module */ "campaigns-campaigns-module").then(__webpack_require__.bind(null, /*! ./campaigns/campaigns.module */ "./src/app/campaigns/campaigns.module.ts")).then(m => m.CampaignsModule) },
     { path: '**', component: _shared_page_not_found_page_not_found_component__WEBPACK_IMPORTED_MODULE_3__["PageNotFoundComponent"], canActivate: [_authentication_service_auth_guard_service__WEBPACK_IMPORTED_MODULE_4__["AuthGuardService"]] }
 ];
 let AppRoutingModule = class AppRoutingModule {

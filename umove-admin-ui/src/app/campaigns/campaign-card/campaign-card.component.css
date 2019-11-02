@@ -1,15 +1,4 @@
-.my-card {
-    margin-bottom: 40px;
-    height: 350px;
-    cursor: pointer;
-    
-}
 
-.my-card:hover {
-    -webkit-transform: scale(1.1);
-    -ms-transform: scale(1.1);
-    transform: scale(1.1);
-}
 
 .name {
     padding-top: 10%;
@@ -28,4 +17,18 @@
 
 }
 
+.my-card2 {
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+    height: 370px;
+}
 
+.my-card2:hover {
+    
+    box-shadow: 0 7px 28px rgba(0,0,0,0.15), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+
+.content {
+    font-size: 1.2em;
+}

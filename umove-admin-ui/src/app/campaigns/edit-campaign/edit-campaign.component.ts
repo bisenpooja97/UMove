@@ -27,20 +27,20 @@ export class EditCampaignComponent implements OnInit {
   usedCoupons: number;
   maxDiscountAmount: number;
   campaignStatus: string;
-
+  pc: string;
   
   constructor(public dialogRef: MatDialogRef<EditCampaignComponent>,
     private fb: FormBuilder, private route: ActivatedRoute,
     private router: Router, private campaignService: CampaignsService,
     @Inject(MAT_DIALOG_DATA) data
-) { }
+) { this.pc=data.promocode;
+console.log(this.pc,'promocode');}
 
 campaignForm = this.fb.group({
   
 promocode: ['', [Validators.pattern('^[A-Z0-9]*$')]]
   
 });
-
 
   ngOnInit() {
   }

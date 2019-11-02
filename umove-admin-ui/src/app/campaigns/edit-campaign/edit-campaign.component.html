@@ -5,14 +5,14 @@
         </button>
     </mat-toolbar>
 
-    <form fxLayout="column" fxLayoutAlign="center center" [formGroup]="campaignForm" (ngSubmit)="onSubmit()">
+    <form fxLayout="column" fxLayoutAlign="center center" [formGroup]="campaignForm"  (ngSubmit)="onSubmit()">
 
             <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px" class="form"
                 fxLayoutAlign="center center">
 
                 <mat-form-field appearance="outline" fxFlex>
                     <mat-label class="font-style">Promo Code</mat-label>
-                    <input matInput maxlength="6" #input placeholder="promo code" formControlName="promocode" required class="font-style">
+                    <input matInput maxlength="10" #input placeholder="promo code" formControlName="promocode" [(ngModel)]="pc.promocode" required class="font-style">
        
                 </mat-form-field>
                      <button mat-raised-button class="btn font-style" [disabled]='!campaignForm.valid' color="primary">

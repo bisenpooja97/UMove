@@ -15,7 +15,7 @@ const routes: Routes = [
 { path: 'vehicles', loadChildren: () => import('./vehicles/vehicles.module').then(m => m.VehiclesModule), canActivate: [AuthGuardService] },
 { path: 'settings', loadChildren: () => import('./settings/settings.module').then(m => m.SettingsModule) },
 { path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) },
-// { path: 'campaigns', loadChildren: () => import('./campaign/campaign.module').then(m => m.DashboardModule) },
+ { path: 'campaigns', loadChildren: () => import('./campaigns/campaigns.module').then(m => m.CampaignsModule) },
 { path: '**', component: PageNotFoundComponent, canActivate: [AuthGuardService] }
 ];
 

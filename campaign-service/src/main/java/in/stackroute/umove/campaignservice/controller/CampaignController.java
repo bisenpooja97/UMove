@@ -109,6 +109,17 @@ public class CampaignController
         map.put("message","Campaign updated");
         return new ResponseEntity<>(map, HttpStatus.OK);
     }
+
+    @PatchMapping(path="/validateCampaigns/{id}")
+        public ResponseEntity validateCampaign(@PathVariable("id") String id){
+        Boolean validateCampaign = campaignService.validateCampaign(id);
+        Map<String, Object> map = new TreeMap<>();
+        map.put("data",validateCampaign);
+        map.put("status", HttpStatus.OK);
+        map.put("message","Campaign validated");
+        return new ResponseEntity<>(map, HttpStatus.OK);
+    }
+
     /**
      *
      * API endpoint for deleting campaign
