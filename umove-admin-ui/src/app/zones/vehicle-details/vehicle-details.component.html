@@ -1,15 +1,31 @@
-<h1 fxLayout="column" fxLayout.gt-md="row" fxLayoutGap.gt-md="15px" class="vehicles">
+<h1 fxLayout="column" fxLayout.gt-md="row" fxLayoutGap.gt-md="15px" class="vehicles font-style">
     Vehicles
 
 </h1>
-<mat-list>
-    <mat-list-item *ngFor="let folder of vehicle" fxLayoutAlign="center center">
-        <mat-icon mat-list-icon>motorcycle</mat-icon>
-        <h4 mat-line>{{folder.vehicleType.name}}</h4>
-        <h4 mat-line>{{folder.registrationNo}}</h4>   
-    </mat-list-item>
-
-</mat-list>
+<ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-scale-multiple"
+>
+  <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>
+<div class="vehicle-list">
+        <mat-list class="center-list">
+                <div *ngIf="displayCount === 0" fxLayoutAlign="center center" class="error-handling font-style">
+                        <img src="http://miceemporio.com/img/no-record-found.jpeg">
+                    </div>
+            <mat-list-item *ngFor="let folder of vehicles; let i = index">
+                
+                <mat-icon mat-list-icon class="icon-size"><span class="space"></span>motorcycle</mat-icon>
+                <h4 mat-line><span class="rNo font-style">{{folder.registrationNo}}</span>
+                    <span class="type font-style">{{folder.vehicleType.name}}</span>
+                </h4>
+                <mat-divider></mat-divider>
+            </mat-list-item>
+        </mat-list>
+        
+</div>
 
 <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutAlign="end" class="add-button">
     <button mat-fab color="primary" disabled="{{buttonDisable}}" (click)="add()">
@@ -17,3 +33,4 @@
             add
         </i>
     </button>
+    

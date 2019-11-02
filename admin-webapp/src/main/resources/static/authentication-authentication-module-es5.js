@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h1 fxLayout=\"column\" fxLayout.gt-md=\"row\" fxLayoutGap.gt-md=\"15px\" fxLayoutAlign=\"center center\">\n    Login\n</h1>\n<section fxLayout=\"column\" fxLayoutGap=\"20px\" fxLayoutAlign=\"center\" fxLayout.gt-xs=\"row\" class=\"login\">\n    <mat-card fxFlex=30%>\n        <img mat-card-image\n            src=\"https://previews.123rf.com/images/stodolskaya/stodolskaya1511/stodolskaya151100027/49219342-user-login-or-access-authentication-icon.jpg\"\n            alt=\"Photo of a Shiba Inu\">\n        <mat-card-content>\n            <div fxLayout=\"column\" fxLayoutAlign=\"center center\">\n                <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\">\n                    <mat-form-field>\n                        <mat-label>Username</mat-label>\n                        <input matInput [(ngModel)]=\"username\" required>\n                    </mat-form-field>\n\n                    <mat-form-field>\n                        <mat-label>Password</mat-label>\n                        <input matInput [(ngModel)]=\"password\" type=\"password\" required>\n                    </mat-form-field>\n                    <mat-card-actions>\n                        <button mat-raised-button (click)=\"login()\" color=\"primary\">\n                            Submit\n                        </button>\n                    </mat-card-actions>\n                </div>\n            </div>\n        </mat-card-content>\n\n    </mat-card>\n</section>"
+module.exports = "\n<section fxLayout=\"column\" fxLayoutGap=\"20px\" fxLayoutAlign=\"space-around\" fxLayout.gt-xs=\"row\" class=\"login\">\n    <!-- <h1 fxLayout=\"column\" fxLayout.gt-md=\"row\" fxLayoutGap.gt-md=\"15px\" fxLayoutAlign=\"center center\" class=\"login-heading\">\n        Umove Operational Portal \n    </h1> -->\n\n    <img src=\"assets/login.jpg\" alt=\"Photo of a Shiba Inu\" height=\"50%\" width=\"30%\">\n\n    <mat-card fxFlex=25%>\n        <h3 fxLayout=\"column\" fxLayout.gt-md=\"row\" fxLayoutGap.gt-md=\"15px\" fxLayoutAlign=\"center center\" class=\"login-heading\n        font-style\">\n            Umove Operational Portal \n        </h3> \n        <mat-card-title class=\"space-title\">\n            <div fxLayout=\"column\" fxLayoutAlign=\"center center\">\n                <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\">\n                    <mat-form-field>\n                        <mat-label class=\"font-style\">Username</mat-label>\n                        <input matInput [(ngModel)]=\"username\" required class=\"font-style\">\n                    </mat-form-field>\n\n                    <mat-form-field>\n                        <mat-label class=\"font-style\">Password</mat-label>\n                        <input matInput [(ngModel)]=\"password\" type=\"password\" required class=\"font-style\">\n                    </mat-form-field>\n                    <mat-card-actions fxLayoutAlign=\"center center\">\n                        <button mat-raised-button (click)=\"login()\" color=\"primary\" class=\"btn font-style\">\n                            Submit\n                        </button>\n                    </mat-card-actions>\n                </div>\n            </div>\n        </mat-card-title>\n\n    </mat-card>\n</section>"
 
 /***/ }),
 
@@ -70,7 +70,7 @@ var AuthenticationRoutingModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".login {\n    padding-bottom: 35px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvYXV0aGVudGljYXRpb24vYXV0aGVudGljYXRpb24uY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLG9CQUFvQjtBQUN4QiIsImZpbGUiOiJzcmMvYXBwL2F1dGhlbnRpY2F0aW9uL2F1dGhlbnRpY2F0aW9uLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIubG9naW4ge1xuICAgIHBhZGRpbmctYm90dG9tOiAzNXB4O1xufSJdfQ== */"
+module.exports = ".login {\n    padding-top: 8%;\n    padding-bottom: 8%;\n    font-size: 1.5em;\n}\n\n.login-heading {\n    padding-top: 2%;\n}\n\n.space-title {\n    padding-top: 15%;\n}\n\n@media only screen and (max-width: 600px) {\n \n    .login {\n        padding-bottom: 25%;\n    }\n}\n\n.btn {\n    width: 12em; height: 60px;\n    font-size: 24px;\n   }\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvYXV0aGVudGljYXRpb24vYXV0aGVudGljYXRpb24uY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLGVBQWU7SUFDZixrQkFBa0I7SUFDbEIsZ0JBQWdCO0FBQ3BCOztBQUVBO0lBQ0ksZUFBZTtBQUNuQjs7QUFFQTtJQUNJLGdCQUFnQjtBQUNwQjs7QUFHQTs7SUFFSTtRQUNJLG1CQUFtQjtJQUN2QjtBQUNKOztBQUVBO0lBQ0ksV0FBVyxFQUFFLFlBQVk7SUFDekIsZUFBZTtHQUNoQiIsImZpbGUiOiJzcmMvYXBwL2F1dGhlbnRpY2F0aW9uL2F1dGhlbnRpY2F0aW9uLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIubG9naW4ge1xuICAgIHBhZGRpbmctdG9wOiA4JTtcbiAgICBwYWRkaW5nLWJvdHRvbTogOCU7XG4gICAgZm9udC1zaXplOiAxLjVlbTtcbn1cblxuLmxvZ2luLWhlYWRpbmcge1xuICAgIHBhZGRpbmctdG9wOiAyJTtcbn1cblxuLnNwYWNlLXRpdGxlIHtcbiAgICBwYWRkaW5nLXRvcDogMTUlO1xufVxuXG5cbkBtZWRpYSBvbmx5IHNjcmVlbiBhbmQgKG1heC13aWR0aDogNjAwcHgpIHtcbiBcbiAgICAubG9naW4ge1xuICAgICAgICBwYWRkaW5nLWJvdHRvbTogMjUlO1xuICAgIH1cbn1cblxuLmJ0biB7XG4gICAgd2lkdGg6IDEyZW07IGhlaWdodDogNjBweDtcbiAgICBmb250LXNpemU6IDI0cHg7XG4gICB9Il19 */"
 
 /***/ }),
 
@@ -88,14 +88,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _service_authentication_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./service/authentication.service */ "./src/app/authentication/service/authentication.service.ts");
+/* harmony import */ var _shared_notification_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../shared/notification.service */ "./src/app/shared/notification.service.ts");
+
 
 
 
 
 var AuthenticationComponent = /** @class */ (function () {
-    function AuthenticationComponent(loginservice, router) {
+    function AuthenticationComponent(loginservice, router, notificationService) {
         this.loginservice = loginservice;
         this.router = router;
+        this.notificationService = notificationService;
         this.username = 'admin';
         this.password = 'admin';
     }
@@ -107,12 +110,13 @@ var AuthenticationComponent = /** @class */ (function () {
             this.invalidLogin = false;
         }
         else {
-            alert('Invalid credentials');
+            this.notificationService.warn('Invalid credentials!!!');
         }
     };
     AuthenticationComponent.ctorParameters = function () { return [
         { type: _service_authentication_service__WEBPACK_IMPORTED_MODULE_3__["AuthenticationService"] },
-        { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] }
+        { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] },
+        { type: _shared_notification_service__WEBPACK_IMPORTED_MODULE_4__["NotificationService"] }
     ]; };
     AuthenticationComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({

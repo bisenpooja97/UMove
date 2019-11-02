@@ -1,8 +1,16 @@
-<mat-card (click)="ok()" class="my-card">
+<mat-card class="my-card my-card2">
 
     <mat-card-content fxLayoutAlign="space-between">
-        <ngx-avatar name="{{name}}"></ngx-avatar>
+        <ngx-avatar class="font-style" name="{{name}}"></ngx-avatar>
     </mat-card-content>
-    <mat-card-title class="fuelName">{{name}}</mat-card-title>
+    <mat-card-title class="fuelName font-style">{{name}}</mat-card-title>
+    <mat-card-title class="typeName font-style">Cost: {{fuelCost}}
+        <span fxLayoutGap="50%">
+            <i class="material-icons iconCapacity"  (click)="update()"  >
+                create
+            </i>
+       </span>
+    </mat-card-title>
+  
 
 </mat-card>

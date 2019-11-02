@@ -3,7 +3,7 @@ import {Subscription} from 'rxjs';
 import {UserProfile} from '../../model/user-profile';
 import {UserProfileServiceService} from '../../service/users-profile/user-profile-service.service';
 import {Router} from '@angular/router';
-import {ToastController} from '@ionic/angular';
+import {MenuController, ToastController} from '@ionic/angular';
 import { HTTP } from '@ionic-native/http/ngx';
 import {Storage} from '@ionic/storage';
 
@@ -17,19 +17,17 @@ export class ViewProfilePage implements OnInit {
 
   private updateSubscription: Subscription;
   public user: UserProfile;
-  public localUser: UserProfile = {
-      id: null ,
-      name: '',
-      mobileNumber: '',
-      email: '',
-      role: 'User',
-      userStatus: null,
-      // document: null,
-  };
-    key = 'details';
+  public localUser: UserProfile;
+  key = 'details';
 
     // tslint:disable-next-line:max-line-length
-  constructor(private userDataService: UserProfileServiceService, private router: Router, public toastController: ToastController, private storage: Storage) { }
+  constructor(private userDataService: UserProfileServiceService, private router: Router,
+              public toastController: ToastController, private storage: Storage, private menuCtrl: MenuController) {
+      this.menuCtrl.enable(true);
+      this.menuCtrl.close();
+      this.menuCtrl.enable(true);
+      this.localUser = new UserProfile();
+  }
   goAnOtherPage() {
     this.router.navigateByUrl('/update-kyc');
   }
@@ -47,7 +45,7 @@ export class ViewProfilePage implements OnInit {
       this.router.navigateByUrl('/login');
   }
   ionViewWillEnter() {
-     this.storage.get(this.key).then(async value => {
+     this.storage.get(this.key).then(value => {
          console.log('Before:', value);
          this.localUser = value;
          console.log(this.localUser.id);
@@ -60,7 +58,7 @@ export class ViewProfilePage implements OnInit {
      });
   }
   ngOnInit() {
-      this.storage.get(this.key).then(async value => {
+      this.storage.get(this.key).then(value => {
           console.log('Before:', value);
           this.localUser = value;
           this.userDataService.getUserDetailById(this.localUser.id)
@@ -69,11 +67,6 @@ export class ViewProfilePage implements OnInit {
                   console.log('Response1 : ', data.data);
                   this.user = JSON.parse(data.data).data;
               });
-          const toast = await this.toastController.create({
-              message: 'Welcome',
-              duration: 2000
-          });
-          toast.present();
       });
       // this.storage.get(this.key).then(value => {
       //     console.log('Before:', value);

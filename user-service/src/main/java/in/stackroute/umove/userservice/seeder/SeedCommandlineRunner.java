@@ -26,10 +26,10 @@ public class SeedCommandlineRunner implements CommandLineRunner
     public void run(String... args) throws Exception
     {
 //        UserData user=new UserData("Rahul","9414632078","rahul@gmail.com",Role.User,UserStatus.Inactive);
-//        DocumentVerification documentVerification = new DocumentVerification(DocumentStatus.Pending, "DLImage",
-//                "RJ27-SL-7133",date);
-//
-//        user.setDocument(documentVerification);
+////        DocumentVerification documentVerification = new DocumentVerification(DocumentStatus.Pending, "DLImage",
+////                "RJ27-SL-7133",date);
+////
+////        user.setDocument(documentVerification);
 //        userRepository.save(user);
 
     }

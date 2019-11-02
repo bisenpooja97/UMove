@@ -9,9 +9,11 @@ package in.stackroute.umove.zoneservice.service.impl;
 import in.stackroute.umove.zoneservice.exception.ZoneAlreadyExistException;
 import in.stackroute.umove.zoneservice.exception.ZoneNotFoundException;
 import in.stackroute.umove.zoneservice.exception.ZonesNotFoundException;
+import in.stackroute.umove.zoneservice.model.Vehicle;
 import in.stackroute.umove.zoneservice.model.Zone;
 import in.stackroute.umove.zoneservice.model.ZoneStatus;
 import in.stackroute.umove.zoneservice.repository.ZoneRepository;
+import in.stackroute.umove.zoneservice.service.ServiceVehicle;
 import in.stackroute.umove.zoneservice.service.ServiceZone;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -29,6 +31,8 @@ public class ServiceZoneImpl implements ServiceZone {
     @Autowired
     private ZoneRepository zoneRepository;
 
+    @Autowired
+    private ServiceVehicle vehicleManagementService;
     // Zone service for creating new zones
     @Override
     public Zone addNewZone(Zone zone) {
@@ -47,7 +51,7 @@ public class ServiceZoneImpl implements ServiceZone {
     // Zone service for getting all zones
     @Override
     public List<Zone> findAllZones(int page) {
-        List<Zone> zone = zoneRepository.findAll(new PageRequest(page,100)).getContent();
+        List<Zone> zone = zoneRepository.findAll(new PageRequest(page,1000)).getContent();
         if(zone.isEmpty())
             throw new ZonesNotFoundException("No data found!!!!");
         return zone;
@@ -65,7 +69,7 @@ public class ServiceZoneImpl implements ServiceZone {
     // Zone service for finding zones by locality
     @Override
     public List<Zone> findZonesByLocality(String locality, int page) {
-        List<Zone> zones = zoneRepository.findZonesByLocality(locality, new PageRequest(page,9)).getContent();
+        List<Zone> zones = zoneRepository.findZonesByLocality(locality, new PageRequest(page,1000)).getContent();
         if(zones.isEmpty()) {
             throw new ZonesNotFoundException("No data found");
         }
@@ -140,7 +144,7 @@ public class ServiceZoneImpl implements ServiceZone {
 
     @Override
     public List<Zone> findByStatus(ZoneStatus status, int page) {
-        List<Zone> zones = zoneRepository.findByStatus(status,new PageRequest(page,9)).getContent();
+        List<Zone> zones = zoneRepository.findByStatus(status,new PageRequest(page,1000)).getContent();
         return zones;
     }
 

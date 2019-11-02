@@ -7,6 +7,8 @@ import {MapService} from "../service/zone/map.service";
 import {RideService} from "../service/ride.service";
 import {UserProfile} from "../model/user-profile";
 import {Storage} from "@ionic/storage";
+import {MenuController} from '@ionic/angular';
+import {Ride} from '../model/ride';
 
 @Component({
   selector: 'app-home',
@@ -18,7 +20,7 @@ export class HomePage implements OnInit{
     ngOnInit(): void {
 
     }
-  containerId = 'pick';
+  containerId = 'pick-up';
   page = 'pick-up';
   trip : boolean;
   isLoaded : boolean;
@@ -34,9 +36,8 @@ export class HomePage implements OnInit{
               private geolocation: Geolocation,
               private mapService: MapService,
               private rideService: RideService,
-              private storage: Storage) {
-
-
+              private storage: Storage,
+              private menuCtrl: MenuController) {
   }
 
   showVehicleList() {
@@ -65,15 +66,42 @@ export class HomePage implements OnInit{
   }
 
   ionViewDidEnter() {
-    this.geolocation.getCurrentPosition().then((resp) => {
-      const lat = resp.coords.latitude;
-      const lng = resp.coords.longitude;
-      this.mapService.buildMap(lat, lng, 'pickup', true);
-      // this.mapService.checkMapLoading();
-      // this.mapService.marker(lat, lng);
-    }).catch((error) => {
-      console.log('Error getting location', error);
-    });
+    this.menuCtrl.enable(true);
+    this.mapService.checkGPSPermission();
+
+    console.log('user ki current ride check rk rha hu');
+    this.storage.ready().then(() => {
+      this.storage.get('details').then(value => {
+        console.log('ye h wo user ', value);
+        this.rideService.getCurrentRide(value.id).then(response => {
+          console.log('ye aaya hresonse', response);
+          if(response.status === 200 && response.data && JSON.parse(response.data).data) {
+            console.log('data', response.data);
+            const currentRide: Ride = JSON.parse(response.data).data;
+            console.log('ye h ride ka data', currentRide);
+            if(currentRide.status === 'Confirmed') {
+              this.router.navigateByUrl('ride-booking-details');
+            }
+            else if(currentRide.status === 'Started') {
+              this.router.navigateByUrl('ride-details');
+            }
+          }
+        })
+      })
+    })
+
+    // this.mapService.requestGPSPermission();
+    // this.mapService.askToTurnOnGPS();
+    // this.mapService.getLocationCoordinates();
+    // // this.geolocation.getCurrentPosition().then((resp) => {
+    // //   const lat = resp.coords.latitude;
+    // //   const lng = resp.coords.longitude;
+    // //   this.mapService.buildMap(lat, lng, 'pickup', true);
+    // //   // this.mapService.checkMapLoading();
+    //   // this.mapService.marker(lat, lng);
+    // }).catch((error) => {
+    //   console.log('Error getting location', error);
+    // });
     this.mapService.selectZone$.subscribe(zone => {
       console.log('selected zone', zone);
       this.selectedZone = zone;
@@ -82,6 +110,7 @@ export class HomePage implements OnInit{
       console.log('lo ho gya load ab tofinally~~~');
       this.isLoaded = true;
     });
+
     this.storage.ready().then(() => {
       this.storage.get(this.key).then(value => {
         console.log('this is in storage', value);

@@ -14,6 +14,12 @@ import in.stackroute.umove.bookingservice.repo.RideRepo;
 import in.stackroute.umove.bookingservice.repo.TrackingRepo;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -135,7 +141,7 @@ public class RideServiceImp implements RideService {
 
     //Function to get ride details by userId and rideStatus
     @Override
-    public Ride getRideByUserIdNStatus(String userId, String rideStatus){
+    public Ride getRideByUserIdNStatus(String userId, RideStatus rideStatus){
         Ride ride = rideRepo.findByUserIdNStatus(userId, rideStatus);
         return ride;
     }
@@ -242,7 +248,10 @@ public class RideServiceImp implements RideService {
             throw new RideNotFoundException("Ride", "rideId", rideId);
         }
 
-        Payment payment = new Payment();
+        Payment payment = paymentRepo.findByRideId(rideId.toString());
+        if(payment == null) {
+            payment = new Payment();
+        }
         int sizeOfDestinationZones = ride.getDestinationZones().size();
         int discount_percent = 0;
 
@@ -323,8 +332,10 @@ public class RideServiceImp implements RideService {
     @Override
     public boolean isValidUser(String userId) {
         RestTemplate restTemplate = new RestTemplate();
-        Map<String, Object> response = restTemplate.getForObject("http://13.235.35.202:8080/userservice/api/v1/users/" + userId, Map.class);
+        Map<String, Object> response = restTemplate.getForObject("https://umove-dev.stackroute.io/userservice/api/v1/users/" + userId, Map.class);
+        System.out.println("response for user status" + response);
         Map<String, Object> user = (Map<String, Object>) response.get("data");
+        System.out.println("user" + user);
         if(user.get("userStatus").equals("Active")) {
             return true;
         }
@@ -333,9 +344,56 @@ public class RideServiceImp implements RideService {
     }
 
     @Override
-    public boolean isVehicleAllocated(String zoneId, String typeName) {
+    public synchronized boolean isVehicleTypeAllocated(String zoneId, String typeId) {
+        System.out.println("url for vehicle type" + "https://umove-dev.stackroute.io/zoneservice/" +
+                "api/v1/bookingConfirmed?zoneId=" + zoneId + "&typeId=" + typeId);
+
+        HttpHeaders requestHeaders = new HttpHeaders();
+        HttpEntity<?> requestEntity = new HttpEntity<Object>(requestHeaders);
+
+        RestTemplate restTemplate = new RestTemplate();
+
+        HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory();
+        restTemplate.setRequestFactory(requestFactory);
+
+        restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
+
+        ResponseEntity<Map> response = restTemplate.exchange("https://umove-dev.stackroute.io/zoneservice/" +
+                "api/v1/bookingConfirmed?zoneId=" + zoneId + "&typeId=" + typeId, HttpMethod.PATCH, requestEntity, Map.class);
+
+        System.out.println("vehicle type count ka status" + response.getBody().get("status"));
+        if(response.getBody().get("status").equals("Booked")) {
+            return true;
+        }
         return false;
     }
+
+    @Override
+    public synchronized boolean isVehicleAllocated(String registrationNo) {
+
+        System.out.println("alocate vehicle url: " + "https://umove-dev.stackroute.io/zoneservice/" +
+        "api/v1/onRideStart?registrationNo=" + registrationNo);
+
+        HttpHeaders requestHeaders = new HttpHeaders();
+        HttpEntity<?> requestEntity = new HttpEntity<Object>(requestHeaders);
+
+        RestTemplate restTemplate = new RestTemplate();
+
+        HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory();
+        restTemplate.setRequestFactory(requestFactory);
+
+        restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
+
+        ResponseEntity<Map> response = restTemplate.exchange("https://umove-dev.stackroute.io/zoneservice/" +
+        "api/v1/onRideStart?registrationNo=" + registrationNo, HttpMethod.PATCH, requestEntity, Map.class);
+
+        if(response.getBody().get("status").equals("Booked")) {
+            return true;
+        }
+
+        return false;
+    }
+
     public TrackingLatitudeLongitude storeTrackingData(Ride ride) {
         TrackingLatitudeLongitude trackingLatitudeLongitude = new TrackingLatitudeLongitude();
         if(ride.getStatus().equals(RideStatus.Started))

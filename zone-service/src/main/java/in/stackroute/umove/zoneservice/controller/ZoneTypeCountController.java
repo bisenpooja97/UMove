@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-// @CrossOrigin(origins = {"http://localhost:4200"})
+//@CrossOrigin(origins = {"http://localhost:4200"})
 @RestController
 @RequestMapping("api/v1")
 public class ZoneTypeCountController {
@@ -61,6 +61,23 @@ public class ZoneTypeCountController {
         return new ResponseEntity<Map>(map, HttpStatus.OK);
     }
 
-
+    @PatchMapping("/bookingConfirmed")
+    public ResponseEntity<Map> ConfirmBooking(@RequestParam(value = "zoneId") String zoneId,
+                                              @RequestParam(value = "typeId") String typeId) {
+        ZoneTypeCount typeList = serviceZoneTypeCount.bookingConfirmed(zoneId, typeId);
+        if(typeList == null) {
+            Map<String, Object> map = new TreeMap<>();
+            map.put("message", "No type available!!!");
+            map.put("status", "Failed");
+            return new ResponseEntity<Map>(map, HttpStatus.OK);
+        } else {
+            Map<String, Object> map = new TreeMap<>();
+            map.put("data", typeList);
+            map.put("message", "Booking confirmed!!!");
+            map.put("status", "Booked");
+            return new ResponseEntity<Map>(map, HttpStatus.OK);
+        }
+    }
+    
 
 }

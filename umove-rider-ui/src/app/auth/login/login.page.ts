@@ -1,17 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import * as firebase from 'firebase';
 import {environment} from '../../../environments/environment';
 import {WindowService} from '../../service/window/window.service';
 import {Storage} from '@ionic/storage';
 import {UserProfile} from '../../model/user-profile';
+import {MenuController} from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
-// tslint:disable-next-line:component-class-suffix
 export class LoginPage implements OnInit {
   pnumber: string;
   windowRef: any;
@@ -21,7 +21,8 @@ export class LoginPage implements OnInit {
   user: any;
   disableButton: boolean;
 
-  constructor(private win: WindowService, private  router: Router, private storage: Storage) {
+  constructor(private win: WindowService, private  router: Router, private storage: Storage, private menuCtrl: MenuController) {
+    this.menuCtrl.enable(false);
     this.localUserData = new UserProfile();
   }
 
@@ -33,11 +34,9 @@ export class LoginPage implements OnInit {
     const countrycode = '+91';
     const p2 = countrycode.concat(this.pnumber);
     console.log(p2);
-    const num = p2;
-
     // console.log(this.pnumber);
 
-    firebase.auth().signInWithPhoneNumber(num, appVerifier)
+    firebase.auth().signInWithPhoneNumber(p2, appVerifier)
         .then(result => {
 
           this.windowRef.confirmationResult = result;

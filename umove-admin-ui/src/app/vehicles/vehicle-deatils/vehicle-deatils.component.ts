@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { MatDialogConfig, MatDialog } from '@angular/material';
 import { UpdateVehiclesComponent } from '../update-vehicles/update-vehicles.component';
 import { NotificationService } from 'src/app/shared/notification.service';
+import { Location } from '@angular/common';
 export interface Status {
   value: string;
   viewValue: string;
@@ -35,14 +36,15 @@ export class VehicleDeatilsComponent implements OnInit {
     { value: 'Free', viewValue: 'FREE' },
     { value: 'Servicing', viewValue: 'SERVICING' },
     { value: 'Stolen', viewValue: 'STOLEN' },
-    { value: 'No_More_In_Use', viewValue: 'No More In Use' }
+    { value: 'No_More_In_Use', viewValue: 'NO MORE IN USE' }
 
   ];
 
   constructor(private vehicleService: VehicleService,
               private route: ActivatedRoute,
               private matDialog: MatDialog,
-              private notificationService: NotificationService) { }
+              private notificationService: NotificationService,
+              private location: Location) { }
 
   ngOnInit() {
     this.getVehicleDetails();
@@ -56,7 +58,13 @@ export class VehicleDeatilsComponent implements OnInit {
       this.registrationNo = this.vehicle.registrationNo;
       this.name = this.vehicle.vehicleType.name;
       this.lastServiceDate = this.vehicle.lastServiceDate;
-      this.purchasedDate = this.vehicle.purchasedDate;
+      // this.purchasedDate = this.vehicle.purchasedDate;
+      let pd = new Date();
+      pd = new Date(this.vehicle.purchasedDate);
+      let pd2;
+      pd2 = pd.getDate();
+      pd.setDate(pd2 + 1);
+      this.purchasedDate = pd;
       this.insuranceNo = this.vehicle.insuranceNo;
       this.zoneId = this.vehicle.zoneId;
       this.chassisNumber = this.vehicle.chassisNumber;
@@ -71,6 +79,8 @@ export class VehicleDeatilsComponent implements OnInit {
     console.log(this.vehicle, newValue);
     this.vehicle.status = newValue;
     this.vehicleService.updateVehicle(this.route.snapshot.paramMap.get('registrationNo'), this.vehicle).subscribe(
+      res => this.notificationService.success('status updated successfully!!!'),
+      error => this.notificationService.warn('Not updated!!'),
     );
   }
 
@@ -78,6 +88,7 @@ export class VehicleDeatilsComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
+    dialogConfig.width = '40%';
     dialogConfig.data = {
       insuranceNo: this.vehicle.insuranceNo,
       lastServiceDate: this.vehicle.lastServiceDate,
@@ -98,5 +109,9 @@ export class VehicleDeatilsComponent implements OnInit {
         );
       }
     });
+  }
+
+  back() {
+    this.location.back();
   }
 }

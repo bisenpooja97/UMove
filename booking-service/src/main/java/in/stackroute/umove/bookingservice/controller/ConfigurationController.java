@@ -15,7 +15,6 @@ import java.util.Map;
 import java.util.TreeMap;
 
 @RestController
-@CrossOrigin(origins = {"http://localhost:4200"})
 @RequestMapping(value = "api/v1")
 public class ConfigurationController {
 

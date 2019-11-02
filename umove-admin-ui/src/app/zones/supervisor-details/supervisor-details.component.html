@@ -1,36 +1,52 @@
-
 <div fxLayout="column">
-        <mat-card class="supervisor" fxFlex.sm="0 1 calc(50%-10px)" fxFlex.md="0 1 calc(33%-10px)" fxLayout="column" fxLayoutGap="20px">
-                        <mat-card-title fxLayoutAlign="start" class="zoneName">Supervisor
-                                <button mat-button class="icon" disabled="{{buttonDisabled2}}"  (click)="updateSupervisor()">
+        <mat-card class="supervisor" fxFlex.sm="0 1 calc(50%-10px)" fxFlex.md="0 1 calc(33%-10px)" fxLayout="column"
+                fxLayoutGap="20px">
+
+                <div *ngIf="sName === null; else sup">
+                        <mat-card-title fxLayoutAlign="start" class="zoneName font-style">Supervisor
+                        </mat-card-title>
+                        <br><br>
+                        <h2 fxLayoutAlign="center center" class="font-style">No Supervisor allocated!!!</h2>
+                        <div fxLayoutAlign="center center">
+                                <button mat-flat-button (click)="addSupervisor()" color="accent" class="font-style  btn-sup">
+                                        Add Supervisor
+                                </button>
+                        </div>
+                </div>
+                <br><br>
+
+                <ng-template #sup>
+                        <mat-card-title fxLayoutAlign="start" class="zoneName font-style">Supervisor
+                                <button mat-button class="icon" disabled="{{buttonDisabled2}}"
+                                        (click)="updateSupervisor()">
                                         <mat-icon>
                                                 create
                                         </mat-icon>
                                 </button>
                         </mat-card-title>
-        
                         <br><br>
-        
-            <div fxFlex=50% fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="20%" fxLayoutGap.lt-md="0px"
-                class="form" fxLayoutAlign="center center">    
-            <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="50px" fxLayoutGap.lt-md="0px" class="col">
-                    <mat-card-title fxLayoutAlign="center center">Name: {{sName}}</mat-card-title> 
-                    <mat-card-title fxLayoutAlign="center center">Contact No: {{sNumber}}</mat-card-title>
-                    
-                       
-            </div>  
-            <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="50px" fxLayoutGap.lt-md="0px" class="col">
-                    <mat-card-title fxLayoutAlign="center center">Email: {{sEmail}}</mat-card-title> 
-                    <mat-card-title fxLayoutAlign="center center">Shift: Daily</mat-card-title>
-                    
-            </div> 
-            </div>  
-            <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutAlign="end" class="add-button">
-                    <button mat-fab color="primary" disabled="{{buttonDisabled}}" (click)="addSupervisor()">
-                        <i class="material-icons">
-                            add
-                        </i>
-                    </button>
-                </div>
+                        <div fxFlex=50% fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="20%" fxLayoutGap.lt-md="0px"
+                                class="form" fxLayoutAlign="center center">
+                                <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="50px"
+                                        fxLayoutGap.lt-md="0px" class="col">
+                                        <mat-card-title fxLayoutAlign="center center" class="font-style">Name: {{sName}}
+                                        </mat-card-title>
+                                        <mat-card-title fxLayoutAlign="center center" class="font-style">Contact No:
+                                                {{sNumber}}
+                                        </mat-card-title>
+
+
+                                </div>
+                                <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="50px"
+                                        fxLayoutGap.lt-md="0px" class="col">
+                                        <mat-card-title fxLayoutAlign="center center" class="font-style">Email:
+                                                {{sEmail}}</mat-card-title>
+                                        <mat-card-title fxLayoutAlign="center center" class="font-style">Shift: Daily
+                                        </mat-card-title>
+
+                                </div>
+                        </div>
+                </ng-template>
+
         </mat-card>
-        
+</div>

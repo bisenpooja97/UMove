@@ -25,10 +25,11 @@ public class UIController {
 //        return new ModelAndView("forward:http://localhost:8088", model);
 //    }
 
-    @RequestMapping("/")
-    private String redirectToAdminUI(ModelMap model) {
-        return "forward:adminwebapp/";
+    @GetMapping("/")
+    private RedirectView redirectToAdminUI() {
+        RedirectView redirectView = new RedirectView();
+        redirectView.setUrl("/adminwebapp");
+        return redirectView;
     }
-
 
 }

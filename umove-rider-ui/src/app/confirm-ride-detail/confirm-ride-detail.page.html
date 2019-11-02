@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
@@ -22,7 +22,7 @@
   </ion-card>
 
   <ion-card *ngIf="!booking?.paymentMethod">
-      <ion-item lines="none" routerLink="/show-payment-method">
+      <ion-item lines="none" routerLink="/show-payment-method/select">
         <a>Select Payment Method</a>
       </ion-item>
   </ion-card>
@@ -48,23 +48,23 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-card *ngIf="!booking?.promocode">
-    <ion-item lines="none" routerLink="/campaigns">
+  <ion-card *ngIf="!booking?.promoCode">
+    <ion-item lines="none" routerLink="/campaigns/apply">
       <a>Apply Promocode</a>
     </ion-item>
   </ion-card>
 
-  <ion-card *ngIf="booking?.promocode">
+  <ion-card *ngIf="booking?.promoCode">
     <ion-card-content>
       <ion-grid no-padding>
         <ion-row class="ion-align-items-center">
           <ion-icon name="pricetags" size="large" color="success"></ion-icon>
           <ion-col padding-horizontal>
             <ion-text color="success">
-              <h2>{{ booking?.promocode?.promocode }} Promocode Applied!</h2>
+              <h2>{{ booking?.promoCode?.promocode }} Promocode Applied!</h2>
             </ion-text>
             <ion-text>
-              <p>Get {{ booking?.promocode?.discountPercent }}% off on your ride upto {{ 50 | currency: 'INR' }}</p>
+              <p>Get {{ booking?.promoCode?.discountPercent }}% off on your ride upto {{ 50 | currency: 'INR' }}</p>
             </ion-text>
           </ion-col>
           <ion-icon name="close-circle" size="large" (click)="removeSelectedPromocode()"></ion-icon>
@@ -76,7 +76,7 @@
         <ion-row  class="map" id="booking" style="height: 300px;" ></ion-row>
   </ion-card>
 
-  <ion-button expand="block" class="ion-no-margin btn-bottom" (click)="confirmBooking()">
+  <ion-button expand="block" class="ion-no-margin btn-bottom bottom-button" (click)="confirmBooking()">
     Confirm Booking
   </ion-button>
 </ion-content>

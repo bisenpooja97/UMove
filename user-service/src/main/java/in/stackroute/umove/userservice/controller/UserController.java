@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -33,9 +34,9 @@ import java.util.stream.Collectors;
 //@CrossOrigin(origins = "http://localhost:8100")
 @RestController
 @RequestMapping("api/v1")
-
 @AllArgsConstructor
-@NoArgsConstructor
+//@CrossOrigin(origins="http://localhost:4200")
+//@NoArgsConstructor
 //@CrossOrigin(origins="http://localhost:4200")
 public class UserController
 {
@@ -47,6 +48,14 @@ public class UserController
     private UserService userService;
     @Autowired
     PaymentServiceInterface paymentServiceInterface;
+
+    private final RabbitTemplate messagingTemplate;
+
+    @Autowired
+    UserController(RabbitTemplate messagingTemplate){
+        this.messagingTemplate = messagingTemplate;
+    }
+
 
     @PostMapping(path = "users/adduser")
     public ResponseEntity<Map> addUser(@RequestBody UserData user) {
@@ -75,7 +84,10 @@ public ResponseEntity updateUser(@PathVariable String id, @RequestBody UserData 
     Map<String, Object> map = new TreeMap<>();
     map.put("data", data);
     map.put("status", HttpStatus.OK);
-    return new ResponseEntity<>(map, HttpStatus.OK);
+    messagingTemplate.convertAndSend("user_exchange", "user_status", map);
+    messagingTemplate.convertAndSend("user_exchange", "kyc_status", map);
+
+        return new ResponseEntity<>(map, HttpStatus.OK);
 }
 
 @GetMapping(path = "users/{userId}/document")
@@ -111,7 +123,7 @@ public ResponseEntity<Map> getUsersById(@PathVariable String id)
             users=userService.findByName(name);
         }
         if(role!= null ) {
-            users=userService.findByRole(role);
+            users=userService.findByRoles(role);
         }
         if(userStatus!= null ) {
             users=userService.findByUserStatus(userStatus);

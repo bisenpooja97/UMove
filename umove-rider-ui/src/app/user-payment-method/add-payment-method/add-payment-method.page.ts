@@ -1,6 +1,6 @@
 import {Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {HTTP} from '@ionic-native/http/ngx';
 import {PaymentMethod} from '../../model/payment-method';
 import {UserPaymentMethodService} from '../../service/user-payment-method/user-payment-method.service';
@@ -15,19 +15,17 @@ import {UserProfile} from '../../model/user-profile';
 export class AddPaymentMethodPage implements OnInit {
   public addPayment: FormGroup;
   public payment: PaymentMethod;
-  public localUser: UserProfile = {
-    id: null ,
-    name: '',
-    mobileNumber: '',
-    email: '',
-    role: 'User',
-    userStatus: null,
-    // document: null,
-  };
+  public localUser: UserProfile;
   key = 'details';
-  // tslint:disable-next-line:max-line-length
-  constructor(private formBuilder: FormBuilder, private userPaymentMethodService: UserPaymentMethodService, private router: Router, private http: HTTP, private storage: Storage) { }
+  page: string;
+
+  constructor(private formBuilder: FormBuilder, private userPaymentMethodService: UserPaymentMethodService, private router: Router,
+              private http: HTTP, private storage: Storage, private route: ActivatedRoute) {
+      this.localUser = new UserProfile();
+  }
+
   ngOnInit() {
+    this.page = this.route.snapshot.paramMap.get('page');
     this.addPayment = new FormGroup({
       paymentProvider: new FormControl('', Validators.required),
       paymentType: new FormControl('', Validators.required),
@@ -38,7 +36,7 @@ export class AddPaymentMethodPage implements OnInit {
     });
   }
   goShowPayment() {
-    this.router.navigateByUrl('/show-payment-method');
+    this.router.navigateByUrl('/show-payment-method/' + this.page);
   }
   addForm(data) {
     this.storage.get(this.key).then(value => {

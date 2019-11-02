@@ -4,3 +4,10 @@
   bottom: 0px;
   right: 0;
 }
+::ng-deep a.mapboxgl-ctrl-logo.mapboxgl-compact{
+  display: none;
+}
+
+::ng-deep .mapboxgl-ctrl-attrib.mapboxgl-compact::after{
+  display: none;
+}

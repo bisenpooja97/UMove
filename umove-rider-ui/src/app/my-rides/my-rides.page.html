@@ -1,11 +1,15 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>My Rides</ion-title>
   </ion-toolbar>
-</ion-header><ion-content>
+</ion-header>
+<ion-content>
+  <p style="width: 100%; text-align: center; font-size: 1.4em;" *ngIf="!ridedata || ridedata.length===0">
+    No Rides Yet!
+  </p>
   <ion-list lines="none">
     <ion-item *ngFor="let ride of ridedata">
       <ion-card (click)="rideDetails(ride)">

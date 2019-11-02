@@ -27,3 +27,11 @@ controles-container{
   height: 40px;
   padding: 0px !important;
 }
+
+.inputFile {
+	font-size: 1.25em;
+    font-weight: 700;
+    color: black;
+    display: inline-block;
+    padding-bottom: 5%;
+}

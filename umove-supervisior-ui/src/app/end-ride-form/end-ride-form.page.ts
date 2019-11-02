@@ -61,15 +61,16 @@ export class EndRideFormPage implements OnInit {
       console.log('response', response, response.status, JSON.parse(response.data));
       if (response && response.status === 200 && JSON.parse(response.data).status === 'OK') {
         this.rideService.presentToast('Extracharges submitted successfully.', 2000);
-        this.router.navigateByUrl('');
+        this.router.navigateByUrl('home');
       } else if (!response) {
         this.rideService.presentToast('Error: Something Went Wrong, Try again.', 2000);
-        this.router.navigateByUrl('');
+        this.router.navigateByUrl('home');
       } else {
         this.rideService.presentToast('Can\'t process your request right now', 2000);
-        this.router.navigateByUrl('');
+        this.router.navigateByUrl('home');
       }
-    });
+
+    })
   }
 
 

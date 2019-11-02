@@ -5,6 +5,7 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
 import {MapService} from "../service/zone/map.service";
 import {RideService} from "../service/ride.service";
+import {MenuController} from "@ionic/angular";
 
 @Component({
   selector: 'app-drop',
@@ -13,24 +14,24 @@ import {RideService} from "../service/ride.service";
 })
 export class DropPage implements OnInit {
   ngOnInit(): void {
-
-    this.geolocation.getCurrentPosition().then((resp) => {
-      const lat = resp.coords.latitude;
-      const lng = resp.coords.longitude;
-      this.mapService.buildMap(lat, lng,'drop',true);
-      // this.mapService.checkMapLoading();
-      // this.mapService.marker(lat, lng);
-    }).catch((error) => {
-      console.log('Error getting location', error);
-    });
-    this.mapService.selectZone$.subscribe(zone => {
-      console.log('selected zone',zone);
-      this.selectedZone = zone;
-    });
-    this.mapService.onLoad$.subscribe((message:string)=>{
-      console.log('lo ho gya load ab tofinally~~~');
-      this.isLoaded = true;
-    })
+    //
+    // this.geolocation.getCurrentPosition().then((resp) => {
+    //   const lat = resp.coords.latitude;
+    //   const lng = resp.coords.longitude;
+    //   this.mapService.buildMap(lat, lng,'drop',true);
+    //   // this.mapService.checkMapLoading();
+    //   // this.mapService.marker(lat, lng);
+    // }).catch((error) => {
+    //   console.log('Error getting location', error);
+    // });
+    // this.mapService.selectZone$.subscribe(zone => {
+    //   console.log('selected zone',zone);
+    //   this.selectedZone = zone;
+    // });
+    // this.mapService.onLoad$.subscribe((message:string)=>{
+    //   console.log('lo ho gya load ab tofinally~~~');
+    //   this.isLoaded = true;
+    // })
   }
   containerId = 'drop';
   page = 'drop';
@@ -44,7 +45,8 @@ export class DropPage implements OnInit {
               private router: Router,
               private geolocation: Geolocation,
               private mapService: MapService,
-              private rideService: RideService) {
+              private rideService: RideService,
+              private menuCtrl: MenuController) {
 
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
@@ -73,5 +75,33 @@ export class DropPage implements OnInit {
 
   gettingCoordinatesByLocality($event: any) {
     this.mapService.gettingCoordinatesByLocality($event);
+  }
+  ionViewDidEnter() {
+    this.menuCtrl.enable(true);
+    // this.mapService.checkGPSPermission(this.containerId);
+    this.geolocation.getCurrentPosition().then((resp) => {
+      const lat = resp.coords.latitude;
+      const lng = resp.coords.longitude;
+      this.mapService.buildMap(lat, lng, 'drop', true);
+      // this.mapService.checkMapLoading();
+      // this.mapService.marker(lat, lng);
+    }).catch((error) => {
+      console.log('Error getting location', error);
+    });
+    this.mapService.selectZone$.subscribe(zone => {
+      console.log('selected zone', zone);
+      this.selectedZone = zone;
+    });
+    this.mapService.onLoad$.subscribe((message: string) => {
+      console.log('lo ho gya load ab tofinally~~~');
+      this.isLoaded = true;
+    });
+
+    // this.storage.ready().then(() => {
+    //   this.storage.get(this.key).then(value => {
+    //     console.log('this is in storage', value);
+    //     this.localUserData = value;
+    //   });
+    // });
   }
 }

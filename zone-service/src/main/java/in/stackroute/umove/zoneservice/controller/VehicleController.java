@@ -109,6 +109,23 @@ public class VehicleController {
         map.put("status", HttpStatus.OK);
         return new ResponseEntity<Map>(map, HttpStatus.OK);
     }
+
+    @PatchMapping("/onRideStart")
+    public  ResponseEntity<Map> rideStart(@RequestParam(value = "registrationNo") String registrationNo) {
+        Boolean vehicle = vehicleManagementService.onRideStart(registrationNo);
+        if(vehicle == false) {
+            Map<String, Object> map = new TreeMap<>();
+            map.put("message", "Already busy!!!");
+            map.put("status", "Failed");
+            return new ResponseEntity<Map>(map, HttpStatus.OK);
+        } else {
+            Map<String, Object> map = new TreeMap<>();
+            map.put("data", vehicle);
+            map.put("message", "Status changed!!!");
+            map.put("status", "Booked");
+            return new ResponseEntity<Map>(map, HttpStatus.OK);
+        }
+    }
 }
 
 

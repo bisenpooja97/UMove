@@ -5,6 +5,8 @@ import {UserProfile} from '../../model/user-profile';
 import {Storage} from '@ionic/storage';
 import {HTTP} from '@ionic-native/http/ngx';
 import {UserProfileServiceService} from '../../service/users-profile/user-profile-service.service';
+import {AuthenticationService} from '../../service/authentication-service/authentication.service';
+import {MenuController} from '@ionic/angular';
 
 @Component({
     selector: 'app-verify',
@@ -22,10 +24,16 @@ export class VerifyPage implements OnInit {
     userDataRecieved: UserProfile;
     userData: UserProfile;
     user: any;
+    disableButton: boolean;
+    jsonkey = 'token';
+    jsonToken: string;
     // inputtext: any;
 
     // tslint:disable-next-line:max-line-length
-    constructor(private win: WindowService, private  router: Router, private http: HTTP , private storage: Storage, private userDataService: UserProfileServiceService) {
+    constructor(private win: WindowService, private  router: Router, private http: HTTP , private storage: Storage,
+                private userDataService: UserProfileServiceService, private menuCtrl: MenuController,
+                private  authDataService: AuthenticationService) {
+        this.menuCtrl.enable(false);
         this.error = false;
         this.userData = new UserProfile();
     }
@@ -34,28 +42,35 @@ export class VerifyPage implements OnInit {
         this.windowRef = this.win.windowRef;
     }
     verifyLoginCode() {
+        this.disableButton = true;
         this.windowRef.confirmationResult
             .confirm(this.verificationCode)
             .then( result => {
                 this.user = result.user;
                 // console.log(this.user.phoneNumber);
                 this.userData.mobileNumber = this.user.phoneNumber;
-                this.userData.role = 'User';
+                this.userData.roles = ['ROLE_USER'];
                 console.log('In Verify Page', this.userData);
-                this.userDataService.addUser(this.userData).then(res => {
-                    this.userDataRecieved = JSON.parse(res.data).data;
+                this.authDataService.addUser(this.userData).then(res => {
+                    const data = JSON.parse(res.data);
+                    this.userDataRecieved = data.data;
+                    this.jsonToken = data.token;
                     console.log(this.userDataRecieved.id);
+                    console.log(this.jsonToken);
                     this.storage.ready().then(() => {
                         console.log('storing data --', this.userDataRecieved);
                         this.storage.set(this.key, this.userDataRecieved);
-                        this.storage.get(this.key).then(value => {
-                            console.log('this is in storage', value);
-                            this.localUserData = value;
-                            if (this.localUserData.name != null) {
-                                this.router.navigateByUrl('/home');
-                            } else {
-                                this.router.navigateByUrl('/edit-profile');
-                            }
+                        this.storage.set(this.jsonkey, this.jsonToken);
+                        this.storage.ready().then(() => {
+                            this.storage.get(this.key).then(value => {
+                                console.log('this is in storage', value);
+                                this.localUserData = value;
+                                if (this.localUserData.name != null) {
+                                    this.router.navigateByUrl('/home');
+                                } else {
+                                    this.router.navigateByUrl('/edit-profile');
+                                }
+                            });
                         });
                     });
                 });
@@ -73,9 +88,9 @@ export class VerifyPage implements OnInit {
             .catch( error => {
                 console.log(error, 'Incorrect code entered?');
                 this.error = true;
+                this.disableButton = false;
             });
     }
-
     loadData() {
         this.storage.get(this.key).then(value => {
             console.log('this is in storage', value);

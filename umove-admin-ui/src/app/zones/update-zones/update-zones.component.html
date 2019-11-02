@@ -11,15 +11,16 @@
                 fxLayoutAlign="center center">
 
                         <mat-form-field appearance="outline" fxFlex>
-                                <mat-label>Zone Capacity</mat-label>
-                                <input matInput maxlength="6" #input placeholder="Zone Capacity" formControlName="capacity" [(ngModel)]="cap" required>
-                                <mat-error *ngIf="capacity.invalid">
+                                <mat-label class="font-style">Zone Capacity</mat-label>
+                                <input matInput maxlength="6" #input placeholder="Zone Capacity" formControlName="capacity" [(ngModel)]="cap" required
+                                class="font-style" autocomplete="off">
+                                <mat-error *ngIf="capacity.invalid" class="font-style">
 
                                     {{getErrorCapacity()}}
                                 </mat-error>
                             </mat-form-field>
 
-                     <button mat-raised-button class="btn" [disabled]='!zoneForm.valid' color="primary">
+                     <button mat-raised-button class="btn font-style" [disabled]='!zoneForm.valid' color="primary">
                                 Submit
                             </button>
 

@@ -1,9 +1,12 @@
 package in.stackroute.umove.zoneservice.service.impl;
 
 import in.stackroute.umove.zoneservice.exception.TypeAlreadyExistException;
+import in.stackroute.umove.zoneservice.model.Vehicle;
 import in.stackroute.umove.zoneservice.model.VehicleType;
 import in.stackroute.umove.zoneservice.repository.FuelRepo;
+import in.stackroute.umove.zoneservice.repository.VehicleRepo;
 import in.stackroute.umove.zoneservice.repository.VehicleTypeRepo;
+import in.stackroute.umove.zoneservice.service.ServiceVehicle;
 import in.stackroute.umove.zoneservice.service.ServiceVehicleType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -25,8 +28,13 @@ public class VehicleTypeImpl implements ServiceVehicleType {
     VehicleTypeRepo repo;
     FuelRepo fuelRepo;
     //To add new type
-    @Override
+    @Autowired
+    VehicleRepo vehicleRepo;
 
+    @Autowired
+    ServiceVehicle serviceVehicle;
+
+    @Override
     public  VehicleType addType(VehicleType type) {
         VehicleType typeList=repo.findByNameIgnoreCase(type.getName());
         if(typeList != null){
@@ -43,7 +51,7 @@ public class VehicleTypeImpl implements ServiceVehicleType {
 
     //To get details of all type
     public List<VehicleType> find(int page) {
-        return repo.findAll(new PageRequest(page,100)).getContent();
+        return repo.findAll(new PageRequest(page,1000)).getContent();
     }
 
     //To get vehicle type by fuel type
@@ -78,7 +86,6 @@ public class VehicleTypeImpl implements ServiceVehicleType {
             if (type.getName() != null) {
                 typeList.setName(type.getName());
             }
-
             if (type.getCostPerKm() != 0) {
                 typeList.setCostPerKm(type.getCostPerKm());
             }
@@ -97,8 +104,15 @@ public class VehicleTypeImpl implements ServiceVehicleType {
             if(type.getBaseFare() != 0){
                 typeList.setBaseFare(type.getBaseFare());
             }
-            return repo.save(typeList);
+            repo.save(typeList);
+            List<Vehicle> vehicleList = serviceVehicle.findByType(type.getName());
+//            for (vehicle in )
 
+            for ( Vehicle vehicle : vehicleList){
+                vehicle.setVehicleType(typeList);
+                 vehicleRepo.save(vehicle);
+            }
+            return repo.save(typeList);
 
         }
 

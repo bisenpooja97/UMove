@@ -14,7 +14,7 @@
       </div>
     </div>
   <div padding>
-  <ion-button size="large" type="submit" (click)="verifyLoginCode()" expand="block">Verify</ion-button>
+  <ion-button size="large" type="submit" (click)="verifyLoginCode()" expand="block" [disabled]="disableButton">Verify</ion-button>
   </div>
 <!--  <button ion-button (click)="loadData()">Load Data</button>-->
 </ion-content>

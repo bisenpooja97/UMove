@@ -14,7 +14,12 @@ const routes: Routes = [
 { path: '', loadChildren: () => import('./authentication/authentication.module').then(m => m.AuthenticationModule) },
 { path: 'types', loadChildren: () => import('./types/types.module').then(m => m.TypesModule), canActivate: [AuthGuardService] },
 { path: 'vehicles', loadChildren: () => import('./vehicles/vehicles.module').then(m => m.VehiclesModule), canActivate: [AuthGuardService] },
-{ path: '**', component: PageNotFoundComponent}];
+{ path: 'settings', loadChildren: () => import('./settings/settings.module').then(m => m.SettingsModule) },
+{ path: '**', component: PageNotFoundComponent, canActivate: [AuthGuardService] },
+// { path: 'customer-list', loadChildren: () => import('./customers/customers.module').then(m => m.CustomersModule) },
+// { path: 'customer-list', loadChildren: () => import('./customers/customers.module').then(m => m.CustomersModule) },
+// { path: 'report-list', loadChildren: () => import('./report/report.module').then(m => m.ReportModule) },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, {useHash: true})],

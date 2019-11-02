@@ -27,3 +27,7 @@ controles-container{
     height: 40px;
     padding: 0px !important;
   }
+
+  .shift-left {
+      padding-left: -100px;
+  }

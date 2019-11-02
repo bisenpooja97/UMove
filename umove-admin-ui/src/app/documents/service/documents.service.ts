@@ -18,7 +18,7 @@ export class DocumentsService {
 
   getUsers(): Observable<Resp> {
     console.log(this.baseUrl + '/' +  '?role=User&documentStatus=Pending');
-    return this.httpClient.get<Resp>(this.baseUrl  +  '?role=User&documentStatus=Pending');
+    return this.httpClient.get<Resp>(this.baseUrl  +  '?role=ROLE_USER&documentStatus=Pending');
   }
 
 

@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { PaymentDetail } from 'src/app/model/paymentdetail';
 import { Payment } from 'src/app/model/payment';
 import { RideService } from '../service/ride.service';
+import {MenuController} from '@ionic/angular';
 
 declare let RazorpayCheckout: any;
 
@@ -21,21 +22,14 @@ export class PaymentDetailsPage implements OnInit {
   ride: Ride;
   paymentAmount = 333;
   currency = 'INR';
-  currencyIcon = '$';
   razorKey = 'rzp_test_p3NNx70zMgBF3L';
-  rideData: Ride;
-  extraChargeStatus: boolean;
-  paymentDetail: PaymentDetail;
-  appliedPromoCode: boolean;
   payment: Payment;
-  rideStatusPaid: boolean;
-  rideStatusUnPaid: boolean;
-  petrolCharge: boolean;
-  showExtraCharge: boolean;
 
 
-  constructor(private rideService: RideService, private route: Router, private router: ActivatedRoute) {
 
+  constructor(private rideService: RideService, private route: Router, private router: ActivatedRoute,
+              private menuCtrl: MenuController) {
+    menuCtrl.enable(false);
   }
 
   ngOnInit() {
@@ -72,7 +66,7 @@ export class PaymentDetailsPage implements OnInit {
         name: this.name
       },
       theme: {
-        color: '#F37254'
+        color: '#344955'
       },
       modal: {
         ondistion() {
@@ -82,6 +76,7 @@ export class PaymentDetailsPage implements OnInit {
     };
 
     const successCallback = (paymentId) => {
+      this.menuCtrl.enable(true);
       this.rideService.setPaymentDetails(this.bookingId, paymentId, 'Paid').then(response => {
         console.log('data of payment in sql: ', response.data);
         this.payment = JSON.parse(response.data).data;
@@ -96,9 +91,12 @@ export class PaymentDetailsPage implements OnInit {
       this.rideService.setPaymentDetails(this.bookingId, null, "Pending").then(response => {
         console.log('data of payment in sql: ', response.data);
         this.payment = JSON.parse(response.data).data;
-        this.route.navigateByUrl('/confirm-ride-detail');
       });
-      alert(error.description + ' (Error ' + error.code + ')');
+
+      this.rideService.presentAlert('', error.description , 'Ok', () => {
+        this.route.navigateByUrl('/home');
+      });
+
     };
 
     RazorpayCheckout.open(options, successCallback, cancelCallback);

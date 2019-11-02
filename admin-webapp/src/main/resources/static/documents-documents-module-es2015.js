@@ -107,7 +107,7 @@ let DocumentCardComponent = class DocumentCardComponent {
             data: {
                 name: this.users.name,
                 id: this.users.id,
-                imageUrl: `${src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].baseUrl}/userservice/api/v1/downloadFile/${this.users.id}`,
+                imageUrl: `${src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].baseUrl}userservice/api/v1/downloadFile/${this.users.id}`,
                 users: this.users
             }
         });
@@ -371,7 +371,7 @@ let DocumentsService = class DocumentsService {
     }
     getUsers() {
         console.log(this.baseUrl + '/' + '?role=User&documentStatus=Pending');
-        return this.httpClient.get(this.baseUrl + '?role=User&documentStatus=Pending');
+        return this.httpClient.get(this.baseUrl + '?role=ROLE_USER&documentStatus=Pending');
     }
     getUsersById(id) {
         return this.httpClient.get(this.baseUrl + '/' + id);
