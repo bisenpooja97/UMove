@@ -144,7 +144,8 @@ public class ServiceZoneImpl implements ServiceZone {
            double d = R * c; // Distance in km
            System.out.println("Distance "+d);
            // calculate the result
-           if (c<=vicinityDistance && repo.countVehicleByZoneId(zones1.getId())>0){
+           if (d<=vicinityDistance && repo.countVehicleByZoneId(zones1.getId())>0){
+
                nearbyZones.add(zones1);
                //System.out.println(c*r);
            }
