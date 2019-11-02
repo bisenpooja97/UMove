@@ -31,6 +31,7 @@ import {UserPaymentMethodService} from './service/user-payment-method/user-payme
 import {IonicStorageModule} from '@ionic/storage';
 import {CustomerErrorHandler} from "./customer-error-handler";
 import {CampaignService} from './service/campaign-service/campaign.service';
+import {FCM} from "@ionic-native/fcm/ngx";
 
 @NgModule({
   declarations: [AppComponent, BikeListPage, DropPage],
@@ -63,6 +64,7 @@ import {CampaignService} from './service/campaign-service/campaign.service';
     SplashScreen,
     HttpClient,
     HTTP,
+      FCM,
     UserProfileServiceService,
     UserPaymentMethodService,
       CampaignService,
