@@ -152,7 +152,7 @@ public class ServiceZoneImpl implements ServiceZone {
 
     @Override
     public List<Zone> findByStatus(ZoneStatus status) {
-        return zoneRepository.findByStatus(status).getContent();
+        return zoneRepository.findByStatus(status);
     }
 
     @Override
