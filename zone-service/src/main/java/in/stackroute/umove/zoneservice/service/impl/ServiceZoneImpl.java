@@ -120,7 +120,7 @@ public class ServiceZoneImpl implements ServiceZone {
     // Zone service for getting nearby zones
     @Override
     public List<Zone> getNearbyZones(Double lon, Double lat) {
-       List<Zone> zones=findByStatus(ZoneStatus.ACTIVE,1 );
+       List<Zone> zones=findByStatus(ZoneStatus.ACTIVE,0 );
        List<Zone> nearbyZones = new ArrayList<>();
         RestTemplate restTemplate = new RestTemplate();
         Map<String, Object> response = restTemplate.getForObject("https://umove-dev.stackroute.io/bookingservice/api/v1/config/vicinityDistance", Map.class);
