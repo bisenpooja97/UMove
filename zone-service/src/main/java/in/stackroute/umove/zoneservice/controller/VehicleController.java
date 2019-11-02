@@ -64,6 +64,15 @@ public class VehicleController {
             return new ResponseEntity<Map>(map, HttpStatus.OK);
         }
 
+        if (zoneId != null && !zoneId.isEmpty() && status !=null) {
+            List<Vehicle> vehicleList = vehicleManagementService.findByZoneAndStatus(zoneId,status);
+            Map<String, Object> map = new TreeMap<>();
+            map.put("data", vehicleList);
+            map.put("status", HttpStatus.OK);
+            return new ResponseEntity<Map>(map, HttpStatus.OK);
+        }
+
+
         if (type != null && !type.isEmpty()) {
             List<Vehicle> vehicleList = vehicleManagementService.findByType(type,(page !=null) ? page : 0);
             Map<String, Object> map = new TreeMap<>();

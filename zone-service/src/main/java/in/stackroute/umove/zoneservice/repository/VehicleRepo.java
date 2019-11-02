@@ -29,6 +29,7 @@ public interface VehicleRepo extends MongoRepository<Vehicle,String> {
     Vehicle findByInsuranceNoIgnoreCase(String name);
     Page<Vehicle> findByStatus(VehicleStatus status, Pageable pageable);
     Page<Vehicle> findAll(Pageable pageable);
-
+    List<Vehicle> findByZoneIdAndStatus(String zoneId,VehicleStatus status);
+    int countVehicleByZoneId(String id);
 
 }
