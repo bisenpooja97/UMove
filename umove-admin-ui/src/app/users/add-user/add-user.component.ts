@@ -41,7 +41,7 @@ export class AddUserComponent implements OnInit {
                 name: ['', [Validators.pattern('^[a-zA-Z\-]*$')]],
                 mobileNumber: ['', [Validators.pattern('[0-9]+')]],
                 email: ['', []],
-                role: ['ROLE_SUPERVISOR'],
+                roles: [['ROLE_SUPERVISOR']],
                 userStatus: ['Unallocated']
               });
 
