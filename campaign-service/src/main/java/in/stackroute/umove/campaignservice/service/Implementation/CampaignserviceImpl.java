@@ -33,7 +33,7 @@ public class CampaignserviceImpl implements CampaignService
     public Campaign addCampaign(Campaign campaign) {
 
             campaign.setMaximumLimit(campaign.getMaxDiscountAmount()*campaign.getTargetCustomers());
-            campaign.setCampaignStatus(CampaignStatus.IN_PROGRESS);
+            campaign.setCampaignStatus(CampaignStatus.CREATED);
 
             return campaignRepository.save(campaign);
     }

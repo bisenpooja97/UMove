@@ -5,6 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import {User} from './model/user';
 import {Storage} from '@ionic/storage';
+import {FCM} from "@ionic-native/fcm/ngx";
 
 @Component({
     selector: 'app-root',
@@ -42,7 +43,8 @@ export class AppComponent {
         private platform: Platform,
         private splashScreen: SplashScreen,
         private statusBar: StatusBar,
-        private storage: Storage
+        private storage: Storage,
+        private fcm: FCM
     ) {
         this.initializeApp();
         console.log('user ka data le rhe h =>');
@@ -51,12 +53,35 @@ export class AppComponent {
             storage.get('details').then(value => {
                 console.log('or ye aagya data', value);
                 this.currentUser = value;
-            })
-        })
+            });
+        });
     }
 
     initializeApp() {
         this.platform.ready().then(() => {
+
+            console.log('subscribed topic');
+            this.fcm.subscribeToTopic('news');
+
+            this.fcm.getToken().then(token => {
+                console.log('token:', token);
+                // backend.registerToken(token);
+            });
+
+            this.fcm.onNotification().subscribe(data => {
+                console.log('data from notification', data)
+                // if(data.wasTapped){
+                //     console.log("Received in background");
+                // } else {
+                //     console.log("Received in foreground");
+                // };
+            });
+
+            this.fcm.onTokenRefresh().subscribe(token => {
+                console.log('refreshed token:', token);
+                // backend.registerToken(token);
+            });
+
             this.statusBar.styleDefault();
             this.splashScreen.hide();
         });
