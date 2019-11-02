@@ -29,7 +29,7 @@ export class ConfirmRideDetailPage implements OnInit {
           this.booking.paymentMethod = state.selectedPaymentMethod;
           console.log('selected payment method: ', this.booking.paymentMethod);
         } else if (state.selectedPromocode) {
-          this.booking.promocode = state.selectedPromocode;
+          this.booking.promoCode = state.selectedPromocode;
         }
       }
     });
@@ -59,7 +59,7 @@ export class ConfirmRideDetailPage implements OnInit {
   }
 
   removeSelectedPromocode() {
-    this.booking.promocode = undefined;
+    this.booking.promoCode = undefined;
   }
 
   ionViewDidEnter() {

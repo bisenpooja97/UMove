@@ -16,7 +16,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 1000M
+          memory: 3000M
 
   # mongodb
   mongo:
@@ -33,7 +33,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 1000M
+          memory: 300M
 
 #  # cassendra
 #  cassandra:
@@ -77,7 +77,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 1000M
+          memory: 300M
 
   # Config Server
   config:
@@ -90,7 +90,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 1000M
+          memory: 500M
 
   # DISCOVERY SERVICE
   discovery:
@@ -105,7 +105,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 1000M
+          memory: 500M
 
   # API GATEWAY
   apigateway:
@@ -124,7 +124,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 1000M
+          memory: 500M
 
   adminwebapp:
     build:
@@ -142,7 +142,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 1000M
+          memory: 500M
 
   users:
     build:
@@ -157,7 +157,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 1000M
+          memory: 500M
     volumes:
       - '$HOME/umove/data/uploads/documents:/uploads/documents'
 
@@ -176,7 +176,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 1000M
+          memory: 500M
 
   zones:
     build:
@@ -191,7 +191,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 1000M
+          memory: 500M
     volumes:
       - '$HOME/umove/data/uploads/vehicle-type:/uploads/vehicle-type'
 
@@ -211,7 +211,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 1000M
+          memory: 500M
 
   campaigns:
     build:
@@ -226,7 +226,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 1000M
+          memory: 500M
 
   reports:
     build:
@@ -241,5 +241,5 @@ services:
     deploy:
       resources:
         limits:
-          memory: 1000M
+          memory: 500M
 

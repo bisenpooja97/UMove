@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Ride } from 'src/app/model/ride';
+
 import { Router, ActivatedRoute } from '@angular/router';
-import { Ride } from '../model/ride';
-import { PaymentDetail } from '../model/paymentdetail';
-import { Payment } from '../model/payment';
+import { PaymentDetail } from 'src/app/model/paymentdetail';
+import { Payment } from 'src/app/model/payment';
 import { RideService } from '../service/ride.service';
-import { ToastController } from '@ionic/angular';
 
 declare let RazorpayCheckout: any;
 
@@ -17,9 +17,9 @@ export class PaymentDetailsPage implements OnInit {
   bookingId: string;
   name: string;
   email: string;
-  contact: number;
-  rides: Ride;
-  paymentAmount: number;
+  contact: string;
+  ride: Ride;
+  paymentAmount = 333;
   currency = 'INR';
   currencyIcon = '$';
   razorKey = 'rzp_test_p3NNx70zMgBF3L';
@@ -30,42 +30,34 @@ export class PaymentDetailsPage implements OnInit {
   payment: Payment;
   rideStatusPaid: boolean;
   rideStatusUnPaid: boolean;
+  petrolCharge: boolean;
+  showExtraCharge: boolean;
 
 
-  constructor(private rideService: RideService, private route: Router, private router: ActivatedRoute) {}
+  constructor(private rideService: RideService, private route: Router, private router: ActivatedRoute) {
 
-  ngOnInit() {
-
-    this.bookingId = this.router.snapshot.paramMap.get('rideId');
-    this.rideStatusPaid = false;
-    this.rideStatusUnPaid = false;
-
-    this.rideService.getBookingById(this.bookingId).then(response => {
-      this.rides = JSON.parse(response.data).data;
-      this.name = this.rides.rider.name;
-      this.email = this.rides.rider.email;
-      this.contact = 7560650799;
-      this.paymentAmount = this.rides.paymentDetail.totalAmount;
-      this.paymentAmount = Number(this.paymentAmount) * 100;
-      if (this.rides.paymentDetail.totalExtraCharges === undefined) {
-        this.extraChargeStatus = false;
-      } else {
-        this.extraChargeStatus = true;
-      }
-
-      if (this.rides.promocode === null) {
-         this.appliedPromoCode = false;
-      } else {
-        this.appliedPromoCode = true;
-      }
-      if (this.rides.paymentDetail.status === 'Paid') {
-        this.rideStatusPaid = true;
-      } else {
-        this.rideStatusUnPaid = true;
-      }
-     });
   }
 
+  ngOnInit() {
+    this.bookingId = this.router.snapshot.paramMap.get('rideId');
+    this.rideService.getBookingById(this.bookingId).then(response => {
+      this.ride = JSON.parse(response.data).data;
+      console.log('ride: ', this.ride);
+      this.name = this.ride.rider.name;
+      this.email = this.ride.rider.email;
+      this.contact = this.ride.rider.mobileNumber;
+      this.paymentAmount = Number(this.ride.paymentDetail.totalAmount) * 100;
+     });
+  }
+  // showExtraCharges(statusExtraCharge: boolean) {
+  //   if (statusExtraCharge === false) {
+  //   this.showExtraCharge = true;
+  //   console.log(this.showExtraCharge);
+  //   this.rideService.presentToast(this.showExtraCharge, 3000);
+  // } else {
+  //     this.showExtraCharge = false;
+  //   }
+  // }
   payWithRazor() {
     const options = {
       description: 'Credits towards consultation',
@@ -90,25 +82,25 @@ export class PaymentDetailsPage implements OnInit {
     };
 
     const successCallback = (paymentId) => {
-      console.log('Hua hUa Ha');
-      this.rideService.setPaymentDetails(this.bookingId, paymentId).then(response => {
+      this.rideService.setPaymentDetails(this.bookingId, paymentId, 'Paid').then(response => {
         console.log('data of payment in sql: ', response.data);
         this.payment = JSON.parse(response.data).data;
-        this.rideService.presentToast('hahaha' + response, 3000);
-      }).catch((e) => {
-        this.rideService.presentToast('hahaha' + e, 3000);
-        this.route.navigateByUrl('');
       });
+      this.rideService.presentAlert('', 'Your payment is successful.', 'Ok', () => {
+        this.route.navigateByUrl('/home');
+      });
+
     };
 
     const cancelCallback = (error) => {
-      console.log('nHua nhUa nHa');
+      this.rideService.setPaymentDetails(this.bookingId, null, "Pending").then(response => {
+        console.log('data of payment in sql: ', response.data);
+        this.payment = JSON.parse(response.data).data;
+        this.route.navigateByUrl('/confirm-ride-detail');
+      });
       alert(error.description + ' (Error ' + error.code + ')');
     };
 
     RazorpayCheckout.open(options, successCallback, cancelCallback);
   }
-
-
-
 }

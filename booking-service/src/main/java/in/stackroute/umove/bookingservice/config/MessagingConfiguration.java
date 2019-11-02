@@ -1,5 +1,6 @@
 package in.stackroute.umove.bookingservice.config;
 
+
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.Queue;
@@ -81,5 +82,6 @@ public class MessagingConfiguration extends SpringBootServletInitializer impleme
     public void configureRabbitListeners(final RabbitListenerEndpointRegistrar registrar) {
         registrar.setMessageHandlerMethodFactory(messageHandlerMethodFactory());
     }
+
 
 }

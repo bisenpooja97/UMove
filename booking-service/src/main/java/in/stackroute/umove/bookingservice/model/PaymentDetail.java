@@ -12,10 +12,11 @@ import java.util.List;
 @Setter
 public class PaymentDetail
 {
-    private PaymentStatus status = PaymentStatus.Pending;
+    private PaymentStatus status= PaymentStatus.Pending;
     private Double rideAmount=0.0;
     private List<ExtraCharge> extraCharges;
+    private Double fuelRefillAmount=0.0;
     private Double totalExtraCharges=0.0;
     private Double totalAmount=0.0;
-    private Double fuelRefillAmount=0.0;
+    private Double baseFare=0.0;
 }

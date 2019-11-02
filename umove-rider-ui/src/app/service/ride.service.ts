@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Zone } from '../model/zone';
 import { environment } from '../../environments/environment';
 import { HTTP } from '@ionic-native/http/ngx';
-import { ToastController } from '@ionic/angular';
+import {AlertController, ToastController} from '@ionic/angular';
 import { Ride } from '../model/ride';
 
 @Injectable({
@@ -13,8 +13,7 @@ export class RideService {
 
   currentBooking: Ride;
   baseUrl = environment.baseUrl + environment.bookingService + environment.bookingBaseApi;
-
-  constructor(private http: HTTP, private toastController: ToastController) {
+  constructor(private http: HTTP, private toastController: ToastController, private alertController: AlertController) {
     console.log('ride service ka constuctor call hua');
     this.currentBooking = new Ride();
     http.setDataSerializer('json');
@@ -29,8 +28,25 @@ export class RideService {
     toast.present();
   }
 
+  async presentAlert(header: string, message: string, btnLabel: string, action) {
+    const alert = await this.alertController.create({
+      header: header,
+      message: message,
+      buttons: [{
+        text: btnLabel,
+        handler: action
+      }]
+    });
+
+    alert.onDidDismiss().then(value => {
+      action();
+    })
+
+    await alert.present();
+  }
+
   confirmBooking(data) {
-    console.log('url', this.baseUrl);
+    console.log('url', this.baseUrl, JSON.stringify(data));
     return this.http.post(this.baseUrl, data, {});
   }
 
@@ -82,11 +98,12 @@ export class RideService {
   getRidesByUserId(userId) {
   return this.http.get(this.baseUrl + '?userId=' + userId, {} , {});
 }
-setPaymentDetails(rideId: string, paymentId: string) {
-  return this.http.put(this.baseUrl + '/payments?rideId=' + rideId + '&payment_Id=' + paymentId, {}, {});
+setPaymentDetails(rideId: string, paymentId: string, paymentStatus: string) {
+  return this.http.put(this.baseUrl + '/payments?rideId=' + rideId + '&paymentId=' + paymentId + '&paymentStatus=' + paymentStatus, {}, {});
 }
-getPaymentDetailsByRideId(id: string) {
-  return this.http.get(this.baseUrl + '/payments/' + id, {}, {});
+
+getPaymentDetailsByRideId(rideId: string) {
+  return this.http.get(this.baseUrl + '/payments/' + rideId, {}, {});
 }
 
 }
