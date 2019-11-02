@@ -1,1 +1,103 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+.button-style{
+  width: 70%;
+  height: 100px;
+  margin-bottom: 20px;
+  margin-left: 130px;
+  margin-right: 100px;
+  align-content: center;
+  align-items: center;
+  font-size: 24px;
+
+}
+
+.button-style-last{
+  width: 70%;
+  height: 100px;
+
+  margin-left: 130px;
+  margin-right: 100px;
+  align-content: center;
+  align-items: center;
+  margin-bottom: 170px;
+  font-size: 24px;
+}
+
+
+.button-style-top{
+  width: 70%;
+  height: 100px;
+
+  margin-left: 130px;
+  margin-right: 100px;
+  align-content: center;
+  align-items: center;
+  margin-top: 150px;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+ul {
+  list-style-type: none;
+}
+
+li{
+  text-decoration: none;
+}
+
+
+.example-container {
+  display: flex;
+  flex-direction: column;
+  max-height: 750px;
+  min-width: 300px;
+}
+
+.example-header {
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  padding-left: 24px;
+  font-size: 20px;
+}
+
+.mat-table {
+  overflow: auto;
+}
+
+.mat-header-cell .mat-sort-header-sorted {
+  color: black;
+}
+
+.mat-input-container {
+  font-size: 14px;
+  flex-grow: 1;
+  margin-left: 32px;
+}
+
+.mat-table {
+  overflow: auto;
+}
+
+a {
+  color: grey !important;
+}
+
+
+/* For Sticky Header */
+.mat-header-row {
+  top: 0;
+  position: sticky;
+  position: -webkit-sticky;
+  z-index: 1;
+  background-color: inherit;
+}
+
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+.container{
+  margin-left: 300px;
+}

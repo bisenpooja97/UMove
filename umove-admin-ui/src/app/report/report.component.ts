@@ -20,4 +20,12 @@ export class ReportComponent implements OnInit {
   lineChart(){
     this.route.navigate(['report/line-chart']);
   }
+
+  bookingVehicleType() {
+    this.route.navigate(['report/booking-vehicleType']);
+  }
+
+  bookingZone() {
+    this.route.navigate(['report/booking-zone']);
+  }
 }

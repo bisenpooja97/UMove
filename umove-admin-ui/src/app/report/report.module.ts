@@ -10,13 +10,15 @@ import {MatNativeDateModule} from "@angular/material/core";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {BrowserModule} from "@angular/platform-browser";
 import {MatButtonModule} from "@angular/material/button";
-import { FlexLayoutModule } from '@angular/flex-layout';
+import {BookingsVehicleTypeComponent} from "./bookings-vehicle-type/bookings-vehicle-type.component";
+import { BookingsZoneComponent } from './bookings-zone/bookings-zone.component';
+import {MatIconModule} from "@angular/material/icon";
+import {MatTableModule} from "@angular/material/table";
+import {FlexLayoutModule} from "@angular/flex-layout";
 
 @NgModule({
-  declarations: [ReportComponent, BarChartComponent, LineChartComponent],
+  declarations: [ReportComponent, BarChartComponent, LineChartComponent, BookingsVehicleTypeComponent, BookingsZoneComponent],
   imports: [
     CommonModule,
     ReportRoutingModule,
@@ -27,6 +29,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    MatIconModule,
+    MatTableModule,
     FlexLayoutModule
   ],
   exports: [
