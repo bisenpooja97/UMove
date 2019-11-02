@@ -37,5 +37,4 @@ export class UserService {
     return this.httpClient.post<Resp>(this.baseUrl + '/adduser', user);
   }
 
-
 }

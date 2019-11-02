@@ -42,7 +42,7 @@ export class ZoneService {
   }
 
   getSupervisor(): Observable<RespSupervisor> {
-    return this.httpClient.get<RespSupervisor>('https://umove-dev.stackroute.io/userservice/api/v1/users?role=Supervisor&status=Unallocated');
+    return this.httpClient.get<RespSupervisor>('http://umove-dev.stackroute.io/userservice/api/v1/users?role=ROLE_SUPERVISOR&status=Unallocated');
   }
 
   getSupervisorById(id: string): Observable<RespSupervisor2> {

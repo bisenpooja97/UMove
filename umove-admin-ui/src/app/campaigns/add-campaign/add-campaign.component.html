@@ -4,48 +4,66 @@
     <mat-icon>clear</mat-icon>
   </button>
 </mat-toolbar>
+
 <form fxLayout="column" fxLayoutAlign="center center" [formGroup]="campaignForm" (ngSubmit)="onSubmit()">
   <h2>Create a new campaign</h2>
   <div fxFlex=50% fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px" class="form"
     fxLayoutAlign="center center">
     <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px" class="col">
-
       <mat-form-field appearance="outline" fxFlex>
         <mat-label>Campaign name</mat-label>
         <input matInput #input placeholder="Campaign Name" formControlName="name" required>
       </mat-form-field>
+      
       <mat-form-field appearance="outline" fxFlex>
-
         <mat-label>Objective</mat-label>
         <input matInput #input placeholder="Enter objective" formControlName="objective" required>
       </mat-form-field>
-    </div>
-    <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px" class="col">
-      <mat-form-field appearance="outline" fxFlex>
-        <mat-label>Start Date</mat-label>
-        <input matInput [matDatepicker]="picker" placeholder="Choose a date">
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
-      <mat-form-field appearance="outline" fxFlex>
-            <mat-label>End Date</mat-label>
-            <input matInput [matDatepicker]="picker" placeholder="Choose a date">
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
-    </div>
-    <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px" class="col">
 
+      <mat-form-field>
+        <input matInput [matDatepicker]="picker1" placeholder="Choose a start date" formControlName="startDate">
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field>
+
+      <!-- <mat-form-field appearance="outline" fxFlex>
+        <mat-label>Upper Bound</mat-label>
+        <input matInput #input placeholder="upper Bound" formControlName="upperBound" required>
+      </mat-form-field> -->
       <mat-form-field appearance="outline" fxFlex>
         <mat-label>Promo code</mat-label>
-        <input matInput #input placeholder="Promo code" formControlName="promo code" required>
+        <input matInput #input placeholder="Promo code" formControlName="promocode" required>
+      </mat-form-field>
+     
+    </div>
+    <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px" class="col">
+    
+      
+      <mat-form-field>
+          <mat-form-field appearance="outline" fxFlex>
+              <mat-label>Discount Percent</mat-label>
+              <input matInput #input placeholder="Discount Percent" formControlName="discountPercent" required>
+            </mat-form-field>
+        <input matInput [matDatepicker]="picker2" placeholder="Choose expiry date" formControlName="expiryDate">
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
       </mat-form-field>
       <mat-form-field appearance="outline" fxFlex>
-
-        <mat-label>Discount Percent</mat-label>
-        <input matInput #input placeholder="Discount Percent" formControlName="discount percent" required>
+        <mat-label>Total Coupons</mat-label>
+        <input matInput #input placeholder="Total Coupons" formControlName="totalCoupons" required>
       </mat-form-field>
+      <mat-form-field appearance="outline" fxFlex>
+        <mat-label>Maximum Discount Amount</mat-label>
+        <input matInput #input placeholder="Maximum Discount Amount" formControlName="maxDiscountAmount" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" fxFlex>
+          <mat-label>Number of target customers</mat-label>
+          <input matInput #input placeholder="Number of target customers" formControlName="targetCustomers" required>
+        </mat-form-field>
+     
     </div>
+ 
   </div>
   <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
     <button mat-raised-button class="btn" [disabled]='!campaignForm.valid' color="primary">
