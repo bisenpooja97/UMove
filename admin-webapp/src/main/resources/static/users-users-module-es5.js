@@ -95,7 +95,7 @@ var AddUserComponent = /** @class */ (function () {
             name: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].pattern('^[a-zA-Z\-]*$')]],
             mobileNumber: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].pattern('[0-9]+')]],
             email: ['', []],
-            role: ['ROLE_SUPERVISOR'],
+            roles: [['ROLE_SUPERVISOR']],
             userStatus: ['Unallocated']
         });
     }

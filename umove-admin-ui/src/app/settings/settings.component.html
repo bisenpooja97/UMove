@@ -6,19 +6,19 @@
     </div>
     <form class="settings-form">
         <mat-form-field class="settings-full-width">
-            <input matInput #autocancelTime name="autocancelTime" value="{{autocancelTimeValue}}" type="text" 
-            placeholder="Autocancel Time" (change)="onChange(autocancelTime.name, autocancelTime.value)">
-        </mat-form-field> 
-    
+            <input matInput #autocancelTime name="autocancelTime" value="{{autocancelTimeValue}}" type="text"
+            placeholder="Autocancel Time (in mins)" (change)="onChange(autocancelTime.name, autocancelTime.value)">
+        </mat-form-field>
+
         <mat-form-field class="settings-full-width">
-            <input matInput #cancelThresholdTime name="cancelThresholdTime" value="{{cancelThresholdTimeValue}}" 
-            type="text" placeholder="Cancel Threshold Time" (change)="onChange(cancelThresholdTime.name,
+            <input matInput #cancelThresholdTime name="cancelThresholdTime" value="{{cancelThresholdTimeValue}}"
+            type="text" placeholder="Cancel Threshold Time (in mins)" (change)="onChange(cancelThresholdTime.name,
             cancelThresholdTime.value)">
         </mat-form-field>
 
         <mat-form-field class="settings-full-width">
-            <input matInput #vicinityDistance name="vicinityDistance" value="{{vicinityDistanceValue}}" 
-            type="text" placeholder="Vicinity Distance" (change)="onChange(vicinityDistance.name,
+            <input matInput #vicinityDistance name="vicinityDistance" value="{{vicinityDistanceValue}}"
+            type="text" placeholder="Vicinity Distance (in km)" (change)="onChange(vicinityDistance.name,
             vicinityDistance.value)">
         </mat-form-field>
     </form>

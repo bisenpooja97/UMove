@@ -56,6 +56,7 @@ public class VehicleImpl implements ServiceVehicle {
     //To update the details of vehicles
     public Vehicle updateVehicleDetails(String name, Vehicle vehicle) {
         Vehicle vehicleList = repo.findByregistrationNoIgnoreCase(name);
+
         if(vehicleList != null){
             if(vehicle.getInsuranceNo() != null){
                 vehicleList.setInsuranceNo(vehicle.getInsuranceNo());
@@ -98,7 +99,12 @@ public class VehicleImpl implements ServiceVehicle {
 
     }
 
-
+    @Override
+    public List<Vehicle> findByZoneAndStatus(String zoneId, VehicleStatus status) {
+        List<Vehicle> vehicles=repo.findByZoneIdAndStatus(zoneId, status);
+        System.out.println("retrived vehicles"+vehicles);
+        return vehicles;
+    }
 
 
     //Find vehicles based on zone and type

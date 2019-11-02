@@ -105,7 +105,7 @@ export class RideBookingDetailsPage implements OnInit {
       this.ride = JSON.parse(response.data).data;
       this.rideStatus = this.ride.status;
       if (this.rideStatus === 'CancelledWithinThreshold') {
-        this.router.navigateByUrl('confirm-ride-detail');
+        this.router.navigateByUrl('home');
       }
       if (this.rideStatus === 'CancelledAfterThreshold') {
         // Apply the url of payment details page
