@@ -16,7 +16,9 @@ export const environment = {
   typeBaseApi: '/api/v1/types',
   fuelBaseApi: '/api/v1/fuel',
   bookingService: 'bookingservice',
-  configBaseApi: '/api/v1/config'
+  configBaseApi: '/api/v1/config',
+  reportService: 'reportservice',
+  reportBaseApi: '/api/v1/reports/'
 };
 /*
  * For easier debugging in development mode, you can import the following file

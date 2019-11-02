@@ -14,14 +14,23 @@ export class DocumentsComponent implements OnInit {
   @Input() users: User;
   @Output() cardDeleted = new EventEmitter<string>();
 
+  displayCount: number;
  p = 1;
  dataSource = new MatTableDataSource();
   constructor(private documentService: DocumentsService, private notificationService: NotificationService, private matDialog: MatDialog) { }
 
   ngOnInit() {
 
-    this.documentService.getUsers().subscribe(res => { this.users = res.data;
-                                                       console.log(res, 'parent');
+    this.documentService.getUsers().subscribe(res => {
+      if (res.count === undefined || res.count === 0) {
+        this.displayCount = 0;
+      } else { this.users = res.data;
+               console.log(res, 'parent');
+      }
+    },
+      error => { if (error.status === 400) {
+        this.displayCount = 0;
+      }
                                                       });
 }
 

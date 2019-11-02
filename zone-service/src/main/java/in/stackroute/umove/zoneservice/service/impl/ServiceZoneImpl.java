@@ -69,7 +69,7 @@ public class ServiceZoneImpl implements ServiceZone {
     // Zone service for finding zones by locality
     @Override
     public List<Zone> findZonesByLocality(String locality, int page) {
-        List<Zone> zones = zoneRepository.findZonesByLocality(locality, new PageRequest(page,9)).getContent();
+        List<Zone> zones = zoneRepository.findZonesByLocality(locality, new PageRequest(page,1000)).getContent();
         if(zones.isEmpty()) {
             throw new ZonesNotFoundException("No data found");
         }
@@ -143,7 +143,7 @@ public class ServiceZoneImpl implements ServiceZone {
 
     @Override
     public List<Zone> findByStatus(ZoneStatus status, int page) {
-        List<Zone> zones = zoneRepository.findByStatus(status,new PageRequest(page,9)).getContent();
+        List<Zone> zones = zoneRepository.findByStatus(status,new PageRequest(page,1000)).getContent();
         return zones;
     }
 

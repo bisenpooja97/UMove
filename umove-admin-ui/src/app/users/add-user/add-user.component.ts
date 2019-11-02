@@ -38,10 +38,10 @@ export class AddUserComponent implements OnInit {
               @Inject(MAT_DIALOG_DATA) data) { }
 
               userForm = this.fb.group({
-                name: ['', [Validators.pattern('^[a-zA-Z0-9\-]*$')]],
+                name: ['', [Validators.pattern('^[a-zA-Z\-]*$')]],
                 mobileNumber: ['', [Validators.pattern('[0-9]+')]],
                 email: ['', []],
-                role: ['', []],
+                roles: [['ROLE_SUPERVISOR']],
                 userStatus: ['Unallocated']
               });
 

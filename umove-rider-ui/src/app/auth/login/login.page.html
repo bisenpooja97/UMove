@@ -13,7 +13,8 @@
         <div padding>
           <h4 >Sign in</h4>
           <p>Enter your 10 digit mobile number</p>
-          <ion-input name="pnumber" type="tel" [(ngModel)]="pnumber" required maxlength="10"></ion-input>
+          <ion-input name="pnumber" type="tel" [(ngModel)]="pnumber" (input)="err=false" required pattern="^[9876][0-9]{9}$"></ion-input>
+          <ion-text color="danger" *ngIf="err" >Enter a valid mobile number.</ion-text>
         </div>
 
         <div padding>

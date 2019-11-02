@@ -20,6 +20,7 @@ export class LoginPage implements OnInit {
   verificationCode: string;
   user: any;
   disableButton: boolean;
+  err: boolean;
 
   constructor(private win: WindowService, private  router: Router, private storage: Storage, private menuCtrl: MenuController) {
     this.menuCtrl.enable(false);
@@ -29,20 +30,26 @@ export class LoginPage implements OnInit {
   ngOnInit() {
   }
   sendLoginCode() {
-    this.disableButton = true;
-    const appVerifier = this.windowRef.recaptchaVerifier;
-    const countrycode = '+91';
-    const p2 = countrycode.concat(this.pnumber);
-    console.log(p2);
-    // console.log(this.pnumber);
+    if (!(/^[9876][0-9]{9}$/.test(this.pnumber))) {
+      console.log('number is invalid');
+      this.err = true;
+    } else {
+      this.err = false;
+      this.disableButton = true;
+      const appVerifier = this.windowRef.recaptchaVerifier;
+      const countrycode = '+91';
+      const p2 = countrycode.concat(this.pnumber);
+      console.log(p2);
+      // console.log(this.pnumber);
 
-    firebase.auth().signInWithPhoneNumber(p2, appVerifier)
-        .then(result => {
+      firebase.auth().signInWithPhoneNumber(p2, appVerifier)
+          .then(result => {
 
-          this.windowRef.confirmationResult = result;
-          this.router.navigateByUrl('/verify');
-        })
-        .catch( error => console.log(error) );
+            this.windowRef.confirmationResult = result;
+            this.router.navigateByUrl('/verify');
+          })
+          .catch(error => console.log(error));
+    }
   }
   // verifyLoginCode() {
   //   this.windowRef.confirmationResult

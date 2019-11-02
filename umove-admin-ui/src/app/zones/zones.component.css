@@ -20,3 +20,12 @@ app-zone-card {
     padding-bottom: 15%;
     padding-top: 13%;
 }
+
+
+.back-btn {
+    margin-top: -8px;
+    margin-right: 20px;
+    font-size: 50px;
+    background-color: transparent;
+    cursor: pointer;
+}

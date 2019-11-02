@@ -37,7 +37,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 //@CrossOrigin(origins="http://localhost:4200")
 //@NoArgsConstructor
-//@CrossOrigin(origins="http://localhost:4200")
+
 public class UserController
 {
     private static final Logger logger = LogManager.getLogger(UserController.class);
