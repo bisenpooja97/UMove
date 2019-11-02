@@ -68,7 +68,7 @@ export class ViewProfilePage implements OnInit {
                   this.user = JSON.parse(data.data).data;
                   this.storage.ready().then(() => {
                       this.storage.set(this.key, this.user);
-                  })
+                  });
               });
       });
       // this.storage.get(this.key).then(value => {

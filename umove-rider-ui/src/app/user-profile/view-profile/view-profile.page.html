@@ -36,7 +36,7 @@
     <div class ="container">
       <ion-menu-button class="top-left"></ion-menu-button>
       <div class="bottom-left">{{user?.name}}</div>
-      <ion-button class="top-right"(click)="goAnOtherPage1()">
+      <ion-button color="secondary" class="top-right"(click)="goAnOtherPage1()">
         <ion-icon ios="ios-create" md="md-create"></ion-icon>
       </ion-button>
     </div>
@@ -69,7 +69,7 @@
   </ion-item>
   <ion-row centers>
     <ion-col text-center>
-      <ion-button class="phone-icon" expand="block" fill=outline (click)="goAnOtherPage()">Update KYC</ion-button>
+      <ion-button class="phone-icon" expand="block" fill="outline" color="secondary" (click)="goAnOtherPage()">Update KYC</ion-button>
     </ion-col>
   </ion-row>
   <ion-item class="phone-icon" lines="none" (click)="goLogout()">
