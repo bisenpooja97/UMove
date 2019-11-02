@@ -142,7 +142,7 @@ public class ServiceZoneImpl implements ServiceZone {
                                    Math.sin(dLon/2) * Math.sin(dLon/2);
            double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
            double d = R * c; // Distance in km
-           System.out.println("Distance "+d);
+           System.out.println("Distance "+ d + "vehiclecount" + repo.countVehicleByZoneId(zones1.getId()));
            // calculate the result
            if (d<=vicinityDistance && repo.countVehicleByZoneId(zones1.getId())>0){
 
