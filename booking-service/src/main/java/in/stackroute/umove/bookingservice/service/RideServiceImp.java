@@ -480,4 +480,54 @@ public class RideServiceImp implements RideService {
 
     }
 
+    @Override
+    public HashMap<String, Integer> getNoOfBookingsVsZone() {
+        List<Ride> rides = rideRepo.findAll();
+        HashSet<String> zoneTypeData = new HashSet<>();
+        int countForZoneType;
+        System.out.println("zone type data"+zoneTypeData);
+
+        HashMap<String, Integer> zoneMap = new HashMap<>();
+        for(Ride ride : rides)
+        {
+            String zoneName = ride.getSourceZone().getName();
+            if(zoneTypeData.contains(zoneName)){
+                countForZoneType=zoneMap.get(zoneName);
+                zoneMap.put(zoneName,countForZoneType+ 1);
+            }
+            else{
+                zoneTypeData.add(zoneName);
+                zoneMap.put(zoneName,1);
+            }
+        }
+        System.out.println(zoneMap);
+
+        return zoneMap;
+    }
+
+    @Override
+    public HashMap<String, Integer> getNoOfBookingsVsVehicleType() {
+        List<Ride> rides = rideRepo.findAll();
+        HashSet<String> vehicleTypeData = new HashSet<>();
+        int countForVehicleType;
+        System.out.println("vehicle type data"+vehicleTypeData);
+
+        HashMap<String, Integer> vehicleMap = new HashMap<>();
+        for(Ride ride : rides)
+        {
+            String vehcleName = ride.getVehicle().getVehicleType().getName();
+            if(vehicleTypeData.contains(vehcleName)){
+                countForVehicleType=vehicleMap.get(vehcleName);
+                vehicleMap.put(vehcleName,countForVehicleType+ 1);
+            }
+            else{
+                vehicleTypeData.add(vehcleName);
+                vehicleMap.put(vehcleName,1);
+            }
+        }
+        System.out.println(vehicleMap);
+
+        return vehicleMap;
+
+    }
 }

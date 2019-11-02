@@ -5,6 +5,7 @@ package in.stackroute.umove.bookingservice.service;
 
     import javax.mail.MessagingException;
     import java.io.IOException;
+    import java.util.HashMap;
     import java.util.List;
 import java.util.Map;
 
@@ -36,5 +37,8 @@ public interface RideService {
 
     boolean isVehicleTypeAllocated(String zoneId, String typeId);
     boolean isVehicleAllocated(String registrationNo);
+
+    HashMap<String, Integer> getNoOfBookingsVsZone();
+    HashMap<String, Integer> getNoOfBookingsVsVehicleType();
 
 }
