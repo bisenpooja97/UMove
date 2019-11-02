@@ -23,5 +23,5 @@ public interface ZoneRepository extends MongoRepository<Zone, Integer> {
     // List<Zone> findByStatus(ZoneStatus status);
     Page<Zone> findByStatus(ZoneStatus status,Pageable pageable);
     Page<Zone> findAll(Pageable pageable);
-    List<Zone> findByStatus(ZoneStatus status);
+//    List<Zone> findByStatus(ZoneStatus status);
 }
