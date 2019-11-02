@@ -108,7 +108,7 @@ var DocumentCardComponent = /** @class */ (function () {
             data: {
                 name: this.users.name,
                 id: this.users.id,
-                imageUrl: src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].baseUrl + "/userservice/api/v1/downloadFile/" + this.users.id,
+                imageUrl: src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].baseUrl + "userservice/api/v1/downloadFile/" + this.users.id,
                 users: this.users
             }
         });
@@ -389,8 +389,8 @@ var DocumentsService = /** @class */ (function () {
         this.baseUrl = src_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].baseUrl + src_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].userService + src_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].userBaseApi;
     }
     DocumentsService.prototype.getUsers = function () {
-        console.log(this.baseUrl + '?role=User&documentStatus=Pending');
-        return this.httpClient.get(this.baseUrl + '?role=User&documentStatus=Pending');
+        console.log(this.baseUrl + '/' + '?role=User&documentStatus=Pending');
+        return this.httpClient.get(this.baseUrl + '?role=ROLE_USER&documentStatus=Pending');
     };
     DocumentsService.prototype.getUsersById = function (id) {
         return this.httpClient.get(this.baseUrl + '/' + id);

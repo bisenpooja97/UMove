@@ -319,7 +319,7 @@ var routes = [
     { path: 'vehicles', loadChildren: function () { return Promise.resolve(/*! import() */).then(__webpack_require__.bind(null, /*! ./vehicles/vehicles.module */ "./src/app/vehicles/vehicles.module.ts")).then(function (m) { return m.VehiclesModule; }); }, canActivate: [_authentication_service_auth_guard_service__WEBPACK_IMPORTED_MODULE_4__["AuthGuardService"]] },
     { path: 'settings', loadChildren: function () { return Promise.resolve(/*! import() */).then(__webpack_require__.bind(null, /*! ./settings/settings.module */ "./src/app/settings/settings.module.ts")).then(function (m) { return m.SettingsModule; }); } },
     { path: 'dashboard', loadChildren: function () { return Promise.all(/*! import() | dashboard-dashboard-module */[__webpack_require__.e("default~dashboard-dashboard-module~report-report-module"), __webpack_require__.e("common"), __webpack_require__.e("dashboard-dashboard-module")]).then(__webpack_require__.bind(null, /*! ./dashboard/dashboard.module */ "./src/app/dashboard/dashboard.module.ts")).then(function (m) { return m.DashboardModule; }); } },
-    // { path: 'campaigns', loadChildren: () => import('./campaign/campaign.module').then(m => m.DashboardModule) },
+    { path: 'campaigns', loadChildren: function () { return __webpack_require__.e(/*! import() | campaigns-campaigns-module */ "campaigns-campaigns-module").then(__webpack_require__.bind(null, /*! ./campaigns/campaigns.module */ "./src/app/campaigns/campaigns.module.ts")).then(function (m) { return m.CampaignsModule; }); } },
     { path: '**', component: _shared_page_not_found_page_not_found_component__WEBPACK_IMPORTED_MODULE_3__["PageNotFoundComponent"], canActivate: [_authentication_service_auth_guard_service__WEBPACK_IMPORTED_MODULE_4__["AuthGuardService"]] }
 ];
 var AppRoutingModule = /** @class */ (function () {
@@ -1754,7 +1754,7 @@ var UpdateTypesComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n.typeName {\n    padding-top: 4%;\n}\n\nimg {\nheight: 30%;\nwidth: 55%;\n}\n\n.my-card2 {\n    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);\n    transition: all 0.3s cubic-bezier(.25,.8,.25,1);\n    height: 270px;\n}\n\n.my-card2:hover {\n    \n    box-shadow: 0 7px 28px rgba(0,0,0,0.15), 0 10px 10px rgba(0,0,0,0.22);\n}\n\n.content {\n    font-size: 1.2em;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvdHlwZXMvdmVoaWNsZS10eXBlLWNhcmQvdmVoaWNsZS10eXBlLWNhcmQuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQ0E7SUFDSSxlQUFlO0FBQ25COztBQUVBO0FBQ0EsV0FBVztBQUNYLFVBQVU7QUFDVjs7QUFFQTtJQUNJLGtFQUFrRTtJQUNsRSwrQ0FBK0M7SUFDL0MsYUFBYTtBQUNqQjs7QUFFQTs7SUFFSSxxRUFBcUU7QUFDekU7O0FBRUE7SUFDSSxnQkFBZ0I7QUFDcEIiLCJmaWxlIjoic3JjL2FwcC90eXBlcy92ZWhpY2xlLXR5cGUtY2FyZC92ZWhpY2xlLXR5cGUtY2FyZC5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiXG4udHlwZU5hbWUge1xuICAgIHBhZGRpbmctdG9wOiA0JTtcbn1cblxuaW1nIHtcbmhlaWdodDogMzAlO1xud2lkdGg6IDU1JTtcbn1cblxuLm15LWNhcmQyIHtcbiAgICBib3gtc2hhZG93OiAwIDFweCAzcHggcmdiYSgwLDAsMCwwLjEyKSwgMCAxcHggMnB4IHJnYmEoMCwwLDAsMC4yNCk7XG4gICAgdHJhbnNpdGlvbjogYWxsIDAuM3MgY3ViaWMtYmV6aWVyKC4yNSwuOCwuMjUsMSk7XG4gICAgaGVpZ2h0OiAyNzBweDtcbn1cblxuLm15LWNhcmQyOmhvdmVyIHtcbiAgICBcbiAgICBib3gtc2hhZG93OiAwIDdweCAyOHB4IHJnYmEoMCwwLDAsMC4xNSksIDAgMTBweCAxMHB4IHJnYmEoMCwwLDAsMC4yMik7XG59XG5cbi5jb250ZW50IHtcbiAgICBmb250LXNpemU6IDEuMmVtO1xufSJdfQ== */"
+module.exports = "\n.typeName {\n    padding-top: 4%;\n}\n\nimg {\nheight: 30%;\nwidth: 55%;\n}\n\n.my-card2 {\n    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);\n    transition: all 0.3s cubic-bezier(.25,.8,.25,1);\n    height: 270px;\n}\n\n.my-card2:hover {\n\n    box-shadow: 0 7px 28px rgba(0,0,0,0.15), 0 10px 10px rgba(0,0,0,0.22);\n}\n\n.content {\n    font-size: 1.2em;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvdHlwZXMvdmVoaWNsZS10eXBlLWNhcmQvdmVoaWNsZS10eXBlLWNhcmQuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQ0E7SUFDSSxlQUFlO0FBQ25COztBQUVBO0FBQ0EsV0FBVztBQUNYLFVBQVU7QUFDVjs7QUFFQTtJQUNJLGtFQUFrRTtJQUNsRSwrQ0FBK0M7SUFDL0MsYUFBYTtBQUNqQjs7QUFFQTs7SUFFSSxxRUFBcUU7QUFDekU7O0FBRUE7SUFDSSxnQkFBZ0I7QUFDcEIiLCJmaWxlIjoic3JjL2FwcC90eXBlcy92ZWhpY2xlLXR5cGUtY2FyZC92ZWhpY2xlLXR5cGUtY2FyZC5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiXG4udHlwZU5hbWUge1xuICAgIHBhZGRpbmctdG9wOiA0JTtcbn1cblxuaW1nIHtcbmhlaWdodDogMzAlO1xud2lkdGg6IDU1JTtcbn1cblxuLm15LWNhcmQyIHtcbiAgICBib3gtc2hhZG93OiAwIDFweCAzcHggcmdiYSgwLDAsMCwwLjEyKSwgMCAxcHggMnB4IHJnYmEoMCwwLDAsMC4yNCk7XG4gICAgdHJhbnNpdGlvbjogYWxsIDAuM3MgY3ViaWMtYmV6aWVyKC4yNSwuOCwuMjUsMSk7XG4gICAgaGVpZ2h0OiAyNzBweDtcbn1cblxuLm15LWNhcmQyOmhvdmVyIHtcblxuICAgIGJveC1zaGFkb3c6IDAgN3B4IDI4cHggcmdiYSgwLDAsMCwwLjE1KSwgMCAxMHB4IDEwcHggcmdiYSgwLDAsMCwwLjIyKTtcbn1cblxuLmNvbnRlbnQge1xuICAgIGZvbnQtc2l6ZTogMS4yZW07XG59XG4iXX0= */"
 
 /***/ }),
 
@@ -2990,13 +2990,13 @@ var ZoneService = /** @class */ (function () {
         return this.httpClient.patch(this.baseUrl + '/' + name, zone);
     };
     ZoneService.prototype.getSupervisor = function () {
-        return this.httpClient.get('http://umove-dev.stackroute.io:8080/userservice/api/v1/users?role=ROLE_SUPERVISOR&status=Unallocated');
+        return this.httpClient.get('http://umove-dev.stackroute.io/userservice/api/v1/users?role=ROLE_SUPERVISOR&status=Unallocated');
     };
     ZoneService.prototype.getSupervisorById = function (id) {
-        return this.httpClient.get('http://umove-dev.stackroute.io:8080/userservice/api/v1/users/' + id);
+        return this.httpClient.get('https://umove-dev.stackroute.io/userservice/api/v1/users/' + id);
     };
     ZoneService.prototype.updateSupervisorStatus = function (id, supervisor) {
-        return this.httpClient.patch('http://13.235.35.202:8080/userservice/api/v1/users/' + id, supervisor);
+        return this.httpClient.patch('https://umove-dev.stackroute.io/userservice/api/v1/users/' + id, supervisor);
     };
     ZoneService.prototype.getZoneType = function (zid, tid) {
         return this.httpClient.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].baseUrl + src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].zoneService +
@@ -3998,17 +3998,14 @@ var environment = {
     baseUrl: 'https://umove-dev.stackroute.io/',
     userService: 'userservice',
     userBaseApi: '/api/v1/users',
-    // baseUrl1: 'http://localhost:8093',
     zoneService: 'zoneservice',
     zoneBaseApi: '/api/v1/zones',
-    // baseUrl2: 'http://172.23.234.112:8093/',
     campaignService: 'campaignservice',
     campaignBaseApi: '/api/v1/campaigns',
     vehicleService: 'vehicleservice',
     vehicleBaseApi: '/api/v1/vehicles',
     typeBaseApi: '/api/v1/types',
     fuelBaseApi: '/api/v1/fuel',
-    // baseUrl3: 'http://172.23.234.60:8080/',
     bookingService: 'bookingservice',
     configBaseApi: '/api/v1/config'
 };
@@ -4034,17 +4031,14 @@ var environment = {
     baseUrl: 'https://umove-dev.stackroute.io/',
     userService: 'userservice',
     userBaseApi: '/api/v1/users',
-    //baseUrl1: 'http://localhost:8093',
     zoneService: 'zoneservice',
     zoneBaseApi: '/api/v1/zones',
-    // baseUrl2: 'http://172.23.234.112:8093/',
     campaignService: 'campaignservice',
     campaignBaseApi: '/api/v1/campaigns',
     vehicleService: 'vehicleservice',
     vehicleBaseApi: '/api/v1/vehicles',
     typeBaseApi: '/api/v1/types',
     fuelBaseApi: '/api/v1/fuel',
-    // baseUrl3: 'http://172.23.234.77:8094/',
     bookingService: 'bookingservice',
     configBaseApi: '/api/v1/config',
     reportService: 'reportservice',
@@ -4095,7 +4089,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/ruchi/umove/umove-admin-ui/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /home/vishnu/umove/umove-admin-ui/src/main.ts */"./src/main.ts");
 
 
 /***/ })

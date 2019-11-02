@@ -64,7 +64,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({"authentication-authentication-module":"authentication-authentication-module","common":"common","users-users-module":"users-users-module","default~dashboard-dashboard-module~report-report-module":"default~dashboard-dashboard-module~report-report-module","dashboard-dashboard-module":"dashboard-dashboard-module","report-report-module":"report-report-module","documents-documents-module":"documents-documents-module","fuel-fuel-module":"fuel-fuel-module"}[chunkId]||chunkId) + "-es5.js"
+/******/ 		return __webpack_require__.p + "" + ({"authentication-authentication-module":"authentication-authentication-module","campaigns-campaigns-module":"campaigns-campaigns-module","common":"common","users-users-module":"users-users-module","default~dashboard-dashboard-module~report-report-module":"default~dashboard-dashboard-module~report-report-module","dashboard-dashboard-module":"dashboard-dashboard-module","report-report-module":"report-report-module","documents-documents-module":"documents-documents-module","fuel-fuel-module":"fuel-fuel-module"}[chunkId]||chunkId) + "-es5.js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -203,7 +203,7 @@
 /******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
 /******/
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "http://13.235.35.202:8080/adminwebapp/";
+/******/ 	__webpack_require__.p = "https://umove-dev.stackroute.io/adminwebapp/";
 /******/
 /******/ 	// on error function for async loading
 /******/ 	__webpack_require__.oe = function(err) { console.error(err); throw err; };

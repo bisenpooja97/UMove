@@ -99,12 +99,7 @@ public class VehicleImpl implements ServiceVehicle {
     }
 
 
-    public List<Vehicle> findByType(String name){
-        List<Vehicle> v=repo.findByType(name);
-        System.out.println("retrieved vehicles type" + v);
-        return v;
 
-    }
 
     //Find vehicles based on zone and type
 
