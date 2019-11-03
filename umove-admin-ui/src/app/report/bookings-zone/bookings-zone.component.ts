@@ -28,9 +28,13 @@ export class BookingsZoneComponent implements OnInit {
   public barChartOptions: ChartOptions = {
     responsive: true,
     scales: {
-      xAxes: [{}], yAxes: [{
+      xAxes: [{ticks: {
+
+          fontSize: 32
+        }}], yAxes: [{
         ticks: {
-          beginAtZero: true
+          beginAtZero: true,
+          fontSize: 32
         }
       }]
     },
