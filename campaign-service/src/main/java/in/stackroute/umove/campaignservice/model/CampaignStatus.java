@@ -7,6 +7,6 @@ public enum CampaignStatus {
     SUCCESS,
     FAILURE,
     CREATED,
-    STARTED,
-    ENDED
+    ENDED,
+    STARTED
 }

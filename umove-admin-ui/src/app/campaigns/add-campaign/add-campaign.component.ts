@@ -38,11 +38,11 @@ campaignForm = this.fb.group({
   startDate: ['', []],
   endDate: ['', []],
   expiryDate:['',[]],
-  promocode: ['', [Validators.pattern('[A-Z0-9]+')]],
+  promocode: ['', [Validators.pattern('[a-zA-Z0-9_]+')]],
   discountPercent: ['', [Validators.pattern('[0-9]+')]],
   totalCoupons: ['', [Validators.pattern('[0-9]+')]],
   usedCoupons: ['', [Validators.pattern('[0-9]+')]],
-  campaignStatus: ['IN_PROGRESS',[]],
+  campaignStatus: ['STARTED',[]],
   maxDiscountAmount: ['',[Validators.pattern('[0-9]+')]],
   targetCustomers:  ['',[Validators.pattern('[0-9]+')]]
 });

@@ -13,7 +13,7 @@ export class CampaignsService {
 
   constructor(private httpClient: HttpClient) { }
 
-  baseUrl = environment.baseUrl + environment.campaignBaseApi+ environment.campaignBaseApi;
+  baseUrl = environment.baseUrl + environment.campaignService+ environment.campaignBaseApi;
 
   getCampaigns(): Observable<Resp> {
     return this.httpClient.get<Resp>(this.baseUrl);
@@ -28,7 +28,7 @@ export class CampaignsService {
   }
 
   public updateCampaignById(id: string, campaign: Campaign) {
-    console.log(JSON.stringify(campaign),'campaign service');
+    console.log(campaign,'campaign service');
     return this.httpClient.patch<Campaign>(this.baseUrl + '/' + id, campaign);
   }
 

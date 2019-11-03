@@ -1,10 +1,9 @@
 .campaign {
     margin-bottom: 40px;
     margin-left: 450px;
-     height: 410px; 
+     height: 480px; 
     width: 55%;
     margin-top: 50px;
-    
 }
 
 .campaignstartend
@@ -48,4 +47,16 @@
 
 .doc {
     margin-top: 70px;
+}
+
+.space {
+    padding-bottom: 10%;
+}
+
+.back-btn {
+    margin-top: 0px;
+    margin-right: 20px;
+    font-size: 50px;
+    background-color: transparent;
+    cursor: pointer;
 }

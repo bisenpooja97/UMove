@@ -33,3 +33,28 @@
     padding-bottom: 15%;
     padding-top: 13%;
 }
+.my-card2 {
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+    width: 250px;
+}
+
+.my-card2:hover {
+    
+    box-shadow: 0 7px 28px rgba(0,0,0,0.15), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+
+.content {
+    font-size: 1.2em;
+}
+
+.space {
+    padding-bottom: 5%;
+}
+.paginator ::ng-deep .ngx-pagination .current {
+    background: #344955;
+    color: white;
+    font-size: 1.5em;
+    border-radius: 10px;
+    }

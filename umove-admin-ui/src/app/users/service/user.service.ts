@@ -11,10 +11,11 @@ import { User } from 'src/app/model/user';
 export class UserService {
 
   constructor(private httpClient: HttpClient) { }
-  baseUrl = environment.baseUrl + environment.userService + environment.userBaseApi;
+  baseUrl = environment.baseUrl  + environment.userService+ environment.userBaseApi;
 
 
   getUsers(): Observable<Resp> {
+    console.log(this.baseUrl);
     return this.httpClient.get<Resp>(this.baseUrl  +  '?role=ROLE_USER');
   }
 

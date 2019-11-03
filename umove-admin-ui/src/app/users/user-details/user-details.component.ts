@@ -4,6 +4,7 @@ import { Document } from 'src/app/model/document';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from '../service/user.service';
 import { NotificationService } from 'src/app/shared/notification.service';
+import { Location } from '@angular/common';
 
 export interface Status {
   value: string;
@@ -34,7 +35,8 @@ export class UserDetailsComponent implements OnInit {
 
   constructor(private router: Router, private userService: UserService,
               private activatedRoute: ActivatedRoute, private route: ActivatedRoute,
-              private notificationService: NotificationService) { }
+              private notificationService: NotificationService,
+              private location: Location) { }
 
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
@@ -76,6 +78,9 @@ export class UserDetailsComponent implements OnInit {
       error => this.notificationService.warn(error),
     );
 
+}
+back() {
+  this.location.back();
 }
 
 

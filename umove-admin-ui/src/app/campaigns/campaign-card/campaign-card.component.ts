@@ -51,12 +51,18 @@ export class CampaignCardComponent implements OnInit {
 
   getColor(campaignStatus) {
     switch (campaignStatus) {
-    case 'IN_PROGRESS':
-    return '#1B5E20';
-    case 'SUCCESS':
-    return '#FFC400';
+    case 'STARTED':
+    return '#F57C00';
+    case 'CREATED':
+    return '#3D5AFE';
     case 'FAILURE':
+    return '#757575';
+    case 'ENDED':
     return '#F44336';
+    case 'IN_PROGRESS':
+    return '#FFEA00';
+    case 'SUCCESS':
+    return '#76FF03'; 
 }
 }
 

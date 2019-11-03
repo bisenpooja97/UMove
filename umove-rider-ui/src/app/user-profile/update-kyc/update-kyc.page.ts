@@ -16,7 +16,7 @@ import {Storage} from '@ionic/storage';
 export class UpdateKycPage implements OnInit {
   public localUser: UserProfile ;
   key = 'details';
-  private disableButton: boolean;
+  disableButton: boolean;
 
   // tslint:disable-next-line:max-line-length
   constructor(private http: HttpClient, private userDataService: UserProfileServiceService , private router: Router , private route: ActivatedRoute, public toastController: ToastController, private storage: Storage) {
