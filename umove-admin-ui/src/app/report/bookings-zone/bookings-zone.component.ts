@@ -49,7 +49,8 @@ export class BookingsZoneComponent implements OnInit {
 
   ngOnInit() {
     this.barChartColors = [
-      { backgroundColor: ["#80d6ff"] }
+
+      { backgroundColor: '#ccd7f6' }
     ];
     this.barChartLabels = this.zoneName;
     this.barChartType  = 'bar';
