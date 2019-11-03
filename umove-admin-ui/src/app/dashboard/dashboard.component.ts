@@ -28,17 +28,21 @@ export class DashboardComponent implements OnInit {
 
   public barChartOptions: ChartOptions = {
   responsive: true,
-  scales: { xAxes: [{}], yAxes: [{
+  scales: { xAxes: [{ticks: {
+        fontSize: 32
+      }}], yAxes: [{
    ticks: {
-     beginAtZero: true
- }
-  }] },
-  plugins: {
-    datalabels: {
-      anchor: 'end',
+     beginAtZero: true,
+     fontSize:32
+
+}
+}] },
+plugins: {
+  datalabels: {
+    anchor: 'end',
       align: 'end',
-    }
   }
+}
 };
 ​
 public barChartLabels: Label[];
@@ -82,10 +86,9 @@ ngOnInit() {
   ];
   this.barChartLabels = this.barLabel;
   this.barChartColors = [
-  { backgroundColor: '#ccd7f6' }
+    { backgroundColor: '#ccd7f6' }
   ];
-​
-  // pie
+​// pie
   this.getPieData();
   this.pieChartType = 'pie';
   this.pieChartLegend = true;
@@ -106,7 +109,7 @@ getBarData() {
                                                                       this.barLabel.push('Busy');
 
 } );
-  this.dashboardService.getVehicleByStatus('No_More_In_Use').subscribe(res => { this.noMoreInUse = res.count;
+  this.dashboardService.getVehicleByStatus('No More In Use').subscribe(res => { this.noMoreInUse = res.count;
                                                                                 this.barCount.push(res.count);
                                                                                 this.barLabel.push('No_More_In_Use');
 } );
