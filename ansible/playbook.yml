@@ -1,0 +1,58 @@
+---
+- hosts: all
+  become: true
+  gather_facts: no
+  pre_tasks:
+    - name: 'Update repositories'
+      raw: sudo apt-get update
+    - name: 'install python2'
+      raw: sudo apt-get -y install python
+      
+- hosts: all
+  become: true
+  roles:
+    - geerlingguy.docker
+    - geerlingguy.git
+
+- hosts: all
+
+  tasks:
+    - name: copy ssh key-pair for repository cloning
+      copy:
+        src: "{{item.file}}"
+        dest: "{{item.dest}}"
+        owner: ubuntu
+        group: ubuntu
+        mode: "u=rw,g=,o="
+      with_items:
+        - file: ~/.ssh/vikram
+          dest: /home/ubuntu/.ssh/vikram
+        - file: ~/.ssh/vikram.pub
+          dest: /home/ubuntu/.ssh/vikram.pub
+          
+    - name: Set authorized key for ssh purpose
+      shell: cat ~/.ssh/vikram.pub >> ~/.ssh/authorized_keys
+          
+    - name: clone_umove_repository
+      git:
+      # needs to change 3 places
+        repo: git@gitlab-ibm.stackroute.in:vbochiw1/umove.git
+        dest: /home/ubuntu/umove
+        force: yes
+        # Change this below from branch
+        version: stage
+        update: yes
+        accept_hostkey: yes
+        key_file: /home/ubuntu/.ssh/vikram
+        
+    - name: start_project
+      shell: docker-compose up -d
+      args:
+        chdir: /home/ubuntu/umove/
+      environment:
+        NODE_ENV: production
+      become: true
+      register: output
+    
+    - debug:
+        var: output
