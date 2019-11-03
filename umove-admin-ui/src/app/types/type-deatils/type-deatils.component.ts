@@ -18,6 +18,7 @@ export class TypeDeatilsComponent implements OnInit {
   name: string;
   costPerKm: number;
   costPerMin: number;
+  baseFare: number;
   cc: string;
   mileage: number;
   message: string;
@@ -43,6 +44,7 @@ export class TypeDeatilsComponent implements OnInit {
       this.costPerKm = this.type.costPerKm;
       this.costPerMin = this.type.costPerMin;
       this.mileage = this.type.mileage;
+      this.baseFare = this.type.baseFare;
     });
   }
 

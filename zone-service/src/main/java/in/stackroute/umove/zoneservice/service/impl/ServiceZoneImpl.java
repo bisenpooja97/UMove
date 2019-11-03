@@ -147,7 +147,6 @@ public class ServiceZoneImpl implements ServiceZone {
            if (distance<=vicinityDistance && repo.countVehicleByZoneId(zones1.getId())>0){
                System.out.println("andr aagya");
                nearbyZones.add(zones1);
-               //System.out.println(c*r);
            }
        }
        return nearbyZones;
