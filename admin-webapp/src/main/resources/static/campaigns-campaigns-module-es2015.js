@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-toolbar>\n  <span class=\"fill-remaining-space\"></span>\n  <button class=\"btn-dialog-close\" mat-stroked-button (click)=\"onClose()\" tabIndex=\"-1\">\n    <mat-icon>clear</mat-icon>\n  </button>\n</mat-toolbar>\n\n<form fxLayout=\"column\" fxLayoutAlign=\"center center\" [formGroup]=\"campaignForm\" (ngSubmit)=\"onSubmit()\">\n  <h2>Create a new campaign</h2>\n  <div fxFlex=50% fxLayout=\"row\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\" class=\"form\"\n    fxLayoutAlign=\"center center\">\n    <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\" class=\"col\">\n      <mat-form-field appearance=\"outline\" fxFlex>\n        <mat-label>Campaign name</mat-label>\n        <input matInput #input placeholder=\"Campaign Name\" formControlName=\"name\" required>\n      </mat-form-field>\n      \n      <mat-form-field appearance=\"outline\" fxFlex>\n        <mat-label>Objective</mat-label>\n        <input matInput #input placeholder=\"Enter objective\" formControlName=\"objective\" required>\n      </mat-form-field>\n\n      <mat-form-field>\n        <input matInput [matDatepicker]=\"picker1\" placeholder=\"Choose a start date\" formControlName=\"startDate\">\n        <mat-datepicker-toggle matSuffix [for]=\"picker1\"></mat-datepicker-toggle>\n        <mat-datepicker #picker1></mat-datepicker>\n      </mat-form-field>\n\n      <!-- <mat-form-field appearance=\"outline\" fxFlex>\n        <mat-label>Upper Bound</mat-label>\n        <input matInput #input placeholder=\"upper Bound\" formControlName=\"upperBound\" required>\n      </mat-form-field> -->\n      <mat-form-field appearance=\"outline\" fxFlex>\n        <mat-label>Promo code</mat-label>\n        <input matInput #input placeholder=\"Promo code\" formControlName=\"promocode\" required>\n      </mat-form-field>\n     \n    </div>\n    <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\" class=\"col\">\n    \n      \n      <mat-form-field>\n          <mat-form-field appearance=\"outline\" fxFlex>\n              <mat-label>Discount Percent</mat-label>\n              <input matInput #input placeholder=\"Discount Percent\" formControlName=\"discountPercent\" required>\n            </mat-form-field>\n        <input matInput [matDatepicker]=\"picker2\" placeholder=\"Choose expiry date\" formControlName=\"expiryDate\">\n        <mat-datepicker-toggle matSuffix [for]=\"picker2\"></mat-datepicker-toggle>\n        <mat-datepicker #picker2></mat-datepicker>\n      </mat-form-field>\n      <mat-form-field appearance=\"outline\" fxFlex>\n        <mat-label>Total Coupons</mat-label>\n        <input matInput #input placeholder=\"Total Coupons\" formControlName=\"totalCoupons\" required>\n      </mat-form-field>\n      <mat-form-field appearance=\"outline\" fxFlex>\n        <mat-label>Maximum Discount Amount</mat-label>\n        <input matInput #input placeholder=\"Maximum Discount Amount\" formControlName=\"maxDiscountAmount\" required>\n      </mat-form-field>\n\n      <mat-form-field appearance=\"outline\" fxFlex>\n          <mat-label>Number of target customers</mat-label>\n          <input matInput #input placeholder=\"Number of target customers\" formControlName=\"targetCustomers\" required>\n        </mat-form-field>\n     \n    </div>\n \n  </div>\n  <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\">\n    <button mat-raised-button class=\"btn\" [disabled]='!campaignForm.valid' color=\"primary\">\n      Submit\n    </button>\n  </div>\n</form>\n"
+module.exports = "<mat-toolbar>\n  <span class=\"fill-remaining-space\"></span>\n  <button class=\"btn-dialog-close\" mat-stroked-button (click)=\"onClose()\" tabIndex=\"-1\">\n    <mat-icon>clear</mat-icon>\n  </button>\n  </mat-toolbar>\n  <form fxLayout=\"column\" fxLayoutAlign=\"center center\" [formGroup]=\"campaignForm\" (ngSubmit)=\"onSubmit()\">\n  <h2>Create a new campaign</h2>\n  <div fxFlex=50% fxLayout=\"row\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\" class=\"form\"\n    fxLayoutAlign=\"center center\">\n    <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\" class=\"col\">\n      <mat-form-field appearance=\"outline\" fxFlex>\n        <mat-label>Campaign name</mat-label>\n        <input matInput #input placeholder=\"Campaign Name\" formControlName=\"name\" required autocomplete=\"off\">\n      </mat-form-field>\n\n      <mat-form-field appearance=\"outline\" fxFlex>\n        <mat-label>Objective</mat-label>\n        <input matInput #input placeholder=\"Enter objective\" formControlName=\"objective\" autocomplete=\"off\" required>\n      </mat-form-field>\n\n      <mat-form-field>\n        <input matInput [matDatepicker]=\"picker1\" placeholder=\"Choose a start date\" formControlName=\"startDate\">\n        <mat-datepicker-toggle matSuffix [for]=\"picker1\"></mat-datepicker-toggle>\n        <mat-datepicker #picker1></mat-datepicker>\n      </mat-form-field>\n      \n      <mat-form-field appearance=\"outline\" fxFlex>\n        <mat-label>Promo code</mat-label>\n        <input matInput #input placeholder=\"Promo code\" formControlName=\"promocode\" required autocomplete=\"off\">\n      </mat-form-field>\n    </div>\n    <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\" class=\"col\">\n    \n          <mat-form-field appearance=\"outline\" fxFlex>\n              <mat-label>Discount Percent</mat-label>\n              <input matInput #input placeholder=\"Discount Percent\" autocomplete=\"off\" formControlName=\"discountPercent\" required>\n      </mat-form-field>\n           \n      <mat-form-field appearance=\"outline\" fxFlex>\n        <mat-label>Total Coupons</mat-label>\n        <input matInput #input placeholder=\"Total Coupons\" autocomplete=\"off\" formControlName=\"totalCoupons\" required>\n      </mat-form-field>\n      <mat-form-field>\n        <mat-label> Expiry Date</mat-label>\n   <input matInput [matDatepicker]=\"picker2\" placeholder=\"Choose expiry date\" autocomplete=\"off\" formControlName=\"expiryDate\">\n   <mat-datepicker-toggle matSuffix [for]=\"picker2\"></mat-datepicker-toggle>\n   <mat-datepicker #picker2></mat-datepicker>\n </mat-form-field>\n      <mat-form-field appearance=\"outline\" fxFlex>\n        <mat-label>Maximum Discount Amount</mat-label>\n        <input matInput #input placeholder=\"Maximum Discount Amount\" autocomplete=\"off\" formControlName=\"maxDiscountAmount\" required>\n      </mat-form-field>\n      \n     \n    </div>\n  </div>\n  <mat-form-field appearance=\"outline\" fxFlex style=\"padding-right: 35%;\">\n    <mat-label>Number of target customers</mat-label>\n    <input matInput #input placeholder=\"Number of target customers\" autocomplete=\"off\" formControlName=\"targetCustomers\" required>\n  </mat-form-field>\n  <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\">\n    <button mat-raised-button class=\"btn\" [disabled]='!campaignForm.valid' color=\"primary\">\n      Submit\n    </button>\n  </div>\n  </form>\n"
 
 /***/ }),
 
@@ -18,7 +18,7 @@ module.exports = "<mat-toolbar>\n  <span class=\"fill-remaining-space\"></span>\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-card class=\"my-card\" fxFlex.sm=\"0 1 calc(50%-10px)\" fxFlex.md=\"0 1 calc(33%-10px)\" fxLayout=\"column\" fxLayoutGap=\"20px\" (click)=\"ok()\">\n\n        <mat-card-title fxLayoutAlign=\"end\" [ngStyle]=\"{'background-color':getColor(campaignStatus)}\" class=\"status\">{{campaignStatus}}</mat-card-title>\n        \n    <mat-card-title fxLayoutAlign=\"start\" class=\"name\" >{{name}}</mat-card-title>\n    <mat-card-content fxLayoutAlign=\"start\" class=\"objective\">Objective:{{objective}}</mat-card-content>\n     <mat-card-content fxLayoutAlign=\"start\">Promo Code:{{promocode}}</mat-card-content>\n    <mat-card-content fxLayoutAlign=\"start\">Total Coupons:{{totalCoupons}}</mat-card-content>\n    <mat-card-content fxLayoutAlign=\"start\">Used Coupons:{{usedCoupons}}</mat-card-content>\n    <mat-card-content fxLayoutAlign=\"start\">MaximumLimit:{{maximumLimit}}</mat-card-content>\n  </mat-card>\n  \n"
+module.exports = "<mat-card class=\"my-card my-card2\" (click)=\"ok()\">\n\n  <mat-card-content fxLayoutAlign=\"space-between\" >\n    <ngx-avatar class=\"font-style\" name=\"{{promocode}}\"></ngx-avatar>\n    <mat-chip-list aria-label=\"Fish selection\">\n<mat-chip [ngStyle]=\"{'background-color':getColor(campaignStatus)}\" class=\"status font-style content\">{{campaignStatus}}</mat-chip>\n</mat-chip-list>\n</mat-card-content>\n       \n    <mat-card-title fxLayoutAlign=\"start\" class=\"name font-style content\" >{{name}}</mat-card-title>\n    <mat-card-content fxLayoutAlign=\"start\" class=\"objective\">Objective:{{objective}}</mat-card-content>\n     <mat-card-content fxLayoutAlign=\"start\">Promo Code:{{promocode}}</mat-card-content>\n    <mat-card-content fxLayoutAlign=\"start\">Total Coupons:{{totalCoupons}}</mat-card-content>\n    <mat-card-content fxLayoutAlign=\"start\">Used Coupons:{{usedCoupons}}</mat-card-content>\n    <mat-card-content fxLayoutAlign=\"start\">MaximumLimit:{{maximumLimit}}</mat-card-content>\n  </mat-card>\n  \n"
 
 /***/ }),
 
@@ -29,7 +29,7 @@ module.exports = "<mat-card class=\"my-card\" fxFlex.sm=\"0 1 calc(50%-10px)\" f
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div fxLayout.sm=\"column\" fxLayout.gt-sm=\"row\" fxLayoutGap=\"10%\">\n  <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap.lt-md=\"0px\">\n    <mat-form-field appearance=\"outline\" fxFlex class=\"status\">\n      <mat-label>Campaign Status</mat-label>\n      <mat-select [(ngModel)]=\"Status\" (ngModelChange)=\"onChange($event)\">\n        <mat-option *ngFor=\"let c of CampaignStatus\" [value]=\"c.value\">\n          {{c.viewValue}}\n        </mat-option>\n      </mat-select>\n    </mat-form-field>\n  </div>\n</div>\n<div fxLayout=\"column\">\n    <mat-card class=\"campaign\" fxFlex.sm=\"0 1 calc(50%-10px)\" fxFlex.md=\"0 1 calc(33%-10px)\" fxLayout=\"column\"\n      fxLayoutGap=\"20px\">\n      <button mat-button class=\"icon\" (click)=\"edit()\">\n        <i class=\"material-icons\">\n            edit\n        </i>\n    </button>\n      <br><br><br>\n      <div fxFlex=50% fxLayout=\"column\" fxLayout.gt-sm=\"row\" fxLayoutGap=\"20%\" fxLayoutGap.lt-md=\"0px\" class=\"form\"\n        fxLayoutAlign=\"center center\">\n\n        <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"30px\" fxLayoutGap.lt-md=\"0px\" class=\"col\">\n          <mat-card-title fxLayoutAlign=\"start\">Start Date: {{campaign?.startDate|date:\"dd LLLL yyyy\" }}</mat-card-title>\n          <mat-card-title fxLayoutAlign=\"start\">Expiry date: {{campaign?.expiryDate|date:\"dd LLLL yyyy\"}}</mat-card-title>\n          <mat-card-title fxLayoutAlign=\"start\">Promo Code: {{campaign?.promocode}}</mat-card-title>\n          <mat-card-title fxLayoutAlign=\"start\">Discount Percent: {{campaign?.discountPercent}}</mat-card-title>\n          <mat-card-title fxLayoutAlign=\"start\">MaximumLimit: {{campaign?.maximumLimit}} </mat-card-title>\n          <mat-card-title fxLayoutAlign=\"start\">Maximum Discount Amount: {{campaign?.maxDiscountAmount}} </mat-card-title>\n          \n           <!-- <div class=\"campaignestartend\">\n            <div fxLayout=\"column\" fxLayout.gt-xs=\"row\" fxLayoutAlign=\"center\" fxLayoutGap=\"10px\">\n            <button mat-raised-button color=\"primary\" (click)=\"start()\" class=\"start\">\n                Start\n            </button>\n            <button mat-raised-button color=\"primary\" (click)=\"end()\" class=\"end\">\n                    End\n                </button>\n           </div>\n        </div>     -->\n        </div>\n      </div>\n    </mat-card>\n</div>\n    \n  \n"
+module.exports = "<div fxLayout.sm=\"column\" fxLayout.gt-sm=\"row\" fxLayoutGap=\"10%\">\n  <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap.lt-md=\"0px\">\n      <i class=\"material-icons back-btn\" (click)=\"back()\">\n          keyboard_backspace\n  </i>\n    <mat-form-field appearance=\"outline\" fxFlex class=\"status\">\n      <mat-label>Campaign Status</mat-label>\n      <mat-select [(ngModel)]=\"Status\" (ngModelChange)=\"onChange($event)\">\n        <mat-option *ngFor=\"let c of CampaignStatus\" [value]=\"c.value\">\n          {{c.viewValue}}\n        </mat-option>\n      </mat-select>\n    </mat-form-field>\n  </div>\n</div>\n            \n \n<div fxLayout=\"column\" class=\"space\">\n    <mat-card class=\"campaign\" fxFlex.sm=\"0 1 calc(50%-10px)\" fxFlex.md=\"0 1 calc(33%-10px)\" fxLayout=\"column\"\n      fxLayoutGap=\"20px\">\n      <button mat-button class=\"icon\" (click)=\"edit()\">\n        <i class=\"material-icons\">\n            edit\n        </i>\n    </button>\n      <br><br><br>\n      <div fxFlex=50% fxLayout=\"column\" fxLayout.gt-sm=\"row\" fxLayoutGap=\"20%\" fxLayoutGap.lt-md=\"0px\" class=\"form\"\n        fxLayoutAlign=\"center center\">\n\n        <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"30px\" fxLayoutGap.lt-md=\"0px\" class=\"col\">\n          <mat-card-title fxLayoutAlign=\"start\">Start Date: {{campaign?.startDate|date:\"dd LLLL yyyy\" }}</mat-card-title>\n           <div *ngIf=\"campaignStatus==='ENDED'; else elseBlock\">End date: {{campaign?.endDate|date:\"dd LLLL yyyy\"}}</div>\n<ng-template #elseBlock></ng-template>\n<mat-card-title fxLayoutAlign=\"start\">Expiry date: {{campaign?.expiryDate|date:\"dd LLLL yyyy\"}}</mat-card-title>\n      \n          <mat-card-title fxLayoutAlign=\"start\">End date: {{campaign?.endDate|date:\"dd LLLL yyyy\"}}</mat-card-title>\n          <mat-card-title fxLayoutAlign=\"start\">Promo Code: {{campaign?.promocode}}</mat-card-title>\n          <mat-card-title fxLayoutAlign=\"start\">Discount Percent: {{campaign?.discountPercent}}</mat-card-title>\n          <mat-card-title fxLayoutAlign=\"start\">MaximumLimit: {{campaign?.maximumLimit}} </mat-card-title>\n          <mat-card-title fxLayoutAlign=\"start\">Maximum Discount Amount: {{campaign?.maxDiscountAmount}} </mat-card-title>\n          <div fxLayout=\"column\" fxLayout.gt-xs=\"row\" fxLayoutAlign=\"center\" fxLayoutGap=\"10px\">\n              <button mat-raised-button color=\"primary\" (click)=\"start()\" class=\"start\">Start\n              </button>\n              <button mat-raised-button color=\"primary\" (click)=\"end()\" class=\"reject\">End\n              </button>\n          </div>\n        \n        </div>\n      </div>\n    </mat-card>\n</div>\n    \n  \n"
 
 /***/ }),
 
@@ -40,7 +40,7 @@ module.exports = "<div fxLayout.sm=\"column\" fxLayout.gt-sm=\"row\" fxLayoutGap
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h1 fxLayout=\"column\" fxLayout.gt-md=\"row\" fxLayoutGap.gt-md=\"15px\" class=\"header\">\n  Campaigns\n</h1>\n<div fxLayout=\"row\" fxLayoutGap=\"20px\" class=\"search\" fxLayout.gt-xs=\"row\">\n  <mat-form-field fxFlex=20%>\n    <input matInput [(ngModel)]=\"term\" placeholder=\"Search\">\n  </mat-form-field>\n</div>\n<div fxLayout.xs=\"column\" fxLayout.gt=\"row\" fxLayout=\"row wrap\" fxLayoutGap=\"10px\" class=\"card\">\n  <app-campaign-card *ngFor=\"let campaign of campaigns | paginate: { itemsPerPage: 10, currentPage: p}| filter:term\"\n    [campaign]=\"campaign\">\n  </app-campaign-card>\n   <pagination-controls (pageChange)=\"p = $event\"></pagination-controls>\n</div>\n<div fxLayout=\"column\" fxLayout.gt-xs=\"row\" fxLayoutAlign=\"end\" class=\"add-button\">\n  <button mat-fab color=\"primary\" (click)=\"add()\">\n      <i class=\"material-icons\">\n          add\n      </i>\n  </button>\n\n"
+module.exports = "<h1 fxLayout=\"column\" fxLayout.gt-md=\"row\" fxLayoutGap.gt-md=\"15px\" class=\"header\">\n  Campaigns\n</h1>\n<div fxLayout=\"row\" fxLayoutGap=\"20px\" class=\"search\" fxLayout.gt-xs=\"row\">\n  <mat-form-field fxFlex=20%>\n    <input matInput [(ngModel)]=\"term\" placeholder=\"Search\">\n  </mat-form-field>\n</div>\n<div fxLayout=\"column wrap\">\n<div fxLayout.xs=\"column\" fxLayout.lg=\"row wrap\" fxLayoutGap=\"50px\" class=\"card\"\nfxLayoutAlign.lt-sm=\"center center\">\n  <app-campaign-card *ngFor=\"let campaign of campaigns | paginate: { itemsPerPage: 10, currentPage: p}| filter:term\"\n    [campaign]=\"campaign\">\n  </app-campaign-card>\n</div>\n   <pagination-controls (pageChange)=\"p = $event\" fxLayoutAlign=\"center center\" class=\"paginator font-style\"></pagination-controls>\n</div>\n\n<div fxLayout=\"column\" fxLayout.gt-xs=\"row\" fxLayoutAlign=\"end\" class=\"add-button\">\n  <button mat-fab color=\"primary\" (click)=\"add()\">\n      <i class=\"material-icons\">\n          add\n      </i>\n  </button>\n\n"
 
 /***/ }),
 
@@ -51,7 +51,7 @@ module.exports = "<h1 fxLayout=\"column\" fxLayout.gt-md=\"row\" fxLayoutGap.gt-
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-toolbar>\n        <span class=\"fill-remaining-space\"></span>\n        <button class=\"btn-dialog-close\" mat-stroked-button (click)=\"onClose()\" tabIndex=\"-1\">\n            <mat-icon>clear</mat-icon>\n        </button>\n    </mat-toolbar>\n\n    <form fxLayout=\"column\" fxLayoutAlign=\"center center\" [formGroup]=\"campaignForm\" (ngSubmit)=\"onSubmit()\">\n\n            <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\" class=\"form\"\n                fxLayoutAlign=\"center center\">\n\n                <mat-form-field appearance=\"outline\" fxFlex>\n                    <mat-label class=\"font-style\">Promo Code</mat-label>\n                    <input matInput maxlength=\"6\" #input placeholder=\"promo code\" formControlName=\"promocode\" required class=\"font-style\">\n       \n                </mat-form-field>\n                     <button mat-raised-button class=\"btn font-style\" [disabled]='!campaignForm.valid' color=\"primary\">\n                                Submit\n                            </button>\n                        </div>\n                        \n    </form>\n\n\n\n"
+module.exports = "<mat-toolbar>\n        <span class=\"fill-remaining-space\"></span>\n        <button class=\"btn-dialog-close\" mat-stroked-button (click)=\"onClose()\" tabIndex=\"-1\">\n            <mat-icon>clear</mat-icon>\n        </button>\n    </mat-toolbar>\n\n    <form fxLayout=\"column\" fxLayoutAlign=\"center center\" [formGroup]=\"campaignForm\"  (ngSubmit)=\"onSubmit()\">\n\n            <div fxLayout=\"column\" fxLayout.lt-md=\"column\" fxLayoutGap=\"20px\" fxLayoutGap.lt-md=\"0px\" class=\"form\"\n                fxLayoutAlign=\"center center\">\n\n                <mat-form-field appearance=\"outline\" fxFlex>\n                    <mat-label class=\"font-style\">Promo Code</mat-label>\n                    <input matInput maxlength=\"10\" #input placeholder=\"promo code\" formControlName=\"promocode\" [(ngModel)]=\"pc.promocode\" required class=\"font-style\">\n       \n                </mat-form-field>\n                     <button mat-raised-button class=\"btn font-style\" [disabled]='!campaignForm.valid' color=\"primary\">\n                                Submit\n                            </button>\n                        </div>\n                        \n    </form>\n\n\n\n"
 
 /***/ }),
 
@@ -97,11 +97,11 @@ let AddCampaignComponent = class AddCampaignComponent {
             startDate: ['', []],
             endDate: ['', []],
             expiryDate: ['', []],
-            promocode: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].pattern('[A-Z0-9]+')]],
+            promocode: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].pattern('[a-zA-Z0-9_]+')]],
             discountPercent: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].pattern('[0-9]+')]],
             totalCoupons: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].pattern('[0-9]+')]],
             usedCoupons: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].pattern('[0-9]+')]],
-            campaignStatus: ['IN_PROGRESS', []],
+            campaignStatus: ['STARTED', []],
             maxDiscountAmount: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].pattern('[0-9]+')]],
             targetCustomers: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].pattern('[0-9]+')]]
         });
@@ -143,7 +143,7 @@ AddCampaignComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".my-card {\n    margin-bottom: 40px;\n    height: 350px;\n    cursor: pointer;\n    \n}\n\n.my-card:hover {\n    transform: scale(1.1);\n}\n\n.name {\n    padding-top: 10%;\n}\n\n.status {\n    font-weight: bold;\n    font-size: 1em;\n    color: white;\n}\n\n.campaigneditdelete\n{\n    flex-direction: row;\n    align-items: center;\n\n}\n\n\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY2FtcGFpZ25zL2NhbXBhaWduLWNhcmQvY2FtcGFpZ24tY2FyZC5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksbUJBQW1CO0lBQ25CLGFBQWE7SUFDYixlQUFlOztBQUVuQjs7QUFFQTtJQUdJLHFCQUFxQjtBQUN6Qjs7QUFFQTtJQUNJLGdCQUFnQjtBQUNwQjs7QUFFQTtJQUNJLGlCQUFpQjtJQUNqQixjQUFjO0lBQ2QsWUFBWTtBQUNoQjs7QUFFQTs7SUFFSSxtQkFBbUI7SUFDbkIsbUJBQW1COztBQUV2QiIsImZpbGUiOiJzcmMvYXBwL2NhbXBhaWducy9jYW1wYWlnbi1jYXJkL2NhbXBhaWduLWNhcmQuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5teS1jYXJkIHtcbiAgICBtYXJnaW4tYm90dG9tOiA0MHB4O1xuICAgIGhlaWdodDogMzUwcHg7XG4gICAgY3Vyc29yOiBwb2ludGVyO1xuICAgIFxufVxuXG4ubXktY2FyZDpob3ZlciB7XG4gICAgLXdlYmtpdC10cmFuc2Zvcm06IHNjYWxlKDEuMSk7XG4gICAgLW1zLXRyYW5zZm9ybTogc2NhbGUoMS4xKTtcbiAgICB0cmFuc2Zvcm06IHNjYWxlKDEuMSk7XG59XG5cbi5uYW1lIHtcbiAgICBwYWRkaW5nLXRvcDogMTAlO1xufVxuXG4uc3RhdHVzIHtcbiAgICBmb250LXdlaWdodDogYm9sZDtcbiAgICBmb250LXNpemU6IDFlbTtcbiAgICBjb2xvcjogd2hpdGU7XG59XG5cbi5jYW1wYWlnbmVkaXRkZWxldGVcbntcbiAgICBmbGV4LWRpcmVjdGlvbjogcm93O1xuICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG5cbn1cblxuXG4iXX0= */"
+module.exports = "\n\n.name {\n    padding-top: 10%;\n}\n\n.status {\n    font-weight: bold;\n    font-size: 1em;\n    color: white;\n}\n\n.campaigneditdelete\n{\n    flex-direction: row;\n    align-items: center;\n\n}\n\n.my-card2 {\n    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);\n    transition: all 0.3s cubic-bezier(.25,.8,.25,1);\n    height: 370px;\n}\n\n.my-card2:hover {\n    \n    box-shadow: 0 7px 28px rgba(0,0,0,0.15), 0 10px 10px rgba(0,0,0,0.22);\n}\n\n.content {\n    font-size: 1.2em;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY2FtcGFpZ25zL2NhbXBhaWduLWNhcmQvY2FtcGFpZ24tY2FyZC5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBRUE7SUFDSSxnQkFBZ0I7QUFDcEI7O0FBRUE7SUFDSSxpQkFBaUI7SUFDakIsY0FBYztJQUNkLFlBQVk7QUFDaEI7O0FBRUE7O0lBRUksbUJBQW1CO0lBQ25CLG1CQUFtQjs7QUFFdkI7O0FBRUE7SUFDSSxrRUFBa0U7SUFDbEUsK0NBQStDO0lBQy9DLGFBQWE7QUFDakI7O0FBRUE7O0lBRUkscUVBQXFFO0FBQ3pFOztBQUdBO0lBQ0ksZ0JBQWdCO0FBQ3BCIiwiZmlsZSI6InNyYy9hcHAvY2FtcGFpZ25zL2NhbXBhaWduLWNhcmQvY2FtcGFpZ24tY2FyZC5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiXG5cbi5uYW1lIHtcbiAgICBwYWRkaW5nLXRvcDogMTAlO1xufVxuXG4uc3RhdHVzIHtcbiAgICBmb250LXdlaWdodDogYm9sZDtcbiAgICBmb250LXNpemU6IDFlbTtcbiAgICBjb2xvcjogd2hpdGU7XG59XG5cbi5jYW1wYWlnbmVkaXRkZWxldGVcbntcbiAgICBmbGV4LWRpcmVjdGlvbjogcm93O1xuICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG5cbn1cblxuLm15LWNhcmQyIHtcbiAgICBib3gtc2hhZG93OiAwIDFweCAzcHggcmdiYSgwLDAsMCwwLjEyKSwgMCAxcHggMnB4IHJnYmEoMCwwLDAsMC4yNCk7XG4gICAgdHJhbnNpdGlvbjogYWxsIDAuM3MgY3ViaWMtYmV6aWVyKC4yNSwuOCwuMjUsMSk7XG4gICAgaGVpZ2h0OiAzNzBweDtcbn1cblxuLm15LWNhcmQyOmhvdmVyIHtcbiAgICBcbiAgICBib3gtc2hhZG93OiAwIDdweCAyOHB4IHJnYmEoMCwwLDAsMC4xNSksIDAgMTBweCAxMHB4IHJnYmEoMCwwLDAsMC4yMik7XG59XG5cblxuLmNvbnRlbnQge1xuICAgIGZvbnQtc2l6ZTogMS4yZW07XG59XG4iXX0= */"
 
 /***/ }),
 
@@ -188,12 +188,18 @@ let CampaignCardComponent = class CampaignCardComponent {
     }
     getColor(campaignStatus) {
         switch (campaignStatus) {
-            case 'IN_PROGRESS':
-                return '#1B5E20';
-            case 'SUCCESS':
-                return '#FFC400';
+            case 'STARTED':
+                return '#F57C00';
+            case 'CREATED':
+                return '#3D5AFE';
             case 'FAILURE':
+                return '#757575';
+            case 'ENDED':
                 return '#F44336';
+            case 'IN_PROGRESS':
+                return '#FFEA00';
+            case 'SUCCESS':
+                return '#76FF03';
         }
     }
 };
@@ -222,7 +228,7 @@ CampaignCardComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".campaign {\n    margin-bottom: 40px;\n    margin-left: 450px;\n     height: 410px; \n    width: 55%;\n    margin-top: 50px;\n    \n}\n\n.campaignstartend\n{\n    margin-left: 100px;\n}\n\n.status {\n    margin-top: 10px;\n    padding-left: 1200px;\n}\n\n@media only screen and (max-width: 600px) {\n    .campaign {\n        margin-left: 30px;\n        height: 300px;\n        width: 85%;\n    }\n\n    .icon{\n        margin-left: 80%;\n        background-color: wheat;\n    }\n\n\n    mat-card-title {\n        font-size: 1.4em;\n    }\n\n    .status {\n        margin-top: 20px;\n        padding-right: 60x;\n        padding-left: 0px;\n    }\n}\n\n.icon{\n    margin-left: 80%;\n    background-color: transparent;\n}\n\n.doc {\n    margin-top: 70px;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY2FtcGFpZ25zL2NhbXBhaWducy1kZXRhaWxzL2NhbXBhaWducy1kZXRhaWxzLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7SUFDSSxtQkFBbUI7SUFDbkIsa0JBQWtCO0tBQ2pCLGFBQWE7SUFDZCxVQUFVO0lBQ1YsZ0JBQWdCOztBQUVwQjs7QUFFQTs7SUFFSSxrQkFBa0I7QUFDdEI7O0FBRUE7SUFDSSxnQkFBZ0I7SUFDaEIsb0JBQW9CO0FBQ3hCOztBQUVBO0lBQ0k7UUFDSSxpQkFBaUI7UUFDakIsYUFBYTtRQUNiLFVBQVU7SUFDZDs7SUFFQTtRQUNJLGdCQUFnQjtRQUNoQix1QkFBdUI7SUFDM0I7OztJQUdBO1FBQ0ksZ0JBQWdCO0lBQ3BCOztJQUVBO1FBQ0ksZ0JBQWdCO1FBQ2hCLGtCQUFrQjtRQUNsQixpQkFBaUI7SUFDckI7QUFDSjs7QUFFQTtJQUNJLGdCQUFnQjtJQUNoQiw2QkFBNkI7QUFDakM7O0FBRUE7SUFDSSxnQkFBZ0I7QUFDcEIiLCJmaWxlIjoic3JjL2FwcC9jYW1wYWlnbnMvY2FtcGFpZ25zLWRldGFpbHMvY2FtcGFpZ25zLWRldGFpbHMuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5jYW1wYWlnbiB7XG4gICAgbWFyZ2luLWJvdHRvbTogNDBweDtcbiAgICBtYXJnaW4tbGVmdDogNDUwcHg7XG4gICAgIGhlaWdodDogNDEwcHg7IFxuICAgIHdpZHRoOiA1NSU7XG4gICAgbWFyZ2luLXRvcDogNTBweDtcbiAgICBcbn1cblxuLmNhbXBhaWduc3RhcnRlbmRcbntcbiAgICBtYXJnaW4tbGVmdDogMTAwcHg7XG59XG5cbi5zdGF0dXMge1xuICAgIG1hcmdpbi10b3A6IDEwcHg7XG4gICAgcGFkZGluZy1sZWZ0OiAxMjAwcHg7XG59XG5cbkBtZWRpYSBvbmx5IHNjcmVlbiBhbmQgKG1heC13aWR0aDogNjAwcHgpIHtcbiAgICAuY2FtcGFpZ24ge1xuICAgICAgICBtYXJnaW4tbGVmdDogMzBweDtcbiAgICAgICAgaGVpZ2h0OiAzMDBweDtcbiAgICAgICAgd2lkdGg6IDg1JTtcbiAgICB9XG5cbiAgICAuaWNvbntcbiAgICAgICAgbWFyZ2luLWxlZnQ6IDgwJTtcbiAgICAgICAgYmFja2dyb3VuZC1jb2xvcjogd2hlYXQ7XG4gICAgfVxuXG5cbiAgICBtYXQtY2FyZC10aXRsZSB7XG4gICAgICAgIGZvbnQtc2l6ZTogMS40ZW07XG4gICAgfVxuXG4gICAgLnN0YXR1cyB7XG4gICAgICAgIG1hcmdpbi10b3A6IDIwcHg7XG4gICAgICAgIHBhZGRpbmctcmlnaHQ6IDYweDtcbiAgICAgICAgcGFkZGluZy1sZWZ0OiAwcHg7XG4gICAgfVxufVxuXG4uaWNvbntcbiAgICBtYXJnaW4tbGVmdDogODAlO1xuICAgIGJhY2tncm91bmQtY29sb3I6IHRyYW5zcGFyZW50O1xufVxuXG4uZG9jIHtcbiAgICBtYXJnaW4tdG9wOiA3MHB4O1xufVxuIl19 */"
+module.exports = ".campaign {\n    margin-bottom: 40px;\n    margin-left: 450px;\n     height: 480px; \n    width: 55%;\n    margin-top: 50px;\n}\n\n.campaignstartend\n{\n    margin-left: 100px;\n}\n\n.status {\n    margin-top: 10px;\n    padding-left: 1200px;\n}\n\n@media only screen and (max-width: 600px) {\n    .campaign {\n        margin-left: 30px;\n        height: 300px;\n        width: 85%;\n    }\n\n    .icon{\n        margin-left: 80%;\n        background-color: wheat;\n    }\n\n\n    mat-card-title {\n        font-size: 1.4em;\n    }\n\n    .status {\n        margin-top: 20px;\n        padding-right: 60x;\n        padding-left: 0px;\n    }\n}\n\n.icon{\n    margin-left: 80%;\n    background-color: transparent;\n}\n\n.doc {\n    margin-top: 70px;\n}\n\n.space {\n    padding-bottom: 10%;\n}\n\n.back-btn {\n    margin-top: 0px;\n    margin-right: 20px;\n    font-size: 50px;\n    background-color: transparent;\n    cursor: pointer;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY2FtcGFpZ25zL2NhbXBhaWducy1kZXRhaWxzL2NhbXBhaWducy1kZXRhaWxzLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7SUFDSSxtQkFBbUI7SUFDbkIsa0JBQWtCO0tBQ2pCLGFBQWE7SUFDZCxVQUFVO0lBQ1YsZ0JBQWdCO0FBQ3BCOztBQUVBOztJQUVJLGtCQUFrQjtBQUN0Qjs7QUFFQTtJQUNJLGdCQUFnQjtJQUNoQixvQkFBb0I7QUFDeEI7O0FBRUE7SUFDSTtRQUNJLGlCQUFpQjtRQUNqQixhQUFhO1FBQ2IsVUFBVTtJQUNkOztJQUVBO1FBQ0ksZ0JBQWdCO1FBQ2hCLHVCQUF1QjtJQUMzQjs7O0lBR0E7UUFDSSxnQkFBZ0I7SUFDcEI7O0lBRUE7UUFDSSxnQkFBZ0I7UUFDaEIsa0JBQWtCO1FBQ2xCLGlCQUFpQjtJQUNyQjtBQUNKOztBQUVBO0lBQ0ksZ0JBQWdCO0lBQ2hCLDZCQUE2QjtBQUNqQzs7QUFFQTtJQUNJLGdCQUFnQjtBQUNwQjs7QUFFQTtJQUNJLG1CQUFtQjtBQUN2Qjs7QUFFQTtJQUNJLGVBQWU7SUFDZixrQkFBa0I7SUFDbEIsZUFBZTtJQUNmLDZCQUE2QjtJQUM3QixlQUFlO0FBQ25CIiwiZmlsZSI6InNyYy9hcHAvY2FtcGFpZ25zL2NhbXBhaWducy1kZXRhaWxzL2NhbXBhaWducy1kZXRhaWxzLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuY2FtcGFpZ24ge1xuICAgIG1hcmdpbi1ib3R0b206IDQwcHg7XG4gICAgbWFyZ2luLWxlZnQ6IDQ1MHB4O1xuICAgICBoZWlnaHQ6IDQ4MHB4OyBcbiAgICB3aWR0aDogNTUlO1xuICAgIG1hcmdpbi10b3A6IDUwcHg7XG59XG5cbi5jYW1wYWlnbnN0YXJ0ZW5kXG57XG4gICAgbWFyZ2luLWxlZnQ6IDEwMHB4O1xufVxuXG4uc3RhdHVzIHtcbiAgICBtYXJnaW4tdG9wOiAxMHB4O1xuICAgIHBhZGRpbmctbGVmdDogMTIwMHB4O1xufVxuXG5AbWVkaWEgb25seSBzY3JlZW4gYW5kIChtYXgtd2lkdGg6IDYwMHB4KSB7XG4gICAgLmNhbXBhaWduIHtcbiAgICAgICAgbWFyZ2luLWxlZnQ6IDMwcHg7XG4gICAgICAgIGhlaWdodDogMzAwcHg7XG4gICAgICAgIHdpZHRoOiA4NSU7XG4gICAgfVxuXG4gICAgLmljb257XG4gICAgICAgIG1hcmdpbi1sZWZ0OiA4MCU7XG4gICAgICAgIGJhY2tncm91bmQtY29sb3I6IHdoZWF0O1xuICAgIH1cblxuXG4gICAgbWF0LWNhcmQtdGl0bGUge1xuICAgICAgICBmb250LXNpemU6IDEuNGVtO1xuICAgIH1cblxuICAgIC5zdGF0dXMge1xuICAgICAgICBtYXJnaW4tdG9wOiAyMHB4O1xuICAgICAgICBwYWRkaW5nLXJpZ2h0OiA2MHg7XG4gICAgICAgIHBhZGRpbmctbGVmdDogMHB4O1xuICAgIH1cbn1cblxuLmljb257XG4gICAgbWFyZ2luLWxlZnQ6IDgwJTtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiB0cmFuc3BhcmVudDtcbn1cblxuLmRvYyB7XG4gICAgbWFyZ2luLXRvcDogNzBweDtcbn1cblxuLnNwYWNlIHtcbiAgICBwYWRkaW5nLWJvdHRvbTogMTAlO1xufVxuXG4uYmFjay1idG4ge1xuICAgIG1hcmdpbi10b3A6IDBweDtcbiAgICBtYXJnaW4tcmlnaHQ6IDIwcHg7XG4gICAgZm9udC1zaXplOiA1MHB4O1xuICAgIGJhY2tncm91bmQtY29sb3I6IHRyYW5zcGFyZW50O1xuICAgIGN1cnNvcjogcG9pbnRlcjtcbn0iXX0= */"
 
 /***/ }),
 
@@ -242,6 +248,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _service_campaigns_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../service/campaigns.service */ "./src/app/campaigns/service/campaigns.service.ts");
 /* harmony import */ var _edit_campaign_edit_campaign_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../edit-campaign/edit-campaign.component */ "./src/app/campaigns/edit-campaign/edit-campaign.component.ts");
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm2015/material.js");
+/* harmony import */ var src_app_shared_notification_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/shared/notification.service */ "./src/app/shared/notification.service.ts");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm2015/common.js");
+
+
 
 
 
@@ -249,16 +259,21 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let CampaignsDetailsComponent = class CampaignsDetailsComponent {
-    constructor(router, campaignService, activatedRoute, route, matDialog) {
+    constructor(router, campaignService, activatedRoute, route, matDialog, notificationService, location) {
         this.router = router;
         this.campaignService = campaignService;
         this.activatedRoute = activatedRoute;
         this.route = route;
         this.matDialog = matDialog;
+        this.notificationService = notificationService;
+        this.location = location;
         this.CampaignStatus = [
             { value: 'IN_PROGRESS', viewValue: 'IN_PROGRESS' },
             { value: 'SUCCESS', viewValue: 'SUCCESS' },
             { value: 'FAILURE', viewValue: 'FAILURE' },
+            { value: 'CREATED', viewValue: 'CREATED' },
+            { value: 'ENDED', viewValue: 'ENDED' },
+            { value: 'STARTED', viewValue: 'STARTED' }
         ];
     }
     ngOnInit() {
@@ -281,36 +296,43 @@ let CampaignsDetailsComponent = class CampaignsDetailsComponent {
         dRef.afterClosed().subscribe(result => {
             if (result !== undefined) {
                 this.campaignService.updateCampaignById(this.id, this.campaign).subscribe(response => {
+                    this.notificationService.success('Campaign updated successfully!!'),
+                        error => {
+                            this.notificationService.warn('Can\'t update ');
+                        };
                 });
             }
         });
     }
-    // start()
-    // {
-    //    console.log(Object.values(this.campaign));
-    //   Object.values(this.campaign)[13] = Object(this.campaign);
-    //   console.log(Object.values(this.campaign)[13], this.campaign);
-    //   this.campaignService.updateCampaignById(this.id,this.campaign).subscribe(
-    //     response => {
-    //                  console.log('Call Success');
-    //                  })
-    // }
     onChange(newValue) {
         console.log('Campaign ', this.campaign);
         console.log(Object.values(this.campaign), Object.values(this.campaign));
         this.campaign.campaignStatus = newValue;
-        console.log(this.campaign, 'campaign ka status change hona chahiye');
-        // console.log(this.campaign.campaignStatus, this.campaign);
-        console.log('Id ', this.id);
         this.campaignService.updateCampaignById(this.id, this.campaign).subscribe(response => {
-            console.log('response ', response);
-            console.log('Call Success');
-            console.log('Campaign ', this.campaign);
-            // this.notificationService.success('Campaign updated successfully!!');
-            //},
-            // error => this.notificationService.warn(error),
-            // );
-        });
+            this.notificationService.success('Campaign status updated successfully!!');
+        }, error => this.notificationService.warn(error));
+    }
+    ;
+    start() {
+        this.campaign.campaignStatus = 'STARTED';
+        console.log(this.campaign, 'campaign started');
+        this.campaignService.updateCampaignById(this.id, this.campaign).subscribe(response => {
+            console.log(this.campaign, 'campaign started -->');
+            this.notificationService.success('Campaign started successfully!!');
+        }, error => this.notificationService.warn(error));
+    }
+    end() {
+        this.campaign.campaignStatus = 'ENDED';
+        this.campaign.endDate = new Date();
+        console.log(this.campaign.endDate);
+        console.log(this.campaign, 'campaign ended');
+        this.campaignService.updateCampaignById(this.id, this.campaign).subscribe(response => {
+            console.log(this.campaign, 'campaign ended -->');
+            this.notificationService.success('Campaign ended successfully!!');
+        }, error => this.notificationService.warn(error));
+    }
+    back() {
+        this.location.back();
     }
 };
 CampaignsDetailsComponent.ctorParameters = () => [
@@ -318,7 +340,9 @@ CampaignsDetailsComponent.ctorParameters = () => [
     { type: _service_campaigns_service__WEBPACK_IMPORTED_MODULE_3__["CampaignsService"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"] },
-    { type: _angular_material__WEBPACK_IMPORTED_MODULE_5__["MatDialog"] }
+    { type: _angular_material__WEBPACK_IMPORTED_MODULE_5__["MatDialog"] },
+    { type: src_app_shared_notification_service__WEBPACK_IMPORTED_MODULE_6__["NotificationService"] },
+    { type: _angular_common__WEBPACK_IMPORTED_MODULE_7__["Location"] }
 ];
 CampaignsDetailsComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -375,7 +399,7 @@ CampaignsRoutingModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".header {\n    margin-left: 240px;\n}\n\napp-campaign-card {\n    \n    width: 25%;\n    margin-left: 50px;\n    \n    \n}\n\n.card {\n    margin-left: 18%;\n}\n\n.search {\n    margin-left: 240px;\n    margin-bottom: 50px;\n}\n\n@media only screen and (max-width: 600px) {\n    .card {\n        margin-left: 10%;\n    }\n\n    app-campaign-card {\n        width: 75%;\n    }\n    \n    .search {\n        margin-left: 60px;\n        margin-bottom: 50px;\n    }\n\n    .header {\n        margin-left: 50px;\n    }\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY2FtcGFpZ25zL2NhbXBhaWducy5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksa0JBQWtCO0FBQ3RCOztBQUVBOztJQUVJLFVBQVU7SUFDVixpQkFBaUI7OztBQUdyQjs7QUFDQTtJQUNJLGdCQUFnQjtBQUNwQjs7QUFFQTtJQUNJLGtCQUFrQjtJQUNsQixtQkFBbUI7QUFDdkI7O0FBRUE7SUFDSTtRQUNJLGdCQUFnQjtJQUNwQjs7SUFFQTtRQUNJLFVBQVU7SUFDZDs7SUFFQTtRQUNJLGlCQUFpQjtRQUNqQixtQkFBbUI7SUFDdkI7O0lBRUE7UUFDSSxpQkFBaUI7SUFDckI7QUFDSiIsImZpbGUiOiJzcmMvYXBwL2NhbXBhaWducy9jYW1wYWlnbnMuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5oZWFkZXIge1xuICAgIG1hcmdpbi1sZWZ0OiAyNDBweDtcbn1cblxuYXBwLWNhbXBhaWduLWNhcmQge1xuICAgIFxuICAgIHdpZHRoOiAyNSU7XG4gICAgbWFyZ2luLWxlZnQ6IDUwcHg7XG4gICAgXG4gICAgXG59XG4uY2FyZCB7XG4gICAgbWFyZ2luLWxlZnQ6IDE4JTtcbn1cblxuLnNlYXJjaCB7XG4gICAgbWFyZ2luLWxlZnQ6IDI0MHB4O1xuICAgIG1hcmdpbi1ib3R0b206IDUwcHg7XG59XG5cbkBtZWRpYSBvbmx5IHNjcmVlbiBhbmQgKG1heC13aWR0aDogNjAwcHgpIHtcbiAgICAuY2FyZCB7XG4gICAgICAgIG1hcmdpbi1sZWZ0OiAxMCU7XG4gICAgfVxuXG4gICAgYXBwLWNhbXBhaWduLWNhcmQge1xuICAgICAgICB3aWR0aDogNzUlO1xuICAgIH1cbiAgICBcbiAgICAuc2VhcmNoIHtcbiAgICAgICAgbWFyZ2luLWxlZnQ6IDYwcHg7XG4gICAgICAgIG1hcmdpbi1ib3R0b206IDUwcHg7XG4gICAgfVxuXG4gICAgLmhlYWRlciB7XG4gICAgICAgIG1hcmdpbi1sZWZ0OiA1MHB4O1xuICAgIH1cbn1cbiJdfQ== */"
+module.exports = "\napp-campaign-card {\n    \n    width: 25%;\n    margin-bottom: 20px;\n    \n    \n}\n\n.paginator ::ng-deep .ngx-pagination .current {\n    background: #344955;\n    color: white;\n    font-size: 1.5em;\n    border-radius: 10px;\n    }\n\n@media only screen and (max-width: 600px) {\n   \n    app-campaign-card {\n        width: 75%;\n    }\n    \n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY2FtcGFpZ25zL2NhbXBhaWducy5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFDQTs7SUFFSSxVQUFVO0lBQ1YsbUJBQW1COzs7QUFHdkI7O0FBRUE7SUFDSSxtQkFBbUI7SUFDbkIsWUFBWTtJQUNaLGdCQUFnQjtJQUNoQixtQkFBbUI7SUFDbkI7O0FBRUo7O0lBRUk7UUFDSSxVQUFVO0lBQ2Q7O0FBRUoiLCJmaWxlIjoic3JjL2FwcC9jYW1wYWlnbnMvY2FtcGFpZ25zLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyJcbmFwcC1jYW1wYWlnbi1jYXJkIHtcbiAgICBcbiAgICB3aWR0aDogMjUlO1xuICAgIG1hcmdpbi1ib3R0b206IDIwcHg7XG4gICAgXG4gICAgXG59XG5cbi5wYWdpbmF0b3IgOjpuZy1kZWVwIC5uZ3gtcGFnaW5hdGlvbiAuY3VycmVudCB7XG4gICAgYmFja2dyb3VuZDogIzM0NDk1NTtcbiAgICBjb2xvcjogd2hpdGU7XG4gICAgZm9udC1zaXplOiAxLjVlbTtcbiAgICBib3JkZXItcmFkaXVzOiAxMHB4O1xuICAgIH1cblxuQG1lZGlhIG9ubHkgc2NyZWVuIGFuZCAobWF4LXdpZHRoOiA2MDBweCkge1xuICAgXG4gICAgYXBwLWNhbXBhaWduLWNhcmQge1xuICAgICAgICB3aWR0aDogNzUlO1xuICAgIH1cbiAgICBcbn1cbiJdfQ== */"
 
 /***/ }),
 
@@ -394,15 +418,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _service_campaigns_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./service/campaigns.service */ "./src/app/campaigns/service/campaigns.service.ts");
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm2015/material.js");
 /* harmony import */ var _add_campaign_add_campaign_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./add-campaign/add-campaign.component */ "./src/app/campaigns/add-campaign/add-campaign.component.ts");
+/* harmony import */ var _shared_notification_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../shared/notification.service */ "./src/app/shared/notification.service.ts");
+
 
 
 
 
 
 let CampaignsComponent = class CampaignsComponent {
-    constructor(campaignservice, matDialog) {
+    constructor(campaignservice, matDialog, notificationService) {
         this.campaignservice = campaignservice;
         this.matDialog = matDialog;
+        this.notificationService = notificationService;
         this.p = 1;
         this.dataSource = new _angular_material__WEBPACK_IMPORTED_MODULE_3__["MatTableDataSource"]();
     }
@@ -422,7 +449,7 @@ let CampaignsComponent = class CampaignsComponent {
             if (result !== undefined) {
                 this.campaignservice.addCampaign(result)
                     .subscribe(response => {
-                    // this.notificationService.success(' Campaign Added successfully');
+                    this.notificationService.success(' Campaign Added successfully');
                     this.getCampaignsInfo();
                 });
             }
@@ -436,7 +463,8 @@ let CampaignsComponent = class CampaignsComponent {
 };
 CampaignsComponent.ctorParameters = () => [
     { type: _service_campaigns_service__WEBPACK_IMPORTED_MODULE_2__["CampaignsService"] },
-    { type: _angular_material__WEBPACK_IMPORTED_MODULE_3__["MatDialog"] }
+    { type: _angular_material__WEBPACK_IMPORTED_MODULE_3__["MatDialog"] },
+    { type: _shared_notification_service__WEBPACK_IMPORTED_MODULE_5__["NotificationService"] }
 ];
 tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])(_angular_material__WEBPACK_IMPORTED_MODULE_3__["MatPaginator"], { static: true })
@@ -478,6 +506,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _add_campaign_add_campaign_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./add-campaign/add-campaign.component */ "./src/app/campaigns/add-campaign/add-campaign.component.ts");
 /* harmony import */ var _edit_campaign_edit_campaign_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./edit-campaign/edit-campaign.component */ "./src/app/campaigns/edit-campaign/edit-campaign.component.ts");
 /* harmony import */ var _campaigns_details_campaigns_details_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./campaigns-details/campaigns-details.component */ "./src/app/campaigns/campaigns-details/campaigns-details.component.ts");
+/* harmony import */ var ngx_avatar__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ngx-avatar */ "./node_modules/ngx-avatar/fesm2015/ngx-avatar.js");
+
 
 
 
@@ -518,6 +548,8 @@ CampaignsModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _angular_forms__WEBPACK_IMPORTED_MODULE_11__["ReactiveFormsModule"],
             _angular_material__WEBPACK_IMPORTED_MODULE_7__["MatToolbarModule"],
             _angular_material__WEBPACK_IMPORTED_MODULE_7__["MatDatepickerModule"],
+            _angular_material__WEBPACK_IMPORTED_MODULE_7__["MatChipsModule"],
+            ngx_avatar__WEBPACK_IMPORTED_MODULE_15__["AvatarModule"]
         ],
         entryComponents: [_add_campaign_add_campaign_component__WEBPACK_IMPORTED_MODULE_12__["AddCampaignComponent"], _edit_campaign_edit_campaign_component__WEBPACK_IMPORTED_MODULE_13__["EditCampaignComponent"]],
     })
@@ -570,6 +602,8 @@ let EditCampaignComponent = class EditCampaignComponent {
         this.campaignForm = this.fb.group({
             promocode: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].pattern('^[A-Z0-9]*$')]]
         });
+        this.pc = data.promocode;
+        console.log(this.pc, 'promocode');
     }
     ngOnInit() {
     }
@@ -624,7 +658,7 @@ __webpack_require__.r(__webpack_exports__);
 let CampaignsService = class CampaignsService {
     constructor(httpClient) {
         this.httpClient = httpClient;
-        this.baseUrl = src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].baseUrl + src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].campaignBaseApi + src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].campaignBaseApi;
+        this.baseUrl = src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].baseUrl + src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].campaignService + src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].campaignBaseApi;
     }
     getCampaigns() {
         return this.httpClient.get(this.baseUrl);
@@ -636,7 +670,7 @@ let CampaignsService = class CampaignsService {
         return this.httpClient.post(this.baseUrl + '/addcampaign', campaign);
     }
     updateCampaignById(id, campaign) {
-        console.log(JSON.stringify(campaign), 'campaign service');
+        console.log(campaign, 'campaign service');
         return this.httpClient.patch(this.baseUrl + '/' + id, campaign);
     }
     deleteCampaign(id) {

@@ -15,4 +15,6 @@ public interface CampaignRepository extends MongoRepository<Campaign,Object> {
     List<Campaign> findByCampaignStatus(CampaignStatus campaignStatus);
 
     List<Campaign> findByName(String name);
+
+    List<Campaign> findByPromocode(String promocode);
 }

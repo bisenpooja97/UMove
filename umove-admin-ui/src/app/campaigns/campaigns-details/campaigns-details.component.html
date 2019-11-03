@@ -1,5 +1,8 @@
 <div fxLayout.sm="column" fxLayout.gt-sm="row" fxLayoutGap="10%">
   <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap.lt-md="0px">
+      <i class="material-icons back-btn" (click)="back()">
+          keyboard_backspace
+  </i>
     <mat-form-field appearance="outline" fxFlex class="status">
       <mat-label>Campaign Status</mat-label>
       <mat-select [(ngModel)]="Status" (ngModelChange)="onChange($event)">
@@ -10,7 +13,9 @@
     </mat-form-field>
   </div>
 </div>
-<div fxLayout="column">
+            
+ 
+<div fxLayout="column" class="space">
     <mat-card class="campaign" fxFlex.sm="0 1 calc(50%-10px)" fxFlex.md="0 1 calc(33%-10px)" fxLayout="column"
       fxLayoutGap="20px">
       <button mat-button class="icon" (click)="edit()">
@@ -24,22 +29,22 @@
 
         <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="30px" fxLayoutGap.lt-md="0px" class="col">
           <mat-card-title fxLayoutAlign="start">Start Date: {{campaign?.startDate|date:"dd LLLL yyyy" }}</mat-card-title>
-          <mat-card-title fxLayoutAlign="start">Expiry date: {{campaign?.expiryDate|date:"dd LLLL yyyy"}}</mat-card-title>
+           <div *ngIf="campaignStatus==='ENDED'; else elseBlock">End date: {{campaign?.endDate|date:"dd LLLL yyyy"}}</div>
+<ng-template #elseBlock></ng-template>
+<mat-card-title fxLayoutAlign="start">Expiry date: {{campaign?.expiryDate|date:"dd LLLL yyyy"}}</mat-card-title>
+      
+          <mat-card-title fxLayoutAlign="start">End date: {{campaign?.endDate|date:"dd LLLL yyyy"}}</mat-card-title>
           <mat-card-title fxLayoutAlign="start">Promo Code: {{campaign?.promocode}}</mat-card-title>
           <mat-card-title fxLayoutAlign="start">Discount Percent: {{campaign?.discountPercent}}</mat-card-title>
           <mat-card-title fxLayoutAlign="start">MaximumLimit: {{campaign?.maximumLimit}} </mat-card-title>
           <mat-card-title fxLayoutAlign="start">Maximum Discount Amount: {{campaign?.maxDiscountAmount}} </mat-card-title>
-          
-           <!-- <div class="campaignestartend">
-            <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutAlign="center" fxLayoutGap="10px">
-            <button mat-raised-button color="primary" (click)="start()" class="start">
-                Start
-            </button>
-            <button mat-raised-button color="primary" (click)="end()" class="end">
-                    End
-                </button>
-           </div>
-        </div>     -->
+          <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutAlign="center" fxLayoutGap="10px">
+              <button mat-raised-button color="primary" (click)="start()" class="start">Start
+              </button>
+              <button mat-raised-button color="primary" (click)="end()" class="reject">End
+              </button>
+          </div>
+        
         </div>
       </div>
     </mat-card>

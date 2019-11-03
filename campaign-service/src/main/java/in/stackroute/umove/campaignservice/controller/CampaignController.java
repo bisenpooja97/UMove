@@ -76,6 +76,7 @@ public class CampaignController
     public ResponseEntity<Map> addCampaign(@RequestBody Campaign campaign)
     {
         Campaign addCampaign = campaignService.addCampaign(campaign);
+System.out.println("a new campaign is getting added");
         Map<String , Object>map = new TreeMap<>();
         map.put("data", addCampaign);
         map.put("message","New campaign created");
@@ -109,6 +110,17 @@ public class CampaignController
         map.put("message","Campaign updated");
         return new ResponseEntity<>(map, HttpStatus.OK);
     }
+
+    @PatchMapping(path="/validateCampaigns/{id}")
+        public ResponseEntity validateCampaign(@PathVariable("id") String id){
+        Boolean validateCampaign = campaignService.validateCampaign(id);
+        Map<String, Object> map = new TreeMap<>();
+        map.put("data",validateCampaign);
+        map.put("status", HttpStatus.OK);
+        map.put("message","Campaign validated");
+        return new ResponseEntity<>(map, HttpStatus.OK);
+    }
+
     /**
      *
      * API endpoint for deleting campaign

@@ -20,4 +20,6 @@ public interface CampaignService
     List<Campaign> findByName(String name);
 
     List<Campaign> findByCampaignStatus(CampaignStatus campaignStatus);
+
+    Boolean validateCampaign(String promocode);
 }

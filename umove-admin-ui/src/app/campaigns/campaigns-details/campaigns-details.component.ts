@@ -4,6 +4,8 @@ import { CampaignsService } from '../service/campaigns.service';
 import { Campaign } from '../model/campaign';
 import { EditCampaignComponent } from '../edit-campaign/edit-campaign.component';
 import { MatDialogConfig, MatDialog } from '@angular/material';
+import { NotificationService } from 'src/app/shared/notification.service';
+import { Location } from '@angular/common';
 
 export interface Status {
   value: string;
@@ -40,11 +42,15 @@ export class CampaignsDetailsComponent implements OnInit {
     { value: 'IN_PROGRESS', viewValue: 'IN_PROGRESS' },
     { value: 'SUCCESS', viewValue: 'SUCCESS' },
     { value: 'FAILURE', viewValue: 'FAILURE' },
+    { value:'CREATED',viewValue: 'CREATED'},
+    { value:'ENDED',viewValue: 'ENDED'},
+    {value: 'STARTED',viewValue: 'STARTED'}
   ];
   
   constructor(private router: Router, private campaignService: CampaignsService,
               private activatedRoute: ActivatedRoute, private route: ActivatedRoute,
-              private matDialog: MatDialog) { }
+              private matDialog: MatDialog,private notificationService: NotificationService,
+              private location: Location) { }
 
 
   ngOnInit() {
@@ -71,41 +77,59 @@ export class CampaignsDetailsComponent implements OnInit {
     if (result !== undefined) {
     this.campaignService.updateCampaignById(this.id,this.campaign).subscribe(
       response => { 
-
-       },
-    );
+        this.notificationService.success('Campaign updated successfully!!'),
+      
+      error => {
+        this.notificationService.warn('Can\'t update ');
+      }
+      });
   }
 });   
   }
-
-  // start()
-  // {
-  //    console.log(Object.values(this.campaign));
-  //   Object.values(this.campaign)[13] = Object(this.campaign);
-  //   console.log(Object.values(this.campaign)[13], this.campaign);
-  //   this.campaignService.updateCampaignById(this.id,this.campaign).subscribe(
-  //     response => {
-  //                  console.log('Call Success');
-  //                  })
-  // }
 
   onChange(newValue) {
     console.log('Campaign ', this.campaign);
      console.log(Object.values(this.campaign),Object.values(this.campaign));
      this.campaign.campaignStatus = newValue;
-     console.log(this.campaign,'campaign ka status change hona chahiye');
-    // console.log(this.campaign.campaignStatus, this.campaign);
-    console.log('Id ',this.id);
+    
     this.campaignService.updateCampaignById(this.id, this.campaign).subscribe(
-      response => {
-                  console.log('response ',response);
-                   console.log('Call Success');
-                   console.log('Campaign ', this.campaign);
-                    // this.notificationService.success('Campaign updated successfully!!');
-       //},
-      // error => this.notificationService.warn(error),
-    // );
-});
+      response => {    
+        this.notificationService.success('Campaign status updated successfully!!');
+       },
+      error => this.notificationService.warn(error),
+     );
+};
+
+start(){
+this.campaign.campaignStatus='STARTED';
+console.log(this.campaign,'campaign started');
+this.campaignService.updateCampaignById(this.id, this.campaign).subscribe(
+  response => {
+                console.log(this.campaign,'campaign started -->');
+                 this.notificationService.success('Campaign started successfully!!');
+   },
+  error => this.notificationService.warn(error),
+ );
+ 
 }
 
+end(){
+
+  this.campaign.campaignStatus='ENDED';
+  this.campaign.endDate=new Date();
+  console.log(this.campaign.endDate);
+console.log(this.campaign,'campaign ended');
+this.campaignService.updateCampaignById(this.id, this.campaign).subscribe(
+  response => {
+                console.log(this.campaign,'campaign ended -->');
+                 this.notificationService.success('Campaign ended successfully!!');
+   },
+  error => this.notificationService.warn(error),
+ );
 }
+
+back() {
+  this.location.back();
+}
+}
+

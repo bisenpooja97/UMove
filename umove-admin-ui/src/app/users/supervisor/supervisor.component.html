@@ -4,16 +4,19 @@
 <div *ngIf="displayCount === 0; else data" class="no-data" fxLayoutAlign="center center">
     <img src="assets/no-record-found.jpeg">
 </div>
+<div fxLayout="column" class="space">
 <ng-template #data>
 <div fxLayout="row" fxLayoutGap="20px" class="search" fxLayout.gt-xs="row">
     <mat-form-field fxFlex=20%>
         <input matInput [(ngModel)]="term" placeholder="Search">
     </mat-form-field>
 </div>
-<div fxLayout="row wrap">
+
+<div fxLayout="column wrap">
+<div fxLayout="row wrap" class="card" fxLayoutGap="50px">
 <div *ngFor="let data of supervisors | paginate: { itemsPerPage: 12, currentPage: p}| filter:term"
-fxLayout.xs="column" fxLayout.lg="row wrap" fxLayoutGap="50px" class="card" fxLayoutAlign.sm="center center">
-<mat-card class="my-card card">
+fxLayout.xs="column" fxLayout.lg="row wrap" fxLayoutGap="50px" fxLayoutAlign.sm="center center">
+<mat-card class="my-card my-card2">
  <mat-card-content fxLayoutAlign="space-between" >
     <ngx-avatar name="{{name}}"></ngx-avatar>
     <mat-chip-list aria-label="Fish selection">
@@ -25,7 +28,8 @@ fxLayout.xs="column" fxLayout.lg="row wrap" fxLayoutGap="50px" class="card" fxLa
   <mat-card-content>Email:{{data.email}}</mat-card-content>
   </mat-card>
 </div>
- <pagination-controls fxLayoutAlign="center center" (pageChange)="p = $event"></pagination-controls>
+</div>
+ <pagination-controls fxLayoutAlign="center center" (pageChange)="p = $event" class="paginator font-style"></pagination-controls>
 </div>
 </ng-template>
 
@@ -35,4 +39,5 @@ fxLayout.xs="column" fxLayout.lg="row wrap" fxLayoutGap="50px" class="card" fxLa
             add
         </i>
     </button>
+</div>
 </div>

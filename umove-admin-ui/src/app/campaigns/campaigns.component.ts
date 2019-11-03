@@ -3,6 +3,7 @@ import { CampaignsService } from './service/campaigns.service';
 import { MatPaginator, MatDialog, MatTableDataSource, MatDialogConfig } from '@angular/material';
 import { AddCampaignComponent } from './add-campaign/add-campaign.component';
 import { Campaign } from './model/campaign';
+import { NotificationService } from '../shared/notification.service';
 
 
 
@@ -21,7 +22,8 @@ export class CampaignsComponent implements OnInit {
   dataSource = new MatTableDataSource();
 
 
-  constructor(private campaignservice: CampaignsService, private matDialog: MatDialog) { }
+  constructor(private campaignservice: CampaignsService, private matDialog: MatDialog,
+    private notificationService: NotificationService) { }
 
   ngOnInit() {
     this.campaignservice.getCampaigns().subscribe(res => { this.campaigns = res.data;
@@ -42,7 +44,7 @@ add() {
       this.campaignservice.addCampaign(result)
           .subscribe(
             response => {
-              // this.notificationService.success(' Campaign Added successfully');
+               this.notificationService.success(' Campaign Added successfully');
               this.getCampaignsInfo();
             }
             
