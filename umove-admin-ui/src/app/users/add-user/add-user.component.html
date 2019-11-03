@@ -11,22 +11,22 @@
     <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px" class="col">
 
       <mat-form-field appearance="outline" fxFlex>
-        <mat-label>Supervisor Name</mat-label>
-        <input matInput #input placeholder="Supervisor Name" formControlName="name" required>
+        <mat-label class="font-style content">Supervisor Name</mat-label>
+        <input matInput #input placeholder="Supervisor Name" formControlName="name" class="font-style content" required>
       </mat-form-field>
-     
+
     </div>
     <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px" class="col">
       <mat-form-field appearance="outline" fxFlex>
-        <mat-label>Email-Id</mat-label>
-        <input matInput #input placeholder="Email-Id" formControlName="email" required>
+        <mat-label class="font-style content">Email-Id</mat-label>
+        <input matInput #input placeholder="Email-Id" formControlName="email" class="font-style content" required>
       </mat-form-field>
       </div>
   </div>
   <mat-form-field appearance="outline" style="padding-right: 35%;">
 
-    <mat-label>Mobile Number</mat-label>
-    <input maxlength="10" matInput #input placeholder="Mobile Number" formControlName="mobileNumber" required>
+    <mat-label class="font-style content">Mobile Number</mat-label>
+    <input maxlength="10" matInput #input placeholder="Mobile Number" formControlName="mobileNumber" class="font-style content" required>
   </mat-form-field>
   <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
     <button mat-raised-button class="btn" [disabled]='!userForm.valid' color="primary">

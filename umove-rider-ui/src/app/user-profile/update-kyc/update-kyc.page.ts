@@ -6,6 +6,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {ToastController} from '@ionic/angular';
 import {UserProfile} from '../../model/user-profile';
 import {Storage} from '@ionic/storage';
+import {FCM} from '@ionic-native/fcm/ngx';
 
 @Component({
   selector: 'app-update-kyc',
@@ -14,12 +15,13 @@ import {Storage} from '@ionic/storage';
 })
 // tslint:disable-next-line:component-class-suffix
 export class UpdateKycPage implements OnInit {
-  public localUser: UserProfile ;
+  public localUser: UserProfile;
   key = 'details';
-  disableButton: boolean;
+  private disableButton: boolean;
+  private userID: string;
 
   // tslint:disable-next-line:max-line-length
-  constructor(private http: HttpClient, private userDataService: UserProfileServiceService , private router: Router , private route: ActivatedRoute, public toastController: ToastController, private storage: Storage) {
+  constructor(private http: HttpClient, private userDataService: UserProfileServiceService, private router: Router, private route: ActivatedRoute, public toastController: ToastController, private storage: Storage, private fcm: FCM) {
     this.localUser = new UserProfile();
     // console.log(this.router.getCurrentNavigation().extras);
     // this.route.queryParams.subscribe(params => {
@@ -28,17 +30,19 @@ export class UpdateKycPage implements OnInit {
     // });
 
   }
+
   selectedFile: File;
   todo: FormGroup;
   public campaigns: any = [];
+
   onFileChanged(event) {
-      // const reader = new FileReader();
-      // reader.onload = (e: any) => {
-      //     const localUrl = e.target.result;
-      // };
-      // console.log(reader.readAsDataURL(event.target.files[0]));
-      //
-      // console.log('event for file upload', event);
+    // const reader = new FileReader();
+    // reader.onload = (e: any) => {
+    //     const localUrl = e.target.result;
+    // };
+    // console.log(reader.readAsDataURL(event.target.files[0]));
+    //
+    // console.log('event for file upload', event);
     this.disableButton = false;
     // const reader = new FileReader();
     // reader.onload = (e: any) => {
@@ -86,6 +90,37 @@ export class UpdateKycPage implements OnInit {
       dlicenceNumber: new FormControl(''),
       expiryDate: new FormControl(''),
     });
-  }
 
+    this.storage.get(this.key).then(value => {
+      console.log('Before:', value);
+      this.localUser = value;
+      console.log(this.localUser.id);
+      // console.log(this.localUser.document.documentStatus);
+      console.log('subscribed topic');
+      this.fcm.subscribeToTopic(this.localUser.id);
+
+      this.fcm.getToken().then(token => {
+        console.log('token:', token);
+        // backend.registerToken(token);
+      });
+
+      this.fcm.onNotification().subscribe(data => {
+        console.log('data from notification', data.documentStatus);
+        // console.log('not working i guess ', this.localUser.document.documentStatus);
+        this.localUser.document.documentStatus = data.documentStatus;
+        console.log(this.localUser.document.documentStatus);
+        this.storage.set(this.key, this.localUser);
+        // if(data.wasTapped){
+        //     console.log("Received in background");
+        // } else {
+        //     console.log("Received in foreground");
+        // };
+      });
+
+      this.fcm.onTokenRefresh().subscribe(token => {
+        console.log('refreshed token:', token);
+        // backend.registerToken(token);
+      });
+    });
+  }
 }
