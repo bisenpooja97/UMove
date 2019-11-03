@@ -2,6 +2,7 @@ package in.stackroute.umove.userservice.controller;
 
 import in.stackroute.umove.userservice.config.JwtConfig;
 import in.stackroute.umove.userservice.config.JwtTokenProvider;
+import in.stackroute.umove.userservice.model.Role;
 import in.stackroute.umove.userservice.model.UserData;
 import in.stackroute.umove.userservice.repository.UserRepository;
 import in.stackroute.umove.userservice.service.UserService;
@@ -62,20 +63,42 @@ public class UserRegistrationController {
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody UserData data) {
         try {
-            UserData addedUser = userService.addUser(data);
-            String username = data.getMobileNumber();
-            System.out.println("repo" + this.userRepository + " roles" + this.userRepository.findByMobileNumber(username).getRoles());
-            System.out.println(username);
-            System.out.println(username + " | " + this.userRepository.findByMobileNumber(username).getRoles());
-            authManager.authenticate(new UsernamePasswordAuthenticationToken(username, "123"));
-            String token = jwtTokenProvider.createToken(username, this.userRepository.findByMobileNumber(username).getRoles());
-            System.out.println("my token" + token);
-            System.out.println(this.userRepository.findByMobileNumber(username).getRoles());
             Map<Object, Object> model = new HashMap<>();
-            model.put("username", username);
-            model.put("token", token);
-            model.put("data",addedUser);
-            model.put("status", HttpStatus.OK);
+
+            Iterator<Role> iterator = data.getRoles().iterator();
+            if(iterator.hasNext() && iterator.next().equals(Role.ROLE_SUPERVISOR)) {
+                if(userService.isVerifiedSupervisor(data)) {
+                    authManager.authenticate(new UsernamePasswordAuthenticationToken(data.getMobileNumber(), "123"));
+                    String token = jwtTokenProvider.createToken(data.getMobileNumber(),
+                            this.userRepository.findByMobileNumber(data.getMobileNumber()).getRoles());
+
+                    model.put("username", data.getMobileNumber());
+                    model.put("token", token);
+                    model.put("data", userRepository.findByMobileNumber(data.getMobileNumber()));
+                    model.put("status", HttpStatus.OK);
+                }
+                else {
+                    model.put("username", data.getMobileNumber());
+                    model.put("status", "Failed");
+                }
+            }
+            else {
+
+                UserData addedUser = userService.addUser(data);
+                String username = data.getMobileNumber();
+                System.out.println("repo" + this.userRepository + " roles" + this.userRepository.findByMobileNumber(username).getRoles());
+                System.out.println(username);
+                System.out.println(username + " | " + this.userRepository.findByMobileNumber(username).getRoles());
+                authManager.authenticate(new UsernamePasswordAuthenticationToken(username, "123"));
+                String token = jwtTokenProvider.createToken(username, this.userRepository.findByMobileNumber(username).getRoles());
+                System.out.println("my token" + token);
+                System.out.println(this.userRepository.findByMobileNumber(username).getRoles());
+
+                model.put("username", username);
+                model.put("token", token);
+                model.put("data", addedUser);
+                model.put("status", HttpStatus.OK);
+            }
             return ok(model);
         } catch (AuthenticationException e) {
             throw new BadCredentialsException("Invalid email/password supplied");
