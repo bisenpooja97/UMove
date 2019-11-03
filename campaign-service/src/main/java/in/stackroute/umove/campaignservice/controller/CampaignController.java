@@ -76,6 +76,7 @@ public class CampaignController
     public ResponseEntity<Map> addCampaign(@RequestBody Campaign campaign)
     {
         Campaign addCampaign = campaignService.addCampaign(campaign);
+System.out.println("a new campaign is getting added");
         Map<String , Object>map = new TreeMap<>();
         map.put("data", addCampaign);
         map.put("message","New campaign created");

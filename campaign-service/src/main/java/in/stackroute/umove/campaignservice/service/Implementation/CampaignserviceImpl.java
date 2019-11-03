@@ -34,6 +34,9 @@ public class CampaignserviceImpl implements CampaignService
 
             campaign.setMaximumLimit(campaign.getMaxDiscountAmount()*campaign.getTargetCustomers());
             campaign.setCampaignStatus(CampaignStatus.CREATED);
+//System.out.println("m service m hu");
+
+            campaignRepository.save(campaign);
             campaign.setEndDate(campaign.getExpiryDate());
             System.out.println(" get expiry date "+campaign.getExpiryDate());
             return campaignRepository.save(campaign);
