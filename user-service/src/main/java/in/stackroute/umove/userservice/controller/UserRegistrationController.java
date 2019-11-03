@@ -66,8 +66,11 @@ public class UserRegistrationController {
             Map<Object, Object> model = new HashMap<>();
 
             Iterator<Role> iterator = data.getRoles().iterator();
+            System.out.println("login k andr user k role" + data.getRoles() + " role jo hona tha " + Role.ROLE_SUPERVISOR);
             if(iterator.hasNext() && iterator.next().equals(Role.ROLE_SUPERVISOR)) {
+                System.out.println("supervisor h");
                 if(userService.isVerifiedSupervisor(data)) {
+                    System.out.println("superivisor verified bhi h ");
                     authManager.authenticate(new UsernamePasswordAuthenticationToken(data.getMobileNumber(), "123"));
                     String token = jwtTokenProvider.createToken(data.getMobileNumber(),
                             this.userRepository.findByMobileNumber(data.getMobileNumber()).getRoles());
@@ -78,12 +81,13 @@ public class UserRegistrationController {
                     model.put("status", HttpStatus.OK);
                 }
                 else {
+                    System.out.println("suerpvisoir hi ni mil pa rha");
                     model.put("username", data.getMobileNumber());
                     model.put("status", "Failed");
                 }
             }
             else {
-
+                System.out.println("ye to user nikla");
                 UserData addedUser = userService.addUser(data);
                 String username = data.getMobileNumber();
                 System.out.println("repo" + this.userRepository + " roles" + this.userRepository.findByMobileNumber(username).getRoles());
