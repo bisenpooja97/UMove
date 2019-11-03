@@ -256,6 +256,22 @@ public class RideController {
         return new ResponseEntity<>(map, HttpStatus.OK);
     }
 
+    @GetMapping("rides/vehicleTypeVsBookings")
+    public ResponseEntity<Map> getNoOfBookingsVsVehicleType()
+    {
+        Map<String, Object> map = new TreeMap<>();
+        map.put("data", rideService.getNoOfBookingsVsVehicleType());
+        map.put("status", HttpStatus.OK);
+        return new ResponseEntity<>(map, HttpStatus.OK);
+    }
+    @GetMapping("rides/ZoneTypeVsBookings")
+    public ResponseEntity<Map> getNoOfBookingsVsZone()
+    {
+        Map<String, Object> map = new TreeMap<>();
+        map.put("data", rideService.getNoOfBookingsVsZone());
+        map.put("status", HttpStatus.OK);
+        return new ResponseEntity<>(map, HttpStatus.OK);
+    }
 
 
 }

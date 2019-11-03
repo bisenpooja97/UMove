@@ -1,15 +1,62 @@
-<div fxlayoutAlign="center center" fxLayoutGap="50px">
-  <div fxlayoutAlign="center center">
-      <button mat-raised-button (click)="barChart()">Bar Chart</button>
-</div>
-<div>
-  <button mat-raised-button (click)="lineChart()">Line Chart</button>
-</div>
+<div class="container" fxFlex="67%">
+  <ul class="nav nav-tabs">
+  <li>
+      <button mat-raised-button  class="button-style-top" (click)="barChart()">No of Booking Per Hour(Bar Chart)</button>
+  </li>
+  <li>
+  <button mat-raised-button  class="button-style"(click)="lineChart()">No of Booking Per Hour(Line Chart)</button>
+  </li>
+  <li>
+    <button mat-raised-button class="button-style" (click)="bookingVehicleType()">Booking-Vehicle Type</button>
+  </li>
+  <li>
+    <button mat-raised-button class="button-style" class="button-style-last" (click)="bookingZone()">Booking-Zone</button>
+  </li>
+  </ul>
+  <div>
     <router-outlet></router-outlet>
   </div>
-  <div style="padding-bottom: 41%;">
+</div>
 
-  </div>
+
+
+
+
+<!--///////////////////////////////////////////////////////////////////////-->
+
+<!--<ng-container matColumnDef="actions">-->
+<!--  <mat-header-cell *matHeaderCellDef> Ενέργειες</mat-header-cell>-->
+<!--  <mat-cell *matCellDef="let row" style="white-space: nowrap">-->
+
+<!--    <button mat-icon-button (click)="barChart()">-->
+<!--          <span matTooltip="Λεπτομέρειες!">-->
+<!--          <mat-icon style="color: grey">No of Booking Per Hour(Bar Chart)</mat-icon>-->
+<!--          </span>-->
+<!--    </button>-->
+
+<!--    <button mat-icon-button (click)="barChart()">-->
+<!--          <span matTooltip="Λεπτομέρειες!">-->
+<!--          <mat-icon style="color: grey">No of Booking Per Hour(Bar Chart)</mat-icon>-->
+<!--          </span>-->
+<!--    </button>-->
+<!--  </mat-cell>-->
+<!--  <mat-cell *matCellDef="let row" style="white-space: nowrap">-->
+
+
+<!--    <button mat-icon-button (click)="barChart()">-->
+<!--          <span matTooltip="Λεπτομέρειες!">-->
+<!--          <mat-icon style="color: grey">No of Booking Per Hour(Bar Chart)</mat-icon>-->
+<!--          </span>-->
+<!--    </button>-->
+
+<!--    <button mat-icon-button (click)="barChart()">-->
+<!--          <span matTooltip="Λεπτομέρειες!">-->
+<!--          <mat-icon style="color: grey">No of Booking Per Hour(Bar Chart)</mat-icon>-->
+<!--          </span>-->
+<!--    </button>-->
+<!--  </mat-cell>-->
+<!--</ng-container>-->
+
 <!--<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">-->
 <!--<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
 

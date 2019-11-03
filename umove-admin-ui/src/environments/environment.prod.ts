@@ -3,6 +3,7 @@ export const environment = {
   baseUrl: 'https://umove-dev.stackroute.io/',
   userService: 'userservice',
   userBaseApi: '/api/v1/users',
+  bookingBaseApi: '/api/v1/rides',
   zoneService: 'zoneservice',
   zoneBaseApi: '/api/v1/zones',
   campaignService: 'campaignservice',
