@@ -25,7 +25,6 @@ export class ViewProfilePage implements OnInit {
               public toastController: ToastController, private storage: Storage, private menuCtrl: MenuController) {
       this.menuCtrl.enable(true);
       this.menuCtrl.close();
-      this.menuCtrl.enable(true);
       this.localUser = new UserProfile();
   }
   goAnOtherPage() {
@@ -54,6 +53,9 @@ export class ViewProfilePage implements OnInit {
                  console.log('filtered data: ', data);
                  console.log('Response1 : ', data.data);
                  this.user = JSON.parse(data.data).data;
+                 this.storage.ready().then(()=> {
+                     this.storage.set(this.key, this.user);
+                 })
              });
      });
   }

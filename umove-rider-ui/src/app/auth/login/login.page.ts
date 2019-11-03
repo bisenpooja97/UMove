@@ -28,6 +28,16 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit() {
+    if (!firebase.apps.length) {
+      firebase.initializeApp(environment.firebase);
+    }
+    this.windowRef = this.win.windowRef;
+
+    this.windowRef.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
+      size: 'invisible'
+    });
+    // this.windowRef.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container');
+    this.windowRef.recaptchaVerifier.render()
   }
   sendLoginCode() {
     if (!(/^[9876][0-9]{9}$/.test(this.pnumber))) {
@@ -70,15 +80,17 @@ export class LoginPage implements OnInit {
         if (this.localUserData && this.localUserData.id != null) {
           this.router.navigateByUrl('/home');
         } else {
-          if (!firebase.apps.length) {
-            firebase.initializeApp(environment.firebase);
-          }
+          // if (!firebase.apps.length) {
+          //   firebase.initializeApp(environment.firebase);
+          // }
           // firebase.initializeApp(environment.firebase);
-          this.windowRef = this.win.windowRef;
-          this.windowRef.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
-            size: 'invisible'});
-          // this.windowRef.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container');
-          this.windowRef.recaptchaVerifier.render();
+          // this.windowRef = this.win.windowRef;
+          //
+          //   this.windowRef.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
+          //     size: 'invisible'
+          //   });
+          //   // this.windowRef.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container');
+          //   this.windowRef.recaptchaVerifier.render();
         }
       });
     });

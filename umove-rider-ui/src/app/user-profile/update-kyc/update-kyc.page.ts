@@ -110,13 +110,15 @@ export class UpdateKycPage implements OnInit {
         this.localUser.document.documentStatus = data.documentStatus;
         console.log(this.localUser.document.documentStatus);
         this.storage.set(this.key, this.localUser);
+        this.storage.get(this.key).then(value => {
+          console.log('After:', value);
+        });
         // if(data.wasTapped){
         //     console.log("Received in background");
         // } else {
         //     console.log("Received in foreground");
         // };
       });
-
       this.fcm.onTokenRefresh().subscribe(token => {
         console.log('refreshed token:', token);
         // backend.registerToken(token);
