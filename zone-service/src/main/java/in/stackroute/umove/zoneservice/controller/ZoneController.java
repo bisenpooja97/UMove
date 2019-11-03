@@ -111,6 +111,8 @@ public class ZoneController {
     @GetMapping("/zones/{supervisorId}")
     public ResponseEntity<Map> getVehiclesBySupervisorId(@PathVariable String supervisorId,@RequestParam(value = "page", required = false) Integer page){
         Zone zone = serviceZoneDummy.findZoneBySupervisorId(supervisorId);
+        System.out.println("zone: " + zone);
+        System.out.println("vehicle service: =>" + vehicleManagementService);
         List<Vehicle> vehicleList =vehicleManagementService.findByZone(zone.getId(),(page !=null) ? page : 0 );
         Map<String, Object> map = new TreeMap<>();
         map.put("data", vehicleList);
