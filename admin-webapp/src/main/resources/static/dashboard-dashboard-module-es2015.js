@@ -1600,7 +1600,7 @@ let DashboardComponent = class DashboardComponent {
         ];
         this.barChartLabels = this.barLabel;
         this.barChartColors = [
-            { backgroundColor: '#d1f4a7' }
+            { backgroundColor: '#ccd7f6' }
         ];
         // pie
         this.getPieData();
