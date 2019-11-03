@@ -26,7 +26,7 @@ export class BikeComponent implements OnInit {
   }
 
   // For selecting bike and changing page type on behalf of booking type
-  private selectingBike(type: {}) {
+  selectingBike(type: {}) {
     this.selectedType = type;
     // this.zoneService.selectedType = this.selectedType;
     // const booking = this.bookingService.currentBooking;

@@ -26,6 +26,7 @@ export class RideBookingDetailsPage implements OnInit {
   rightNow: Date;
   timerSeconds: number;
   timerSettings: MbscTimerOptions;
+  timer: number;
     key = 'details';
 
   constructor(private rideService: RideService, private router: Router, private route: ActivatedRoute,

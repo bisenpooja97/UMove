@@ -46,8 +46,10 @@ export class BookingsVehicleTypeComponent implements OnInit {
 
   ngOnInit() {
     this.barChartColors = [
-      { backgroundColor: ['#80d6ff'] }
+
+      { backgroundColor: '#ccd7f6' }
     ];
+
     this.barChartLabels = this.vehcleName;
     this.barChartType  = 'bar';
     this.barChartLegend = true;

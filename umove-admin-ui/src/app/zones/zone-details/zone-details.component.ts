@@ -122,8 +122,6 @@ getZoneDetails() {
     );
   }
   });
-
-
 }
 
 getColor(status) {

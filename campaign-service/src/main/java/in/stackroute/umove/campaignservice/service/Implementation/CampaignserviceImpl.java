@@ -34,7 +34,11 @@ public class CampaignserviceImpl implements CampaignService
 
             campaign.setMaximumLimit(campaign.getMaxDiscountAmount()*campaign.getTargetCustomers());
             campaign.setCampaignStatus(CampaignStatus.CREATED);
+//System.out.println("m service m hu");
 
+            campaignRepository.save(campaign);
+            campaign.setEndDate(campaign.getExpiryDate());
+            System.out.println(" get expiry date "+campaign.getExpiryDate());
             return campaignRepository.save(campaign);
     }
     /*
@@ -45,6 +49,7 @@ public class CampaignserviceImpl implements CampaignService
     public Campaign updateCampaign(String id, Campaign campaign)
     {
         Campaign updatedCampaign = campaignRepository.findById(id);
+
         if (updatedCampaign != null) {
             if (campaign.getName() != null) {
                 updatedCampaign.setName(campaign.getName());
@@ -119,7 +124,19 @@ public class CampaignserviceImpl implements CampaignService
     public List<Campaign> findByCampaignStatus(CampaignStatus campaignStatus) {
         List<Campaign> campaigns = campaignRepository.findByCampaignStatus(campaignStatus);
         return campaigns;
-
     }
 
+
+    @Override
+    public Boolean validateCampaign(String campaignId) {
+         Campaign campaign=campaignRepository.findById(campaignId);
+         if (campaign.getTotalCoupons()-campaign.getUsedCoupons()>0){
+             campaign.setUsedCoupons(campaign.getUsedCoupons()+1);
+             campaignRepository.save(campaign);
+             return true;
+         }
+         else {
+             return false;
+         }
+    }
 }
