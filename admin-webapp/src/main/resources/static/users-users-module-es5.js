@@ -134,6 +134,7 @@ var AddUserComponent = /** @class */ (function () {
     AddUserComponent.prototype.ngOnInit = function () { };
     AddUserComponent.prototype.onSubmit = function () {
         console.log(this.userForm.value);
+        this.userForm.value.mobileNumber = '+91' + this.userForm.value.mobileNumber;
         this.dialogRef.close(this.userForm.value);
     };
     AddUserComponent.ctorParameters = function () { return [
