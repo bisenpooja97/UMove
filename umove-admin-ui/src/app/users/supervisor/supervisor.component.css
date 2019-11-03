@@ -18,7 +18,7 @@
     .card {
         margin-left: 10%;
     }
-    
+
     .search {
         margin-left: 60px;
         margin-bottom: 50px;
@@ -40,7 +40,7 @@
 }
 
 .my-card2:hover {
-    
+
     box-shadow: 0 7px 28px rgba(0,0,0,0.15), 0 10px 10px rgba(0,0,0,0.22);
 }
 
@@ -58,3 +58,6 @@
     font-size: 1.5em;
     border-radius: 10px;
     }
+.content {
+  font-size: 1.2em;
+}
