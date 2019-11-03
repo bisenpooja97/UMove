@@ -65,11 +65,16 @@ public class UserImplService implements UserService {
 
     @Override
     public boolean isVerifiedSupervisor(UserData user) {
+        System.out.println("is verified me user ka data" + user);
         UserData savedUser = userRepository.findByMobileNumber(user.getMobileNumber());
+        System.out.println("saved user " + savedUser);
         if(savedUser != null) {
+            System.out.println("supervisior mila h is no se");
             Iterator<Role> iterator = savedUser.getRoles().iterator();
             if(iterator.hasNext()) {
+                System.out.println("supervisior role me kuch mila");
                 if (iterator.next().equals(Role.ROLE_SUPERVISOR)) {
+                    System.out.println("supervisior is h");
                     return true;
                 }
             }
