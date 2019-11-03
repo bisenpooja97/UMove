@@ -24,7 +24,7 @@
     "@ionic-native/android-permissions": "^5.16.0",
     "@ionic-native/barcode-scanner": "^5.15.0",
     "@ionic-native/core": "^5.0.0",
-    "@ionic-native/fcm": "^5.1.0",
+    "@ionic-native/fcm": "^5.16.0",
     "@ionic-native/geolocation": "^5.15.0",
     "@ionic-native/http": "^5.15.0",
     "@ionic-native/launch-navigator": "^5.15.0",
@@ -43,7 +43,8 @@
     "cordova-browser": "6.0.0",
     "cordova-plugin-advanced-http": "^2.2.0",
     "cordova-plugin-android-permissions": "^1.0.2",
-    "cordova-plugin-fcm": "^2.1.2",
+    "cordova-plugin-app-name": "^1.0.7",
+    "cordova-plugin-fcm-with-dependecy-updated": "^4.1.0",
     "cordova-plugin-file": "^6.0.2",
     "cordova-plugin-geolocation": "^4.0.2",
     "cordova-plugin-request-location-accuracy": "^2.3.0",
@@ -98,8 +99,7 @@
     "protractor": "~5.4.0",
     "ts-node": "~7.0.0",
     "tslint": "~5.15.0",
-    "typescript": "~3.4.3",
-    "cordova-plugin-fcm-with-dependecy-updated": "2.4.0"
+    "typescript": "~3.4.3"
   },
   "description": "An Ionic project",
   "cordova": {
@@ -123,8 +123,15 @@
       "cordova-plugin-geolocation": {},
       "cordova-plugin-android-permissions": {},
       "cordova-plugin-request-location-accuracy": {},
-      "cordova-plugin-fcm": {},
-      "cordova-plugin-fcm-with-dependecy-updated": {}
+      "cordova-plugin-app-name": {
+        "APP_NAME": "UMove"
+      },
+      "cordova-plugin-fcm-with-dependecy-updated": {
+        "FCM_CORE_VERSION": "16.0.9",
+        "FCM_VERSION": "18.0.0",
+        "GRADLE_TOOLS_VERSION": "3.5.0",
+        "GOOGLE_SERVICES_VERSION": "4.2.0"
+      }
     },
     "platforms": [
       "browser",

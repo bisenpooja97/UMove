@@ -29,9 +29,9 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {Environment} from '@angular/compiler-cli/src/ngtsc/typecheck/src/environment';
 import {UserPaymentMethodService} from './service/user-payment-method/user-payment-method.service';
 import {IonicStorageModule} from '@ionic/storage';
-import {CustomerErrorHandler} from './customer-error-handler';
+import {CustomerErrorHandler} from "./customer-error-handler";
 import {CampaignService} from './service/campaign-service/campaign.service';
-import { FCM } from '@ionic-native/fcm/ngx';
+import {FCM} from "@ionic-native/fcm/ngx";
 
 @NgModule({
   declarations: [AppComponent, BikeListPage, DropPage],
@@ -64,7 +64,7 @@ import { FCM } from '@ionic-native/fcm/ngx';
     SplashScreen,
     HttpClient,
     HTTP,
-    FCM,
+      FCM,
     UserProfileServiceService,
     UserPaymentMethodService,
       CampaignService,

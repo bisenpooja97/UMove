@@ -5,7 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import {User} from './model/user';
 import {Storage} from '@ionic/storage';
-import { FCM } from '@ionic-native/fcm/ngx';
+import {FCM} from "@ionic-native/fcm/ngx";
 
 @Component({
     selector: 'app-root',
@@ -58,55 +58,32 @@ export class AppComponent {
     }
 
     initializeApp() {
-        console.log("pls work");
-        // this.platform.ready().then(() => {
-        //     this.statusBar.styleDefault();
-        //     this.splashScreen.hide();
-            // Notifications
-    //         console.log("im inside initialize application");
-    //         this.fcm.subscribeToTopic('news');
-    //         this.fcm.getToken().then(token => {
-    //             console.log(token);
-    //         });
-    //         this.fcm.onNotification().subscribe(data => {
-    //             console.log(data,"aagaya");
-    //             if (data.wasTapped) {
-    //                 console.log('Received in background');
-    //             } else {
-    //         console.log('Received in foreground');
-    //     }
-    // });
-    //         this.fcm.onTokenRefresh().subscribe(token => {
-    //             console.log(token);
-    //         });
-    //     });
-
         this.platform.ready().then(() => {
-            this.statusBar.styleDefault();
-            this.splashScreen.hide();
 
+            console.log('subscribed topic');
             this.fcm.subscribeToTopic('news');
 
             this.fcm.getToken().then(token => {
-                console.log(token);
+                console.log('token:', token);
+                // backend.registerToken(token);
             });
 
             this.fcm.onNotification().subscribe(data => {
-                console.log(data);
-                if (data.wasTapped) {
-                    console.log('Received in background');
-                    // this.router.navigate([data.landing_page, data.price]);
-                } else {
-                    console.log('Received in foreground');
-                    // this.router.navigate([data.landing_page, data.price]);
-                }
+                console.log('data from notification', data)
+                // if(data.wasTapped){
+                //     console.log("Received in background");
+                // } else {
+                //     console.log("Received in foreground");
+                // };
             });
 
             this.fcm.onTokenRefresh().subscribe(token => {
-                console.log(token);
+                console.log('refreshed token:', token);
+                // backend.registerToken(token);
             });
 
-            // this.fcm.unsubscribeFromTopic('marketing');
+            this.statusBar.styleDefault();
+            this.splashScreen.hide();
         });
     }
 }

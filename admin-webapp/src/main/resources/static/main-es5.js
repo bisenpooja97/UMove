@@ -63,7 +63,7 @@ module.exports = "<mat-sidenav-container>\n\n  <mat-sidenav #sidenav mode=\"push
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"settings\">\n    <div fxLayout=\"column\">\n        <h1 class=\"header\">\n            Settings\n        </h1>\n    </div>\n    <form class=\"settings-form\">\n        <mat-form-field class=\"settings-full-width\">\n            <input matInput #autocancelTime name=\"autocancelTime\" value=\"{{autocancelTimeValue}}\" type=\"text\" \n            placeholder=\"Autocancel Time\" (change)=\"onChange(autocancelTime.name, autocancelTime.value)\">\n        </mat-form-field> \n    \n        <mat-form-field class=\"settings-full-width\">\n            <input matInput #cancelThresholdTime name=\"cancelThresholdTime\" value=\"{{cancelThresholdTimeValue}}\" \n            type=\"text\" placeholder=\"Cancel Threshold Time\" (change)=\"onChange(cancelThresholdTime.name,\n            cancelThresholdTime.value)\">\n        </mat-form-field>\n\n        <mat-form-field class=\"settings-full-width\">\n            <input matInput #vicinityDistance name=\"vicinityDistance\" value=\"{{vicinityDistanceValue}}\" \n            type=\"text\" placeholder=\"Vicinity Distance\" (change)=\"onChange(vicinityDistance.name,\n            vicinityDistance.value)\">\n        </mat-form-field>\n    </form>\n</div>\n"
+module.exports = "<div class=\"settings\">\n    <div fxLayout=\"column\">\n        <h1 class=\"header\">\n            Settings\n        </h1>\n    </div>\n    <form class=\"settings-form\">\n        <mat-form-field class=\"settings-full-width\">\n            <input matInput #autocancelTime name=\"autocancelTime\" value=\"{{autocancelTimeValue}}\" type=\"text\"\n            placeholder=\"Autocancel Time (in mins)\" (change)=\"onChange(autocancelTime.name, autocancelTime.value)\">\n        </mat-form-field>\n\n        <mat-form-field class=\"settings-full-width\">\n            <input matInput #cancelThresholdTime name=\"cancelThresholdTime\" value=\"{{cancelThresholdTimeValue}}\"\n            type=\"text\" placeholder=\"Cancel Threshold Time (in mins)\" (change)=\"onChange(cancelThresholdTime.name,\n            cancelThresholdTime.value)\">\n        </mat-form-field>\n\n        <mat-form-field class=\"settings-full-width\">\n            <input matInput #vicinityDistance name=\"vicinityDistance\" value=\"{{vicinityDistanceValue}}\"\n            type=\"text\" placeholder=\"Vicinity Distance (in km)\" (change)=\"onChange(vicinityDistance.name,\n            vicinityDistance.value)\">\n        </mat-form-field>\n    </form>\n</div>\n"
 
 /***/ }),
 
@@ -2990,13 +2990,13 @@ var ZoneService = /** @class */ (function () {
         return this.httpClient.patch(this.baseUrl + '/' + name, zone);
     };
     ZoneService.prototype.getSupervisor = function () {
-        return this.httpClient.get('http://umove-dev.stackroute.io/userservice/api/v1/users?role=ROLE_SUPERVISOR&status=Unallocated');
+        return this.httpClient.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].baseUrl + src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].userService + src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].userBaseApi + '?role=ROLE_SUPERVISOR&status=Unallocated');
     };
     ZoneService.prototype.getSupervisorById = function (id) {
-        return this.httpClient.get('https://umove-dev.stackroute.io/userservice/api/v1/users/' + id);
+        return this.httpClient.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].baseUrl + src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].userService + src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].userBaseApi + '/' + id);
     };
     ZoneService.prototype.updateSupervisorStatus = function (id, supervisor) {
-        return this.httpClient.patch('https://umove-dev.stackroute.io/userservice/api/v1/users/' + id, supervisor);
+        return this.httpClient.patch(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].baseUrl + src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].userService + src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].userBaseApi + '/' + id, supervisor);
     };
     ZoneService.prototype.getZoneType = function (zid, tid) {
         return this.httpClient.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].baseUrl + src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].zoneService +

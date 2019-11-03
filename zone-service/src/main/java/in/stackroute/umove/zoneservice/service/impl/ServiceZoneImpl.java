@@ -9,20 +9,24 @@ package in.stackroute.umove.zoneservice.service.impl;
 import in.stackroute.umove.zoneservice.exception.ZoneAlreadyExistException;
 import in.stackroute.umove.zoneservice.exception.ZoneNotFoundException;
 import in.stackroute.umove.zoneservice.exception.ZonesNotFoundException;
+import in.stackroute.umove.zoneservice.model.Configuration;
 import in.stackroute.umove.zoneservice.model.Vehicle;
 import in.stackroute.umove.zoneservice.model.Zone;
 import in.stackroute.umove.zoneservice.model.ZoneStatus;
+import in.stackroute.umove.zoneservice.repository.VehicleRepo;
 import in.stackroute.umove.zoneservice.repository.ZoneRepository;
 import in.stackroute.umove.zoneservice.service.ServiceVehicle;
 import in.stackroute.umove.zoneservice.service.ServiceZone;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ServiceZoneImpl implements ServiceZone {
@@ -32,8 +36,8 @@ public class ServiceZoneImpl implements ServiceZone {
     private ZoneRepository zoneRepository;
 
     @Autowired
-    private ServiceVehicle vehicleManagementService;
-    // Zone service for creating new zones
+    VehicleRepo repo;
+
     @Override
     public Zone addNewZone(Zone zone) {
         List<Zone> zoneList = zoneRepository.findAll();
@@ -116,14 +120,20 @@ public class ServiceZoneImpl implements ServiceZone {
     // Zone service for getting nearby zones
     @Override
     public List<Zone> getNearbyZones(Double lon, Double lat) {
-       List<Zone> zones=zoneRepository.findAll();
+       List<Zone> zones=findByStatus(ZoneStatus.ACTIVE,0 );
        List<Zone> nearbyZones = new ArrayList<>();
+        RestTemplate restTemplate = new RestTemplate();
+        Map<String, Object> response = restTemplate.getForObject("https://umove-dev.stackroute.io/bookingservice/api/v1/config/vicinityDistance", Map.class);
+        System.out.println("response for user status" + response);
+        Map<String, Object> configuration = (Map<String, Object>) response.get("data");
+        int vicinityDistance = (int) configuration.get("value");
+        System.out.println("vicinity Distance"+vicinityDistance);
        Iterator iterator=zones.iterator();
        while (iterator.hasNext()){
            Zone zones1= (Zone) iterator.next();
            Double lat1=zones1.getLat();
            Double lon1=zones1.getLon();
-           int R = 6371; // Radius of the earth in km
+           int radius = 6371; // Radius of the earth in km
            double dLat = (lat-lat1)*(Math.PI/180);  // deg2rad below
            double dLon = (lon-lon1)*(Math.PI/180);
            double a =
@@ -131,10 +141,11 @@ public class ServiceZoneImpl implements ServiceZone {
                            Math.cos((lat1)*(Math.PI/180)) * Math.cos((lat)*(Math.PI/180)) *
                                    Math.sin(dLon/2) * Math.sin(dLon/2);
            double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-           double d = R * c; // Distance in km
-           System.out.println("Distance "+d);
+           double distance = radius * c; // Distance in km
+           System.out.println("Distance "+ distance + ",vehiclecount" + repo.countVehicleByZoneId(zones1.getId()));
            // calculate the result
-           if (d<=1){
+           if (distance<=vicinityDistance && repo.countVehicleByZoneId(zones1.getId())>0){
+               System.out.println("andr aagya");
                nearbyZones.add(zones1);
            }
        }
