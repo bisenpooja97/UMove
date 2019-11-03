@@ -34,7 +34,7 @@ export class HomePage implements OnInit {
   verificationCode: string;
   localUserData: UserProfile;
   user: any;
-  private selectedZone: Zone;
+  selectedZone: Zone;
   locality: string;
     ngOnInit(): void {
 

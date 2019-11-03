@@ -38,7 +38,7 @@ export class DropPage implements OnInit {
   trip : boolean;
   isLoaded : boolean;
 
-  private selectedZone: Zone;
+  selectedZone: Zone;
   locality:string;
   constructor(private zoneService: ZoneService,
               private route: ActivatedRoute,
