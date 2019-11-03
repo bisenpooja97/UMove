@@ -62,6 +62,21 @@ public class UserImplService implements UserService {
         List<UserData> users = userRepository.findByUserStatus(userStatus);
         return users;
     }
+
+    @Override
+    public boolean isVerifiedSupervisor(UserData user) {
+        UserData savedUser = userRepository.findByMobileNumber(user.getMobileNumber());
+        if(savedUser != null) {
+            Iterator<Role> iterator = savedUser.getRoles().iterator();
+            if(iterator.hasNext()) {
+                if (iterator.next().equals(Role.ROLE_SUPERVISOR)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     @Override
     public List<UserData> findByDocumentStatus(DocumentStatus documentStatus) {
         List<UserData> users = userRepository.findByDocumentStatus(documentStatus);
@@ -167,6 +182,7 @@ public class UserImplService implements UserService {
         }
         return null;
     }
+
 //    public DocumentVerification updateDocument(String objid, DocumentVerification user) {
 //        final UserData updatedUser = userRepository.findByid(objid);
 //        final DocumentVerification updatedDocuemt = updatedUser.getDocument();
@@ -179,7 +195,9 @@ public class UserImplService implements UserService {
 //        }
 //        return null;
 //    }
+
 }
+
 //    @Override
 //    public DocumentVerification updateDocumentVerification(ObjectId id, DocumentVerification documentVerification) {
 //        DocumentVerification documentVerification = userRepository.findBy_id(id);

@@ -22,4 +22,6 @@ public interface UserService {
     List<UserData> findByRoles(Role role);
     List<UserData> findByDocumentStatus(DocumentStatus documentStatus);
     List<UserData> findByUserStatus(UserStatus userStatus);
+
+    boolean isVerifiedSupervisor(UserData user);
 }
