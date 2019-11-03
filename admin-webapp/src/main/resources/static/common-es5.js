@@ -24,6 +24,7 @@ var UserService = /** @class */ (function () {
         this.baseUrl = src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].baseUrl + src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].userService + src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].userBaseApi;
     }
     UserService.prototype.getUsers = function () {
+        console.log(this.baseUrl);
         return this.httpClient.get(this.baseUrl + '?role=ROLE_USER');
     };
     UserService.prototype.getSupervisors = function () {

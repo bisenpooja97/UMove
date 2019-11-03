@@ -118,6 +118,7 @@ let AddUserComponent = class AddUserComponent {
     ngOnInit() { }
     onSubmit() {
         console.log(this.userForm.value);
+        this.userForm.value.mobileNumber = '+91' + this.userForm.value.mobileNumber;
         this.dialogRef.close(this.userForm.value);
     }
 };

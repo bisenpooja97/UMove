@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { Resp } from 'src/app/model/user-response';
 import { User } from 'src/app/model/user';
 import {Document} from 'src/app/model/document';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +30,31 @@ export class DocumentsService {
     console.log('Service ID', typeof id);
     console.log(`Base URL ${this.baseUrl}/${id}`);
     console.log('user data:', JSON.stringify(user));
+    this.sendNotificationForKycApproval(user.id, user.document.documentStatus);
     return this.httpClient.patch<User>(this.baseUrl + '/' + id, user);
+  }
+
+  sendNotificationForKycApproval(userId, status)
+  {
+    let body = {
+      "notification":{
+        "title":"UMove",
+        "body":"KYC has been Approved",
+        "sound":"default",
+        "click_action":"FCM_PLUGIN_ACTIVITY",
+        "icon":"fcm_push_icon"
+      },
+      "data":{
+        "documentStatus": status
+      },
+      "to": "/topics/" + userId,
+      "priority":"high"
+    }
+    let options = new HttpHeaders().set('Content-Type','application/json');
+    this.httpClient.post("https://fcm.googleapis.com/fcm/send",body,{
+      headers: options.set('Authorization', 'key=AIzaSyAvCh-b7FvHc4K7SmBl9IIPyhSusxnvUyE'),
+    })
+      .subscribe();
   }
 
   // getUsersByStatus(id:string,document:Document):Observable<Resp>{

@@ -29,7 +29,7 @@ module.exports = "\n<div style=\"text-align: center\"><h3>VehIcle Type Vs No of 
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div style=\"text-align: center\"><h3> No of Bookings vs Zones </h3></div>\n<div class=\"space\">\n  <div fxFlex=\"67%\" class=\"graph\">\n    <div>\n        <canvas baseChart [datasets]=\"barChartData\"\n                [labels]=\"barChartLabels\"\n                [options]=\"barChartOptions\"\n                [legend]=\"barChartLegend\"\n                [chartType]=\"barChartType\">\n        </canvas>\n      </div>\n  </div>\n</div>\n"
+module.exports = "<div style=\"text-align: center\"><h3> No of Bookings vs Zones </h3></div>\n<div class=\"space\">\n  <div fxFlex=\"67%\" class=\"graph\">\n    <div>\n        <canvas baseChart [datasets]=\"barChartData\"\n                [labels]=\"barChartLabels\"\n                [colors]=\"barChartColors\"\n                [options]=\"barChartOptions\"\n                [legend]=\"barChartLegend\"\n                [chartType]=\"barChartType\">\n\n        </canvas>\n      </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -196,7 +196,7 @@ var BookingsVehicleTypeComponent = /** @class */ (function () {
     BookingsVehicleTypeComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.barChartColors = [
-            { backgroundColor: ['#80d6ff'] }
+            { backgroundColor: '#ccd7f6' }
         ];
         this.barChartLabels = this.vehcleName;
         this.barChartType = 'bar';
@@ -356,7 +356,7 @@ var BookingsZoneComponent = /** @class */ (function () {
     BookingsZoneComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.barChartColors = [
-            { backgroundColor: ["#80d6ff"] }
+            { backgroundColor: '#ccd7f6' }
         ];
         this.barChartLabels = this.zoneName;
         this.barChartType = 'bar';

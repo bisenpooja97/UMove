@@ -24,6 +24,7 @@ let UserService = class UserService {
         this.baseUrl = src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].baseUrl + src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].userService + src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].userBaseApi;
     }
     getUsers() {
+        console.log(this.baseUrl);
         return this.httpClient.get(this.baseUrl + '?role=ROLE_USER');
     }
     getSupervisors() {
